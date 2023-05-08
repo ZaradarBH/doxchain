@@ -1,0 +1,12 @@
+syntax = "proto3";
+package doxchain.doxchain;
+
+import "gogoproto/gogo.proto";
+import "doxchain/doxchain/params.proto";
+
+option go_package = "doxchain/x/doxchain/types";
+
+// GenesisState defines the doxchain module's genesis state.
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+}
