@@ -32581,6 +32581,135 @@ paths:
           format: int64
       tags:
         - Query
+  /doxchain/abs/params:
+    get:
+      summary: Parameters queries the parameters of the module.
+      operationId: DoxchainAbsParams
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              params:
+                description: params holds all the parameters of this module.
+                type: object
+            description: >-
+              QueryParamsResponse is response type for the Query/Params RPC
+              method.
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      tags:
+        - Query
+  /doxchain/abs/query_break_factor:
+    get:
+      summary: Queries a list of QueryBreakFactor items.
+      operationId: DoxchainAbsQueryBreakFactor
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              value:
+                type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      tags:
+        - Query
+  /doxchain/abs/query_watchlist:
+    get:
+      summary: Queries watchlist.
+      operationId: DoxchainAbsQueryWatchlist
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              watchlist:
+                type: object
+                properties:
+                  entries:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        address:
+                          type: string
+                        blockHeight:
+                          type: string
+                          format: uint64
+                        coins:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              denom:
+                                type: string
+                              amount:
+                                type: string
+                            description: >-
+                              Coin defines a token with a denomination and an
+                              amount.
+
+
+                              NOTE: The amount field is an Int which implements
+                              the custom method
+
+                              signatures required by gogoproto.
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      tags:
+        - Query
   /doxchain/did/params:
     get:
       summary: Parameters queries the parameters of the module.
@@ -66862,6 +66991,108 @@ definitions:
             NOTE: The amount field is an Int which implements the custom method
             signatures required by gogoproto.
     description: Period defines a length of time and amount of coins that will vest.
+  doxchain.abs.MsgUpdateBreakFactorResponse:
+    type: object
+  doxchain.abs.Params:
+    type: object
+    description: Params defines the parameters for the module.
+  doxchain.abs.QueryBreakFactorResponse:
+    type: object
+    properties:
+      value:
+        type: string
+  doxchain.abs.QueryParamsResponse:
+    type: object
+    properties:
+      params:
+        description: params holds all the parameters of this module.
+        type: object
+    description: QueryParamsResponse is response type for the Query/Params RPC method.
+  doxchain.abs.QueryWatchlistResponse:
+    type: object
+    properties:
+      watchlist:
+        type: object
+        properties:
+          entries:
+            type: array
+            items:
+              type: object
+              properties:
+                address:
+                  type: string
+                blockHeight:
+                  type: string
+                  format: uint64
+                coins:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      denom:
+                        type: string
+                      amount:
+                        type: string
+                    description: >-
+                      Coin defines a token with a denomination and an amount.
+
+
+                      NOTE: The amount field is an Int which implements the
+                      custom method
+
+                      signatures required by gogoproto.
+  doxchain.abs.Watchlist:
+    type: object
+    properties:
+      entries:
+        type: array
+        items:
+          type: object
+          properties:
+            address:
+              type: string
+            blockHeight:
+              type: string
+              format: uint64
+            coins:
+              type: array
+              items:
+                type: object
+                properties:
+                  denom:
+                    type: string
+                  amount:
+                    type: string
+                description: >-
+                  Coin defines a token with a denomination and an amount.
+
+
+                  NOTE: The amount field is an Int which implements the custom
+                  method
+
+                  signatures required by gogoproto.
+  doxchain.abs.WatchlistEntry:
+    type: object
+    properties:
+      address:
+        type: string
+      blockHeight:
+        type: string
+        format: uint64
+      coins:
+        type: array
+        items:
+          type: object
+          properties:
+            denom:
+              type: string
+            amount:
+              type: string
+          description: |-
+            Coin defines a token with a denomination and an amount.
+
+            NOTE: The amount field is an Int which implements the custom method
+            signatures required by gogoproto.
   doxchain.did.Params:
     type: object
     description: Params defines the parameters for the module.

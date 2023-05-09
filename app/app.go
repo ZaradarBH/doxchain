@@ -103,6 +103,9 @@ import (
 	tmos "github.com/tendermint/tendermint/libs/os"
 	dbm "github.com/tendermint/tm-db"
 
+	absmodule "doxchain/x/abs"
+	absmodulekeeper "doxchain/x/abs/keeper"
+	absmoduletypes "doxchain/x/abs/types"
 	didmodule "doxchain/x/did"
 	didmodulekeeper "doxchain/x/did/keeper"
 	didmoduletypes "doxchain/x/did/types"
@@ -169,6 +172,7 @@ var (
 		vesting.AppModuleBasic{},
 		doxchainmodule.AppModuleBasic{},
 		didmodule.AppModuleBasic{},
+		absmodule.AppModuleBasic{},
 		// this line is used by starport scaffolding # stargate/app/moduleBasic
 	)
 
@@ -182,6 +186,7 @@ var (
 		stakingtypes.NotBondedPoolName: {authtypes.Burner, authtypes.Staking},
 		govtypes.ModuleName:            {authtypes.Burner},
 		ibctransfertypes.ModuleName:    {authtypes.Minter, authtypes.Burner},
+		absmoduletypes.ModuleName:      {authtypes.Minter, authtypes.Burner, authtypes.Staking},
 		// this line is used by starport scaffolding # stargate/app/maccPerms
 	}
 )
@@ -245,6 +250,8 @@ type App struct {
 	DoxchainKeeper doxchainmodulekeeper.Keeper
 
 	DidKeeper didmodulekeeper.Keeper
+
+	AbsKeeper absmodulekeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// mm is the module manager
@@ -291,6 +298,7 @@ func New(
 		icacontrollertypes.StoreKey,
 		doxchainmoduletypes.StoreKey,
 		didmoduletypes.StoreKey,
+		absmoduletypes.StoreKey,
 		// this line is used by starport scaffolding # stargate/app/storeKey
 	)
 	tkeys := sdk.NewTransientStoreKeys(paramstypes.TStoreKey)
@@ -521,6 +529,17 @@ func New(
 	)
 	didModule := didmodule.NewAppModule(appCodec, app.DidKeeper, app.AccountKeeper, app.BankKeeper)
 
+	app.AbsKeeper = *absmodulekeeper.NewKeeper(
+		appCodec,
+		keys[absmoduletypes.StoreKey],
+		keys[absmoduletypes.MemStoreKey],
+		app.GetSubspace(absmoduletypes.ModuleName),
+
+		app.AccountKeeper,
+		app.BankKeeper,
+	)
+	absModule := absmodule.NewAppModule(appCodec, app.AbsKeeper, app.AccountKeeper, app.BankKeeper)
+
 	// this line is used by starport scaffolding # stargate/app/keeperDefinition
 
 	/**** IBC Routing ****/
@@ -588,6 +607,7 @@ func New(
 		icaModule,
 		doxchainModule,
 		didModule,
+		absModule,
 		// this line is used by starport scaffolding # stargate/app/appModule
 	)
 
@@ -619,6 +639,7 @@ func New(
 		vestingtypes.ModuleName,
 		doxchainmoduletypes.ModuleName,
 		didmoduletypes.ModuleName,
+		absmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/beginBlockers
 	)
 
@@ -645,6 +666,7 @@ func New(
 		vestingtypes.ModuleName,
 		doxchainmoduletypes.ModuleName,
 		didmoduletypes.ModuleName,
+		absmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/endBlockers
 	)
 
@@ -676,6 +698,7 @@ func New(
 		vestingtypes.ModuleName,
 		doxchainmoduletypes.ModuleName,
 		didmoduletypes.ModuleName,
+		absmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	)
 
@@ -707,6 +730,7 @@ func New(
 		transferModule,
 		doxchainModule,
 		didModule,
+		absModule,
 		// this line is used by starport scaffolding # stargate/app/appModule
 	)
 	app.sm.RegisterStoreDecoders()
@@ -913,6 +937,7 @@ func initParamsKeeper(appCodec codec.BinaryCodec, legacyAmino *codec.LegacyAmino
 	paramsKeeper.Subspace(icahosttypes.SubModuleName)
 	paramsKeeper.Subspace(doxchainmoduletypes.ModuleName)
 	paramsKeeper.Subspace(didmoduletypes.ModuleName)
+	paramsKeeper.Subspace(absmoduletypes.ModuleName)
 	// this line is used by starport scaffolding # stargate/app/paramSubspace
 
 	return paramsKeeper
