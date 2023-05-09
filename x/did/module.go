@@ -1,4 +1,4 @@
-package doxchain
+package did
 
 import (
 	"context"
@@ -11,9 +11,9 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"doxchain/x/doxchain/client/cli"
-	"doxchain/x/doxchain/keeper"
-	"doxchain/x/doxchain/types"
+	"doxchain/x/did/client/cli"
+	"doxchain/x/did/keeper"
+	"doxchain/x/did/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/codec"
 	cdctypes "github.com/cosmos/cosmos-sdk/codec/types"

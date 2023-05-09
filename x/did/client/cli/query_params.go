@@ -3,7 +3,7 @@ package cli
 import (
 	"context"
 
-	"doxchain/x/doxchain/types"
+	"doxchain/x/did/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/spf13/cobra"

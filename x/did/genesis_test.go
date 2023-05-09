@@ -1,12 +1,12 @@
-package doxchain_test
+package did_test
 
 import (
 	"testing"
 
 	keepertest "doxchain/testutil/keeper"
 	"doxchain/testutil/nullify"
-	"doxchain/x/doxchain"
-	"doxchain/x/doxchain/types"
+	"doxchain/x/did"
+	"doxchain/x/did/types"
 	"github.com/stretchr/testify/require"
 )
 
@@ -17,9 +17,9 @@ func TestGenesis(t *testing.T) {
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
-	k, ctx := keepertest.DoxchainKeeper(t)
-	doxchain.InitGenesis(ctx, *k, genesisState)
-	got := doxchain.ExportGenesis(ctx, *k)
+	k, ctx := keepertest.DidKeeper(t)
+	did.InitGenesis(ctx, *k, genesisState)
+	got := did.ExportGenesis(ctx, *k)
 	require.NotNil(t, got)
 
 	nullify.Fill(&genesisState)

@@ -3,7 +3,7 @@ package types_test
 import (
 	"testing"
 
-	"doxchain/x/doxchain/types"
+	"doxchain/x/did/types"
 	"github.com/stretchr/testify/require"
 )
 

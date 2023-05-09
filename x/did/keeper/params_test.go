@@ -4,12 +4,12 @@ import (
 	"testing"
 
 	testkeeper "doxchain/testutil/keeper"
-	"doxchain/x/doxchain/types"
+	"doxchain/x/did/types"
 	"github.com/stretchr/testify/require"
 )
 
 func TestGetParams(t *testing.T) {
-	k, ctx := testkeeper.DoxchainKeeper(t)
+	k, ctx := testkeeper.DidKeeper(t)
 	params := types.DefaultParams()
 
 	k.SetParams(ctx, params)

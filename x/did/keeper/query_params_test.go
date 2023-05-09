@@ -4,13 +4,13 @@ import (
 	"testing"
 
 	testkeeper "doxchain/testutil/keeper"
-	"doxchain/x/doxchain/types"
+	"doxchain/x/did/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 )
 
 func TestParamsQuery(t *testing.T) {
-	keeper, ctx := testkeeper.DoxchainKeeper(t)
+	keeper, ctx := testkeeper.DidKeeper(t)
 	wctx := sdk.WrapSDKContext(ctx)
 	params := types.DefaultParams()
 	keeper.SetParams(ctx, params)

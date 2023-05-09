@@ -1,11 +1,11 @@
-package doxchain
+package did
 
 import (
 	"math/rand"
 
 	"doxchain/testutil/sample"
-	doxchainsimulation "doxchain/x/doxchain/simulation"
-	"doxchain/x/doxchain/types"
+	didsimulation "doxchain/x/did/simulation"
+	"doxchain/x/did/types"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	simappparams "github.com/cosmos/cosmos-sdk/simapp/params"
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -17,7 +17,7 @@ import (
 // avoid unused import issue
 var (
 	_ = sample.AccAddress
-	_ = doxchainsimulation.FindAccount
+	_ = didsimulation.FindAccount
 	_ = simappparams.StakePerAccount
 	_ = simulation.MsgEntryKind
 	_ = baseapp.Paramspace
@@ -33,11 +33,11 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 	for i, acc := range simState.Accounts {
 		accs[i] = acc.Address.String()
 	}
-	doxchainGenesis := types.GenesisState{
+	didGenesis := types.GenesisState{
 		Params: types.DefaultParams(),
 		// this line is used by starport scaffolding # simapp/module/genesisState
 	}
-	simState.GenState[types.ModuleName] = simState.Cdc.MustMarshalJSON(&doxchainGenesis)
+	simState.GenState[types.ModuleName] = simState.Cdc.MustMarshalJSON(&didGenesis)
 }
 
 // ProposalContents doesn't return any content functions for governance proposals

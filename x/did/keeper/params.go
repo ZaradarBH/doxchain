@@ -1,7 +1,7 @@
 package keeper
 
 import (
-	"doxchain/x/doxchain/types"
+	"doxchain/x/did/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 

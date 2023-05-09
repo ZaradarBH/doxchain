@@ -5,12 +5,12 @@ import (
 	"testing"
 
 	keepertest "doxchain/testutil/keeper"
-	"doxchain/x/doxchain/keeper"
-	"doxchain/x/doxchain/types"
+	"doxchain/x/did/keeper"
+	"doxchain/x/did/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func setupMsgServer(t testing.TB) (types.MsgServer, context.Context) {
-	k, ctx := keepertest.DoxchainKeeper(t)
+	k, ctx := keepertest.DidKeeper(t)
 	return keeper.NewMsgServerImpl(*k), sdk.WrapSDKContext(ctx)
 }
