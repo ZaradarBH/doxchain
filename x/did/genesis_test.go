@@ -3,10 +3,10 @@ package did_test
 import (
 	"testing"
 
-	keepertest "doxchain/testutil/keeper"
-	"doxchain/testutil/nullify"
-	"doxchain/x/did"
-	"doxchain/x/did/types"
+	keepertest "github.com/be-heroes/doxchain/testutil/keeper"
+	"github.com/be-heroes/doxchain/testutil/nullify"
+	"github.com/be-heroes/doxchain/x/did"
+	"github.com/be-heroes/doxchain/x/did/types"
 	"github.com/stretchr/testify/require"
 )
 

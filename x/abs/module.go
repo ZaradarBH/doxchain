@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+
 	// this line is used by starport scaffolding # 1
 
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
@@ -11,9 +12,9 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"doxchain/x/abs/client/cli"
-	"doxchain/x/abs/keeper"
-	"doxchain/x/abs/types"
+	"github.com/be-heroes/doxchain/x/abs/client/cli"
+	"github.com/be-heroes/doxchain/x/abs/keeper"
+	"github.com/be-heroes/doxchain/x/abs/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/codec"
 	cdctypes "github.com/cosmos/cosmos-sdk/codec/types"

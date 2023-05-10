@@ -3,7 +3,7 @@ package types
 import (
 	"testing"
 
-	"doxchain/testutil/sample"
+	"github.com/be-heroes/doxchain/testutil/sample"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/stretchr/testify/require"
 )

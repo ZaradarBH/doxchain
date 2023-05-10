@@ -3,8 +3,8 @@ package keeper
 import (
 	"testing"
 
-	"doxchain/x/did/keeper"
-	"doxchain/x/did/types"
+	"github.com/be-heroes/doxchain/x/did/keeper"
+	"github.com/be-heroes/doxchain/x/did/types"
 	"github.com/cosmos/cosmos-sdk/codec"
 	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
 	"github.com/cosmos/cosmos-sdk/store"

@@ -11,8 +11,8 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/stretchr/testify/require"
 
-	"doxchain/testutil/network"
-	"doxchain/x/did/client/cli"
+	"github.com/be-heroes/doxchain/testutil/network"
+	"github.com/be-heroes/doxchain/x/did/client/cli"
 )
 
 func TestCreateDid(t *testing.T) {

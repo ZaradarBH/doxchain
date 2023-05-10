@@ -1,7 +1,7 @@
 package keeper
 
 import (
-	"doxchain/x/doxchain/types"
+	"github.com/be-heroes/doxchain/x/doxchain/types"
 )
 
 type msgServer struct {

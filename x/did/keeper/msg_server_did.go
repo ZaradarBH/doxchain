@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"doxchain/x/did/types"
+	"github.com/be-heroes/doxchain/x/did/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )

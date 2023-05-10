@@ -6,7 +6,7 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/stretchr/testify/require"
 
-	"doxchain/x/did/types"
+	"github.com/be-heroes/doxchain/x/did/types"
 )
 
 func TestDidMsgServerCreate(t *testing.T) {

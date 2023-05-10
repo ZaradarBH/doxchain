@@ -3,7 +3,7 @@ package keeper
 import (
 	"encoding/binary"
 
-	"doxchain/x/did/types"
+	"github.com/be-heroes/doxchain/x/did/types"
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )

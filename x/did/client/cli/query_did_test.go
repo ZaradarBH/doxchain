@@ -11,10 +11,10 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"doxchain/testutil/network"
-	"doxchain/testutil/nullify"
-	"doxchain/x/did/client/cli"
-	"doxchain/x/did/types"
+	"github.com/be-heroes/doxchain/testutil/network"
+	"github.com/be-heroes/doxchain/testutil/nullify"
+	"github.com/be-heroes/doxchain/x/did/client/cli"
+	"github.com/be-heroes/doxchain/x/did/types"
 )
 
 func networkWithDidObjects(t *testing.T, n int) (*network.Network, []types.Did) {

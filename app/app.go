@@ -103,19 +103,20 @@ import (
 	tmos "github.com/tendermint/tendermint/libs/os"
 	dbm "github.com/tendermint/tm-db"
 
-	absmodule "doxchain/x/abs"
-	absmodulekeeper "doxchain/x/abs/keeper"
-	absmoduletypes "doxchain/x/abs/types"
-	didmodule "doxchain/x/did"
-	didmodulekeeper "doxchain/x/did/keeper"
-	didmoduletypes "doxchain/x/did/types"
-	doxchainmodule "doxchain/x/doxchain"
-	doxchainmodulekeeper "doxchain/x/doxchain/keeper"
-	doxchainmoduletypes "doxchain/x/doxchain/types"
+	absmodule "github.com/be-heroes/doxchain/x/abs"
+	absmodulekeeper "github.com/be-heroes/doxchain/x/abs/keeper"
+	absmoduletypes "github.com/be-heroes/doxchain/x/abs/types"
+	didmodule "github.com/be-heroes/doxchain/x/did"
+	didmodulekeeper "github.com/be-heroes/doxchain/x/did/keeper"
+	didmoduletypes "github.com/be-heroes/doxchain/x/did/types"
+	doxchainmodule "github.com/be-heroes/doxchain/x/doxchain"
+	doxchainmodulekeeper "github.com/be-heroes/doxchain/x/doxchain/keeper"
+	doxchainmoduletypes "github.com/be-heroes/doxchain/x/doxchain/types"
+
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 
-	appparams "doxchain/app/params"
-	"doxchain/docs"
+	appparams "github.com/be-heroes/doxchain/app/params"
+	"github.com/be-heroes/doxchain/docs"
 )
 
 const (

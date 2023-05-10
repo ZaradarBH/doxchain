@@ -4,7 +4,7 @@ package doxchain.did;
 
 import "doxchain/did/did.proto";
 
-option go_package = "doxchain/x/did/types";
+option go_package = "github.com/be-heroes/doxchain/x/did/types";
 
 // Msg defines the Msg service.
 service Msg {
@@ -13,7 +13,7 @@ service Msg {
   rpc DeleteDid (MsgDeleteDid) returns (MsgDeleteDidResponse);
 }
 message MsgCreateDid {
-  Did Did = 1;
+  Did did = 1;
 }
 
 message MsgCreateDidResponse {
@@ -21,7 +21,7 @@ message MsgCreateDidResponse {
 }
 
 message MsgUpdateDid {
-  Did Did = 1;
+  Did did = 1;
 }
 
 message MsgUpdateDidResponse {}

@@ -3,10 +3,10 @@ package abs_test
 import (
 	"testing"
 
-	keepertest "doxchain/testutil/keeper"
-	"doxchain/testutil/nullify"
-	"doxchain/x/abs"
-	"doxchain/x/abs/types"
+	keepertest "github.com/be-heroes/doxchain/testutil/keeper"
+	"github.com/be-heroes/doxchain/testutil/nullify"
+	"github.com/be-heroes/doxchain/x/abs"
+	"github.com/be-heroes/doxchain/x/abs/types"
 	"github.com/stretchr/testify/require"
 )
 

@@ -4,13 +4,14 @@ import (
 	"fmt"
 
 	"github.com/cosmos/cosmos-sdk/codec"
+	"github.com/cosmos/cosmos-sdk/store/prefix"
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 	"github.com/tendermint/tendermint/libs/log"
 
-	"doxchain/x/abs/types"
+	"github.com/be-heroes/doxchain/x/abs/types"
 )
 
 type (
@@ -80,16 +81,45 @@ func (k Keeper) SetBreakFactor(ctx sdk.Context, breakFactor sdk.Dec) error {
 	return nil
 }
 
-// GetWatchlist fetches the ABS watchlist from the KVStore
-func (k Keeper) GetWatchlist(ctx sdk.Context) types.Watchlist {
-	store := ctx.KVStore(k.storeKey)
-	b := store.Get([]byte(types.WatchlistKey))
+func (k Keeper) SetAddressWatchlist(ctx sdk.Context, addr sdk.AccAddress, watchlistEntry types.WatchlistEntry) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.WatchlistKey)
+	b := k.cdc.MustMarshal(&watchlistEntry)
+	store.Set(addr.Bytes(), b)
+}
 
+func (k Keeper) DeleteAddressWatchlist(ctx sdk.Context, addr sdk.AccAddress) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.WatchlistKey)
+	store.Delete(addr.Bytes())
+}
+
+// get address watch list will return a new watchlist entry if the address is not found
+func (k Keeper) GetAddressWatchlist(ctx sdk.Context, addr sdk.AccAddress) types.WatchlistEntry {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.WatchlistKey)
+	b := store.Get(addr.Bytes())
 	if b == nil {
-		return types.Watchlist{}
+		return types.WatchlistEntry{
+			Address:     addr.String(),
+			BlockHeight: uint64(ctx.BlockHeight()),
+			Coins:       sdk.NewCoins(),
+		}
 	}
 
-	dp := types.Watchlist{}
-	k.cdc.MustUnmarshal(b, &dp)
-	return dp
+	var entry types.WatchlistEntry
+	k.cdc.MustUnmarshal(b, &entry)
+	return entry
+}
+
+func (k Keeper) IterateWatchList(ctx sdk.Context, cb func(entry types.WatchlistEntry) bool) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.WatchlistKey)
+	iter := store.Iterator(nil, nil)
+	defer iter.Close()
+
+	for ; iter.Valid(); iter.Next() {
+		var entry types.WatchlistEntry
+		k.cdc.MustUnmarshal(iter.Value(), &entry)
+
+		if cb(entry) {
+			break
+		}
+	}
 }

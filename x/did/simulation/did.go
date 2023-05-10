@@ -3,8 +3,8 @@ package simulation
 import (
 	"math/rand"
 
-	"doxchain/x/did/keeper"
-	"doxchain/x/did/types"
+	"github.com/be-heroes/doxchain/x/did/keeper"
+	"github.com/be-heroes/doxchain/x/did/types"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	simappparams "github.com/cosmos/cosmos-sdk/simapp/params"
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -22,13 +22,13 @@ func SimulateMsgCreateDid(
 		simAccount, _ := simtypes.RandomAcc(r, accs)
 
 		did := &types.Did{
-			Creator:	simAccount.Address.String(),
-			Url: "did:example:123/path?service=agent#degree",
+			Creator:    simAccount.Address.String(),
+			Url:        "did:example:123/path?service=agent#degree",
 			MethodName: "example",
-			MethodId: "123",
-			Path: "path",
-			Fragment: "degree",
-			Query: "service=agent",
+			MethodId:   "123",
+			Path:       "path",
+			Fragment:   "degree",
+			Query:      "service=agent",
 		}
 
 		msg := &types.MsgCreateDid{

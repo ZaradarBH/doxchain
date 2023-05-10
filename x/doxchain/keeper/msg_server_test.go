@@ -4,9 +4,9 @@ import (
 	"context"
 	"testing"
 
-	keepertest "doxchain/testutil/keeper"
-	"doxchain/x/doxchain/keeper"
-	"doxchain/x/doxchain/types"
+	keepertest "github.com/be-heroes/doxchain/testutil/keeper"
+	"github.com/be-heroes/doxchain/x/doxchain/keeper"
+	"github.com/be-heroes/doxchain/x/doxchain/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 

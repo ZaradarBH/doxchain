@@ -1,9 +1,9 @@
 package keeper
 
 import (
-	abskeeper "doxchain/x/abs/keeper"
+	abskeeper "github.com/be-heroes/doxchain/x/abs/keeper"
 	"github.com/cosmos/cosmos-sdk/codec"
-	sdk "github.com/cosmos/cosmos-sdk/types"
+	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	authkeeper "github.com/cosmos/cosmos-sdk/x/auth/keeper"
 	bankkeeper "github.com/cosmos/cosmos-sdk/x/bank/keeper"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
@@ -18,7 +18,7 @@ type BaseKeeper struct {
 
 func NewBaseKeeper(
 	cdc codec.BinaryCodec,
-	storeKey sdk.StoreKey,
+	storeKey storetypes.StoreKey,
 	ak authkeeper.AccountKeeper,
 	paramSpace paramtypes.Subspace,
 	blockedAddrs map[string]bool,

@@ -10,9 +10,9 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	keepertest "doxchain/testutil/keeper"
-	"doxchain/testutil/nullify"
-	"doxchain/x/did/types"
+	keepertest "github.com/be-heroes/doxchain/testutil/keeper"
+	"github.com/be-heroes/doxchain/testutil/nullify"
+	"github.com/be-heroes/doxchain/x/did/types"
 )
 
 func TestDidQuerySingle(t *testing.T) {

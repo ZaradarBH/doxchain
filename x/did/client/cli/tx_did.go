@@ -1,9 +1,9 @@
 package cli
 
-import (	
-    "encoding/json"
+import (
+	"encoding/json"
 
-	"doxchain/x/did/types"
+	"github.com/be-heroes/doxchain/x/did/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/client/tx"
@@ -20,14 +20,14 @@ func CmdCreateDid() *cobra.Command {
 			if err != nil {
 				return err
 			}
-			
+
 			var did types.Did
 			err = json.Unmarshal([]byte(args[0]), &did)
-			
+
 			if err != nil {
 				return err
 			}
-			
+
 			msg := types.NewMsgCreateDid(did)
 			if err := msg.ValidateBasic(); err != nil {
 				return err
@@ -51,10 +51,10 @@ func CmdUpdateDid() *cobra.Command {
 			if err != nil {
 				return err
 			}
-						
+
 			var did types.Did
 			err = json.Unmarshal([]byte(args[0]), &did)
-			
+
 			if err != nil {
 				return err
 			}

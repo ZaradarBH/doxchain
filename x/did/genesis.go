@@ -1,8 +1,8 @@
 package did
 
 import (
-	"doxchain/x/did/keeper"
-	"doxchain/x/did/types"
+	"github.com/be-heroes/doxchain/x/did/keeper"
+	"github.com/be-heroes/doxchain/x/did/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
