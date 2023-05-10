@@ -1,0 +1,63 @@
+package keeper
+
+import (
+	"context"
+	"fmt"
+
+	"doxchain/x/did/types"
+	sdk "github.com/cosmos/cosmos-sdk/types"
+	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+)
+
+func (k msgServer) CreateDid(goCtx context.Context, msg *types.MsgCreateDid) (*types.MsgCreateDidResponse, error) {
+	ctx := sdk.UnwrapSDKContext(goCtx)
+
+	fullyQualifiedDidIdentifier := k.AppendDid(
+		ctx,
+		*msg.Did,
+	)
+
+	return &types.MsgCreateDidResponse{
+		FullyQualifiedDidIdentifier: fullyQualifiedDidIdentifier,
+	}, nil
+}
+
+func (k msgServer) UpdateDid(goCtx context.Context, msg *types.MsgUpdateDid) (*types.MsgUpdateDidResponse, error) {
+	ctx := sdk.UnwrapSDKContext(goCtx)
+
+	//TODO: Move sprintf logic to utility function or method override on the pb.go type that is generated
+	// Checks that the element exists
+	val, found := k.GetDid(ctx, fmt.Sprintf("did:%s:%s", msg.Did.MethodName, msg.Did.MethodId))
+	if !found {
+		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, fmt.Sprintf("key %d doesn't exist", fmt.Sprintf("did:%s:%s", msg.Did.MethodName, msg.Did.MethodId)))
+	}
+
+	// Checks if the msg creator is the same as the current owner
+	if msg.Did.Creator != val.Creator {
+		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "incorrect owner")
+	}
+
+	k.SetDid(ctx, *msg.Did)
+
+	return &types.MsgUpdateDidResponse{}, nil
+}
+
+func (k msgServer) DeleteDid(goCtx context.Context, msg *types.MsgDeleteDid) (*types.MsgDeleteDidResponse, error) {
+	ctx := sdk.UnwrapSDKContext(goCtx)
+
+	// Checks that the element exists
+	val, found := k.GetDid(ctx, msg.FullyQualifiedDidIdentifier)
+	if !found {
+		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, fmt.Sprintf("key %d doesn't exist", msg.FullyQualifiedDidIdentifier))
+	}
+
+	// Checks if the msg creator is the same as the current owner
+	if msg.Creator != val.Creator {
+		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "incorrect owner")
+	}
+
+	//TODO: Move sprintf logic to utility function or method override on the pb.go type that is generated
+	k.RemoveDid(ctx, msg.FullyQualifiedDidIdentifier)
+
+	return &types.MsgDeleteDidResponse{}, nil
+}

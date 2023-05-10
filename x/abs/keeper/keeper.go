@@ -93,4 +93,3 @@ func (k Keeper) GetWatchlist(ctx sdk.Context) types.Watchlist {
 	k.cdc.MustUnmarshal(b, &dp)
 	return dp
 }
-

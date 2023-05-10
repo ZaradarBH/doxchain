@@ -22,11 +22,11 @@ var _ banktypes.MsgServer = msgServer{}
 
 func (k msgServer) Send(goCtx context.Context, msg *banktypes.MsgSend) (*banktypes.MsgSendResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
-	
+
 	err := k.abs.AddToWatchlist(ctx, sdk.AccAddress(msg.FromAddress), msg.Amount)
 
 	if err != nil {
-	 	return nil, err
+		return nil, err
 	}
 
 	return bankkeeper.NewMsgServerImpl(k.BaseKeeper).Send(sdk.WrapSDKContext(ctx), msg)

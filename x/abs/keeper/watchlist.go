@@ -56,7 +56,7 @@ func (k Keeper) AddToWatchlist(ctx sdk.Context, addr sdk.AccAddress, coins sdk.C
 	}
 
 	for _, watchlistEntryCoinPtr := range watchlistEntry.Coins {
-		//TODO: Decide on oracle design and implement TRA (throttled rolling average) logic		
+		//TODO: Decide on oracle design and implement TRA (throttled rolling average) logic
 		throttledRollingAverage := sdk.ZeroInt()
 
 		if throttledRollingAverage.GT(watchlistEntryCoinPtr.Amount) {
@@ -79,7 +79,7 @@ func (k Keeper) AddToWatchlist(ctx sdk.Context, addr sdk.AccAddress, coins sdk.C
 	//TODO: Decide how to implement blockExpireOffset (constant | dynamic | param)
 	blockExpireOffset := uint64(100000)
 
-	if watchlistEntry.GetBlockHeight() + blockExpireOffset <= blockHeight {
+	if watchlistEntry.GetBlockHeight()+blockExpireOffset <= blockHeight {
 		watchlist.Entries = append(watchlist.Entries[:watchlistEntryIndex], watchlist.Entries[watchlistEntryIndex+1:]...)
 	} else {
 		if len(watchlist.Entries) == watchlistEntryIndex {
