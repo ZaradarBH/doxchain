@@ -1,7 +1,6 @@
 package keeper
 
 import (
-	"fmt"
 	"encoding/binary"
 
 	"doxchain/x/did/types"
@@ -42,7 +41,7 @@ func (k Keeper) AppendDid(
 	count := k.GetDidCount(ctx)
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DidKey))
 	appendedValue := k.cdc.MustMarshal(&did)
-	fullyQualifiedDidIdentifier := GetFullyQualifiedDidIdentifier(did)
+	fullyQualifiedDidIdentifier := did.GetFullyQualifiedDidIdentifier()
 
 	store.Set(GetDidIDBytes(fullyQualifiedDidIdentifier), appendedValue)
 
@@ -56,7 +55,7 @@ func (k Keeper) AppendDid(
 func (k Keeper) SetDid(ctx sdk.Context, did types.Did) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DidKey))
 	b := k.cdc.MustMarshal(&did)
-	store.Set(GetDidIDBytes(GetFullyQualifiedDidIdentifier(did)), b)
+	store.Set(GetDidIDBytes(did.GetFullyQualifiedDidIdentifier()), b)
 }
 
 // GetDid returns a Did object from its Did identifier
@@ -100,10 +99,4 @@ func GetDidIDBytes(did string) []byte {
 // GetDidIDFromBytes returns ID in uint64 format from a byte array
 func GetDidIDFromBytes(bz []byte) string {
 	return string(bz)
-}
-
-// GetFullyQualifiedDidIdentifier from a Did instance
-func GetFullyQualifiedDidIdentifier(did types.Did) string {
-	//TODO: Move sprintf logic to utility function or method override on the pb.go type that is generated
-	return fmt.Sprintf("did:%s:%s", did.MethodName, did.MethodId)
 }
