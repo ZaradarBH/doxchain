@@ -3,7 +3,7 @@ package cmd
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"doxchain/app"
+	"github.com/be-heroes/doxchain/app"
 )
 
 func initSDKConfig() {

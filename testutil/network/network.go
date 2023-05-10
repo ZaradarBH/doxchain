@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"doxchain/app"
+	"github.com/be-heroes/doxchain/app"
 
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	"github.com/cosmos/cosmos-sdk/crypto/hd"

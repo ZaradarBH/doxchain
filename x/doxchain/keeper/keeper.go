@@ -9,7 +9,7 @@ import (
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 	"github.com/tendermint/tendermint/libs/log"
 
-	"doxchain/x/doxchain/types"
+	"github.com/be-heroes/doxchain/x/doxchain/types"
 )
 
 type (

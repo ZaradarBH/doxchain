@@ -3,8 +3,8 @@ package simulation
 import (
 	"math/rand"
 
-	"doxchain/x/abs/keeper"
-	"doxchain/x/abs/types"
+	"github.com/be-heroes/doxchain/x/abs/keeper"
+	"github.com/be-heroes/doxchain/x/abs/types"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"

@@ -3,10 +3,10 @@ package doxchain_test
 import (
 	"testing"
 
-	keepertest "doxchain/testutil/keeper"
-	"doxchain/testutil/nullify"
-	"doxchain/x/doxchain"
-	"doxchain/x/doxchain/types"
+	keepertest "github.com/be-heroes/doxchain/testutil/keeper"
+	"github.com/be-heroes/doxchain/testutil/nullify"
+	"github.com/be-heroes/doxchain/x/doxchain"
+	"github.com/be-heroes/doxchain/x/doxchain/types"
 	"github.com/stretchr/testify/require"
 )
 

@@ -1,8 +1,8 @@
 package abs
 
 import (
-	"doxchain/x/abs/keeper"
-	"doxchain/x/abs/types"
+	"github.com/be-heroes/doxchain/x/abs/keeper"
+	"github.com/be-heroes/doxchain/x/abs/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 

@@ -3,9 +3,9 @@ package did
 import (
 	"math/rand"
 
-	"doxchain/testutil/sample"
-	didsimulation "doxchain/x/did/simulation"
-	"doxchain/x/did/types"
+	"github.com/be-heroes/doxchain/testutil/sample"
+	didsimulation "github.com/be-heroes/doxchain/x/did/simulation"
+	"github.com/be-heroes/doxchain/x/did/types"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	simappparams "github.com/cosmos/cosmos-sdk/simapp/params"
 	sdk "github.com/cosmos/cosmos-sdk/types"

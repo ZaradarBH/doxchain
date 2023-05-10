@@ -3,7 +3,7 @@ package cli
 import (
 	"context"
 
-	"doxchain/x/abs/types"
+	"github.com/be-heroes/doxchain/x/abs/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/spf13/cobra"

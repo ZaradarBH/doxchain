@@ -3,7 +3,7 @@ package doxchain.doxchain;
 
 import "gogoproto/gogo.proto";
 
-option go_package = "doxchain/x/doxchain/types";
+option go_package = "github.com/be-heroes/doxchain/x/doxchain/types";
 
 // Params defines the parameters for the module.
 message Params {

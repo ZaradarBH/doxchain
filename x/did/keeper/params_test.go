@@ -3,8 +3,8 @@ package keeper_test
 import (
 	"testing"
 
-	testkeeper "doxchain/testutil/keeper"
-	"doxchain/x/did/types"
+	testkeeper "github.com/be-heroes/doxchain/testutil/keeper"
+	"github.com/be-heroes/doxchain/x/did/types"
 	"github.com/stretchr/testify/require"
 )
 

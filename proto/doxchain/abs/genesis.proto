@@ -4,7 +4,7 @@ package doxchain.abs;
 import "gogoproto/gogo.proto";
 import "doxchain/abs/params.proto";
 
-option go_package = "doxchain/x/abs/types";
+option go_package = "github.com/be-heroes/doxchain/x/abs/types";
 
 // GenesisState defines the abs module's genesis state.
 message GenesisState {
