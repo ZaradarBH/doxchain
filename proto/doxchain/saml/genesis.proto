@@ -1,0 +1,12 @@
+syntax = "proto3";
+package beheroes.doxchain.saml;
+
+import "gogoproto/gogo.proto";
+import "doxchain/saml/params.proto";
+
+option go_package = "github.com/be-heroes/doxchain/x/saml/types";
+
+// GenesisState defines the saml module's genesis state.
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+}

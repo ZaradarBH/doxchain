@@ -1,0 +1,12 @@
+syntax = "proto3";
+package beheroes.doxchain.saml;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/be-heroes/doxchain/x/saml/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (gogoproto.goproto_stringer) = false;
+  
+}

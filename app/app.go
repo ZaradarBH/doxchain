@@ -122,7 +122,10 @@ import (
 	oraclemodule "github.com/be-heroes/doxchain/x/oracle"
 	oraclemodulekeeper "github.com/be-heroes/doxchain/x/oracle/keeper"
 	oraclemoduletypes "github.com/be-heroes/doxchain/x/oracle/types"
-	// this line is used by starport scaffolding # stargate/app/moduleImport
+	samlmodule "github.com/be-heroes/doxchain/x/saml"
+		samlmodulekeeper "github.com/be-heroes/doxchain/x/saml/keeper"
+		samlmoduletypes "github.com/be-heroes/doxchain/x/saml/types"
+// this line is used by starport scaffolding # stargate/app/moduleImport
 
 	appparams "github.com/be-heroes/doxchain/app/params"
 	"github.com/be-heroes/doxchain/docs"
@@ -186,7 +189,8 @@ var (
 		oauthmodule.AppModuleBasic{},
 		idpmodule.AppModuleBasic{},
 		oraclemodule.AppModuleBasic{},
-		// this line is used by starport scaffolding # stargate/app/moduleBasic
+		samlmodule.AppModuleBasic{},
+// this line is used by starport scaffolding # stargate/app/moduleBasic
 	)
 
 	// module account permissions
@@ -271,7 +275,9 @@ type App struct {
 	IdpKeeper idpmodulekeeper.Keeper
 
 	OracleKeeper oraclemodulekeeper.Keeper
-	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
+	
+		SamlKeeper samlmodulekeeper.Keeper
+// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// mm is the module manager
 	mm *module.Manager
@@ -321,7 +327,8 @@ func New(
 		oauthmoduletypes.StoreKey,
 		idpmoduletypes.StoreKey,
 		oraclemoduletypes.StoreKey,
-		// this line is used by starport scaffolding # stargate/app/storeKey
+		samlmoduletypes.StoreKey,
+// this line is used by starport scaffolding # stargate/app/storeKey
 	)
 	tkeys := sdk.NewTransientStoreKeys(paramstypes.TStoreKey)
 	memKeys := sdk.NewMemoryStoreKeys(capabilitytypes.MemStoreKey)
@@ -593,7 +600,17 @@ func New(
 	)
 	oracleModule := oraclemodule.NewAppModule(appCodec, app.OracleKeeper, app.AccountKeeper, app.BankKeeper)
 
-	// this line is used by starport scaffolding # stargate/app/keeperDefinition
+	
+		app.SamlKeeper = *samlmodulekeeper.NewKeeper(
+			appCodec,
+			keys[samlmoduletypes.StoreKey],
+			keys[samlmoduletypes.MemStoreKey],
+			app.GetSubspace(samlmoduletypes.ModuleName),
+			
+			)
+		samlModule := samlmodule.NewAppModule(appCodec, app.SamlKeeper, app.AccountKeeper, app.BankKeeper)
+
+		// this line is used by starport scaffolding # stargate/app/keeperDefinition
 
 	/**** IBC Routing ****/
 
@@ -664,7 +681,8 @@ func New(
 		oauthModule,
 		idpModule,
 		oracleModule,
-		// this line is used by starport scaffolding # stargate/app/appModule
+		samlModule,
+// this line is used by starport scaffolding # stargate/app/appModule
 	)
 
 	// During begin block slashing happens after distr.BeginBlocker so that
@@ -699,7 +717,8 @@ func New(
 		oauthmoduletypes.ModuleName,
 		idpmoduletypes.ModuleName,
 		oraclemoduletypes.ModuleName,
-		// this line is used by starport scaffolding # stargate/app/beginBlockers
+		samlmoduletypes.ModuleName,
+// this line is used by starport scaffolding # stargate/app/beginBlockers
 	)
 
 	app.mm.SetOrderEndBlockers(
@@ -729,7 +748,8 @@ func New(
 		oauthmoduletypes.ModuleName,
 		idpmoduletypes.ModuleName,
 		oraclemoduletypes.ModuleName,
-		// this line is used by starport scaffolding # stargate/app/endBlockers
+		samlmoduletypes.ModuleName,
+// this line is used by starport scaffolding # stargate/app/endBlockers
 	)
 
 	// NOTE: The genutils module must occur after staking so that pools are
@@ -764,7 +784,8 @@ func New(
 		oauthmoduletypes.ModuleName,
 		idpmoduletypes.ModuleName,
 		oraclemoduletypes.ModuleName,
-		// this line is used by starport scaffolding # stargate/app/initGenesis
+		samlmoduletypes.ModuleName,
+// this line is used by starport scaffolding # stargate/app/initGenesis
 	)
 
 	// Uncomment if you want to set a custom migration order here.
@@ -799,7 +820,8 @@ func New(
 		oauthModule,
 		idpModule,
 		oracleModule,
-		// this line is used by starport scaffolding # stargate/app/appModule
+		samlModule,
+// this line is used by starport scaffolding # stargate/app/appModule
 	)
 	app.sm.RegisterStoreDecoders()
 
@@ -1009,7 +1031,8 @@ func initParamsKeeper(appCodec codec.BinaryCodec, legacyAmino *codec.LegacyAmino
 	paramsKeeper.Subspace(oauthmoduletypes.ModuleName)
 	paramsKeeper.Subspace(idpmoduletypes.ModuleName)
 	paramsKeeper.Subspace(oraclemoduletypes.ModuleName)
-	// this line is used by starport scaffolding # stargate/app/paramSubspace
+	paramsKeeper.Subspace(samlmoduletypes.ModuleName)
+// this line is used by starport scaffolding # stargate/app/paramSubspace
 
 	return paramsKeeper
 }
