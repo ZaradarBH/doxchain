@@ -28,6 +28,18 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgTokenRequest int = 100
 
+	opWeightMsgCreateDeviceCodes = "op_weight_msg_device_codes"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgCreateDeviceCodes int = 100
+
+	opWeightMsgUpdateDeviceCodes = "op_weight_msg_device_codes"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgUpdateDeviceCodes int = 100
+
+	opWeightMsgDeleteDeviceCodes = "op_weight_msg_device_codes"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgDeleteDeviceCodes int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -39,6 +51,14 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 	}
 	oauthGenesis := types.GenesisState{
 		Params: types.DefaultParams(),
+		DeviceCodesList: []types.DeviceCodes{
+			{
+				Tenant:   "0",
+			},
+			{
+				Tenant:   "1",
+			},
+		},
 		// this line is used by starport scaffolding # simapp/module/genesisState
 	}
 	simState.GenState[types.ModuleName] = simState.Cdc.MustMarshalJSON(&oauthGenesis)

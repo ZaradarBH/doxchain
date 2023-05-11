@@ -34,8 +34,11 @@ func (k Keeper) GenerateClientCredentialToken(ctx sdk.Context, msg types.MsgToke
 				return tokenResponse, sdkerrors.Wrap(types.TokenServiceError, "Failed to create token")
 			}
 
+			//TODO: Save signed token to store until it is redeemed via /authorize
 			tokenResponse.AccessToken = signedToken
 			tokenResponse.TokenType = "Bearer"
+
+			//TODO: Make expire time configurable
 			tokenResponse.ExpiresIn = 1800
 
 			break

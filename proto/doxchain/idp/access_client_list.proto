@@ -1,10 +1,12 @@
 syntax = "proto3";
 package beheroes.doxchain.idp;
 
+import "gogoproto/gogo.proto";
+
 option go_package = "github.com/be-heroes/doxchain/x/idp/types";
 
 message AccessClientList {
-  repeated AccessClientListEntry entries = 1;
+  repeated AccessClientListEntry entries = 1 [(gogoproto.nullable) = false];
 }
 
 message AccessClientListEntry { 

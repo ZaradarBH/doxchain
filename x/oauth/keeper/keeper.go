@@ -21,7 +21,7 @@ type (
 
 		authzKeeper    types.AuthzKeeper
 		evidenceKeeper types.EvidenceKeeper
-		idpKeeper types.IdpKeeper
+		idpKeeper      types.IdpKeeper
 	}
 )
 
@@ -48,7 +48,7 @@ func NewKeeper(
 
 		authzKeeper:    authzKeeper,
 		evidenceKeeper: evidenceKeeper,
-		idpKeeper: idpKeeper,
+		idpKeeper:      idpKeeper,
 	}
 }
 

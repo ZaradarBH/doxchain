@@ -19,6 +19,6 @@ func KeyPrefix(p string) []byte {
 }
 
 const (
-	IdpMasterKey = "Idp/masterkey"
-	TenantListKey = "Idp/tenantlist"
+	IdpMasterKey  = "Idp/masterkey"
+	TenantListKey = "Idp/tenants"
 )

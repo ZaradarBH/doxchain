@@ -8,7 +8,7 @@ import (
 )
 
 func RegisterCodec(cdc *codec.LegacyAmino) {
-	cdc.RegisterConcrete(&MsgAuthenticationRequest{}, "idp/AuthenticationRequest", nil)
+	cdc.RegisterConcrete(&MsgAuthenticationRequest{}, "idp/Login", nil)
 	// this line is used by starport scaffolding # 2
 }
 

@@ -1,9 +1,9 @@
 package types
 
 import (
-	sdk "github.com/cosmos/cosmos-sdk/types"	
-	"github.com/cosmos/cosmos-sdk/x/auth/types"
 	idpTypes "github.com/be-heroes/doxchain/x/idp/types"
+	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/cosmos/cosmos-sdk/x/auth/types"
 )
 
 type AuthzKeeper interface {
