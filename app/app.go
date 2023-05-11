@@ -113,6 +113,9 @@ import (
 	doxchainmodulekeeper "github.com/be-heroes/doxchain/x/doxchain/keeper"
 	doxchainmoduletypes "github.com/be-heroes/doxchain/x/doxchain/types"
 
+	idpmodule "github.com/be-heroes/doxchain/x/idp"
+	idpmodulekeeper "github.com/be-heroes/doxchain/x/idp/keeper"
+	idpmoduletypes "github.com/be-heroes/doxchain/x/idp/types"
 	oauthmodule "github.com/be-heroes/doxchain/x/oauth"
 	oauthmodulekeeper "github.com/be-heroes/doxchain/x/oauth/keeper"
 	oauthmoduletypes "github.com/be-heroes/doxchain/x/oauth/types"
@@ -178,6 +181,7 @@ var (
 		didmodule.AppModuleBasic{},
 		absmodule.AppModuleBasic{},
 		oauthmodule.AppModuleBasic{},
+		idpmodule.AppModuleBasic{},
 		// this line is used by starport scaffolding # stargate/app/moduleBasic
 	)
 
@@ -259,6 +263,8 @@ type App struct {
 	AbsKeeper absmodulekeeper.Keeper
 
 	OauthKeeper oauthmodulekeeper.Keeper
+
+	IdpKeeper idpmodulekeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// mm is the module manager
@@ -307,6 +313,7 @@ func New(
 		didmoduletypes.StoreKey,
 		absmoduletypes.StoreKey,
 		oauthmoduletypes.StoreKey,
+		idpmoduletypes.StoreKey,
 		// this line is used by starport scaffolding # stargate/app/storeKey
 	)
 	tkeys := sdk.NewTransientStoreKeys(paramstypes.TStoreKey)
@@ -559,6 +566,18 @@ func New(
 	)
 	oauthModule := oauthmodule.NewAppModule(appCodec, app.OauthKeeper, app.AccountKeeper, app.BankKeeper)
 
+	app.IdpKeeper = *idpmodulekeeper.NewKeeper(
+		appCodec,
+		keys[idpmoduletypes.StoreKey],
+		keys[idpmoduletypes.MemStoreKey],
+		app.GetSubspace(idpmoduletypes.ModuleName),
+
+		app.OauthKeeper,
+		app.AuthzKeeper,
+		app.EvidenceKeeper,
+	)
+	idpModule := idpmodule.NewAppModule(appCodec, app.IdpKeeper, app.AccountKeeper, app.BankKeeper)
+
 	// this line is used by starport scaffolding # stargate/app/keeperDefinition
 
 	/**** IBC Routing ****/
@@ -628,6 +647,7 @@ func New(
 		didModule,
 		absModule,
 		oauthModule,
+		idpModule,
 		// this line is used by starport scaffolding # stargate/app/appModule
 	)
 
@@ -661,6 +681,7 @@ func New(
 		didmoduletypes.ModuleName,
 		absmoduletypes.ModuleName,
 		oauthmoduletypes.ModuleName,
+		idpmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/beginBlockers
 	)
 
@@ -689,6 +710,7 @@ func New(
 		didmoduletypes.ModuleName,
 		absmoduletypes.ModuleName,
 		oauthmoduletypes.ModuleName,
+		idpmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/endBlockers
 	)
 
@@ -722,6 +744,7 @@ func New(
 		didmoduletypes.ModuleName,
 		absmoduletypes.ModuleName,
 		oauthmoduletypes.ModuleName,
+		idpmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	)
 
@@ -755,6 +778,7 @@ func New(
 		didModule,
 		absModule,
 		oauthModule,
+		idpModule,
 		// this line is used by starport scaffolding # stargate/app/appModule
 	)
 	app.sm.RegisterStoreDecoders()
@@ -963,6 +987,7 @@ func initParamsKeeper(appCodec codec.BinaryCodec, legacyAmino *codec.LegacyAmino
 	paramsKeeper.Subspace(didmoduletypes.ModuleName)
 	paramsKeeper.Subspace(absmoduletypes.ModuleName)
 	paramsKeeper.Subspace(oauthmoduletypes.ModuleName)
+	paramsKeeper.Subspace(idpmoduletypes.ModuleName)
 	// this line is used by starport scaffolding # stargate/app/paramSubspace
 
 	return paramsKeeper

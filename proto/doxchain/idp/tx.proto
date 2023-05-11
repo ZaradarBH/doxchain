@@ -1,0 +1,18 @@
+syntax = "proto3";
+package beheroes.doxchain.idp;
+
+option go_package = "github.com/be-heroes/doxchain/x/idp/types";
+
+// Msg defines the Msg service.
+service Msg {
+  rpc BasicAuthenticationRequest (MsgBasicAuthenticationRequest) returns (MsgBasicAuthenticationRequestResponse);
+}
+
+message MsgBasicAuthenticationRequest {
+  string creator = 1;
+}
+
+message MsgBasicAuthenticationRequestResponse {
+  string token = 1;
+}
+

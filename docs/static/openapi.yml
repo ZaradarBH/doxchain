@@ -4,6 +4,42 @@ info:
   name: ''
   description: ''
 paths:
+  /be-heroes/doxchain/idp/params:
+    get:
+      summary: Parameters queries the parameters of the module.
+      operationId: BeheroesDoxchainIdpParams
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              params:
+                description: params holds all the parameters of this module.
+                type: object
+            description: >-
+              QueryParamsResponse is response type for the Query/Params RPC
+              method.
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      tags:
+        - Query
   /be-heroes/doxchain/oauth/params:
     get:
       summary: Parameters queries the parameters of the module.
@@ -44311,12 +44347,15 @@ paths:
       tags:
         - Query
 definitions:
-  beheroes.doxchain.oauth.MsgTokenResponse:
+  beheroes.doxchain.idp.MsgAuthenticationRequestResponse:
     type: object
-  beheroes.doxchain.oauth.Params:
+    properties:
+      token:
+        type: string
+  beheroes.doxchain.idp.Params:
     type: object
     description: Params defines the parameters for the module.
-  beheroes.doxchain.oauth.QueryParamsResponse:
+  beheroes.doxchain.idp.QueryParamsResponse:
     type: object
     properties:
       params:
@@ -44646,6 +44685,18 @@ definitions:
                   "@type": "type.googleapis.com/google.protobuf.Duration",
                   "value": "1.212s"
                 }
+  beheroes.doxchain.oauth.MsgTokenResponse:
+    type: object
+  beheroes.doxchain.oauth.Params:
+    type: object
+    description: Params defines the parameters for the module.
+  beheroes.doxchain.oauth.QueryParamsResponse:
+    type: object
+    properties:
+      params:
+        description: params holds all the parameters of this module.
+        type: object
+    description: QueryParamsResponse is response type for the Query/Params RPC method.
   cosmos.auth.v1beta1.AddressBytesToStringResponse:
     type: object
     properties:
