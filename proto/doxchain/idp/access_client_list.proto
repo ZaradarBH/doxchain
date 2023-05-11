@@ -7,7 +7,8 @@ message AccessClientList {
   repeated AccessClientListEntry entries = 1;
 }
 
-message AccessClientListEntry {  
-  string clientId = 1; 
-  string clientSecret = 2; 
+message AccessClientListEntry { 
+  string creator = 1; 
+  string clientId = 2; 
+  string clientSecret = 3; 
 }

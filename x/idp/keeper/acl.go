@@ -8,16 +8,41 @@ import (
 	"github.com/be-heroes/doxchain/x/idp/types"
 )
 
-// GetAccessClientList for a given tenant
-func (k Keeper) GetAccessClientList(ctx sdk.Context, tenant string) (acl types.AccessClientList, err error) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AccessClientListKey))
-	tenantAclBytes := store.Get([]byte(tenant))
+// GetTenant for a given tenant identifier
+func (k Keeper) GetTenant(ctx sdk.Context, tenantIdentifier string) (tenant types.Tenant, err error) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), []byte{})
+	tenantListBytes := store.Get(types.KeyPrefix(types.TenantListKey))
 
-	if tenantAclBytes == nil {
-		return types.AccessClientList{}, sdkerrors.Wrap(types.AccessClientListError, "No ACL exists for given tenant")
+	if tenantListBytes == nil {
+		return types.Tenant{}, sdkerrors.Wrap(types.AccessClientListError, "No tenant list found")
 	}
 
-	k.cdc.MustUnmarshal(tenantAclBytes, &acl)
+	tenants := &types.TenantList{}
 
-	return acl, nil
+	k.cdc.MustUnmarshal(tenantListBytes, tenants)
+	
+	for _, tenantEntry := range tenants.Entries {
+		if(tenantEntry.Identifier == tenantIdentifier){
+			tenant = *tenantEntry
+
+			break
+		}
+	}
+
+	if &tenant == nil {
+		return types.Tenant{}, sdkerrors.Wrap(types.AccessClientListError, "No tenant found for given identifier")
+	}
+
+	return tenant, nil
+}
+
+// GetAccessClientList for a given tenant identifier
+func (k Keeper) GetAccessClientList(ctx sdk.Context, tenantIdentifier string) (acl types.AccessClientList, err error) {
+	tenant, err := k.GetTenant(ctx, tenantIdentifier)
+
+	if err != nil {
+		return types.AccessClientList{}, err
+	}
+
+	return tenant.AccessClientList, nil
 }
