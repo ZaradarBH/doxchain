@@ -14,7 +14,7 @@ import (
 func createNDid(keeper *keeper.Keeper, ctx sdk.Context, n int) []types.Did {
 	items := make([]types.Did, n)
 	for i := range items {
-		items[i].Id = keeper.AppendDid(ctx, items[i])
+		items[i].Url = keeper.AppendDid(ctx, items[i])
 	}
 	return items
 }
@@ -23,7 +23,7 @@ func TestDidGet(t *testing.T) {
 	keeper, ctx := keepertest.DidKeeper(t)
 	items := createNDid(keeper, ctx, 10)
 	for _, item := range items {
-		got, found := keeper.GetDid(ctx, item.Id)
+		got, found := keeper.GetDid(ctx, item.GetFullyQualifiedDidIdentifier())
 		require.True(t, found)
 		require.Equal(t,
 			nullify.Fill(&item),
@@ -36,8 +36,8 @@ func TestDidRemove(t *testing.T) {
 	keeper, ctx := keepertest.DidKeeper(t)
 	items := createNDid(keeper, ctx, 10)
 	for _, item := range items {
-		keeper.RemoveDid(ctx, item.Id)
-		_, found := keeper.GetDid(ctx, item.Id)
+		keeper.RemoveDid(ctx, item.GetFullyQualifiedDidIdentifier())
+		_, found := keeper.GetDid(ctx, item.GetFullyQualifiedDidIdentifier())
 		require.False(t, found)
 	}
 }

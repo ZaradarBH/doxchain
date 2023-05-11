@@ -17,13 +17,23 @@ func TestMsgCreateDid_ValidateBasic(t *testing.T) {
 		{
 			name: "invalid address",
 			msg: MsgCreateDid{
-				Creator: "invalid_address",
+				&Did{
+					Creator:    "invalid_address",
+					Url:        "did:method:id",
+					MethodName: "method",
+					MethodId:   "id",
+				},
 			},
 			err: sdkerrors.ErrInvalidAddress,
 		}, {
 			name: "valid address",
 			msg: MsgCreateDid{
-				Creator: sample.AccAddress(),
+				&Did{
+					Creator:    sample.AccAddress(),
+					Url:        "did:method:id",
+					MethodName: "method",
+					MethodId:   "id",
+				},
 			},
 		},
 	}
@@ -48,13 +58,23 @@ func TestMsgUpdateDid_ValidateBasic(t *testing.T) {
 		{
 			name: "invalid address",
 			msg: MsgUpdateDid{
-				Creator: "invalid_address",
+				&Did{
+					Creator:    "invalid_address",
+					Url:        "did:method:id",
+					MethodName: "method",
+					MethodId:   "id",
+				},
 			},
 			err: sdkerrors.ErrInvalidAddress,
 		}, {
 			name: "valid address",
 			msg: MsgUpdateDid{
-				Creator: sample.AccAddress(),
+				&Did{
+					Creator:    sample.AccAddress(),
+					Url:        "did:method:id",
+					MethodName: "method",
+					MethodId:   "id",
+				},
 			},
 		},
 	}

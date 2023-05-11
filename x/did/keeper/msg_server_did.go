@@ -29,7 +29,7 @@ func (k msgServer) UpdateDid(goCtx context.Context, msg *types.MsgUpdateDid) (*t
 	fullyQualifiedDidIdentifier := msg.Did.GetFullyQualifiedDidIdentifier()
 	val, found := k.GetDid(ctx, fullyQualifiedDidIdentifier)
 	if !found {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, fmt.Sprintf("key %d doesn't exist", fullyQualifiedDidIdentifier))
+		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, fmt.Sprintf("key %s doesn't exist", fullyQualifiedDidIdentifier))
 	}
 
 	// Checks if the msg creator is the same as the current owner
@@ -48,7 +48,7 @@ func (k msgServer) DeleteDid(goCtx context.Context, msg *types.MsgDeleteDid) (*t
 	// Checks that the element exists
 	val, found := k.GetDid(ctx, msg.FullyQualifiedDidIdentifier)
 	if !found {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, fmt.Sprintf("key %d doesn't exist", msg.FullyQualifiedDidIdentifier))
+		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, fmt.Sprintf("key %s doesn't exist", msg.FullyQualifiedDidIdentifier))
 	}
 
 	// Checks if the msg creator is the same as the current owner

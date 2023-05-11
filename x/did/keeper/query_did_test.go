@@ -27,17 +27,17 @@ func TestDidQuerySingle(t *testing.T) {
 	}{
 		{
 			desc:     "First",
-			request:  &types.QueryGetDidRequest{Id: msgs[0].Id},
+			request:  &types.QueryGetDidRequest{FullyQualifiedDidIdentifier: string(msgs[0].Id)},
 			response: &types.QueryGetDidResponse{Did: msgs[0]},
 		},
 		{
 			desc:     "Second",
-			request:  &types.QueryGetDidRequest{Id: msgs[1].Id},
+			request:  &types.QueryGetDidRequest{FullyQualifiedDidIdentifier: string(msgs[1].Id)},
 			response: &types.QueryGetDidResponse{Did: msgs[1]},
 		},
 		{
 			desc:    "KeyNotFound",
-			request: &types.QueryGetDidRequest{Id: uint64(len(msgs))},
+			request: &types.QueryGetDidRequest{FullyQualifiedDidIdentifier: string(len(msgs))},
 			err:     sdkerrors.ErrKeyNotFound,
 		},
 		{

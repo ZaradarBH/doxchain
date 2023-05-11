@@ -8,5 +8,11 @@ import (
 )
 
 func (k msgServer) Token(goCtx context.Context, msg *types.MsgTokenRequest) (*types.MsgTokenResponse, error) {
-	return k.Token(sdk.UnwrapSDKContext(goCtx), msg)
+	authToken, err := k.Keeper.Token(sdk.UnwrapSDKContext(goCtx), *msg)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &authToken, nil
 }

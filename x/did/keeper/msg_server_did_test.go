@@ -1,6 +1,7 @@
 package keeper_test
 
 import (
+	"fmt"
 	"testing"
 
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
@@ -13,9 +14,14 @@ func TestDidMsgServerCreate(t *testing.T) {
 	srv, ctx := setupMsgServer(t)
 	creator := "A"
 	for i := 0; i < 5; i++ {
-		resp, err := srv.CreateDid(ctx, &types.MsgCreateDid{Creator: creator})
+		resp, err := srv.CreateDid(ctx, &types.MsgCreateDid{
+			Did: &types.Did{
+				Creator:    creator,
+				MethodName: "method",
+				MethodId:   string(i),
+			}})
 		require.NoError(t, err)
-		require.Equal(t, i, int(resp.Id))
+		require.Equal(t, fmt.Sprintf("did:method:%d", i), resp.FullyQualifiedDidIdentifier)
 	}
 }
 
@@ -28,23 +34,39 @@ func TestDidMsgServerUpdate(t *testing.T) {
 		err     error
 	}{
 		{
-			desc:    "Completed",
-			request: &types.MsgUpdateDid{Creator: creator},
+			desc: "Completed",
+			request: &types.MsgUpdateDid{Did: &types.Did{
+				Creator:    creator,
+				MethodName: "method",
+				MethodId:   "id",
+			}},
 		},
 		{
-			desc:    "Unauthorized",
-			request: &types.MsgUpdateDid{Creator: "B"},
-			err:     sdkerrors.ErrUnauthorized,
+			desc: "Unauthorized",
+			request: &types.MsgUpdateDid{Did: &types.Did{
+				Creator:    "B",
+				MethodName: "method",
+				MethodId:   "id",
+			}},
+			err: sdkerrors.ErrUnauthorized,
 		},
 		{
-			desc:    "Unauthorized",
-			request: &types.MsgUpdateDid{Creator: creator, Id: 10},
-			err:     sdkerrors.ErrKeyNotFound,
+			desc: "Unauthorized",
+			request: &types.MsgUpdateDid{Did: &types.Did{
+				Creator:    creator,
+				MethodName: "method",
+				MethodId:   "id",
+			}},
+			err: sdkerrors.ErrKeyNotFound,
 		},
 	} {
 		t.Run(tc.desc, func(t *testing.T) {
 			srv, ctx := setupMsgServer(t)
-			_, err := srv.CreateDid(ctx, &types.MsgCreateDid{Creator: creator})
+			_, err := srv.CreateDid(ctx, &types.MsgCreateDid{Did: &types.Did{
+				Creator:    creator,
+				MethodName: "method",
+				MethodId:   "id",
+			}})
 			require.NoError(t, err)
 
 			_, err = srv.UpdateDid(ctx, tc.request)
@@ -76,14 +98,20 @@ func TestDidMsgServerDelete(t *testing.T) {
 		},
 		{
 			desc:    "KeyNotFound",
-			request: &types.MsgDeleteDid{Creator: creator, Id: 10},
+			request: &types.MsgDeleteDid{Creator: creator, FullyQualifiedDidIdentifier: "did:method:id"},
 			err:     sdkerrors.ErrKeyNotFound,
 		},
 	} {
 		t.Run(tc.desc, func(t *testing.T) {
 			srv, ctx := setupMsgServer(t)
 
-			_, err := srv.CreateDid(ctx, &types.MsgCreateDid{Creator: creator})
+			_, err := srv.CreateDid(ctx, &types.MsgCreateDid{
+				Did: &types.Did{
+					Creator:    creator,
+					MethodName: "method",
+					MethodId:   "id",
+				},
+			})
 			require.NoError(t, err)
 			_, err = srv.DeleteDid(ctx, tc.request)
 			if tc.err != nil {
