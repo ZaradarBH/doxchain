@@ -3,10 +3,10 @@ package keeper_test
 import (
 	"testing"
 
+	testkeeper "github.com/be-heroes/doxchain/testutil/keeper"
+	"github.com/be-heroes/doxchain/x/saml/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
-	testkeeper 	"github.com/be-heroes/doxchain/testutil/keeper"
-	"github.com/be-heroes/doxchain/x/saml/types"
 )
 
 func TestParamsQuery(t *testing.T) {

@@ -4,10 +4,10 @@ import (
 	"context"
 	"testing"
 
+	keepertest "github.com/be-heroes/doxchain/testutil/keeper"
+	"github.com/be-heroes/doxchain/x/saml/keeper"
+	"github.com/be-heroes/doxchain/x/saml/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-    "github.com/be-heroes/doxchain/x/saml/types"
-    "github.com/be-heroes/doxchain/x/saml/keeper"
-    keepertest "github.com/be-heroes/doxchain/testutil/keeper"
 )
 
 func setupMsgServer(t testing.TB) (types.MsgServer, context.Context) {
