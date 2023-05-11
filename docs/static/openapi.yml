@@ -44419,7 +44419,7 @@ paths:
       tags:
         - Query
 definitions:
-  beheroes.doxchain.idp.MsgBasicAuthenticationRequestResponse:
+  beheroes.doxchain.idp.MsgAuthenticationResponse:
     type: object
     properties:
       token:

@@ -27,22 +27,22 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
-type MsgBasicAuthenticationRequest struct {
+type MsgAuthenticationRequest struct {
 	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 }
 
-func (m *MsgBasicAuthenticationRequest) Reset()         { *m = MsgBasicAuthenticationRequest{} }
-func (m *MsgBasicAuthenticationRequest) String() string { return proto.CompactTextString(m) }
-func (*MsgBasicAuthenticationRequest) ProtoMessage()    {}
-func (*MsgBasicAuthenticationRequest) Descriptor() ([]byte, []int) {
+func (m *MsgAuthenticationRequest) Reset()         { *m = MsgAuthenticationRequest{} }
+func (m *MsgAuthenticationRequest) String() string { return proto.CompactTextString(m) }
+func (*MsgAuthenticationRequest) ProtoMessage()    {}
+func (*MsgAuthenticationRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_d303193384f0350d, []int{0}
 }
-func (m *MsgBasicAuthenticationRequest) XXX_Unmarshal(b []byte) error {
+func (m *MsgAuthenticationRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgBasicAuthenticationRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgAuthenticationRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgBasicAuthenticationRequest.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgAuthenticationRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -52,41 +52,41 @@ func (m *MsgBasicAuthenticationRequest) XXX_Marshal(b []byte, deterministic bool
 		return b[:n], nil
 	}
 }
-func (m *MsgBasicAuthenticationRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgBasicAuthenticationRequest.Merge(m, src)
+func (m *MsgAuthenticationRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgAuthenticationRequest.Merge(m, src)
 }
-func (m *MsgBasicAuthenticationRequest) XXX_Size() int {
+func (m *MsgAuthenticationRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgBasicAuthenticationRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgBasicAuthenticationRequest.DiscardUnknown(m)
+func (m *MsgAuthenticationRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgAuthenticationRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgBasicAuthenticationRequest proto.InternalMessageInfo
+var xxx_messageInfo_MsgAuthenticationRequest proto.InternalMessageInfo
 
-func (m *MsgBasicAuthenticationRequest) GetCreator() string {
+func (m *MsgAuthenticationRequest) GetCreator() string {
 	if m != nil {
 		return m.Creator
 	}
 	return ""
 }
 
-type MsgBasicAuthenticationRequestResponse struct {
+type MsgAuthenticationResponse struct {
 	Token string `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
 }
 
-func (m *MsgBasicAuthenticationRequestResponse) Reset()         { *m = MsgBasicAuthenticationRequestResponse{} }
-func (m *MsgBasicAuthenticationRequestResponse) String() string { return proto.CompactTextString(m) }
-func (*MsgBasicAuthenticationRequestResponse) ProtoMessage()    {}
-func (*MsgBasicAuthenticationRequestResponse) Descriptor() ([]byte, []int) {
+func (m *MsgAuthenticationResponse) Reset()         { *m = MsgAuthenticationResponse{} }
+func (m *MsgAuthenticationResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgAuthenticationResponse) ProtoMessage()    {}
+func (*MsgAuthenticationResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_d303193384f0350d, []int{1}
 }
-func (m *MsgBasicAuthenticationRequestResponse) XXX_Unmarshal(b []byte) error {
+func (m *MsgAuthenticationResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgBasicAuthenticationRequestResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgAuthenticationResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgBasicAuthenticationRequestResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgAuthenticationResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -96,19 +96,19 @@ func (m *MsgBasicAuthenticationRequestResponse) XXX_Marshal(b []byte, determinis
 		return b[:n], nil
 	}
 }
-func (m *MsgBasicAuthenticationRequestResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgBasicAuthenticationRequestResponse.Merge(m, src)
+func (m *MsgAuthenticationResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgAuthenticationResponse.Merge(m, src)
 }
-func (m *MsgBasicAuthenticationRequestResponse) XXX_Size() int {
+func (m *MsgAuthenticationResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgBasicAuthenticationRequestResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgBasicAuthenticationRequestResponse.DiscardUnknown(m)
+func (m *MsgAuthenticationResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgAuthenticationResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgBasicAuthenticationRequestResponse proto.InternalMessageInfo
+var xxx_messageInfo_MsgAuthenticationResponse proto.InternalMessageInfo
 
-func (m *MsgBasicAuthenticationRequestResponse) GetToken() string {
+func (m *MsgAuthenticationResponse) GetToken() string {
 	if m != nil {
 		return m.Token
 	}
@@ -116,29 +116,29 @@ func (m *MsgBasicAuthenticationRequestResponse) GetToken() string {
 }
 
 func init() {
-	proto.RegisterType((*MsgBasicAuthenticationRequest)(nil), "beheroes.doxchain.idp.MsgBasicAuthenticationRequest")
-	proto.RegisterType((*MsgBasicAuthenticationRequestResponse)(nil), "beheroes.doxchain.idp.MsgBasicAuthenticationRequestResponse")
+	proto.RegisterType((*MsgAuthenticationRequest)(nil), "beheroes.doxchain.idp.MsgAuthenticationRequest")
+	proto.RegisterType((*MsgAuthenticationResponse)(nil), "beheroes.doxchain.idp.MsgAuthenticationResponse")
 }
 
 func init() { proto.RegisterFile("doxchain/idp/tx.proto", fileDescriptor_d303193384f0350d) }
 
 var fileDescriptor_d303193384f0350d = []byte{
-	// 236 bytes of a gzipped FileDescriptorProto
+	// 227 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x4d, 0xc9, 0xaf, 0x48,
 	0xce, 0x48, 0xcc, 0xcc, 0xd3, 0xcf, 0x4c, 0x29, 0xd0, 0x2f, 0xa9, 0xd0, 0x2b, 0x28, 0xca, 0x2f,
 	0xc9, 0x17, 0x12, 0x4d, 0x4a, 0xcd, 0x48, 0x2d, 0xca, 0x4f, 0x2d, 0xd6, 0x83, 0xc9, 0xeb, 0x65,
-	0xa6, 0x14, 0x28, 0x59, 0x72, 0xc9, 0xfa, 0x16, 0xa7, 0x3b, 0x25, 0x16, 0x67, 0x26, 0x3b, 0x96,
-	0x96, 0x64, 0xa4, 0xe6, 0x95, 0x64, 0x26, 0x27, 0x96, 0x64, 0xe6, 0xe7, 0x05, 0xa5, 0x16, 0x96,
-	0xa6, 0x16, 0x97, 0x08, 0x49, 0x70, 0xb1, 0x27, 0x17, 0xa5, 0x26, 0x96, 0xe4, 0x17, 0x49, 0x30,
-	0x2a, 0x30, 0x6a, 0x70, 0x06, 0xc1, 0xb8, 0x4a, 0xb6, 0x5c, 0xaa, 0x78, 0xb5, 0x06, 0xa5, 0x16,
-	0x17, 0xe4, 0xe7, 0x15, 0xa7, 0x0a, 0x89, 0x70, 0xb1, 0x96, 0xe4, 0x67, 0xa7, 0xe6, 0x41, 0x0d,
-	0x80, 0x70, 0x8c, 0x66, 0x30, 0x72, 0x31, 0xfb, 0x16, 0xa7, 0x0b, 0x4d, 0x60, 0xe4, 0x92, 0xc2,
-	0x63, 0xbf, 0x89, 0x1e, 0x56, 0x87, 0xeb, 0xe1, 0xb5, 0x5a, 0xca, 0x86, 0x1c, 0x5d, 0x30, 0x07,
-	0x3b, 0x39, 0x9f, 0x78, 0x24, 0xc7, 0x78, 0xe1, 0x91, 0x1c, 0xe3, 0x83, 0x47, 0x72, 0x8c, 0x13,
-	0x1e, 0xcb, 0x31, 0x5c, 0x78, 0x2c, 0xc7, 0x70, 0xe3, 0xb1, 0x1c, 0x43, 0x94, 0x66, 0x7a, 0x66,
-	0x49, 0x46, 0x69, 0x92, 0x5e, 0x72, 0x7e, 0xae, 0x7e, 0x52, 0xaa, 0x2e, 0xc4, 0x0a, 0x7d, 0x78,
-	0x88, 0x57, 0x40, 0xc2, 0xbc, 0xb2, 0x20, 0xb5, 0x38, 0x89, 0x0d, 0x1c, 0xee, 0xc6, 0x80, 0x00,
-	0x00, 0x00, 0xff, 0xff, 0x38, 0xdb, 0x54, 0x9f, 0x90, 0x01, 0x00, 0x00,
+	0xa6, 0x14, 0x28, 0x99, 0x70, 0x49, 0xf8, 0x16, 0xa7, 0x3b, 0x96, 0x96, 0x64, 0xa4, 0xe6, 0x95,
+	0x64, 0x26, 0x27, 0x96, 0x64, 0xe6, 0xe7, 0x05, 0xa5, 0x16, 0x96, 0xa6, 0x16, 0x97, 0x08, 0x49,
+	0x70, 0xb1, 0x27, 0x17, 0xa5, 0x26, 0x96, 0xe4, 0x17, 0x49, 0x30, 0x2a, 0x30, 0x6a, 0x70, 0x06,
+	0xc1, 0xb8, 0x4a, 0x86, 0x5c, 0x92, 0x58, 0x74, 0x15, 0x17, 0xe4, 0xe7, 0x15, 0xa7, 0x0a, 0x89,
+	0x70, 0xb1, 0x96, 0xe4, 0x67, 0xa7, 0xe6, 0x41, 0x35, 0x41, 0x38, 0x46, 0x8d, 0x8c, 0x5c, 0xcc,
+	0xbe, 0xc5, 0xe9, 0x42, 0x55, 0x5c, 0xa2, 0xd8, 0x6d, 0xd3, 0xd7, 0xc3, 0xea, 0x42, 0x3d, 0x5c,
+	0xce, 0x93, 0x32, 0x20, 0x5e, 0x03, 0xc4, 0x65, 0x4e, 0xce, 0x27, 0x1e, 0xc9, 0x31, 0x5e, 0x78,
+	0x24, 0xc7, 0xf8, 0xe0, 0x91, 0x1c, 0xe3, 0x84, 0xc7, 0x72, 0x0c, 0x17, 0x1e, 0xcb, 0x31, 0xdc,
+	0x78, 0x2c, 0xc7, 0x10, 0xa5, 0x99, 0x9e, 0x59, 0x92, 0x51, 0x9a, 0xa4, 0x97, 0x9c, 0x9f, 0xab,
+	0x9f, 0x94, 0xaa, 0x0b, 0x31, 0x56, 0x1f, 0x1e, 0x92, 0x15, 0x90, 0xb0, 0xac, 0x2c, 0x48, 0x2d,
+	0x4e, 0x62, 0x03, 0x87, 0xa7, 0x31, 0x20, 0x00, 0x00, 0xff, 0xff, 0xe6, 0x7c, 0x46, 0x19, 0x68,
+	0x01, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -153,7 +153,7 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type MsgClient interface {
-	BasicAuthenticationRequest(ctx context.Context, in *MsgBasicAuthenticationRequest, opts ...grpc.CallOption) (*MsgBasicAuthenticationRequestResponse, error)
+	AuthenticationRequest(ctx context.Context, in *MsgAuthenticationRequest, opts ...grpc.CallOption) (*MsgAuthenticationResponse, error)
 }
 
 type msgClient struct {
@@ -164,9 +164,9 @@ func NewMsgClient(cc grpc1.ClientConn) MsgClient {
 	return &msgClient{cc}
 }
 
-func (c *msgClient) BasicAuthenticationRequest(ctx context.Context, in *MsgBasicAuthenticationRequest, opts ...grpc.CallOption) (*MsgBasicAuthenticationRequestResponse, error) {
-	out := new(MsgBasicAuthenticationRequestResponse)
-	err := c.cc.Invoke(ctx, "/beheroes.doxchain.idp.Msg/BasicAuthenticationRequest", in, out, opts...)
+func (c *msgClient) AuthenticationRequest(ctx context.Context, in *MsgAuthenticationRequest, opts ...grpc.CallOption) (*MsgAuthenticationResponse, error) {
+	out := new(MsgAuthenticationResponse)
+	err := c.cc.Invoke(ctx, "/beheroes.doxchain.idp.Msg/AuthenticationRequest", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -175,35 +175,35 @@ func (c *msgClient) BasicAuthenticationRequest(ctx context.Context, in *MsgBasic
 
 // MsgServer is the server API for Msg service.
 type MsgServer interface {
-	BasicAuthenticationRequest(context.Context, *MsgBasicAuthenticationRequest) (*MsgBasicAuthenticationRequestResponse, error)
+	AuthenticationRequest(context.Context, *MsgAuthenticationRequest) (*MsgAuthenticationResponse, error)
 }
 
 // UnimplementedMsgServer can be embedded to have forward compatible implementations.
 type UnimplementedMsgServer struct {
 }
 
-func (*UnimplementedMsgServer) BasicAuthenticationRequest(ctx context.Context, req *MsgBasicAuthenticationRequest) (*MsgBasicAuthenticationRequestResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method BasicAuthenticationRequest not implemented")
+func (*UnimplementedMsgServer) AuthenticationRequest(ctx context.Context, req *MsgAuthenticationRequest) (*MsgAuthenticationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AuthenticationRequest not implemented")
 }
 
 func RegisterMsgServer(s grpc1.Server, srv MsgServer) {
 	s.RegisterService(&_Msg_serviceDesc, srv)
 }
 
-func _Msg_BasicAuthenticationRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgBasicAuthenticationRequest)
+func _Msg_AuthenticationRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgAuthenticationRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MsgServer).BasicAuthenticationRequest(ctx, in)
+		return srv.(MsgServer).AuthenticationRequest(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/beheroes.doxchain.idp.Msg/BasicAuthenticationRequest",
+		FullMethod: "/beheroes.doxchain.idp.Msg/AuthenticationRequest",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).BasicAuthenticationRequest(ctx, req.(*MsgBasicAuthenticationRequest))
+		return srv.(MsgServer).AuthenticationRequest(ctx, req.(*MsgAuthenticationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -213,15 +213,15 @@ var _Msg_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*MsgServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "BasicAuthenticationRequest",
-			Handler:    _Msg_BasicAuthenticationRequest_Handler,
+			MethodName: "AuthenticationRequest",
+			Handler:    _Msg_AuthenticationRequest_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "doxchain/idp/tx.proto",
 }
 
-func (m *MsgBasicAuthenticationRequest) Marshal() (dAtA []byte, err error) {
+func (m *MsgAuthenticationRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -231,12 +231,12 @@ func (m *MsgBasicAuthenticationRequest) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgBasicAuthenticationRequest) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgAuthenticationRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgBasicAuthenticationRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgAuthenticationRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -251,7 +251,7 @@ func (m *MsgBasicAuthenticationRequest) MarshalToSizedBuffer(dAtA []byte) (int, 
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgBasicAuthenticationRequestResponse) Marshal() (dAtA []byte, err error) {
+func (m *MsgAuthenticationResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -261,12 +261,12 @@ func (m *MsgBasicAuthenticationRequestResponse) Marshal() (dAtA []byte, err erro
 	return dAtA[:n], nil
 }
 
-func (m *MsgBasicAuthenticationRequestResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgAuthenticationResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgBasicAuthenticationRequestResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgAuthenticationResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -292,7 +292,7 @@ func encodeVarintTx(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return base
 }
-func (m *MsgBasicAuthenticationRequest) Size() (n int) {
+func (m *MsgAuthenticationRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -305,7 +305,7 @@ func (m *MsgBasicAuthenticationRequest) Size() (n int) {
 	return n
 }
 
-func (m *MsgBasicAuthenticationRequestResponse) Size() (n int) {
+func (m *MsgAuthenticationResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -324,7 +324,7 @@ func sovTx(x uint64) (n int) {
 func sozTx(x uint64) (n int) {
 	return sovTx(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
-func (m *MsgBasicAuthenticationRequest) Unmarshal(dAtA []byte) error {
+func (m *MsgAuthenticationRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -347,10 +347,10 @@ func (m *MsgBasicAuthenticationRequest) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgBasicAuthenticationRequest: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgAuthenticationRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgBasicAuthenticationRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgAuthenticationRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -406,7 +406,7 @@ func (m *MsgBasicAuthenticationRequest) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgBasicAuthenticationRequestResponse) Unmarshal(dAtA []byte) error {
+func (m *MsgAuthenticationResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -429,10 +429,10 @@ func (m *MsgBasicAuthenticationRequestResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgBasicAuthenticationRequestResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgAuthenticationResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgBasicAuthenticationRequestResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgAuthenticationResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:

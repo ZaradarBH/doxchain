@@ -12,8 +12,8 @@ import (
 )
 
 // Login method for simple idp keeper
-func (k Keeper) Login(ctx sdk.Context, msg types.MsgBasicAuthenticationRequest) (types.MsgBasicAuthenticationRequestResponse, error) {
-	response := types.MsgBasicAuthenticationRequestResponse{}
+func (k Keeper) Login(ctx sdk.Context, msg types.MsgAuthenticationRequest) (types.MsgAuthenticationResponse, error) {
+	response := types.MsgAuthenticationResponse{}
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), []byte{})
 	byteKey := types.KeyPrefix(types.IdpMasterKey)
 	idpMasterKeyBytes := store.Get(byteKey)

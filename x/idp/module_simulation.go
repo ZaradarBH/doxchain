@@ -24,9 +24,9 @@ var (
 )
 
 const (
-	opWeightMsgBasicAuthenticationRequest = "op_weight_msg_basic_authentication_request"
+	opWeightMsgAuthenticationRequest = "op_weight_msg_basic_authentication_request"
 	// TODO: Determine the simulation weight value
-	defaultWeightMsgBasicAuthenticationRequest int = 100
+	defaultWeightMsgAuthenticationRequest int = 100
 
 	// this line is used by starport scaffolding # simapp/module/const
 )
@@ -62,15 +62,15 @@ func (am AppModule) RegisterStoreDecoder(_ sdk.StoreDecoderRegistry) {}
 func (am AppModule) WeightedOperations(simState module.SimulationState) []simtypes.WeightedOperation {
 	operations := make([]simtypes.WeightedOperation, 0)
 
-	var weightMsgBasicAuthenticationRequest int
-	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgBasicAuthenticationRequest, &weightMsgBasicAuthenticationRequest, nil,
+	var weightMsgAuthenticationRequest int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgAuthenticationRequest, &weightMsgAuthenticationRequest, nil,
 		func(_ *rand.Rand) {
-			weightMsgBasicAuthenticationRequest = defaultWeightMsgBasicAuthenticationRequest
+			weightMsgAuthenticationRequest = defaultWeightMsgAuthenticationRequest
 		},
 	)
 	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgBasicAuthenticationRequest,
-		idpsimulation.SimulateMsgBasicAuthenticationRequest(am.accountKeeper, am.bankKeeper, am.keeper),
+		weightMsgAuthenticationRequest,
+		idpsimulation.SimulateMsgAuthenticationRequest(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
 	// this line is used by starport scaffolding # simapp/module/operation

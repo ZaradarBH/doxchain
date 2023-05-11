@@ -10,7 +10,7 @@ import (
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 )
 
-func SimulateMsgBasicAuthenticationRequest(
+func SimulateMsgAuthenticationRequest(
 	ak types.AccountKeeper,
 	bk types.BankKeeper,
 	k keeper.Keeper,
@@ -18,12 +18,12 @@ func SimulateMsgBasicAuthenticationRequest(
 	return func(r *rand.Rand, app *baseapp.BaseApp, ctx sdk.Context, accs []simtypes.Account, chainID string,
 	) (simtypes.OperationMsg, []simtypes.FutureOperation, error) {
 		simAccount, _ := simtypes.RandomAcc(r, accs)
-		msg := &types.MsgBasicAuthenticationRequest{
+		msg := &types.MsgAuthenticationRequest{
 			Creator: simAccount.Address.String(),
 		}
 
-		// TODO: Handling the BasicAuthenticationRequest simulation
+		// TODO: Handling the AuthenticationRequest simulation
 
-		return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "BasicAuthenticationRequest simulation not implemented"), nil, nil
+		return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "AuthenticationRequest simulation not implemented"), nil, nil
 	}
 }

@@ -12,10 +12,10 @@ import (
 
 var _ = strconv.Itoa(0)
 
-func CmdBasicAuthenticationRequest() *cobra.Command {
+func CmdAuthenticationRequest() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "basic-authentication-request",
-		Short: "Broadcast message BasicAuthenticationRequest",
+		Use:   "authentication-request",
+		Short: "Broadcast message AuthenticationRequest",
 		Args:  cobra.ExactArgs(0),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 
@@ -24,7 +24,7 @@ func CmdBasicAuthenticationRequest() *cobra.Command {
 				return err
 			}
 
-			msg := types.NewMsgBasicAuthenticationRequest(
+			msg := types.NewMsgAuthenticationRequest(
 				clientCtx.GetFromAddress().String(),
 			)
 			if err := msg.ValidateBasic(); err != nil {
