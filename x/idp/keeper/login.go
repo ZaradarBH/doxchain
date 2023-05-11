@@ -22,9 +22,10 @@ func (k Keeper) Login(ctx sdk.Context, msg types.MsgAuthenticationRequest) (type
 		return response, sdkerrors.Wrap(types.LoginError, "Could not authenticate user")
 	}
 
+	//TODO: Implement oracle logic for adding unix timestamps to each block so we can use those to improve precision when issuing claims, assertions, etc
 	jwtToken := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"sub": msg.Creator,
-		"exp": time.Now().Add(time.Hour).Unix(),
+		"exp": time.Unix(int64(ctx.BlockHeight()), 0),
 	})
 
 	tokenString, err := jwtToken.SignedString([]byte(idpMasterKeyBytes))
