@@ -14,7 +14,7 @@ func (k Keeper) GetTenant(ctx sdk.Context, tenantIdentifier string) (tenant type
 	tenantListBytes := store.Get(types.KeyPrefix(types.TenantListKey))
 
 	if tenantListBytes == nil {
-		return types.Tenant{}, sdkerrors.Wrap(types.AccessClientListError, "No tenant list found")
+		return types.Tenant{}, sdkerrors.Wrap(types.TenantListError, "No tenant list found")
 	}
 
 	tenants := &types.TenantList{}
@@ -30,7 +30,7 @@ func (k Keeper) GetTenant(ctx sdk.Context, tenantIdentifier string) (tenant type
 	}
 
 	if &tenant == nil {
-		return types.Tenant{}, sdkerrors.Wrap(types.AccessClientListError, "No tenant found for given identifier")
+		return types.Tenant{}, sdkerrors.Wrap(types.TenantError, "No tenant found for given identifier")
 	}
 
 	return tenant, nil
@@ -42,6 +42,10 @@ func (k Keeper) GetAccessClientList(ctx sdk.Context, tenantIdentifier string) (a
 
 	if err != nil {
 		return types.AccessClientList{}, err
+	}
+
+	if &tenant.AccessClientList == nil {
+		return types.AccessClientList{}, sdkerrors.Wrap(types.AccessClientListError, "No ACL found for tenant")
 	}
 
 	return tenant.AccessClientList, nil
