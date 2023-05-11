@@ -26,7 +26,7 @@ func (gs GenesisState) Validate() error {
 
 		if _, ok := didIdMap[fullyQualifiedDidIdentifier]; ok {
 			return fmt.Errorf("duplicated id for did")
-		}		
+		}
 		didIdMap[fullyQualifiedDidIdentifier] = true
 	}
 	// this line is used by starport scaffolding # genesis/types/validate

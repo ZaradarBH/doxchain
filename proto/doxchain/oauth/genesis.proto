@@ -1,0 +1,12 @@
+syntax = "proto3";
+package beheroes.doxchain.oauth;
+
+import "gogoproto/gogo.proto";
+import "doxchain/oauth/params.proto";
+
+option go_package = "github.com/be-heroes/doxchain/x/oauth/types";
+
+// GenesisState defines the oauth module's genesis state.
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+}

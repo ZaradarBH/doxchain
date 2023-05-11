@@ -52,7 +52,7 @@ var _ sdk.Msg = &MsgUpdateDid{}
 
 func NewMsgUpdateDid(did Did) *MsgUpdateDid {
 	return &MsgUpdateDid{
-		Did:      &did,
+		Did: &did,
 	}
 }
 
@@ -89,8 +89,8 @@ var _ sdk.Msg = &MsgDeleteDid{}
 
 func NewMsgDeleteDid(creator string, fullyQualifiedDidIdentifier string) *MsgDeleteDid {
 	return &MsgDeleteDid{
-		Creator: creator,
-		FullyQualifiedDidIdentifier:      fullyQualifiedDidIdentifier,
+		Creator:                     creator,
+		FullyQualifiedDidIdentifier: fullyQualifiedDidIdentifier,
 	}
 }
 func (msg *MsgDeleteDid) Route() string {

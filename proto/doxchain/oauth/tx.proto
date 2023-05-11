@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package beheroes.doxchain.oauth;
+
+option go_package = "github.com/be-heroes/doxchain/x/oauth/types";
+
+// Msg defines the Msg service.
+service Msg {
+  rpc Token (MsgToken) returns (MsgTokenResponse);
+}
+
+message MsgToken {
+  string creator      = 1;
+  string tenant       = 2;
+  string clientId     = 3;
+  string clientSecret = 4;
+  string scope        = 5;
+  string grantType    = 6;
+  string clientAssertionType	= 7;
+  string clientAssertion = 8;
+}
+
+message MsgTokenResponse {}
+

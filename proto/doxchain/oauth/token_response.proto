@@ -1,0 +1,11 @@
+syntax = "proto3";
+package beheroes.doxchain.oauth;
+
+option go_package = "github.com/be-heroes/doxchain/x/oauth/types";
+
+message TokenResponse {
+  
+  string accessToken = 1; 
+  string tokenType = 2; 
+  int32 expiresIn = 3; 
+}

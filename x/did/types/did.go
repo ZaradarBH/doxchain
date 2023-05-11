@@ -4,6 +4,6 @@ import (
 	"fmt"
 )
 
-func (did *Did) GetFullyQualifiedDidIdentifier() string { 
-	return fmt.Sprintf("did:%s:%s", did.MethodName, did.MethodId) 
+func (did *Did) GetFullyQualifiedDidIdentifier() string {
+	return fmt.Sprintf("did:%s:%s", did.MethodName, did.MethodId)
 }
