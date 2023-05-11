@@ -17,7 +17,3 @@ const (
 func KeyPrefix(p string) []byte {
 	return []byte(p)
 }
-
-const (
-	AccessClientListKey = "Did/accessclientlist"
-)

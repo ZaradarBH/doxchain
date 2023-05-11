@@ -21,6 +21,7 @@ type (
 
 		authzKeeper    types.AuthzKeeper
 		evidenceKeeper types.EvidenceKeeper
+		idpKeeper types.IdpKeeper
 	}
 )
 
@@ -32,6 +33,7 @@ func NewKeeper(
 
 	authzKeeper types.AuthzKeeper,
 	evidenceKeeper types.EvidenceKeeper,
+	idpKeeper types.IdpKeeper,
 ) *Keeper {
 	// set KeyTable if it has not already been set
 	if !ps.HasKeyTable() {
@@ -46,6 +48,7 @@ func NewKeeper(
 
 		authzKeeper:    authzKeeper,
 		evidenceKeeper: evidenceKeeper,
+		idpKeeper: idpKeeper,
 	}
 }
 

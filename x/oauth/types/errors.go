@@ -8,5 +8,5 @@ import (
 
 // x/oauth module sentinel errors
 var (
-	TokenServiceError = sdkerrors.Register(ModuleName, 500, "sample error")
+	TokenServiceError = sdkerrors.Register(ModuleName, 500, "Simple Token Service error")
 )

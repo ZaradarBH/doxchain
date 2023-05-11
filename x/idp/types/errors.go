@@ -8,6 +8,7 @@ import (
 
 // x/idp module sentinel errors
 var (
-	LoginError          = sdkerrors.Register(ModuleName, 401, "Error authenticating user")
-	IdpMasterKeyMissing = sdkerrors.Register(ModuleName, 1000, "IdpMasterKey is missing from store")
+	LoginError            = sdkerrors.Register(ModuleName, 401, "Authentication error")
+	IdpMasterKeyError     = sdkerrors.Register(ModuleName, 1000, "IdpMasterKey error")
+	AccessClientListError = sdkerrors.Register(ModuleName, 1001, "AccessClientList error")
 )

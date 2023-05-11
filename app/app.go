@@ -577,6 +577,7 @@ func New(
 
 		app.AuthzKeeper,
 		app.EvidenceKeeper,
+		app.IdpKeeper,
 	)
 	oauthModule := oauthmodule.NewAppModule(appCodec, app.OauthKeeper, app.AccountKeeper, app.BankKeeper)
 

@@ -28,7 +28,7 @@ func (k Keeper) Token(ctx sdk.Context, msg types.MsgToken) (types.TokenResponse,
 
 func (k Keeper) GenerateClientCredentialToken(ctx sdk.Context, msg types.MsgToken) (types.TokenResponse, error) {
 	tokenResponse := types.TokenResponse{}
-	acl, err := k.GetAccessClientList(ctx, msg.Tenant)
+	acl, err := k.idpKeeper.GetAccessClientList(ctx, msg.Tenant)
 
 	if err != nil {
 		return tokenResponse, err

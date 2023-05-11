@@ -20,4 +20,5 @@ func KeyPrefix(p string) []byte {
 
 const (
 	IdpMasterKey = "Idp/masterkey"
+	AccessClientListKey = "Idp/accessclientlist"
 )
