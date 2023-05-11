@@ -8,5 +8,5 @@ import (
 )
 
 func (k msgServer) BasicAuthenticationRequest(goCtx context.Context, msg *types.MsgBasicAuthenticationRequest) (*types.MsgBasicAuthenticationRequestResponse, error) {
-	return k.Login(sdk.UnwrapSDKContext(goCtx), msg);
+	return k.Login(sdk.UnwrapSDKContext(goCtx), msg)
 }
