@@ -13,13 +13,13 @@ import (
 // Token method for simple oauth keeper
 func (k Keeper) Token(ctx sdk.Context, msg types.MsgTokenRequest) (types.MsgTokenResponse, error) {
 	switch msg.GrantType {
-	case "client_credentials":
+	case types.ClientCredentials.String():
 		if msg.ClientAssertionType == "urn:ietf:params:oauth:client-assertion-type:jwt-bearer" {
 			//TODO: Implement support for https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-client-creds-grant-flow#second-case-access-token-request-with-a-certificate
 		} else {
 			return k.GenerateClientCredentialToken(ctx, msg)
 		}
-	case "device_code":
+	case types.DeviceCode.String():
 		//TODO: https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-device-code
 	}
 
@@ -41,7 +41,8 @@ func (k Keeper) GenerateClientCredentialToken(ctx sdk.Context, msg types.MsgToke
 
 			claims["iss"] = types.ModuleName
 			claims["sub"] = msg.ClientId
-			claims["exp"] = time.Now().Add(5 * time.Minute).Unix()
+			//TODO: Implement oracle logic for adding unix timestamps to each block so we can use those to improve precision when issuing claims, assertions, etc
+			claims["exp"] = time.Unix(int64(ctx.BlockHeight()), 0)
 
 			signedToken, err := jwtToken.SignedString([]byte(aclEntry.ClientSecret))
 
