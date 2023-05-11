@@ -1,6 +1,8 @@
 package keeper
 
 import (
+    "time"
+
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
@@ -34,17 +36,14 @@ func (k Keeper) GenerateClientCredentialToken(ctx sdk.Context, msg types.MsgToke
 
 	for _, aclEntry := range acl.Entries {
 		if aclEntry.ClientId == msg.ClientId && aclEntry.ClientSecret == msg.ClientSecret {
-			// Create a new token
-			token := jwt.New(jwt.SigningMethodHS256)
-			claims := token.Claims.(jwt.MapClaims)
+			jwtToken := jwt.New(jwt.SigningMethodHS256)
+			claims := jwtToken.Claims.(jwt.MapClaims)
 			
 			claims["iss"] = types.ModuleName
 			claims["sub"] = msg.ClientId
-			//Figure out best way to manage exp´timestamp.
-			//claims["exp"] = jwt.Now().Add(time.Minute * 30).Unix()
+			claims["exp"] = time.Now().Add(5 * time.Minute).Unix()
 		
-			// Sign the token with the client secret
-			signedToken, err := token.SignedString([]byte(aclEntry.ClientSecret))
+			signedToken, err := jwtToken.SignedString([]byte(aclEntry.ClientSecret))
 
 			if err != nil {
 				return tokenResponse, sdkerrors.Wrap(types.TokenServiceError, "Failed to create token")

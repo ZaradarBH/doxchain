@@ -8,10 +8,5 @@ import (
 )
 
 func (k msgServer) Token(goCtx context.Context, msg *types.MsgToken) (*types.MsgTokenResponse, error) {
-	ctx := sdk.UnwrapSDKContext(goCtx)
-
-	// TODO: Handling the message
-	_ = ctx
-
-	return &types.MsgTokenResponse{}, nil
+	return k.Token(sdk.UnwrapSDKContext(goCtx), msg)
 }
