@@ -8,13 +8,13 @@ import (
 )
 
 func RegisterCodec(cdc *codec.LegacyAmino) {
-	cdc.RegisterConcrete(&MsgToken{}, "oauth/Token", nil)
+	cdc.RegisterConcrete(&MsgTokenRequest{}, "oauth/Token", nil)
 	// this line is used by starport scaffolding # 2
 }
 
 func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 	registry.RegisterImplementations((*sdk.Msg)(nil),
-		&MsgToken{},
+		&MsgTokenRequest{},
 	)
 	// this line is used by starport scaffolding # 3
 

@@ -10,7 +10,7 @@ import (
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 )
 
-func SimulateMsgToken(
+func SimulateMsgTokenRequest(
 	ak types.AccountKeeper,
 	bk types.BankKeeper,
 	k keeper.Keeper,
@@ -18,7 +18,7 @@ func SimulateMsgToken(
 	return func(r *rand.Rand, app *baseapp.BaseApp, ctx sdk.Context, accs []simtypes.Account, chainID string,
 	) (simtypes.OperationMsg, []simtypes.FutureOperation, error) {
 		simAccount, _ := simtypes.RandomAcc(r, accs)
-		msg := &types.MsgToken{
+		msg := &types.MsgTokenRequest{
 			Creator: simAccount.Address.String(),
 		}
 

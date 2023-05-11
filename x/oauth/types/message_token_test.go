@@ -8,21 +8,21 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestMsgToken_ValidateBasic(t *testing.T) {
+func TestMsgTokenRequest_ValidateBasic(t *testing.T) {
 	tests := []struct {
 		name string
-		msg  MsgToken
+		msg  MsgTokenRequest
 		err  error
 	}{
 		{
 			name: "invalid address",
-			msg: MsgToken{
+			msg: MsgTokenRequest{
 				Creator: "invalid_address",
 			},
 			err: sdkerrors.ErrInvalidAddress,
 		}, {
 			name: "valid address",
-			msg: MsgToken{
+			msg: MsgTokenRequest{
 				Creator: sample.AccAddress(),
 			},
 		},

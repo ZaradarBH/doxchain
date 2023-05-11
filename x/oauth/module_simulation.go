@@ -24,9 +24,9 @@ var (
 )
 
 const (
-	opWeightMsgToken = "op_weight_msg_token"
+	opWeightMsgTokenRequest = "op_weight_msg_token"
 	// TODO: Determine the simulation weight value
-	defaultWeightMsgToken int = 100
+	defaultWeightMsgTokenRequest int = 100
 
 	// this line is used by starport scaffolding # simapp/module/const
 )
@@ -62,15 +62,15 @@ func (am AppModule) RegisterStoreDecoder(_ sdk.StoreDecoderRegistry) {}
 func (am AppModule) WeightedOperations(simState module.SimulationState) []simtypes.WeightedOperation {
 	operations := make([]simtypes.WeightedOperation, 0)
 
-	var weightMsgToken int
-	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgToken, &weightMsgToken, nil,
+	var weightMsgTokenRequest int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgTokenRequest, &weightMsgTokenRequest, nil,
 		func(_ *rand.Rand) {
-			weightMsgToken = defaultWeightMsgToken
+			weightMsgTokenRequest = defaultWeightMsgTokenRequest
 		},
 	)
 	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgToken,
-		oauthsimulation.SimulateMsgToken(am.accountKeeper, am.bankKeeper, am.keeper),
+		weightMsgTokenRequest,
+		oauthsimulation.SimulateMsgTokenRequest(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
 	// this line is used by starport scaffolding # simapp/module/operation

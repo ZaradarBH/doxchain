@@ -44759,6 +44759,14 @@ definitions:
                 }
   beheroes.doxchain.oauth.MsgTokenResponse:
     type: object
+    properties:
+      accessToken:
+        type: string
+      tokenType:
+        type: string
+      expiresIn:
+        type: integer
+        format: int32
   beheroes.doxchain.oauth.Params:
     type: object
     description: Params defines the parameters for the module.

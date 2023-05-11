@@ -5,12 +5,12 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-const TypeMsgToken = "token"
+const TypeMsgTokenRequest = "token"
 
-var _ sdk.Msg = &MsgToken{}
+var _ sdk.Msg = &MsgTokenRequest{}
 
-func NewMsgToken(creator string, tenant string, clientId string, clientSecret string, scope string, grantType string) *MsgToken {
-	return &MsgToken{
+func NewMsgTokenRequest(creator string, tenant string, clientId string, clientSecret string, scope string, grantType string) *MsgTokenRequest {
+	return &MsgTokenRequest{
 		Creator:      creator,
 		Tenant:       tenant,
 		ClientId:     clientId,
@@ -20,15 +20,15 @@ func NewMsgToken(creator string, tenant string, clientId string, clientSecret st
 	}
 }
 
-func (msg *MsgToken) Route() string {
+func (msg *MsgTokenRequest) Route() string {
 	return RouterKey
 }
 
-func (msg *MsgToken) Type() string {
-	return TypeMsgToken
+func (msg *MsgTokenRequest) Type() string {
+	return TypeMsgTokenRequest
 }
 
-func (msg *MsgToken) GetSigners() []sdk.AccAddress {
+func (msg *MsgTokenRequest) GetSigners() []sdk.AccAddress {
 	creator, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		panic(err)
@@ -36,12 +36,12 @@ func (msg *MsgToken) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{creator}
 }
 
-func (msg *MsgToken) GetSignBytes() []byte {
+func (msg *MsgTokenRequest) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(msg)
 	return sdk.MustSortJSON(bz)
 }
 
-func (msg *MsgToken) ValidateBasic() error {
+func (msg *MsgTokenRequest) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)

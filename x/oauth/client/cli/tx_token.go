@@ -29,7 +29,7 @@ func CmdToken() *cobra.Command {
 				return err
 			}
 
-			msg := types.NewMsgToken(
+			msg := types.NewMsgTokenRequest(
 				clientCtx.GetFromAddress().String(),
 				argTenant,
 				argClientId,

@@ -5,7 +5,7 @@ option go_package = "github.com/be-heroes/doxchain/x/idp/types";
 
 // Msg defines the Msg service.
 service Msg {
-  rpc AuthenticationRequest (MsgAuthenticationRequest) returns (MsgAuthenticationResponse);
+  rpc Login (MsgAuthenticationRequest) returns (MsgAuthenticationResponse);
 }
 
 message MsgAuthenticationRequest {
