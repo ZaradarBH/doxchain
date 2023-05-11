@@ -125,9 +125,6 @@ import (
 	samlmodule "github.com/be-heroes/doxchain/x/saml"
 	samlmodulekeeper "github.com/be-heroes/doxchain/x/saml/keeper"
 	samlmoduletypes "github.com/be-heroes/doxchain/x/saml/types"
-	twinsmodule "github.com/be-heroes/doxchain/x/twins"
-	twinsmodulekeeper "github.com/be-heroes/doxchain/x/twins/keeper"
-	twinsmoduletypes "github.com/be-heroes/doxchain/x/twins/types"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 
 	appparams "github.com/be-heroes/doxchain/app/params"
@@ -193,7 +190,6 @@ var (
 		idpmodule.AppModuleBasic{},
 		oraclemodule.AppModuleBasic{},
 		samlmodule.AppModuleBasic{},
-		twinsmodule.AppModuleBasic{},
 		// this line is used by starport scaffolding # stargate/app/moduleBasic
 	)
 
@@ -281,8 +277,6 @@ type App struct {
 	OracleKeeper oraclemodulekeeper.Keeper
 
 	SamlKeeper samlmodulekeeper.Keeper
-
-	TwinsKeeper twinsmodulekeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// mm is the module manager
@@ -334,7 +328,6 @@ func New(
 		idpmoduletypes.StoreKey,
 		oraclemoduletypes.StoreKey,
 		samlmoduletypes.StoreKey,
-		twinsmoduletypes.StoreKey,
 		// this line is used by starport scaffolding # stargate/app/storeKey
 	)
 	tkeys := sdk.NewTransientStoreKeys(paramstypes.TStoreKey)
@@ -615,16 +608,6 @@ func New(
 	)
 	samlModule := samlmodule.NewAppModule(appCodec, app.SamlKeeper, app.AccountKeeper, app.BankKeeper)
 
-	app.TwinsKeeper = *twinsmodulekeeper.NewKeeper(
-		appCodec,
-		keys[twinsmoduletypes.StoreKey],
-		keys[twinsmoduletypes.MemStoreKey],
-		app.GetSubspace(twinsmoduletypes.ModuleName),
-
-		app.IdpKeeper,
-	)
-	twinsModule := twinsmodule.NewAppModule(appCodec, app.TwinsKeeper, app.AccountKeeper, app.BankKeeper)
-
 	// this line is used by starport scaffolding # stargate/app/keeperDefinition
 
 	/**** IBC Routing ****/
@@ -697,7 +680,6 @@ func New(
 		idpModule,
 		oracleModule,
 		samlModule,
-		twinsModule,
 		// this line is used by starport scaffolding # stargate/app/appModule
 	)
 
@@ -734,7 +716,6 @@ func New(
 		idpmoduletypes.ModuleName,
 		oraclemoduletypes.ModuleName,
 		samlmoduletypes.ModuleName,
-		twinsmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/beginBlockers
 	)
 
@@ -766,7 +747,6 @@ func New(
 		idpmoduletypes.ModuleName,
 		oraclemoduletypes.ModuleName,
 		samlmoduletypes.ModuleName,
-		twinsmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/endBlockers
 	)
 
@@ -803,7 +783,6 @@ func New(
 		idpmoduletypes.ModuleName,
 		oraclemoduletypes.ModuleName,
 		samlmoduletypes.ModuleName,
-		twinsmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	)
 
@@ -840,7 +819,6 @@ func New(
 		idpModule,
 		oracleModule,
 		samlModule,
-		twinsModule,
 		// this line is used by starport scaffolding # stargate/app/appModule
 	)
 	app.sm.RegisterStoreDecoders()
@@ -1052,7 +1030,6 @@ func initParamsKeeper(appCodec codec.BinaryCodec, legacyAmino *codec.LegacyAmino
 	paramsKeeper.Subspace(idpmoduletypes.ModuleName)
 	paramsKeeper.Subspace(oraclemoduletypes.ModuleName)
 	paramsKeeper.Subspace(samlmoduletypes.ModuleName)
-	paramsKeeper.Subspace(twinsmoduletypes.ModuleName)
 	// this line is used by starport scaffolding # stargate/app/paramSubspace
 
 	return paramsKeeper
