@@ -1,0 +1,7 @@
+syntax = "proto3";
+package beheroes.doxchain.twins;
+
+option go_package = "github.com/be-heroes/doxchain/x/twins/types";
+
+// Msg defines the Msg service.
+service Msg {}
