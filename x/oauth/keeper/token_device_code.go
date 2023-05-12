@@ -4,8 +4,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
-	"github.com/be-heroes/doxchain/x/oauth/utils"
 	"github.com/be-heroes/doxchain/x/oauth/types"
+	"github.com/be-heroes/doxchain/x/oauth/utils"
 )
 
 func (k Keeper) GenerateDeviceCodeToken(ctx sdk.Context, msg types.MsgTokenRequest) (types.MsgTokenResponse, error) {
@@ -33,7 +33,7 @@ func (k Keeper) GenerateDeviceCodeToken(ctx sdk.Context, msg types.MsgTokenReque
 			tokenResponse.ExpiresIn = 1800
 
 			tenantDeviceCodes.Entries = append(tenantDeviceCodes.Entries[:index], tenantDeviceCodes.Entries[index+1:]...)
-			
+
 			k.SetDeviceCodes(ctx, tenantDeviceCodes)
 
 			break

@@ -1,11 +1,11 @@
-package oauth
+package kyc
 
 import (
 	"math/rand"
 
 	"github.com/be-heroes/doxchain/testutil/sample"
-	oauthsimulation "github.com/be-heroes/doxchain/x/oauth/simulation"
-	"github.com/be-heroes/doxchain/x/oauth/types"
+	kycsimulation "github.com/be-heroes/doxchain/x/kyc/simulation"
+	"github.com/be-heroes/doxchain/x/kyc/types"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	simappparams "github.com/cosmos/cosmos-sdk/simapp/params"
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -17,30 +17,14 @@ import (
 // avoid unused import issue
 var (
 	_ = sample.AccAddress
-	_ = oauthsimulation.FindAccount
+	_ = kycsimulation.FindAccount
 	_ = simappparams.StakePerAccount
 	_ = simulation.MsgEntryKind
 	_ = baseapp.Paramspace
 )
 
 const (
-	opWeightMsgTokenRequest = "op_weight_msg_token"
-	// TODO: Determine the simulation weight value
-	defaultWeightMsgTokenRequest int = 100
-
-	opWeightMsgCreateDeviceCodes = "op_weight_msg_device_codes"
-	// TODO: Determine the simulation weight value
-	defaultWeightMsgCreateDeviceCodes int = 100
-
-	opWeightMsgUpdateDeviceCodes = "op_weight_msg_device_codes"
-	// TODO: Determine the simulation weight value
-	defaultWeightMsgUpdateDeviceCodes int = 100
-
-	opWeightMsgDeleteDeviceCodes = "op_weight_msg_device_codes"
-	// TODO: Determine the simulation weight value
-	defaultWeightMsgDeleteDeviceCodes int = 100
-
-	// this line is used by starport scaffolding # simapp/module/const
+// this line is used by starport scaffolding # simapp/module/const
 )
 
 // GenerateGenesisState creates a randomized GenState of the module
@@ -49,19 +33,11 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 	for i, acc := range simState.Accounts {
 		accs[i] = acc.Address.String()
 	}
-	oauthGenesis := types.GenesisState{
+	kycGenesis := types.GenesisState{
 		Params: types.DefaultParams(),
-		DeviceCodesList: []types.DeviceCodes{
-			{
-				Tenant: "0",
-			},
-			{
-				Tenant: "1",
-			},
-		},
 		// this line is used by starport scaffolding # simapp/module/genesisState
 	}
-	simState.GenState[types.ModuleName] = simState.Cdc.MustMarshalJSON(&oauthGenesis)
+	simState.GenState[types.ModuleName] = simState.Cdc.MustMarshalJSON(&kycGenesis)
 }
 
 // ProposalContents doesn't return any content functions for governance proposals
@@ -81,17 +57,6 @@ func (am AppModule) RegisterStoreDecoder(_ sdk.StoreDecoderRegistry) {}
 // WeightedOperations returns the all the gov module operations with their respective weights.
 func (am AppModule) WeightedOperations(simState module.SimulationState) []simtypes.WeightedOperation {
 	operations := make([]simtypes.WeightedOperation, 0)
-
-	var weightMsgTokenRequest int
-	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgTokenRequest, &weightMsgTokenRequest, nil,
-		func(_ *rand.Rand) {
-			weightMsgTokenRequest = defaultWeightMsgTokenRequest
-		},
-	)
-	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgTokenRequest,
-		oauthsimulation.SimulateMsgTokenRequest(am.accountKeeper, am.bankKeeper, am.keeper),
-	))
 
 	// this line is used by starport scaffolding # simapp/module/operation
 
