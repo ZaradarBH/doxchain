@@ -25,8 +25,7 @@ func (k Keeper) GenerateDeviceCodeToken(ctx sdk.Context, msg types.MsgTokenReque
 
 			claims["iss"] = types.ModuleName
 			claims["sub"] = msg.ClientId
-			//TODO: Implement oracle logic for adding unix timestamps to each block so we can use those to improve precision when issuing claims, assertions, etc
-			claims["exp"] = time.Unix(int64(ctx.BlockHeight()), 0)
+			claims["exp"] = ctx.BlockTime().Add(time.Minute * 3)
 
 			signedToken, err := jwtToken.SignedString([]byte(msg.DeviceCode))
 
@@ -34,7 +33,7 @@ func (k Keeper) GenerateDeviceCodeToken(ctx sdk.Context, msg types.MsgTokenReque
 				return tokenResponse, sdkerrors.Wrap(types.TokenServiceError, "Failed to create token")
 			}
 
-			//TODO: Save signed token to store until it is redeemed via /authorize
+			//TODO: Save signed token to store until it is expired via /authorize
 			tokenResponse.AccessToken = signedToken
 			tokenResponse.TokenType = "Bearer"
 
