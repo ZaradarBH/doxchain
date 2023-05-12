@@ -1,13 +1,11 @@
 package keeper
 
 import (
-	"time"
-
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
 	"github.com/be-heroes/doxchain/x/oauth/types"
-	"github.com/dgrijalva/jwt-go"
+	"github.com/be-heroes/doxchain/x/oauth/utils"
 )
 
 func (k Keeper) GenerateClientCredentialToken(ctx sdk.Context, msg types.MsgTokenRequest) (types.MsgTokenResponse, error) {
@@ -19,25 +17,19 @@ func (k Keeper) GenerateClientCredentialToken(ctx sdk.Context, msg types.MsgToke
 	}
 
 	for _, aclEntry := range acl.Entries {
-		if aclEntry.ClientId == msg.ClientId && aclEntry.ClientSecret == msg.ClientSecret {
-			jwtToken := jwt.New(jwt.SigningMethodHS256)
-			claims := jwtToken.Claims.(jwt.MapClaims)
-
-			claims["iss"] = types.ModuleName
-			claims["sub"] = msg.ClientId
-			claims["exp"] = ctx.BlockTime().Add(time.Minute * 3)
-
-			signedToken, err := jwtToken.SignedString([]byte(aclEntry.ClientSecret))
+		if aclEntry.Creator == msg.Creator {
+			jwtToken := utils.NewJwtTokenFactory(utils.WithContext(&ctx)).Create(&msg)
+			signedToken, err := jwtToken.SignedString([]byte(msg.ClientSecret))
 
 			if err != nil {
 				return tokenResponse, sdkerrors.Wrap(types.TokenServiceError, "Failed to create token")
 			}
 
-			//TODO: Save signed token to store until it is expired via /authorize
+			//TODO: Save signed token to store until it is removed, if we even want to do that?
 			tokenResponse.AccessToken = signedToken
-			tokenResponse.TokenType = "Bearer"
+			tokenResponse.TokenType = types.Bearer.String()
 
-			//TODO: Make expire time configurable
+			//TODO: Make expire time configurable!
 			tokenResponse.ExpiresIn = 1800
 
 			break

@@ -10,16 +10,17 @@ option go_package = "github.com/be-heroes/doxchain/x/oauth/types";
 service Msg {
   rpc Token             (MsgTokenRequest     ) returns (MsgTokenResponse            );
 }
+
 message MsgTokenRequest {
-  string creator             = 1;
-  string tenant              = 2;
-  string clientId            = 3;
-  string clientSecret        = 4;
-  string deviceCode          = 5;
-  string scope               = 6;
-  string grantType           = 7;
-  string clientAssertionType = 8;
-  string clientAssertion     = 9;
+  string creator                = 1;
+  string tenant                 = 2;
+  string scope                  = 3;
+  string grantType              = 4;
+  string clientId               = 5;
+  string clientSecret           = 6;
+  string deviceCode             = 7;  
+  string clientAssertionType    = 8;
+  string clientAssertion        = 9;
 }
 
 message MsgTokenResponse {

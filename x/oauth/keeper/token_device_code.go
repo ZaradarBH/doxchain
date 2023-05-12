@@ -1,13 +1,11 @@
 package keeper
 
 import (
-	"time"
-
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
+	"github.com/be-heroes/doxchain/x/oauth/utils"
 	"github.com/be-heroes/doxchain/x/oauth/types"
-	"github.com/dgrijalva/jwt-go"
 )
 
 func (k Keeper) GenerateDeviceCodeToken(ctx sdk.Context, msg types.MsgTokenRequest) (types.MsgTokenResponse, error) {
@@ -20,24 +18,18 @@ func (k Keeper) GenerateDeviceCodeToken(ctx sdk.Context, msg types.MsgTokenReque
 
 	for index, deviceCodeEntry := range tenantDeviceCodes.Entries {
 		if deviceCodeEntry.DeviceCode == msg.DeviceCode {
-			jwtToken := jwt.New(jwt.SigningMethodHS256)
-			claims := jwtToken.Claims.(jwt.MapClaims)
-
-			claims["iss"] = types.ModuleName
-			claims["sub"] = msg.ClientId
-			claims["exp"] = ctx.BlockTime().Add(time.Minute * 3)
-
+			jwtToken := utils.NewJwtTokenFactory(utils.WithContext(&ctx)).Create(&msg)
 			signedToken, err := jwtToken.SignedString([]byte(msg.DeviceCode))
 
 			if err != nil {
 				return tokenResponse, sdkerrors.Wrap(types.TokenServiceError, "Failed to create token")
 			}
 
-			//TODO: Save signed token to store until it is expired via /authorize
+			//TODO: Save signed token to store until it is removed, if we even want to do that?
 			tokenResponse.AccessToken = signedToken
-			tokenResponse.TokenType = "Bearer"
+			tokenResponse.TokenType = types.Bearer.String()
 
-			//TODO: Make expire time configurable
+			//TODO: Make expire time configurable!
 			tokenResponse.ExpiresIn = 1800
 
 			tenantDeviceCodes.Entries = append(tenantDeviceCodes.Entries[:index], tenantDeviceCodes.Entries[index+1:]...)

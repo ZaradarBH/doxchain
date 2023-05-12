@@ -11,7 +11,7 @@ message TenantList {
 }
 
 message Tenant {  
-  string creator = 1;
+  string creator  = 1;
   string identifier = 2;
   AccessClientList accessClientList = 3 [(gogoproto.nullable) = false];
 }

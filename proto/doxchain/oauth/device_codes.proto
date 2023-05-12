@@ -11,7 +11,8 @@ message DeviceCodes {
 }
 
 message DeviceCodeEntry {
-  string userCode = 1;
-  string deviceCode = 2; 
+  string creator = 1;
+  string userCode = 2;
+  string deviceCode = 3; 
 }
 
