@@ -3,8 +3,8 @@ package keeper
 import (
 	"testing"
 
-	"github.com/be-heroes/doxchain/x/oauth2/keeper"
-	"github.com/be-heroes/doxchain/x/oauth2/types"
+	"github.com/be-heroes/doxchain/x/oauthTwo/keeper"
+	"github.com/be-heroes/doxchain/x/oauthTwo/types"
 	"github.com/cosmos/cosmos-sdk/codec"
 	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
 	"github.com/cosmos/cosmos-sdk/store"
@@ -17,7 +17,7 @@ import (
 	tmdb "github.com/tendermint/tm-db"
 )
 
-func OauthKeeper(t testing.TB) (*keeper.Keeper, sdk.Context) {
+func OauthTwoKeeper(t testing.TB) (*keeper.Keeper, sdk.Context) {
 	storeKey := sdk.NewKVStoreKey(types.StoreKey)
 	memStoreKey := storetypes.NewMemoryStoreKey(types.MemStoreKey)
 

@@ -1,0 +1,17 @@
+syntax = "proto3";
+package beheroes.doxchain.oauthTwo;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/be-heroes/doxchain/x/oauthTwo/types";
+
+message AccessTokenRegistry {
+  string tenant = 1; 
+  repeated AccessTokenInfo issued = 2 [(gogoproto.nullable) = false]; 
+}
+
+message AccessTokenInfo {
+  string creator = 1;
+  string identifier = 2;
+  int64 expiresAt = 3;
+}

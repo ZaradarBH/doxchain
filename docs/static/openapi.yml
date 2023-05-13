@@ -252,10 +252,10 @@ paths:
                   additionalProperties: {}
       tags:
         - Query
-  /be-heroes/doxchain/oauth/params:
+  /be-heroes/doxchain/oauthTwo/params:
     get:
       summary: Parameters queries the parameters of the module.
-      operationId: BeheroesDoxchainOauth2Params
+      operationId: BeheroesDoxchainOauthTwoParams
       responses:
         '200':
           description: A successful response.
@@ -324,10 +324,10 @@ paths:
                   additionalProperties: {}
       tags:
         - Query
-  /be-heroes/doxchain/saml2/params:
+  /be-heroes/doxchain/samlTwo/params:
     get:
       summary: Parameters queries the parameters of the module.
-      operationId: BeheroesDoxchainSaml2Params
+      operationId: BeheroesDoxchainSamlTwoParams
       responses:
         '200':
           description: A successful response.
@@ -45082,7 +45082,7 @@ definitions:
         description: params holds all the parameters of this module.
         type: object
     description: QueryParamsResponse is response type for the Query/Params RPC method.
-  beheroes.doxchain.oauth2.MsgDeviceCodeResponse:
+  beheroes.doxchain.oauthTwo.MsgDeviceCodeResponse:
     type: object
     properties:
       deviceCode:
@@ -45091,7 +45091,7 @@ definitions:
         type: string
       verification_uri:
         type: string
-  beheroes.doxchain.oauth2.MsgTokenResponse:
+  beheroes.doxchain.oauthTwo.MsgTokenResponse:
     type: object
     properties:
       accessToken:
@@ -45101,10 +45101,10 @@ definitions:
       expiresIn:
         type: string
         format: int64
-  beheroes.doxchain.oauth2.Params:
+  beheroes.doxchain.oauthTwo.Params:
     type: object
     description: Params defines the parameters for the module.
-  beheroes.doxchain.oauth2.QueryParamsResponse:
+  beheroes.doxchain.oauthTwo.QueryParamsResponse:
     type: object
     properties:
       params:
@@ -45121,10 +45121,10 @@ definitions:
         description: params holds all the parameters of this module.
         type: object
     description: QueryParamsResponse is response type for the Query/Params RPC method.
-  beheroes.doxchain.saml2.Params:
+  beheroes.doxchain.samlTwo.Params:
     type: object
     description: Params defines the parameters for the module.
-  beheroes.doxchain.saml2.QueryParamsResponse:
+  beheroes.doxchain.samlTwo.QueryParamsResponse:
     type: object
     properties:
       params:

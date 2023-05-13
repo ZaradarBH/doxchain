@@ -1,0 +1,18 @@
+syntax = "proto3";
+package beheroes.doxchain.oauthTwo;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/be-heroes/doxchain/x/oauthTwo/types";
+
+message DeviceCodeRegistry {
+  string tenant = 1; 
+  repeated DeviceCodeInfo codes = 2 [(gogoproto.nullable) = false]; 
+}
+
+message DeviceCodeInfo {
+  string creator = 1;
+  string deviceCode = 2; 
+  int64 expiresAt = 3;
+}
+

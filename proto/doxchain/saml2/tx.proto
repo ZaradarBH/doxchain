@@ -1,7 +1,0 @@
-syntax = "proto3";
-package beheroes.doxchain.saml2;
-
-option go_package = "github.com/be-heroes/doxchain/x/saml2/types";
-
-// Msg defines the Msg service.
-service Msg {}

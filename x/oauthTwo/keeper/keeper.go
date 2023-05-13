@@ -9,7 +9,7 @@ import (
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 	"github.com/tendermint/tendermint/libs/log"
 
-	"github.com/be-heroes/doxchain/x/idp/types"
+	"github.com/be-heroes/doxchain/x/oauthTwo/types"
 )
 
 type (
@@ -19,24 +19,21 @@ type (
 		memKey     storetypes.StoreKey
 		paramstore paramtypes.Subspace
 
-		OauthTwoKeeper    types.OauthTwoKeeper
 		authzKeeper    types.AuthzKeeper
 		evidenceKeeper types.EvidenceKeeper
+		idpKeeper      types.IdpKeeper
 	}
 )
 
-//TODO: Implement AppRegistration concept
-//TODO: Implement ClientId2ClientId ACL concept to infer audience relationships
-//TODO: Implement IDP metadata logic
 func NewKeeper(
 	cdc codec.BinaryCodec,
 	storeKey,
 	memKey storetypes.StoreKey,
 	ps paramtypes.Subspace,
 
-	OauthTwoKeeper types.OauthTwoKeeper,
 	authzKeeper types.AuthzKeeper,
 	evidenceKeeper types.EvidenceKeeper,
+	idpKeeper types.IdpKeeper,
 ) *Keeper {
 	// set KeyTable if it has not already been set
 	if !ps.HasKeyTable() {
@@ -49,12 +46,13 @@ func NewKeeper(
 		memKey:     memKey,
 		paramstore: ps,
 
-		OauthTwoKeeper:    OauthTwoKeeper,
 		authzKeeper:    authzKeeper,
 		evidenceKeeper: evidenceKeeper,
+		idpKeeper:      idpKeeper,
 	}
 }
 
+//TODO: Implement /authorize message handler / logic to autorize jwts
 func (k Keeper) Logger(ctx sdk.Context) log.Logger {
 	return ctx.Logger().With("module", fmt.Sprintf("x/%s", types.ModuleName))
 }

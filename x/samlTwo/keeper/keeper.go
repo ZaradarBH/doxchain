@@ -9,7 +9,7 @@ import (
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 	"github.com/tendermint/tendermint/libs/log"
 
-	"github.com/be-heroes/doxchain/x/idp/types"
+	"github.com/be-heroes/doxchain/x/samlTwo/types"
 )
 
 type (
@@ -18,25 +18,15 @@ type (
 		storeKey   storetypes.StoreKey
 		memKey     storetypes.StoreKey
 		paramstore paramtypes.Subspace
-
-		OauthTwoKeeper    types.OauthTwoKeeper
-		authzKeeper    types.AuthzKeeper
-		evidenceKeeper types.EvidenceKeeper
 	}
 )
 
-//TODO: Implement AppRegistration concept
-//TODO: Implement ClientId2ClientId ACL concept to infer audience relationships
-//TODO: Implement IDP metadata logic
 func NewKeeper(
 	cdc codec.BinaryCodec,
 	storeKey,
 	memKey storetypes.StoreKey,
 	ps paramtypes.Subspace,
 
-	OauthTwoKeeper types.OauthTwoKeeper,
-	authzKeeper types.AuthzKeeper,
-	evidenceKeeper types.EvidenceKeeper,
 ) *Keeper {
 	// set KeyTable if it has not already been set
 	if !ps.HasKeyTable() {
@@ -48,10 +38,6 @@ func NewKeeper(
 		storeKey:   storeKey,
 		memKey:     memKey,
 		paramstore: ps,
-
-		OauthTwoKeeper:    OauthTwoKeeper,
-		authzKeeper:    authzKeeper,
-		evidenceKeeper: evidenceKeeper,
 	}
 }
 

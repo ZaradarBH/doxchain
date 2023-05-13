@@ -1,0 +1,12 @@
+syntax = "proto3";
+package beheroes.doxchain.oauthTwo;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/be-heroes/doxchain/x/oauthTwo/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (gogoproto.goproto_stringer) = false;
+  
+}
