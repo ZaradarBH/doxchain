@@ -14,15 +14,18 @@ var _ = strconv.Itoa(0)
 
 func CmdToken() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "token [tenant] [client-id] [client-secret] [scope] [grant-type]",
+		Use:   "token [tenant] [client-id] [client-secret] [scope] [grant-type] [device-code] [client-assertion] [client-assertion-type]",
 		Short: "Broadcast message token",
-		Args:  cobra.ExactArgs(5),
+		Args:  cobra.ExactArgs(8),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 			argTenant := args[0]
 			argClientId := args[1]
 			argClientSecret := args[2]
 			argScope := args[3]
 			argGrantType := args[4]
+			argDeviceCode := args[5]
+			argClientAssertion := args[6]
+			argClientAssertionType := args[7]
 
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
@@ -36,6 +39,9 @@ func CmdToken() *cobra.Command {
 				argClientSecret,
 				argScope,
 				argGrantType,
+				argDeviceCode,
+				argClientAssertion,
+				argClientAssertionType,
 			)
 			if err := msg.ValidateBasic(); err != nil {
 				return err

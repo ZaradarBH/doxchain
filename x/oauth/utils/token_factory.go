@@ -46,7 +46,7 @@ func NewJwtTokenFactory(opts ...JwtTokenFactoryOption) *JwtTokenFactory {
 }
 
 // Create returns a new jwt token with the configured signing method. Defaults to HS256
-func (jtf JwtTokenFactory) Create(msg *types.MsgTokenRequest) *jwt.Token {
+func (jtf JwtTokenFactory) Create(msg types.MsgTokenRequest) *jwt.Token {
 	jwtToken := jwt.New(jtf.SigningMethod)
 	claims := jwtToken.Claims.(jwt.MapClaims)
 	issuedAt := jtf.Context.BlockTime()

@@ -22,3 +22,19 @@ func (k Keeper) Token(ctx sdk.Context, msg types.MsgTokenRequest) (types.MsgToke
 
 	return types.MsgTokenResponse{}, sdkerrors.Wrap(types.TokenServiceError, "Unsupported grant_type")
 }
+
+func(k Keeper) AuthorizeRequest(ctx sdk.Context, msg types.MsgTokenRequest) (bool, error) {
+	acl, err := k.idpKeeper.GetAccessClientList(ctx, msg.Tenant)
+
+	if err != nil {
+		return false, err
+	}
+
+	for _, aclEntry := range acl.Entries {
+		if aclEntry.Creator == msg.Creator {
+			return true, nil
+		}
+	}
+
+	return false, nil
+}
