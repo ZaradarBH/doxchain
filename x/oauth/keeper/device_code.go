@@ -21,7 +21,7 @@ func (k Keeper) DeviceCode(ctx sdk.Context, msg types.MsgDeviceCodeRequest) (typ
 	response.DeviceCode, _ = utils.GenerateRandomString(32)
 	response.UserCode, _ = utils.GenerateRandomString(8)
 	//TODO: Implement support for verification uri in tenant
-	response.VerificationUri = "http://about:blank"
+	response.VerificationUri = "http://tenant_verification_uri/"
 
 	tenantDeviceCodeRegistry, found := k.GetDeviceCodeRegistry(ctx, msg.Tenant)
 
