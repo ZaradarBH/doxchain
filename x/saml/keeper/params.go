@@ -1,7 +1,7 @@
 package keeper
 
 import (
-	"github.com/be-heroes/doxchain/x/saml/types"
+	"github.com/be-heroes/doxchain/x/saml2/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 

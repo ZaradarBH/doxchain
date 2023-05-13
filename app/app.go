@@ -128,9 +128,9 @@ import (
 	oraclemodule "github.com/be-heroes/doxchain/x/oracle"
 	oraclemodulekeeper "github.com/be-heroes/doxchain/x/oracle/keeper"
 	oraclemoduletypes "github.com/be-heroes/doxchain/x/oracle/types"
-	samlmodule "github.com/be-heroes/doxchain/x/saml"
-	samlmodulekeeper "github.com/be-heroes/doxchain/x/saml/keeper"
-	samlmoduletypes "github.com/be-heroes/doxchain/x/saml/types"
+	saml2module "github.com/be-heroes/doxchain/x/saml2"
+	saml2modulekeeper "github.com/be-heroes/doxchain/x/saml2/keeper"
+	saml2moduletypes "github.com/be-heroes/doxchain/x/saml2/types"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 
 	appparams "github.com/be-heroes/doxchain/app/params"
@@ -195,7 +195,7 @@ var (
 		oauth2module.AppModuleBasic{},
 		idpmodule.AppModuleBasic{},
 		oraclemodule.AppModuleBasic{},
-		samlmodule.AppModuleBasic{},
+		saml2module.AppModuleBasic{},
 		kycmodule.AppModuleBasic{},
 		amlmodule.AppModuleBasic{},
 		// this line is used by starport scaffolding # stargate/app/moduleBasic
@@ -284,7 +284,7 @@ type App struct {
 
 	OracleKeeper oraclemodulekeeper.Keeper
 
-	SamlKeeper samlmodulekeeper.Keeper
+	SamlKeeper saml2modulekeeper.Keeper
 
 	KycKeeper kycmodulekeeper.Keeper
 
@@ -339,7 +339,7 @@ func New(
 		oauth2moduletypes.StoreKey,
 		idpmoduletypes.StoreKey,
 		oraclemoduletypes.StoreKey,
-		samlmoduletypes.StoreKey,
+		saml2moduletypes.StoreKey,
 		kycmoduletypes.StoreKey,
 		amlmoduletypes.StoreKey,
 		// this line is used by starport scaffolding # stargate/app/storeKey
@@ -615,13 +615,13 @@ func New(
 	)
 	oracleModule := oraclemodule.NewAppModule(appCodec, app.OracleKeeper, app.AccountKeeper, app.BankKeeper)
 
-	app.SamlKeeper = *samlmodulekeeper.NewKeeper(
+	app.SamlKeeper = *saml2modulekeeper.NewKeeper(
 		appCodec,
-		keys[samlmoduletypes.StoreKey],
-		keys[samlmoduletypes.MemStoreKey],
-		app.GetSubspace(samlmoduletypes.ModuleName),
+		keys[saml2moduletypes.StoreKey],
+		keys[saml2moduletypes.MemStoreKey],
+		app.GetSubspace(saml2moduletypes.ModuleName),
 	)
-	samlModule := samlmodule.NewAppModule(appCodec, app.SamlKeeper, app.AccountKeeper, app.BankKeeper)
+	saml2module := saml2module.NewAppModule(appCodec, app.SamlKeeper, app.AccountKeeper, app.BankKeeper)
 
 	app.KycKeeper = *kycmodulekeeper.NewKeeper(
 		appCodec,
@@ -714,7 +714,7 @@ func New(
 		oauth2module,
 		idpModule,
 		oracleModule,
-		samlModule,
+		saml2module,
 		kycModule,
 		amlModule,
 		// this line is used by starport scaffolding # stargate/app/appModule
@@ -752,7 +752,7 @@ func New(
 		oauth2moduletypes.ModuleName,
 		idpmoduletypes.ModuleName,
 		oraclemoduletypes.ModuleName,
-		samlmoduletypes.ModuleName,
+		saml2moduletypes.ModuleName,
 		kycmoduletypes.ModuleName,
 		amlmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/beginBlockers
@@ -785,7 +785,7 @@ func New(
 		oauth2moduletypes.ModuleName,
 		idpmoduletypes.ModuleName,
 		oraclemoduletypes.ModuleName,
-		samlmoduletypes.ModuleName,
+		saml2moduletypes.ModuleName,
 		kycmoduletypes.ModuleName,
 		amlmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/endBlockers
@@ -823,7 +823,7 @@ func New(
 		oauth2moduletypes.ModuleName,
 		idpmoduletypes.ModuleName,
 		oraclemoduletypes.ModuleName,
-		samlmoduletypes.ModuleName,
+		saml2moduletypes.ModuleName,
 		kycmoduletypes.ModuleName,
 		amlmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
@@ -861,7 +861,7 @@ func New(
 		oauth2module,
 		idpModule,
 		oracleModule,
-		samlModule,
+		saml2module,
 		kycModule,
 		amlModule,
 		// this line is used by starport scaffolding # stargate/app/appModule
@@ -1074,7 +1074,7 @@ func initParamsKeeper(appCodec codec.BinaryCodec, legacyAmino *codec.LegacyAmino
 	paramsKeeper.Subspace(oauth2moduletypes.ModuleName)
 	paramsKeeper.Subspace(idpmoduletypes.ModuleName)
 	paramsKeeper.Subspace(oraclemoduletypes.ModuleName)
-	paramsKeeper.Subspace(samlmoduletypes.ModuleName)
+	paramsKeeper.Subspace(saml2moduletypes.ModuleName)
 	paramsKeeper.Subspace(kycmoduletypes.ModuleName)
 	paramsKeeper.Subspace(amlmoduletypes.ModuleName)
 	// this line is used by starport scaffolding # stargate/app/paramSubspace

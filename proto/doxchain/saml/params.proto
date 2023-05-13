@@ -3,7 +3,7 @@ package beheroes.doxchain.saml;
 
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/be-heroes/doxchain/x/saml/types";
+option go_package = "github.com/be-heroes/doxchain/x/saml2/types";
 
 // Params defines the parameters for the module.
 message Params {

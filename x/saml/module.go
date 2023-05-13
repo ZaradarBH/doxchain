@@ -11,9 +11,9 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/be-heroes/doxchain/x/saml/client/cli"
-	"github.com/be-heroes/doxchain/x/saml/keeper"
-	"github.com/be-heroes/doxchain/x/saml/types"
+	"github.com/be-heroes/doxchain/x/saml2/client/cli"
+	"github.com/be-heroes/doxchain/x/saml2/keeper"
+	"github.com/be-heroes/doxchain/x/saml2/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/codec"
 	cdctypes "github.com/cosmos/cosmos-sdk/codec/types"

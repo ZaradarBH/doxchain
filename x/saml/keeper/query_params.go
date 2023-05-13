@@ -3,7 +3,7 @@ package keeper
 import (
 	"context"
 
-	"github.com/be-heroes/doxchain/x/saml/types"
+	"github.com/be-heroes/doxchain/x/saml2/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"

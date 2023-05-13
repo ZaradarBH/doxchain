@@ -3,7 +3,7 @@ package cli
 import (
 	"context"
 
-	"github.com/be-heroes/doxchain/x/saml/types"
+	"github.com/be-heroes/doxchain/x/saml2/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/spf13/cobra"

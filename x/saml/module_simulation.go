@@ -4,8 +4,8 @@ import (
 	"math/rand"
 
 	"github.com/be-heroes/doxchain/testutil/sample"
-	samlsimulation "github.com/be-heroes/doxchain/x/saml/simulation"
-	"github.com/be-heroes/doxchain/x/saml/types"
+	samlsimulation "github.com/be-heroes/doxchain/x/saml2/simulation"
+	"github.com/be-heroes/doxchain/x/saml2/types"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	simappparams "github.com/cosmos/cosmos-sdk/simapp/params"
 	sdk "github.com/cosmos/cosmos-sdk/types"

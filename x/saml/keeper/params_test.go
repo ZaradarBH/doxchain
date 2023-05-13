@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	testkeeper "github.com/be-heroes/doxchain/testutil/keeper"
-	"github.com/be-heroes/doxchain/x/saml/types"
+	"github.com/be-heroes/doxchain/x/saml2/types"
 	"github.com/stretchr/testify/require"
 )
 

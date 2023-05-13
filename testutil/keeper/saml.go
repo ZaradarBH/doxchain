@@ -3,8 +3,8 @@ package keeper
 import (
 	"testing"
 
-	"github.com/be-heroes/doxchain/x/saml/keeper"
-	"github.com/be-heroes/doxchain/x/saml/types"
+	"github.com/be-heroes/doxchain/x/saml2/keeper"
+	"github.com/be-heroes/doxchain/x/saml2/types"
 	"github.com/cosmos/cosmos-sdk/codec"
 	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
 	"github.com/cosmos/cosmos-sdk/store"
