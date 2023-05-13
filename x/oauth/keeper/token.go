@@ -19,6 +19,7 @@ func (k Keeper) Token(ctx sdk.Context, msg types.MsgTokenRequest) (types.MsgToke
 	return types.MsgTokenResponse{}, sdkerrors.Wrap(types.TokenServiceError, "Unsupported grant_type")
 }
 
+// AuthorizeRequest method for simple oauth keeper
 func (k Keeper) AuthorizeRequest(ctx sdk.Context, msg types.MsgTokenRequest) (bool, error) {
 	acl, err := k.idpKeeper.GetAccessClientList(ctx, msg.Tenant)
 
