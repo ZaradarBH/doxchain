@@ -11,7 +11,6 @@ import (
 	"github.com/golang-jwt/jwt"
 )
 
-//TODO: Implement devicecode message handler / logic to generate device code
 func (k Keeper) GenerateDeviceCodeToken(ctx sdk.Context, msg types.MsgTokenRequest) (types.MsgTokenResponse, error) {
 	tokenResponse := types.MsgTokenResponse{}
 	isAuthorized, err := k.idpKeeper.AuthorizeCreator(ctx, msg.Tenant, msg.Creator)
