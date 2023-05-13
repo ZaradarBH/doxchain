@@ -94,7 +94,9 @@ endif
 
 build: check_version go.sum
 	mkdir -p $(BUILDDIR)/
-	GOWORK=off go build -mod=readonly  $(BUILD_FLAGS) -o $(BUILDDIR)/ $(GO_MODULE)/cmd/doxchaind
+	go build -mod=readonly  $(BUILD_FLAGS) -o $(BUILDDIR)/ $(GO_MODULE)/cmd/doxchaind
+
+build-release: build-release-amd64 build-release-arm64
 
 build-release-amd64: go.sum $(BUILDDIR)/
 	$(DOCKER) buildx create --name core-builder || true
@@ -111,9 +113,10 @@ build-release-amd64: go.sum $(BUILDDIR)/
 		-f Dockerfile .
 	$(DOCKER) rm -f core-builder || true
 	$(DOCKER) create -ti --name core-builder core:local-amd64
-	$(DOCKER) cp core-builder:/usr/local/bin/terrad $(BUILDDIR)/release/terrad
-	tar -czvf $(BUILDDIR)/release/terra_$(VERSION)_Linux_x86_64.tar.gz -C $(BUILDDIR)/release/ terrad
-	rm $(BUILDDIR)/release/terrad
+	mkdir -p $(BUILDDIR)/release/
+	$(DOCKER) cp core-builder:/usr/local/bin/doxchaind $(BUILDDIR)/release/doxchaind
+	tar -czvf $(BUILDDIR)/release/doxchain_$(VERSION)_Linux_x86_64.tar.gz -C $(BUILDDIR)/release/ doxchaind
+	rm $(BUILDDIR)/release/doxchaind
 	$(DOCKER) rm -f core-builder
 
 build-release-arm64: go.sum $(BUILDDIR)/
@@ -131,13 +134,13 @@ build-release-arm64: go.sum $(BUILDDIR)/
 		-f Dockerfile .
 	$(DOCKER) rm -f core-builder || true
 	$(DOCKER) create -ti --name core-builder core:local-arm64
-	$(DOCKER) cp core-builder:/usr/local/bin/terrad $(BUILDDIR)/release/terrad 
-	tar -czvf $(BUILDDIR)/release/terra_$(VERSION)_Linux_arm64.tar.gz -C $(BUILDDIR)/release/ terrad 
-	rm $(BUILDDIR)/release/terrad
+	$(DOCKER) cp core-builder:/usr/local/bin/doxchaind $(BUILDDIR)/release/doxchaind 
+	tar -czvf $(BUILDDIR)/release/doxchain_$(VERSION)_Linux_arm64.tar.gz -C $(BUILDDIR)/release/ doxchaind 
+	rm $(BUILDDIR)/release/doxchaind
 	$(DOCKER) rm -f core-builder
 
 install: check_version go.sum
-	GOWORK=off go install -mod=readonly $(BUILD_FLAGS) $(GO_MODULE)/cmd/doxchaind
+	go install -mod=readonly $(BUILD_FLAGS) $(GO_MODULE)/cmd/doxchaind
 
 ###############################################################################
 ###                                Protobuf                                 ###
