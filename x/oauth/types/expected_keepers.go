@@ -1,7 +1,6 @@
 package types
 
 import (
-	idpTypes "github.com/be-heroes/doxchain/x/idp/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/x/auth/types"
 )
@@ -27,6 +26,6 @@ type BankKeeper interface {
 }
 
 type IdpKeeper interface {
-	GetAccessClientList(ctx sdk.Context, tenant string) (acl idpTypes.AccessClientList, err error)
+	AuthorizeCreator(ctx sdk.Context, tenant string, creator string) (bool, error)
 	// Methods imported from authz should be defined here
 }

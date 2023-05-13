@@ -11,7 +11,7 @@ import (
 
 func (k Keeper) GenerateClientCredentialToken(ctx sdk.Context, msg types.MsgTokenRequest) (types.MsgTokenResponse, error) {
 	tokenResponse := types.MsgTokenResponse{}
-	isAuthorized, err := k.AuthorizeRequest(ctx, msg)
+	isAuthorized, err := k.idpKeeper.AuthorizeCreator(ctx, msg.Tenant, msg.Creator)
 
 	if !isAuthorized {
 		return tokenResponse, err
@@ -27,13 +27,13 @@ func (k Keeper) GenerateClientCredentialToken(ctx sdk.Context, msg types.MsgToke
 			signedToken, err := jwtToken.SignedString([]byte(msg.ClientSecret))
 
 			if err != nil {
-				return tokenResponse, sdkerrors.Wrap(types.TokenServiceError, "Failed to create token")
+				return tokenResponse, sdkerrors.Wrap(types.TokenServiceError, "Failed to create access token")
 			}
 
 			tenantAccessTokens, found := k.GetAccessTokens(ctx, msg.Tenant)
 
 			if !found {
-				return tokenResponse, sdkerrors.Wrap(types.TokenServiceError, "Failed to fetch access tokens for tenant")
+				return tokenResponse, sdkerrors.Wrap(types.TokenServiceError, "Failed to fetch access tokens cache for tenant")
 			}
 
 			tenantAccessTokens.Tokens = append(tenantAccessTokens.Tokens, types.AccessToken{
