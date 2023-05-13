@@ -16,18 +16,18 @@ func TestGenesis(t *testing.T) {
 
 		DeviceCodeRegistryList: []types.DeviceCodeRegistry{
 			{
-				Index: "0",
+				Tenant: "0",
 			},
 			{
-				Index: "1",
+				Tenant: "1",
 			},
 		},
 		AccessTokenRegistryList: []types.AccessTokenRegistry{
 			{
-				Index: "0",
+				Tenant: "0",
 			},
 			{
-				Index: "1",
+				Tenant: "1",
 			},
 		},
 		// this line is used by starport scaffolding # genesis/test/state
