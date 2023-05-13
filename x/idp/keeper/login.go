@@ -22,28 +22,13 @@ func (k Keeper) Login(ctx sdk.Context, msg types.MsgAuthenticationRequest) (type
 		return response, err
 	}
 
-	//TODO: How do we secure this?
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), []byte{})
-	byteKey := types.KeyPrefix(types.IdpMasterKey)
-	idpMasterKeyBytes := store.Get(byteKey)
-
-	if idpMasterKeyBytes == nil {
-		idpMasterKeyBytes, err := keyring.GeneratePrivateKey("rsa", 2048)
-		
-		if err != nil {
-			return response, sdkerrors.Wrap(types.LoginError, "Failed to initialize new master key")
-		}
-
-		store.Set(byteKey, idpMasterKeyBytes)
-	}
-
 	//TODO: Move JwtTokenFactory to common util namespace, implement option for passing in claims in factory and replace this logic
 	jwtToken := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"sub": msg.Creator,
 		"exp": ctx.BlockTime().Add(time.Hour * 1),
 	})
 
-	tokenString, err := jwtToken.SignedString([]byte(idpMasterKeyBytes))
+	tokenString, err := jwtToken.SignedString([]byte(msg.Creator))
 	if err != nil {
 		return response, sdkerrors.Wrap(types.LoginError, "Could not issue refresh token")
 	}
