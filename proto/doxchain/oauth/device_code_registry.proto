@@ -1,9 +1,9 @@
 syntax = "proto3";
-package beheroes.doxchain.oauth;
+package beheroes.doxchain.oauth2;
 
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/be-heroes/doxchain/x/oauth/types";
+option go_package = "github.com/be-heroes/doxchain/x/oauth2/types";
 
 message DeviceCodeRegistry {
   string tenant = 1; 

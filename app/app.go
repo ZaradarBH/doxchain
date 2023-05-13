@@ -122,9 +122,9 @@ import (
 	kycmodule "github.com/be-heroes/doxchain/x/kyc"
 	kycmodulekeeper "github.com/be-heroes/doxchain/x/kyc/keeper"
 	kycmoduletypes "github.com/be-heroes/doxchain/x/kyc/types"
-	oauthmodule "github.com/be-heroes/doxchain/x/oauth"
-	oauthmodulekeeper "github.com/be-heroes/doxchain/x/oauth/keeper"
-	oauthmoduletypes "github.com/be-heroes/doxchain/x/oauth/types"
+	oauth2module "github.com/be-heroes/doxchain/x/oauth2"
+	oauth2modulekeeper "github.com/be-heroes/doxchain/x/oauth2/keeper"
+	oauth2moduletypes "github.com/be-heroes/doxchain/x/oauth2/types"
 	oraclemodule "github.com/be-heroes/doxchain/x/oracle"
 	oraclemodulekeeper "github.com/be-heroes/doxchain/x/oracle/keeper"
 	oraclemoduletypes "github.com/be-heroes/doxchain/x/oracle/types"
@@ -192,7 +192,7 @@ var (
 		doxchainmodule.AppModuleBasic{},
 		didmodule.AppModuleBasic{},
 		absmodule.AppModuleBasic{},
-		oauthmodule.AppModuleBasic{},
+		oauth2module.AppModuleBasic{},
 		idpmodule.AppModuleBasic{},
 		oraclemodule.AppModuleBasic{},
 		samlmodule.AppModuleBasic{},
@@ -278,7 +278,7 @@ type App struct {
 
 	AbsKeeper absmodulekeeper.Keeper
 
-	OauthKeeper oauthmodulekeeper.Keeper
+	OauthKeeper oauth2modulekeeper.Keeper
 
 	IdpKeeper idpmodulekeeper.Keeper
 
@@ -336,7 +336,7 @@ func New(
 		doxchainmoduletypes.StoreKey,
 		didmoduletypes.StoreKey,
 		absmoduletypes.StoreKey,
-		oauthmoduletypes.StoreKey,
+		oauth2moduletypes.StoreKey,
 		idpmoduletypes.StoreKey,
 		oraclemoduletypes.StoreKey,
 		samlmoduletypes.StoreKey,
@@ -583,17 +583,17 @@ func New(
 	)
 	absModule := absmodule.NewAppModule(appCodec, app.AbsKeeper, app.AccountKeeper, app.BankKeeper)
 
-	app.OauthKeeper = *oauthmodulekeeper.NewKeeper(
+	app.OauthKeeper = *oauth2modulekeeper.NewKeeper(
 		appCodec,
-		keys[oauthmoduletypes.StoreKey],
-		keys[oauthmoduletypes.MemStoreKey],
-		app.GetSubspace(oauthmoduletypes.ModuleName),
+		keys[oauth2moduletypes.StoreKey],
+		keys[oauth2moduletypes.MemStoreKey],
+		app.GetSubspace(oauth2moduletypes.ModuleName),
 
 		app.AuthzKeeper,
 		app.EvidenceKeeper,
 		app.IdpKeeper,
 	)
-	oauthModule := oauthmodule.NewAppModule(appCodec, app.OauthKeeper, app.AccountKeeper, app.BankKeeper)
+	oauth2module := oauth2module.NewAppModule(appCodec, app.OauthKeeper, app.AccountKeeper, app.BankKeeper)
 
 	app.IdpKeeper = *idpmodulekeeper.NewKeeper(
 		appCodec,
@@ -711,7 +711,7 @@ func New(
 		doxchainModule,
 		didModule,
 		absModule,
-		oauthModule,
+		oauth2module,
 		idpModule,
 		oracleModule,
 		samlModule,
@@ -749,7 +749,7 @@ func New(
 		doxchainmoduletypes.ModuleName,
 		didmoduletypes.ModuleName,
 		absmoduletypes.ModuleName,
-		oauthmoduletypes.ModuleName,
+		oauth2moduletypes.ModuleName,
 		idpmoduletypes.ModuleName,
 		oraclemoduletypes.ModuleName,
 		samlmoduletypes.ModuleName,
@@ -782,7 +782,7 @@ func New(
 		doxchainmoduletypes.ModuleName,
 		didmoduletypes.ModuleName,
 		absmoduletypes.ModuleName,
-		oauthmoduletypes.ModuleName,
+		oauth2moduletypes.ModuleName,
 		idpmoduletypes.ModuleName,
 		oraclemoduletypes.ModuleName,
 		samlmoduletypes.ModuleName,
@@ -820,7 +820,7 @@ func New(
 		doxchainmoduletypes.ModuleName,
 		didmoduletypes.ModuleName,
 		absmoduletypes.ModuleName,
-		oauthmoduletypes.ModuleName,
+		oauth2moduletypes.ModuleName,
 		idpmoduletypes.ModuleName,
 		oraclemoduletypes.ModuleName,
 		samlmoduletypes.ModuleName,
@@ -858,7 +858,7 @@ func New(
 		doxchainModule,
 		didModule,
 		absModule,
-		oauthModule,
+		oauth2module,
 		idpModule,
 		oracleModule,
 		samlModule,
@@ -1071,7 +1071,7 @@ func initParamsKeeper(appCodec codec.BinaryCodec, legacyAmino *codec.LegacyAmino
 	paramsKeeper.Subspace(doxchainmoduletypes.ModuleName)
 	paramsKeeper.Subspace(didmoduletypes.ModuleName)
 	paramsKeeper.Subspace(absmoduletypes.ModuleName)
-	paramsKeeper.Subspace(oauthmoduletypes.ModuleName)
+	paramsKeeper.Subspace(oauth2moduletypes.ModuleName)
 	paramsKeeper.Subspace(idpmoduletypes.ModuleName)
 	paramsKeeper.Subspace(oraclemoduletypes.ModuleName)
 	paramsKeeper.Subspace(samlmoduletypes.ModuleName)

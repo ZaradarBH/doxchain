@@ -1,8 +1,8 @@
 syntax = "proto3";
 
-package beheroes.doxchain.oauth;
+package beheroes.doxchain.oauth2;
 
-option go_package = "github.com/be-heroes/doxchain/x/oauth/types";
+option go_package = "github.com/be-heroes/doxchain/x/oauth2/types";
 
 // Msg defines the Msg service.
 service Msg {
