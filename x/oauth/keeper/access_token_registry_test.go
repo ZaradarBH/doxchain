@@ -18,7 +18,7 @@ var _ = strconv.IntSize
 func createNAccessTokenRegistry(keeper *keeper.Keeper, ctx sdk.Context, n int) []types.AccessTokenRegistry {
 	items := make([]types.AccessTokenRegistry, n)
 	for i := range items {
-		items[i].jti = strconv.Itoa(i)
+		items[i].Tenant = strconv.Itoa(i)
 
 		keeper.SetAccessTokenRegistry(ctx, items[i])
 	}
@@ -30,7 +30,7 @@ func TestAccessTokenRegistryGet(t *testing.T) {
 	items := createNAccessTokenRegistry(keeper, ctx, 10)
 	for _, item := range items {
 		rst, found := keeper.GetAccessTokenRegistry(ctx,
-			item.Index,
+			item.Tenant,
 		)
 		require.True(t, found)
 		require.Equal(t,
@@ -44,10 +44,10 @@ func TestAccessTokenRegistryRemove(t *testing.T) {
 	items := createNAccessTokenRegistry(keeper, ctx, 10)
 	for _, item := range items {
 		keeper.RemoveAccessTokenRegistry(ctx,
-			item.Index,
+			item.Tenant,
 		)
 		_, found := keeper.GetAccessTokenRegistry(ctx,
-			item.Index,
+			item.Tenant,
 		)
 		require.False(t, found)
 	}
