@@ -1,4 +1,4 @@
-package saml
+package saml2
 
 import (
 	"github.com/be-heroes/doxchain/x/saml2/keeper"

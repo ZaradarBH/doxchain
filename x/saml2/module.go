@@ -1,4 +1,4 @@
-package saml
+package saml2
 
 import (
 	"context"

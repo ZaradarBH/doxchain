@@ -1,4 +1,4 @@
-package saml_test
+package saml2_test
 
 import (
 	"testing"

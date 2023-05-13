@@ -1,4 +1,4 @@
-package oauth
+package oauth2
 
 import (
 	"math/rand"
