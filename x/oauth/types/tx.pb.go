@@ -195,39 +195,166 @@ func (m *MsgTokenResponse) GetExpiresIn() int64 {
 	return 0
 }
 
+type MsgDeviceCodeRequest struct {
+	Creator  string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	ClientId string `protobuf:"bytes,2,opt,name=clientId,proto3" json:"clientId,omitempty"`
+	Scope    string `protobuf:"bytes,3,opt,name=scope,proto3" json:"scope,omitempty"`
+}
+
+func (m *MsgDeviceCodeRequest) Reset()         { *m = MsgDeviceCodeRequest{} }
+func (m *MsgDeviceCodeRequest) String() string { return proto.CompactTextString(m) }
+func (*MsgDeviceCodeRequest) ProtoMessage()    {}
+func (*MsgDeviceCodeRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_5cd6b06f034d1db5, []int{2}
+}
+func (m *MsgDeviceCodeRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgDeviceCodeRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgDeviceCodeRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgDeviceCodeRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgDeviceCodeRequest.Merge(m, src)
+}
+func (m *MsgDeviceCodeRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgDeviceCodeRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgDeviceCodeRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgDeviceCodeRequest proto.InternalMessageInfo
+
+func (m *MsgDeviceCodeRequest) GetCreator() string {
+	if m != nil {
+		return m.Creator
+	}
+	return ""
+}
+
+func (m *MsgDeviceCodeRequest) GetClientId() string {
+	if m != nil {
+		return m.ClientId
+	}
+	return ""
+}
+
+func (m *MsgDeviceCodeRequest) GetScope() string {
+	if m != nil {
+		return m.Scope
+	}
+	return ""
+}
+
+type MsgDeviceCodeResponse struct {
+	DeviceCode      string `protobuf:"bytes,1,opt,name=deviceCode,proto3" json:"deviceCode,omitempty"`
+	UserCode        string `protobuf:"bytes,2,opt,name=userCode,proto3" json:"userCode,omitempty"`
+	VerificationUri string `protobuf:"bytes,3,opt,name=verification_uri,json=verificationUri,proto3" json:"verification_uri,omitempty"`
+}
+
+func (m *MsgDeviceCodeResponse) Reset()         { *m = MsgDeviceCodeResponse{} }
+func (m *MsgDeviceCodeResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgDeviceCodeResponse) ProtoMessage()    {}
+func (*MsgDeviceCodeResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_5cd6b06f034d1db5, []int{3}
+}
+func (m *MsgDeviceCodeResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgDeviceCodeResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgDeviceCodeResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgDeviceCodeResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgDeviceCodeResponse.Merge(m, src)
+}
+func (m *MsgDeviceCodeResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgDeviceCodeResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgDeviceCodeResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgDeviceCodeResponse proto.InternalMessageInfo
+
+func (m *MsgDeviceCodeResponse) GetDeviceCode() string {
+	if m != nil {
+		return m.DeviceCode
+	}
+	return ""
+}
+
+func (m *MsgDeviceCodeResponse) GetUserCode() string {
+	if m != nil {
+		return m.UserCode
+	}
+	return ""
+}
+
+func (m *MsgDeviceCodeResponse) GetVerificationUri() string {
+	if m != nil {
+		return m.VerificationUri
+	}
+	return ""
+}
+
 func init() {
 	proto.RegisterType((*MsgTokenRequest)(nil), "beheroes.doxchain.oauth.MsgTokenRequest")
 	proto.RegisterType((*MsgTokenResponse)(nil), "beheroes.doxchain.oauth.MsgTokenResponse")
+	proto.RegisterType((*MsgDeviceCodeRequest)(nil), "beheroes.doxchain.oauth.MsgDeviceCodeRequest")
+	proto.RegisterType((*MsgDeviceCodeResponse)(nil), "beheroes.doxchain.oauth.MsgDeviceCodeResponse")
 }
 
 func init() { proto.RegisterFile("doxchain/oauth/tx.proto", fileDescriptor_5cd6b06f034d1db5) }
 
 var fileDescriptor_5cd6b06f034d1db5 = []byte{
-	// 370 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x92, 0xcf, 0x4e, 0x2a, 0x31,
-	0x14, 0xc6, 0x19, 0xb8, 0xfc, 0x3b, 0xf7, 0x26, 0xdc, 0x54, 0x23, 0x0d, 0x31, 0x13, 0xc2, 0x0a,
-	0x63, 0x9c, 0x31, 0xfa, 0x04, 0x6a, 0x5c, 0xb0, 0x60, 0x83, 0xac, 0x8c, 0x9b, 0x99, 0xce, 0xc9,
-	0xcc, 0x44, 0x6d, 0xc7, 0xb6, 0x98, 0xe1, 0x2d, 0x7c, 0x17, 0x5f, 0xc2, 0x25, 0x4b, 0x97, 0x06,
-	0x5e, 0xc4, 0xd0, 0x02, 0x83, 0x44, 0x13, 0x77, 0xfd, 0x7e, 0xdf, 0x97, 0xa6, 0xfd, 0xce, 0x81,
-	0x76, 0x24, 0x72, 0x96, 0x04, 0x29, 0xf7, 0x45, 0x30, 0xd1, 0x89, 0xaf, 0x73, 0x2f, 0x93, 0x42,
-	0x0b, 0xd2, 0x0e, 0x31, 0x41, 0x29, 0x50, 0x79, 0xeb, 0x84, 0x67, 0x12, 0xbd, 0xd7, 0x32, 0xb4,
-	0x86, 0x2a, 0x1e, 0x8b, 0x7b, 0xe4, 0x23, 0x7c, 0x9a, 0xa0, 0xd2, 0x84, 0x42, 0x9d, 0x49, 0x0c,
-	0xb4, 0x90, 0xd4, 0xe9, 0x3a, 0xfd, 0xe6, 0x68, 0x2d, 0xc9, 0x01, 0xd4, 0x34, 0xf2, 0x80, 0x6b,
-	0x5a, 0x36, 0xc6, 0x4a, 0x91, 0x7d, 0xa8, 0x2a, 0x26, 0x32, 0xa4, 0x15, 0x83, 0xad, 0x20, 0x87,
-	0xd0, 0x8c, 0x65, 0xc0, 0xf5, 0x78, 0x9a, 0x21, 0xfd, 0x63, 0x9c, 0x02, 0x90, 0x0e, 0x34, 0xd8,
-	0x43, 0x8a, 0x5c, 0x0f, 0x22, 0x5a, 0x35, 0xe6, 0x46, 0x93, 0x1e, 0xfc, 0xb3, 0xe7, 0x1b, 0x64,
-	0x12, 0x35, 0xad, 0x19, 0xff, 0x0b, 0x23, 0x2e, 0x40, 0x84, 0xcf, 0x29, 0xc3, 0x2b, 0x11, 0x21,
-	0xad, 0x9b, 0xc4, 0x16, 0x21, 0xa7, 0xb0, 0x67, 0xf3, 0x17, 0x4a, 0xa1, 0xd4, 0xa9, 0xe0, 0xe6,
-	0x1d, 0x0d, 0x13, 0xfc, 0xce, 0x22, 0x7d, 0x68, 0xed, 0x60, 0xda, 0x34, 0xe9, 0x5d, 0xdc, 0xcb,
-	0xe0, 0x7f, 0x51, 0x9a, 0xca, 0x04, 0x57, 0x48, 0xba, 0xf0, 0x37, 0x60, 0x0c, 0x95, 0x32, 0x78,
-	0xd5, 0xdc, 0x36, 0x5a, 0xf6, 0xa1, 0x97, 0x07, 0xf3, 0x0e, 0x5b, 0x60, 0x01, 0x96, 0x2e, 0xe6,
-	0x59, 0x2a, 0x51, 0x0d, 0xb8, 0xe9, 0xb1, 0x32, 0x2a, 0xc0, 0x19, 0x83, 0xca, 0x50, 0xc5, 0xe4,
-	0x0e, 0xaa, 0xf6, 0xae, 0xbe, 0xf7, 0xc3, 0x44, 0xbd, 0x9d, 0x69, 0x76, 0x8e, 0x7e, 0x91, 0xb4,
-	0x5f, 0xb8, 0xbc, 0x7e, 0x9b, 0xbb, 0xce, 0x6c, 0xee, 0x3a, 0x1f, 0x73, 0xd7, 0x79, 0x59, 0xb8,
-	0xa5, 0xd9, 0xc2, 0x2d, 0xbd, 0x2f, 0xdc, 0xd2, 0xed, 0x71, 0x9c, 0xea, 0x64, 0x12, 0x7a, 0x4c,
-	0x3c, 0xfa, 0x21, 0x9e, 0xd8, 0xfb, 0xfc, 0xcd, 0xb6, 0xe5, 0xeb, 0x7d, 0x9b, 0x66, 0xa8, 0xc2,
-	0x9a, 0xd9, 0xb9, 0xf3, 0xcf, 0x00, 0x00, 0x00, 0xff, 0xff, 0xa1, 0xd6, 0x1d, 0x3c, 0x8e, 0x02,
-	0x00, 0x00,
+	// 458 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x93, 0x4f, 0x6f, 0xd3, 0x30,
+	0x18, 0xc6, 0x9b, 0x96, 0x76, 0xed, 0x0b, 0x52, 0x27, 0x33, 0x98, 0x55, 0xa1, 0x68, 0xca, 0xa9,
+	0x13, 0x5a, 0x8a, 0xe0, 0x13, 0xf0, 0xef, 0xb0, 0x43, 0x2f, 0x65, 0x5c, 0x10, 0x12, 0x4a, 0x9c,
+	0x97, 0xc4, 0x1a, 0xd8, 0xc1, 0x76, 0xa6, 0xec, 0xc2, 0x67, 0xe0, 0xbb, 0xf0, 0x25, 0x38, 0xf6,
+	0xc8, 0x11, 0xb5, 0x5f, 0x04, 0xc5, 0x49, 0x9a, 0x2c, 0x1b, 0x6c, 0x37, 0xbf, 0xcf, 0xf3, 0x24,
+	0xaf, 0xdf, 0x9f, 0x6d, 0x38, 0x8c, 0x64, 0xce, 0x92, 0x80, 0x8b, 0x85, 0x0c, 0x32, 0x93, 0x2c,
+	0x4c, 0xee, 0xa7, 0x4a, 0x1a, 0x49, 0x0e, 0x43, 0x4c, 0x50, 0x49, 0xd4, 0x7e, 0x9d, 0xf0, 0x6d,
+	0xc2, 0xfb, 0xd9, 0x87, 0xe9, 0x52, 0xc7, 0x67, 0xf2, 0x1c, 0xc5, 0x0a, 0xbf, 0x65, 0xa8, 0x0d,
+	0xa1, 0xb0, 0xc7, 0x14, 0x06, 0x46, 0x2a, 0xea, 0x1c, 0x39, 0xf3, 0xc9, 0xaa, 0x2e, 0xc9, 0x63,
+	0x18, 0x19, 0x14, 0x81, 0x30, 0xb4, 0x6f, 0x8d, 0xaa, 0x22, 0x07, 0x30, 0xd4, 0x4c, 0xa6, 0x48,
+	0x07, 0x56, 0x2e, 0x0b, 0xf2, 0x04, 0x26, 0xb1, 0x0a, 0x84, 0x39, 0xbb, 0x4c, 0x91, 0xde, 0xb3,
+	0x4e, 0x23, 0x90, 0x19, 0x8c, 0xd9, 0x17, 0x8e, 0xc2, 0x9c, 0x46, 0x74, 0x68, 0xcd, 0x5d, 0x4d,
+	0x3c, 0x78, 0x50, 0xae, 0xdf, 0x21, 0x53, 0x68, 0xe8, 0xc8, 0xfa, 0x57, 0x34, 0xe2, 0x02, 0x44,
+	0x78, 0xc1, 0x19, 0xbe, 0x96, 0x11, 0xd2, 0x3d, 0x9b, 0x68, 0x29, 0xe4, 0x19, 0x3c, 0x2c, 0xf3,
+	0x2f, 0xb5, 0x46, 0x65, 0xb8, 0x14, 0x76, 0x1f, 0x63, 0x1b, 0xbc, 0xc9, 0x22, 0x73, 0x98, 0x76,
+	0x64, 0x3a, 0xb1, 0xe9, 0xae, 0xec, 0xa5, 0xb0, 0xdf, 0x40, 0xd3, 0xa9, 0x14, 0x1a, 0xc9, 0x11,
+	0xdc, 0x0f, 0x18, 0x43, 0xad, 0xad, 0x5c, 0x91, 0x6b, 0x4b, 0x05, 0x0f, 0x53, 0x2c, 0xec, 0x3e,
+	0x4a, 0x80, 0x8d, 0x50, 0xb8, 0x98, 0xa7, 0x5c, 0xa1, 0x3e, 0x15, 0x96, 0xe3, 0x60, 0xd5, 0x08,
+	0x5e, 0x08, 0x07, 0x4b, 0x1d, 0xbf, 0xd9, 0x8d, 0x77, 0xfb, 0x59, 0xb5, 0xf9, 0xf6, 0x3b, 0x7c,
+	0x6f, 0x3c, 0x2f, 0xef, 0x3b, 0x3c, 0xea, 0xf4, 0xa8, 0x46, 0xbb, 0x8a, 0xda, 0xb9, 0x86, 0x7a,
+	0x06, 0xe3, 0x4c, 0xa3, 0xb2, 0x6e, 0xd5, 0xaa, 0xae, 0xc9, 0x31, 0xec, 0x5f, 0xa0, 0xe2, 0x9f,
+	0x39, 0x0b, 0x0a, 0x74, 0x9f, 0x32, 0xc5, 0xab, 0xae, 0xd3, 0xb6, 0xfe, 0x5e, 0xf1, 0xe7, 0x6b,
+	0x07, 0x06, 0x4b, 0x1d, 0x93, 0x8f, 0x30, 0x2c, 0x81, 0xcd, 0xfd, 0x7f, 0x5c, 0x5b, 0xbf, 0x73,
+	0x65, 0x67, 0xc7, 0x77, 0x48, 0x56, 0xc3, 0x9c, 0x03, 0x34, 0x23, 0x92, 0x93, 0xff, 0x7d, 0x78,
+	0x0d, 0xf7, 0xcc, 0xbf, 0x6b, 0xbc, 0x6c, 0xf6, 0xea, 0xed, 0xaf, 0x8d, 0xeb, 0xac, 0x37, 0xae,
+	0xf3, 0x67, 0xe3, 0x3a, 0x3f, 0xb6, 0x6e, 0x6f, 0xbd, 0x75, 0x7b, 0xbf, 0xb7, 0x6e, 0xef, 0xc3,
+	0xd3, 0x98, 0x9b, 0x24, 0x0b, 0x7d, 0x26, 0xbf, 0x2e, 0x42, 0x3c, 0x29, 0x7f, 0xba, 0xd8, 0xbd,
+	0xdf, 0xbc, 0x7e, 0xc1, 0x97, 0x29, 0xea, 0x70, 0x64, 0x5f, 0xf1, 0x8b, 0xbf, 0x01, 0x00, 0x00,
+	0xff, 0xff, 0x3e, 0x40, 0xfd, 0xd9, 0xe0, 0x03, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -243,6 +370,7 @@ const _ = grpc.SupportPackageIsVersion4
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type MsgClient interface {
 	Token(ctx context.Context, in *MsgTokenRequest, opts ...grpc.CallOption) (*MsgTokenResponse, error)
+	DeviceCode(ctx context.Context, in *MsgDeviceCodeRequest, opts ...grpc.CallOption) (*MsgDeviceCodeResponse, error)
 }
 
 type msgClient struct {
@@ -262,9 +390,19 @@ func (c *msgClient) Token(ctx context.Context, in *MsgTokenRequest, opts ...grpc
 	return out, nil
 }
 
+func (c *msgClient) DeviceCode(ctx context.Context, in *MsgDeviceCodeRequest, opts ...grpc.CallOption) (*MsgDeviceCodeResponse, error) {
+	out := new(MsgDeviceCodeResponse)
+	err := c.cc.Invoke(ctx, "/beheroes.doxchain.oauth.Msg/DeviceCode", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 type MsgServer interface {
 	Token(context.Context, *MsgTokenRequest) (*MsgTokenResponse, error)
+	DeviceCode(context.Context, *MsgDeviceCodeRequest) (*MsgDeviceCodeResponse, error)
 }
 
 // UnimplementedMsgServer can be embedded to have forward compatible implementations.
@@ -273,6 +411,9 @@ type UnimplementedMsgServer struct {
 
 func (*UnimplementedMsgServer) Token(ctx context.Context, req *MsgTokenRequest) (*MsgTokenResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Token not implemented")
+}
+func (*UnimplementedMsgServer) DeviceCode(ctx context.Context, req *MsgDeviceCodeRequest) (*MsgDeviceCodeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeviceCode not implemented")
 }
 
 func RegisterMsgServer(s grpc1.Server, srv MsgServer) {
@@ -297,6 +438,24 @@ func _Msg_Token_Handler(srv interface{}, ctx context.Context, dec func(interface
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_DeviceCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgDeviceCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).DeviceCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/beheroes.doxchain.oauth.Msg/DeviceCode",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).DeviceCode(ctx, req.(*MsgDeviceCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Msg_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "beheroes.doxchain.oauth.Msg",
 	HandlerType: (*MsgServer)(nil),
@@ -304,6 +463,10 @@ var _Msg_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Token",
 			Handler:    _Msg_Token_Handler,
+		},
+		{
+			MethodName: "DeviceCode",
+			Handler:    _Msg_DeviceCode_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -438,6 +601,94 @@ func (m *MsgTokenResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *MsgDeviceCodeRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgDeviceCodeRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgDeviceCodeRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Scope) > 0 {
+		i -= len(m.Scope)
+		copy(dAtA[i:], m.Scope)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Scope)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.ClientId) > 0 {
+		i -= len(m.ClientId)
+		copy(dAtA[i:], m.ClientId)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.ClientId)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Creator) > 0 {
+		i -= len(m.Creator)
+		copy(dAtA[i:], m.Creator)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Creator)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgDeviceCodeResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgDeviceCodeResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgDeviceCodeResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.VerificationUri) > 0 {
+		i -= len(m.VerificationUri)
+		copy(dAtA[i:], m.VerificationUri)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.VerificationUri)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.UserCode) > 0 {
+		i -= len(m.UserCode)
+		copy(dAtA[i:], m.UserCode)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.UserCode)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.DeviceCode) > 0 {
+		i -= len(m.DeviceCode)
+		copy(dAtA[i:], m.DeviceCode)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.DeviceCode)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintTx(dAtA []byte, offset int, v uint64) int {
 	offset -= sovTx(v)
 	base := offset
@@ -510,6 +761,48 @@ func (m *MsgTokenResponse) Size() (n int) {
 	}
 	if m.ExpiresIn != 0 {
 		n += 1 + sovTx(uint64(m.ExpiresIn))
+	}
+	return n
+}
+
+func (m *MsgDeviceCodeRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Creator)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.ClientId)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Scope)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	return n
+}
+
+func (m *MsgDeviceCodeResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.DeviceCode)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.UserCode)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.VerificationUri)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
 	}
 	return n
 }
@@ -970,6 +1263,298 @@ func (m *MsgTokenResponse) Unmarshal(dAtA []byte) error {
 					break
 				}
 			}
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgDeviceCodeRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgDeviceCodeRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgDeviceCodeRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Creator = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ClientId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ClientId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Scope", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Scope = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgDeviceCodeResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgDeviceCodeResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgDeviceCodeResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DeviceCode", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.DeviceCode = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field UserCode", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.UserCode = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field VerificationUri", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.VerificationUri = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipTx(dAtA[iNdEx:])

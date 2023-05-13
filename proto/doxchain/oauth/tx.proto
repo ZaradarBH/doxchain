@@ -6,9 +6,9 @@ option go_package = "github.com/be-heroes/doxchain/x/oauth/types";
 
 // Msg defines the Msg service.
 service Msg {
-  rpc Token              (MsgTokenRequest      ) returns (MsgTokenResponse             );
+  rpc Token      (MsgTokenRequest) returns (MsgTokenResponse     );
+  rpc DeviceCode (MsgDeviceCodeRequest  ) returns (MsgDeviceCodeResponse);
 }
-
 message MsgTokenRequest {
   string creator             = 1;
   string tenant              = 2;
@@ -24,5 +24,18 @@ message MsgTokenRequest {
 message MsgTokenResponse {
   string accessToken = 1;
   string tokenType   = 2;
-  int64 expiresIn   = 3;
+  int64  expiresIn   = 3;
 }
+
+message MsgDeviceCodeRequest {
+  string creator  = 1;
+  string clientId = 2;
+  string scope    = 3;
+}
+
+message MsgDeviceCodeResponse {
+  string deviceCode       = 1;
+  string userCode         = 2;
+  string verification_uri = 3;
+}
+

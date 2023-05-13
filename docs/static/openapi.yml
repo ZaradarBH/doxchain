@@ -45082,6 +45082,15 @@ definitions:
         description: params holds all the parameters of this module.
         type: object
     description: QueryParamsResponse is response type for the Query/Params RPC method.
+  beheroes.doxchain.oauth.MsgDeviceCodeResponse:
+    type: object
+    properties:
+      deviceCode:
+        type: string
+      userCode:
+        type: string
+      verification_uri:
+        type: string
   beheroes.doxchain.oauth.MsgTokenResponse:
     type: object
     properties:

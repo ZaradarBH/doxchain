@@ -52,6 +52,10 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgDeleteAccessTokenRegistry int = 100
 
+	opWeightMsgDeviceCode = "op_weight_msg_device_code"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgDeviceCode int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -111,6 +115,17 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgTokenRequest,
 		oauthsimulation.SimulateMsgTokenRequest(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgDeviceCode int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgDeviceCode, &weightMsgDeviceCode, nil,
+		func(_ *rand.Rand) {
+			weightMsgDeviceCode = defaultWeightMsgDeviceCode
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgDeviceCode,
+		oauthsimulation.SimulateMsgDeviceCode(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
 	// this line is used by starport scaffolding # simapp/module/operation
