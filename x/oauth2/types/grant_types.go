@@ -12,7 +12,7 @@ func (gt GrantType) String() string {
 	case ClientCredentialsGrant:
 		return "client_credentials"
 	case DeviceCodeGrant:
-		return "device_code"
+		return "urn:ietf:params:oauth:grant-type:device_code"
 	}
 
 	return "unknown"
