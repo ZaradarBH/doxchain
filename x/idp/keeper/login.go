@@ -28,6 +28,7 @@ func (k Keeper) Login(ctx sdk.Context, msg types.MsgAuthenticationRequest) (type
 		return response, sdkerrors.Wrap(types.LoginError, "Could not locate IDP master key in store")
 	}
 
+	//TODO: Move JwtTokenFactory to common util namespace, implement option for passing in claims in factory and replace this logic
 	jwtToken := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"sub": msg.Creator,
 		"exp": ctx.BlockTime().Add(time.Hour * 1),
