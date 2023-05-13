@@ -1,0 +1,25 @@
+FROM archlinux:base
+
+RUN pacman -Syu ; \
+    pacman -S --noconfirm wget lz4 aria2 curl jq net-tools; \
+    pacman -Scc ;
+
+ARG entrypoint=entrypoint.sh
+
+RUN mkdir /doxchain ; \
+    groupadd bitcoinboyz ; \
+    useradd -g bitcoinboyz --home-dir=/doxchain bitcoinboyz ; \
+    chown -R bitcoinboyz:bitcoinboyz /doxchain
+
+USER bitcoinboyz
+
+WORKDIR /doxchain
+
+# using multi-stage build to reduce image size and build time
+COPY --from=core:local-amd64 /usr/local/bin/doxchaind /usr/bin/doxchaind
+
+EXPOSE 26656 26657 1317
+ENTRYPOINT ["/bin/sh", "entrypoint.sh"]
+STOPSIGNAL SIGTERM
+
+COPY ${entrypoint} entrypoint.sh

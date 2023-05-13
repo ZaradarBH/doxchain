@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  doxchain:
+    platform: linux/amd64
+    container_name: doxchain
+    image: doxchain:arch
+    ports:
+      - "1317:1317"
+      - "26656-26657:26656-26657"
