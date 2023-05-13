@@ -1,0 +1,11 @@
+syntax = "proto3";
+package beheroes.doxchain.aml;
+
+option go_package = "github.com/be-heroes/doxchain/x/aml/types";
+
+message AMLRequest {
+  string firstName = 1; 
+  string lastName = 2; 
+  bool approved = 3; 
+  string creator = 4;
+}

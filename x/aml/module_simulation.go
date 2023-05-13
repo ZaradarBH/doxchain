@@ -24,7 +24,19 @@ var (
 )
 
 const (
-// this line is used by starport scaffolding # simapp/module/const
+	opWeightMsgCreateAMLRequest = "op_weight_msg_aml_request"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgCreateAMLRequest int = 100
+
+	opWeightMsgUpdateAMLRequest = "op_weight_msg_aml_request"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgUpdateAMLRequest int = 100
+
+	opWeightMsgDeleteAMLRequest = "op_weight_msg_aml_request"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgDeleteAMLRequest int = 100
+
+	// this line is used by starport scaffolding # simapp/module/const
 )
 
 // GenerateGenesisState creates a randomized GenState of the module
@@ -57,6 +69,39 @@ func (am AppModule) RegisterStoreDecoder(_ sdk.StoreDecoderRegistry) {}
 // WeightedOperations returns the all the gov module operations with their respective weights.
 func (am AppModule) WeightedOperations(simState module.SimulationState) []simtypes.WeightedOperation {
 	operations := make([]simtypes.WeightedOperation, 0)
+
+	var weightMsgCreateAMLRequest int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgCreateAMLRequest, &weightMsgCreateAMLRequest, nil,
+		func(_ *rand.Rand) {
+			weightMsgCreateAMLRequest = defaultWeightMsgCreateAMLRequest
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgCreateAMLRequest,
+		amlsimulation.SimulateMsgCreateAMLRequest(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgUpdateAMLRequest int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgUpdateAMLRequest, &weightMsgUpdateAMLRequest, nil,
+		func(_ *rand.Rand) {
+			weightMsgUpdateAMLRequest = defaultWeightMsgUpdateAMLRequest
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgUpdateAMLRequest,
+		amlsimulation.SimulateMsgUpdateAMLRequest(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgDeleteAMLRequest int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgDeleteAMLRequest, &weightMsgDeleteAMLRequest, nil,
+		func(_ *rand.Rand) {
+			weightMsgDeleteAMLRequest = defaultWeightMsgDeleteAMLRequest
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgDeleteAMLRequest,
+		amlsimulation.SimulateMsgDeleteAMLRequest(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
 
 	// this line is used by starport scaffolding # simapp/module/operation
 

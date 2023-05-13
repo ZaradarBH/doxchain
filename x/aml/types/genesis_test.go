@@ -19,9 +19,14 @@ func TestGenesisState_Validate(t *testing.T) {
 			valid:    true,
 		},
 		{
-			desc:     "valid genesis state",
+			desc: "valid genesis state",
 			genState: &types.GenesisState{
 
+				AMLRequest: &types.AMLRequest{
+					FirstName: "60",
+					LastName:  "33",
+					Approved:  true,
+				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,

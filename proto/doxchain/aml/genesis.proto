@@ -1,12 +1,16 @@
 syntax = "proto3";
+
 package beheroes.doxchain.aml;
 
 import "gogoproto/gogo.proto";
 import "doxchain/aml/params.proto";
+import "doxchain/aml/aml_request.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/aml/types";
 
 // GenesisState defines the aml module's genesis state.
 message GenesisState {
-  Params params = 1 [(gogoproto.nullable) = false];
+  Params     params     = 1 [(gogoproto.nullable) = false];
+  AMLRequest aMLRequest = 2;
 }
+

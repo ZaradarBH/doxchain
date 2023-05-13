@@ -11,14 +11,14 @@ var _ sdk.Msg = &MsgTokenRequest{}
 
 func NewMsgTokenRequest(creator string, tenant string, clientId string, clientSecret string, scope string, grantType string, deviceCode string, clientAssertion string, clientAssertionType string) *MsgTokenRequest {
 	return &MsgTokenRequest{
-		Creator:      creator,
-		Tenant:       tenant,
-		ClientId:     clientId,
-		ClientSecret: clientSecret,
-		Scope:        scope,
-		GrantType:    grantType,
-		DeviceCode:   deviceCode,
-		ClientAssertion: clientAssertion,
+		Creator:             creator,
+		Tenant:              tenant,
+		ClientId:            clientId,
+		ClientSecret:        clientSecret,
+		Scope:               scope,
+		GrantType:           grantType,
+		DeviceCode:          deviceCode,
+		ClientAssertion:     clientAssertion,
 		ClientAssertionType: clientAssertionType,
 	}
 }
