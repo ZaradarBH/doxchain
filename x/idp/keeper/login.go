@@ -7,6 +7,7 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
 	"github.com/be-heroes/doxchain/x/idp/types"
+	"github.com/be-heroes/doxchain/utils"
 	"github.com/dgrijalva/jwt-go"
 )
 
@@ -18,14 +19,10 @@ func (k Keeper) Login(ctx sdk.Context, msg types.MsgAuthenticationRequest) (type
 	if !isAuthorized {
 		return response, err
 	}
-
-	//TODO: Move JwtTokenFactory to common util namespace, implement option for passing in claims in factory and replace this logic
-	jwtToken := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"sub": msg.Creator,
-		"exp": ctx.BlockTime().Add(time.Hour * 1),
-	})
-
+	
+	jwtToken := utils.NewJwtTokenFactory(utils.WithContext(&ctx)).Create(msg.Tenant, msg.Creator, msg.ClientId, time.Minute * 60)
 	tokenString, err := jwtToken.SignedString([]byte(msg.Creator))
+
 	if err != nil {
 		return response, sdkerrors.Wrap(types.LoginError, "Could not issue refresh token")
 	}
