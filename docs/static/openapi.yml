@@ -81,6 +81,64 @@ paths:
                   additionalProperties: {}
       tags:
         - Query
+  /be-heroes/doxchain/idp/get_dot_well_known:
+    get:
+      summary: Queries a list of GetDotWellKnown items.
+      operationId: BeheroesDoxchainIdpGetDotWellKnown
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              issuer:
+                type: string
+              authorizationEndpoint:
+                type: string
+              tokenEndpoint:
+                type: string
+              tokenEndpointAuthMethodsSupported:
+                type: array
+                items:
+                  type: string
+              tokenEndpointAuthSigningAlgosSupported:
+                type: array
+                items:
+                  type: string
+              userInfoEndpoint:
+                type: string
+              jwksUri:
+                type: string
+              registrationEndpoint:
+                type: string
+              scopesSupported:
+                type: string
+              responseTypesSupported:
+                type: string
+              serviceDocumentation:
+                type: string
+              uiLocalesSupported:
+                type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      tags:
+        - Query
   /be-heroes/doxchain/idp/params:
     get:
       summary: Parameters queries the parameters of the module.
@@ -44945,6 +45003,37 @@ definitions:
   beheroes.doxchain.idp.Params:
     type: object
     description: Params defines the parameters for the module.
+  beheroes.doxchain.idp.QueryGetDotWellKnownResponse:
+    type: object
+    properties:
+      issuer:
+        type: string
+      authorizationEndpoint:
+        type: string
+      tokenEndpoint:
+        type: string
+      tokenEndpointAuthMethodsSupported:
+        type: array
+        items:
+          type: string
+      tokenEndpointAuthSigningAlgosSupported:
+        type: array
+        items:
+          type: string
+      userInfoEndpoint:
+        type: string
+      jwksUri:
+        type: string
+      registrationEndpoint:
+        type: string
+      scopesSupported:
+        type: string
+      responseTypesSupported:
+        type: string
+      serviceDocumentation:
+        type: string
+      uiLocalesSupported:
+        type: string
   beheroes.doxchain.idp.QueryParamsResponse:
     type: object
     properties:

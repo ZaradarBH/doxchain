@@ -1,4 +1,5 @@
 syntax = "proto3";
+
 package beheroes.doxchain.idp;
 
 import "gogoproto/gogo.proto";
@@ -10,17 +11,43 @@ option go_package = "github.com/be-heroes/doxchain/x/idp/types";
 
 // Query defines the gRPC querier service.
 service Query {
+  
   // Parameters queries the parameters of the module.
-  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/be-heroes/doxchain/idp/params";
+  
+  }
+  
+  // Queries a list of GetDotWellKnown items.
+  rpc GetDotWellKnown (QueryGetDotWellKnownRequest) returns (QueryGetDotWellKnownResponse) {
+    option (google.api.http).get = "/be-heroes/doxchain/idp/get_dot_well_known";
+  
   }
 }
-
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
 
 // QueryParamsResponse is response type for the Query/Params RPC method.
 message QueryParamsResponse {
+  
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
 }
+
+message QueryGetDotWellKnownRequest {}
+
+message QueryGetDotWellKnownResponse {
+  string issuer = 1 [json_name="issuer"];
+  string authorizationEndpoint = 2 [json_name="authorization_endpoint"];
+  string tokenEndpoint = 3 [json_name="token_endpoint"];
+  repeated string tokenEndpointAuthMethodsSupported = 4 [json_name="token_endpoint_auth_methods_supported"];
+  repeated string tokenEndpointAuthSigningAlgosSupported = 5 [json_name="token_endpoint_auth_signing_alg_values_supported"];  
+  string userInfoEndpoint = 6 [json_name="userinfo_endpoint"];
+  string jwksUri = 7 [json_name="jwks_uri"];
+  string registrationEndpoint = 8 [json_name="registration_endpoint"];
+  string scopesSupported = 9 [json_name="scopes_supported"];
+  string responseTypesSupported = 10 [json_name="response_types_supported"];
+  string serviceDocumentation = 11 [json_name="service_documentation"];
+  string uiLocalesSupported = 12 [json_name="ui_locales_supported"];
+}
+

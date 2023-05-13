@@ -6,9 +6,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
-	"github.com/be-heroes/doxchain/x/idp/types"
 	"github.com/be-heroes/doxchain/utils"
-	"github.com/dgrijalva/jwt-go"
+	"github.com/be-heroes/doxchain/x/idp/types"
 )
 
 // Login method for simple idp keeper
@@ -19,8 +18,8 @@ func (k Keeper) Login(ctx sdk.Context, msg types.MsgAuthenticationRequest) (type
 	if !isAuthorized {
 		return response, err
 	}
-	
-	jwtToken := utils.NewJwtTokenFactory(utils.WithContext(&ctx)).Create(msg.Tenant, msg.Creator, msg.ClientId, time.Minute * 60)
+
+	jwtToken := utils.NewJwtTokenFactory(utils.WithContext(&ctx)).Create(msg.Tenant, msg.Creator, msg.Creator, time.Minute*60)
 	tokenString, err := jwtToken.SignedString([]byte(msg.Creator))
 
 	if err != nil {

@@ -157,7 +157,7 @@ func (am AppModule) BeginBlock(_ sdk.Context, _ abci.RequestBeginBlock) {}
 func (am AppModule) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.ValidatorUpdate {
 	accessTokenRegistries := am.keeper.GetAllAccessTokenRegistry(ctx)
 
-	for _, accessTokenRegistry := range accessTokenRegistries {	
+	for _, accessTokenRegistry := range accessTokenRegistries {
 		registryUpdated := false
 
 		for index, accessTokenInfo := range accessTokenRegistry.Issued {
@@ -172,7 +172,7 @@ func (am AppModule) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.Val
 
 				registryUpdated = true
 			}
-		}		
+		}
 
 		if registryUpdated {
 			am.keeper.SetAccessTokenRegistry(ctx, accessTokenRegistry)

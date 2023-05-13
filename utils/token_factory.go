@@ -54,7 +54,7 @@ func (jtf JwtTokenFactory) Create(tenant string, creator string, clientId string
 	claims["iss"] = tenant
 	claims["sub"] = creator
 	//TODO: Decide on best strategy for infering the audience based on the available state
-	claims["aud"] = clientId	
+	claims["aud"] = clientId
 	claims["iat"] = issuedAt.Unix()
 	claims["exp"] = issuedAt.Add(expireOffSet).Unix()
 

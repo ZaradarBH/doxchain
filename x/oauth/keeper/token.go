@@ -11,7 +11,7 @@ import (
 func (k Keeper) Token(ctx sdk.Context, msg types.MsgTokenRequest) (types.MsgTokenResponse, error) {
 	switch msg.GrantType {
 	case types.ClientCredentialsGrant.String():
-		return k.GenerateClientCredentialToken(ctx, msg)		
+		return k.GenerateClientCredentialToken(ctx, msg)
 	case types.DeviceCodeGrant.String():
 		return k.GenerateDeviceCodeToken(ctx, msg)
 	}
