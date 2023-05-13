@@ -21,6 +21,7 @@ func (k Keeper) Login(ctx sdk.Context, msg types.MsgAuthenticationRequest) (type
 		return response, err
 	}
 
+	//TODO: Consider replacing this with keyring based approach
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), []byte{})
 	byteKey := types.KeyPrefix(types.IdpMasterKey)
 	idpMasterKeyBytes := store.Get(byteKey)
