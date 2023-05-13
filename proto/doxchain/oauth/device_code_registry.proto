@@ -13,5 +13,6 @@ message DeviceCodeRegistry {
 message DeviceCodeInfo {
   string creator = 1;
   string deviceCode = 2; 
+  int64 expiresAt = 3;
 }
 

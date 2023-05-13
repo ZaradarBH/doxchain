@@ -53,7 +53,6 @@ func NewKeeper(
 }
 
 //TODO: Implement /authorize message handler / logic to autorize jwts
-//TODO: Implement /devicecode message handler / logic to generate device code
 func (k Keeper) Logger(ctx sdk.Context) log.Logger {
 	return ctx.Logger().With("module", fmt.Sprintf("x/%s", types.ModuleName))
 }

@@ -179,5 +179,29 @@ func (am AppModule) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.Val
 		}
 	}
 
+	deviceCodeRegistries := am.keeper.GetAllDeviceCodeRegistry(ctx)
+
+	for _, deviceCodeRegistry := range deviceCodeRegistries {
+		registryUpdated := false
+
+		for index, deviceCodeInfo := range deviceCodeRegistry.Codes {
+			if deviceCodeInfo.ExpiresAt < ctx.BlockTime().Unix() {
+				deviceCodeRegistry.Codes = append(deviceCodeRegistry.Codes[:index], deviceCodeRegistry.Codes[index+1:]...)
+
+				ctx.EventManager().EmitEvent(
+					sdk.NewEvent(types.EventTypeDeviceCodeExpired,
+						sdk.NewAttribute(types.AttributeKeyDeviceCode, deviceCodeInfo.DeviceCode),
+					),
+				)
+
+				registryUpdated = true
+			}
+		}
+
+		if registryUpdated {
+			am.keeper.SetDeviceCodeRegistry(ctx, deviceCodeRegistry)
+		}
+	}
+
 	return []abci.ValidatorUpdate{}
 }

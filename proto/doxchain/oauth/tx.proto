@@ -29,8 +29,9 @@ message MsgTokenResponse {
 
 message MsgDeviceCodeRequest {
   string creator  = 1;
-  string clientId = 2;
-  string scope    = 3;
+  string tenant  = 2;
+  string clientId = 3;
+  string scope    = 4;
 }
 
 message MsgDeviceCodeResponse {
