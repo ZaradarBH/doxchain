@@ -10,6 +10,7 @@ import (
 
 	"github.com/be-heroes/doxchain/x/idp/types"
 	"github.com/dgrijalva/jwt-go"
+	"github.com/zalando/go-keyring"
 )
 
 // Login method for simple idp keeper
@@ -21,15 +22,13 @@ func (k Keeper) Login(ctx sdk.Context, msg types.MsgAuthenticationRequest) (type
 		return response, err
 	}
 
-	//TODO: Consider replacing this with keyring based approach
+	//TODO: Need to reconsider this approach. The gpkey will be diff on various validators. If validator X processes block Y when no key exists it would write the new key to the store and on the next block it should be available on to all other nodes and thus the next block producer (theoretically)
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), []byte{})
 	byteKey := types.KeyPrefix(types.IdpMasterKey)
 	idpMasterKeyBytes := store.Get(byteKey)
 
 	if idpMasterKeyBytes == nil {
-		idpMasterKeyBytes := make([]byte, 128)
-
-		_, err := rand.Read(buf)
+		idpMasterKeyBytes, err := keyring.GeneratePrivateKey("rsa", 2048)
 		
 		if err != nil {
 			return response, sdkerrors.Wrap(types.LoginError, "Failed to initialize new master key")
