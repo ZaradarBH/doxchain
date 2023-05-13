@@ -8,10 +8,17 @@ import (
 )
 
 func (k msgServer) UpdateBreakFactor(goCtx context.Context, msg *types.MsgUpdateBreakFactor) (*types.MsgUpdateBreakFactorResponse, error) {
-	ctx := sdk.UnwrapSDKContext(goCtx)
+	decValue, err := sdk.NewDecFromStr(msg.Value)
 
-	// TODO: Handling the message
-	_ = ctx
+	if err != nil {
+		return nil, err
+	}
+
+	err = k.Keeper.SetBreakFactor(sdk.UnwrapSDKContext(goCtx), decValue)
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &types.MsgUpdateBreakFactorResponse{}, nil
 }
