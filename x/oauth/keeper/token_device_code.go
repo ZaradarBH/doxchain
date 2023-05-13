@@ -24,7 +24,7 @@ func (k Keeper) GenerateDeviceCodeToken(ctx sdk.Context, msg types.MsgTokenReque
 	}
 
 	for index, deviceCodeEntry := range tenantDeviceCodes.Codes {
-		if deviceCodeEntry.DeviceCode == msg.DeviceCode {
+		if deviceCodeEntry.DeviceCode == msg.DeviceCode && deviceCodeEntry.Creator == msg.Creator {
 			jwtToken := utils.NewJwtTokenFactory(utils.WithContext(&ctx)).Create(msg)
 			claims := jwtToken.Claims.(jwt.MapClaims)
 			signedToken, err := jwtToken.SignedString([]byte(msg.DeviceCode))
@@ -33,23 +33,23 @@ func (k Keeper) GenerateDeviceCodeToken(ctx sdk.Context, msg types.MsgTokenReque
 				return tokenResponse, sdkerrors.Wrap(types.TokenServiceError, "Failed to create access token")
 			}
 
-			tenantAccessTokens, found := k.GetAccessTokens(ctx, msg.Tenant)
+			tokenResponse.AccessToken = signedToken
+			tokenResponse.TokenType = types.Bearer.String()
+			tokenResponse.ExpiresIn = claims["exp"].(string)
+
+			tenantAccessTokenRegistry, found := k.GetAccessTokenRegistry(ctx, msg.Tenant)
 
 			if !found {
 				return tokenResponse, sdkerrors.Wrap(types.TokenServiceError, "Failed to fetch access tokens cache for tenant")
 			}
 
-			tenantAccessTokens.Tokens = append(tenantAccessTokens.Tokens, types.AccessToken{
+			tenantAccessTokenRegistry.Issued = append(tenantAccessTokenRegistry.Issued, types.AccessTokenInfo{
 				Creator:     msg.Creator,
-				Uuid:        claims["jti"].(string),
-				SignedToken: signedToken,
+				Identifier:  claims["jti"].(string),
+				ExpiresIn:   tokenResponse.ExpiresIn,
 			})
 
-			k.SetAccessTokens(ctx, tenantAccessTokens)
-
-			tokenResponse.AccessToken = signedToken
-			tokenResponse.TokenType = types.Bearer.String()
-			tokenResponse.ExpiresIn = claims["exp"].(string)
+			k.SetAccessTokenRegistry(ctx, tenantAccessTokenRegistry)
 
 			tenantDeviceCodes.Codes = append(tenantDeviceCodes.Codes[:index], tenantDeviceCodes.Codes[index+1:]...)
 

@@ -2,21 +2,18 @@ package keeper
 
 import (
 	"time"
-	"crypto/rand"
 
-	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
 	"github.com/be-heroes/doxchain/x/idp/types"
 	"github.com/dgrijalva/jwt-go"
-	"github.com/zalando/go-keyring"
 )
 
 // Login method for simple idp keeper
 func (k Keeper) Login(ctx sdk.Context, msg types.MsgAuthenticationRequest) (types.MsgAuthenticationResponse, error) {
 	response := types.MsgAuthenticationResponse{}
-	isAuthorized, err := k.idpKeeper.AuthorizeCreator(ctx, msg.Tenant, msg.Creator)
+	isAuthorized, err := k.AuthorizeCreator(ctx, msg.Tenant, msg.Creator)
 
 	if !isAuthorized {
 		return response, err

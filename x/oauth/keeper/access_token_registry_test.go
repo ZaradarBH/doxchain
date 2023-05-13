@@ -15,21 +15,21 @@ import (
 // Prevent strconv unused error
 var _ = strconv.IntSize
 
-func createNAccessTokens(keeper *keeper.Keeper, ctx sdk.Context, n int) []types.AccessTokens {
-	items := make([]types.AccessTokens, n)
+func createNAccessTokenRegistry(keeper *keeper.Keeper, ctx sdk.Context, n int) []types.AccessTokenRegistry {
+	items := make([]types.AccessTokenRegistry, n)
 	for i := range items {
 		items[i].jti = strconv.Itoa(i)
 
-		keeper.SetAccessTokens(ctx, items[i])
+		keeper.SetAccessTokenRegistry(ctx, items[i])
 	}
 	return items
 }
 
-func TestAccessTokensGet(t *testing.T) {
+func TestAccessTokenRegistryGet(t *testing.T) {
 	keeper, ctx := keepertest.OauthKeeper(t)
-	items := createNAccessTokens(keeper, ctx, 10)
+	items := createNAccessTokenRegistry(keeper, ctx, 10)
 	for _, item := range items {
-		rst, found := keeper.GetAccessTokens(ctx,
+		rst, found := keeper.GetAccessTokenRegistry(ctx,
 			item.Index,
 		)
 		require.True(t, found)
@@ -39,25 +39,25 @@ func TestAccessTokensGet(t *testing.T) {
 		)
 	}
 }
-func TestAccessTokensRemove(t *testing.T) {
+func TestAccessTokenRegistryRemove(t *testing.T) {
 	keeper, ctx := keepertest.OauthKeeper(t)
-	items := createNAccessTokens(keeper, ctx, 10)
+	items := createNAccessTokenRegistry(keeper, ctx, 10)
 	for _, item := range items {
-		keeper.RemoveAccessTokens(ctx,
+		keeper.RemoveAccessTokenRegistry(ctx,
 			item.Index,
 		)
-		_, found := keeper.GetAccessTokens(ctx,
+		_, found := keeper.GetAccessTokenRegistry(ctx,
 			item.Index,
 		)
 		require.False(t, found)
 	}
 }
 
-func TestAccessTokensGetAll(t *testing.T) {
+func TestAccessTokenRegistryGetAll(t *testing.T) {
 	keeper, ctx := keepertest.OauthKeeper(t)
-	items := createNAccessTokens(keeper, ctx, 10)
+	items := createNAccessTokenRegistry(keeper, ctx, 10)
 	require.ElementsMatch(t,
 		nullify.Fill(items),
-		nullify.Fill(keeper.GetAllAccessTokens(ctx)),
+		nullify.Fill(keeper.GetAllAccessTokenRegistry(ctx)),
 	)
 }

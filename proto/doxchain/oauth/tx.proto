@@ -2,9 +2,6 @@ syntax = "proto3";
 
 package beheroes.doxchain.oauth;
 
-import "doxchain/oauth/device_codes.proto";
-import "doxchain/oauth/access_tokens.proto";
-
 option go_package = "github.com/be-heroes/doxchain/x/oauth/types";
 
 // Msg defines the Msg service.

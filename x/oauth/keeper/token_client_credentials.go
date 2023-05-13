@@ -30,23 +30,24 @@ func (k Keeper) GenerateClientCredentialToken(ctx sdk.Context, msg types.MsgToke
 				return tokenResponse, sdkerrors.Wrap(types.TokenServiceError, "Failed to create access token")
 			}
 
-			tenantAccessTokens, found := k.GetAccessTokens(ctx, msg.Tenant)
+			tokenResponse.AccessToken = signedToken
+			tokenResponse.TokenType = types.Bearer.String()
+			tokenResponse.ExpiresIn = claims["exp"].(string)
+
+			tenantAccessTokenRegistry, found := k.GetAccessTokenRegistry(ctx, msg.Tenant)
 
 			if !found {
 				return tokenResponse, sdkerrors.Wrap(types.TokenServiceError, "Failed to fetch access tokens cache for tenant")
 			}
 
-			tenantAccessTokens.Tokens = append(tenantAccessTokens.Tokens, types.AccessToken{
+			tenantAccessTokenRegistry.Issued = append(tenantAccessTokenRegistry.Issued, types.AccessTokenInfo{
 				Creator:     msg.Creator,
-				Uuid:        claims["jti"].(string),
-				SignedToken: signedToken,
+				Identifier:  claims["jti"].(string),
+				ExpiresIn:   tokenResponse.ExpiresIn,
 			})
 
-			k.SetAccessTokens(ctx, tenantAccessTokens)
+			k.SetAccessTokenRegistry(ctx, tenantAccessTokenRegistry)
 
-			tokenResponse.AccessToken = signedToken
-			tokenResponse.TokenType = types.Bearer.String()
-			tokenResponse.ExpiresIn = claims["exp"].(string)
 	}
 
 	return tokenResponse, sdkerrors.Wrap(types.TokenServiceError, "ClientCredential TokenResponse could not be issued")

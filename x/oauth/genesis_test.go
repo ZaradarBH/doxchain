@@ -22,7 +22,7 @@ func TestGenesis(t *testing.T) {
 				Index: "1",
 			},
 		},
-		AccessTokensList: []types.AccessTokens{
+		AccessTokenRegistryList: []types.AccessTokenRegistry{
 			{
 				Index: "0",
 			},
@@ -42,6 +42,6 @@ func TestGenesis(t *testing.T) {
 	nullify.Fill(got)
 
 	require.ElementsMatch(t, genesisState.DeviceCodesList, got.DeviceCodesList)
-	require.ElementsMatch(t, genesisState.AccessTokensList, got.AccessTokensList)
+	require.ElementsMatch(t, genesisState.AccessTokenRegistryList, got.AccessTokenRegistryList)
 	// this line is used by starport scaffolding # genesis/test/assert
 }

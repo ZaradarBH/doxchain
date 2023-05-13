@@ -5,12 +5,12 @@ import "encoding/binary"
 var _ binary.ByteOrder
 
 const (
-	// AccessTokensKeyPrefix is the prefix to retrieve all AccessTokens
-	AccessTokensKeyPrefix = "AccessTokens/value/"
+	// AccessTokenRegistryKeyPrefix is the prefix to retrieve all AccessTokenRegistry
+	AccessTokenRegistryKeyPrefix = "AccessTokenRegistry/value/"
 )
 
-// AccessTokensKey returns the store key to retrieve a AccessTokens from the index fields
-func AccessTokensKey(
+// AccessTokenRegistryKey returns the store key to retrieve a AccessTokenRegistry from the index fields
+func AccessTokenRegistryKey(
 	index string,
 ) []byte {
 	var key []byte

@@ -11,7 +11,7 @@ const DefaultIndex uint64 = 1
 func DefaultGenesis() *GenesisState {
 	return &GenesisState{
 		DeviceCodesList:  []DeviceCodes{},
-		AccessTokensList: []AccessTokens{},
+		AccessTokenRegistryList: []AccessTokenRegistry{},
 		// this line is used by starport scaffolding # genesis/types/default
 		Params: DefaultParams(),
 	}
@@ -30,15 +30,15 @@ func (gs GenesisState) Validate() error {
 		}
 		deviceCodesIndexMap[tenant] = struct{}{}
 	}
-	// Check for duplicated index in accessTokens
-	accessTokensIndexMap := make(map[string]struct{})
+	// Check for duplicated index in AccessTokenRegistry
+	AccessTokenRegistryIndexMap := make(map[string]struct{})
 
-	for _, elem := range gs.AccessTokensList {
-		tenant := string(AccessTokensKey(elem.Tenant))
-		if _, ok := accessTokensIndexMap[tenant]; ok {
-			return fmt.Errorf("duplicated index for accessTokens")
+	for _, elem := range gs.AccessTokenRegistryList {
+		tenant := string(AccessTokenRegistryKey(elem.Tenant))
+		if _, ok := AccessTokenRegistryIndexMap[tenant]; ok {
+			return fmt.Errorf("duplicated index for AccessTokenRegistry")
 		}
-		accessTokensIndexMap[tenant] = struct{}{}
+		AccessTokenRegistryIndexMap[tenant] = struct{}{}
 	}
 	// this line is used by starport scaffolding # genesis/types/validate
 

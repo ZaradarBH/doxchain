@@ -5,7 +5,7 @@ package beheroes.doxchain.oauth;
 import "gogoproto/gogo.proto";
 import "doxchain/oauth/params.proto";
 import "doxchain/oauth/device_codes.proto";
-import "doxchain/oauth/access_tokens.proto";
+import "doxchain/oauth/access_token_registry.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/oauth/types";
 
@@ -13,6 +13,6 @@ option go_package = "github.com/be-heroes/doxchain/x/oauth/types";
 message GenesisState {
            Params       params           = 1 [(gogoproto.nullable) = false];
   repeated DeviceCodes  deviceCodesList  = 2 [(gogoproto.nullable) = false];
-  repeated AccessTokens accessTokensList = 3 [(gogoproto.nullable) = false];
+  repeated AccessTokenRegistry accessTokenRegistryList = 3 [(gogoproto.nullable) = false];
 }
 

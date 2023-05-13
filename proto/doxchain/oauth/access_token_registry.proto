@@ -5,13 +5,13 @@ import "gogoproto/gogo.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/oauth/types";
 
-message AccessTokens {
+message AccessTokenRegistry {
   string tenant = 1; 
-  repeated AccessToken tokens = 2 [(gogoproto.nullable) = false]; 
+  repeated AccessTokenInfo issued = 2 [(gogoproto.nullable) = false]; 
 }
 
-message AccessToken {
+message AccessTokenInfo {
   string creator = 1;
-  string uuid = 2;
-  string signedToken = 3;
+  string identifier = 2;
+  string expiresIn = 3;
 }

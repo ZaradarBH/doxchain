@@ -30,7 +30,7 @@ func TestGenesisState_Validate(t *testing.T) {
 						Index: "1",
 					},
 				},
-				AccessTokensList: []types.AccessTokens{
+				AccessTokenRegistryList: []types.AccessTokenRegistry{
 					{
 						Index: "0",
 					},
@@ -57,9 +57,9 @@ func TestGenesisState_Validate(t *testing.T) {
 			valid: false,
 		},
 		{
-			desc: "duplicated accessTokens",
+			desc: "duplicated AccessTokenRegistry",
 			genState: &types.GenesisState{
-				AccessTokensList: []types.AccessTokens{
+				AccessTokenRegistryList: []types.AccessTokenRegistry{
 					{
 						Index: "0",
 					},
