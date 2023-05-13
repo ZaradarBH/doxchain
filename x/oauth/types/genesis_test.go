@@ -24,18 +24,18 @@ func TestGenesisState_Validate(t *testing.T) {
 
 				DeviceCodeRegistryList: []types.DeviceCodeRegistry{
 					{
-						Index: "0",
+						Tenant: "0",
 					},
 					{
-						Index: "1",
+						Tenant: "1",
 					},
 				},
 				AccessTokenRegistryList: []types.AccessTokenRegistry{
 					{
-						Index: "0",
+						Tenant: "0",
 					},
 					{
-						Index: "1",
+						Tenant: "1",
 					},
 				},
 				// this line is used by starport scaffolding # types/genesis/validField
@@ -47,10 +47,10 @@ func TestGenesisState_Validate(t *testing.T) {
 			genState: &types.GenesisState{
 				DeviceCodeRegistryList: []types.DeviceCodeRegistry{
 					{
-						Index: "0",
+						Tenant: "0",
 					},
 					{
-						Index: "0",
+						Tenant: "0",
 					},
 				},
 			},
@@ -61,10 +61,10 @@ func TestGenesisState_Validate(t *testing.T) {
 			genState: &types.GenesisState{
 				AccessTokenRegistryList: []types.AccessTokenRegistry{
 					{
-						Index: "0",
+						Tenant: "0",
 					},
 					{
-						Index: "0",
+						Tenant: "0",
 					},
 				},
 			},
