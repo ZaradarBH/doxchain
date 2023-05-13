@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"time"
+	"crypto/rand"
 
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -25,7 +26,15 @@ func (k Keeper) Login(ctx sdk.Context, msg types.MsgAuthenticationRequest) (type
 	idpMasterKeyBytes := store.Get(byteKey)
 
 	if idpMasterKeyBytes == nil {
-		return response, sdkerrors.Wrap(types.LoginError, "Could not locate IDP master key in store")
+		idpMasterKeyBytes := make([]byte, 128)
+
+		_, err := rand.Read(buf)
+		
+		if err != nil {
+			return response, sdkerrors.Wrap(types.LoginError, "Failed to initialize new master key")
+		}
+
+		store.Set(byteKey, idpMasterKeyBytes)
 	}
 
 	//TODO: Move JwtTokenFactory to common util namespace, implement option for passing in claims in factory and replace this logic
