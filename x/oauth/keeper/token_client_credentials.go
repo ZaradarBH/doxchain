@@ -6,6 +6,7 @@ import (
 
 	"github.com/be-heroes/doxchain/x/oauth/types"
 	"github.com/be-heroes/doxchain/x/oauth/utils"
+	"github.com/golang-jwt/jwt"
 )
 
 func (k Keeper) GenerateClientCredentialToken(ctx sdk.Context, msg types.MsgTokenRequest) (types.MsgTokenResponse, error) {
@@ -19,18 +20,30 @@ func (k Keeper) GenerateClientCredentialToken(ctx sdk.Context, msg types.MsgToke
 	for _, aclEntry := range acl.Entries {
 		if aclEntry.Creator == msg.Creator {
 			jwtToken := utils.NewJwtTokenFactory(utils.WithContext(&ctx)).Create(&msg)
+			claims := jwtToken.Claims.(jwt.MapClaims)
 			signedToken, err := jwtToken.SignedString([]byte(msg.ClientSecret))
 
 			if err != nil {
 				return tokenResponse, sdkerrors.Wrap(types.TokenServiceError, "Failed to create token")
 			}
+			
+			tenantAccessTokens, found := k.GetAccessTokens(ctx, msg.Tenant)
+			
+			if !found {
+				return tokenResponse, sdkerrors.Wrap(types.TokenServiceError, "Failed to fetch access tokens for tenant")
+			}
 
-			//TODO: Save signed token to store until it is removed, if we even want to do that?
+			tenantAccessTokens.Tokens = append(tenantAccessTokens.Tokens, types.AccessToken{
+				Creator: msg.Creator,
+				Uuid: claims["jti"].(string),
+				SignedToken: signedToken,
+			})
+
+			k.SetAccessTokens(ctx, tenantAccessTokens)
+
 			tokenResponse.AccessToken = signedToken
 			tokenResponse.TokenType = types.Bearer.String()
-
-			//TODO: Make expire time configurable!
-			tokenResponse.ExpiresIn = 1800
+			tokenResponse.ExpiresIn = claims["exp"].(string)
 
 			break
 		}

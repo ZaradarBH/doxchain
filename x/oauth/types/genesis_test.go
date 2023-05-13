@@ -30,6 +30,14 @@ func TestGenesisState_Validate(t *testing.T) {
 						Index: "1",
 					},
 				},
+				AccessTokensList: []types.AccessTokens{
+					{
+						Index: "0",
+					},
+					{
+						Index: "1",
+					},
+				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
@@ -38,6 +46,20 @@ func TestGenesisState_Validate(t *testing.T) {
 			desc: "duplicated deviceCodes",
 			genState: &types.GenesisState{
 				DeviceCodesList: []types.DeviceCodes{
+					{
+						Index: "0",
+					},
+					{
+						Index: "0",
+					},
+				},
+			},
+			valid: false,
+		},
+		{
+			desc: "duplicated accessTokens",
+			genState: &types.GenesisState{
+				AccessTokensList: []types.AccessTokens{
 					{
 						Index: "0",
 					},

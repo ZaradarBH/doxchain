@@ -7,6 +7,7 @@ import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "doxchain/oauth/params.proto";
 import "doxchain/oauth/device_codes.proto";
+import "doxchain/oauth/access_tokens.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/oauth/types";
 
@@ -18,6 +19,7 @@ service Query {
   
   }
 }
+
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
 

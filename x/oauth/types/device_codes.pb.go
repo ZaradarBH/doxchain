@@ -24,8 +24,8 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 type DeviceCodes struct {
-	Tenant  string            `protobuf:"bytes,1,opt,name=tenant,proto3" json:"tenant,omitempty"`
-	Entries []DeviceCodeEntry `protobuf:"bytes,2,rep,name=entries,proto3" json:"entries"`
+	Tenant string       `protobuf:"bytes,1,opt,name=tenant,proto3" json:"tenant,omitempty"`
+	Codes  []DeviceCode `protobuf:"bytes,2,rep,name=codes,proto3" json:"codes"`
 }
 
 func (m *DeviceCodes) Reset()         { *m = DeviceCodes{} }
@@ -68,31 +68,31 @@ func (m *DeviceCodes) GetTenant() string {
 	return ""
 }
 
-func (m *DeviceCodes) GetEntries() []DeviceCodeEntry {
+func (m *DeviceCodes) GetCodes() []DeviceCode {
 	if m != nil {
-		return m.Entries
+		return m.Codes
 	}
 	return nil
 }
 
-type DeviceCodeEntry struct {
+type DeviceCode struct {
 	Creator    string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 	UserCode   string `protobuf:"bytes,2,opt,name=userCode,proto3" json:"userCode,omitempty"`
 	DeviceCode string `protobuf:"bytes,3,opt,name=deviceCode,proto3" json:"deviceCode,omitempty"`
 }
 
-func (m *DeviceCodeEntry) Reset()         { *m = DeviceCodeEntry{} }
-func (m *DeviceCodeEntry) String() string { return proto.CompactTextString(m) }
-func (*DeviceCodeEntry) ProtoMessage()    {}
-func (*DeviceCodeEntry) Descriptor() ([]byte, []int) {
+func (m *DeviceCode) Reset()         { *m = DeviceCode{} }
+func (m *DeviceCode) String() string { return proto.CompactTextString(m) }
+func (*DeviceCode) ProtoMessage()    {}
+func (*DeviceCode) Descriptor() ([]byte, []int) {
 	return fileDescriptor_d76520aea23f034f, []int{1}
 }
-func (m *DeviceCodeEntry) XXX_Unmarshal(b []byte) error {
+func (m *DeviceCode) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *DeviceCodeEntry) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *DeviceCode) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_DeviceCodeEntry.Marshal(b, m, deterministic)
+		return xxx_messageInfo_DeviceCode.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -102,33 +102,33 @@ func (m *DeviceCodeEntry) XXX_Marshal(b []byte, deterministic bool) ([]byte, err
 		return b[:n], nil
 	}
 }
-func (m *DeviceCodeEntry) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_DeviceCodeEntry.Merge(m, src)
+func (m *DeviceCode) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DeviceCode.Merge(m, src)
 }
-func (m *DeviceCodeEntry) XXX_Size() int {
+func (m *DeviceCode) XXX_Size() int {
 	return m.Size()
 }
-func (m *DeviceCodeEntry) XXX_DiscardUnknown() {
-	xxx_messageInfo_DeviceCodeEntry.DiscardUnknown(m)
+func (m *DeviceCode) XXX_DiscardUnknown() {
+	xxx_messageInfo_DeviceCode.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_DeviceCodeEntry proto.InternalMessageInfo
+var xxx_messageInfo_DeviceCode proto.InternalMessageInfo
 
-func (m *DeviceCodeEntry) GetCreator() string {
+func (m *DeviceCode) GetCreator() string {
 	if m != nil {
 		return m.Creator
 	}
 	return ""
 }
 
-func (m *DeviceCodeEntry) GetUserCode() string {
+func (m *DeviceCode) GetUserCode() string {
 	if m != nil {
 		return m.UserCode
 	}
 	return ""
 }
 
-func (m *DeviceCodeEntry) GetDeviceCode() string {
+func (m *DeviceCode) GetDeviceCode() string {
 	if m != nil {
 		return m.DeviceCode
 	}
@@ -137,30 +137,30 @@ func (m *DeviceCodeEntry) GetDeviceCode() string {
 
 func init() {
 	proto.RegisterType((*DeviceCodes)(nil), "beheroes.doxchain.oauth.DeviceCodes")
-	proto.RegisterType((*DeviceCodeEntry)(nil), "beheroes.doxchain.oauth.DeviceCodeEntry")
+	proto.RegisterType((*DeviceCode)(nil), "beheroes.doxchain.oauth.DeviceCode")
 }
 
 func init() { proto.RegisterFile("doxchain/oauth/device_codes.proto", fileDescriptor_d76520aea23f034f) }
 
 var fileDescriptor_d76520aea23f034f = []byte{
-	// 268 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x74, 0x90, 0xc1, 0x4a, 0xc3, 0x30,
-	0x18, 0xc7, 0xdb, 0x4d, 0x36, 0xcd, 0x0e, 0x42, 0x10, 0x0d, 0x3b, 0xc4, 0xb9, 0x53, 0x41, 0x4c,
-	0x40, 0xdf, 0x60, 0x3a, 0xf0, 0xbc, 0xa3, 0x17, 0x69, 0xd3, 0x8f, 0xb6, 0x07, 0xf3, 0x8d, 0x24,
-	0x95, 0xed, 0x2d, 0x7c, 0xac, 0x1d, 0x77, 0xf4, 0x24, 0xd2, 0xbe, 0x88, 0x34, 0x6b, 0xab, 0x08,
-	0xbb, 0xe5, 0x9f, 0xef, 0x97, 0xdf, 0x47, 0xfe, 0xe4, 0x26, 0xc5, 0x8d, 0xca, 0xe3, 0x42, 0x4b,
-	0x8c, 0x4b, 0x97, 0xcb, 0x14, 0xde, 0x0b, 0x05, 0xaf, 0x0a, 0x53, 0xb0, 0x62, 0x6d, 0xd0, 0x21,
-	0xbd, 0x4a, 0x20, 0x07, 0x83, 0x60, 0x45, 0xc7, 0x0a, 0xcf, 0x4e, 0x2f, 0x32, 0xcc, 0xd0, 0x33,
-	0xb2, 0x39, 0x1d, 0xf0, 0x39, 0x92, 0xc9, 0x93, 0x97, 0x3c, 0x36, 0x0e, 0x7a, 0x49, 0x46, 0x0e,
-	0x74, 0xac, 0x1d, 0x0b, 0x67, 0x61, 0x74, 0xb6, 0x6a, 0x13, 0x7d, 0x26, 0x63, 0xd0, 0xce, 0x14,
-	0x60, 0xd9, 0x60, 0x36, 0x8c, 0x26, 0xf7, 0x91, 0x38, 0xb2, 0x47, 0xfc, 0xea, 0x96, 0xda, 0x99,
-	0xed, 0xe2, 0x64, 0xf7, 0x75, 0x1d, 0xac, 0xba, 0xe7, 0xf3, 0x8c, 0x9c, 0xff, 0x23, 0x28, 0x23,
-	0x63, 0x65, 0x20, 0x76, 0x68, 0xda, 0xad, 0x5d, 0xa4, 0x53, 0x72, 0x5a, 0x5a, 0x30, 0x0d, 0xca,
-	0x06, 0x7e, 0xd4, 0x67, 0xca, 0x09, 0x49, 0x7b, 0x11, 0x1b, 0xfa, 0xe9, 0x9f, 0x9b, 0xc5, 0x72,
-	0x57, 0xf1, 0x70, 0x5f, 0xf1, 0xf0, 0xbb, 0xe2, 0xe1, 0x47, 0xcd, 0x83, 0x7d, 0xcd, 0x83, 0xcf,
-	0x9a, 0x07, 0x2f, 0xb7, 0x59, 0xe1, 0xf2, 0x32, 0x11, 0x0a, 0xdf, 0x64, 0x02, 0x77, 0x87, 0x6f,
-	0xc8, 0xbe, 0xda, 0x4d, 0x5b, 0xae, 0xdb, 0xae, 0xc1, 0x26, 0x23, 0xdf, 0xd3, 0xc3, 0x4f, 0x00,
-	0x00, 0x00, 0xff, 0xff, 0xf8, 0x95, 0xc5, 0x82, 0x7b, 0x01, 0x00, 0x00,
+	// 259 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x52, 0x4c, 0xc9, 0xaf, 0x48,
+	0xce, 0x48, 0xcc, 0xcc, 0xd3, 0xcf, 0x4f, 0x2c, 0x2d, 0xc9, 0xd0, 0x4f, 0x49, 0x2d, 0xcb, 0x4c,
+	0x4e, 0x8d, 0x4f, 0xce, 0x4f, 0x49, 0x2d, 0xd6, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x12, 0x4f,
+	0x4a, 0xcd, 0x48, 0x2d, 0xca, 0x4f, 0x2d, 0xd6, 0x83, 0xa9, 0xd5, 0x03, 0xab, 0x95, 0x12, 0x49,
+	0xcf, 0x4f, 0xcf, 0x07, 0xab, 0xd1, 0x07, 0xb1, 0x20, 0xca, 0x95, 0xd2, 0xb8, 0xb8, 0x5d, 0xc0,
+	0x86, 0x38, 0x83, 0xcc, 0x10, 0x12, 0xe3, 0x62, 0x2b, 0x49, 0xcd, 0x4b, 0xcc, 0x2b, 0x91, 0x60,
+	0x54, 0x60, 0xd4, 0xe0, 0x0c, 0x82, 0xf2, 0x84, 0xec, 0xb9, 0x58, 0xc1, 0x96, 0x48, 0x30, 0x29,
+	0x30, 0x6b, 0x70, 0x1b, 0x29, 0xeb, 0xe1, 0xb0, 0x45, 0x0f, 0x61, 0x98, 0x13, 0xcb, 0x89, 0x7b,
+	0xf2, 0x0c, 0x41, 0x10, 0x7d, 0x4a, 0x49, 0x5c, 0x5c, 0x08, 0x29, 0x21, 0x09, 0x2e, 0xf6, 0xe4,
+	0xa2, 0xd4, 0xc4, 0x92, 0xfc, 0x22, 0xa8, 0x3d, 0x30, 0xae, 0x90, 0x14, 0x17, 0x47, 0x69, 0x71,
+	0x6a, 0x11, 0x48, 0x95, 0x04, 0x13, 0x58, 0x0a, 0xce, 0x17, 0x92, 0xe3, 0xe2, 0x4a, 0x81, 0x9b,
+	0x21, 0xc1, 0x0c, 0x96, 0x45, 0x12, 0x71, 0x72, 0x3d, 0xf1, 0x48, 0x8e, 0xf1, 0xc2, 0x23, 0x39,
+	0xc6, 0x07, 0x8f, 0xe4, 0x18, 0x27, 0x3c, 0x96, 0x63, 0xb8, 0xf0, 0x58, 0x8e, 0xe1, 0xc6, 0x63,
+	0x39, 0x86, 0x28, 0xed, 0xf4, 0xcc, 0x92, 0x8c, 0xd2, 0x24, 0xbd, 0xe4, 0xfc, 0x5c, 0xfd, 0xa4,
+	0x54, 0x5d, 0x88, 0xd3, 0xf5, 0xe1, 0x81, 0x59, 0x01, 0x0d, 0xce, 0x92, 0xca, 0x82, 0xd4, 0xe2,
+	0x24, 0x36, 0x70, 0xc8, 0x18, 0x03, 0x02, 0x00, 0x00, 0xff, 0xff, 0xa3, 0x03, 0xe6, 0x9f, 0x6d,
+	0x01, 0x00, 0x00,
 }
 
 func (m *DeviceCodes) Marshal() (dAtA []byte, err error) {
@@ -183,10 +183,10 @@ func (m *DeviceCodes) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
-	if len(m.Entries) > 0 {
-		for iNdEx := len(m.Entries) - 1; iNdEx >= 0; iNdEx-- {
+	if len(m.Codes) > 0 {
+		for iNdEx := len(m.Codes) - 1; iNdEx >= 0; iNdEx-- {
 			{
-				size, err := m.Entries[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				size, err := m.Codes[iNdEx].MarshalToSizedBuffer(dAtA[:i])
 				if err != nil {
 					return 0, err
 				}
@@ -207,7 +207,7 @@ func (m *DeviceCodes) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *DeviceCodeEntry) Marshal() (dAtA []byte, err error) {
+func (m *DeviceCode) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -217,12 +217,12 @@ func (m *DeviceCodeEntry) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *DeviceCodeEntry) MarshalTo(dAtA []byte) (int, error) {
+func (m *DeviceCode) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *DeviceCodeEntry) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *DeviceCode) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -272,8 +272,8 @@ func (m *DeviceCodes) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovDeviceCodes(uint64(l))
 	}
-	if len(m.Entries) > 0 {
-		for _, e := range m.Entries {
+	if len(m.Codes) > 0 {
+		for _, e := range m.Codes {
 			l = e.Size()
 			n += 1 + l + sovDeviceCodes(uint64(l))
 		}
@@ -281,7 +281,7 @@ func (m *DeviceCodes) Size() (n int) {
 	return n
 }
 
-func (m *DeviceCodeEntry) Size() (n int) {
+func (m *DeviceCode) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -371,7 +371,7 @@ func (m *DeviceCodes) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Entries", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Codes", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -398,8 +398,8 @@ func (m *DeviceCodes) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Entries = append(m.Entries, DeviceCodeEntry{})
-			if err := m.Entries[len(m.Entries)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+			m.Codes = append(m.Codes, DeviceCode{})
+			if err := m.Codes[len(m.Codes)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -424,7 +424,7 @@ func (m *DeviceCodes) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *DeviceCodeEntry) Unmarshal(dAtA []byte) error {
+func (m *DeviceCode) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -447,10 +447,10 @@ func (m *DeviceCodeEntry) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: DeviceCodeEntry: wiretype end group for non-group")
+			return fmt.Errorf("proto: DeviceCode: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: DeviceCodeEntry: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: DeviceCode: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:

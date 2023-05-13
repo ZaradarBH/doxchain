@@ -155,5 +155,7 @@ func (am AppModule) BeginBlock(_ sdk.Context, _ abci.RequestBeginBlock) {}
 
 // EndBlock contains the logic that is automatically triggered at the end of each block
 func (am AppModule) EndBlock(_ sdk.Context, _ abci.RequestEndBlock) []abci.ValidatorUpdate {
+	//TODO: Implement logic to clean up expired access tokens at the end of each block
+
 	return []abci.ValidatorUpdate{}
 }

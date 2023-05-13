@@ -6,37 +6,60 @@ import (
 
 	"github.com/be-heroes/doxchain/x/oauth/types"
 	"github.com/be-heroes/doxchain/x/oauth/utils"
+	"github.com/golang-jwt/jwt"
 )
 
 func (k Keeper) GenerateDeviceCodeToken(ctx sdk.Context, msg types.MsgTokenRequest) (types.MsgTokenResponse, error) {
 	tokenResponse := types.MsgTokenResponse{}
-	tenantDeviceCodes, found := k.GetDeviceCodes(ctx, msg.Tenant)
+	acl, err := k.idpKeeper.GetAccessClientList(ctx, msg.Tenant)
 
-	if !found {
-		return tokenResponse, sdkerrors.Wrap(types.TokenServiceError, "DeviceCodes could not be found for tenant")
+	if err != nil {
+		return tokenResponse, err
 	}
 
-	for index, deviceCodeEntry := range tenantDeviceCodes.Entries {
-		if deviceCodeEntry.DeviceCode == msg.DeviceCode {
-			jwtToken := utils.NewJwtTokenFactory(utils.WithContext(&ctx)).Create(&msg)
-			signedToken, err := jwtToken.SignedString([]byte(msg.DeviceCode))
+	for _, aclEntry := range acl.Entries {
+		if aclEntry.Creator == msg.Creator {
+			tenantDeviceCodes, found := k.GetDeviceCodes(ctx, msg.Tenant)
 
-			if err != nil {
-				return tokenResponse, sdkerrors.Wrap(types.TokenServiceError, "Failed to create token")
+			if !found {
+				return tokenResponse, sdkerrors.Wrap(types.TokenServiceError, "DeviceCodes could not be found for tenant")
 			}
 
-			//TODO: Save signed token to store until it is removed, if we even want to do that?
-			tokenResponse.AccessToken = signedToken
-			tokenResponse.TokenType = types.Bearer.String()
+			for index, deviceCodeEntry := range tenantDeviceCodes.Codes {
+				if deviceCodeEntry.DeviceCode == msg.DeviceCode {
+					jwtToken := utils.NewJwtTokenFactory(utils.WithContext(&ctx)).Create(&msg)
+					claims := jwtToken.Claims.(jwt.MapClaims)
+					signedToken, err := jwtToken.SignedString([]byte(msg.DeviceCode))
 
-			//TODO: Make expire time configurable!
-			tokenResponse.ExpiresIn = 1800
+					if err != nil {
+						return tokenResponse, sdkerrors.Wrap(types.TokenServiceError, "Failed to create token")
+					}
+					
+					tenantAccessTokens, found := k.GetAccessTokens(ctx, msg.Tenant)
+					
+					if !found {
+						return tokenResponse, sdkerrors.Wrap(types.TokenServiceError, "Failed to fetch access tokens for tenant")
+					}
 
-			tenantDeviceCodes.Entries = append(tenantDeviceCodes.Entries[:index], tenantDeviceCodes.Entries[index+1:]...)
+					tenantAccessTokens.Tokens = append(tenantAccessTokens.Tokens, types.AccessToken{
+						Creator: msg.Creator,
+						Uuid: claims["jti"].(string),
+						SignedToken: signedToken,
+					})
 
-			k.SetDeviceCodes(ctx, tenantDeviceCodes)
+					k.SetAccessTokens(ctx, tenantAccessTokens)
 
-			break
+					tokenResponse.AccessToken = signedToken
+					tokenResponse.TokenType = types.Bearer.String()
+					tokenResponse.ExpiresIn = claims["exp"].(string)
+
+					tenantDeviceCodes.Codes = append(tenantDeviceCodes.Codes[:index], tenantDeviceCodes.Codes[index+1:]...)
+
+					k.SetDeviceCodes(ctx, tenantDeviceCodes)
+
+					break
+				}
+			}
 		}
 	}
 

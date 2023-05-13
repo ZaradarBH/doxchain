@@ -40,6 +40,18 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgDeleteDeviceCodes int = 100
 
+	opWeightMsgCreateAccessTokens = "op_weight_msg_access_tokens"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgCreateAccessTokens int = 100
+
+	opWeightMsgUpdateAccessTokens = "op_weight_msg_access_tokens"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgUpdateAccessTokens int = 100
+
+	opWeightMsgDeleteAccessTokens = "op_weight_msg_access_tokens"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgDeleteAccessTokens int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -52,6 +64,14 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 	oauthGenesis := types.GenesisState{
 		Params: types.DefaultParams(),
 		DeviceCodesList: []types.DeviceCodes{
+			{
+				Tenant: "0",
+			},
+			{
+				Tenant: "1",
+			},
+		},
+		AccessTokensList: []types.AccessTokens{
 			{
 				Tenant: "0",
 			},

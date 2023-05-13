@@ -5,14 +5,13 @@ import "gogoproto/gogo.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/oauth/types";
 
-message DeviceCodes {
+message AccessTokens {
   string tenant = 1; 
-  repeated DeviceCode codes = 2 [(gogoproto.nullable) = false]; 
+  repeated AccessToken tokens = 2 [(gogoproto.nullable) = false]; 
 }
 
-message DeviceCode {
+message AccessToken {
   string creator = 1;
-  string userCode = 2;
-  string deviceCode = 3; 
+  string uuid = 2;
+  string signedToken = 3;
 }
-

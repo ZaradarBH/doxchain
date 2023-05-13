@@ -3,28 +3,29 @@ syntax = "proto3";
 package beheroes.doxchain.oauth;
 
 import "doxchain/oauth/device_codes.proto";
+import "doxchain/oauth/access_tokens.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/oauth/types";
 
 // Msg defines the Msg service.
 service Msg {
-  rpc Token             (MsgTokenRequest     ) returns (MsgTokenResponse            );
+  rpc Token              (MsgTokenRequest      ) returns (MsgTokenResponse             );
 }
 
 message MsgTokenRequest {
-  string creator                = 1;
-  string tenant                 = 2;
-  string scope                  = 3;
-  string grantType              = 4;
-  string clientId               = 5;
-  string clientSecret           = 6;
-  string deviceCode             = 7;  
-  string clientAssertionType    = 8;
-  string clientAssertion        = 9;
+  string creator             = 1;
+  string tenant              = 2;
+  string scope               = 3;
+  string grantType           = 4;
+  string clientId            = 5;
+  string clientSecret        = 6;
+  string deviceCode          = 7;
+  string clientAssertionType = 8;
+  string clientAssertion     = 9;
 }
 
 message MsgTokenResponse {
   string accessToken = 1;
   string tokenType   = 2;
-  int32  expiresIn   = 3;
+  string expiresIn   = 3;
 }

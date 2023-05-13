@@ -44857,8 +44857,7 @@ definitions:
       tokenType:
         type: string
       expiresIn:
-        type: integer
-        format: int32
+        type: string
   beheroes.doxchain.oauth.Params:
     type: object
     description: Params defines the parameters for the module.

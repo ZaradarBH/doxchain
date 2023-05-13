@@ -3,15 +3,15 @@ package types
 type GrantType int
 
 const (
-	ClientCredentials GrantType = iota
-	DeviceCode
+	ClientCredentialsGrant GrantType = iota
+	DeviceCodeGrant
 )
 
 func (gt GrantType) String() string {
 	switch gt {
-	case ClientCredentials:
+	case ClientCredentialsGrant:
 		return "client_credentials"
-	case DeviceCode:
+	case DeviceCodeGrant:
 		return "device_code"
 	}
 
