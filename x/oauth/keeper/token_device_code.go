@@ -9,6 +9,7 @@ import (
 	"github.com/golang-jwt/jwt"
 )
 
+//TODO: Implement devicecode message handler / logic to generate device code
 func (k Keeper) GenerateDeviceCodeToken(ctx sdk.Context, msg types.MsgTokenRequest) (types.MsgTokenResponse, error) {
 	tokenResponse := types.MsgTokenResponse{}
 	isAuthorized, err := k.idpKeeper.AuthorizeCreator(ctx, msg.Tenant, msg.Creator)
@@ -17,14 +18,14 @@ func (k Keeper) GenerateDeviceCodeToken(ctx sdk.Context, msg types.MsgTokenReque
 		return tokenResponse, err
 	}
 
-	tenantDeviceCodes, found := k.GetDeviceCodes(ctx, msg.Tenant)
+	tenantDeviceCodeRegistry, found := k.GetDeviceCodeRegistry(ctx, msg.Tenant)
 
 	if !found {
-		return tokenResponse, sdkerrors.Wrap(types.TokenServiceError, "DeviceCodes cache could not be found for tenant")
+		return tokenResponse, sdkerrors.Wrap(types.TokenServiceError, "DeviceCodeRegistry cache could not be found for tenant")
 	}
 
-	for index, deviceCodeEntry := range tenantDeviceCodes.Codes {
-		if deviceCodeEntry.DeviceCode == msg.DeviceCode && deviceCodeEntry.Creator == msg.Creator {
+	for index, deviceCodeInfo := range tenantDeviceCodeRegistry.Codes {
+		if deviceCodeInfo.DeviceCode == msg.DeviceCode && deviceCodeInfo.Creator == msg.Creator {
 			jwtToken := utils.NewJwtTokenFactory(utils.WithContext(&ctx)).Create(msg)
 			claims := jwtToken.Claims.(jwt.MapClaims)
 			signedToken, err := jwtToken.SignedString([]byte(msg.DeviceCode))
@@ -34,7 +35,8 @@ func (k Keeper) GenerateDeviceCodeToken(ctx sdk.Context, msg types.MsgTokenReque
 			}
 
 			tokenResponse.AccessToken = signedToken
-			tokenResponse.TokenType = types.Bearer.String()
+			tokenResponse.TokenType = types.Bearer.String()			
+			//TODO: ExpiresIn should be 15 min for device code flow
 			tokenResponse.ExpiresIn = claims["exp"].(string)
 
 			tenantAccessTokenRegistry, found := k.GetAccessTokenRegistry(ctx, msg.Tenant)
@@ -51,9 +53,9 @@ func (k Keeper) GenerateDeviceCodeToken(ctx sdk.Context, msg types.MsgTokenReque
 
 			k.SetAccessTokenRegistry(ctx, tenantAccessTokenRegistry)
 
-			tenantDeviceCodes.Codes = append(tenantDeviceCodes.Codes[:index], tenantDeviceCodes.Codes[index+1:]...)
+			tenantDeviceCodeRegistry.Codes = append(tenantDeviceCodeRegistry.Codes[:index], tenantDeviceCodeRegistry.Codes[index+1:]...)
 
-			k.SetDeviceCodes(ctx, tenantDeviceCodes)
+			k.SetDeviceCodeRegistry(ctx, tenantDeviceCodeRegistry)
 
 			break
 		}

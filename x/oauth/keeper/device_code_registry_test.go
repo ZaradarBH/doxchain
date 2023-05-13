@@ -15,21 +15,21 @@ import (
 // Prevent strconv unused error
 var _ = strconv.IntSize
 
-func createNDeviceCodes(keeper *keeper.Keeper, ctx sdk.Context, n int) []types.DeviceCodes {
-	items := make([]types.DeviceCodes, n)
+func createNDeviceCodeRegistry(keeper *keeper.Keeper, ctx sdk.Context, n int) []types.DeviceCodeRegistry {
+	items := make([]types.DeviceCodeRegistry, n)
 	for i := range items {
 		items[i].Tenant = strconv.Itoa(i)
 
-		keeper.SetDeviceCodes(ctx, items[i])
+		keeper.SetDeviceCodeRegistry(ctx, items[i])
 	}
 	return items
 }
 
-func TestDeviceCodesGet(t *testing.T) {
+func TestDeviceCodeRegistryGet(t *testing.T) {
 	keeper, ctx := keepertest.OauthKeeper(t)
-	items := createNDeviceCodes(keeper, ctx, 10)
+	items := createNDeviceCodeRegistry(keeper, ctx, 10)
 	for _, item := range items {
-		rst, found := keeper.GetDeviceCodes(ctx,
+		rst, found := keeper.GetDeviceCodeRegistry(ctx,
 			item.Tenant,
 		)
 		require.True(t, found)
@@ -39,25 +39,25 @@ func TestDeviceCodesGet(t *testing.T) {
 		)
 	}
 }
-func TestDeviceCodesRemove(t *testing.T) {
+func TestDeviceCodeRegistryRemove(t *testing.T) {
 	keeper, ctx := keepertest.OauthKeeper(t)
-	items := createNDeviceCodes(keeper, ctx, 10)
+	items := createNDeviceCodeRegistry(keeper, ctx, 10)
 	for _, item := range items {
-		keeper.RemoveDeviceCodes(ctx,
+		keeper.RemoveDeviceCodeRegistry(ctx,
 			item.Tenant,
 		)
-		_, found := keeper.GetDeviceCodes(ctx,
+		_, found := keeper.GetDeviceCodeRegistry(ctx,
 			item.Tenant,
 		)
 		require.False(t, found)
 	}
 }
 
-func TestDeviceCodesGetAll(t *testing.T) {
+func TestDeviceCodeRegistryGetAll(t *testing.T) {
 	keeper, ctx := keepertest.OauthKeeper(t)
-	items := createNDeviceCodes(keeper, ctx, 10)
+	items := createNDeviceCodeRegistry(keeper, ctx, 10)
 	require.ElementsMatch(t,
 		nullify.Fill(items),
-		nullify.Fill(keeper.GetAllDeviceCodes(ctx)),
+		nullify.Fill(keeper.GetAllDeviceCodeRegistry(ctx)),
 	)
 }

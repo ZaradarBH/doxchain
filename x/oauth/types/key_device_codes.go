@@ -5,12 +5,12 @@ import "encoding/binary"
 var _ binary.ByteOrder
 
 const (
-	// DeviceCodesKeyPrefix is the prefix to retrieve all DeviceCodes
-	DeviceCodesKeyPrefix = "DeviceCodes/value/"
+	// DeviceCodeRegistryKeyPrefix is the prefix to retrieve all DeviceCodeRegistry
+	DeviceCodeRegistryKeyPrefix = "DeviceCodeRegistry/value/"
 )
 
-// DeviceCodesKey returns the store key to retrieve a DeviceCodes from the index fields
-func DeviceCodesKey(
+// DeviceCodeRegistryKey returns the store key to retrieve a DeviceCodeRegistry from the index fields
+func DeviceCodeRegistryKey(
 	index string,
 ) []byte {
 	var key []byte

@@ -28,17 +28,17 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgTokenRequest int = 100
 
-	opWeightMsgCreateDeviceCodes = "op_weight_msg_device_codes"
+	opWeightMsgCreateDeviceCodeRegistry = "op_weight_msg_device_codes"
 	// TODO: Determine the simulation weight value
-	defaultWeightMsgCreateDeviceCodes int = 100
+	defaultWeightMsgCreateDeviceCodeRegistry int = 100
 
-	opWeightMsgUpdateDeviceCodes = "op_weight_msg_device_codes"
+	opWeightMsgUpdateDeviceCodeRegistry = "op_weight_msg_device_codes"
 	// TODO: Determine the simulation weight value
-	defaultWeightMsgUpdateDeviceCodes int = 100
+	defaultWeightMsgUpdateDeviceCodeRegistry int = 100
 
-	opWeightMsgDeleteDeviceCodes = "op_weight_msg_device_codes"
+	opWeightMsgDeleteDeviceCodeRegistry = "op_weight_msg_device_codes"
 	// TODO: Determine the simulation weight value
-	defaultWeightMsgDeleteDeviceCodes int = 100
+	defaultWeightMsgDeleteDeviceCodeRegistry int = 100
 
 	opWeightMsgCreateAccessTokenRegistry = "op_weight_msg_access_tokens"
 	// TODO: Determine the simulation weight value
@@ -63,7 +63,7 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 	}
 	oauthGenesis := types.GenesisState{
 		Params: types.DefaultParams(),
-		DeviceCodesList: []types.DeviceCodes{
+		DeviceCodeRegistryList: []types.DeviceCodeRegistry{
 			{
 				Tenant: "0",
 			},

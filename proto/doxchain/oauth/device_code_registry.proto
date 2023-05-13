@@ -5,12 +5,12 @@ import "gogoproto/gogo.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/oauth/types";
 
-message DeviceCodes {
+message DeviceCodeRegistry {
   string tenant = 1; 
-  repeated DeviceCode codes = 2 [(gogoproto.nullable) = false]; 
+  repeated DeviceCodeInfo codes = 2 [(gogoproto.nullable) = false]; 
 }
 
-message DeviceCode {
+message DeviceCodeInfo {
   string creator = 1;
   string deviceCode = 2; 
 }

@@ -22,7 +22,7 @@ func TestGenesisState_Validate(t *testing.T) {
 			desc: "valid genesis state",
 			genState: &types.GenesisState{
 
-				DeviceCodesList: []types.DeviceCodes{
+				DeviceCodeRegistryList: []types.DeviceCodeRegistry{
 					{
 						Index: "0",
 					},
@@ -43,9 +43,9 @@ func TestGenesisState_Validate(t *testing.T) {
 			valid: true,
 		},
 		{
-			desc: "duplicated deviceCodes",
+			desc: "duplicated DeviceCodeRegistry",
 			genState: &types.GenesisState{
-				DeviceCodesList: []types.DeviceCodes{
+				DeviceCodeRegistryList: []types.DeviceCodeRegistry{
 					{
 						Index: "0",
 					},

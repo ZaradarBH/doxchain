@@ -14,7 +14,7 @@ func TestGenesis(t *testing.T) {
 	genesisState := types.GenesisState{
 		Params: types.DefaultParams(),
 
-		DeviceCodesList: []types.DeviceCodes{
+		DeviceCodeRegistryList: []types.DeviceCodeRegistry{
 			{
 				Index: "0",
 			},
@@ -41,7 +41,7 @@ func TestGenesis(t *testing.T) {
 	nullify.Fill(&genesisState)
 	nullify.Fill(got)
 
-	require.ElementsMatch(t, genesisState.DeviceCodesList, got.DeviceCodesList)
+	require.ElementsMatch(t, genesisState.DeviceCodeRegistryList, got.DeviceCodeRegistryList)
 	require.ElementsMatch(t, genesisState.AccessTokenRegistryList, got.AccessTokenRegistryList)
 	// this line is used by starport scaffolding # genesis/test/assert
 }
