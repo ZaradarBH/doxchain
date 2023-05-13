@@ -6,7 +6,6 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/be-heroes/doxchain/x/oauth/types"
 	"github.com/golang-jwt/jwt"
 	"github.com/google/uuid"
 )
@@ -46,18 +45,18 @@ func NewJwtTokenFactory(opts ...JwtTokenFactoryOption) *JwtTokenFactory {
 }
 
 // Create returns a new jwt token with the configured signing method. Defaults to HS256
-func (jtf JwtTokenFactory) Create(msg types.MsgTokenRequest) *jwt.Token {
+func (jtf JwtTokenFactory) Create(tenant string, creator string, clientId string, expireOffSet time.Duration) *jwt.Token {
 	jwtToken := jwt.New(jtf.SigningMethod)
 	claims := jwtToken.Claims.(jwt.MapClaims)
 	issuedAt := jtf.Context.BlockTime()
 
 	claims["jti"] = strings.Replace(uuid.New().String(), "-", "", -1)
-	claims["iss"] = msg.Tenant
-	claims["sub"] = msg.Creator
+	claims["iss"] = tenant
+	claims["sub"] = creator
 	//TODO: Decide on best strategy for infering the audience based on the available state
-	claims["aud"] = msg.ClientId
-	claims["iat"] = issuedAt
-	claims["exp"] = issuedAt.Add(time.Minute * 3)
+	claims["aud"] = clientId	
+	claims["iat"] = issuedAt.Unix()
+	claims["exp"] = issuedAt.Add(expireOffSet).Unix()
 
 	return jwtToken
 }

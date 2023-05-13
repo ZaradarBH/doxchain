@@ -1,11 +1,13 @@
 package keeper
 
 import (
+	"time"
+
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
 	"github.com/be-heroes/doxchain/x/oauth/types"
-	"github.com/be-heroes/doxchain/x/oauth/utils"
+	"github.com/be-heroes/doxchain/utils"
 	"github.com/golang-jwt/jwt"
 )
 
@@ -26,7 +28,7 @@ func (k Keeper) GenerateDeviceCodeToken(ctx sdk.Context, msg types.MsgTokenReque
 
 	for index, deviceCodeInfo := range tenantDeviceCodeRegistry.Codes {
 		if deviceCodeInfo.DeviceCode == msg.DeviceCode && deviceCodeInfo.Creator == msg.Creator {
-			jwtToken := utils.NewJwtTokenFactory(utils.WithContext(&ctx)).Create(msg)
+			jwtToken := utils.NewJwtTokenFactory(utils.WithContext(&ctx)).Create(msg.Tenant, msg.Creator, msg.ClientId, time.Minute * 15)
 			claims := jwtToken.Claims.(jwt.MapClaims)
 			signedToken, err := jwtToken.SignedString([]byte(msg.DeviceCode))
 
@@ -36,8 +38,7 @@ func (k Keeper) GenerateDeviceCodeToken(ctx sdk.Context, msg types.MsgTokenReque
 
 			tokenResponse.AccessToken = signedToken
 			tokenResponse.TokenType = types.Bearer.String()			
-			//TODO: ExpiresIn should be 15 min for device code flow
-			tokenResponse.ExpiresIn = claims["exp"].(string)
+			tokenResponse.ExpiresIn = claims["exp"].(int64)
 
 			tenantAccessTokenRegistry, found := k.GetAccessTokenRegistry(ctx, msg.Tenant)
 
@@ -48,7 +49,7 @@ func (k Keeper) GenerateDeviceCodeToken(ctx sdk.Context, msg types.MsgTokenReque
 			tenantAccessTokenRegistry.Issued = append(tenantAccessTokenRegistry.Issued, types.AccessTokenInfo{
 				Creator:     msg.Creator,
 				Identifier:  claims["jti"].(string),
-				ExpiresIn:   tokenResponse.ExpiresIn,
+				ExpiresAt:   tokenResponse.ExpiresIn,
 			})
 
 			k.SetAccessTokenRegistry(ctx, tenantAccessTokenRegistry)

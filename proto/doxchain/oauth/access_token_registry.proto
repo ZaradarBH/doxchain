@@ -13,5 +13,5 @@ message AccessTokenRegistry {
 message AccessTokenInfo {
   string creator = 1;
   string identifier = 2;
-  string expiresIn = 3;
+  int64 expiresAt = 3;
 }

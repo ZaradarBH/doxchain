@@ -154,8 +154,30 @@ func (AppModule) ConsensusVersion() uint64 { return 1 }
 func (am AppModule) BeginBlock(_ sdk.Context, _ abci.RequestBeginBlock) {}
 
 // EndBlock contains the logic that is automatically triggered at the end of each block
-func (am AppModule) EndBlock(_ sdk.Context, _ abci.RequestEndBlock) []abci.ValidatorUpdate {
-	//TODO: Implement logic to clean up expired access tokens at the end of each block
+func (am AppModule) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.ValidatorUpdate {
+	accessTokenRegistries := am.keeper.GetAllAccessTokenRegistry(ctx)
+
+	for _, accessTokenRegistry := range accessTokenRegistries {	
+		registryUpdated := false
+
+		for index, accessTokenInfo := range accessTokenRegistry.Issued {
+			if accessTokenInfo.ExpiresAt < ctx.BlockTime().Unix() {
+				accessTokenRegistry.Issued = append(accessTokenRegistry.Issued[:index], accessTokenRegistry.Issued[index+1:]...)
+
+				ctx.EventManager().EmitEvent(
+					sdk.NewEvent(types.EventTypeTokenExpired,
+						sdk.NewAttribute(types.AttributeKeyIdentifier, accessTokenInfo.Identifier),
+					),
+				)
+
+				registryUpdated = true
+			}
+		}		
+
+		if registryUpdated {
+			am.keeper.SetAccessTokenRegistry(ctx, accessTokenRegistry)
+		}
+	}
 
 	return []abci.ValidatorUpdate{}
 }
