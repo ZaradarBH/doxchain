@@ -22,8 +22,7 @@ func (k Keeper) Login(ctx sdk.Context, msg types.MsgAuthenticationRequest) (type
 		return response, err
 	}
 
-	//TODO: Need to reconsider this approach. The gpkey will be diff on various validators. If validator X processes block Y when no key exists it would write the new key to the store and on the next block it should be available on to all other nodes and thus the next block producer (theoretically)
-	//TODO: Figure out how to protected the key so it cannot be exposed. Can a keeper somehow have a pkey it can use to encrypt data without exposing the pkey?
+	//TODO: How do we secure this?
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), []byte{})
 	byteKey := types.KeyPrefix(types.IdpMasterKey)
 	idpMasterKeyBytes := store.Get(byteKey)
