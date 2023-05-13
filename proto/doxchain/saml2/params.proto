@@ -1,5 +1,5 @@
 syntax = "proto3";
-package beheroes.doxchain.saml;
+package beheroes.doxchain.saml2;
 
 import "gogoproto/gogo.proto";
 

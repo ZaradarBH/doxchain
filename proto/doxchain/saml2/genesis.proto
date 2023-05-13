@@ -1,8 +1,8 @@
 syntax = "proto3";
-package beheroes.doxchain.saml;
+package beheroes.doxchain.saml2;
 
 import "gogoproto/gogo.proto";
-import "doxchain/saml/params.proto";
+import "doxchain/saml2/params.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/saml2/types";
 

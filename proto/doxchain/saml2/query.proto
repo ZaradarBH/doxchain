@@ -1,10 +1,10 @@
 syntax = "proto3";
-package beheroes.doxchain.saml;
+package beheroes.doxchain.saml2;
 
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
-import "doxchain/saml/params.proto";
+import "doxchain/saml2/params.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/saml2/types";
 
@@ -12,7 +12,7 @@ option go_package = "github.com/be-heroes/doxchain/x/saml2/types";
 service Query {
   // Parameters queries the parameters of the module.
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
-    option (google.api.http).get = "/be-heroes/doxchain/saml/params";
+    option (google.api.http).get = "/be-heroes/doxchain/saml2/params";
   }
 }
 

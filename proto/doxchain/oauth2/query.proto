@@ -5,7 +5,7 @@ package beheroes.doxchain.oauth2;
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
-import "doxchain/oauth/params.proto";
+import "doxchain/oauth2/params.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/oauth2/types";
 

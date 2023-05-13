@@ -3,9 +3,9 @@ syntax = "proto3";
 package beheroes.doxchain.oauth2;
 
 import "gogoproto/gogo.proto";
-import "doxchain/oauth/params.proto";
-import "doxchain/oauth/device_code_registry.proto";
-import "doxchain/oauth/access_token_registry.proto";
+import "doxchain/oauth2/params.proto";
+import "doxchain/oauth2/device_code_registry.proto";
+import "doxchain/oauth2/access_token_registry.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/oauth2/types";
 
