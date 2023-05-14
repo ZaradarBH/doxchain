@@ -51,7 +51,7 @@ func NewDidTokenFactory(opts ...DidTokenFactoryOption) *DidTokenFactory {
 
 // Create returns a new did
 func (didf DidTokenFactory) Create(creator string, url string) *didTypes.Did {
-	//TODO: Master regexp package in golang and parse url string to create did based on regex
+	//TODO: Master regexp package in golang and parse url string to populate remaning did fields based on regex matches
 	return &didTypes.Did{
 		Creator: creator,
 		Url: url,

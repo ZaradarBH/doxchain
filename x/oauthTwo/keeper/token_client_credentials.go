@@ -49,7 +49,6 @@ func (k Keeper) GenerateClientCredentialToken(ctx sdk.Context, msg types.MsgToke
 		})
 
 		k.SetAccessTokenRegistry(ctx, tenantAccessTokenRegistry)
-
 	}
 
 	return response, sdkerrors.Wrap(types.TokenServiceError, "ClientCredential TokenResponse could not be issued")
