@@ -19,7 +19,7 @@ const (
 )
 
 var (
-	//TODO: Figure out why its crying about perl syntax and how to convert these regxs to a proper format without lossing functionality or atleast finding a workaround
+	//TODO: Golang regexp does not support named captures, only numbered captures.
 	// REGEX_DID_METHOD_NAME = regexp.MustCompile(fmt.Sprintf("(?<%s>[a-zA-Z0-9_]+)", REGEX_DID_METHOD_NAME_CAPTURE_IDENTIFIER))
 	// REGEX_DID_METHOD_ID = regexp.MustCompile(fmt.Sprintf("(?<%s>%s+(:%s+)*)", REGEX_DID_METHOD_ID_CAPTURE_IDENTIFIER, REGEX_DID_ID_CHAR, REGEX_DID_ID_CHAR))
 	// REGEX_DID_PATH = regexp.MustCompile(fmt.Sprintf("(?<%s>\\/[^#?]*)?", REGEX_DID_PATH_CAPTURE_IDENTIFIER))
