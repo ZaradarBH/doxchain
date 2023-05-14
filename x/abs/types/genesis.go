@@ -10,7 +10,7 @@ const DefaultIndex uint64 = 1
 // DefaultGenesis returns the default genesis state
 func DefaultGenesis() *GenesisState {
 	return &GenesisState{
-		PartitionedPoolsList: []PartitionedPools{},
+		PartitionedPoolRegistryList: []PartitionedPoolRegistry{},
 // this line is used by starport scaffolding # genesis/types/default
 		Params: DefaultParams(),
 	}
@@ -22,12 +22,12 @@ func (gs GenesisState) Validate() error {
 	// Check for duplicated index in partitionedPools
 partitionedPoolsIndexMap := make(map[string]struct{})
 
-for _, elem := range gs.PartitionedPoolsList {
-	index := string(PartitionedPoolsKey(elem.Index))
-	if _, ok := partitionedPoolsIndexMap[index]; ok {
-		return fmt.Errorf("duplicated index for partitionedPools")
+for _, elem := range gs.PartitionedPoolRegistryList {
+	creator := string(PartitionedPoolRegistryKey(elem.Creator))
+	if _, ok := partitionedPoolsIndexMap[creator]; ok {
+		return fmt.Errorf("duplicated creator for PartitionedPoolRegistries")
 	}
-	partitionedPoolsIndexMap[index] = struct{}{}
+	partitionedPoolsIndexMap[creator] = struct{}{}
 }
 // this line is used by starport scaffolding # genesis/types/validate
 

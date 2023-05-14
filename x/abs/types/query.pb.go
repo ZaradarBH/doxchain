@@ -273,22 +273,24 @@ func (m *QueryWatchlistResponse) GetWatchlist() Watchlist {
 	return Watchlist{}
 }
 
-type QueryGetPartitionedPoolsRequest struct {
-	Index string `protobuf:"bytes,1,opt,name=index,proto3" json:"index,omitempty"`
+type QueryGetPartitionedPoolRegistryRequest struct {
+	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 }
 
-func (m *QueryGetPartitionedPoolsRequest) Reset()         { *m = QueryGetPartitionedPoolsRequest{} }
-func (m *QueryGetPartitionedPoolsRequest) String() string { return proto.CompactTextString(m) }
-func (*QueryGetPartitionedPoolsRequest) ProtoMessage()    {}
-func (*QueryGetPartitionedPoolsRequest) Descriptor() ([]byte, []int) {
+func (m *QueryGetPartitionedPoolRegistryRequest) Reset() {
+	*m = QueryGetPartitionedPoolRegistryRequest{}
+}
+func (m *QueryGetPartitionedPoolRegistryRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryGetPartitionedPoolRegistryRequest) ProtoMessage()    {}
+func (*QueryGetPartitionedPoolRegistryRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_5545a3a8d78dfc59, []int{6}
 }
-func (m *QueryGetPartitionedPoolsRequest) XXX_Unmarshal(b []byte) error {
+func (m *QueryGetPartitionedPoolRegistryRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *QueryGetPartitionedPoolsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *QueryGetPartitionedPoolRegistryRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_QueryGetPartitionedPoolsRequest.Marshal(b, m, deterministic)
+		return xxx_messageInfo_QueryGetPartitionedPoolRegistryRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -298,41 +300,43 @@ func (m *QueryGetPartitionedPoolsRequest) XXX_Marshal(b []byte, deterministic bo
 		return b[:n], nil
 	}
 }
-func (m *QueryGetPartitionedPoolsRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryGetPartitionedPoolsRequest.Merge(m, src)
+func (m *QueryGetPartitionedPoolRegistryRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGetPartitionedPoolRegistryRequest.Merge(m, src)
 }
-func (m *QueryGetPartitionedPoolsRequest) XXX_Size() int {
+func (m *QueryGetPartitionedPoolRegistryRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *QueryGetPartitionedPoolsRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryGetPartitionedPoolsRequest.DiscardUnknown(m)
+func (m *QueryGetPartitionedPoolRegistryRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGetPartitionedPoolRegistryRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_QueryGetPartitionedPoolsRequest proto.InternalMessageInfo
+var xxx_messageInfo_QueryGetPartitionedPoolRegistryRequest proto.InternalMessageInfo
 
-func (m *QueryGetPartitionedPoolsRequest) GetIndex() string {
+func (m *QueryGetPartitionedPoolRegistryRequest) GetCreator() string {
 	if m != nil {
-		return m.Index
+		return m.Creator
 	}
 	return ""
 }
 
-type QueryGetPartitionedPoolsResponse struct {
-	PartitionedPools PartitionedPools `protobuf:"bytes,1,opt,name=partitionedPools,proto3" json:"partitionedPools"`
+type QueryGetPartitionedPoolRegistryResponse struct {
+	PartitionedPoolRegistry PartitionedPoolRegistry `protobuf:"bytes,1,opt,name=partitionedPoolRegistry,proto3" json:"partitionedPoolRegistry"`
 }
 
-func (m *QueryGetPartitionedPoolsResponse) Reset()         { *m = QueryGetPartitionedPoolsResponse{} }
-func (m *QueryGetPartitionedPoolsResponse) String() string { return proto.CompactTextString(m) }
-func (*QueryGetPartitionedPoolsResponse) ProtoMessage()    {}
-func (*QueryGetPartitionedPoolsResponse) Descriptor() ([]byte, []int) {
+func (m *QueryGetPartitionedPoolRegistryResponse) Reset() {
+	*m = QueryGetPartitionedPoolRegistryResponse{}
+}
+func (m *QueryGetPartitionedPoolRegistryResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryGetPartitionedPoolRegistryResponse) ProtoMessage()    {}
+func (*QueryGetPartitionedPoolRegistryResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_5545a3a8d78dfc59, []int{7}
 }
-func (m *QueryGetPartitionedPoolsResponse) XXX_Unmarshal(b []byte) error {
+func (m *QueryGetPartitionedPoolRegistryResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *QueryGetPartitionedPoolsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *QueryGetPartitionedPoolRegistryResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_QueryGetPartitionedPoolsResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_QueryGetPartitionedPoolRegistryResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -342,41 +346,43 @@ func (m *QueryGetPartitionedPoolsResponse) XXX_Marshal(b []byte, deterministic b
 		return b[:n], nil
 	}
 }
-func (m *QueryGetPartitionedPoolsResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryGetPartitionedPoolsResponse.Merge(m, src)
+func (m *QueryGetPartitionedPoolRegistryResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGetPartitionedPoolRegistryResponse.Merge(m, src)
 }
-func (m *QueryGetPartitionedPoolsResponse) XXX_Size() int {
+func (m *QueryGetPartitionedPoolRegistryResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *QueryGetPartitionedPoolsResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryGetPartitionedPoolsResponse.DiscardUnknown(m)
+func (m *QueryGetPartitionedPoolRegistryResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGetPartitionedPoolRegistryResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_QueryGetPartitionedPoolsResponse proto.InternalMessageInfo
+var xxx_messageInfo_QueryGetPartitionedPoolRegistryResponse proto.InternalMessageInfo
 
-func (m *QueryGetPartitionedPoolsResponse) GetPartitionedPools() PartitionedPools {
+func (m *QueryGetPartitionedPoolRegistryResponse) GetPartitionedPoolRegistry() PartitionedPoolRegistry {
 	if m != nil {
-		return m.PartitionedPools
+		return m.PartitionedPoolRegistry
 	}
-	return PartitionedPools{}
+	return PartitionedPoolRegistry{}
 }
 
-type QueryAllPartitionedPoolsRequest struct {
+type QueryAllPartitionedPoolRegistriesRequest struct {
 	Pagination *query.PageRequest `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
 }
 
-func (m *QueryAllPartitionedPoolsRequest) Reset()         { *m = QueryAllPartitionedPoolsRequest{} }
-func (m *QueryAllPartitionedPoolsRequest) String() string { return proto.CompactTextString(m) }
-func (*QueryAllPartitionedPoolsRequest) ProtoMessage()    {}
-func (*QueryAllPartitionedPoolsRequest) Descriptor() ([]byte, []int) {
+func (m *QueryAllPartitionedPoolRegistriesRequest) Reset() {
+	*m = QueryAllPartitionedPoolRegistriesRequest{}
+}
+func (m *QueryAllPartitionedPoolRegistriesRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryAllPartitionedPoolRegistriesRequest) ProtoMessage()    {}
+func (*QueryAllPartitionedPoolRegistriesRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_5545a3a8d78dfc59, []int{8}
 }
-func (m *QueryAllPartitionedPoolsRequest) XXX_Unmarshal(b []byte) error {
+func (m *QueryAllPartitionedPoolRegistriesRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *QueryAllPartitionedPoolsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *QueryAllPartitionedPoolRegistriesRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_QueryAllPartitionedPoolsRequest.Marshal(b, m, deterministic)
+		return xxx_messageInfo_QueryAllPartitionedPoolRegistriesRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -386,42 +392,46 @@ func (m *QueryAllPartitionedPoolsRequest) XXX_Marshal(b []byte, deterministic bo
 		return b[:n], nil
 	}
 }
-func (m *QueryAllPartitionedPoolsRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryAllPartitionedPoolsRequest.Merge(m, src)
+func (m *QueryAllPartitionedPoolRegistriesRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryAllPartitionedPoolRegistriesRequest.Merge(m, src)
 }
-func (m *QueryAllPartitionedPoolsRequest) XXX_Size() int {
+func (m *QueryAllPartitionedPoolRegistriesRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *QueryAllPartitionedPoolsRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryAllPartitionedPoolsRequest.DiscardUnknown(m)
+func (m *QueryAllPartitionedPoolRegistriesRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryAllPartitionedPoolRegistriesRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_QueryAllPartitionedPoolsRequest proto.InternalMessageInfo
+var xxx_messageInfo_QueryAllPartitionedPoolRegistriesRequest proto.InternalMessageInfo
 
-func (m *QueryAllPartitionedPoolsRequest) GetPagination() *query.PageRequest {
+func (m *QueryAllPartitionedPoolRegistriesRequest) GetPagination() *query.PageRequest {
 	if m != nil {
 		return m.Pagination
 	}
 	return nil
 }
 
-type QueryAllPartitionedPoolsResponse struct {
-	PartitionedPools []PartitionedPools  `protobuf:"bytes,1,rep,name=partitionedPools,proto3" json:"partitionedPools"`
-	Pagination       *query.PageResponse `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
+type QueryAllPartitionedPoolRegistriesResponse struct {
+	PartitionedPoolRegistries []PartitionedPoolRegistry `protobuf:"bytes,1,rep,name=partitionedPoolRegistries,proto3" json:"partitionedPoolRegistries"`
+	Pagination                *query.PageResponse       `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
 }
 
-func (m *QueryAllPartitionedPoolsResponse) Reset()         { *m = QueryAllPartitionedPoolsResponse{} }
-func (m *QueryAllPartitionedPoolsResponse) String() string { return proto.CompactTextString(m) }
-func (*QueryAllPartitionedPoolsResponse) ProtoMessage()    {}
-func (*QueryAllPartitionedPoolsResponse) Descriptor() ([]byte, []int) {
+func (m *QueryAllPartitionedPoolRegistriesResponse) Reset() {
+	*m = QueryAllPartitionedPoolRegistriesResponse{}
+}
+func (m *QueryAllPartitionedPoolRegistriesResponse) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QueryAllPartitionedPoolRegistriesResponse) ProtoMessage() {}
+func (*QueryAllPartitionedPoolRegistriesResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_5545a3a8d78dfc59, []int{9}
 }
-func (m *QueryAllPartitionedPoolsResponse) XXX_Unmarshal(b []byte) error {
+func (m *QueryAllPartitionedPoolRegistriesResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *QueryAllPartitionedPoolsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *QueryAllPartitionedPoolRegistriesResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_QueryAllPartitionedPoolsResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_QueryAllPartitionedPoolRegistriesResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -431,26 +441,26 @@ func (m *QueryAllPartitionedPoolsResponse) XXX_Marshal(b []byte, deterministic b
 		return b[:n], nil
 	}
 }
-func (m *QueryAllPartitionedPoolsResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryAllPartitionedPoolsResponse.Merge(m, src)
+func (m *QueryAllPartitionedPoolRegistriesResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryAllPartitionedPoolRegistriesResponse.Merge(m, src)
 }
-func (m *QueryAllPartitionedPoolsResponse) XXX_Size() int {
+func (m *QueryAllPartitionedPoolRegistriesResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *QueryAllPartitionedPoolsResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryAllPartitionedPoolsResponse.DiscardUnknown(m)
+func (m *QueryAllPartitionedPoolRegistriesResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryAllPartitionedPoolRegistriesResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_QueryAllPartitionedPoolsResponse proto.InternalMessageInfo
+var xxx_messageInfo_QueryAllPartitionedPoolRegistriesResponse proto.InternalMessageInfo
 
-func (m *QueryAllPartitionedPoolsResponse) GetPartitionedPools() []PartitionedPools {
+func (m *QueryAllPartitionedPoolRegistriesResponse) GetPartitionedPoolRegistries() []PartitionedPoolRegistry {
 	if m != nil {
-		return m.PartitionedPools
+		return m.PartitionedPoolRegistries
 	}
 	return nil
 }
 
-func (m *QueryAllPartitionedPoolsResponse) GetPagination() *query.PageResponse {
+func (m *QueryAllPartitionedPoolRegistriesResponse) GetPagination() *query.PageResponse {
 	if m != nil {
 		return m.Pagination
 	}
@@ -464,57 +474,59 @@ func init() {
 	proto.RegisterType((*QueryBreakFactorResponse)(nil), "doxchain.abs.QueryBreakFactorResponse")
 	proto.RegisterType((*QueryWatchlistRequest)(nil), "doxchain.abs.QueryWatchlistRequest")
 	proto.RegisterType((*QueryWatchlistResponse)(nil), "doxchain.abs.QueryWatchlistResponse")
-	proto.RegisterType((*QueryGetPartitionedPoolsRequest)(nil), "doxchain.abs.QueryGetPartitionedPoolsRequest")
-	proto.RegisterType((*QueryGetPartitionedPoolsResponse)(nil), "doxchain.abs.QueryGetPartitionedPoolsResponse")
-	proto.RegisterType((*QueryAllPartitionedPoolsRequest)(nil), "doxchain.abs.QueryAllPartitionedPoolsRequest")
-	proto.RegisterType((*QueryAllPartitionedPoolsResponse)(nil), "doxchain.abs.QueryAllPartitionedPoolsResponse")
+	proto.RegisterType((*QueryGetPartitionedPoolRegistryRequest)(nil), "doxchain.abs.QueryGetPartitionedPoolRegistryRequest")
+	proto.RegisterType((*QueryGetPartitionedPoolRegistryResponse)(nil), "doxchain.abs.QueryGetPartitionedPoolRegistryResponse")
+	proto.RegisterType((*QueryAllPartitionedPoolRegistriesRequest)(nil), "doxchain.abs.QueryAllPartitionedPoolRegistriesRequest")
+	proto.RegisterType((*QueryAllPartitionedPoolRegistriesResponse)(nil), "doxchain.abs.QueryAllPartitionedPoolRegistriesResponse")
 }
 
 func init() { proto.RegisterFile("doxchain/abs/query.proto", fileDescriptor_5545a3a8d78dfc59) }
 
 var fileDescriptor_5545a3a8d78dfc59 = []byte{
-	// 644 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x95, 0x4f, 0x6f, 0x12, 0x41,
-	0x18, 0xc6, 0xd9, 0x6a, 0x9b, 0x74, 0x34, 0x86, 0x4c, 0xb1, 0xd0, 0x0d, 0x2e, 0xb8, 0xb6, 0xb5,
-	0xd5, 0x74, 0x47, 0xe8, 0xc1, 0x18, 0x4f, 0xc5, 0xa4, 0x8d, 0x37, 0x24, 0x31, 0x26, 0x5e, 0xc8,
-	0x2c, 0x8c, 0xcb, 0xa6, 0xcb, 0xce, 0x76, 0x67, 0xa8, 0x34, 0xc6, 0x4b, 0xaf, 0x5e, 0x4c, 0xfc,
-	0x10, 0x5e, 0xfc, 0x0a, 0xde, 0x7b, 0x6c, 0xe2, 0xc5, 0x93, 0x69, 0xc0, 0x0f, 0x62, 0x76, 0x76,
-	0x16, 0xd8, 0x3f, 0xd0, 0xc6, 0x1b, 0xcb, 0xfb, 0xbc, 0xcf, 0xfb, 0x9b, 0xe1, 0x7d, 0x16, 0x50,
-	0xea, 0xd2, 0x61, 0xa7, 0x87, 0x6d, 0x17, 0x61, 0x93, 0xa1, 0x93, 0x01, 0xf1, 0xcf, 0x0c, 0xcf,
-	0xa7, 0x9c, 0xc2, 0xbb, 0x51, 0xc5, 0xc0, 0x26, 0x53, 0x0b, 0x16, 0xb5, 0xa8, 0x28, 0xa0, 0xe0,
-	0x53, 0xa8, 0x51, 0xcb, 0x16, 0xa5, 0x96, 0x43, 0x10, 0xf6, 0x6c, 0x84, 0x5d, 0x97, 0x72, 0xcc,
-	0x6d, 0xea, 0x32, 0x59, 0x7d, 0xd2, 0xa1, 0xac, 0x4f, 0x19, 0x32, 0x31, 0x23, 0xa1, 0x35, 0x3a,
-	0xad, 0x99, 0x84, 0xe3, 0x1a, 0xf2, 0xb0, 0x65, 0xbb, 0x42, 0x2c, 0xb5, 0x1b, 0x31, 0x0e, 0x0f,
-	0xfb, 0xb8, 0x1f, 0xd9, 0x94, 0x63, 0xa5, 0x8f, 0x98, 0x77, 0x7a, 0x8e, 0xcd, 0xb8, 0xac, 0x6e,
-	0x26, 0x1b, 0xb9, 0x1d, 0xd8, 0x92, 0x6e, 0xdb, 0xa3, 0xd4, 0x91, 0x1e, 0x7a, 0x01, 0xc0, 0x37,
-	0x01, 0x40, 0x53, 0x18, 0xb7, 0xc8, 0xc9, 0x80, 0x30, 0xae, 0xbf, 0x06, 0x6b, 0xb1, 0x6f, 0x99,
-	0x47, 0x5d, 0x46, 0x60, 0x1d, 0xac, 0x84, 0x00, 0x25, 0xa5, 0xaa, 0xec, 0xdc, 0xa9, 0x17, 0x8c,
-	0xd9, 0xab, 0x30, 0x42, 0x75, 0xe3, 0xf6, 0xc5, 0x9f, 0x4a, 0xae, 0x25, 0x95, 0xfa, 0x06, 0x28,
-	0x0a, 0xab, 0x86, 0x4f, 0xf0, 0xf1, 0x21, 0xee, 0x70, 0xea, 0x47, 0x53, 0x9e, 0x81, 0x52, 0xba,
-	0x24, 0x47, 0x15, 0xc0, 0xf2, 0x29, 0x76, 0x06, 0x44, 0x4c, 0x5a, 0x6d, 0x85, 0x0f, 0x7a, 0x11,
-	0xdc, 0x17, 0x1d, 0xef, 0xa2, 0xb3, 0x46, 0x56, 0x6f, 0xc1, 0x7a, 0xb2, 0x20, 0x8d, 0x5e, 0x82,
-	0xd5, 0xc9, 0xcd, 0x48, 0xec, 0x62, 0x1c, 0x7b, 0xd2, 0x23, 0xc9, 0xa7, 0x7a, 0xfd, 0x39, 0xa8,
-	0x08, 0xdb, 0x23, 0xc2, 0x9b, 0xd3, 0x0b, 0x6c, 0x06, 0xf7, 0x27, 0x27, 0x07, 0xa0, 0xb6, 0xdb,
-	0x25, 0xc3, 0x08, 0x54, 0x3c, 0xe8, 0x1c, 0x54, 0xe7, 0x37, 0x4a, 0xb2, 0x26, 0xc8, 0x7b, 0x89,
-	0x9a, 0x04, 0xd4, 0x52, 0xf7, 0x1a, 0x53, 0x49, 0xce, 0x54, 0xb7, 0x6e, 0x4b, 0xdc, 0x03, 0xc7,
-	0x99, 0x87, 0x7b, 0x08, 0xc0, 0x74, 0xc5, 0xe4, 0xb8, 0x6d, 0x23, 0xdc, 0x47, 0x23, 0xd8, 0x47,
-	0x23, 0x5c, 0x75, 0xb9, 0x8f, 0x46, 0x13, 0x5b, 0x44, 0xf6, 0xb6, 0x66, 0x3a, 0xf5, 0x9f, 0x8a,
-	0x3c, 0x61, 0xe6, 0xac, 0x85, 0x27, 0xbc, 0xf5, 0xff, 0x27, 0x84, 0x47, 0x31, 0xfc, 0x25, 0x81,
-	0xff, 0xf8, 0x5a, 0xfc, 0x10, 0x67, 0x96, 0xbf, 0x7e, 0xb5, 0x0c, 0x96, 0x05, 0x3f, 0x3c, 0x06,
-	0x2b, 0xe1, 0xe2, 0xc2, 0x6a, 0x1c, 0x2a, 0x9d, 0x0b, 0xf5, 0xe1, 0x02, 0x45, 0x38, 0x44, 0x2f,
-	0x9f, 0xff, 0xfa, 0xfb, 0x6d, 0x69, 0x1d, 0x16, 0x50, 0x46, 0x70, 0xe1, 0x17, 0x05, 0xe4, 0x93,
-	0x3b, 0x0f, 0xb7, 0x32, 0x5c, 0xd3, 0x71, 0x51, 0xb7, 0xaf, 0x93, 0x49, 0x82, 0x1d, 0x41, 0xa0,
-	0xc3, 0x2a, 0x4a, 0xbf, 0xc2, 0xda, 0x66, 0xd0, 0xd0, 0xfe, 0x10, 0x0e, 0x3e, 0x57, 0xc0, 0xbd,
-	0x78, 0x6c, 0xe0, 0xa3, 0x8c, 0x21, 0xc9, 0xb4, 0xa9, 0x9b, 0x8b, 0x45, 0x92, 0x63, 0x4b, 0x70,
-	0x54, 0xe0, 0x83, 0x2c, 0x8e, 0x49, 0xc6, 0xe0, 0x0f, 0x05, 0xe4, 0x93, 0xbf, 0x3f, 0xdc, 0xcb,
-	0x98, 0x30, 0x3f, 0x84, 0xaa, 0x71, 0x53, 0xb9, 0x44, 0x7b, 0x21, 0xd0, 0xf6, 0x61, 0x0d, 0x99,
-	0x64, 0xaf, 0x47, 0x7c, 0x4a, 0x18, 0x5a, 0xfc, 0xba, 0x44, 0x9f, 0x44, 0xb0, 0x3f, 0xc3, 0xef,
-	0x0a, 0x58, 0x4b, 0xfa, 0x1e, 0x38, 0x4e, 0x26, 0xf1, 0xfc, 0x1c, 0x66, 0x12, 0x2f, 0x88, 0x92,
-	0x5e, 0x13, 0xc4, 0x4f, 0xe1, 0xee, 0x8d, 0x89, 0x1b, 0xaf, 0x2e, 0x46, 0x9a, 0x72, 0x39, 0xd2,
-	0x94, 0xab, 0x91, 0xa6, 0x7c, 0x1d, 0x6b, 0xb9, 0xcb, 0xb1, 0x96, 0xfb, 0x3d, 0xd6, 0x72, 0xef,
-	0x77, 0x2d, 0x9b, 0xf7, 0x06, 0xa6, 0xd1, 0xa1, 0xfd, 0x2c, 0xbb, 0xa1, 0x30, 0xe4, 0x67, 0x1e,
-	0x61, 0xe6, 0x8a, 0xf8, 0x9b, 0xd8, 0xff, 0x17, 0x00, 0x00, 0xff, 0xff, 0x3c, 0xa7, 0x6d, 0x76,
-	0x0f, 0x07, 0x00, 0x00,
+	// 680 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x95, 0xcf, 0x4f, 0x13, 0x41,
+	0x14, 0xc7, 0x3b, 0x28, 0x35, 0x3c, 0x8d, 0x31, 0x63, 0xa5, 0x65, 0x83, 0x4b, 0x5d, 0xe5, 0x97,
+	0xd1, 0x1d, 0x01, 0xd1, 0x03, 0x31, 0x86, 0x1a, 0x21, 0xde, 0x6a, 0x13, 0x63, 0xe2, 0xa5, 0x99,
+	0x5d, 0xc6, 0xed, 0x86, 0x65, 0x67, 0xd9, 0x99, 0x22, 0xc4, 0x78, 0xe1, 0xea, 0x85, 0xc4, 0x7f,
+	0xc1, 0x3f, 0x86, 0x98, 0x98, 0x90, 0x78, 0xf1, 0xa4, 0x06, 0xfc, 0x43, 0x4c, 0x67, 0x67, 0x81,
+	0x6d, 0xb7, 0x14, 0xbc, 0xb1, 0xbc, 0xef, 0xfb, 0xbe, 0xcf, 0x7b, 0x79, 0x6f, 0x0a, 0x95, 0x35,
+	0xbe, 0xed, 0xb6, 0xa8, 0x1f, 0x12, 0xea, 0x08, 0xb2, 0xd9, 0x66, 0xf1, 0x8e, 0x1d, 0xc5, 0x5c,
+	0x72, 0x7c, 0x2d, 0x8d, 0xd8, 0xd4, 0x11, 0x46, 0xc9, 0xe3, 0x1e, 0x57, 0x01, 0xd2, 0xf9, 0x2b,
+	0xd1, 0x18, 0xe3, 0x1e, 0xe7, 0x5e, 0xc0, 0x08, 0x8d, 0x7c, 0x42, 0xc3, 0x90, 0x4b, 0x2a, 0x7d,
+	0x1e, 0x0a, 0x1d, 0xbd, 0xef, 0x72, 0xb1, 0xc1, 0x05, 0x71, 0xa8, 0x60, 0x89, 0x35, 0xd9, 0x9a,
+	0x73, 0x98, 0xa4, 0x73, 0x24, 0xa2, 0x9e, 0x1f, 0x2a, 0xb1, 0xd6, 0x8e, 0x65, 0x38, 0x22, 0x1a,
+	0xd3, 0x8d, 0xd4, 0x66, 0x3c, 0x13, 0xfa, 0x40, 0xa5, 0xdb, 0x0a, 0x7c, 0x21, 0x75, 0xf4, 0x41,
+	0x77, 0xa2, 0xf4, 0x3b, 0xb6, 0x6c, 0xad, 0x19, 0x71, 0x1e, 0x34, 0x63, 0xe6, 0xf9, 0x42, 0xa6,
+	0x4d, 0x59, 0x25, 0xc0, 0xaf, 0x3b, 0x20, 0x75, 0x55, 0xa0, 0xc1, 0x36, 0xdb, 0x4c, 0x48, 0xeb,
+	0x15, 0xdc, 0xcc, 0xfc, 0x57, 0x44, 0x3c, 0x14, 0x0c, 0xcf, 0x43, 0x31, 0x01, 0xa9, 0xa0, 0x2a,
+	0x9a, 0xb9, 0x3a, 0x5f, 0xb2, 0x4f, 0x8f, 0xc4, 0x4e, 0xd4, 0xb5, 0xcb, 0xfb, 0xbf, 0x26, 0x0a,
+	0x0d, 0xad, 0xb4, 0xc6, 0xa0, 0xac, 0xac, 0x6a, 0x31, 0xa3, 0xeb, 0x2b, 0xd4, 0x95, 0x3c, 0x4e,
+	0xab, 0x3c, 0x82, 0x4a, 0x6f, 0x48, 0x97, 0x2a, 0xc1, 0xf0, 0x16, 0x0d, 0xda, 0x4c, 0x55, 0x1a,
+	0x69, 0x24, 0x1f, 0x56, 0x19, 0x6e, 0xa9, 0x8c, 0xb7, 0x69, 0xcf, 0xa9, 0xd5, 0x1b, 0x18, 0xed,
+	0x0e, 0x68, 0xa3, 0x25, 0x18, 0x39, 0x9e, 0x90, 0xc6, 0x2e, 0x67, 0xb1, 0x8f, 0x73, 0x34, 0xf9,
+	0x89, 0xde, 0xaa, 0xc1, 0x94, 0xb2, 0x5d, 0x65, 0xb2, 0x7e, 0x32, 0xc8, 0x3a, 0xe7, 0x41, 0x43,
+	0x8f, 0x51, 0x03, 0xe0, 0x0a, 0x5c, 0x71, 0x63, 0x46, 0x25, 0x8f, 0x35, 0x71, 0xfa, 0x69, 0xed,
+	0x21, 0x98, 0x1e, 0x68, 0xa2, 0x61, 0x19, 0x94, 0xa3, 0x7c, 0x89, 0x46, 0x9f, 0xec, 0x99, 0x78,
+	0x9e, 0x58, 0x37, 0xd2, 0xcf, 0xcb, 0x8a, 0x61, 0x46, 0x11, 0x2d, 0x07, 0x41, 0xbe, 0x83, 0xcf,
+	0xd2, 0x55, 0xc0, 0x2b, 0x00, 0x27, 0xbb, 0xa9, 0x29, 0xa6, 0xec, 0x64, 0x91, 0xed, 0xce, 0x22,
+	0xdb, 0xc9, 0x8d, 0xe8, 0x45, 0xb6, 0xeb, 0xd4, 0x63, 0x3a, 0xb7, 0x71, 0x2a, 0xd3, 0xfa, 0x8d,
+	0x60, 0xf6, 0x1c, 0x45, 0xf5, 0x20, 0x7c, 0x18, 0x8b, 0xfa, 0x89, 0x2a, 0xa8, 0x7a, 0xe9, 0xa2,
+	0xa3, 0xe8, 0xef, 0x86, 0x57, 0x33, 0x0d, 0x0e, 0xa9, 0x06, 0xa7, 0x07, 0x36, 0x98, 0x70, 0x9e,
+	0xee, 0x70, 0xfe, 0x6b, 0x11, 0x86, 0x55, 0x87, 0x78, 0x1d, 0x8a, 0xc9, 0x2d, 0xe0, 0x6a, 0x16,
+	0xb2, 0xf7, 0xd4, 0x8c, 0x3b, 0x67, 0x28, 0x92, 0x22, 0xd6, 0xf8, 0xee, 0x8f, 0xbf, 0x5f, 0x86,
+	0x46, 0x71, 0x89, 0xe4, 0xbc, 0x09, 0xf8, 0x33, 0x82, 0x1b, 0xdd, 0x67, 0x84, 0x27, 0x73, 0x5c,
+	0x7b, 0x2f, 0xd0, 0x98, 0x1a, 0x24, 0xd3, 0x04, 0x33, 0x8a, 0xc0, 0xc2, 0x55, 0xd2, 0xfb, 0x3a,
+	0x36, 0x9d, 0x4e, 0x42, 0xf3, 0x7d, 0x52, 0x78, 0x17, 0xc1, 0xf5, 0xec, 0x25, 0xe2, 0xbb, 0x39,
+	0x45, 0xba, 0x0f, 0xd8, 0xb8, 0x77, 0xb6, 0x48, 0x73, 0x4c, 0x2a, 0x8e, 0x09, 0x7c, 0x3b, 0x8f,
+	0xe3, 0xf8, 0x6c, 0xf1, 0x77, 0x04, 0xe5, 0x3e, 0xfb, 0x80, 0x1f, 0xe7, 0x14, 0x1a, 0x78, 0xde,
+	0xc6, 0xe2, 0x05, 0xb3, 0x34, 0xef, 0x4b, 0xc5, 0xfb, 0x1c, 0x3f, 0x23, 0x0e, 0x7b, 0xd8, 0x62,
+	0x31, 0x67, 0x82, 0x9c, 0xeb, 0x79, 0xf6, 0x99, 0x20, 0x1f, 0xf5, 0x0b, 0xf2, 0x09, 0x7f, 0x43,
+	0x60, 0xf4, 0x29, 0xb5, 0x1c, 0x04, 0xf8, 0x49, 0x0e, 0xdc, 0x39, 0x4e, 0xdb, 0x78, 0x7a, 0xe1,
+	0x3c, 0xdd, 0xd6, 0x92, 0x6a, 0x6b, 0x11, 0x2f, 0xfc, 0x47, 0x5b, 0xb5, 0x17, 0xfb, 0x87, 0x26,
+	0x3a, 0x38, 0x34, 0xd1, 0x9f, 0x43, 0x13, 0xed, 0x1d, 0x99, 0x85, 0x83, 0x23, 0xb3, 0xf0, 0xf3,
+	0xc8, 0x2c, 0xbc, 0x9b, 0xf5, 0x7c, 0xd9, 0x6a, 0x3b, 0xb6, 0xcb, 0x37, 0xf2, 0x8c, 0xb7, 0x95,
+	0xb5, 0xdc, 0x89, 0x98, 0x70, 0x8a, 0xea, 0xd7, 0x6b, 0xe1, 0x5f, 0x00, 0x00, 0x00, 0xff, 0xff,
+	0x69, 0x99, 0x4c, 0xb8, 0xae, 0x07, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -536,8 +548,8 @@ type QueryClient interface {
 	// Queries watchlist.
 	QueryWatchlist(ctx context.Context, in *QueryWatchlistRequest, opts ...grpc.CallOption) (*QueryWatchlistResponse, error)
 	// Queries a list of PartitionedPools items.
-	PartitionedPools(ctx context.Context, in *QueryGetPartitionedPoolsRequest, opts ...grpc.CallOption) (*QueryGetPartitionedPoolsResponse, error)
-	PartitionedPoolsAll(ctx context.Context, in *QueryAllPartitionedPoolsRequest, opts ...grpc.CallOption) (*QueryAllPartitionedPoolsResponse, error)
+	PartitionedPoolRegistry(ctx context.Context, in *QueryGetPartitionedPoolRegistryRequest, opts ...grpc.CallOption) (*QueryGetPartitionedPoolRegistryResponse, error)
+	PartitionedPoolRegistryAll(ctx context.Context, in *QueryAllPartitionedPoolRegistriesRequest, opts ...grpc.CallOption) (*QueryAllPartitionedPoolRegistriesResponse, error)
 }
 
 type queryClient struct {
@@ -575,18 +587,18 @@ func (c *queryClient) QueryWatchlist(ctx context.Context, in *QueryWatchlistRequ
 	return out, nil
 }
 
-func (c *queryClient) PartitionedPools(ctx context.Context, in *QueryGetPartitionedPoolsRequest, opts ...grpc.CallOption) (*QueryGetPartitionedPoolsResponse, error) {
-	out := new(QueryGetPartitionedPoolsResponse)
-	err := c.cc.Invoke(ctx, "/doxchain.abs.Query/PartitionedPools", in, out, opts...)
+func (c *queryClient) PartitionedPoolRegistry(ctx context.Context, in *QueryGetPartitionedPoolRegistryRequest, opts ...grpc.CallOption) (*QueryGetPartitionedPoolRegistryResponse, error) {
+	out := new(QueryGetPartitionedPoolRegistryResponse)
+	err := c.cc.Invoke(ctx, "/doxchain.abs.Query/PartitionedPoolRegistry", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *queryClient) PartitionedPoolsAll(ctx context.Context, in *QueryAllPartitionedPoolsRequest, opts ...grpc.CallOption) (*QueryAllPartitionedPoolsResponse, error) {
-	out := new(QueryAllPartitionedPoolsResponse)
-	err := c.cc.Invoke(ctx, "/doxchain.abs.Query/PartitionedPoolsAll", in, out, opts...)
+func (c *queryClient) PartitionedPoolRegistryAll(ctx context.Context, in *QueryAllPartitionedPoolRegistriesRequest, opts ...grpc.CallOption) (*QueryAllPartitionedPoolRegistriesResponse, error) {
+	out := new(QueryAllPartitionedPoolRegistriesResponse)
+	err := c.cc.Invoke(ctx, "/doxchain.abs.Query/PartitionedPoolRegistryAll", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -602,8 +614,8 @@ type QueryServer interface {
 	// Queries watchlist.
 	QueryWatchlist(context.Context, *QueryWatchlistRequest) (*QueryWatchlistResponse, error)
 	// Queries a list of PartitionedPools items.
-	PartitionedPools(context.Context, *QueryGetPartitionedPoolsRequest) (*QueryGetPartitionedPoolsResponse, error)
-	PartitionedPoolsAll(context.Context, *QueryAllPartitionedPoolsRequest) (*QueryAllPartitionedPoolsResponse, error)
+	PartitionedPoolRegistry(context.Context, *QueryGetPartitionedPoolRegistryRequest) (*QueryGetPartitionedPoolRegistryResponse, error)
+	PartitionedPoolRegistryAll(context.Context, *QueryAllPartitionedPoolRegistriesRequest) (*QueryAllPartitionedPoolRegistriesResponse, error)
 }
 
 // UnimplementedQueryServer can be embedded to have forward compatible implementations.
@@ -619,11 +631,11 @@ func (*UnimplementedQueryServer) QueryBreakFactor(ctx context.Context, req *Quer
 func (*UnimplementedQueryServer) QueryWatchlist(ctx context.Context, req *QueryWatchlistRequest) (*QueryWatchlistResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryWatchlist not implemented")
 }
-func (*UnimplementedQueryServer) PartitionedPools(ctx context.Context, req *QueryGetPartitionedPoolsRequest) (*QueryGetPartitionedPoolsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PartitionedPools not implemented")
+func (*UnimplementedQueryServer) PartitionedPoolRegistry(ctx context.Context, req *QueryGetPartitionedPoolRegistryRequest) (*QueryGetPartitionedPoolRegistryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PartitionedPoolRegistry not implemented")
 }
-func (*UnimplementedQueryServer) PartitionedPoolsAll(ctx context.Context, req *QueryAllPartitionedPoolsRequest) (*QueryAllPartitionedPoolsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method PartitionedPoolsAll not implemented")
+func (*UnimplementedQueryServer) PartitionedPoolRegistryAll(ctx context.Context, req *QueryAllPartitionedPoolRegistriesRequest) (*QueryAllPartitionedPoolRegistriesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PartitionedPoolRegistryAll not implemented")
 }
 
 func RegisterQueryServer(s grpc1.Server, srv QueryServer) {
@@ -684,38 +696,38 @@ func _Query_QueryWatchlist_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Query_PartitionedPools_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryGetPartitionedPoolsRequest)
+func _Query_PartitionedPoolRegistry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryGetPartitionedPoolRegistryRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(QueryServer).PartitionedPools(ctx, in)
+		return srv.(QueryServer).PartitionedPoolRegistry(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/doxchain.abs.Query/PartitionedPools",
+		FullMethod: "/doxchain.abs.Query/PartitionedPoolRegistry",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).PartitionedPools(ctx, req.(*QueryGetPartitionedPoolsRequest))
+		return srv.(QueryServer).PartitionedPoolRegistry(ctx, req.(*QueryGetPartitionedPoolRegistryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Query_PartitionedPoolsAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryAllPartitionedPoolsRequest)
+func _Query_PartitionedPoolRegistryAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryAllPartitionedPoolRegistriesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(QueryServer).PartitionedPoolsAll(ctx, in)
+		return srv.(QueryServer).PartitionedPoolRegistryAll(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/doxchain.abs.Query/PartitionedPoolsAll",
+		FullMethod: "/doxchain.abs.Query/PartitionedPoolRegistryAll",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).PartitionedPoolsAll(ctx, req.(*QueryAllPartitionedPoolsRequest))
+		return srv.(QueryServer).PartitionedPoolRegistryAll(ctx, req.(*QueryAllPartitionedPoolRegistriesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -737,12 +749,12 @@ var _Query_serviceDesc = grpc.ServiceDesc{
 			Handler:    _Query_QueryWatchlist_Handler,
 		},
 		{
-			MethodName: "PartitionedPools",
-			Handler:    _Query_PartitionedPools_Handler,
+			MethodName: "PartitionedPoolRegistry",
+			Handler:    _Query_PartitionedPoolRegistry_Handler,
 		},
 		{
-			MethodName: "PartitionedPoolsAll",
-			Handler:    _Query_PartitionedPoolsAll_Handler,
+			MethodName: "PartitionedPoolRegistryAll",
+			Handler:    _Query_PartitionedPoolRegistryAll_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -914,7 +926,7 @@ func (m *QueryWatchlistResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) 
 	return len(dAtA) - i, nil
 }
 
-func (m *QueryGetPartitionedPoolsRequest) Marshal() (dAtA []byte, err error) {
+func (m *QueryGetPartitionedPoolRegistryRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -924,27 +936,27 @@ func (m *QueryGetPartitionedPoolsRequest) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *QueryGetPartitionedPoolsRequest) MarshalTo(dAtA []byte) (int, error) {
+func (m *QueryGetPartitionedPoolRegistryRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *QueryGetPartitionedPoolsRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *QueryGetPartitionedPoolRegistryRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
-	if len(m.Index) > 0 {
-		i -= len(m.Index)
-		copy(dAtA[i:], m.Index)
-		i = encodeVarintQuery(dAtA, i, uint64(len(m.Index)))
+	if len(m.Creator) > 0 {
+		i -= len(m.Creator)
+		copy(dAtA[i:], m.Creator)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.Creator)))
 		i--
 		dAtA[i] = 0xa
 	}
 	return len(dAtA) - i, nil
 }
 
-func (m *QueryGetPartitionedPoolsResponse) Marshal() (dAtA []byte, err error) {
+func (m *QueryGetPartitionedPoolRegistryResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -954,18 +966,18 @@ func (m *QueryGetPartitionedPoolsResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *QueryGetPartitionedPoolsResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *QueryGetPartitionedPoolRegistryResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *QueryGetPartitionedPoolsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *QueryGetPartitionedPoolRegistryResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
 	{
-		size, err := m.PartitionedPools.MarshalToSizedBuffer(dAtA[:i])
+		size, err := m.PartitionedPoolRegistry.MarshalToSizedBuffer(dAtA[:i])
 		if err != nil {
 			return 0, err
 		}
@@ -977,7 +989,7 @@ func (m *QueryGetPartitionedPoolsResponse) MarshalToSizedBuffer(dAtA []byte) (in
 	return len(dAtA) - i, nil
 }
 
-func (m *QueryAllPartitionedPoolsRequest) Marshal() (dAtA []byte, err error) {
+func (m *QueryAllPartitionedPoolRegistriesRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -987,12 +999,12 @@ func (m *QueryAllPartitionedPoolsRequest) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *QueryAllPartitionedPoolsRequest) MarshalTo(dAtA []byte) (int, error) {
+func (m *QueryAllPartitionedPoolRegistriesRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *QueryAllPartitionedPoolsRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *QueryAllPartitionedPoolRegistriesRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1012,7 +1024,7 @@ func (m *QueryAllPartitionedPoolsRequest) MarshalToSizedBuffer(dAtA []byte) (int
 	return len(dAtA) - i, nil
 }
 
-func (m *QueryAllPartitionedPoolsResponse) Marshal() (dAtA []byte, err error) {
+func (m *QueryAllPartitionedPoolRegistriesResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1022,12 +1034,12 @@ func (m *QueryAllPartitionedPoolsResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *QueryAllPartitionedPoolsResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *QueryAllPartitionedPoolRegistriesResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *QueryAllPartitionedPoolsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *QueryAllPartitionedPoolRegistriesResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1044,10 +1056,10 @@ func (m *QueryAllPartitionedPoolsResponse) MarshalToSizedBuffer(dAtA []byte) (in
 		i--
 		dAtA[i] = 0x12
 	}
-	if len(m.PartitionedPools) > 0 {
-		for iNdEx := len(m.PartitionedPools) - 1; iNdEx >= 0; iNdEx-- {
+	if len(m.PartitionedPoolRegistries) > 0 {
+		for iNdEx := len(m.PartitionedPoolRegistries) - 1; iNdEx >= 0; iNdEx-- {
 			{
-				size, err := m.PartitionedPools[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				size, err := m.PartitionedPoolRegistries[iNdEx].MarshalToSizedBuffer(dAtA[:i])
 				if err != nil {
 					return 0, err
 				}
@@ -1134,31 +1146,31 @@ func (m *QueryWatchlistResponse) Size() (n int) {
 	return n
 }
 
-func (m *QueryGetPartitionedPoolsRequest) Size() (n int) {
+func (m *QueryGetPartitionedPoolRegistryRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	l = len(m.Index)
+	l = len(m.Creator)
 	if l > 0 {
 		n += 1 + l + sovQuery(uint64(l))
 	}
 	return n
 }
 
-func (m *QueryGetPartitionedPoolsResponse) Size() (n int) {
+func (m *QueryGetPartitionedPoolRegistryResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	l = m.PartitionedPools.Size()
+	l = m.PartitionedPoolRegistry.Size()
 	n += 1 + l + sovQuery(uint64(l))
 	return n
 }
 
-func (m *QueryAllPartitionedPoolsRequest) Size() (n int) {
+func (m *QueryAllPartitionedPoolRegistriesRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1171,14 +1183,14 @@ func (m *QueryAllPartitionedPoolsRequest) Size() (n int) {
 	return n
 }
 
-func (m *QueryAllPartitionedPoolsResponse) Size() (n int) {
+func (m *QueryAllPartitionedPoolRegistriesResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	if len(m.PartitionedPools) > 0 {
-		for _, e := range m.PartitionedPools {
+	if len(m.PartitionedPoolRegistries) > 0 {
+		for _, e := range m.PartitionedPoolRegistries {
 			l = e.Size()
 			n += 1 + l + sovQuery(uint64(l))
 		}
@@ -1594,7 +1606,7 @@ func (m *QueryWatchlistResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *QueryGetPartitionedPoolsRequest) Unmarshal(dAtA []byte) error {
+func (m *QueryGetPartitionedPoolRegistryRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1617,15 +1629,15 @@ func (m *QueryGetPartitionedPoolsRequest) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: QueryGetPartitionedPoolsRequest: wiretype end group for non-group")
+			return fmt.Errorf("proto: QueryGetPartitionedPoolRegistryRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryGetPartitionedPoolsRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: QueryGetPartitionedPoolRegistryRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Index", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -1653,7 +1665,7 @@ func (m *QueryGetPartitionedPoolsRequest) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Index = string(dAtA[iNdEx:postIndex])
+			m.Creator = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -1676,7 +1688,7 @@ func (m *QueryGetPartitionedPoolsRequest) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *QueryGetPartitionedPoolsResponse) Unmarshal(dAtA []byte) error {
+func (m *QueryGetPartitionedPoolRegistryResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1699,15 +1711,15 @@ func (m *QueryGetPartitionedPoolsResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: QueryGetPartitionedPoolsResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: QueryGetPartitionedPoolRegistryResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryGetPartitionedPoolsResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: QueryGetPartitionedPoolRegistryResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field PartitionedPools", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field PartitionedPoolRegistry", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -1734,7 +1746,7 @@ func (m *QueryGetPartitionedPoolsResponse) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if err := m.PartitionedPools.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+			if err := m.PartitionedPoolRegistry.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -1759,7 +1771,7 @@ func (m *QueryGetPartitionedPoolsResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *QueryAllPartitionedPoolsRequest) Unmarshal(dAtA []byte) error {
+func (m *QueryAllPartitionedPoolRegistriesRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1782,10 +1794,10 @@ func (m *QueryAllPartitionedPoolsRequest) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: QueryAllPartitionedPoolsRequest: wiretype end group for non-group")
+			return fmt.Errorf("proto: QueryAllPartitionedPoolRegistriesRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryAllPartitionedPoolsRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: QueryAllPartitionedPoolRegistriesRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -1845,7 +1857,7 @@ func (m *QueryAllPartitionedPoolsRequest) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *QueryAllPartitionedPoolsResponse) Unmarshal(dAtA []byte) error {
+func (m *QueryAllPartitionedPoolRegistriesResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1868,15 +1880,15 @@ func (m *QueryAllPartitionedPoolsResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: QueryAllPartitionedPoolsResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: QueryAllPartitionedPoolRegistriesResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryAllPartitionedPoolsResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: QueryAllPartitionedPoolRegistriesResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field PartitionedPools", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field PartitionedPoolRegistries", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -1903,8 +1915,8 @@ func (m *QueryAllPartitionedPoolsResponse) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.PartitionedPools = append(m.PartitionedPools, PartitionedPools{})
-			if err := m.PartitionedPools[len(m.PartitionedPools)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+			m.PartitionedPoolRegistries = append(m.PartitionedPoolRegistries, PartitionedPoolRegistry{})
+			if err := m.PartitionedPoolRegistries[len(m.PartitionedPoolRegistries)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex

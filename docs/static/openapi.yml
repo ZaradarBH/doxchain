@@ -32937,24 +32937,29 @@ paths:
           format: int64
       tags:
         - Query
-  /be-heroes/doxchain/abs/partitioned_pools:
+  /be-heroes/doxchain/abs/partitioned_pool_registries:
     get:
-      operationId: DoxchainAbsPartitionedPoolsAll
+      operationId: DoxchainAbsPartitionedPoolRegistryAll
       responses:
         '200':
           description: A successful response.
           schema:
             type: object
             properties:
-              partitionedPools:
+              partitionedPoolRegistries:
                 type: array
                 items:
                   type: object
                   properties:
-                    index:
-                      type: string
                     creator:
                       type: string
+                    pools:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          denom:
+                            type: string
               pagination:
                 type: object
                 properties:
@@ -33060,23 +33065,28 @@ paths:
           type: boolean
       tags:
         - Query
-  /be-heroes/doxchain/abs/partitioned_pools/{index}:
+  /be-heroes/doxchain/abs/partitioned_pool_registries/{creator}:
     get:
       summary: Queries a list of PartitionedPools items.
-      operationId: DoxchainAbsPartitionedPools
+      operationId: DoxchainAbsPartitionedPoolRegistry
       responses:
         '200':
           description: A successful response.
           schema:
             type: object
             properties:
-              partitionedPools:
+              partitionedPoolRegistry:
                 type: object
                 properties:
-                  index:
-                    type: string
                   creator:
                     type: string
+                  pools:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        denom:
+                          type: string
         default:
           description: An unexpected error response.
           schema:
@@ -33096,7 +33106,7 @@ paths:
                       type: string
                   additionalProperties: {}
       parameters:
-        - name: index
+        - name: creator
           in: path
           required: true
           type: string
@@ -67903,36 +67913,47 @@ definitions:
             NOTE: The amount field is an Int which implements the custom method
             signatures required by gogoproto.
     description: Period defines a length of time and amount of coins that will vest.
-  doxchain.abs.MsgCreatePartitionedPoolsResponse:
-    type: object
-  doxchain.abs.MsgDeletePartitionedPoolsResponse:
+  doxchain.abs.MsgCreatePartitionedPoolRegistryResponse:
     type: object
   doxchain.abs.MsgUpdateBreakFactorResponse:
-    type: object
-  doxchain.abs.MsgUpdatePartitionedPoolsResponse:
     type: object
   doxchain.abs.Params:
     type: object
     description: Params defines the parameters for the module.
-  doxchain.abs.PartitionedPools:
+  doxchain.abs.PartitionedPool:
     type: object
     properties:
-      index:
+      denom:
         type: string
+  doxchain.abs.PartitionedPoolRegistry:
+    type: object
+    properties:
       creator:
         type: string
-  doxchain.abs.QueryAllPartitionedPoolsResponse:
-    type: object
-    properties:
-      partitionedPools:
+      pools:
         type: array
         items:
           type: object
           properties:
-            index:
+            denom:
               type: string
+  doxchain.abs.QueryAllPartitionedPoolRegistriesResponse:
+    type: object
+    properties:
+      partitionedPoolRegistries:
+        type: array
+        items:
+          type: object
+          properties:
             creator:
               type: string
+            pools:
+              type: array
+              items:
+                type: object
+                properties:
+                  denom:
+                    type: string
       pagination:
         type: object
         properties:
@@ -67964,16 +67985,21 @@ definitions:
     properties:
       value:
         type: string
-  doxchain.abs.QueryGetPartitionedPoolsResponse:
+  doxchain.abs.QueryGetPartitionedPoolRegistryResponse:
     type: object
     properties:
-      partitionedPools:
+      partitionedPoolRegistry:
         type: object
         properties:
-          index:
-            type: string
           creator:
             type: string
+          pools:
+            type: array
+            items:
+              type: object
+              properties:
+                denom:
+                  type: string
   doxchain.abs.QueryParamsResponse:
     type: object
     properties:

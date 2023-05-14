@@ -4,13 +4,13 @@ package doxchain.abs;
 
 import "gogoproto/gogo.proto";
 import "doxchain/abs/params.proto";
-import "doxchain/abs/partitioned_pools.proto";
+import "doxchain/abs/partitioned_pool_registry.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/abs/types";
 
 // GenesisState defines the abs module's genesis state.
 message GenesisState {
            Params           params               = 1 [(gogoproto.nullable) = false];
-  repeated PartitionedPools partitionedPoolsList = 2 [(gogoproto.nullable) = false];
+  repeated PartitionedPoolRegistry partitionedPoolRegistryList = 2 [(gogoproto.nullable) = false];
 }
 

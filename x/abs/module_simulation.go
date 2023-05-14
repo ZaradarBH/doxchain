@@ -51,14 +51,12 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 	}
 	absGenesis := types.GenesisState{
 		Params: types.DefaultParams(),
-		PartitionedPoolsList: []types.PartitionedPools{
+		PartitionedPoolRegistryList: []types.PartitionedPoolRegistry{
 		{
 			Creator: sample.AccAddress(),
-Index: "0",
 },
 		{
 			Creator: sample.AccAddress(),
-Index: "1",
 },
 	},
 	// this line is used by starport scaffolding # simapp/module/genesisState
@@ -93,39 +91,6 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgUpdateBreakFactor,
 		abssimulation.SimulateMsgUpdateBreakFactor(am.accountKeeper, am.bankKeeper, am.keeper),
-	))
-
-	var weightMsgCreatePartitionedPools int
-	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgCreatePartitionedPools, &weightMsgCreatePartitionedPools, nil,
-		func(_ *rand.Rand) {
-			weightMsgCreatePartitionedPools = defaultWeightMsgCreatePartitionedPools
-		},
-	)
-	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgCreatePartitionedPools,
-		abssimulation.SimulateMsgCreatePartitionedPools(am.accountKeeper, am.bankKeeper, am.keeper),
-	))
-
-	var weightMsgUpdatePartitionedPools int
-	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgUpdatePartitionedPools, &weightMsgUpdatePartitionedPools, nil,
-		func(_ *rand.Rand) {
-			weightMsgUpdatePartitionedPools = defaultWeightMsgUpdatePartitionedPools
-		},
-	)
-	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgUpdatePartitionedPools,
-		abssimulation.SimulateMsgUpdatePartitionedPools(am.accountKeeper, am.bankKeeper, am.keeper),
-	))
-
-	var weightMsgDeletePartitionedPools int
-	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgDeletePartitionedPools, &weightMsgDeletePartitionedPools, nil,
-		func(_ *rand.Rand) {
-			weightMsgDeletePartitionedPools = defaultWeightMsgDeletePartitionedPools
-		},
-	)
-	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgDeletePartitionedPools,
-		abssimulation.SimulateMsgDeletePartitionedPools(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
 	// this line is used by starport scaffolding # simapp/module/operation

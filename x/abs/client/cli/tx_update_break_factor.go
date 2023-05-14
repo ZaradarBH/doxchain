@@ -25,7 +25,7 @@ func CmdUpdateBreakFactor() *cobra.Command {
 				return err
 			}
 
-			msg := types.NewMsgUpdateBreakFactor(
+			msg := types.NewMsgUpdateBreakFactorRequest(
 				clientCtx.GetFromAddress().String(),
 				argValue,
 			)

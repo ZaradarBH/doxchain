@@ -9,10 +9,10 @@ import (
     "github.com/be-heroes/doxchain/x/abs/types"
 )
 
-func CmdListPartitionedPools() *cobra.Command {
+func CmdListPartitionedPoolRegistries() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "list-partitioned-pools",
-		Short: "list all partitionedPools",
+		Use:   "list-partitioned-pool-registries",
+		Short: "list all partitionedPoolRegistries",
 		RunE: func(cmd *cobra.Command, args []string) error {
             clientCtx := client.GetClientContextFromCmd(cmd)
 
@@ -23,11 +23,11 @@ func CmdListPartitionedPools() *cobra.Command {
 
             queryClient := types.NewQueryClient(clientCtx)
 
-            params := &types.QueryAllPartitionedPoolsRequest{
+            params := &types.QueryAllPartitionedPoolRegistriesRequest{
                 Pagination: pageReq,
             }
 
-            res, err := queryClient.PartitionedPoolsAll(context.Background(), params)
+            res, err := queryClient.PartitionedPoolRegistryAll(context.Background(), params)
             if err != nil {
                 return err
             }
@@ -42,9 +42,9 @@ func CmdListPartitionedPools() *cobra.Command {
     return cmd
 }
 
-func CmdShowPartitionedPools() *cobra.Command {
+func CmdShowPartitionedPoolRegistry() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "show-partitioned-pools [index]",
+		Use:   "show-partitioned-pools [creator]",
 		Short: "shows a partitionedPools",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
@@ -54,12 +54,12 @@ func CmdShowPartitionedPools() *cobra.Command {
 
              argIndex := args[0]
             
-            params := &types.QueryGetPartitionedPoolsRequest{
-                Index: argIndex,
+            params := &types.QueryGetPartitionedPoolRegistryRequest{
+                Creator: argIndex,
                 
             }
 
-            res, err := queryClient.PartitionedPools(context.Background(), params)
+            res, err := queryClient.PartitionedPoolRegistry(context.Background(), params)
             if err != nil {
                 return err
             }

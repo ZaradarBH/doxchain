@@ -3,18 +3,16 @@ syntax = "proto3";
 package doxchain.abs;
 
 import "gogoproto/gogo.proto";
-import "doxchain/abs/partitioned_pools.proto";
+import "doxchain/abs/partitioned_pool_registry.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/abs/types";
 
 // Msg defines the Msg service.
 service Msg {
-  rpc UpdateBreakFactor      (MsgUpdateBreakFactor     ) returns (MsgUpdateBreakFactorResponse     );
-  rpc CreatePartitionedPools (MsgCreatePartitionedPools) returns (MsgCreatePartitionedPoolsResponse);
-  rpc UpdatePartitionedPools (MsgUpdatePartitionedPools) returns (MsgUpdatePartitionedPoolsResponse);
-  rpc DeletePartitionedPools (MsgDeletePartitionedPools) returns (MsgDeletePartitionedPoolsResponse);
+  rpc UpdateBreakFactor      (MsgUpdateBreakFactorRequest     ) returns (MsgUpdateBreakFactorResponse     );
+  rpc CreatePartitionedPoolRegistry (MsgCreatePartitionedPoolRegistryRequest) returns (MsgCreatePartitionedPoolRegistryResponse);
 }
-message MsgUpdateBreakFactor {
+message MsgUpdateBreakFactorRequest {
   option           (gogoproto.equal) = false;
   option (gogoproto.goproto_getters) = false;
   string creator = 1 [(gogoproto.moretags) = "yaml:\"creator\""];
@@ -23,24 +21,9 @@ message MsgUpdateBreakFactor {
 
 message MsgUpdateBreakFactorResponse {}
 
-message MsgCreatePartitionedPools {
+message MsgCreatePartitionedPoolRegistryRequest {
   string creator = 1;
-  string index   = 2;
+  string denom   = 2;
 }
 
-message MsgCreatePartitionedPoolsResponse {}
-
-message MsgUpdatePartitionedPools {
-  string creator = 1;
-  string index   = 2;
-}
-
-message MsgUpdatePartitionedPoolsResponse {}
-
-message MsgDeletePartitionedPools {
-  string creator = 1;
-  string index   = 2;
-}
-
-message MsgDeletePartitionedPoolsResponse {}
-
+message MsgCreatePartitionedPoolRegistryResponse {}

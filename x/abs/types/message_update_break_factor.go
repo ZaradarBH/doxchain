@@ -7,24 +7,24 @@ import (
 
 const TypeMsgUpdateBreakFactor = "update_break_factor"
 
-var _ sdk.Msg = &MsgUpdateBreakFactor{}
+var _ sdk.Msg = &MsgUpdateBreakFactorRequest{}
 
-func NewMsgUpdateBreakFactor(creator string, value string) *MsgUpdateBreakFactor {
-	return &MsgUpdateBreakFactor{
+func NewMsgUpdateBreakFactorRequest(creator string, value string) *MsgUpdateBreakFactorRequest {
+	return &MsgUpdateBreakFactorRequest{
 		Creator: creator,
 		Value:   value,
 	}
 }
 
-func (msg *MsgUpdateBreakFactor) Route() string {
+func (msg *MsgUpdateBreakFactorRequest) Route() string {
 	return RouterKey
 }
 
-func (msg *MsgUpdateBreakFactor) Type() string {
+func (msg *MsgUpdateBreakFactorRequest) Type() string {
 	return TypeMsgUpdateBreakFactor
 }
 
-func (msg *MsgUpdateBreakFactor) GetSigners() []sdk.AccAddress {
+func (msg *MsgUpdateBreakFactorRequest) GetSigners() []sdk.AccAddress {
 	creator, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		panic(err)
@@ -32,12 +32,12 @@ func (msg *MsgUpdateBreakFactor) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{creator}
 }
 
-func (msg *MsgUpdateBreakFactor) GetSignBytes() []byte {
+func (msg *MsgUpdateBreakFactorRequest) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(msg)
 	return sdk.MustSortJSON(bz)
 }
 
-func (msg *MsgUpdateBreakFactor) ValidateBasic() error {
+func (msg *MsgUpdateBreakFactorRequest) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)

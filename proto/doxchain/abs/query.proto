@@ -7,7 +7,7 @@ import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "doxchain/abs/params.proto";
 import "doxchain/abs/watchlist.proto";
-import "doxchain/abs/partitioned_pools.proto";
+import "doxchain/abs/partitioned_pool_registry.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/abs/types";
 
@@ -33,12 +33,12 @@ service Query {
   }
   
   // Queries a list of PartitionedPools items.
-  rpc PartitionedPools    (QueryGetPartitionedPoolsRequest) returns (QueryGetPartitionedPoolsResponse) {
-    option (google.api.http).get = "/be-heroes/doxchain/abs/partitioned_pools/{index}";
+  rpc PartitionedPoolRegistry    (QueryGetPartitionedPoolRegistryRequest) returns (QueryGetPartitionedPoolRegistryResponse) {
+    option (google.api.http).get = "/be-heroes/doxchain/abs/partitioned_pool_registries/{creator}";
   
   }
-  rpc PartitionedPoolsAll (QueryAllPartitionedPoolsRequest) returns (QueryAllPartitionedPoolsResponse) {
-    option (google.api.http).get = "/be-heroes/doxchain/abs/partitioned_pools";
+  rpc PartitionedPoolRegistryAll (QueryAllPartitionedPoolRegistriesRequest) returns (QueryAllPartitionedPoolRegistriesResponse) {
+    option (google.api.http).get = "/be-heroes/doxchain/abs/partitioned_pool_registries";
   
   }
 }
@@ -64,20 +64,20 @@ message QueryWatchlistResponse {
   Watchlist watchlist = 1 [(gogoproto.nullable) = false];
 }
 
-message QueryGetPartitionedPoolsRequest {
-  string index = 1;
+message QueryGetPartitionedPoolRegistryRequest {
+  string creator = 1;
 }
 
-message QueryGetPartitionedPoolsResponse {
-  PartitionedPools partitionedPools = 1 [(gogoproto.nullable) = false];
+message QueryGetPartitionedPoolRegistryResponse {
+  PartitionedPoolRegistry partitionedPoolRegistry = 1 [(gogoproto.nullable) = false];
 }
 
-message QueryAllPartitionedPoolsRequest {
+message QueryAllPartitionedPoolRegistriesRequest {
   cosmos.base.query.v1beta1.PageRequest pagination = 1;
 }
 
-message QueryAllPartitionedPoolsResponse {
-  repeated PartitionedPools                       partitionedPools = 1 [(gogoproto.nullable) = false];
+message QueryAllPartitionedPoolRegistriesResponse {
+  repeated PartitionedPoolRegistry                       partitionedPoolRegistries = 1 [(gogoproto.nullable) = false];
            cosmos.base.query.v1beta1.PageResponse pagination       = 2;
 }
 

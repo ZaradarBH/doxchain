@@ -8,21 +8,17 @@ import (
 )
 
 func RegisterCodec(cdc *codec.LegacyAmino) {
-	cdc.RegisterConcrete(&MsgUpdateBreakFactor{}, "abs/UpdateBreakFactor", nil)
-	cdc.RegisterConcrete(&MsgCreatePartitionedPools{}, "abs/CreatePartitionedPools", nil)
-cdc.RegisterConcrete(&MsgUpdatePartitionedPools{}, "abs/UpdatePartitionedPools", nil)
-cdc.RegisterConcrete(&MsgDeletePartitionedPools{}, "abs/DeletePartitionedPools", nil)
+	cdc.RegisterConcrete(&MsgUpdateBreakFactorRequest{}, "abs/UpdateBreakFactor", nil)
+	cdc.RegisterConcrete(&MsgCreatePartitionedPoolRegistryRequest{}, "abs/CreatePartitionedPools", nil)
 // this line is used by starport scaffolding # 2
 }
 
 func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 	registry.RegisterImplementations((*sdk.Msg)(nil),
-		&MsgUpdateBreakFactor{},
+		&MsgUpdateBreakFactorRequest{},
 	)
 	registry.RegisterImplementations((*sdk.Msg)(nil),
-	&MsgCreatePartitionedPools{},
-	&MsgUpdatePartitionedPools{},
-	&MsgDeletePartitionedPools{},
+	&MsgCreatePartitionedPoolRegistryRequest{},
 )
 // this line is used by starport scaffolding # 3
 

@@ -5,17 +5,17 @@ import "encoding/binary"
 var _ binary.ByteOrder
 
 const (
-    // PartitionedPoolsKeyPrefix is the prefix to retrieve all PartitionedPools
-	PartitionedPoolsKeyPrefix = "PartitionedPools/value/"
+    // PartitionedPoolRegistryKeyPrefix is the prefix to retrieve all PartitionedPools
+	PartitionedPoolRegistryKeyPrefix = "PartitionedPoolRegistry/value/"
 )
 
 // PartitionedPoolsKey returns the store key to retrieve a PartitionedPools from the index fields
-func PartitionedPoolsKey(
-index string,
+func PartitionedPoolRegistryKey(
+creator string,
 ) []byte {
 	var key []byte
     
-    indexBytes := []byte(index)
+    indexBytes := []byte(creator)
     key = append(key, indexBytes...)
     key = append(key, []byte("/")...)
     
