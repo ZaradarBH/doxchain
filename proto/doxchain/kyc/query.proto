@@ -35,9 +35,11 @@ message QueryParamsResponse {
   Params params = 1 [(gogoproto.nullable) = false];
 }
 
-message QueryGetKYCRequestRequest {}
+message QueryGetKYCRequestRequest {
+  string creator = 1;
+}
 
 message QueryGetKYCRequestResponse {
-  KYCRequest KYCRequest = 1 [(gogoproto.nullable) = false];
+  KYCRequest Request = 1 [(gogoproto.nullable) = false];
 }
 

@@ -4,6 +4,310 @@ info:
   name: ''
   description: ''
 paths:
+  /be-heroes/doxchain/abs/partitioned_pool_registries:
+    get:
+      operationId: BeheroesDoxchainAbsPartitionedPoolRegistryAll
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              partitionedPoolRegistries:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    creator:
+                      type: string
+                    pools:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          denom:
+                            type: string
+              pagination:
+                type: object
+                properties:
+                  next_key:
+                    type: string
+                    format: byte
+                    description: |-
+                      next_key is the key to be passed to PageRequest.key to
+                      query the next page most efficiently. It will be empty if
+                      there are no more results.
+                  total:
+                    type: string
+                    format: uint64
+                    title: >-
+                      total is total number of results available if
+                      PageRequest.count_total
+
+                      was set, its value is undefined otherwise
+                description: >-
+                  PageResponse is to be embedded in gRPC response messages where
+                  the
+
+                  corresponding request message has used PageRequest.
+
+                   message SomeResponse {
+                           repeated Bar results = 1;
+                           PageResponse page = 2;
+                   }
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: pagination.key
+          description: |-
+            key is a value returned in PageResponse.next_key to begin
+            querying the next page most efficiently. Only one of offset or key
+            should be set.
+          in: query
+          required: false
+          type: string
+          format: byte
+        - name: pagination.offset
+          description: >-
+            offset is a numeric offset that can be used when key is unavailable.
+
+            It is less efficient than using key. Only one of offset or key
+            should
+
+            be set.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.limit
+          description: >-
+            limit is the total number of results to be returned in the result
+            page.
+
+            If left empty it will default to a value to be set by each app.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.count_total
+          description: >-
+            count_total is set to true  to indicate that the result set should
+            include
+
+            a count of the total number of items available for pagination in
+            UIs.
+
+            count_total is only respected when offset is used. It is ignored
+            when key
+
+            is set.
+          in: query
+          required: false
+          type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+
+
+            Since: cosmos-sdk 0.43
+          in: query
+          required: false
+          type: boolean
+      tags:
+        - Query
+  /be-heroes/doxchain/abs/partitioned_pool_registries/{creator}:
+    get:
+      summary: Queries a list of PartitionedPools items.
+      operationId: BeheroesDoxchainAbsPartitionedPoolRegistry
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              partitionedPoolRegistry:
+                type: object
+                properties:
+                  creator:
+                    type: string
+                  pools:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        denom:
+                          type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: creator
+          in: path
+          required: true
+          type: string
+      tags:
+        - Query
+  /doxchain/abs/params:
+    get:
+      summary: Parameters queries the parameters of the module.
+      operationId: BeheroesDoxchainAbsParams
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              params:
+                description: params holds all the parameters of this module.
+                type: object
+            description: >-
+              QueryParamsResponse is response type for the Query/Params RPC
+              method.
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      tags:
+        - Query
+  /doxchain/abs/query_break_factor:
+    get:
+      summary: Queries a list of QueryBreakFactor items.
+      operationId: BeheroesDoxchainAbsQueryBreakFactor
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              value:
+                type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      tags:
+        - Query
+  /doxchain/abs/query_watchlist:
+    get:
+      summary: Queries watchlist.
+      operationId: BeheroesDoxchainAbsQueryWatchlist
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              watchlist:
+                type: object
+                properties:
+                  entries:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        address:
+                          type: string
+                        blockHeight:
+                          type: string
+                          format: uint64
+                        coins:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              denom:
+                                type: string
+                              amount:
+                                type: string
+                            description: >-
+                              Coin defines a token with a denomination and an
+                              amount.
+
+
+                              NOTE: The amount field is an Int which implements
+                              the custom method
+
+                              signatures required by gogoproto.
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      tags:
+        - Query
   /be-heroes/doxchain/aml/aml_request:
     get:
       summary: Queries a AMLRequest by index.
@@ -49,6 +353,251 @@ paths:
     get:
       summary: Parameters queries the parameters of the module.
       operationId: BeheroesDoxchainAmlParams
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              params:
+                description: params holds all the parameters of this module.
+                type: object
+            description: >-
+              QueryParamsResponse is response type for the Query/Params RPC
+              method.
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      tags:
+        - Query
+  /doxchain/did/did:
+    get:
+      operationId: BeheroesDoxchainDidDidAll
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              Did:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    creator:
+                      type: string
+                    url:
+                      type: string
+                    methodName:
+                      type: string
+                    methodId:
+                      type: string
+                    path:
+                      type: string
+                    fragment:
+                      type: string
+                    query:
+                      type: string
+                    parameters:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          value:
+                            type: string
+                    id:
+                      type: string
+                      format: uint64
+              pagination:
+                type: object
+                properties:
+                  next_key:
+                    type: string
+                    format: byte
+                    description: |-
+                      next_key is the key to be passed to PageRequest.key to
+                      query the next page most efficiently. It will be empty if
+                      there are no more results.
+                  total:
+                    type: string
+                    format: uint64
+                    title: >-
+                      total is total number of results available if
+                      PageRequest.count_total
+
+                      was set, its value is undefined otherwise
+                description: >-
+                  PageResponse is to be embedded in gRPC response messages where
+                  the
+
+                  corresponding request message has used PageRequest.
+
+                   message SomeResponse {
+                           repeated Bar results = 1;
+                           PageResponse page = 2;
+                   }
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: pagination.key
+          description: |-
+            key is a value returned in PageResponse.next_key to begin
+            querying the next page most efficiently. Only one of offset or key
+            should be set.
+          in: query
+          required: false
+          type: string
+          format: byte
+        - name: pagination.offset
+          description: >-
+            offset is a numeric offset that can be used when key is unavailable.
+
+            It is less efficient than using key. Only one of offset or key
+            should
+
+            be set.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.limit
+          description: >-
+            limit is the total number of results to be returned in the result
+            page.
+
+            If left empty it will default to a value to be set by each app.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.count_total
+          description: >-
+            count_total is set to true  to indicate that the result set should
+            include
+
+            a count of the total number of items available for pagination in
+            UIs.
+
+            count_total is only respected when offset is used. It is ignored
+            when key
+
+            is set.
+          in: query
+          required: false
+          type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+
+
+            Since: cosmos-sdk 0.43
+          in: query
+          required: false
+          type: boolean
+      tags:
+        - Query
+  /doxchain/did/did/{fullyQualifiedDidIdentifier}:
+    get:
+      summary: Queries a list of Did items.
+      operationId: BeheroesDoxchainDidDid
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              Did:
+                type: object
+                properties:
+                  creator:
+                    type: string
+                  url:
+                    type: string
+                  methodName:
+                    type: string
+                  methodId:
+                    type: string
+                  path:
+                    type: string
+                  fragment:
+                    type: string
+                  query:
+                    type: string
+                  parameters:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        value:
+                          type: string
+                  id:
+                    type: string
+                    format: uint64
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: fullyQualifiedDidIdentifier
+          in: path
+          required: true
+          type: string
+      tags:
+        - Query
+  /doxchain/did/params:
+    get:
+      summary: Parameters queries the parameters of the module.
+      operationId: BeheroesDoxchainDidParams
       responses:
         '200':
           description: A successful response.
@@ -185,17 +734,40 @@ paths:
           schema:
             type: object
             properties:
-              KYCRequest:
+              Request:
                 type: object
                 properties:
-                  firstName:
-                    type: string
-                  lastName:
-                    type: string
+                  did:
+                    type: object
+                    properties:
+                      creator:
+                        type: string
+                      url:
+                        type: string
+                      methodName:
+                        type: string
+                      methodId:
+                        type: string
+                      path:
+                        type: string
+                      fragment:
+                        type: string
+                      query:
+                        type: string
+                      parameters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            value:
+                              type: string
+                      id:
+                        type: string
+                        format: uint64
                   approved:
                     type: boolean
-                  creator:
-                    type: string
         default:
           description: An unexpected error response.
           schema:
@@ -214,6 +786,11 @@ paths:
                     '@type':
                       type: string
                   additionalProperties: {}
+      parameters:
+        - name: creator
+          in: query
+          required: false
+          type: string
       tags:
         - Query
   /be-heroes/doxchain/kyc/params:
@@ -32937,555 +33514,6 @@ paths:
           format: int64
       tags:
         - Query
-  /be-heroes/doxchain/abs/partitioned_pool_registries:
-    get:
-      operationId: DoxchainAbsPartitionedPoolRegistryAll
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            properties:
-              partitionedPoolRegistries:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    creator:
-                      type: string
-                    pools:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          denom:
-                            type: string
-              pagination:
-                type: object
-                properties:
-                  next_key:
-                    type: string
-                    format: byte
-                    description: |-
-                      next_key is the key to be passed to PageRequest.key to
-                      query the next page most efficiently. It will be empty if
-                      there are no more results.
-                  total:
-                    type: string
-                    format: uint64
-                    title: >-
-                      total is total number of results available if
-                      PageRequest.count_total
-
-                      was set, its value is undefined otherwise
-                description: >-
-                  PageResponse is to be embedded in gRPC response messages where
-                  the
-
-                  corresponding request message has used PageRequest.
-
-                   message SomeResponse {
-                           repeated Bar results = 1;
-                           PageResponse page = 2;
-                   }
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      parameters:
-        - name: pagination.key
-          description: |-
-            key is a value returned in PageResponse.next_key to begin
-            querying the next page most efficiently. Only one of offset or key
-            should be set.
-          in: query
-          required: false
-          type: string
-          format: byte
-        - name: pagination.offset
-          description: >-
-            offset is a numeric offset that can be used when key is unavailable.
-
-            It is less efficient than using key. Only one of offset or key
-            should
-
-            be set.
-          in: query
-          required: false
-          type: string
-          format: uint64
-        - name: pagination.limit
-          description: >-
-            limit is the total number of results to be returned in the result
-            page.
-
-            If left empty it will default to a value to be set by each app.
-          in: query
-          required: false
-          type: string
-          format: uint64
-        - name: pagination.count_total
-          description: >-
-            count_total is set to true  to indicate that the result set should
-            include
-
-            a count of the total number of items available for pagination in
-            UIs.
-
-            count_total is only respected when offset is used. It is ignored
-            when key
-
-            is set.
-          in: query
-          required: false
-          type: boolean
-        - name: pagination.reverse
-          description: >-
-            reverse is set to true if results are to be returned in the
-            descending order.
-
-
-            Since: cosmos-sdk 0.43
-          in: query
-          required: false
-          type: boolean
-      tags:
-        - Query
-  /be-heroes/doxchain/abs/partitioned_pool_registries/{creator}:
-    get:
-      summary: Queries a list of PartitionedPools items.
-      operationId: DoxchainAbsPartitionedPoolRegistry
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            properties:
-              partitionedPoolRegistry:
-                type: object
-                properties:
-                  creator:
-                    type: string
-                  pools:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        denom:
-                          type: string
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      parameters:
-        - name: creator
-          in: path
-          required: true
-          type: string
-      tags:
-        - Query
-  /doxchain/abs/params:
-    get:
-      summary: Parameters queries the parameters of the module.
-      operationId: DoxchainAbsParams
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            properties:
-              params:
-                description: params holds all the parameters of this module.
-                type: object
-            description: >-
-              QueryParamsResponse is response type for the Query/Params RPC
-              method.
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      tags:
-        - Query
-  /doxchain/abs/query_break_factor:
-    get:
-      summary: Queries a list of QueryBreakFactor items.
-      operationId: DoxchainAbsQueryBreakFactor
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            properties:
-              value:
-                type: string
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      tags:
-        - Query
-  /doxchain/abs/query_watchlist:
-    get:
-      summary: Queries watchlist.
-      operationId: DoxchainAbsQueryWatchlist
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            properties:
-              watchlist:
-                type: object
-                properties:
-                  entries:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        address:
-                          type: string
-                        blockHeight:
-                          type: string
-                          format: uint64
-                        coins:
-                          type: array
-                          items:
-                            type: object
-                            properties:
-                              denom:
-                                type: string
-                              amount:
-                                type: string
-                            description: >-
-                              Coin defines a token with a denomination and an
-                              amount.
-
-
-                              NOTE: The amount field is an Int which implements
-                              the custom method
-
-                              signatures required by gogoproto.
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      tags:
-        - Query
-  /doxchain/did/did:
-    get:
-      operationId: DoxchainDidDidAll
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            properties:
-              Did:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    creator:
-                      type: string
-                    url:
-                      type: string
-                    methodName:
-                      type: string
-                    methodId:
-                      type: string
-                    path:
-                      type: string
-                    fragment:
-                      type: string
-                    query:
-                      type: string
-                    parameters:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          name:
-                            type: string
-                          value:
-                            type: string
-                    id:
-                      type: string
-                      format: uint64
-              pagination:
-                type: object
-                properties:
-                  next_key:
-                    type: string
-                    format: byte
-                    description: |-
-                      next_key is the key to be passed to PageRequest.key to
-                      query the next page most efficiently. It will be empty if
-                      there are no more results.
-                  total:
-                    type: string
-                    format: uint64
-                    title: >-
-                      total is total number of results available if
-                      PageRequest.count_total
-
-                      was set, its value is undefined otherwise
-                description: >-
-                  PageResponse is to be embedded in gRPC response messages where
-                  the
-
-                  corresponding request message has used PageRequest.
-
-                   message SomeResponse {
-                           repeated Bar results = 1;
-                           PageResponse page = 2;
-                   }
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      parameters:
-        - name: pagination.key
-          description: |-
-            key is a value returned in PageResponse.next_key to begin
-            querying the next page most efficiently. Only one of offset or key
-            should be set.
-          in: query
-          required: false
-          type: string
-          format: byte
-        - name: pagination.offset
-          description: >-
-            offset is a numeric offset that can be used when key is unavailable.
-
-            It is less efficient than using key. Only one of offset or key
-            should
-
-            be set.
-          in: query
-          required: false
-          type: string
-          format: uint64
-        - name: pagination.limit
-          description: >-
-            limit is the total number of results to be returned in the result
-            page.
-
-            If left empty it will default to a value to be set by each app.
-          in: query
-          required: false
-          type: string
-          format: uint64
-        - name: pagination.count_total
-          description: >-
-            count_total is set to true  to indicate that the result set should
-            include
-
-            a count of the total number of items available for pagination in
-            UIs.
-
-            count_total is only respected when offset is used. It is ignored
-            when key
-
-            is set.
-          in: query
-          required: false
-          type: boolean
-        - name: pagination.reverse
-          description: >-
-            reverse is set to true if results are to be returned in the
-            descending order.
-
-
-            Since: cosmos-sdk 0.43
-          in: query
-          required: false
-          type: boolean
-      tags:
-        - Query
-  /doxchain/did/did/{fullyQualifiedDidIdentifier}:
-    get:
-      summary: Queries a list of Did items.
-      operationId: DoxchainDidDid
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            properties:
-              Did:
-                type: object
-                properties:
-                  creator:
-                    type: string
-                  url:
-                    type: string
-                  methodName:
-                    type: string
-                  methodId:
-                    type: string
-                  path:
-                    type: string
-                  fragment:
-                    type: string
-                  query:
-                    type: string
-                  parameters:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        value:
-                          type: string
-                  id:
-                    type: string
-                    format: uint64
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      parameters:
-        - name: fullyQualifiedDidIdentifier
-          in: path
-          required: true
-          type: string
-      tags:
-        - Query
-  /doxchain/did/params:
-    get:
-      summary: Parameters queries the parameters of the module.
-      operationId: DoxchainDidParams
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            properties:
-              params:
-                description: params holds all the parameters of this module.
-                type: object
-            description: >-
-              QueryParamsResponse is response type for the Query/Params RPC
-              method.
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      tags:
-        - Query
   /doxchain/doxchain/params:
     get:
       summary: Parameters queries the parameters of the module.
@@ -44806,47 +44834,274 @@ paths:
       tags:
         - Query
 definitions:
-  beheroes.doxchain.aml.AMLRequest:
+  beheroes.doxchain.abs.MsgCreatePartitionedPoolRegistryResponse:
     type: object
-    properties:
-      firstName:
-        type: string
-      lastName:
-        type: string
-      approved:
-        type: boolean
-      creator:
-        type: string
-  beheroes.doxchain.aml.MsgCreateAMLRequestResponse:
+  beheroes.doxchain.abs.MsgUpdateBreakFactorResponse:
     type: object
-  beheroes.doxchain.aml.MsgDeleteAMLRequestResponse:
-    type: object
-  beheroes.doxchain.aml.MsgUpdateAMLRequestResponse:
-    type: object
-  beheroes.doxchain.aml.Params:
+  beheroes.doxchain.abs.Params:
     type: object
     description: Params defines the parameters for the module.
-  beheroes.doxchain.aml.QueryGetAMLRequestResponse:
+  beheroes.doxchain.abs.PartitionedPool:
     type: object
     properties:
-      AMLRequest:
+      denom:
+        type: string
+  beheroes.doxchain.abs.PartitionedPoolRegistry:
+    type: object
+    properties:
+      creator:
+        type: string
+      pools:
+        type: array
+        items:
+          type: object
+          properties:
+            denom:
+              type: string
+  beheroes.doxchain.abs.QueryAllPartitionedPoolRegistriesResponse:
+    type: object
+    properties:
+      partitionedPoolRegistries:
+        type: array
+        items:
+          type: object
+          properties:
+            creator:
+              type: string
+            pools:
+              type: array
+              items:
+                type: object
+                properties:
+                  denom:
+                    type: string
+      pagination:
         type: object
         properties:
-          firstName:
+          next_key:
             type: string
-          lastName:
+            format: byte
+            description: |-
+              next_key is the key to be passed to PageRequest.key to
+              query the next page most efficiently. It will be empty if
+              there are no more results.
+          total:
             type: string
-          approved:
-            type: boolean
+            format: uint64
+            title: >-
+              total is total number of results available if
+              PageRequest.count_total
+
+              was set, its value is undefined otherwise
+        description: |-
+          PageResponse is to be embedded in gRPC response messages where the
+          corresponding request message has used PageRequest.
+
+           message SomeResponse {
+                   repeated Bar results = 1;
+                   PageResponse page = 2;
+           }
+  beheroes.doxchain.abs.QueryBreakFactorResponse:
+    type: object
+    properties:
+      value:
+        type: string
+  beheroes.doxchain.abs.QueryGetPartitionedPoolRegistryResponse:
+    type: object
+    properties:
+      partitionedPoolRegistry:
+        type: object
+        properties:
           creator:
             type: string
-  beheroes.doxchain.aml.QueryParamsResponse:
+          pools:
+            type: array
+            items:
+              type: object
+              properties:
+                denom:
+                  type: string
+  beheroes.doxchain.abs.QueryParamsResponse:
     type: object
     properties:
       params:
         description: params holds all the parameters of this module.
         type: object
     description: QueryParamsResponse is response type for the Query/Params RPC method.
+  beheroes.doxchain.abs.QueryWatchlistResponse:
+    type: object
+    properties:
+      watchlist:
+        type: object
+        properties:
+          entries:
+            type: array
+            items:
+              type: object
+              properties:
+                address:
+                  type: string
+                blockHeight:
+                  type: string
+                  format: uint64
+                coins:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      denom:
+                        type: string
+                      amount:
+                        type: string
+                    description: >-
+                      Coin defines a token with a denomination and an amount.
+
+
+                      NOTE: The amount field is an Int which implements the
+                      custom method
+
+                      signatures required by gogoproto.
+  beheroes.doxchain.abs.Watchlist:
+    type: object
+    properties:
+      entries:
+        type: array
+        items:
+          type: object
+          properties:
+            address:
+              type: string
+            blockHeight:
+              type: string
+              format: uint64
+            coins:
+              type: array
+              items:
+                type: object
+                properties:
+                  denom:
+                    type: string
+                  amount:
+                    type: string
+                description: >-
+                  Coin defines a token with a denomination and an amount.
+
+
+                  NOTE: The amount field is an Int which implements the custom
+                  method
+
+                  signatures required by gogoproto.
+  beheroes.doxchain.abs.WatchlistEntry:
+    type: object
+    properties:
+      address:
+        type: string
+      blockHeight:
+        type: string
+        format: uint64
+      coins:
+        type: array
+        items:
+          type: object
+          properties:
+            denom:
+              type: string
+            amount:
+              type: string
+          description: |-
+            Coin defines a token with a denomination and an amount.
+
+            NOTE: The amount field is an Int which implements the custom method
+            signatures required by gogoproto.
+  cosmos.base.query.v1beta1.PageRequest:
+    type: object
+    properties:
+      key:
+        type: string
+        format: byte
+        description: |-
+          key is a value returned in PageResponse.next_key to begin
+          querying the next page most efficiently. Only one of offset or key
+          should be set.
+      offset:
+        type: string
+        format: uint64
+        description: |-
+          offset is a numeric offset that can be used when key is unavailable.
+          It is less efficient than using key. Only one of offset or key should
+          be set.
+      limit:
+        type: string
+        format: uint64
+        description: >-
+          limit is the total number of results to be returned in the result
+          page.
+
+          If left empty it will default to a value to be set by each app.
+      count_total:
+        type: boolean
+        description: >-
+          count_total is set to true  to indicate that the result set should
+          include
+
+          a count of the total number of items available for pagination in UIs.
+
+          count_total is only respected when offset is used. It is ignored when
+          key
+
+          is set.
+      reverse:
+        type: boolean
+        description: >-
+          reverse is set to true if results are to be returned in the descending
+          order.
+
+
+          Since: cosmos-sdk 0.43
+    description: |-
+      message SomeRequest {
+               Foo some_parameter = 1;
+               PageRequest pagination = 2;
+       }
+    title: |-
+      PageRequest is to be embedded in gRPC request messages for efficient
+      pagination. Ex:
+  cosmos.base.query.v1beta1.PageResponse:
+    type: object
+    properties:
+      next_key:
+        type: string
+        format: byte
+        description: |-
+          next_key is the key to be passed to PageRequest.key to
+          query the next page most efficiently. It will be empty if
+          there are no more results.
+      total:
+        type: string
+        format: uint64
+        title: |-
+          total is total number of results available if PageRequest.count_total
+          was set, its value is undefined otherwise
+    description: |-
+      PageResponse is to be embedded in gRPC response messages where the
+      corresponding request message has used PageRequest.
+
+       message SomeResponse {
+               repeated Bar results = 1;
+               PageResponse page = 2;
+       }
+  cosmos.base.v1beta1.Coin:
+    type: object
+    properties:
+      denom:
+        type: string
+      amount:
+        type: string
+    description: |-
+      Coin defines a token with a denomination and an amount.
+
+      NOTE: The amount field is an Int which implements the custom method
+      signatures required by gogoproto.
   google.protobuf.Any:
     type: object
     properties:
@@ -45170,6 +45425,194 @@ definitions:
                   "@type": "type.googleapis.com/google.protobuf.Duration",
                   "value": "1.212s"
                 }
+  beheroes.doxchain.aml.AMLRequest:
+    type: object
+    properties:
+      firstName:
+        type: string
+      lastName:
+        type: string
+      approved:
+        type: boolean
+      creator:
+        type: string
+  beheroes.doxchain.aml.MsgCreateAMLRequestResponse:
+    type: object
+  beheroes.doxchain.aml.MsgDeleteAMLRequestResponse:
+    type: object
+  beheroes.doxchain.aml.MsgUpdateAMLRequestResponse:
+    type: object
+  beheroes.doxchain.aml.Params:
+    type: object
+    description: Params defines the parameters for the module.
+  beheroes.doxchain.aml.QueryGetAMLRequestResponse:
+    type: object
+    properties:
+      AMLRequest:
+        type: object
+        properties:
+          firstName:
+            type: string
+          lastName:
+            type: string
+          approved:
+            type: boolean
+          creator:
+            type: string
+  beheroes.doxchain.aml.QueryParamsResponse:
+    type: object
+    properties:
+      params:
+        description: params holds all the parameters of this module.
+        type: object
+    description: QueryParamsResponse is response type for the Query/Params RPC method.
+  beheroes.doxchain.did.Did:
+    type: object
+    properties:
+      creator:
+        type: string
+      url:
+        type: string
+      methodName:
+        type: string
+      methodId:
+        type: string
+      path:
+        type: string
+      fragment:
+        type: string
+      query:
+        type: string
+      parameters:
+        type: array
+        items:
+          type: object
+          properties:
+            name:
+              type: string
+            value:
+              type: string
+      id:
+        type: string
+        format: uint64
+  beheroes.doxchain.did.DidParameter:
+    type: object
+    properties:
+      name:
+        type: string
+      value:
+        type: string
+  beheroes.doxchain.did.MsgCreateDidResponse:
+    type: object
+    properties:
+      fullyQualifiedDidIdentifier:
+        type: string
+  beheroes.doxchain.did.MsgDeleteDidResponse:
+    type: object
+  beheroes.doxchain.did.MsgUpdateDidResponse:
+    type: object
+  beheroes.doxchain.did.Params:
+    type: object
+    description: Params defines the parameters for the module.
+  beheroes.doxchain.did.QueryAllDidResponse:
+    type: object
+    properties:
+      Did:
+        type: array
+        items:
+          type: object
+          properties:
+            creator:
+              type: string
+            url:
+              type: string
+            methodName:
+              type: string
+            methodId:
+              type: string
+            path:
+              type: string
+            fragment:
+              type: string
+            query:
+              type: string
+            parameters:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  value:
+                    type: string
+            id:
+              type: string
+              format: uint64
+      pagination:
+        type: object
+        properties:
+          next_key:
+            type: string
+            format: byte
+            description: |-
+              next_key is the key to be passed to PageRequest.key to
+              query the next page most efficiently. It will be empty if
+              there are no more results.
+          total:
+            type: string
+            format: uint64
+            title: >-
+              total is total number of results available if
+              PageRequest.count_total
+
+              was set, its value is undefined otherwise
+        description: |-
+          PageResponse is to be embedded in gRPC response messages where the
+          corresponding request message has used PageRequest.
+
+           message SomeResponse {
+                   repeated Bar results = 1;
+                   PageResponse page = 2;
+           }
+  beheroes.doxchain.did.QueryGetDidResponse:
+    type: object
+    properties:
+      Did:
+        type: object
+        properties:
+          creator:
+            type: string
+          url:
+            type: string
+          methodName:
+            type: string
+          methodId:
+            type: string
+          path:
+            type: string
+          fragment:
+            type: string
+          query:
+            type: string
+          parameters:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
+          id:
+            type: string
+            format: uint64
+  beheroes.doxchain.did.QueryParamsResponse:
+    type: object
+    properties:
+      params:
+        description: params holds all the parameters of this module.
+        type: object
+    description: QueryParamsResponse is response type for the Query/Params RPC method.
   beheroes.doxchain.idp.MsgAuthenticationResponse:
     type: object
     properties:
@@ -45219,19 +45662,40 @@ definitions:
   beheroes.doxchain.kyc.KYCRequest:
     type: object
     properties:
-      firstName:
-        type: string
-      lastName:
-        type: string
+      did:
+        type: object
+        properties:
+          creator:
+            type: string
+          url:
+            type: string
+          methodName:
+            type: string
+          methodId:
+            type: string
+          path:
+            type: string
+          fragment:
+            type: string
+          query:
+            type: string
+          parameters:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
+          id:
+            type: string
+            format: uint64
       approved:
         type: boolean
-      creator:
-        type: string
   beheroes.doxchain.kyc.MsgCreateKYCRequestResponse:
     type: object
   beheroes.doxchain.kyc.MsgDeleteKYCRequestResponse:
-    type: object
-  beheroes.doxchain.kyc.MsgUpdateKYCRequestResponse:
     type: object
   beheroes.doxchain.kyc.Params:
     type: object
@@ -45239,17 +45703,40 @@ definitions:
   beheroes.doxchain.kyc.QueryGetKYCRequestResponse:
     type: object
     properties:
-      KYCRequest:
+      Request:
         type: object
         properties:
-          firstName:
-            type: string
-          lastName:
-            type: string
+          did:
+            type: object
+            properties:
+              creator:
+                type: string
+              url:
+                type: string
+              methodName:
+                type: string
+              methodId:
+                type: string
+              path:
+                type: string
+              fragment:
+                type: string
+              query:
+                type: string
+              parameters:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    value:
+                      type: string
+              id:
+                type: string
+                format: uint64
           approved:
             type: boolean
-          creator:
-            type: string
   beheroes.doxchain.kyc.QueryParamsResponse:
     type: object
     properties:
@@ -45982,83 +46469,6 @@ definitions:
             type: string
             format: uint64
     description: QueryParamsResponse is the response type for the Query/Params RPC method.
-  cosmos.base.query.v1beta1.PageRequest:
-    type: object
-    properties:
-      key:
-        type: string
-        format: byte
-        description: |-
-          key is a value returned in PageResponse.next_key to begin
-          querying the next page most efficiently. Only one of offset or key
-          should be set.
-      offset:
-        type: string
-        format: uint64
-        description: |-
-          offset is a numeric offset that can be used when key is unavailable.
-          It is less efficient than using key. Only one of offset or key should
-          be set.
-      limit:
-        type: string
-        format: uint64
-        description: >-
-          limit is the total number of results to be returned in the result
-          page.
-
-          If left empty it will default to a value to be set by each app.
-      count_total:
-        type: boolean
-        description: >-
-          count_total is set to true  to indicate that the result set should
-          include
-
-          a count of the total number of items available for pagination in UIs.
-
-          count_total is only respected when offset is used. It is ignored when
-          key
-
-          is set.
-      reverse:
-        type: boolean
-        description: >-
-          reverse is set to true if results are to be returned in the descending
-          order.
-
-
-          Since: cosmos-sdk 0.43
-    description: |-
-      message SomeRequest {
-               Foo some_parameter = 1;
-               PageRequest pagination = 2;
-       }
-    title: |-
-      PageRequest is to be embedded in gRPC request messages for efficient
-      pagination. Ex:
-  cosmos.base.query.v1beta1.PageResponse:
-    type: object
-    properties:
-      next_key:
-        type: string
-        format: byte
-        description: |-
-          next_key is the key to be passed to PageRequest.key to
-          query the next page most efficiently. It will be empty if
-          there are no more results.
-      total:
-        type: string
-        format: uint64
-        title: |-
-          total is total number of results available if PageRequest.count_total
-          was set, its value is undefined otherwise
-    description: |-
-      PageResponse is to be embedded in gRPC response messages where the
-      corresponding request message has used PageRequest.
-
-       message SomeResponse {
-               repeated Bar results = 1;
-               PageResponse page = 2;
-       }
   cosmos.authz.v1beta1.Grant:
     type: object
     properties:
@@ -47708,18 +48118,6 @@ definitions:
     description: |-
       SendEnabled maps coin denom to a send_enabled status (whether a denom is
       sendable).
-  cosmos.base.v1beta1.Coin:
-    type: object
-    properties:
-      denom:
-        type: string
-      amount:
-        type: string
-    description: |-
-      Coin defines a token with a denomination and an amount.
-
-      NOTE: The amount field is an Int which implements the custom method
-      signatures required by gogoproto.
   cosmos.base.node.v1beta1.ConfigResponse:
     type: object
     properties:
@@ -67913,332 +68311,6 @@ definitions:
             NOTE: The amount field is an Int which implements the custom method
             signatures required by gogoproto.
     description: Period defines a length of time and amount of coins that will vest.
-  doxchain.abs.MsgCreatePartitionedPoolRegistryResponse:
-    type: object
-  doxchain.abs.MsgUpdateBreakFactorResponse:
-    type: object
-  doxchain.abs.Params:
-    type: object
-    description: Params defines the parameters for the module.
-  doxchain.abs.PartitionedPool:
-    type: object
-    properties:
-      denom:
-        type: string
-  doxchain.abs.PartitionedPoolRegistry:
-    type: object
-    properties:
-      creator:
-        type: string
-      pools:
-        type: array
-        items:
-          type: object
-          properties:
-            denom:
-              type: string
-  doxchain.abs.QueryAllPartitionedPoolRegistriesResponse:
-    type: object
-    properties:
-      partitionedPoolRegistries:
-        type: array
-        items:
-          type: object
-          properties:
-            creator:
-              type: string
-            pools:
-              type: array
-              items:
-                type: object
-                properties:
-                  denom:
-                    type: string
-      pagination:
-        type: object
-        properties:
-          next_key:
-            type: string
-            format: byte
-            description: |-
-              next_key is the key to be passed to PageRequest.key to
-              query the next page most efficiently. It will be empty if
-              there are no more results.
-          total:
-            type: string
-            format: uint64
-            title: >-
-              total is total number of results available if
-              PageRequest.count_total
-
-              was set, its value is undefined otherwise
-        description: |-
-          PageResponse is to be embedded in gRPC response messages where the
-          corresponding request message has used PageRequest.
-
-           message SomeResponse {
-                   repeated Bar results = 1;
-                   PageResponse page = 2;
-           }
-  doxchain.abs.QueryBreakFactorResponse:
-    type: object
-    properties:
-      value:
-        type: string
-  doxchain.abs.QueryGetPartitionedPoolRegistryResponse:
-    type: object
-    properties:
-      partitionedPoolRegistry:
-        type: object
-        properties:
-          creator:
-            type: string
-          pools:
-            type: array
-            items:
-              type: object
-              properties:
-                denom:
-                  type: string
-  doxchain.abs.QueryParamsResponse:
-    type: object
-    properties:
-      params:
-        description: params holds all the parameters of this module.
-        type: object
-    description: QueryParamsResponse is response type for the Query/Params RPC method.
-  doxchain.abs.QueryWatchlistResponse:
-    type: object
-    properties:
-      watchlist:
-        type: object
-        properties:
-          entries:
-            type: array
-            items:
-              type: object
-              properties:
-                address:
-                  type: string
-                blockHeight:
-                  type: string
-                  format: uint64
-                coins:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      denom:
-                        type: string
-                      amount:
-                        type: string
-                    description: >-
-                      Coin defines a token with a denomination and an amount.
-
-
-                      NOTE: The amount field is an Int which implements the
-                      custom method
-
-                      signatures required by gogoproto.
-  doxchain.abs.Watchlist:
-    type: object
-    properties:
-      entries:
-        type: array
-        items:
-          type: object
-          properties:
-            address:
-              type: string
-            blockHeight:
-              type: string
-              format: uint64
-            coins:
-              type: array
-              items:
-                type: object
-                properties:
-                  denom:
-                    type: string
-                  amount:
-                    type: string
-                description: >-
-                  Coin defines a token with a denomination and an amount.
-
-
-                  NOTE: The amount field is an Int which implements the custom
-                  method
-
-                  signatures required by gogoproto.
-  doxchain.abs.WatchlistEntry:
-    type: object
-    properties:
-      address:
-        type: string
-      blockHeight:
-        type: string
-        format: uint64
-      coins:
-        type: array
-        items:
-          type: object
-          properties:
-            denom:
-              type: string
-            amount:
-              type: string
-          description: |-
-            Coin defines a token with a denomination and an amount.
-
-            NOTE: The amount field is an Int which implements the custom method
-            signatures required by gogoproto.
-  doxchain.did.Did:
-    type: object
-    properties:
-      creator:
-        type: string
-      url:
-        type: string
-      methodName:
-        type: string
-      methodId:
-        type: string
-      path:
-        type: string
-      fragment:
-        type: string
-      query:
-        type: string
-      parameters:
-        type: array
-        items:
-          type: object
-          properties:
-            name:
-              type: string
-            value:
-              type: string
-      id:
-        type: string
-        format: uint64
-  doxchain.did.DidParameter:
-    type: object
-    properties:
-      name:
-        type: string
-      value:
-        type: string
-  doxchain.did.MsgCreateDidResponse:
-    type: object
-    properties:
-      fullyQualifiedDidIdentifier:
-        type: string
-  doxchain.did.MsgDeleteDidResponse:
-    type: object
-  doxchain.did.MsgUpdateDidResponse:
-    type: object
-  doxchain.did.Params:
-    type: object
-    description: Params defines the parameters for the module.
-  doxchain.did.QueryAllDidResponse:
-    type: object
-    properties:
-      Did:
-        type: array
-        items:
-          type: object
-          properties:
-            creator:
-              type: string
-            url:
-              type: string
-            methodName:
-              type: string
-            methodId:
-              type: string
-            path:
-              type: string
-            fragment:
-              type: string
-            query:
-              type: string
-            parameters:
-              type: array
-              items:
-                type: object
-                properties:
-                  name:
-                    type: string
-                  value:
-                    type: string
-            id:
-              type: string
-              format: uint64
-      pagination:
-        type: object
-        properties:
-          next_key:
-            type: string
-            format: byte
-            description: |-
-              next_key is the key to be passed to PageRequest.key to
-              query the next page most efficiently. It will be empty if
-              there are no more results.
-          total:
-            type: string
-            format: uint64
-            title: >-
-              total is total number of results available if
-              PageRequest.count_total
-
-              was set, its value is undefined otherwise
-        description: |-
-          PageResponse is to be embedded in gRPC response messages where the
-          corresponding request message has used PageRequest.
-
-           message SomeResponse {
-                   repeated Bar results = 1;
-                   PageResponse page = 2;
-           }
-  doxchain.did.QueryGetDidResponse:
-    type: object
-    properties:
-      Did:
-        type: object
-        properties:
-          creator:
-            type: string
-          url:
-            type: string
-          methodName:
-            type: string
-          methodId:
-            type: string
-          path:
-            type: string
-          fragment:
-            type: string
-          query:
-            type: string
-          parameters:
-            type: array
-            items:
-              type: object
-              properties:
-                name:
-                  type: string
-                value:
-                  type: string
-          id:
-            type: string
-            format: uint64
-  doxchain.did.QueryParamsResponse:
-    type: object
-    properties:
-      params:
-        description: params holds all the parameters of this module.
-        type: object
-    description: QueryParamsResponse is response type for the Query/Params RPC method.
   doxchain.doxchain.Params:
     type: object
     description: Params defines the parameters for the module.

@@ -81,17 +81,6 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		kycsimulation.SimulateMsgCreateKYCRequest(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
-	var weightMsgUpdateKYCRequest int
-	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgUpdateKYCRequest, &weightMsgUpdateKYCRequest, nil,
-		func(_ *rand.Rand) {
-			weightMsgUpdateKYCRequest = defaultWeightMsgUpdateKYCRequest
-		},
-	)
-	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgUpdateKYCRequest,
-		kycsimulation.SimulateMsgUpdateKYCRequest(am.accountKeeper, am.bankKeeper, am.keeper),
-	))
-
 	var weightMsgDeleteKYCRequest int
 	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgDeleteKYCRequest, &weightMsgDeleteKYCRequest, nil,
 		func(_ *rand.Rand) {

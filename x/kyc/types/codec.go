@@ -9,7 +9,6 @@ import (
 
 func RegisterCodec(cdc *codec.LegacyAmino) {
 	cdc.RegisterConcrete(&MsgCreateKYCRequest{}, "kyc/CreateKYCRequest", nil)
-	cdc.RegisterConcrete(&MsgUpdateKYCRequest{}, "kyc/UpdateKYCRequest", nil)
 	cdc.RegisterConcrete(&MsgDeleteKYCRequest{}, "kyc/DeleteKYCRequest", nil)
 	// this line is used by starport scaffolding # 2
 }
@@ -17,7 +16,6 @@ func RegisterCodec(cdc *codec.LegacyAmino) {
 func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgCreateKYCRequest{},
-		&MsgUpdateKYCRequest{},
 		&MsgDeleteKYCRequest{},
 	)
 	// this line is used by starport scaffolding # 3

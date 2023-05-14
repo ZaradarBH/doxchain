@@ -12,66 +12,43 @@ func (k msgServer) CreateKYCRequest(goCtx context.Context, msg *types.MsgCreateK
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	// Check if the value already exists
-	_, isFound := k.GetKYCRequest(ctx)
+	_, isFound := k.GetKYCRequest(ctx, msg.Creator)
 	if isFound {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "already set")
 	}
 
+	if msg.Did.Creator != msg.Creator {
+		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "impersonation is not supported yet")
+	}
+
 	var kYCRequest = types.KYCRequest{
-		Creator:   msg.Creator,
-		FirstName: msg.FirstName,
-		LastName:  msg.LastName,
-		Approved:  msg.Approved,
+		Did:   &msg.Did,
+		Approved:  false,
 	}
 
 	k.SetKYCRequest(
 		ctx,
 		kYCRequest,
 	)
+
 	return &types.MsgCreateKYCRequestResponse{}, nil
-}
-
-func (k msgServer) UpdateKYCRequest(goCtx context.Context, msg *types.MsgUpdateKYCRequest) (*types.MsgUpdateKYCRequestResponse, error) {
-	ctx := sdk.UnwrapSDKContext(goCtx)
-
-	// Check if the value exists
-	valFound, isFound := k.GetKYCRequest(ctx)
-	if !isFound {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "not set")
-	}
-
-	// Checks if the the msg creator is the same as the current owner
-	if msg.Creator != valFound.Creator {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "incorrect owner")
-	}
-
-	var kYCRequest = types.KYCRequest{
-		Creator:   msg.Creator,
-		FirstName: msg.FirstName,
-		LastName:  msg.LastName,
-		Approved:  msg.Approved,
-	}
-
-	k.SetKYCRequest(ctx, kYCRequest)
-
-	return &types.MsgUpdateKYCRequestResponse{}, nil
 }
 
 func (k msgServer) DeleteKYCRequest(goCtx context.Context, msg *types.MsgDeleteKYCRequest) (*types.MsgDeleteKYCRequestResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	// Check if the value exists
-	valFound, isFound := k.GetKYCRequest(ctx)
+	valFound, isFound := k.GetKYCRequest(ctx, msg.Creator)
 	if !isFound {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "not set")
 	}
 
 	// Checks if the the msg creator is the same as the current owner
-	if msg.Creator != valFound.Creator {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "incorrect owner")
+	if msg.Creator != valFound.Did.Creator {
+		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "impersonation not supported yet")
 	}
 
-	k.RemoveKYCRequest(ctx)
+	k.RemoveKYCRequest(ctx, msg.Creator)
 
 	return &types.MsgDeleteKYCRequestResponse{}, nil
 }

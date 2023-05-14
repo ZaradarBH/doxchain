@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package doxchain.abs;
+package beheroes.doxchain.abs;
 
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";

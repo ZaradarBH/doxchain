@@ -20,4 +20,5 @@ func KeyPrefix(p string) []byte {
 
 const (
 	KYCRequestKey = "KYCRequest/value/"
+	KYCRequestCountKey = "KYCRequest/count/"
 )

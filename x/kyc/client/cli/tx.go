@@ -31,7 +31,6 @@ func GetTxCmd() *cobra.Command {
 	}
 
 	cmd.AddCommand(CmdCreateKYCRequest())
-	cmd.AddCommand(CmdUpdateKYCRequest())
 	cmd.AddCommand(CmdDeleteKYCRequest())
 	// this line is used by starport scaffolding # 1
 

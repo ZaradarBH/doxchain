@@ -3,36 +3,57 @@ package keeper_test
 import (
 	"testing"
 
-	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/stretchr/testify/require"
-
 	keepertest "github.com/be-heroes/doxchain/testutil/keeper"
 	"github.com/be-heroes/doxchain/testutil/nullify"
 	"github.com/be-heroes/doxchain/x/kyc/keeper"
 	"github.com/be-heroes/doxchain/x/kyc/types"
+	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/stretchr/testify/require"
 )
 
-func createTestKYCRequest(keeper *keeper.Keeper, ctx sdk.Context) types.KYCRequest {
-	item := types.KYCRequest{}
-	keeper.SetKYCRequest(ctx, item)
-	return item
+func createNDid(keeper *keeper.Keeper, ctx sdk.Context, n int) []types.KYCRequest {
+	items := make([]types.KYCRequest, n)
+	for i := range items {
+		items[i].Did = keeper.AppendDid(ctx, items[i])
+	}
+	return items
 }
 
-func TestKYCRequestGet(t *testing.T) {
-	keeper, ctx := keepertest.KycKeeper(t)
-	item := createTestKYCRequest(keeper, ctx)
-	rst, found := keeper.GetKYCRequest(ctx)
-	require.True(t, found)
-	require.Equal(t,
-		nullify.Fill(&item),
-		nullify.Fill(&rst),
+func TestDidGet(t *testing.T) {
+	keeper, ctx := keepertest.DidKeeper(t)
+	items := createNDid(keeper, ctx, 10)
+	for _, item := range items {
+		got, found := keeper.GetDid(ctx, item.GetFullyQualifiedDidIdentifier())
+		require.True(t, found)
+		require.Equal(t,
+			nullify.Fill(&item),
+			nullify.Fill(&got),
+		)
+	}
+}
+
+func TestDidRemove(t *testing.T) {
+	keeper, ctx := keepertest.DidKeeper(t)
+	items := createNDid(keeper, ctx, 10)
+	for _, item := range items {
+		keeper.RemoveDid(ctx, item.GetFullyQualifiedDidIdentifier())
+		_, found := keeper.GetDid(ctx, item.GetFullyQualifiedDidIdentifier())
+		require.False(t, found)
+	}
+}
+
+func TestDidGetAll(t *testing.T) {
+	keeper, ctx := keepertest.DidKeeper(t)
+	items := createNDid(keeper, ctx, 10)
+	require.ElementsMatch(t,
+		nullify.Fill(items),
+		nullify.Fill(keeper.GetAllDid(ctx)),
 	)
 }
 
-func TestKYCRequestRemove(t *testing.T) {
-	keeper, ctx := keepertest.KycKeeper(t)
-	createTestKYCRequest(keeper, ctx)
-	keeper.RemoveKYCRequest(ctx)
-	_, found := keeper.GetKYCRequest(ctx)
-	require.False(t, found)
+func TestDidCount(t *testing.T) {
+	keeper, ctx := keepertest.DidKeeper(t)
+	items := createNDid(keeper, ctx, 10)
+	count := uint64(len(items))
+	require.Equal(t, count, keeper.GetDidCount(ctx))
 }

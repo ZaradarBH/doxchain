@@ -630,6 +630,7 @@ func New(
 		app.GetSubspace(kycmoduletypes.ModuleName),
 
 		app.AccountKeeper,
+		app.DidKeeper,
 	)
 	kycModule := kycmodule.NewAppModule(appCodec, app.KycKeeper, app.AccountKeeper, app.BankKeeper)
 

@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package beheroes.doxchain.kyc;
 
+import "gogoproto/gogo.proto";
+import "doxchain/did/did.proto";
 import "doxchain/kyc/kyc_request.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/kyc/types";
@@ -9,26 +11,14 @@ option go_package = "github.com/be-heroes/doxchain/x/kyc/types";
 // Msg defines the Msg service.
 service Msg {
   rpc CreateKYCRequest (MsgCreateKYCRequest) returns (MsgCreateKYCRequestResponse);
-  rpc UpdateKYCRequest (MsgUpdateKYCRequest) returns (MsgUpdateKYCRequestResponse);
   rpc DeleteKYCRequest (MsgDeleteKYCRequest) returns (MsgDeleteKYCRequestResponse);
 }
 message MsgCreateKYCRequest {
-  string creator   = 1;
-  string firstName = 3;
-  string lastName  = 4;
-  bool   approved  = 5;
+  string creator = 1;
+  beheroes.doxchain.did.Did  did = 2 [(gogoproto.nullable) = false];  
 }
 
 message MsgCreateKYCRequestResponse {}
-
-message MsgUpdateKYCRequest {
-  string creator   = 1;
-  string firstName = 3;
-  string lastName  = 4;
-  bool   approved  = 5;
-}
-
-message MsgUpdateKYCRequestResponse {}
 
 message MsgDeleteKYCRequest {
   string creator = 1;

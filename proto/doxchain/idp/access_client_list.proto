@@ -6,7 +6,8 @@ import "gogoproto/gogo.proto";
 option go_package = "github.com/be-heroes/doxchain/x/idp/types";
 
 message AccessClientList {
-  repeated AccessClientListEntry entries = 1 [(gogoproto.nullable) = false];
+  string creator = 1;
+  repeated AccessClientListEntry entries = 2 [(gogoproto.nullable) = false];
 }
 
 message AccessClientListEntry { 

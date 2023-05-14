@@ -15,10 +15,10 @@ func (k Keeper) KYCRequest(goCtx context.Context, req *types.QueryGetKYCRequestR
 	}
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	val, found := k.GetKYCRequest(ctx)
+	val, found := k.GetKYCRequest(ctx, req.Creator)
 	if !found {
 		return nil, status.Error(codes.NotFound, "not found")
 	}
 
-	return &types.QueryGetKYCRequestResponse{KYCRequest: val}, nil
+	return &types.QueryGetKYCRequestResponse{Request: val}, nil
 }
