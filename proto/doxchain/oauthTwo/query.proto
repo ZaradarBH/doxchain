@@ -6,11 +6,13 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "doxchain/oauthtwo/params.proto";
+import "doxchain/oauthtwo/authorization_code_registry.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/oauthtwo/types";
 
 // Query defines the gRPC querier service.
-service Query {  
+service Query {
+  
   // Parameters queries the parameters of the module.
   rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/be-heroes/doxchain/oauthtwo/params";

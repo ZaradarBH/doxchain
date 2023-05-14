@@ -8,7 +8,7 @@ import (
 )
 
 // Token method for simple oauth keeper
-func (k Keeper) Token(ctx sdk.Context, msg types.MsgTokenRequest) (types.MsgTokenResponse, error) {	
+func (k Keeper) Token(ctx sdk.Context, msg types.MsgTokenRequest) (types.MsgTokenResponse, error) {
 	//TODO: Validate ClientId and Scope
 	switch msg.GrantType {
 	case types.ClientCredentialsGrant.String():

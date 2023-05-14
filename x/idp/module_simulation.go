@@ -68,10 +68,6 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 			weightMsgAuthenticationRequest = defaultWeightMsgAuthenticationRequest
 		},
 	)
-	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgAuthenticationRequest,
-		idpsimulation.SimulateMsgAuthenticationRequest(am.accountKeeper, am.bankKeeper, am.keeper),
-	))
 
 	// this line is used by starport scaffolding # simapp/module/operation
 

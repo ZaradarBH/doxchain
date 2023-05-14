@@ -38,6 +38,14 @@ func TestGenesisState_Validate(t *testing.T) {
 						Tenant: "1",
 					},
 				},
+				AuthorizationCodeRegistryList: []types.AuthorizationCodeRegistry{
+					{
+						Index: "0",
+					},
+					{
+						Index: "1",
+					},
+				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
@@ -65,6 +73,20 @@ func TestGenesisState_Validate(t *testing.T) {
 					},
 					{
 						Tenant: "0",
+					},
+				},
+			},
+			valid: false,
+		},
+		{
+			desc: "duplicated authorizationCodeRegistry",
+			genState: &types.GenesisState{
+				AuthorizationCodeRegistryList: []types.AuthorizationCodeRegistry{
+					{
+						Index: "0",
+					},
+					{
+						Index: "0",
 					},
 				},
 			},

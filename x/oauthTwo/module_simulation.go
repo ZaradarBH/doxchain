@@ -60,6 +60,18 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgAuthorize int = 100
 
+	opWeightMsgCreateAuthorizationCodeRegistry = "op_weight_msg_authorization_code_registry"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgCreateAuthorizationCodeRegistry int = 100
+
+	opWeightMsgUpdateAuthorizationCodeRegistry = "op_weight_msg_authorization_code_registry"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgUpdateAuthorizationCodeRegistry int = 100
+
+	opWeightMsgDeleteAuthorizationCodeRegistry = "op_weight_msg_authorization_code_registry"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgDeleteAuthorizationCodeRegistry int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -87,6 +99,14 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 				Tenant: "1",
 			},
 		},
+		AuthorizationCodeRegistryList: []types.AuthorizationCodeRegistry{
+			{
+				Tenant: "0",
+			},
+			{
+				Tenant: "0",
+			},
+		},
 		// this line is used by starport scaffolding # simapp/module/genesisState
 	}
 	simState.GenState[types.ModuleName] = simState.Cdc.MustMarshalJSON(&oauthGenesis)
@@ -109,39 +129,6 @@ func (am AppModule) RegisterStoreDecoder(_ sdk.StoreDecoderRegistry) {}
 // WeightedOperations returns the all the gov module operations with their respective weights.
 func (am AppModule) WeightedOperations(simState module.SimulationState) []simtypes.WeightedOperation {
 	operations := make([]simtypes.WeightedOperation, 0)
-
-	var weightMsgTokenRequest int
-	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgTokenRequest, &weightMsgTokenRequest, nil,
-		func(_ *rand.Rand) {
-			weightMsgTokenRequest = defaultWeightMsgTokenRequest
-		},
-	)
-	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgTokenRequest,
-		oauthtwosimulation.SimulateMsgTokenRequest(am.accountKeeper, am.bankKeeper, am.keeper),
-	))
-
-	var weightMsgDeviceCode int
-	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgDeviceCode, &weightMsgDeviceCode, nil,
-		func(_ *rand.Rand) {
-			weightMsgDeviceCode = defaultWeightMsgDeviceCode
-		},
-	)
-	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgDeviceCode,
-		oauthtwosimulation.SimulateMsgDeviceCode(am.accountKeeper, am.bankKeeper, am.keeper),
-	))
-
-	var weightMsgAuthorize int
-	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgAuthorize, &weightMsgAuthorize, nil,
-		func(_ *rand.Rand) {
-			weightMsgAuthorize = defaultWeightMsgAuthorize
-		},
-	)
-	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgAuthorize,
-		oauthtwosimulation.SimulateMsgAuthorize(am.accountKeeper, am.bankKeeper, am.keeper),
-	))
 
 	// this line is used by starport scaffolding # simapp/module/operation
 

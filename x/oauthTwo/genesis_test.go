@@ -30,6 +30,14 @@ func TestGenesis(t *testing.T) {
 				Tenant: "1",
 			},
 		},
+		AuthorizationCodeRegistryList: []types.AuthorizationCodeRegistry{
+			{
+				Index: "0",
+			},
+			{
+				Index: "1",
+			},
+		},
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
@@ -43,5 +51,6 @@ func TestGenesis(t *testing.T) {
 
 	require.ElementsMatch(t, genesisState.DeviceCodeRegistryList, got.DeviceCodeRegistryList)
 	require.ElementsMatch(t, genesisState.AccessTokenRegistryList, got.AccessTokenRegistryList)
+	require.ElementsMatch(t, genesisState.AuthorizationCodeRegistryList, got.AuthorizationCodeRegistryList)
 	// this line is used by starport scaffolding # genesis/test/assert
 }
