@@ -203,5 +203,29 @@ func (am AppModule) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.Val
 		}
 	}
 
+	authorizationCodeRegistries := am.keeper.GetAllAuthorizationCodeRegistry(ctx)
+
+	for _, authorizationCodeRegistry := range authorizationCodeRegistries {
+		registryUpdated := false
+
+		for index, authorizationCodeInfo := range authorizationCodeRegistry.Codes {
+			if authorizationCodeInfo.ExpiresAt < ctx.BlockTime().Unix() {
+				authorizationCodeRegistry.Codes = append(authorizationCodeRegistry.Codes[:index], authorizationCodeRegistry.Codes[index+1:]...)
+
+				ctx.EventManager().EmitEvent(
+					sdk.NewEvent(types.EventTypeAuthorizationCodeExpired,
+						sdk.NewAttribute(types.AttributeKeyAuthorizationCode, authorizationCodeInfo.AuthorizationCode),
+					),
+				)
+
+				registryUpdated = true
+			}
+		}
+
+		if registryUpdated {
+			am.keeper.SetAuthorizationCodeRegistry(ctx, authorizationCodeRegistry)
+		}
+	}
+
 	return []abci.ValidatorUpdate{}
 }
