@@ -31,7 +31,10 @@ func GetTxCmd() *cobra.Command {
 	}
 
 	cmd.AddCommand(CmdUpdateBreakFactor())
-	// this line is used by starport scaffolding # 1
+	cmd.AddCommand(CmdCreatePartitionedPools())
+	cmd.AddCommand(CmdUpdatePartitionedPools())
+	cmd.AddCommand(CmdDeletePartitionedPools())
+// this line is used by starport scaffolding # 1
 
 	return cmd
 }

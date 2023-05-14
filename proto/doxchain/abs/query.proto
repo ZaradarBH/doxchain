@@ -1,4 +1,5 @@
 syntax = "proto3";
+
 package doxchain.abs;
 
 import "gogoproto/gogo.proto";
@@ -6,46 +7,77 @@ import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "doxchain/abs/params.proto";
 import "doxchain/abs/watchlist.proto";
+import "doxchain/abs/partitioned_pools.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/abs/types";
 
 // Query defines the gRPC querier service.
 service Query {
+  
   // Parameters queries the parameters of the module.
-  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/doxchain/abs/params";
+  
   }
   
   // Queries a list of QueryBreakFactor items.
-	rpc QueryBreakFactor(QueryBreakFactorRequest) returns (QueryBreakFactorResponse) {
-		option (google.api.http).get = "/doxchain/abs/query_break_factor";
-	}
+  rpc QueryBreakFactor (QueryBreakFactorRequest) returns (QueryBreakFactorResponse) {
+    option (google.api.http).get = "/doxchain/abs/query_break_factor";
+  
+  }
   
   // Queries watchlist.
-	rpc QueryWatchlist(QueryWatchlistRequest) returns (QueryWatchlistResponse) {
-		option (google.api.http).get = "/doxchain/abs/query_watchlist";
-	}
+  rpc QueryWatchlist (QueryWatchlistRequest) returns (QueryWatchlistResponse) {
+    option (google.api.http).get = "/doxchain/abs/query_watchlist";
+  
+  }
+  
+  // Queries a list of PartitionedPools items.
+  rpc PartitionedPools    (QueryGetPartitionedPoolsRequest) returns (QueryGetPartitionedPoolsResponse) {
+    option (google.api.http).get = "/be-heroes/doxchain/abs/partitioned_pools/{index}";
+  
+  }
+  rpc PartitionedPoolsAll (QueryAllPartitionedPoolsRequest) returns (QueryAllPartitionedPoolsResponse) {
+    option (google.api.http).get = "/be-heroes/doxchain/abs/partitioned_pools";
+  
+  }
 }
-
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
 
 // QueryParamsResponse is response type for the Query/Params RPC method.
 message QueryParamsResponse {
+  
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
 }
 
-message QueryBreakFactorRequest {
-}
+message QueryBreakFactorRequest {}
 
 message QueryBreakFactorResponse {
   string value = 1;
 }
 
-message QueryWatchlistRequest {
-}
+message QueryWatchlistRequest {}
 
 message QueryWatchlistResponse {
   Watchlist watchlist = 1 [(gogoproto.nullable) = false];
 }
+
+message QueryGetPartitionedPoolsRequest {
+  string index = 1;
+}
+
+message QueryGetPartitionedPoolsResponse {
+  PartitionedPools partitionedPools = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllPartitionedPoolsRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllPartitionedPoolsResponse {
+  repeated PartitionedPools                       partitionedPools = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination       = 2;
+}
+

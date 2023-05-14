@@ -6,7 +6,7 @@ package types
 import (
 	context "context"
 	fmt "fmt"
-	_ "github.com/cosmos/cosmos-sdk/types/query"
+	query "github.com/cosmos/cosmos-sdk/types/query"
 	_ "github.com/gogo/protobuf/gogoproto"
 	grpc1 "github.com/gogo/protobuf/grpc"
 	proto "github.com/gogo/protobuf/proto"
@@ -273,6 +273,190 @@ func (m *QueryWatchlistResponse) GetWatchlist() Watchlist {
 	return Watchlist{}
 }
 
+type QueryGetPartitionedPoolsRequest struct {
+	Index string `protobuf:"bytes,1,opt,name=index,proto3" json:"index,omitempty"`
+}
+
+func (m *QueryGetPartitionedPoolsRequest) Reset()         { *m = QueryGetPartitionedPoolsRequest{} }
+func (m *QueryGetPartitionedPoolsRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryGetPartitionedPoolsRequest) ProtoMessage()    {}
+func (*QueryGetPartitionedPoolsRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_5545a3a8d78dfc59, []int{6}
+}
+func (m *QueryGetPartitionedPoolsRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryGetPartitionedPoolsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryGetPartitionedPoolsRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryGetPartitionedPoolsRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGetPartitionedPoolsRequest.Merge(m, src)
+}
+func (m *QueryGetPartitionedPoolsRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryGetPartitionedPoolsRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGetPartitionedPoolsRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryGetPartitionedPoolsRequest proto.InternalMessageInfo
+
+func (m *QueryGetPartitionedPoolsRequest) GetIndex() string {
+	if m != nil {
+		return m.Index
+	}
+	return ""
+}
+
+type QueryGetPartitionedPoolsResponse struct {
+	PartitionedPools PartitionedPools `protobuf:"bytes,1,opt,name=partitionedPools,proto3" json:"partitionedPools"`
+}
+
+func (m *QueryGetPartitionedPoolsResponse) Reset()         { *m = QueryGetPartitionedPoolsResponse{} }
+func (m *QueryGetPartitionedPoolsResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryGetPartitionedPoolsResponse) ProtoMessage()    {}
+func (*QueryGetPartitionedPoolsResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_5545a3a8d78dfc59, []int{7}
+}
+func (m *QueryGetPartitionedPoolsResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryGetPartitionedPoolsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryGetPartitionedPoolsResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryGetPartitionedPoolsResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGetPartitionedPoolsResponse.Merge(m, src)
+}
+func (m *QueryGetPartitionedPoolsResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryGetPartitionedPoolsResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGetPartitionedPoolsResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryGetPartitionedPoolsResponse proto.InternalMessageInfo
+
+func (m *QueryGetPartitionedPoolsResponse) GetPartitionedPools() PartitionedPools {
+	if m != nil {
+		return m.PartitionedPools
+	}
+	return PartitionedPools{}
+}
+
+type QueryAllPartitionedPoolsRequest struct {
+	Pagination *query.PageRequest `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
+}
+
+func (m *QueryAllPartitionedPoolsRequest) Reset()         { *m = QueryAllPartitionedPoolsRequest{} }
+func (m *QueryAllPartitionedPoolsRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryAllPartitionedPoolsRequest) ProtoMessage()    {}
+func (*QueryAllPartitionedPoolsRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_5545a3a8d78dfc59, []int{8}
+}
+func (m *QueryAllPartitionedPoolsRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryAllPartitionedPoolsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryAllPartitionedPoolsRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryAllPartitionedPoolsRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryAllPartitionedPoolsRequest.Merge(m, src)
+}
+func (m *QueryAllPartitionedPoolsRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryAllPartitionedPoolsRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryAllPartitionedPoolsRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryAllPartitionedPoolsRequest proto.InternalMessageInfo
+
+func (m *QueryAllPartitionedPoolsRequest) GetPagination() *query.PageRequest {
+	if m != nil {
+		return m.Pagination
+	}
+	return nil
+}
+
+type QueryAllPartitionedPoolsResponse struct {
+	PartitionedPools []PartitionedPools  `protobuf:"bytes,1,rep,name=partitionedPools,proto3" json:"partitionedPools"`
+	Pagination       *query.PageResponse `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
+}
+
+func (m *QueryAllPartitionedPoolsResponse) Reset()         { *m = QueryAllPartitionedPoolsResponse{} }
+func (m *QueryAllPartitionedPoolsResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryAllPartitionedPoolsResponse) ProtoMessage()    {}
+func (*QueryAllPartitionedPoolsResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_5545a3a8d78dfc59, []int{9}
+}
+func (m *QueryAllPartitionedPoolsResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryAllPartitionedPoolsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryAllPartitionedPoolsResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryAllPartitionedPoolsResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryAllPartitionedPoolsResponse.Merge(m, src)
+}
+func (m *QueryAllPartitionedPoolsResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryAllPartitionedPoolsResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryAllPartitionedPoolsResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryAllPartitionedPoolsResponse proto.InternalMessageInfo
+
+func (m *QueryAllPartitionedPoolsResponse) GetPartitionedPools() []PartitionedPools {
+	if m != nil {
+		return m.PartitionedPools
+	}
+	return nil
+}
+
+func (m *QueryAllPartitionedPoolsResponse) GetPagination() *query.PageResponse {
+	if m != nil {
+		return m.Pagination
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterType((*QueryParamsRequest)(nil), "doxchain.abs.QueryParamsRequest")
 	proto.RegisterType((*QueryParamsResponse)(nil), "doxchain.abs.QueryParamsResponse")
@@ -280,41 +464,57 @@ func init() {
 	proto.RegisterType((*QueryBreakFactorResponse)(nil), "doxchain.abs.QueryBreakFactorResponse")
 	proto.RegisterType((*QueryWatchlistRequest)(nil), "doxchain.abs.QueryWatchlistRequest")
 	proto.RegisterType((*QueryWatchlistResponse)(nil), "doxchain.abs.QueryWatchlistResponse")
+	proto.RegisterType((*QueryGetPartitionedPoolsRequest)(nil), "doxchain.abs.QueryGetPartitionedPoolsRequest")
+	proto.RegisterType((*QueryGetPartitionedPoolsResponse)(nil), "doxchain.abs.QueryGetPartitionedPoolsResponse")
+	proto.RegisterType((*QueryAllPartitionedPoolsRequest)(nil), "doxchain.abs.QueryAllPartitionedPoolsRequest")
+	proto.RegisterType((*QueryAllPartitionedPoolsResponse)(nil), "doxchain.abs.QueryAllPartitionedPoolsResponse")
 }
 
 func init() { proto.RegisterFile("doxchain/abs/query.proto", fileDescriptor_5545a3a8d78dfc59) }
 
 var fileDescriptor_5545a3a8d78dfc59 = []byte{
-	// 450 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x84, 0x92, 0xc1, 0x8f, 0xd2, 0x40,
-	0x14, 0xc6, 0x5b, 0x75, 0x49, 0x76, 0x34, 0xc6, 0x8c, 0x75, 0x61, 0x1b, 0xec, 0x62, 0x75, 0x0d,
-	0x9a, 0xd8, 0x11, 0x3c, 0x7a, 0xc3, 0xc4, 0xc4, 0x9b, 0x92, 0x18, 0x13, 0x2f, 0x64, 0xa6, 0x8e,
-	0x6d, 0x03, 0x74, 0x4a, 0x67, 0x8a, 0x70, 0xe5, 0xe2, 0xc1, 0x8b, 0x89, 0xff, 0x14, 0x47, 0x12,
-	0x2f, 0x9e, 0x8c, 0x01, 0xff, 0x10, 0xc3, 0xcc, 0x14, 0x2c, 0x6d, 0xd8, 0x1b, 0xf4, 0xfb, 0xde,
-	0xef, 0x7d, 0xef, 0xbd, 0x01, 0x8d, 0x4f, 0x6c, 0xe6, 0x87, 0x38, 0x8a, 0x11, 0x26, 0x1c, 0x4d,
-	0x32, 0x9a, 0xce, 0xbd, 0x24, 0x65, 0x82, 0xc1, 0x5b, 0xb9, 0xe2, 0x61, 0xc2, 0x6d, 0x2b, 0x60,
-	0x01, 0x93, 0x02, 0xda, 0xfe, 0x52, 0x1e, 0xbb, 0x19, 0x30, 0x16, 0x8c, 0x28, 0xc2, 0x49, 0x84,
-	0x70, 0x1c, 0x33, 0x81, 0x45, 0xc4, 0x62, 0xae, 0xd5, 0xa7, 0x3e, 0xe3, 0x63, 0xc6, 0x11, 0xc1,
-	0x9c, 0x2a, 0x34, 0x9a, 0x76, 0x08, 0x15, 0xb8, 0x83, 0x12, 0x1c, 0x44, 0xb1, 0x34, 0x6b, 0xef,
-	0x79, 0x21, 0x47, 0x82, 0x53, 0x3c, 0xce, 0x31, 0xcd, 0x82, 0xf4, 0x05, 0x0b, 0x3f, 0x1c, 0x45,
-	0x5c, 0x28, 0xd5, 0xb5, 0x00, 0x7c, 0xb7, 0x45, 0xbf, 0x95, 0x25, 0x7d, 0x3a, 0xc9, 0x28, 0x17,
-	0xee, 0x1b, 0x70, 0xb7, 0xf0, 0x95, 0x27, 0x2c, 0xe6, 0x14, 0x76, 0x41, 0x4d, 0xa1, 0x1b, 0x66,
-	0xcb, 0x6c, 0xdf, 0xec, 0x5a, 0xde, 0xff, 0x43, 0x7a, 0xca, 0xdd, 0xbb, 0xb1, 0xfc, 0x7d, 0x61,
-	0xf4, 0xb5, 0xd3, 0x3d, 0x07, 0x75, 0x89, 0xea, 0xa5, 0x14, 0x0f, 0x5f, 0x63, 0x5f, 0xb0, 0x34,
-	0xef, 0xf2, 0x1c, 0x34, 0xca, 0x92, 0x6e, 0x65, 0x81, 0x93, 0x29, 0x1e, 0x65, 0x54, 0x76, 0x3a,
-	0xed, 0xab, 0x3f, 0x6e, 0x1d, 0xdc, 0x93, 0x15, 0x1f, 0xf2, 0x29, 0x72, 0xd4, 0x7b, 0x70, 0x76,
-	0x28, 0x68, 0xd0, 0x4b, 0x70, 0xba, 0x9b, 0x59, 0xc7, 0xae, 0x17, 0x63, 0xef, 0x6a, 0x74, 0xf2,
-	0xbd, 0xbf, 0xfb, 0xf5, 0x3a, 0x38, 0x91, 0x5c, 0x38, 0x04, 0x35, 0x35, 0x1e, 0x6c, 0x15, 0xab,
-	0xcb, 0xdb, 0xb3, 0x1f, 0x1c, 0x71, 0xa8, 0x54, 0x6e, 0x73, 0xf1, 0xf3, 0xef, 0x8f, 0x6b, 0x67,
-	0xd0, 0x42, 0x15, 0x87, 0x83, 0xdf, 0x4c, 0x70, 0xe7, 0x70, 0x33, 0xf0, 0xb2, 0x82, 0x5a, 0x5e,
-	0xaa, 0xfd, 0xf8, 0x2a, 0x9b, 0x4e, 0xd0, 0x96, 0x09, 0x5c, 0xd8, 0x42, 0xe5, 0x27, 0x3c, 0x20,
-	0xdb, 0x82, 0xc1, 0x67, 0xd5, 0x78, 0x61, 0x82, 0xdb, 0xc5, 0xe5, 0xc2, 0x87, 0x15, 0x4d, 0x0e,
-	0x6f, 0x62, 0x3f, 0x3a, 0x6e, 0xd2, 0x39, 0x2e, 0x65, 0x8e, 0x0b, 0x78, 0xbf, 0x2a, 0xc7, 0xee,
-	0x12, 0xbd, 0x57, 0xcb, 0xb5, 0x63, 0xae, 0xd6, 0x8e, 0xf9, 0x67, 0xed, 0x98, 0xdf, 0x37, 0x8e,
-	0xb1, 0xda, 0x38, 0xc6, 0xaf, 0x8d, 0x63, 0x7c, 0x7c, 0x12, 0x44, 0x22, 0xcc, 0x88, 0xe7, 0xb3,
-	0x31, 0x22, 0xf4, 0x59, 0x48, 0x53, 0x46, 0xf9, 0x1e, 0x36, 0x93, 0x38, 0x31, 0x4f, 0x28, 0x27,
-	0x35, 0xf9, 0xe6, 0x5f, 0xfc, 0x0b, 0x00, 0x00, 0xff, 0xff, 0xbb, 0xd8, 0x49, 0x32, 0xb6, 0x03,
-	0x00, 0x00,
+	// 644 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x95, 0x4f, 0x6f, 0x12, 0x41,
+	0x18, 0xc6, 0xd9, 0x6a, 0x9b, 0x74, 0x34, 0x86, 0x4c, 0xb1, 0xd0, 0x0d, 0x2e, 0xb8, 0xb6, 0xb5,
+	0xd5, 0x74, 0x47, 0xe8, 0xc1, 0x18, 0x4f, 0xc5, 0xa4, 0x8d, 0x37, 0x24, 0x31, 0x26, 0x5e, 0xc8,
+	0x2c, 0x8c, 0xcb, 0xa6, 0xcb, 0xce, 0x76, 0x67, 0xa8, 0x34, 0xc6, 0x4b, 0xaf, 0x5e, 0x4c, 0xfc,
+	0x10, 0x5e, 0xfc, 0x0a, 0xde, 0x7b, 0x6c, 0xe2, 0xc5, 0x93, 0x69, 0xc0, 0x0f, 0x62, 0x76, 0x76,
+	0x16, 0xd8, 0x3f, 0xd0, 0xc6, 0x1b, 0xcb, 0xfb, 0xbc, 0xcf, 0xfb, 0x9b, 0xe1, 0x7d, 0x16, 0x50,
+	0xea, 0xd2, 0x61, 0xa7, 0x87, 0x6d, 0x17, 0x61, 0x93, 0xa1, 0x93, 0x01, 0xf1, 0xcf, 0x0c, 0xcf,
+	0xa7, 0x9c, 0xc2, 0xbb, 0x51, 0xc5, 0xc0, 0x26, 0x53, 0x0b, 0x16, 0xb5, 0xa8, 0x28, 0xa0, 0xe0,
+	0x53, 0xa8, 0x51, 0xcb, 0x16, 0xa5, 0x96, 0x43, 0x10, 0xf6, 0x6c, 0x84, 0x5d, 0x97, 0x72, 0xcc,
+	0x6d, 0xea, 0x32, 0x59, 0x7d, 0xd2, 0xa1, 0xac, 0x4f, 0x19, 0x32, 0x31, 0x23, 0xa1, 0x35, 0x3a,
+	0xad, 0x99, 0x84, 0xe3, 0x1a, 0xf2, 0xb0, 0x65, 0xbb, 0x42, 0x2c, 0xb5, 0x1b, 0x31, 0x0e, 0x0f,
+	0xfb, 0xb8, 0x1f, 0xd9, 0x94, 0x63, 0xa5, 0x8f, 0x98, 0x77, 0x7a, 0x8e, 0xcd, 0xb8, 0xac, 0x6e,
+	0x26, 0x1b, 0xb9, 0x1d, 0xd8, 0x92, 0x6e, 0xdb, 0xa3, 0xd4, 0x91, 0x1e, 0x7a, 0x01, 0xc0, 0x37,
+	0x01, 0x40, 0x53, 0x18, 0xb7, 0xc8, 0xc9, 0x80, 0x30, 0xae, 0xbf, 0x06, 0x6b, 0xb1, 0x6f, 0x99,
+	0x47, 0x5d, 0x46, 0x60, 0x1d, 0xac, 0x84, 0x00, 0x25, 0xa5, 0xaa, 0xec, 0xdc, 0xa9, 0x17, 0x8c,
+	0xd9, 0xab, 0x30, 0x42, 0x75, 0xe3, 0xf6, 0xc5, 0x9f, 0x4a, 0xae, 0x25, 0x95, 0xfa, 0x06, 0x28,
+	0x0a, 0xab, 0x86, 0x4f, 0xf0, 0xf1, 0x21, 0xee, 0x70, 0xea, 0x47, 0x53, 0x9e, 0x81, 0x52, 0xba,
+	0x24, 0x47, 0x15, 0xc0, 0xf2, 0x29, 0x76, 0x06, 0x44, 0x4c, 0x5a, 0x6d, 0x85, 0x0f, 0x7a, 0x11,
+	0xdc, 0x17, 0x1d, 0xef, 0xa2, 0xb3, 0x46, 0x56, 0x6f, 0xc1, 0x7a, 0xb2, 0x20, 0x8d, 0x5e, 0x82,
+	0xd5, 0xc9, 0xcd, 0x48, 0xec, 0x62, 0x1c, 0x7b, 0xd2, 0x23, 0xc9, 0xa7, 0x7a, 0xfd, 0x39, 0xa8,
+	0x08, 0xdb, 0x23, 0xc2, 0x9b, 0xd3, 0x0b, 0x6c, 0x06, 0xf7, 0x27, 0x27, 0x07, 0xa0, 0xb6, 0xdb,
+	0x25, 0xc3, 0x08, 0x54, 0x3c, 0xe8, 0x1c, 0x54, 0xe7, 0x37, 0x4a, 0xb2, 0x26, 0xc8, 0x7b, 0x89,
+	0x9a, 0x04, 0xd4, 0x52, 0xf7, 0x1a, 0x53, 0x49, 0xce, 0x54, 0xb7, 0x6e, 0x4b, 0xdc, 0x03, 0xc7,
+	0x99, 0x87, 0x7b, 0x08, 0xc0, 0x74, 0xc5, 0xe4, 0xb8, 0x6d, 0x23, 0xdc, 0x47, 0x23, 0xd8, 0x47,
+	0x23, 0x5c, 0x75, 0xb9, 0x8f, 0x46, 0x13, 0x5b, 0x44, 0xf6, 0xb6, 0x66, 0x3a, 0xf5, 0x9f, 0x8a,
+	0x3c, 0x61, 0xe6, 0xac, 0x85, 0x27, 0xbc, 0xf5, 0xff, 0x27, 0x84, 0x47, 0x31, 0xfc, 0x25, 0x81,
+	0xff, 0xf8, 0x5a, 0xfc, 0x10, 0x67, 0x96, 0xbf, 0x7e, 0xb5, 0x0c, 0x96, 0x05, 0x3f, 0x3c, 0x06,
+	0x2b, 0xe1, 0xe2, 0xc2, 0x6a, 0x1c, 0x2a, 0x9d, 0x0b, 0xf5, 0xe1, 0x02, 0x45, 0x38, 0x44, 0x2f,
+	0x9f, 0xff, 0xfa, 0xfb, 0x6d, 0x69, 0x1d, 0x16, 0x50, 0x46, 0x70, 0xe1, 0x17, 0x05, 0xe4, 0x93,
+	0x3b, 0x0f, 0xb7, 0x32, 0x5c, 0xd3, 0x71, 0x51, 0xb7, 0xaf, 0x93, 0x49, 0x82, 0x1d, 0x41, 0xa0,
+	0xc3, 0x2a, 0x4a, 0xbf, 0xc2, 0xda, 0x66, 0xd0, 0xd0, 0xfe, 0x10, 0x0e, 0x3e, 0x57, 0xc0, 0xbd,
+	0x78, 0x6c, 0xe0, 0xa3, 0x8c, 0x21, 0xc9, 0xb4, 0xa9, 0x9b, 0x8b, 0x45, 0x92, 0x63, 0x4b, 0x70,
+	0x54, 0xe0, 0x83, 0x2c, 0x8e, 0x49, 0xc6, 0xe0, 0x0f, 0x05, 0xe4, 0x93, 0xbf, 0x3f, 0xdc, 0xcb,
+	0x98, 0x30, 0x3f, 0x84, 0xaa, 0x71, 0x53, 0xb9, 0x44, 0x7b, 0x21, 0xd0, 0xf6, 0x61, 0x0d, 0x99,
+	0x64, 0xaf, 0x47, 0x7c, 0x4a, 0x18, 0x5a, 0xfc, 0xba, 0x44, 0x9f, 0x44, 0xb0, 0x3f, 0xc3, 0xef,
+	0x0a, 0x58, 0x4b, 0xfa, 0x1e, 0x38, 0x4e, 0x26, 0xf1, 0xfc, 0x1c, 0x66, 0x12, 0x2f, 0x88, 0x92,
+	0x5e, 0x13, 0xc4, 0x4f, 0xe1, 0xee, 0x8d, 0x89, 0x1b, 0xaf, 0x2e, 0x46, 0x9a, 0x72, 0x39, 0xd2,
+	0x94, 0xab, 0x91, 0xa6, 0x7c, 0x1d, 0x6b, 0xb9, 0xcb, 0xb1, 0x96, 0xfb, 0x3d, 0xd6, 0x72, 0xef,
+	0x77, 0x2d, 0x9b, 0xf7, 0x06, 0xa6, 0xd1, 0xa1, 0xfd, 0x2c, 0xbb, 0xa1, 0x30, 0xe4, 0x67, 0x1e,
+	0x61, 0xe6, 0x8a, 0xf8, 0x9b, 0xd8, 0xff, 0x17, 0x00, 0x00, 0xff, 0xff, 0x3c, 0xa7, 0x6d, 0x76,
+	0x0f, 0x07, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -335,6 +535,9 @@ type QueryClient interface {
 	QueryBreakFactor(ctx context.Context, in *QueryBreakFactorRequest, opts ...grpc.CallOption) (*QueryBreakFactorResponse, error)
 	// Queries watchlist.
 	QueryWatchlist(ctx context.Context, in *QueryWatchlistRequest, opts ...grpc.CallOption) (*QueryWatchlistResponse, error)
+	// Queries a list of PartitionedPools items.
+	PartitionedPools(ctx context.Context, in *QueryGetPartitionedPoolsRequest, opts ...grpc.CallOption) (*QueryGetPartitionedPoolsResponse, error)
+	PartitionedPoolsAll(ctx context.Context, in *QueryAllPartitionedPoolsRequest, opts ...grpc.CallOption) (*QueryAllPartitionedPoolsResponse, error)
 }
 
 type queryClient struct {
@@ -372,6 +575,24 @@ func (c *queryClient) QueryWatchlist(ctx context.Context, in *QueryWatchlistRequ
 	return out, nil
 }
 
+func (c *queryClient) PartitionedPools(ctx context.Context, in *QueryGetPartitionedPoolsRequest, opts ...grpc.CallOption) (*QueryGetPartitionedPoolsResponse, error) {
+	out := new(QueryGetPartitionedPoolsResponse)
+	err := c.cc.Invoke(ctx, "/doxchain.abs.Query/PartitionedPools", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) PartitionedPoolsAll(ctx context.Context, in *QueryAllPartitionedPoolsRequest, opts ...grpc.CallOption) (*QueryAllPartitionedPoolsResponse, error) {
+	out := new(QueryAllPartitionedPoolsResponse)
+	err := c.cc.Invoke(ctx, "/doxchain.abs.Query/PartitionedPoolsAll", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 type QueryServer interface {
 	// Parameters queries the parameters of the module.
@@ -380,6 +601,9 @@ type QueryServer interface {
 	QueryBreakFactor(context.Context, *QueryBreakFactorRequest) (*QueryBreakFactorResponse, error)
 	// Queries watchlist.
 	QueryWatchlist(context.Context, *QueryWatchlistRequest) (*QueryWatchlistResponse, error)
+	// Queries a list of PartitionedPools items.
+	PartitionedPools(context.Context, *QueryGetPartitionedPoolsRequest) (*QueryGetPartitionedPoolsResponse, error)
+	PartitionedPoolsAll(context.Context, *QueryAllPartitionedPoolsRequest) (*QueryAllPartitionedPoolsResponse, error)
 }
 
 // UnimplementedQueryServer can be embedded to have forward compatible implementations.
@@ -394,6 +618,12 @@ func (*UnimplementedQueryServer) QueryBreakFactor(ctx context.Context, req *Quer
 }
 func (*UnimplementedQueryServer) QueryWatchlist(ctx context.Context, req *QueryWatchlistRequest) (*QueryWatchlistResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryWatchlist not implemented")
+}
+func (*UnimplementedQueryServer) PartitionedPools(ctx context.Context, req *QueryGetPartitionedPoolsRequest) (*QueryGetPartitionedPoolsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PartitionedPools not implemented")
+}
+func (*UnimplementedQueryServer) PartitionedPoolsAll(ctx context.Context, req *QueryAllPartitionedPoolsRequest) (*QueryAllPartitionedPoolsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PartitionedPoolsAll not implemented")
 }
 
 func RegisterQueryServer(s grpc1.Server, srv QueryServer) {
@@ -454,6 +684,42 @@ func _Query_QueryWatchlist_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_PartitionedPools_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryGetPartitionedPoolsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).PartitionedPools(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/doxchain.abs.Query/PartitionedPools",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).PartitionedPools(ctx, req.(*QueryGetPartitionedPoolsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_PartitionedPoolsAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryAllPartitionedPoolsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).PartitionedPoolsAll(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/doxchain.abs.Query/PartitionedPoolsAll",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).PartitionedPoolsAll(ctx, req.(*QueryAllPartitionedPoolsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Query_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "doxchain.abs.Query",
 	HandlerType: (*QueryServer)(nil),
@@ -469,6 +735,14 @@ var _Query_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "QueryWatchlist",
 			Handler:    _Query_QueryWatchlist_Handler,
+		},
+		{
+			MethodName: "PartitionedPools",
+			Handler:    _Query_PartitionedPools_Handler,
+		},
+		{
+			MethodName: "PartitionedPoolsAll",
+			Handler:    _Query_PartitionedPoolsAll_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -640,6 +914,153 @@ func (m *QueryWatchlistResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) 
 	return len(dAtA) - i, nil
 }
 
+func (m *QueryGetPartitionedPoolsRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryGetPartitionedPoolsRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryGetPartitionedPoolsRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Index) > 0 {
+		i -= len(m.Index)
+		copy(dAtA[i:], m.Index)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.Index)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryGetPartitionedPoolsResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryGetPartitionedPoolsResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryGetPartitionedPoolsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	{
+		size, err := m.PartitionedPools.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarintQuery(dAtA, i, uint64(size))
+	}
+	i--
+	dAtA[i] = 0xa
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryAllPartitionedPoolsRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryAllPartitionedPoolsRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryAllPartitionedPoolsRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Pagination != nil {
+		{
+			size, err := m.Pagination.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintQuery(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryAllPartitionedPoolsResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryAllPartitionedPoolsResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryAllPartitionedPoolsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Pagination != nil {
+		{
+			size, err := m.Pagination.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintQuery(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.PartitionedPools) > 0 {
+		for iNdEx := len(m.PartitionedPools) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.PartitionedPools[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintQuery(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0xa
+		}
+	}
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintQuery(dAtA []byte, offset int, v uint64) int {
 	offset -= sovQuery(v)
 	base := offset
@@ -710,6 +1131,62 @@ func (m *QueryWatchlistResponse) Size() (n int) {
 	_ = l
 	l = m.Watchlist.Size()
 	n += 1 + l + sovQuery(uint64(l))
+	return n
+}
+
+func (m *QueryGetPartitionedPoolsRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Index)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryGetPartitionedPoolsResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = m.PartitionedPools.Size()
+	n += 1 + l + sovQuery(uint64(l))
+	return n
+}
+
+func (m *QueryAllPartitionedPoolsRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Pagination != nil {
+		l = m.Pagination.Size()
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryAllPartitionedPoolsResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.PartitionedPools) > 0 {
+		for _, e := range m.PartitionedPools {
+			l = e.Size()
+			n += 1 + l + sovQuery(uint64(l))
+		}
+	}
+	if m.Pagination != nil {
+		l = m.Pagination.Size()
+		n += 1 + l + sovQuery(uint64(l))
+	}
 	return n
 }
 
@@ -1093,6 +1570,377 @@ func (m *QueryWatchlistResponse) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if err := m.Watchlist.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryGetPartitionedPoolsRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryGetPartitionedPoolsRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryGetPartitionedPoolsRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Index", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Index = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryGetPartitionedPoolsResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryGetPartitionedPoolsResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryGetPartitionedPoolsResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field PartitionedPools", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.PartitionedPools.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryAllPartitionedPoolsRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryAllPartitionedPoolsRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryAllPartitionedPoolsRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Pagination == nil {
+				m.Pagination = &query.PageRequest{}
+			}
+			if err := m.Pagination.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryAllPartitionedPoolsResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryAllPartitionedPoolsResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryAllPartitionedPoolsResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field PartitionedPools", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.PartitionedPools = append(m.PartitionedPools, PartitionedPools{})
+			if err := m.PartitionedPools[len(m.PartitionedPools)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Pagination == nil {
+				m.Pagination = &query.PageResponse{}
+			}
+			if err := m.Pagination.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex

@@ -9,14 +9,22 @@ import (
 
 func RegisterCodec(cdc *codec.LegacyAmino) {
 	cdc.RegisterConcrete(&MsgUpdateBreakFactor{}, "abs/UpdateBreakFactor", nil)
-	// this line is used by starport scaffolding # 2
+	cdc.RegisterConcrete(&MsgCreatePartitionedPools{}, "abs/CreatePartitionedPools", nil)
+cdc.RegisterConcrete(&MsgUpdatePartitionedPools{}, "abs/UpdatePartitionedPools", nil)
+cdc.RegisterConcrete(&MsgDeletePartitionedPools{}, "abs/DeletePartitionedPools", nil)
+// this line is used by starport scaffolding # 2
 }
 
 func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgUpdateBreakFactor{},
 	)
-	// this line is used by starport scaffolding # 3
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+	&MsgCreatePartitionedPools{},
+	&MsgUpdatePartitionedPools{},
+	&MsgDeletePartitionedPools{},
+)
+// this line is used by starport scaffolding # 3
 
 	msgservice.RegisterMsgServiceDesc(registry, &_Msg_serviceDesc)
 }
