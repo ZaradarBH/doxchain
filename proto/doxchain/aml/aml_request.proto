@@ -1,11 +1,12 @@
 syntax = "proto3";
 package beheroes.doxchain.aml;
 
+import "gogoproto/gogo.proto";
+import "doxchain/did/did.proto";
+
 option go_package = "github.com/be-heroes/doxchain/x/aml/types";
 
-message AMLRequest {
-  string firstName = 1; 
-  string lastName = 2; 
-  bool approved = 3; 
-  string creator = 4;
+message AMLRequest {    
+  beheroes.doxchain.did.Did  did = 1;
+  bool approved = 2; 
 }

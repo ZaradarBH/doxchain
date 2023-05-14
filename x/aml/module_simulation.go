@@ -81,17 +81,6 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		amlsimulation.SimulateMsgCreateAMLRequest(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
-	var weightMsgUpdateAMLRequest int
-	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgUpdateAMLRequest, &weightMsgUpdateAMLRequest, nil,
-		func(_ *rand.Rand) {
-			weightMsgUpdateAMLRequest = defaultWeightMsgUpdateAMLRequest
-		},
-	)
-	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgUpdateAMLRequest,
-		amlsimulation.SimulateMsgUpdateAMLRequest(am.accountKeeper, am.bankKeeper, am.keeper),
-	))
-
 	var weightMsgDeleteAMLRequest int
 	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgDeleteAMLRequest, &weightMsgDeleteAMLRequest, nil,
 		func(_ *rand.Rand) {

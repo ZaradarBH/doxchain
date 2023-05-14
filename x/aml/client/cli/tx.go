@@ -31,7 +31,6 @@ func GetTxCmd() *cobra.Command {
 	}
 
 	cmd.AddCommand(CmdCreateAMLRequest())
-	cmd.AddCommand(CmdUpdateAMLRequest())
 	cmd.AddCommand(CmdDeleteAMLRequest())
 	// this line is used by starport scaffolding # 1
 

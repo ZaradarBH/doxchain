@@ -318,17 +318,40 @@ paths:
           schema:
             type: object
             properties:
-              AMLRequest:
+              Request:
                 type: object
                 properties:
-                  firstName:
-                    type: string
-                  lastName:
-                    type: string
+                  did:
+                    type: object
+                    properties:
+                      creator:
+                        type: string
+                      url:
+                        type: string
+                      methodName:
+                        type: string
+                      methodId:
+                        type: string
+                      path:
+                        type: string
+                      fragment:
+                        type: string
+                      query:
+                        type: string
+                      parameters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            value:
+                              type: string
+                      id:
+                        type: string
+                        format: uint64
                   approved:
                     type: boolean
-                  creator:
-                    type: string
         default:
           description: An unexpected error response.
           schema:
@@ -347,6 +370,11 @@ paths:
                     '@type':
                       type: string
                   additionalProperties: {}
+      parameters:
+        - name: creator
+          in: query
+          required: false
+          type: string
       tags:
         - Query
   /be-heroes/doxchain/aml/params:
@@ -45428,19 +45456,40 @@ definitions:
   beheroes.doxchain.aml.AMLRequest:
     type: object
     properties:
-      firstName:
-        type: string
-      lastName:
-        type: string
+      did:
+        type: object
+        properties:
+          creator:
+            type: string
+          url:
+            type: string
+          methodName:
+            type: string
+          methodId:
+            type: string
+          path:
+            type: string
+          fragment:
+            type: string
+          query:
+            type: string
+          parameters:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
+          id:
+            type: string
+            format: uint64
       approved:
         type: boolean
-      creator:
-        type: string
   beheroes.doxchain.aml.MsgCreateAMLRequestResponse:
     type: object
   beheroes.doxchain.aml.MsgDeleteAMLRequestResponse:
-    type: object
-  beheroes.doxchain.aml.MsgUpdateAMLRequestResponse:
     type: object
   beheroes.doxchain.aml.Params:
     type: object
@@ -45448,17 +45497,40 @@ definitions:
   beheroes.doxchain.aml.QueryGetAMLRequestResponse:
     type: object
     properties:
-      AMLRequest:
+      Request:
         type: object
         properties:
-          firstName:
-            type: string
-          lastName:
-            type: string
+          did:
+            type: object
+            properties:
+              creator:
+                type: string
+              url:
+                type: string
+              methodName:
+                type: string
+              methodId:
+                type: string
+              path:
+                type: string
+              fragment:
+                type: string
+              query:
+                type: string
+              parameters:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    value:
+                      type: string
+              id:
+                type: string
+                format: uint64
           approved:
             type: boolean
-          creator:
-            type: string
   beheroes.doxchain.aml.QueryParamsResponse:
     type: object
     properties:

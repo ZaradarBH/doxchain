@@ -15,10 +15,10 @@ func (k Keeper) AMLRequest(goCtx context.Context, req *types.QueryGetAMLRequestR
 	}
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	val, found := k.GetAMLRequest(ctx)
+	val, found := k.GetAMLRequest(ctx, req.Creator)
 	if !found {
 		return nil, status.Error(codes.NotFound, "not found")
 	}
 
-	return &types.QueryGetAMLRequestResponse{AMLRequest: val}, nil
+	return &types.QueryGetAMLRequestResponse{Request: val}, nil
 }

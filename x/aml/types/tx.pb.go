@@ -6,6 +6,8 @@ package types
 import (
 	context "context"
 	fmt "fmt"
+	types "github.com/be-heroes/doxchain/x/did/types"
+	_ "github.com/gogo/protobuf/gogoproto"
 	grpc1 "github.com/gogo/protobuf/grpc"
 	proto "github.com/gogo/protobuf/proto"
 	grpc "google.golang.org/grpc"
@@ -28,10 +30,8 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 type MsgCreateAMLRequest struct {
-	Creator   string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
-	FirstName string `protobuf:"bytes,3,opt,name=firstName,proto3" json:"firstName,omitempty"`
-	LastName  string `protobuf:"bytes,4,opt,name=lastName,proto3" json:"lastName,omitempty"`
-	Approved  bool   `protobuf:"varint,5,opt,name=approved,proto3" json:"approved,omitempty"`
+	Creator string    `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	Did     types.Did `protobuf:"bytes,2,opt,name=did,proto3" json:"did"`
 }
 
 func (m *MsgCreateAMLRequest) Reset()         { *m = MsgCreateAMLRequest{} }
@@ -74,25 +74,11 @@ func (m *MsgCreateAMLRequest) GetCreator() string {
 	return ""
 }
 
-func (m *MsgCreateAMLRequest) GetFirstName() string {
+func (m *MsgCreateAMLRequest) GetDid() types.Did {
 	if m != nil {
-		return m.FirstName
+		return m.Did
 	}
-	return ""
-}
-
-func (m *MsgCreateAMLRequest) GetLastName() string {
-	if m != nil {
-		return m.LastName
-	}
-	return ""
-}
-
-func (m *MsgCreateAMLRequest) GetApproved() bool {
-	if m != nil {
-		return m.Approved
-	}
-	return false
+	return types.Did{}
 }
 
 type MsgCreateAMLRequestResponse struct {
@@ -131,110 +117,6 @@ func (m *MsgCreateAMLRequestResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_MsgCreateAMLRequestResponse proto.InternalMessageInfo
 
-type MsgUpdateAMLRequest struct {
-	Creator   string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
-	FirstName string `protobuf:"bytes,3,opt,name=firstName,proto3" json:"firstName,omitempty"`
-	LastName  string `protobuf:"bytes,4,opt,name=lastName,proto3" json:"lastName,omitempty"`
-	Approved  bool   `protobuf:"varint,5,opt,name=approved,proto3" json:"approved,omitempty"`
-}
-
-func (m *MsgUpdateAMLRequest) Reset()         { *m = MsgUpdateAMLRequest{} }
-func (m *MsgUpdateAMLRequest) String() string { return proto.CompactTextString(m) }
-func (*MsgUpdateAMLRequest) ProtoMessage()    {}
-func (*MsgUpdateAMLRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ee2568d5ef656394, []int{2}
-}
-func (m *MsgUpdateAMLRequest) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *MsgUpdateAMLRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_MsgUpdateAMLRequest.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *MsgUpdateAMLRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgUpdateAMLRequest.Merge(m, src)
-}
-func (m *MsgUpdateAMLRequest) XXX_Size() int {
-	return m.Size()
-}
-func (m *MsgUpdateAMLRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgUpdateAMLRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_MsgUpdateAMLRequest proto.InternalMessageInfo
-
-func (m *MsgUpdateAMLRequest) GetCreator() string {
-	if m != nil {
-		return m.Creator
-	}
-	return ""
-}
-
-func (m *MsgUpdateAMLRequest) GetFirstName() string {
-	if m != nil {
-		return m.FirstName
-	}
-	return ""
-}
-
-func (m *MsgUpdateAMLRequest) GetLastName() string {
-	if m != nil {
-		return m.LastName
-	}
-	return ""
-}
-
-func (m *MsgUpdateAMLRequest) GetApproved() bool {
-	if m != nil {
-		return m.Approved
-	}
-	return false
-}
-
-type MsgUpdateAMLRequestResponse struct {
-}
-
-func (m *MsgUpdateAMLRequestResponse) Reset()         { *m = MsgUpdateAMLRequestResponse{} }
-func (m *MsgUpdateAMLRequestResponse) String() string { return proto.CompactTextString(m) }
-func (*MsgUpdateAMLRequestResponse) ProtoMessage()    {}
-func (*MsgUpdateAMLRequestResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ee2568d5ef656394, []int{3}
-}
-func (m *MsgUpdateAMLRequestResponse) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *MsgUpdateAMLRequestResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_MsgUpdateAMLRequestResponse.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *MsgUpdateAMLRequestResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgUpdateAMLRequestResponse.Merge(m, src)
-}
-func (m *MsgUpdateAMLRequestResponse) XXX_Size() int {
-	return m.Size()
-}
-func (m *MsgUpdateAMLRequestResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgUpdateAMLRequestResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_MsgUpdateAMLRequestResponse proto.InternalMessageInfo
-
 type MsgDeleteAMLRequest struct {
 	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 }
@@ -243,7 +125,7 @@ func (m *MsgDeleteAMLRequest) Reset()         { *m = MsgDeleteAMLRequest{} }
 func (m *MsgDeleteAMLRequest) String() string { return proto.CompactTextString(m) }
 func (*MsgDeleteAMLRequest) ProtoMessage()    {}
 func (*MsgDeleteAMLRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ee2568d5ef656394, []int{4}
+	return fileDescriptor_ee2568d5ef656394, []int{2}
 }
 func (m *MsgDeleteAMLRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -286,7 +168,7 @@ func (m *MsgDeleteAMLRequestResponse) Reset()         { *m = MsgDeleteAMLRequest
 func (m *MsgDeleteAMLRequestResponse) String() string { return proto.CompactTextString(m) }
 func (*MsgDeleteAMLRequestResponse) ProtoMessage()    {}
 func (*MsgDeleteAMLRequestResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_ee2568d5ef656394, []int{5}
+	return fileDescriptor_ee2568d5ef656394, []int{3}
 }
 func (m *MsgDeleteAMLRequestResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -318,8 +200,6 @@ var xxx_messageInfo_MsgDeleteAMLRequestResponse proto.InternalMessageInfo
 func init() {
 	proto.RegisterType((*MsgCreateAMLRequest)(nil), "beheroes.doxchain.aml.MsgCreateAMLRequest")
 	proto.RegisterType((*MsgCreateAMLRequestResponse)(nil), "beheroes.doxchain.aml.MsgCreateAMLRequestResponse")
-	proto.RegisterType((*MsgUpdateAMLRequest)(nil), "beheroes.doxchain.aml.MsgUpdateAMLRequest")
-	proto.RegisterType((*MsgUpdateAMLRequestResponse)(nil), "beheroes.doxchain.aml.MsgUpdateAMLRequestResponse")
 	proto.RegisterType((*MsgDeleteAMLRequest)(nil), "beheroes.doxchain.aml.MsgDeleteAMLRequest")
 	proto.RegisterType((*MsgDeleteAMLRequestResponse)(nil), "beheroes.doxchain.aml.MsgDeleteAMLRequestResponse")
 }
@@ -327,28 +207,27 @@ func init() {
 func init() { proto.RegisterFile("doxchain/aml/tx.proto", fileDescriptor_ee2568d5ef656394) }
 
 var fileDescriptor_ee2568d5ef656394 = []byte{
-	// 332 bytes of a gzipped FileDescriptorProto
+	// 309 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x4d, 0xc9, 0xaf, 0x48,
 	0xce, 0x48, 0xcc, 0xcc, 0xd3, 0x4f, 0xcc, 0xcd, 0xd1, 0x2f, 0xa9, 0xd0, 0x2b, 0x28, 0xca, 0x2f,
 	0xc9, 0x17, 0x12, 0x4d, 0x4a, 0xcd, 0x48, 0x2d, 0xca, 0x4f, 0x2d, 0xd6, 0x83, 0xc9, 0xeb, 0x25,
-	0xe6, 0xe6, 0x48, 0xc9, 0xa1, 0xa8, 0x4e, 0xcc, 0xcd, 0x89, 0x2f, 0x4a, 0x2d, 0x2c, 0x4d, 0x2d,
-	0x2e, 0x81, 0x68, 0x53, 0x6a, 0x65, 0xe4, 0x12, 0xf6, 0x2d, 0x4e, 0x77, 0x2e, 0x4a, 0x4d, 0x2c,
-	0x49, 0x75, 0xf4, 0xf5, 0x09, 0x82, 0xc8, 0x0a, 0x49, 0x70, 0xb1, 0x27, 0x83, 0xc4, 0xf2, 0x8b,
-	0x24, 0x18, 0x15, 0x18, 0x35, 0x38, 0x83, 0x60, 0x5c, 0x21, 0x19, 0x2e, 0xce, 0xb4, 0xcc, 0xa2,
-	0xe2, 0x12, 0xbf, 0xc4, 0xdc, 0x54, 0x09, 0x66, 0xb0, 0x1c, 0x42, 0x40, 0x48, 0x8a, 0x8b, 0x23,
-	0x27, 0x11, 0x2a, 0xc9, 0x02, 0x96, 0x84, 0xf3, 0x41, 0x72, 0x89, 0x05, 0x05, 0x45, 0xf9, 0x65,
-	0xa9, 0x29, 0x12, 0xac, 0x0a, 0x8c, 0x1a, 0x1c, 0x41, 0x70, 0xbe, 0x92, 0x2c, 0x97, 0x34, 0x16,
-	0x67, 0x04, 0xa5, 0x16, 0x17, 0xe4, 0xe7, 0x15, 0xa7, 0xc2, 0x9c, 0x19, 0x5a, 0x90, 0x32, 0x18,
-	0x9c, 0x89, 0xee, 0x0c, 0xb8, 0x33, 0xf5, 0xc1, 0xae, 0x74, 0x49, 0xcd, 0x49, 0x25, 0xce, 0x95,
-	0x50, 0xf3, 0xd0, 0x35, 0xc0, 0xcc, 0x33, 0x7a, 0xc8, 0xc4, 0xc5, 0xec, 0x5b, 0x9c, 0x2e, 0x54,
-	0xc4, 0x25, 0x80, 0x11, 0x43, 0x5a, 0x7a, 0x58, 0x63, 0x5c, 0x0f, 0x4b, 0x30, 0x4a, 0x19, 0x11,
-	0xaf, 0x16, 0x66, 0x37, 0xc8, 0x4e, 0x8c, 0xe0, 0xc6, 0x63, 0x27, 0xba, 0x5a, 0x7c, 0x76, 0xe2,
-	0x0a, 0x3f, 0x90, 0x9d, 0x18, 0x81, 0x87, 0xc7, 0x4e, 0x74, 0xb5, 0xf8, 0xec, 0xc4, 0x15, 0xc6,
-	0x4e, 0xce, 0x27, 0x1e, 0xc9, 0x31, 0x5e, 0x78, 0x24, 0xc7, 0xf8, 0xe0, 0x91, 0x1c, 0xe3, 0x84,
-	0xc7, 0x72, 0x0c, 0x17, 0x1e, 0xcb, 0x31, 0xdc, 0x78, 0x2c, 0xc7, 0x10, 0xa5, 0x99, 0x9e, 0x59,
-	0x92, 0x51, 0x9a, 0xa4, 0x97, 0x9c, 0x9f, 0xab, 0x9f, 0x94, 0xaa, 0x0b, 0x31, 0x58, 0x1f, 0x9e,
-	0xa1, 0x2a, 0x20, 0x19, 0xb0, 0xb2, 0x20, 0xb5, 0x38, 0x89, 0x0d, 0x9c, 0x9b, 0x8c, 0x01, 0x01,
-	0x00, 0x00, 0xff, 0xff, 0xf7, 0x79, 0xdc, 0x2b, 0x9d, 0x03, 0x00, 0x00,
+	0xe6, 0xe6, 0x48, 0x89, 0xa4, 0xe7, 0xa7, 0xe7, 0x83, 0x55, 0xe8, 0x83, 0x58, 0x10, 0xc5, 0x52,
+	0x72, 0x28, 0x66, 0x24, 0xe6, 0xe6, 0xc4, 0x17, 0xa5, 0x16, 0x96, 0xa6, 0x16, 0x97, 0x40, 0xe5,
+	0xc5, 0xe0, 0xf2, 0x29, 0x99, 0x29, 0x20, 0x0c, 0x11, 0x57, 0x4a, 0xe6, 0x12, 0xf6, 0x2d, 0x4e,
+	0x77, 0x2e, 0x4a, 0x4d, 0x2c, 0x49, 0x75, 0xf4, 0xf5, 0x09, 0x82, 0x68, 0x12, 0x92, 0xe0, 0x62,
+	0x4f, 0x06, 0x89, 0xe5, 0x17, 0x49, 0x30, 0x2a, 0x30, 0x6a, 0x70, 0x06, 0xc1, 0xb8, 0x42, 0x46,
+	0x5c, 0xcc, 0x29, 0x99, 0x29, 0x12, 0x4c, 0x0a, 0x8c, 0x1a, 0xdc, 0x46, 0x52, 0x7a, 0x98, 0x6e,
+	0x04, 0x99, 0xed, 0x92, 0x99, 0xe2, 0xc4, 0x72, 0xe2, 0x9e, 0x3c, 0x43, 0x10, 0x48, 0xb1, 0x92,
+	0x2c, 0x97, 0x34, 0x16, 0x4b, 0x82, 0x52, 0x8b, 0x0b, 0xf2, 0xf3, 0x8a, 0x53, 0x95, 0xf4, 0xc1,
+	0x6e, 0x70, 0x49, 0xcd, 0x49, 0x25, 0xce, 0x0d, 0x50, 0xf3, 0xd0, 0x35, 0xc0, 0xcc, 0x33, 0x7a,
+	0xcb, 0xc8, 0xc5, 0xec, 0x5b, 0x9c, 0x2e, 0x54, 0xc4, 0x25, 0x80, 0xe1, 0x31, 0x2d, 0x3d, 0xac,
+	0xa1, 0xaa, 0x87, 0xc5, 0x7d, 0x52, 0x46, 0xc4, 0xab, 0x85, 0xd9, 0x0d, 0xb2, 0x13, 0xc3, 0x23,
+	0x78, 0xec, 0x44, 0x57, 0x8b, 0xcf, 0x4e, 0x5c, 0xfe, 0x75, 0x72, 0x3e, 0xf1, 0x48, 0x8e, 0xf1,
+	0xc2, 0x23, 0x39, 0xc6, 0x07, 0x8f, 0xe4, 0x18, 0x27, 0x3c, 0x96, 0x63, 0xb8, 0xf0, 0x58, 0x8e,
+	0xe1, 0xc6, 0x63, 0x39, 0x86, 0x28, 0xcd, 0xf4, 0xcc, 0x92, 0x8c, 0xd2, 0x24, 0xbd, 0xe4, 0xfc,
+	0x5c, 0xfd, 0xa4, 0x54, 0x5d, 0x88, 0xc1, 0xfa, 0xf0, 0xa4, 0x50, 0x01, 0x49, 0x70, 0x95, 0x05,
+	0xa9, 0xc5, 0x49, 0x6c, 0xe0, 0xf4, 0x60, 0x0c, 0x08, 0x00, 0x00, 0xff, 0xff, 0xf8, 0xea, 0xea,
+	0xd3, 0x8d, 0x02, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -364,7 +243,6 @@ const _ = grpc.SupportPackageIsVersion4
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type MsgClient interface {
 	CreateAMLRequest(ctx context.Context, in *MsgCreateAMLRequest, opts ...grpc.CallOption) (*MsgCreateAMLRequestResponse, error)
-	UpdateAMLRequest(ctx context.Context, in *MsgUpdateAMLRequest, opts ...grpc.CallOption) (*MsgUpdateAMLRequestResponse, error)
 	DeleteAMLRequest(ctx context.Context, in *MsgDeleteAMLRequest, opts ...grpc.CallOption) (*MsgDeleteAMLRequestResponse, error)
 }
 
@@ -385,15 +263,6 @@ func (c *msgClient) CreateAMLRequest(ctx context.Context, in *MsgCreateAMLReques
 	return out, nil
 }
 
-func (c *msgClient) UpdateAMLRequest(ctx context.Context, in *MsgUpdateAMLRequest, opts ...grpc.CallOption) (*MsgUpdateAMLRequestResponse, error) {
-	out := new(MsgUpdateAMLRequestResponse)
-	err := c.cc.Invoke(ctx, "/beheroes.doxchain.aml.Msg/UpdateAMLRequest", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *msgClient) DeleteAMLRequest(ctx context.Context, in *MsgDeleteAMLRequest, opts ...grpc.CallOption) (*MsgDeleteAMLRequestResponse, error) {
 	out := new(MsgDeleteAMLRequestResponse)
 	err := c.cc.Invoke(ctx, "/beheroes.doxchain.aml.Msg/DeleteAMLRequest", in, out, opts...)
@@ -406,7 +275,6 @@ func (c *msgClient) DeleteAMLRequest(ctx context.Context, in *MsgDeleteAMLReques
 // MsgServer is the server API for Msg service.
 type MsgServer interface {
 	CreateAMLRequest(context.Context, *MsgCreateAMLRequest) (*MsgCreateAMLRequestResponse, error)
-	UpdateAMLRequest(context.Context, *MsgUpdateAMLRequest) (*MsgUpdateAMLRequestResponse, error)
 	DeleteAMLRequest(context.Context, *MsgDeleteAMLRequest) (*MsgDeleteAMLRequestResponse, error)
 }
 
@@ -416,9 +284,6 @@ type UnimplementedMsgServer struct {
 
 func (*UnimplementedMsgServer) CreateAMLRequest(ctx context.Context, req *MsgCreateAMLRequest) (*MsgCreateAMLRequestResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAMLRequest not implemented")
-}
-func (*UnimplementedMsgServer) UpdateAMLRequest(ctx context.Context, req *MsgUpdateAMLRequest) (*MsgUpdateAMLRequestResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateAMLRequest not implemented")
 }
 func (*UnimplementedMsgServer) DeleteAMLRequest(ctx context.Context, req *MsgDeleteAMLRequest) (*MsgDeleteAMLRequestResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAMLRequest not implemented")
@@ -442,24 +307,6 @@ func _Msg_CreateAMLRequest_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MsgServer).CreateAMLRequest(ctx, req.(*MsgCreateAMLRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Msg_UpdateAMLRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgUpdateAMLRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MsgServer).UpdateAMLRequest(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/beheroes.doxchain.aml.Msg/UpdateAMLRequest",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).UpdateAMLRequest(ctx, req.(*MsgUpdateAMLRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -491,10 +338,6 @@ var _Msg_serviceDesc = grpc.ServiceDesc{
 			Handler:    _Msg_CreateAMLRequest_Handler,
 		},
 		{
-			MethodName: "UpdateAMLRequest",
-			Handler:    _Msg_UpdateAMLRequest_Handler,
-		},
-		{
 			MethodName: "DeleteAMLRequest",
 			Handler:    _Msg_DeleteAMLRequest_Handler,
 		},
@@ -523,30 +366,16 @@ func (m *MsgCreateAMLRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
-	if m.Approved {
-		i--
-		if m.Approved {
-			dAtA[i] = 1
-		} else {
-			dAtA[i] = 0
+	{
+		size, err := m.Did.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
 		}
-		i--
-		dAtA[i] = 0x28
+		i -= size
+		i = encodeVarintTx(dAtA, i, uint64(size))
 	}
-	if len(m.LastName) > 0 {
-		i -= len(m.LastName)
-		copy(dAtA[i:], m.LastName)
-		i = encodeVarintTx(dAtA, i, uint64(len(m.LastName)))
-		i--
-		dAtA[i] = 0x22
-	}
-	if len(m.FirstName) > 0 {
-		i -= len(m.FirstName)
-		copy(dAtA[i:], m.FirstName)
-		i = encodeVarintTx(dAtA, i, uint64(len(m.FirstName)))
-		i--
-		dAtA[i] = 0x1a
-	}
+	i--
+	dAtA[i] = 0x12
 	if len(m.Creator) > 0 {
 		i -= len(m.Creator)
 		copy(dAtA[i:], m.Creator)
@@ -573,83 +402,6 @@ func (m *MsgCreateAMLRequestResponse) MarshalTo(dAtA []byte) (int, error) {
 }
 
 func (m *MsgCreateAMLRequestResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	return len(dAtA) - i, nil
-}
-
-func (m *MsgUpdateAMLRequest) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *MsgUpdateAMLRequest) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *MsgUpdateAMLRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.Approved {
-		i--
-		if m.Approved {
-			dAtA[i] = 1
-		} else {
-			dAtA[i] = 0
-		}
-		i--
-		dAtA[i] = 0x28
-	}
-	if len(m.LastName) > 0 {
-		i -= len(m.LastName)
-		copy(dAtA[i:], m.LastName)
-		i = encodeVarintTx(dAtA, i, uint64(len(m.LastName)))
-		i--
-		dAtA[i] = 0x22
-	}
-	if len(m.FirstName) > 0 {
-		i -= len(m.FirstName)
-		copy(dAtA[i:], m.FirstName)
-		i = encodeVarintTx(dAtA, i, uint64(len(m.FirstName)))
-		i--
-		dAtA[i] = 0x1a
-	}
-	if len(m.Creator) > 0 {
-		i -= len(m.Creator)
-		copy(dAtA[i:], m.Creator)
-		i = encodeVarintTx(dAtA, i, uint64(len(m.Creator)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *MsgUpdateAMLRequestResponse) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *MsgUpdateAMLRequestResponse) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *MsgUpdateAMLRequestResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -731,54 +483,12 @@ func (m *MsgCreateAMLRequest) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovTx(uint64(l))
 	}
-	l = len(m.FirstName)
-	if l > 0 {
-		n += 1 + l + sovTx(uint64(l))
-	}
-	l = len(m.LastName)
-	if l > 0 {
-		n += 1 + l + sovTx(uint64(l))
-	}
-	if m.Approved {
-		n += 2
-	}
+	l = m.Did.Size()
+	n += 1 + l + sovTx(uint64(l))
 	return n
 }
 
 func (m *MsgCreateAMLRequestResponse) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	return n
-}
-
-func (m *MsgUpdateAMLRequest) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.Creator)
-	if l > 0 {
-		n += 1 + l + sovTx(uint64(l))
-	}
-	l = len(m.FirstName)
-	if l > 0 {
-		n += 1 + l + sovTx(uint64(l))
-	}
-	l = len(m.LastName)
-	if l > 0 {
-		n += 1 + l + sovTx(uint64(l))
-	}
-	if m.Approved {
-		n += 2
-	}
-	return n
-}
-
-func (m *MsgUpdateAMLRequestResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -876,11 +586,11 @@ func (m *MsgCreateAMLRequest) Unmarshal(dAtA []byte) error {
 			}
 			m.Creator = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
-		case 3:
+		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field FirstName", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Did", wireType)
 			}
-			var stringLen uint64
+			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowTx
@@ -890,76 +600,25 @@ func (m *MsgCreateAMLRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				msglen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
+			if msglen < 0 {
 				return ErrInvalidLengthTx
 			}
-			postIndex := iNdEx + intStringLen
+			postIndex := iNdEx + msglen
 			if postIndex < 0 {
 				return ErrInvalidLengthTx
 			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FirstName = string(dAtA[iNdEx:postIndex])
+			if err := m.Did.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
 			iNdEx = postIndex
-		case 4:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field LastName", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTx
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthTx
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthTx
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.LastName = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 5:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Approved", wireType)
-			}
-			var v int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTx
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				v |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			m.Approved = bool(v != 0)
 		default:
 			iNdEx = preIndex
 			skippy, err := skipTx(dAtA[iNdEx:])
@@ -1008,222 +667,6 @@ func (m *MsgCreateAMLRequestResponse) Unmarshal(dAtA []byte) error {
 		}
 		if fieldNum <= 0 {
 			return fmt.Errorf("proto: MsgCreateAMLRequestResponse: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		default:
-			iNdEx = preIndex
-			skippy, err := skipTx(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthTx
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *MsgUpdateAMLRequest) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowTx
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: MsgUpdateAMLRequest: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgUpdateAMLRequest: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTx
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthTx
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthTx
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Creator = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 3:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field FirstName", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTx
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthTx
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthTx
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.FirstName = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 4:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field LastName", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTx
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthTx
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthTx
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.LastName = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 5:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Approved", wireType)
-			}
-			var v int
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTx
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				v |= int(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			m.Approved = bool(v != 0)
-		default:
-			iNdEx = preIndex
-			skippy, err := skipTx(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthTx
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *MsgUpdateAMLRequestResponse) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowTx
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: MsgUpdateAMLRequestResponse: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgUpdateAMLRequestResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:

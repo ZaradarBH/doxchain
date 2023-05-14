@@ -5,6 +5,8 @@ package types
 
 import (
 	fmt "fmt"
+	types "github.com/be-heroes/doxchain/x/did/types"
+	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
 	io "io"
 	math "math"
@@ -23,10 +25,8 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 type AMLRequest struct {
-	FirstName string `protobuf:"bytes,1,opt,name=firstName,proto3" json:"firstName,omitempty"`
-	LastName  string `protobuf:"bytes,2,opt,name=lastName,proto3" json:"lastName,omitempty"`
-	Approved  bool   `protobuf:"varint,3,opt,name=approved,proto3" json:"approved,omitempty"`
-	Creator   string `protobuf:"bytes,4,opt,name=creator,proto3" json:"creator,omitempty"`
+	Did      *types.Did `protobuf:"bytes,1,opt,name=did,proto3" json:"did,omitempty"`
+	Approved bool       `protobuf:"varint,2,opt,name=approved,proto3" json:"approved,omitempty"`
 }
 
 func (m *AMLRequest) Reset()         { *m = AMLRequest{} }
@@ -62,18 +62,11 @@ func (m *AMLRequest) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_AMLRequest proto.InternalMessageInfo
 
-func (m *AMLRequest) GetFirstName() string {
+func (m *AMLRequest) GetDid() *types.Did {
 	if m != nil {
-		return m.FirstName
+		return m.Did
 	}
-	return ""
-}
-
-func (m *AMLRequest) GetLastName() string {
-	if m != nil {
-		return m.LastName
-	}
-	return ""
+	return nil
 }
 
 func (m *AMLRequest) GetApproved() bool {
@@ -81,13 +74,6 @@ func (m *AMLRequest) GetApproved() bool {
 		return m.Approved
 	}
 	return false
-}
-
-func (m *AMLRequest) GetCreator() string {
-	if m != nil {
-		return m.Creator
-	}
-	return ""
 }
 
 func init() {
@@ -101,17 +87,17 @@ var fileDescriptor_97191bad95acab09 = []byte{
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0x4b, 0xc9, 0xaf, 0x48,
 	0xce, 0x48, 0xcc, 0xcc, 0xd3, 0x4f, 0xcc, 0xcd, 0x01, 0xe1, 0xf8, 0xa2, 0xd4, 0xc2, 0xd2, 0xd4,
 	0xe2, 0x12, 0xbd, 0x82, 0xa2, 0xfc, 0x92, 0x7c, 0x21, 0xd1, 0xa4, 0xd4, 0x8c, 0xd4, 0xa2, 0xfc,
-	0xd4, 0x62, 0x3d, 0x98, 0x42, 0xbd, 0xc4, 0xdc, 0x1c, 0xa5, 0x1a, 0x2e, 0x2e, 0x47, 0x5f, 0x9f,
-	0x20, 0x88, 0x52, 0x21, 0x19, 0x2e, 0xce, 0xb4, 0xcc, 0xa2, 0xe2, 0x12, 0xbf, 0xc4, 0xdc, 0x54,
-	0x09, 0x46, 0x05, 0x46, 0x0d, 0xce, 0x20, 0x84, 0x80, 0x90, 0x14, 0x17, 0x47, 0x4e, 0x22, 0x54,
-	0x92, 0x09, 0x2c, 0x09, 0xe7, 0x83, 0xe4, 0x12, 0x0b, 0x0a, 0x8a, 0xf2, 0xcb, 0x52, 0x53, 0x24,
-	0x98, 0x15, 0x18, 0x35, 0x38, 0x82, 0xe0, 0x7c, 0x21, 0x09, 0x2e, 0xf6, 0xe4, 0xa2, 0xd4, 0xc4,
-	0x92, 0xfc, 0x22, 0x09, 0x16, 0xb0, 0x36, 0x18, 0xd7, 0xc9, 0xf9, 0xc4, 0x23, 0x39, 0xc6, 0x0b,
-	0x8f, 0xe4, 0x18, 0x1f, 0x3c, 0x92, 0x63, 0x9c, 0xf0, 0x58, 0x8e, 0xe1, 0xc2, 0x63, 0x39, 0x86,
-	0x1b, 0x8f, 0xe5, 0x18, 0xa2, 0x34, 0xd3, 0x33, 0x4b, 0x32, 0x4a, 0x93, 0xf4, 0x92, 0xf3, 0x73,
-	0xf5, 0x93, 0x52, 0x75, 0x21, 0x4e, 0xd7, 0x87, 0xfb, 0xb1, 0x02, 0xec, 0xcb, 0x92, 0xca, 0x82,
-	0xd4, 0xe2, 0x24, 0x36, 0xb0, 0x07, 0x8d, 0x01, 0x01, 0x00, 0x00, 0xff, 0xff, 0x5c, 0xa6, 0x5c,
-	0x72, 0x02, 0x01, 0x00, 0x00,
+	0xd4, 0x62, 0x3d, 0x98, 0x42, 0xbd, 0xc4, 0xdc, 0x1c, 0x29, 0x91, 0xf4, 0xfc, 0xf4, 0x7c, 0xb0,
+	0x0a, 0x7d, 0x10, 0x0b, 0xa2, 0x58, 0x4a, 0x0c, 0x6e, 0x58, 0x4a, 0x66, 0x0a, 0x08, 0x43, 0xc4,
+	0x95, 0xc2, 0xb8, 0xb8, 0x1c, 0x7d, 0x7d, 0x82, 0x20, 0x06, 0x0b, 0xe9, 0x70, 0x31, 0xa7, 0x64,
+	0xa6, 0x48, 0x30, 0x2a, 0x30, 0x6a, 0x70, 0x1b, 0x49, 0xe9, 0x61, 0x5a, 0x00, 0xd2, 0xe8, 0x92,
+	0x99, 0x12, 0x04, 0x52, 0x26, 0x24, 0xc5, 0xc5, 0x91, 0x58, 0x50, 0x50, 0x94, 0x5f, 0x96, 0x9a,
+	0x22, 0xc1, 0xa4, 0xc0, 0xa8, 0xc1, 0x11, 0x04, 0xe7, 0x3b, 0x39, 0x9f, 0x78, 0x24, 0xc7, 0x78,
+	0xe1, 0x91, 0x1c, 0xe3, 0x83, 0x47, 0x72, 0x8c, 0x13, 0x1e, 0xcb, 0x31, 0x5c, 0x78, 0x2c, 0xc7,
+	0x70, 0xe3, 0xb1, 0x1c, 0x43, 0x94, 0x66, 0x7a, 0x66, 0x49, 0x46, 0x69, 0x92, 0x5e, 0x72, 0x7e,
+	0xae, 0x7e, 0x52, 0xaa, 0x2e, 0xc4, 0x06, 0x7d, 0xb8, 0xf3, 0x2a, 0xc0, 0xbe, 0x2d, 0xa9, 0x2c,
+	0x48, 0x2d, 0x4e, 0x62, 0x03, 0xbb, 0xd1, 0x18, 0x10, 0x00, 0x00, 0xff, 0xff, 0x87, 0x9b, 0x18,
+	0x3b, 0x0a, 0x01, 0x00, 0x00,
 }
 
 func (m *AMLRequest) Marshal() (dAtA []byte, err error) {
@@ -134,13 +120,6 @@ func (m *AMLRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
-	if len(m.Creator) > 0 {
-		i -= len(m.Creator)
-		copy(dAtA[i:], m.Creator)
-		i = encodeVarintAmlRequest(dAtA, i, uint64(len(m.Creator)))
-		i--
-		dAtA[i] = 0x22
-	}
 	if m.Approved {
 		i--
 		if m.Approved {
@@ -149,19 +128,17 @@ func (m *AMLRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 			dAtA[i] = 0
 		}
 		i--
-		dAtA[i] = 0x18
+		dAtA[i] = 0x10
 	}
-	if len(m.LastName) > 0 {
-		i -= len(m.LastName)
-		copy(dAtA[i:], m.LastName)
-		i = encodeVarintAmlRequest(dAtA, i, uint64(len(m.LastName)))
-		i--
-		dAtA[i] = 0x12
-	}
-	if len(m.FirstName) > 0 {
-		i -= len(m.FirstName)
-		copy(dAtA[i:], m.FirstName)
-		i = encodeVarintAmlRequest(dAtA, i, uint64(len(m.FirstName)))
+	if m.Did != nil {
+		{
+			size, err := m.Did.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintAmlRequest(dAtA, i, uint64(size))
+		}
 		i--
 		dAtA[i] = 0xa
 	}
@@ -185,20 +162,12 @@ func (m *AMLRequest) Size() (n int) {
 	}
 	var l int
 	_ = l
-	l = len(m.FirstName)
-	if l > 0 {
-		n += 1 + l + sovAmlRequest(uint64(l))
-	}
-	l = len(m.LastName)
-	if l > 0 {
+	if m.Did != nil {
+		l = m.Did.Size()
 		n += 1 + l + sovAmlRequest(uint64(l))
 	}
 	if m.Approved {
 		n += 2
-	}
-	l = len(m.Creator)
-	if l > 0 {
-		n += 1 + l + sovAmlRequest(uint64(l))
 	}
 	return n
 }
@@ -240,9 +209,9 @@ func (m *AMLRequest) Unmarshal(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field FirstName", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field Did", wireType)
 			}
-			var stringLen uint64
+			var msglen int
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowAmlRequest
@@ -252,57 +221,29 @@ func (m *AMLRequest) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				msglen |= int(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
+			if msglen < 0 {
 				return ErrInvalidLengthAmlRequest
 			}
-			postIndex := iNdEx + intStringLen
+			postIndex := iNdEx + msglen
 			if postIndex < 0 {
 				return ErrInvalidLengthAmlRequest
 			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FirstName = string(dAtA[iNdEx:postIndex])
+			if m.Did == nil {
+				m.Did = &types.Did{}
+			}
+			if err := m.Did.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
 			iNdEx = postIndex
 		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field LastName", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAmlRequest
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAmlRequest
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAmlRequest
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.LastName = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 3:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Approved", wireType)
 			}
@@ -322,38 +263,6 @@ func (m *AMLRequest) Unmarshal(dAtA []byte) error {
 				}
 			}
 			m.Approved = bool(v != 0)
-		case 4:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAmlRequest
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAmlRequest
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAmlRequest
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Creator = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipAmlRequest(dAtA[iNdEx:])

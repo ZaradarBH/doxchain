@@ -25,49 +25,10 @@ func SimulateMsgCreateAMLRequest(
 			Creator: simAccount.Address.String(),
 		}
 
-		_, found := k.GetAMLRequest(ctx)
+		_, found := k.GetAMLRequest(ctx, msg.Creator)
 		if found {
 			return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "AMLRequest already exist"), nil, nil
 		}
-
-		txCtx := simulation.OperationInput{
-			R:               r,
-			App:             app,
-			TxGen:           simappparams.MakeTestEncodingConfig().TxConfig,
-			Cdc:             nil,
-			Msg:             msg,
-			MsgType:         msg.Type(),
-			Context:         ctx,
-			SimAccount:      simAccount,
-			ModuleName:      types.ModuleName,
-			CoinsSpentInMsg: sdk.NewCoins(),
-			AccountKeeper:   ak,
-			Bankkeeper:      bk,
-		}
-		return simulation.GenAndDeliverTxWithRandFees(txCtx)
-	}
-}
-
-func SimulateMsgUpdateAMLRequest(
-	ak types.AccountKeeper,
-	bk types.BankKeeper,
-	k keeper.Keeper,
-) simtypes.Operation {
-	return func(r *rand.Rand, app *baseapp.BaseApp, ctx sdk.Context, accs []simtypes.Account, chainID string,
-	) (simtypes.OperationMsg, []simtypes.FutureOperation, error) {
-		var (
-			simAccount        = simtypes.Account{}
-			msg               = &types.MsgUpdateAMLRequest{}
-			aMLRequest, found = k.GetAMLRequest(ctx)
-		)
-		if !found {
-			return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "aMLRequest store is empty"), nil, nil
-		}
-		simAccount, found = FindAccount(accs, aMLRequest.Creator)
-		if !found {
-			return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "aMLRequest creator not found"), nil, nil
-		}
-		msg.Creator = simAccount.Address.String()
 
 		txCtx := simulation.OperationInput{
 			R:               r,
@@ -96,13 +57,13 @@ func SimulateMsgDeleteAMLRequest(
 	) (simtypes.OperationMsg, []simtypes.FutureOperation, error) {
 		var (
 			simAccount        = simtypes.Account{}
-			msg               = &types.MsgUpdateAMLRequest{}
-			aMLRequest, found = k.GetAMLRequest(ctx)
+			msg               = &types.MsgDeleteAMLRequest{}
+			aMLRequest, found = k.GetAMLRequest(ctx, msg.Creator)
 		)
 		if !found {
 			return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "aMLRequest store is empty"), nil, nil
 		}
-		simAccount, found = FindAccount(accs, aMLRequest.Creator)
+		simAccount, found = FindAccount(accs, aMLRequest.Did.Creator)
 		if !found {
 			return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "aMLRequest creator not found"), nil, nil
 		}

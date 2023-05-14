@@ -11,6 +11,7 @@ option go_package = "github.com/be-heroes/doxchain/x/aml/types";
 // GenesisState defines the aml module's genesis state.
 message GenesisState {
   Params     params     = 1 [(gogoproto.nullable) = false];
-  AMLRequest aMLRequest = 2;
+  repeated   AMLRequest requests      = 2 [(gogoproto.nullable) = false];
+             uint64     requestCount = 3;
 }
 

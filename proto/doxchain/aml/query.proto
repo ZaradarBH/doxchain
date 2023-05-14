@@ -35,9 +35,11 @@ message QueryParamsResponse {
   Params params = 1 [(gogoproto.nullable) = false];
 }
 
-message QueryGetAMLRequestRequest {}
+message QueryGetAMLRequestRequest {
+  string creator = 1;
+}
 
 message QueryGetAMLRequestResponse {
-  AMLRequest AMLRequest = 1 [(gogoproto.nullable) = false];
+  AMLRequest Request = 1 [(gogoproto.nullable) = false];
 }
 
