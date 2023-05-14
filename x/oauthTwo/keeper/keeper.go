@@ -52,7 +52,6 @@ func NewKeeper(
 	}
 }
 
-//TODO: Implement /authorize message handler / logic to autorize jwts
 func (k Keeper) Logger(ctx sdk.Context) log.Logger {
 	return ctx.Logger().With("module", fmt.Sprintf("x/%s", types.ModuleName))
 }
