@@ -4,13 +4,13 @@ import (
 	"testing"
 
 	testkeeper "github.com/be-heroes/doxchain/testutil/keeper"
-	"github.com/be-heroes/doxchain/x/samlTwo/types"
+	"github.com/be-heroes/doxchain/x/samltwo/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 )
 
 func TestParamsQuery(t *testing.T) {
-	keeper, ctx := testkeeper.SamlTwoKeeper(t)
+	keeper, ctx := testkeeper.samltwoKeeper(t)
 	wctx := sdk.WrapSDKContext(ctx)
 	params := types.DefaultParams()
 	keeper.SetParams(ctx, params)

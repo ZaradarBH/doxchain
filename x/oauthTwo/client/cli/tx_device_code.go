@@ -3,7 +3,7 @@ package cli
 import (
 	"strconv"
 
-	"github.com/be-heroes/doxchain/x/oauthTwo/types"
+	"github.com/be-heroes/doxchain/x/oauthtwo/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/client/tx"

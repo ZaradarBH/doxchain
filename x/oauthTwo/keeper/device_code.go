@@ -1,12 +1,12 @@
 package keeper
 
 import (
-	"time"	
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+	"time"
 
-	"github.com/be-heroes/doxchain/x/oauthTwo/types"
 	"github.com/be-heroes/doxchain/utils"
+	"github.com/be-heroes/doxchain/x/oauthtwo/types"
 )
 
 // DeviceCode method for simple oauth keeper
@@ -18,9 +18,10 @@ func (k Keeper) DeviceCode(ctx sdk.Context, msg types.MsgDeviceCodeRequest) (typ
 		return response, err
 	}
 
+	//TODO: Validate ClientId and Scope
+	//TODO: Implement support for verification uri in tenant
 	response.DeviceCode, _ = utils.GenerateRandomString(32)
 	response.UserCode, _ = utils.GenerateRandomString(8)
-	//TODO: Implement support for verification uri in tenant
 	response.VerificationUri = "http://tenant_verification_uri/"
 
 	tenantDeviceCodeRegistry, found := k.GetDeviceCodeRegistry(ctx, msg.Tenant)
@@ -28,11 +29,11 @@ func (k Keeper) DeviceCode(ctx sdk.Context, msg types.MsgDeviceCodeRequest) (typ
 	if !found {
 		return response, sdkerrors.Wrap(types.TokenServiceError, "DeviceCodeRegistry cache could not be found for tenant")
 	}
-	
+
 	deviceCodeInfo := types.DeviceCodeInfo{
-		Creator: msg.Creator,
+		Creator:    msg.Creator,
 		DeviceCode: response.DeviceCode,
-		ExpiresAt: ctx.BlockTime().Add(time.Minute * 15).Unix(),
+		ExpiresAt:  ctx.BlockTime().Add(time.Minute * 15).Unix(),
 	}
 
 	tenantDeviceCodeRegistry.Codes = append(tenantDeviceCodeRegistry.Codes, deviceCodeInfo)

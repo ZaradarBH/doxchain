@@ -1,13 +1,13 @@
 syntax = "proto3";
 
-package beheroes.doxchain.oauthTwo;
+package beheroes.doxchain.oauthtwo;
 
 import "gogoproto/gogo.proto";
-import "doxchain/oauthTwo/params.proto";
-import "doxchain/oauthTwo/device_code_registry.proto";
-import "doxchain/oauthTwo/access_token_registry.proto";
+import "doxchain/oauthtwo/params.proto";
+import "doxchain/oauthtwo/device_code_registry.proto";
+import "doxchain/oauthtwo/access_token_registry.proto";
 
-option go_package = "github.com/be-heroes/doxchain/x/oauthTwo/types";
+option go_package = "github.com/be-heroes/doxchain/x/oauthtwo/types";
 
 // GenesisState defines the oauth module's genesis state.
 message GenesisState {

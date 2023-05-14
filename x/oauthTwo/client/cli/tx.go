@@ -8,7 +8,7 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/client"
 	// "github.com/cosmos/cosmos-sdk/client/flags"
-	"github.com/be-heroes/doxchain/x/oauthTwo/types"
+	"github.com/be-heroes/doxchain/x/oauthtwo/types"
 )
 
 var (
@@ -32,6 +32,7 @@ func GetTxCmd() *cobra.Command {
 
 	cmd.AddCommand(CmdToken())
 	cmd.AddCommand(CmdDeviceCode())
+	cmd.AddCommand(CmdAuthorize())
 	// this line is used by starport scaffolding # 1
 
 	return cmd

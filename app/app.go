@@ -122,15 +122,15 @@ import (
 	kycmodule "github.com/be-heroes/doxchain/x/kyc"
 	kycmodulekeeper "github.com/be-heroes/doxchain/x/kyc/keeper"
 	kycmoduletypes "github.com/be-heroes/doxchain/x/kyc/types"
-	oauthTwomodule "github.com/be-heroes/doxchain/x/oauthTwo"
-	oauthTwomodulekeeper "github.com/be-heroes/doxchain/x/oauthTwo/keeper"
-	oauthTwomoduletypes "github.com/be-heroes/doxchain/x/oauthTwo/types"
+	oauthtwomodule "github.com/be-heroes/doxchain/x/oauthtwo"
+	oauthtwomodulekeeper "github.com/be-heroes/doxchain/x/oauthtwo/keeper"
+	oauthtwomoduletypes "github.com/be-heroes/doxchain/x/oauthtwo/types"
 	oraclemodule "github.com/be-heroes/doxchain/x/oracle"
 	oraclemodulekeeper "github.com/be-heroes/doxchain/x/oracle/keeper"
 	oraclemoduletypes "github.com/be-heroes/doxchain/x/oracle/types"
-	samlTwomodule "github.com/be-heroes/doxchain/x/samlTwo"
-	samlTwomodulekeeper "github.com/be-heroes/doxchain/x/samlTwo/keeper"
-	samlTwomoduletypes "github.com/be-heroes/doxchain/x/samlTwo/types"
+	samltwomodule "github.com/be-heroes/doxchain/x/samltwo"
+	samltwomodulekeeper "github.com/be-heroes/doxchain/x/samltwo/keeper"
+	samltwomoduletypes "github.com/be-heroes/doxchain/x/samltwo/types"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 
 	appparams "github.com/be-heroes/doxchain/app/params"
@@ -192,10 +192,10 @@ var (
 		doxchainmodule.AppModuleBasic{},
 		didmodule.AppModuleBasic{},
 		absmodule.AppModuleBasic{},
-		oauthTwomodule.AppModuleBasic{},
+		oauthtwomodule.AppModuleBasic{},
 		idpmodule.AppModuleBasic{},
 		oraclemodule.AppModuleBasic{},
-		samlTwomodule.AppModuleBasic{},
+		samltwomodule.AppModuleBasic{},
 		kycmodule.AppModuleBasic{},
 		amlmodule.AppModuleBasic{},
 		// this line is used by starport scaffolding # stargate/app/moduleBasic
@@ -278,13 +278,13 @@ type App struct {
 
 	AbsKeeper absmodulekeeper.Keeper
 
-	OauthTwoKeeper oauthTwomodulekeeper.Keeper
+	oauthtwoKeeper oauthtwomodulekeeper.Keeper
 
 	IdpKeeper idpmodulekeeper.Keeper
 
 	OracleKeeper oraclemodulekeeper.Keeper
 
-	SamlTwoKeeper samlTwomodulekeeper.Keeper
+	samltwoKeeper samltwomodulekeeper.Keeper
 
 	KycKeeper kycmodulekeeper.Keeper
 
@@ -336,10 +336,10 @@ func New(
 		doxchainmoduletypes.StoreKey,
 		didmoduletypes.StoreKey,
 		absmoduletypes.StoreKey,
-		oauthTwomoduletypes.StoreKey,
+		oauthtwomoduletypes.StoreKey,
 		idpmoduletypes.StoreKey,
 		oraclemoduletypes.StoreKey,
-		samlTwomoduletypes.StoreKey,
+		samltwomoduletypes.StoreKey,
 		kycmoduletypes.StoreKey,
 		amlmoduletypes.StoreKey,
 		// this line is used by starport scaffolding # stargate/app/storeKey
@@ -583,17 +583,17 @@ func New(
 	)
 	absModule := absmodule.NewAppModule(appCodec, app.AbsKeeper, app.AccountKeeper, app.BankKeeper)
 
-	app.OauthTwoKeeper = *oauthTwomodulekeeper.NewKeeper(
+	app.oauthtwoKeeper = *oauthtwomodulekeeper.NewKeeper(
 		appCodec,
-		keys[oauthTwomoduletypes.StoreKey],
-		keys[oauthTwomoduletypes.MemStoreKey],
-		app.GetSubspace(oauthTwomoduletypes.ModuleName),
+		keys[oauthtwomoduletypes.StoreKey],
+		keys[oauthtwomoduletypes.MemStoreKey],
+		app.GetSubspace(oauthtwomoduletypes.ModuleName),
 
 		app.AuthzKeeper,
 		app.EvidenceKeeper,
 		app.IdpKeeper,
 	)
-	oauthTwomodule := oauthTwomodule.NewAppModule(appCodec, app.OauthTwoKeeper, app.AccountKeeper, app.BankKeeper)
+	oauthtwomodule := oauthtwomodule.NewAppModule(appCodec, app.oauthtwoKeeper, app.AccountKeeper, app.BankKeeper)
 
 	app.IdpKeeper = *idpmodulekeeper.NewKeeper(
 		appCodec,
@@ -601,7 +601,7 @@ func New(
 		keys[idpmoduletypes.MemStoreKey],
 		app.GetSubspace(idpmoduletypes.ModuleName),
 
-		app.OauthTwoKeeper,
+		app.oauthtwoKeeper,
 		app.AuthzKeeper,
 		app.EvidenceKeeper,
 	)
@@ -615,13 +615,13 @@ func New(
 	)
 	oracleModule := oraclemodule.NewAppModule(appCodec, app.OracleKeeper, app.AccountKeeper, app.BankKeeper)
 
-	app.SamlTwoKeeper = *samlTwomodulekeeper.NewKeeper(
+	app.samltwoKeeper = *samltwomodulekeeper.NewKeeper(
 		appCodec,
-		keys[samlTwomoduletypes.StoreKey],
-		keys[samlTwomoduletypes.MemStoreKey],
-		app.GetSubspace(samlTwomoduletypes.ModuleName),
+		keys[samltwomoduletypes.StoreKey],
+		keys[samltwomoduletypes.MemStoreKey],
+		app.GetSubspace(samltwomoduletypes.ModuleName),
 	)
-	samlTwomodule := samlTwomodule.NewAppModule(appCodec, app.SamlTwoKeeper, app.AccountKeeper, app.BankKeeper)
+	samltwomodule := samltwomodule.NewAppModule(appCodec, app.samltwoKeeper, app.AccountKeeper, app.BankKeeper)
 
 	app.KycKeeper = *kycmodulekeeper.NewKeeper(
 		appCodec,
@@ -711,10 +711,10 @@ func New(
 		doxchainModule,
 		didModule,
 		absModule,
-		oauthTwomodule,
+		oauthtwomodule,
 		idpModule,
 		oracleModule,
-		samlTwomodule,
+		samltwomodule,
 		kycModule,
 		amlModule,
 		// this line is used by starport scaffolding # stargate/app/appModule
@@ -749,10 +749,10 @@ func New(
 		doxchainmoduletypes.ModuleName,
 		didmoduletypes.ModuleName,
 		absmoduletypes.ModuleName,
-		oauthTwomoduletypes.ModuleName,
+		oauthtwomoduletypes.ModuleName,
 		idpmoduletypes.ModuleName,
 		oraclemoduletypes.ModuleName,
-		samlTwomoduletypes.ModuleName,
+		samltwomoduletypes.ModuleName,
 		kycmoduletypes.ModuleName,
 		amlmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/beginBlockers
@@ -782,10 +782,10 @@ func New(
 		doxchainmoduletypes.ModuleName,
 		didmoduletypes.ModuleName,
 		absmoduletypes.ModuleName,
-		oauthTwomoduletypes.ModuleName,
+		oauthtwomoduletypes.ModuleName,
 		idpmoduletypes.ModuleName,
 		oraclemoduletypes.ModuleName,
-		samlTwomoduletypes.ModuleName,
+		samltwomoduletypes.ModuleName,
 		kycmoduletypes.ModuleName,
 		amlmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/endBlockers
@@ -820,10 +820,10 @@ func New(
 		doxchainmoduletypes.ModuleName,
 		didmoduletypes.ModuleName,
 		absmoduletypes.ModuleName,
-		oauthTwomoduletypes.ModuleName,
+		oauthtwomoduletypes.ModuleName,
 		idpmoduletypes.ModuleName,
 		oraclemoduletypes.ModuleName,
-		samlTwomoduletypes.ModuleName,
+		samltwomoduletypes.ModuleName,
 		kycmoduletypes.ModuleName,
 		amlmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
@@ -858,10 +858,10 @@ func New(
 		doxchainModule,
 		didModule,
 		absModule,
-		oauthTwomodule,
+		oauthtwomodule,
 		idpModule,
 		oracleModule,
-		samlTwomodule,
+		samltwomodule,
 		kycModule,
 		amlModule,
 		// this line is used by starport scaffolding # stargate/app/appModule
@@ -1071,10 +1071,10 @@ func initParamsKeeper(appCodec codec.BinaryCodec, legacyAmino *codec.LegacyAmino
 	paramsKeeper.Subspace(doxchainmoduletypes.ModuleName)
 	paramsKeeper.Subspace(didmoduletypes.ModuleName)
 	paramsKeeper.Subspace(absmoduletypes.ModuleName)
-	paramsKeeper.Subspace(oauthTwomoduletypes.ModuleName)
+	paramsKeeper.Subspace(oauthtwomoduletypes.ModuleName)
 	paramsKeeper.Subspace(idpmoduletypes.ModuleName)
 	paramsKeeper.Subspace(oraclemoduletypes.ModuleName)
-	paramsKeeper.Subspace(samlTwomoduletypes.ModuleName)
+	paramsKeeper.Subspace(samltwomoduletypes.ModuleName)
 	paramsKeeper.Subspace(kycmoduletypes.ModuleName)
 	paramsKeeper.Subspace(amlmoduletypes.ModuleName)
 	// this line is used by starport scaffolding # stargate/app/paramSubspace

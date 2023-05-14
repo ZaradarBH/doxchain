@@ -1,4 +1,4 @@
-package samlTwo
+package samltwo
 
 import (
 	"context"
@@ -11,9 +11,9 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/be-heroes/doxchain/x/samlTwo/client/cli"
-	"github.com/be-heroes/doxchain/x/samlTwo/keeper"
-	"github.com/be-heroes/doxchain/x/samlTwo/types"
+	"github.com/be-heroes/doxchain/x/samltwo/client/cli"
+	"github.com/be-heroes/doxchain/x/samltwo/keeper"
+	"github.com/be-heroes/doxchain/x/samltwo/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/codec"
 	cdctypes "github.com/cosmos/cosmos-sdk/codec/types"

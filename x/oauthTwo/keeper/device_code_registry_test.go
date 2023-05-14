@@ -6,8 +6,8 @@ import (
 
 	keepertest "github.com/be-heroes/doxchain/testutil/keeper"
 	"github.com/be-heroes/doxchain/testutil/nullify"
-	"github.com/be-heroes/doxchain/x/oauthTwo/keeper"
-	"github.com/be-heroes/doxchain/x/oauthTwo/types"
+	"github.com/be-heroes/doxchain/x/oauthtwo/keeper"
+	"github.com/be-heroes/doxchain/x/oauthtwo/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 )
@@ -26,7 +26,7 @@ func createNDeviceCodeRegistry(keeper *keeper.Keeper, ctx sdk.Context, n int) []
 }
 
 func TestDeviceCodeRegistryGet(t *testing.T) {
-	keeper, ctx := keepertest.OauthTwoKeeper(t)
+	keeper, ctx := keepertest.oauthtwoKeeper(t)
 	items := createNDeviceCodeRegistry(keeper, ctx, 10)
 	for _, item := range items {
 		rst, found := keeper.GetDeviceCodeRegistry(ctx,
@@ -40,7 +40,7 @@ func TestDeviceCodeRegistryGet(t *testing.T) {
 	}
 }
 func TestDeviceCodeRegistryRemove(t *testing.T) {
-	keeper, ctx := keepertest.OauthTwoKeeper(t)
+	keeper, ctx := keepertest.oauthtwoKeeper(t)
 	items := createNDeviceCodeRegistry(keeper, ctx, 10)
 	for _, item := range items {
 		keeper.RemoveDeviceCodeRegistry(ctx,
@@ -54,7 +54,7 @@ func TestDeviceCodeRegistryRemove(t *testing.T) {
 }
 
 func TestDeviceCodeRegistryGetAll(t *testing.T) {
-	keeper, ctx := keepertest.OauthTwoKeeper(t)
+	keeper, ctx := keepertest.oauthtwoKeeper(t)
 	items := createNDeviceCodeRegistry(keeper, ctx, 10)
 	require.ElementsMatch(t,
 		nullify.Fill(items),

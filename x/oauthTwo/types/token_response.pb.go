@@ -83,7 +83,7 @@ func (m *TokenResponse) GetExpiresIn() int32 {
 }
 
 func init() {
-	proto.RegisterType((*TokenResponse)(nil), "beheroes.doxchain.oauthTwo.TokenResponse")
+	proto.RegisterType((*TokenResponse)(nil), "beheroes.doxchain.oauthtwo.TokenResponse")
 }
 
 func init() {

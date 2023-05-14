@@ -1,9 +1,9 @@
 syntax = "proto3";
-package beheroes.doxchain.oauthTwo;
+package beheroes.doxchain.oauthtwo;
 
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/be-heroes/doxchain/x/oauthTwo/types";
+option go_package = "github.com/be-heroes/doxchain/x/oauthtwo/types";
 
 message AccessTokenRegistry {
   string tenant = 1; 

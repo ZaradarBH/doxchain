@@ -1,9 +1,9 @@
 syntax = "proto3";
-package beheroes.doxchain.samlTwo;
+package beheroes.doxchain.samltwo;
 
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/be-heroes/doxchain/x/samlTwo/types";
+option go_package = "github.com/be-heroes/doxchain/x/samltwo/types";
 
 // Params defines the parameters for the module.
 message Params {

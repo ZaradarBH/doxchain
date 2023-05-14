@@ -3,7 +3,7 @@ package types_test
 import (
 	"testing"
 
-	"github.com/be-heroes/doxchain/x/samlTwo/types"
+	"github.com/be-heroes/doxchain/x/samltwo/types"
 	"github.com/stretchr/testify/require"
 )
 

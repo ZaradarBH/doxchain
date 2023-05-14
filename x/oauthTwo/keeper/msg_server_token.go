@@ -3,7 +3,7 @@ package keeper
 import (
 	"context"
 
-	"github.com/be-heroes/doxchain/x/oauthTwo/types"
+	"github.com/be-heroes/doxchain/x/oauthtwo/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 

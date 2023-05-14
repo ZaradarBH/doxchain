@@ -1,8 +1,8 @@
-package oauthTwo
+package oauthtwo
 
 import (
-	"github.com/be-heroes/doxchain/x/oauthTwo/keeper"
-	"github.com/be-heroes/doxchain/x/oauthTwo/types"
+	"github.com/be-heroes/doxchain/x/oauthtwo/keeper"
+	"github.com/be-heroes/doxchain/x/oauthtwo/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 

@@ -1,4 +1,4 @@
-package oauthTwo
+package oauthtwo
 
 import (
 	"context"
@@ -11,9 +11,9 @@ import (
 
 	abci "github.com/tendermint/tendermint/abci/types"
 
-	"github.com/be-heroes/doxchain/x/oauthTwo/client/cli"
-	"github.com/be-heroes/doxchain/x/oauthTwo/keeper"
-	"github.com/be-heroes/doxchain/x/oauthTwo/types"
+	"github.com/be-heroes/doxchain/x/oauthtwo/client/cli"
+	"github.com/be-heroes/doxchain/x/oauthtwo/keeper"
+	"github.com/be-heroes/doxchain/x/oauthtwo/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/codec"
 	cdctypes "github.com/cosmos/cosmos-sdk/codec/types"

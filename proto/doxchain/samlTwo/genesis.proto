@@ -1,10 +1,10 @@
 syntax = "proto3";
-package beheroes.doxchain.samlTwo;
+package beheroes.doxchain.samltwo;
 
 import "gogoproto/gogo.proto";
-import "doxchain/samlTwo/params.proto";
+import "doxchain/samltwo/params.proto";
 
-option go_package = "github.com/be-heroes/doxchain/x/samlTwo/types";
+option go_package = "github.com/be-heroes/doxchain/x/samltwo/types";
 
 // GenesisState defines the saml module's genesis state.
 message GenesisState {

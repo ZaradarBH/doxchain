@@ -1,8 +1,8 @@
-package samlTwo
+package samltwo
 
 import (
-	"github.com/be-heroes/doxchain/x/samlTwo/keeper"
-	"github.com/be-heroes/doxchain/x/samlTwo/types"
+	"github.com/be-heroes/doxchain/x/samltwo/keeper"
+	"github.com/be-heroes/doxchain/x/samltwo/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 

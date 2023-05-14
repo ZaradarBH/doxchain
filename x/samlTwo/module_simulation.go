@@ -1,11 +1,11 @@
-package samlTwo
+package samltwo
 
 import (
 	"math/rand"
 
 	"github.com/be-heroes/doxchain/testutil/sample"
-	samlsimulation "github.com/be-heroes/doxchain/x/samlTwo/simulation"
-	"github.com/be-heroes/doxchain/x/samlTwo/types"
+	samlsimulation "github.com/be-heroes/doxchain/x/samltwo/simulation"
+	"github.com/be-heroes/doxchain/x/samltwo/types"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	simappparams "github.com/cosmos/cosmos-sdk/simapp/params"
 	sdk "github.com/cosmos/cosmos-sdk/types"

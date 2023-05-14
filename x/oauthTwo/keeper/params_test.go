@@ -4,12 +4,12 @@ import (
 	"testing"
 
 	testkeeper "github.com/be-heroes/doxchain/testutil/keeper"
-	"github.com/be-heroes/doxchain/x/oauthTwo/types"
+	"github.com/be-heroes/doxchain/x/oauthtwo/types"
 	"github.com/stretchr/testify/require"
 )
 
 func TestGetParams(t *testing.T) {
-	k, ctx := testkeeper.OauthTwoKeeper(t)
+	k, ctx := testkeeper.oauthtwoKeeper(t)
 	params := types.DefaultParams()
 
 	k.SetParams(ctx, params)

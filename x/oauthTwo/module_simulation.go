@@ -1,11 +1,11 @@
-package oauthTwo
+package oauthtwo
 
 import (
 	"math/rand"
 
 	"github.com/be-heroes/doxchain/testutil/sample"
-	oauthsimulation "github.com/be-heroes/doxchain/x/oauthTwo/simulation"
-	"github.com/be-heroes/doxchain/x/oauthTwo/types"
+	oauthtwosimulation "github.com/be-heroes/doxchain/x/oauthtwo/simulation"
+	"github.com/be-heroes/doxchain/x/oauthtwo/types"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	simappparams "github.com/cosmos/cosmos-sdk/simapp/params"
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -17,7 +17,7 @@ import (
 // avoid unused import issue
 var (
 	_ = sample.AccAddress
-	_ = oauthsimulation.FindAccount
+	_ = oauthtwosimulation.FindAccount
 	_ = simappparams.StakePerAccount
 	_ = simulation.MsgEntryKind
 	_ = baseapp.Paramspace
@@ -55,6 +55,10 @@ const (
 	opWeightMsgDeviceCode = "op_weight_msg_device_code"
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgDeviceCode int = 100
+
+	opWeightMsgAuthorize = "op_weight_msg_authorize"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgAuthorize int = 100
 
 	// this line is used by starport scaffolding # simapp/module/const
 )
@@ -114,7 +118,7 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	)
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgTokenRequest,
-		oauthsimulation.SimulateMsgTokenRequest(am.accountKeeper, am.bankKeeper, am.keeper),
+		oauthtwosimulation.SimulateMsgTokenRequest(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
 	var weightMsgDeviceCode int
@@ -125,7 +129,18 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	)
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgDeviceCode,
-		oauthsimulation.SimulateMsgDeviceCode(am.accountKeeper, am.bankKeeper, am.keeper),
+		oauthtwosimulation.SimulateMsgDeviceCode(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgAuthorize int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgAuthorize, &weightMsgAuthorize, nil,
+		func(_ *rand.Rand) {
+			weightMsgAuthorize = defaultWeightMsgAuthorize
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgAuthorize,
+		oauthtwosimulation.SimulateMsgAuthorize(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
 	// this line is used by starport scaffolding # simapp/module/operation

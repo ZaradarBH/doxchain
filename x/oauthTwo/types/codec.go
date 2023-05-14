@@ -8,8 +8,9 @@ import (
 )
 
 func RegisterCodec(cdc *codec.LegacyAmino) {
-	cdc.RegisterConcrete(&MsgTokenRequest{}, "oauthTwo/token", nil)
-	cdc.RegisterConcrete(&MsgDeviceCodeRequest{}, "oauthTwo/devicecode", nil)
+	cdc.RegisterConcrete(&MsgTokenRequest{}, "oauthtwo/token", nil)
+	cdc.RegisterConcrete(&MsgDeviceCodeRequest{}, "oauthtwo/devicecode", nil)
+	cdc.RegisterConcrete(&MsgAuthorizeRequest{}, "oauthtwo/Authorize", nil)
 	// this line is used by starport scaffolding # 2
 }
 
@@ -19,6 +20,9 @@ func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 	)
 	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgDeviceCodeRequest{},
+	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgAuthorizeRequest{},
 	)
 	// this line is used by starport scaffolding # 3
 

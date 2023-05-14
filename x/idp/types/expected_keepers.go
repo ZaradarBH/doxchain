@@ -5,7 +5,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/auth/types"
 )
 
-type OauthTwoKeeper interface {
+type OAuthTwoKeeper interface {
 	// Methods imported from oauth should be defined here
 }
 

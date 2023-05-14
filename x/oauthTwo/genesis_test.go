@@ -1,12 +1,12 @@
-package oauthTwo_test
+package oauthtwo_test
 
 import (
 	"testing"
 
 	keepertest "github.com/be-heroes/doxchain/testutil/keeper"
 	"github.com/be-heroes/doxchain/testutil/nullify"
-	"github.com/be-heroes/doxchain/x/oauthTwo"
-	"github.com/be-heroes/doxchain/x/oauthTwo/types"
+	"github.com/be-heroes/doxchain/x/oauthtwo"
+	"github.com/be-heroes/doxchain/x/oauthtwo/types"
 	"github.com/stretchr/testify/require"
 )
 
@@ -33,7 +33,7 @@ func TestGenesis(t *testing.T) {
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
-	k, ctx := keepertest.OauthTwoKeeper(t)
+	k, ctx := keepertest.oauthtwoKeeper(t)
 	oauth.InitGenesis(ctx, *k, genesisState)
 	got := oauth.ExportGenesis(ctx, *k)
 	require.NotNil(t, got)

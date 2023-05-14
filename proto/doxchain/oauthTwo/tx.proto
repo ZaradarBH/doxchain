@@ -1,13 +1,14 @@
 syntax = "proto3";
 
-package beheroes.doxchain.oauthTwo;
+package beheroes.doxchain.oauthtwo;
 
-option go_package = "github.com/be-heroes/doxchain/x/oauthTwo/types";
+option go_package = "github.com/be-heroes/doxchain/x/oauthtwo/types";
 
 // Msg defines the Msg service.
 service Msg {
-  rpc Token      (MsgTokenRequest) returns (MsgTokenResponse     );
-  rpc DeviceCode (MsgDeviceCodeRequest  ) returns (MsgDeviceCodeResponse);
+  rpc Token      (MsgTokenRequest     ) returns (MsgTokenResponse     );
+  rpc DeviceCode (MsgDeviceCodeRequest) returns (MsgDeviceCodeResponse);
+  rpc Authorize  (MsgAuthorizeRequest        ) returns (MsgAuthorizeResponse );
 }
 message MsgTokenRequest {
   string creator             = 1;
@@ -29,7 +30,7 @@ message MsgTokenResponse {
 
 message MsgDeviceCodeRequest {
   string creator  = 1;
-  string tenant  = 2;
+  string tenant   = 2;
   string clientId = 3;
   string scope    = 4;
 }
@@ -38,5 +39,16 @@ message MsgDeviceCodeResponse {
   string deviceCode       = 1;
   string userCode         = 2;
   string verification_uri = 3;
+}
+
+message MsgAuthorizeRequest {
+  string creator  = 1;
+  string tenant   = 2;
+  string clientId = 3;
+  string scope    = 4;
+}
+
+message MsgAuthorizeResponse {
+  string authorizationCode = 1;
 }
 
