@@ -20,9 +20,15 @@ message MsgTokenRequest {
   string grantType           = 4;
   string clientId            = 5;
   string clientSecret        = 6;
-  string deviceCode          = 7;
-  string clientAssertionType = 8;
-  string clientAssertion     = 9;
+  string deviceCode          = 7;  
+  string authorizationCode   = 8;  
+  string clientAssertionType = 9;
+  string clientAssertion     = 10;
+  string responseType        = 11;
+  string redirectUri         = 12;
+  string codeChallenge       = 13;
+  string codeChallengeMethod = 14;
+  string state               = 15;
 }
 
 message MsgTokenResponse {
