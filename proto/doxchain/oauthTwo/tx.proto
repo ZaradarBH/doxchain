@@ -29,6 +29,7 @@ message MsgTokenRequest {
   string codeChallenge       = 13;
   string codeChallengeMethod = 14;
   string state               = 15;
+  string requestedTokenUse   = 16;
 }
 
 message MsgTokenResponse {
