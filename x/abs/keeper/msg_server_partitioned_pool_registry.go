@@ -11,7 +11,6 @@ import (
 
 func (k msgServer) CreatePartitionedPoolRegistry(goCtx context.Context,  msg *types.MsgCreatePartitionedPoolRegistryRequest) (*types.MsgCreatePartitionedPoolRegistryResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
-
     partitionedPoolRegistry, isFound := k.GetPartitionedPoolRegistry(ctx, msg.Creator)
 
     if !isFound {
@@ -22,12 +21,12 @@ func (k msgServer) CreatePartitionedPoolRegistry(goCtx context.Context,  msg *ty
     }
 
     if partitionedPoolRegistry.Creator != msg.Creator {
-        return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "Only the creator of a partioned pool can change it after its inception")
+        return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "Only the creator of a partioned pool can interface with it after its inception")
     }
 
     for _, partitionedPool := range partitionedPoolRegistry.Pools {
         if partitionedPool.Denom == msg.Denom {
-            return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "Denom already set")
+            return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "Denom already exists")
         }
     }
 

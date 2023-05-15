@@ -24,6 +24,8 @@ type (
 	}
 )
 
+//TODO: Implement KYC process concept
+//TODO: Implement KYC approver concept
 func NewKeeper(
 	cdc codec.BinaryCodec,
 	storeKey,

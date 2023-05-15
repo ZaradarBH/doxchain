@@ -25,10 +25,9 @@ type (
 	}
 )
 
-//TODO: Implement AppRegistration concept for ClientId
-//TODO: Implement ClientId2ClientId ACL concept to infer audience relationships
-//TODO: Implement IDP metadata logic
-//TODO: Implement validation concept for ClientId and Scope
+//TODO: Implement AppRegistration concept
+//TODO: Implement AppRegistrationGraph concept to infer audience relationships
+//TODO: Implement IDP metadata logic (.well-known, etc)
 func NewKeeper(
 	cdc codec.BinaryCodec,
 	storeKey,

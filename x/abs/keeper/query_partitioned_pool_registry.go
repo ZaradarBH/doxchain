@@ -43,12 +43,14 @@ func (k Keeper) PartitionedPoolRegistry(goCtx context.Context, req *types.QueryG
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
+
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	val, found := k.GetPartitionedPoolRegistry(
 	    ctx,
 	    req.Creator,
         )
+		
 	if !found {
 	    return nil, status.Error(codes.NotFound, "not found")
 	}

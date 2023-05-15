@@ -15,19 +15,17 @@ func CmdListPartitionedPoolRegistries() *cobra.Command {
 		Short: "list all partitionedPoolRegistries",
 		RunE: func(cmd *cobra.Command, args []string) error {
             clientCtx := client.GetClientContextFromCmd(cmd)
-
             pageReq, err := client.ReadPageRequest(cmd.Flags())
+
             if err != nil {
                 return err
             }
 
             queryClient := types.NewQueryClient(clientCtx)
-
-            params := &types.QueryAllPartitionedPoolRegistriesRequest{
+            res, err := queryClient.PartitionedPoolRegistryAll(context.Background(), &types.QueryAllPartitionedPoolRegistriesRequest{
                 Pagination: pageReq,
-            }
-
-            res, err := queryClient.PartitionedPoolRegistryAll(context.Background(), params)
+            })
+            
             if err != nil {
                 return err
             }
@@ -44,22 +42,16 @@ func CmdListPartitionedPoolRegistries() *cobra.Command {
 
 func CmdShowPartitionedPoolRegistry() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "show-partitioned-pools [creator]",
-		Short: "shows a partitionedPools",
+		Use:   "show-partitioned-pool-registry [creator]",
+		Short: "shows a partitionedPoolRegistry",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
             clientCtx := client.GetClientContextFromCmd(cmd)
-
             queryClient := types.NewQueryClient(clientCtx)
+            res, err := queryClient.PartitionedPoolRegistry(context.Background(), &types.QueryGetPartitionedPoolRegistryRequest{
+                Creator: args[0],                
+            })
 
-             argIndex := args[0]
-            
-            params := &types.QueryGetPartitionedPoolRegistryRequest{
-                Creator: argIndex,
-                
-            }
-
-            res, err := queryClient.PartitionedPoolRegistry(context.Background(), params)
             if err != nil {
                 return err
             }

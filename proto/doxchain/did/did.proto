@@ -14,7 +14,6 @@ message Did {
   string fragment = 6;
   string query = 7;
   repeated DidParameter parameters = 8 [(gogoproto.nullable) = true];
-  uint64 id = 9;
 }
 
 message DidParameter { 

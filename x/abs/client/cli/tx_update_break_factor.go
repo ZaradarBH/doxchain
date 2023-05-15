@@ -18,8 +18,6 @@ func CmdUpdateBreakFactor() *cobra.Command {
 		Short: "Broadcast message UpdateBreakFactor",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
-			argValue := args[0]
-
 			clientCtx, err := client.GetClientTxContext(cmd)
 
 			if err != nil {
@@ -28,7 +26,7 @@ func CmdUpdateBreakFactor() *cobra.Command {
 
 			msg := types.NewMsgUpdateBreakFactorRequest(
 				clientCtx.GetFromAddress().String(),
-				argValue,
+				args[0],
 			)
 
 			if err := msg.ValidateBasic(); err != nil {

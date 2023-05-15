@@ -18,27 +18,26 @@ func (k Keeper) SetPartitionedPoolRegistry(ctx sdk.Context, partitionedPoolRegis
 // GetPartitionedPoolRegistry returns a PartitionedPoolRegistry from its creator
 func (k Keeper) GetPartitionedPoolRegistry(
     ctx sdk.Context,
-    creator string,
-    
+    creator string,    
 ) (val types.PartitionedPoolRegistry, found bool) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.PartitionedPoolRegistryKeyPrefix))
-
 	b := store.Get(types.PartitionedPoolRegistryKey(
         creator,
     ))
+
     if b == nil {
         return val, false
     }
 
 	k.cdc.MustUnmarshal(b, &val)
+
 	return val, true
 }
 
 // RemovePartitionedPoolRegistry removes a PartitionedPoolRegistry from the store
 func (k Keeper) RemovePartitionedPoolRegistry(
     ctx sdk.Context,
-    creator string,
-    
+    creator string,    
 ) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.PartitionedPoolRegistryKeyPrefix))
 	store.Delete(types.PartitionedPoolRegistryKey(

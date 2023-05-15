@@ -12,5 +12,4 @@ message PartitionedPoolRegistry {
 
 message PartitionedPool {
   string denom = 1;
-  //TODO: Finish PP message
 }

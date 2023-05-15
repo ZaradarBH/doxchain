@@ -15,7 +15,6 @@ func CmdCreatePartitionedPoolRegistry() *cobra.Command {
 		Short: "Create a new partitionedPoolRegistry",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
-         	denom := args[0]		
 			clientCtx, err := client.GetClientTxContext(cmd)
 
 			if err != nil {
@@ -24,7 +23,7 @@ func CmdCreatePartitionedPoolRegistry() *cobra.Command {
 
 			msg := types.NewMsgCreatePartitionedPoolRegistryRequest(
 			    clientCtx.GetFromAddress().String(),
-			    denom,
+			    args[0],
                 )
 
 			if err := msg.ValidateBasic(); err != nil {

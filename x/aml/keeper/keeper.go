@@ -23,6 +23,8 @@ type (
 	}
 )
 
+//TODO: Implement AML process concept
+//TODO: Implement AML approver concept
 func NewKeeper(
 	cdc codec.BinaryCodec,
 	storeKey,

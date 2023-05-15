@@ -349,11 +349,11 @@ paths:
                               type: string
                             value:
                               type: string
-                      id:
-                        type: string
-                        format: uint64
                   approved:
                     type: boolean
+                    title: >-
+                      TODO: Add additional message fields after talking with the
+                      regulation experts
         default:
           description: An unexpected error response.
           schema:
@@ -452,9 +452,6 @@ paths:
                             type: string
                           value:
                             type: string
-                    id:
-                      type: string
-                      format: uint64
               pagination:
                 type: object
                 properties:
@@ -596,9 +593,6 @@ paths:
                           type: string
                         value:
                           type: string
-                  id:
-                    type: string
-                    format: uint64
         default:
           description: An unexpected error response.
           schema:
@@ -793,11 +787,11 @@ paths:
                               type: string
                             value:
                               type: string
-                      id:
-                        type: string
-                        format: uint64
                   approved:
                     type: boolean
+                    title: >-
+                      TODO: Add additional message fields after talking with the
+                      regulation experts
         default:
           description: An unexpected error response.
           schema:
@@ -45488,11 +45482,11 @@ definitions:
                   type: string
                 value:
                   type: string
-          id:
-            type: string
-            format: uint64
       approved:
         type: boolean
+        title: >-
+          TODO: Add additional message fields after talking with the regulation
+          experts
   beheroes.doxchain.aml.MsgCreateAMLRequestResponse:
     type: object
   beheroes.doxchain.aml.MsgDeleteAMLRequestResponse:
@@ -45532,11 +45526,11 @@ definitions:
                       type: string
                     value:
                       type: string
-              id:
-                type: string
-                format: uint64
           approved:
             type: boolean
+            title: >-
+              TODO: Add additional message fields after talking with the
+              regulation experts
   beheroes.doxchain.aml.QueryParamsResponse:
     type: object
     properties:
@@ -45570,9 +45564,6 @@ definitions:
               type: string
             value:
               type: string
-      id:
-        type: string
-        format: uint64
   beheroes.doxchain.did.DidParameter:
     type: object
     properties:
@@ -45623,9 +45614,6 @@ definitions:
                     type: string
                   value:
                     type: string
-            id:
-              type: string
-              format: uint64
       pagination:
         type: object
         properties:
@@ -45681,9 +45669,6 @@ definitions:
                   type: string
                 value:
                   type: string
-          id:
-            type: string
-            format: uint64
   beheroes.doxchain.did.QueryParamsResponse:
     type: object
     properties:
@@ -45766,11 +45751,11 @@ definitions:
                   type: string
                 value:
                   type: string
-          id:
-            type: string
-            format: uint64
       approved:
         type: boolean
+        title: >-
+          TODO: Add additional message fields after talking with the regulation
+          experts
   beheroes.doxchain.kyc.MsgCreateKYCRequestResponse:
     type: object
   beheroes.doxchain.kyc.MsgDeleteKYCRequestResponse:
@@ -45810,11 +45795,11 @@ definitions:
                       type: string
                     value:
                       type: string
-              id:
-                type: string
-                format: uint64
           approved:
             type: boolean
+            title: >-
+              TODO: Add additional message fields after talking with the
+              regulation experts
   beheroes.doxchain.kyc.QueryParamsResponse:
     type: object
     properties:

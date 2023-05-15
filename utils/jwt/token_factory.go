@@ -54,7 +54,7 @@ func (jtf JwtTokenFactory) Create(tenant string, creator string, clientId string
 	claims["iss"] = tenant
 	claims["sub"] = creator
 	//TODO: Replace once IDP audience functionality is implemented
-	claims["aud"] = clientId
+	claims["aud"] = ""
 	claims["iat"] = issuedAt.Unix()
 	claims["exp"] = issuedAt.Add(expireOffSet).Unix()
 
