@@ -27,7 +27,6 @@ paths:
                         properties:
                           denom:
                             type: string
-                            title: 'TODO: Finish PP message'
               pagination:
                 type: object
                 properties:
@@ -155,7 +154,6 @@ paths:
                       properties:
                         denom:
                           type: string
-                          title: 'TODO: Finish PP message'
         default:
           description: An unexpected error response.
           schema:
@@ -44870,7 +44868,6 @@ definitions:
     properties:
       denom:
         type: string
-        title: 'TODO: Finish PP message'
   beheroes.doxchain.abs.PartitionedPoolRegistry:
     type: object
     properties:
@@ -44883,7 +44880,6 @@ definitions:
           properties:
             denom:
               type: string
-              title: 'TODO: Finish PP message'
   beheroes.doxchain.abs.QueryAllPartitionedPoolRegistriesResponse:
     type: object
     properties:
@@ -44901,7 +44897,6 @@ definitions:
                 properties:
                   denom:
                     type: string
-                    title: 'TODO: Finish PP message'
       pagination:
         type: object
         properties:
@@ -44948,7 +44943,6 @@ definitions:
               properties:
                 denom:
                   type: string
-                  title: 'TODO: Finish PP message'
   beheroes.doxchain.abs.QueryParamsResponse:
     type: object
     properties:

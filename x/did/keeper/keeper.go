@@ -24,7 +24,7 @@ type (
 	}
 )
 
-//TODO: Implement support for DIDDocuments
+//TODO: Implement Did / DidDocument validation to ensure verification relationships are valid
 func NewKeeper(
 	cdc codec.BinaryCodec,
 	storeKey,

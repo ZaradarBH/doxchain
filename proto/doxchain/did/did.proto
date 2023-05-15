@@ -20,3 +20,44 @@ message DidParameter {
   string name = 1;
   string value = 2;
 }
+
+message DidDocument {
+  string creator = 1;
+  repeated string context = 2;
+  Did id = 3;
+  Did controller = 4;
+  repeated Did alsoKnownAs = 5;
+  repeated VerificationMethod verificationMethod = 6;
+  repeated VerificationRelationship authentication = 7;
+  repeated VerificationRelationship assertionMethod = 8;
+  repeated VerificationRelationship keyAgreement = 9;
+  repeated VerificationRelationship capabilityInvocation = 10;
+  repeated VerificationRelationship capabilityDelegation = 11;
+  repeated Service service = 12;
+}
+
+message VerificationMethod {
+  Did id = 1;
+  string type = 2;
+  Did controller = 3;  
+  oneof key_oneof {
+    string publicKeyJwk = 4;
+    string publicKeyMultibase = 5;
+  }
+}
+
+message Service {
+  Did id = 1;
+  string type = 2;
+  string serviceEndpoint = 3;
+}
+
+message VerificationRelationship {
+  Did id = 1;
+  string type = 2;
+  Did controller = 3;   
+  oneof key_oneof {
+    string publicKeyJwk = 4;
+    string publicKeyMultibase = 5;
+  }
+}
