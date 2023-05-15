@@ -40,10 +40,10 @@ func CmdListDid() *cobra.Command {
 	return cmd
 }
 
-func CmdGetDid() *cobra.Command {
+func CmdShowDid() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "get-did [fullyQualifiedDidIdentifier]",
-		Short: "Gets a did",
+		Use:   "show-did [fullyQualifiedDidIdentifier]",
+		Short: "Shows a did",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx := client.GetClientContextFromCmd(cmd)

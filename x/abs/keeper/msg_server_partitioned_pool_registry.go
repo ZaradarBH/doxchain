@@ -15,8 +15,8 @@ func (k msgServer) CreatePartitionedPoolRegistry(goCtx context.Context, msg *typ
 	if !isFound {
 		partitionedPoolRegistry = types.PartitionedPoolRegistry{
 			Creator: msg.Creator,
+			Pools: []types.PartitionedPool{}
 		}
-		partitionedPoolRegistry.Pools = []types.PartitionedPool{}
 	}
 
 	if partitionedPoolRegistry.Creator != msg.Creator {

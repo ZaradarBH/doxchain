@@ -12,7 +12,7 @@ import (
 func CmdListPartitionedPoolRegistries() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "list-partitioned-pool-registries",
-		Short: "list all partitionedPoolRegistries",
+		Short: "list all PartitionedPoolRegistries",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx := client.GetClientContextFromCmd(cmd)
 			pageReq, err := client.ReadPageRequest(cmd.Flags())

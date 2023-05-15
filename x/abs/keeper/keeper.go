@@ -28,6 +28,7 @@ type (
 
 //TODO: Finish PartitionedPool concept
 //TODO: Finish Watchlist concept
+//TODO: Reimplement break factor as a consensus param, rather then a message
 func NewKeeper(
 	cdc codec.BinaryCodec,
 	storeKey,
