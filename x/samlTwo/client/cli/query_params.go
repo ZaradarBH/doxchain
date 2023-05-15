@@ -16,10 +16,9 @@ func CmdQueryParams() *cobra.Command {
 		Args:  cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx := client.GetClientContextFromCmd(cmd)
-
 			queryClient := types.NewQueryClient(clientCtx)
-
 			res, err := queryClient.Params(context.Background(), &types.QueryParamsRequest{})
+			
 			if err != nil {
 				return err
 			}
