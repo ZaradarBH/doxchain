@@ -1,8 +1,6 @@
 package cli
 
 import (
-	"encoding/json"
-
 	"github.com/be-heroes/doxchain/x/did/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
@@ -12,7 +10,7 @@ import (
 
 func CmdCreateDid() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "create-did [did-json]",
+		Use:   "create-did [did-url]",
 		Short: "Create a new did",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
@@ -22,7 +20,7 @@ func CmdCreateDid() *cobra.Command {
 			}
 
 			var did types.Did
-			err = json.Unmarshal([]byte(args[0]), &did)
+			err = clientCtx.Codec.UnmarshalJSON([]byte(args[0]), &did)
 
 			if err != nil {
 				return err
@@ -45,7 +43,7 @@ func CmdCreateDid() *cobra.Command {
 
 func CmdUpdateDid() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "update-did [did-json]",
+		Use:   "update-did [did-url]",
 		Short: "Update a did",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
@@ -56,7 +54,7 @@ func CmdUpdateDid() *cobra.Command {
 			}
 
 			var did types.Did
-			err = json.Unmarshal([]byte(args[0]), &did)
+			err = clientCtx.Codec.UnmarshalJSON([]byte(args[0]), &did)
 
 			if err != nil {
 				return err
@@ -79,8 +77,8 @@ func CmdUpdateDid() *cobra.Command {
 
 func CmdDeleteDid() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "delete-did [fullyQualifiedDidIdentifier]",
-		Short: "Delete a did by fullyQualifiedDidIdentifier",
+		Use:   "delete-did [did-identifier]",
+		Short: "Delete a did by did-identifier (FullyQualifiedDidIdentifier => did:MethodName:MethodId)",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientTxContext(cmd)
