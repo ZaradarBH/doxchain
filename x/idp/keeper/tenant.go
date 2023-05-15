@@ -18,11 +18,11 @@ func (k Keeper) GetTenant(ctx sdk.Context, tenantIdentifier string) (tenant type
 	}
 
 	matched := false
-	tenants := &types.TenantList{}
+	tenants := &types.TenantRegistry{}
 
 	k.cdc.MustUnmarshal(tenantListBytes, tenants)
 
-	for _, tenantEntry := range tenants.Entries {
+	for _, tenantEntry := range tenants.Tenants {
 		if tenantEntry.Identifier == tenantIdentifier {
 			tenant = *tenantEntry
 			matched = true

@@ -2,14 +2,11 @@ syntax = "proto3";
 package beheroes.doxchain.abs;
 
 import "gogoproto/gogo.proto";
+import "doxchain/abs/partitioned_pool.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/abs/types";
 
 message PartitionedPoolRegistry {
   string creator = 1;
   repeated PartitionedPool pools = 2 [(gogoproto.nullable) = false]; 
-}
-
-message PartitionedPool {
-  string denom = 1;
 }

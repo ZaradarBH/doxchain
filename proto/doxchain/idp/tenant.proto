@@ -6,9 +6,9 @@ import "doxchain/idp/access_client_list.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/idp/types";
 
-message TenantList {
+message TenantRegistry {
   string creator  = 1;
-  repeated Tenant entries = 2;
+  repeated Tenant tenants = 2;
 }
 
 message Tenant {  

@@ -11,7 +11,7 @@ message AccessClientList {
 }
 
 message AccessClientListEntry { 
-  string creator   = 1;  
+  string user      = 1;  
   bool canRead     = 2; 
   bool canWrite    = 3; 
   bool canExecute  = 4; 

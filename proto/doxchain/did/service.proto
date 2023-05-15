@@ -1,0 +1,13 @@
+syntax = "proto3";
+package beheroes.doxchain.did;
+
+import "gogoproto/gogo.proto";
+import "doxchain/did/did.proto";
+
+option go_package = "github.com/be-heroes/doxchain/x/did/types";
+
+message Service {
+  Did id = 1 [(gogoproto.nullable) = false];
+  string type = 2;
+  string serviceEndpoint = 3;
+}

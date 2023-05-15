@@ -1,0 +1,10 @@
+syntax = "proto3";
+package beheroes.doxchain.abs;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/be-heroes/doxchain/x/abs/types";
+
+message PartitionedPool {
+  string denom = 1;
+}

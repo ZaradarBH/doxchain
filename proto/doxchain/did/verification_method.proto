@@ -1,0 +1,21 @@
+syntax = "proto3";
+package beheroes.doxchain.did;
+
+import "gogoproto/gogo.proto";
+import "doxchain/did/did.proto";
+
+option go_package = "github.com/be-heroes/doxchain/x/did/types";
+
+message VerificationMethod {
+  Did id = 1 [(gogoproto.nullable) = false];
+  string type = 2;
+  Did controller = 3 [(gogoproto.nullable) = false];  
+  oneof key_oneof {
+    string publicKeyJwk = 4;
+    string publicKeyMultibase = 5;
+  }
+}
+
+message VerificationRelationship {
+  VerificationMethod verificationMethod = 1 [(gogoproto.nullable) = false];
+}
