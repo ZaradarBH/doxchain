@@ -21,6 +21,7 @@ func CmdUpdateBreakFactor() *cobra.Command {
 			argValue := args[0]
 
 			clientCtx, err := client.GetClientTxContext(cmd)
+
 			if err != nil {
 				return err
 			}
@@ -29,9 +30,11 @@ func CmdUpdateBreakFactor() *cobra.Command {
 				clientCtx.GetFromAddress().String(),
 				argValue,
 			)
+
 			if err := msg.ValidateBasic(); err != nil {
 				return err
 			}
+			
 			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msg)
 		},
 	}

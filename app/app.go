@@ -138,7 +138,7 @@ import (
 )
 
 const (
-	AccountAddressPrefix = "cosmos"
+	AccountAddressPrefix = "doxc"
 	Name                 = "doxchain"
 )
 
@@ -278,13 +278,13 @@ type App struct {
 
 	AbsKeeper absmodulekeeper.Keeper
 
-	oauthtwoKeeper oauthtwomodulekeeper.Keeper
+	OAuthTwoKeeper oauthtwomodulekeeper.Keeper
 
 	IdpKeeper idpmodulekeeper.Keeper
 
 	OracleKeeper oraclemodulekeeper.Keeper
 
-	samltwoKeeper samltwomodulekeeper.Keeper
+	SamlTwoKeeper samltwomodulekeeper.Keeper
 
 	KycKeeper kycmodulekeeper.Keeper
 
@@ -583,7 +583,7 @@ func New(
 	)
 	absModule := absmodule.NewAppModule(appCodec, app.AbsKeeper, app.AccountKeeper, app.BankKeeper)
 
-	app.oauthtwoKeeper = *oauthtwomodulekeeper.NewKeeper(
+	app.OAuthTwoKeeper = *oauthtwomodulekeeper.NewKeeper(
 		appCodec,
 		keys[oauthtwomoduletypes.StoreKey],
 		keys[oauthtwomoduletypes.MemStoreKey],
@@ -593,7 +593,7 @@ func New(
 		app.EvidenceKeeper,
 		app.IdpKeeper,
 	)
-	oauthtwomodule := oauthtwomodule.NewAppModule(appCodec, app.oauthtwoKeeper, app.AccountKeeper, app.BankKeeper)
+	oauthtwomodule := oauthtwomodule.NewAppModule(appCodec, app.OAuthTwoKeeper, app.AccountKeeper, app.BankKeeper)
 
 	app.IdpKeeper = *idpmodulekeeper.NewKeeper(
 		appCodec,
@@ -601,7 +601,7 @@ func New(
 		keys[idpmoduletypes.MemStoreKey],
 		app.GetSubspace(idpmoduletypes.ModuleName),
 
-		app.oauthtwoKeeper,
+		app.OAuthTwoKeeper,
 		app.AuthzKeeper,
 		app.EvidenceKeeper,
 	)
@@ -615,13 +615,13 @@ func New(
 	)
 	oracleModule := oraclemodule.NewAppModule(appCodec, app.OracleKeeper, app.AccountKeeper, app.BankKeeper)
 
-	app.samltwoKeeper = *samltwomodulekeeper.NewKeeper(
+	app.SamlTwoKeeper = *samltwomodulekeeper.NewKeeper(
 		appCodec,
 		keys[samltwomoduletypes.StoreKey],
 		keys[samltwomoduletypes.MemStoreKey],
 		app.GetSubspace(samltwomoduletypes.ModuleName),
 	)
-	samltwomodule := samltwomodule.NewAppModule(appCodec, app.samltwoKeeper, app.AccountKeeper, app.BankKeeper)
+	samltwomodule := samltwomodule.NewAppModule(appCodec, app.SamlTwoKeeper, app.AccountKeeper, app.BankKeeper)
 
 	app.KycKeeper = *kycmodulekeeper.NewKeeper(
 		appCodec,

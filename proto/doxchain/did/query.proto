@@ -15,26 +15,24 @@ service Query {
   
   // Parameters queries the parameters of the module.
   rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
-    option (google.api.http).get = "/doxchain/did/params";
-  
+    option (google.api.http).get = "/doxchain/did/params";  
   }
   
   // Queries a list of Did items.
   rpc Did    (QueryGetDidRequest) returns (QueryGetDidResponse) {
-    option (google.api.http).get = "/doxchain/did/did/{fullyQualifiedDidIdentifier}";
-  
+    option (google.api.http).get = "/doxchain/did/did/{fullyQualifiedDidIdentifier}";  
   }
+
   rpc DidAll (QueryAllDidRequest) returns (QueryAllDidResponse) {
-    option (google.api.http).get = "/doxchain/did/did";
-  
+    option (google.api.http).get = "/doxchain/did/did";  
   }
 }
+
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
 
 // QueryParamsResponse is response type for the Query/Params RPC method.
-message QueryParamsResponse {
-  
+message QueryParamsResponse {  
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
 }
@@ -52,7 +50,7 @@ message QueryAllDidRequest {
 }
 
 message QueryAllDidResponse {
-  repeated Did                                    Did        = 1 [(gogoproto.nullable) = false];
+  repeated Did                                    didList        = 1 [(gogoproto.nullable) = false];
            cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 

@@ -12,6 +12,7 @@ service Msg {
   rpc UpdateDid (MsgUpdateDid) returns (MsgUpdateDidResponse);
   rpc DeleteDid (MsgDeleteDid) returns (MsgDeleteDidResponse);
 }
+
 message MsgCreateDid {
   Did did = 1;
 }
@@ -32,4 +33,3 @@ message MsgDeleteDid {
 }
 
 message MsgDeleteDidResponse {}
-

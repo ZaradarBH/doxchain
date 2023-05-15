@@ -16,38 +16,34 @@ service Query {
   
   // Parameters queries the parameters of the module.
   rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
-    option (google.api.http).get = "/doxchain/abs/params";
-  
+    option (google.api.http).get = "/doxchain/abs/params";  
   }
   
   // Queries a list of QueryBreakFactor items.
   rpc QueryBreakFactor (QueryBreakFactorRequest) returns (QueryBreakFactorResponse) {
-    option (google.api.http).get = "/doxchain/abs/query_break_factor";
-  
+    option (google.api.http).get = "/doxchain/abs/query_break_factor";  
   }
   
   // Queries watchlist.
   rpc QueryWatchlist (QueryWatchlistRequest) returns (QueryWatchlistResponse) {
-    option (google.api.http).get = "/doxchain/abs/query_watchlist";
-  
+    option (google.api.http).get = "/doxchain/abs/query_watchlist";  
   }
   
   // Queries a list of PartitionedPools items.
   rpc PartitionedPoolRegistry    (QueryGetPartitionedPoolRegistryRequest) returns (QueryGetPartitionedPoolRegistryResponse) {
-    option (google.api.http).get = "/be-heroes/doxchain/abs/partitioned_pool_registries/{creator}";
-  
+    option (google.api.http).get = "/be-heroes/doxchain/abs/partitioned_pool_registries/{creator}";  
   }
+
   rpc PartitionedPoolRegistryAll (QueryAllPartitionedPoolRegistriesRequest) returns (QueryAllPartitionedPoolRegistriesResponse) {
-    option (google.api.http).get = "/be-heroes/doxchain/abs/partitioned_pool_registries";
-  
+    option (google.api.http).get = "/be-heroes/doxchain/abs/partitioned_pool_registries";  
   }
 }
+
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
 
 // QueryParamsResponse is response type for the Query/Params RPC method.
-message QueryParamsResponse {
-  
+message QueryParamsResponse {  
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
 }
@@ -77,7 +73,7 @@ message QueryAllPartitionedPoolRegistriesRequest {
 }
 
 message QueryAllPartitionedPoolRegistriesResponse {
-  repeated PartitionedPoolRegistry                       partitionedPoolRegistries = 1 [(gogoproto.nullable) = false];
+  repeated PartitionedPoolRegistry                partitionedPoolRegistries = 1 [(gogoproto.nullable) = false];
            cosmos.base.query.v1beta1.PageResponse pagination       = 2;
 }
 

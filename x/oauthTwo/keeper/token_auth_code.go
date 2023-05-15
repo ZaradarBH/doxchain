@@ -6,7 +6,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
-	"github.com/be-heroes/doxchain/utils"
+	utils "github.com/be-heroes/doxchain/utils/jwt"
 	"github.com/be-heroes/doxchain/x/oauthtwo/types"
 	"github.com/golang-jwt/jwt"
 )

@@ -6,7 +6,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/client/tx"
 	"github.com/spf13/cobra"
-	"github.com/be-heroes/doxchain/utils"
+	utils "github.com/be-heroes/doxchain/utils/did"
 )
 
 func CmdCreateAMLRequest() *cobra.Command {

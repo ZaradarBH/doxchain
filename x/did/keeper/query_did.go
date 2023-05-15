@@ -37,7 +37,7 @@ func (k Keeper) DidAll(goCtx context.Context, req *types.QueryAllDidRequest) (*t
 		return nil, status.Error(codes.Internal, err.Error())
 	}
 
-	return &types.QueryAllDidResponse{Did: dids, Pagination: pageRes}, nil
+	return &types.QueryAllDidResponse{DidList: dids, Pagination: pageRes}, nil
 }
 
 func (k Keeper) Did(goCtx context.Context, req *types.QueryGetDidRequest) (*types.QueryGetDidResponse, error) {

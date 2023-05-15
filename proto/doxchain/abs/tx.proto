@@ -9,9 +9,10 @@ option go_package = "github.com/be-heroes/doxchain/x/abs/types";
 
 // Msg defines the Msg service.
 service Msg {
-  rpc UpdateBreakFactor      (MsgUpdateBreakFactorRequest     ) returns (MsgUpdateBreakFactorResponse     );
+  rpc UpdateBreakFactor      (MsgUpdateBreakFactorRequest) returns (MsgUpdateBreakFactorResponse);
   rpc CreatePartitionedPoolRegistry (MsgCreatePartitionedPoolRegistryRequest) returns (MsgCreatePartitionedPoolRegistryResponse);
 }
+
 message MsgUpdateBreakFactorRequest {
   option           (gogoproto.equal) = false;
   option (gogoproto.goproto_getters) = false;

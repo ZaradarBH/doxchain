@@ -13,6 +13,7 @@ service Msg {
   rpc CreateAMLRequest (MsgCreateAMLRequest) returns (MsgCreateAMLRequestResponse);
   rpc DeleteAMLRequest (MsgDeleteAMLRequest) returns (MsgDeleteAMLRequestResponse);
 }
+
 message MsgCreateAMLRequest {
   string creator = 1;
   beheroes.doxchain.did.Did  did = 2 [(gogoproto.nullable) = false];  

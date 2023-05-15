@@ -15,4 +15,3 @@ message DeviceCodeInfo {
   string deviceCode = 2; 
   int64 expiresAt = 3;
 }
-
