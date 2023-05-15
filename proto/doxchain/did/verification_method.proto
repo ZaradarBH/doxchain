@@ -17,5 +17,6 @@ message VerificationMethod {
 }
 
 message VerificationRelationship {
-  VerificationMethod verificationMethod = 1 [(gogoproto.nullable) = false];
+  repeated Did referenced = 1 [(gogoproto.nullable) = false];
+  repeated VerificationMethod embedded = 2 [(gogoproto.nullable) = false];
 }

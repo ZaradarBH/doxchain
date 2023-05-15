@@ -45708,331 +45708,481 @@ definitions:
         items:
           type: object
           properties:
-            verificationMethod:
-              type: object
-              properties:
-                id:
-                  type: object
-                  properties:
-                    creator:
-                      type: string
-                    url:
-                      type: string
-                    methodName:
-                      type: string
-                    methodId:
-                      type: string
-                    path:
-                      type: string
-                    fragment:
-                      type: string
-                    query:
-                      type: string
-                    parameters:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          name:
-                            type: string
-                          value:
-                            type: string
-                type:
-                  type: string
-                controller:
-                  type: object
-                  properties:
-                    creator:
-                      type: string
-                    url:
-                      type: string
-                    methodName:
-                      type: string
-                    methodId:
-                      type: string
-                    path:
-                      type: string
-                    fragment:
-                      type: string
-                    query:
-                      type: string
-                    parameters:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          name:
-                            type: string
-                          value:
-                            type: string
-                publicKeyJwk:
-                  type: string
-                publicKeyMultibase:
-                  type: string
+            referenced:
+              type: array
+              items:
+                type: object
+                properties:
+                  creator:
+                    type: string
+                  url:
+                    type: string
+                  methodName:
+                    type: string
+                  methodId:
+                    type: string
+                  path:
+                    type: string
+                  fragment:
+                    type: string
+                  query:
+                    type: string
+                  parameters:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        value:
+                          type: string
+            embedded:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: object
+                    properties:
+                      creator:
+                        type: string
+                      url:
+                        type: string
+                      methodName:
+                        type: string
+                      methodId:
+                        type: string
+                      path:
+                        type: string
+                      fragment:
+                        type: string
+                      query:
+                        type: string
+                      parameters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            value:
+                              type: string
+                  type:
+                    type: string
+                  controller:
+                    type: object
+                    properties:
+                      creator:
+                        type: string
+                      url:
+                        type: string
+                      methodName:
+                        type: string
+                      methodId:
+                        type: string
+                      path:
+                        type: string
+                      fragment:
+                        type: string
+                      query:
+                        type: string
+                      parameters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            value:
+                              type: string
+                  publicKeyJwk:
+                    type: string
+                  publicKeyMultibase:
+                    type: string
       assertionMethod:
         type: array
         items:
           type: object
           properties:
-            verificationMethod:
-              type: object
-              properties:
-                id:
-                  type: object
-                  properties:
-                    creator:
-                      type: string
-                    url:
-                      type: string
-                    methodName:
-                      type: string
-                    methodId:
-                      type: string
-                    path:
-                      type: string
-                    fragment:
-                      type: string
-                    query:
-                      type: string
-                    parameters:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          name:
-                            type: string
-                          value:
-                            type: string
-                type:
-                  type: string
-                controller:
-                  type: object
-                  properties:
-                    creator:
-                      type: string
-                    url:
-                      type: string
-                    methodName:
-                      type: string
-                    methodId:
-                      type: string
-                    path:
-                      type: string
-                    fragment:
-                      type: string
-                    query:
-                      type: string
-                    parameters:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          name:
-                            type: string
-                          value:
-                            type: string
-                publicKeyJwk:
-                  type: string
-                publicKeyMultibase:
-                  type: string
+            referenced:
+              type: array
+              items:
+                type: object
+                properties:
+                  creator:
+                    type: string
+                  url:
+                    type: string
+                  methodName:
+                    type: string
+                  methodId:
+                    type: string
+                  path:
+                    type: string
+                  fragment:
+                    type: string
+                  query:
+                    type: string
+                  parameters:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        value:
+                          type: string
+            embedded:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: object
+                    properties:
+                      creator:
+                        type: string
+                      url:
+                        type: string
+                      methodName:
+                        type: string
+                      methodId:
+                        type: string
+                      path:
+                        type: string
+                      fragment:
+                        type: string
+                      query:
+                        type: string
+                      parameters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            value:
+                              type: string
+                  type:
+                    type: string
+                  controller:
+                    type: object
+                    properties:
+                      creator:
+                        type: string
+                      url:
+                        type: string
+                      methodName:
+                        type: string
+                      methodId:
+                        type: string
+                      path:
+                        type: string
+                      fragment:
+                        type: string
+                      query:
+                        type: string
+                      parameters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            value:
+                              type: string
+                  publicKeyJwk:
+                    type: string
+                  publicKeyMultibase:
+                    type: string
       keyAgreement:
         type: array
         items:
           type: object
           properties:
-            verificationMethod:
-              type: object
-              properties:
-                id:
-                  type: object
-                  properties:
-                    creator:
-                      type: string
-                    url:
-                      type: string
-                    methodName:
-                      type: string
-                    methodId:
-                      type: string
-                    path:
-                      type: string
-                    fragment:
-                      type: string
-                    query:
-                      type: string
-                    parameters:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          name:
-                            type: string
-                          value:
-                            type: string
-                type:
-                  type: string
-                controller:
-                  type: object
-                  properties:
-                    creator:
-                      type: string
-                    url:
-                      type: string
-                    methodName:
-                      type: string
-                    methodId:
-                      type: string
-                    path:
-                      type: string
-                    fragment:
-                      type: string
-                    query:
-                      type: string
-                    parameters:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          name:
-                            type: string
-                          value:
-                            type: string
-                publicKeyJwk:
-                  type: string
-                publicKeyMultibase:
-                  type: string
+            referenced:
+              type: array
+              items:
+                type: object
+                properties:
+                  creator:
+                    type: string
+                  url:
+                    type: string
+                  methodName:
+                    type: string
+                  methodId:
+                    type: string
+                  path:
+                    type: string
+                  fragment:
+                    type: string
+                  query:
+                    type: string
+                  parameters:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        value:
+                          type: string
+            embedded:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: object
+                    properties:
+                      creator:
+                        type: string
+                      url:
+                        type: string
+                      methodName:
+                        type: string
+                      methodId:
+                        type: string
+                      path:
+                        type: string
+                      fragment:
+                        type: string
+                      query:
+                        type: string
+                      parameters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            value:
+                              type: string
+                  type:
+                    type: string
+                  controller:
+                    type: object
+                    properties:
+                      creator:
+                        type: string
+                      url:
+                        type: string
+                      methodName:
+                        type: string
+                      methodId:
+                        type: string
+                      path:
+                        type: string
+                      fragment:
+                        type: string
+                      query:
+                        type: string
+                      parameters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            value:
+                              type: string
+                  publicKeyJwk:
+                    type: string
+                  publicKeyMultibase:
+                    type: string
       capabilityInvocation:
         type: array
         items:
           type: object
           properties:
-            verificationMethod:
-              type: object
-              properties:
-                id:
-                  type: object
-                  properties:
-                    creator:
-                      type: string
-                    url:
-                      type: string
-                    methodName:
-                      type: string
-                    methodId:
-                      type: string
-                    path:
-                      type: string
-                    fragment:
-                      type: string
-                    query:
-                      type: string
-                    parameters:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          name:
-                            type: string
-                          value:
-                            type: string
-                type:
-                  type: string
-                controller:
-                  type: object
-                  properties:
-                    creator:
-                      type: string
-                    url:
-                      type: string
-                    methodName:
-                      type: string
-                    methodId:
-                      type: string
-                    path:
-                      type: string
-                    fragment:
-                      type: string
-                    query:
-                      type: string
-                    parameters:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          name:
-                            type: string
-                          value:
-                            type: string
-                publicKeyJwk:
-                  type: string
-                publicKeyMultibase:
-                  type: string
+            referenced:
+              type: array
+              items:
+                type: object
+                properties:
+                  creator:
+                    type: string
+                  url:
+                    type: string
+                  methodName:
+                    type: string
+                  methodId:
+                    type: string
+                  path:
+                    type: string
+                  fragment:
+                    type: string
+                  query:
+                    type: string
+                  parameters:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        value:
+                          type: string
+            embedded:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: object
+                    properties:
+                      creator:
+                        type: string
+                      url:
+                        type: string
+                      methodName:
+                        type: string
+                      methodId:
+                        type: string
+                      path:
+                        type: string
+                      fragment:
+                        type: string
+                      query:
+                        type: string
+                      parameters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            value:
+                              type: string
+                  type:
+                    type: string
+                  controller:
+                    type: object
+                    properties:
+                      creator:
+                        type: string
+                      url:
+                        type: string
+                      methodName:
+                        type: string
+                      methodId:
+                        type: string
+                      path:
+                        type: string
+                      fragment:
+                        type: string
+                      query:
+                        type: string
+                      parameters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            value:
+                              type: string
+                  publicKeyJwk:
+                    type: string
+                  publicKeyMultibase:
+                    type: string
       capabilityDelegation:
         type: array
         items:
           type: object
           properties:
-            verificationMethod:
-              type: object
-              properties:
-                id:
-                  type: object
-                  properties:
-                    creator:
-                      type: string
-                    url:
-                      type: string
-                    methodName:
-                      type: string
-                    methodId:
-                      type: string
-                    path:
-                      type: string
-                    fragment:
-                      type: string
-                    query:
-                      type: string
-                    parameters:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          name:
-                            type: string
-                          value:
-                            type: string
-                type:
-                  type: string
-                controller:
-                  type: object
-                  properties:
-                    creator:
-                      type: string
-                    url:
-                      type: string
-                    methodName:
-                      type: string
-                    methodId:
-                      type: string
-                    path:
-                      type: string
-                    fragment:
-                      type: string
-                    query:
-                      type: string
-                    parameters:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          name:
-                            type: string
-                          value:
-                            type: string
-                publicKeyJwk:
-                  type: string
-                publicKeyMultibase:
-                  type: string
+            referenced:
+              type: array
+              items:
+                type: object
+                properties:
+                  creator:
+                    type: string
+                  url:
+                    type: string
+                  methodName:
+                    type: string
+                  methodId:
+                    type: string
+                  path:
+                    type: string
+                  fragment:
+                    type: string
+                  query:
+                    type: string
+                  parameters:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        value:
+                          type: string
+            embedded:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: object
+                    properties:
+                      creator:
+                        type: string
+                      url:
+                        type: string
+                      methodName:
+                        type: string
+                      methodId:
+                        type: string
+                      path:
+                        type: string
+                      fragment:
+                        type: string
+                      query:
+                        type: string
+                      parameters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            value:
+                              type: string
+                  type:
+                    type: string
+                  controller:
+                    type: object
+                    properties:
+                      creator:
+                        type: string
+                      url:
+                        type: string
+                      methodName:
+                        type: string
+                      methodId:
+                        type: string
+                      path:
+                        type: string
+                      fragment:
+                        type: string
+                      query:
+                        type: string
+                      parameters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            value:
+                              type: string
+                  publicKeyJwk:
+                    type: string
+                  publicKeyMultibase:
+                    type: string
       service:
         type: array
         items:
@@ -46276,67 +46426,97 @@ definitions:
   beheroes.doxchain.did.VerificationRelationship:
     type: object
     properties:
-      verificationMethod:
-        type: object
-        properties:
-          id:
-            type: object
-            properties:
-              creator:
-                type: string
-              url:
-                type: string
-              methodName:
-                type: string
-              methodId:
-                type: string
-              path:
-                type: string
-              fragment:
-                type: string
-              query:
-                type: string
-              parameters:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                    value:
-                      type: string
-          type:
-            type: string
-          controller:
-            type: object
-            properties:
-              creator:
-                type: string
-              url:
-                type: string
-              methodName:
-                type: string
-              methodId:
-                type: string
-              path:
-                type: string
-              fragment:
-                type: string
-              query:
-                type: string
-              parameters:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                    value:
-                      type: string
-          publicKeyJwk:
-            type: string
-          publicKeyMultibase:
-            type: string
+      referenced:
+        type: array
+        items:
+          type: object
+          properties:
+            creator:
+              type: string
+            url:
+              type: string
+            methodName:
+              type: string
+            methodId:
+              type: string
+            path:
+              type: string
+            fragment:
+              type: string
+            query:
+              type: string
+            parameters:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  value:
+                    type: string
+      embedded:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: object
+              properties:
+                creator:
+                  type: string
+                url:
+                  type: string
+                methodName:
+                  type: string
+                methodId:
+                  type: string
+                path:
+                  type: string
+                fragment:
+                  type: string
+                query:
+                  type: string
+                parameters:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      value:
+                        type: string
+            type:
+              type: string
+            controller:
+              type: object
+              properties:
+                creator:
+                  type: string
+                url:
+                  type: string
+                methodName:
+                  type: string
+                methodId:
+                  type: string
+                path:
+                  type: string
+                fragment:
+                  type: string
+                query:
+                  type: string
+                parameters:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      value:
+                        type: string
+            publicKeyJwk:
+              type: string
+            publicKeyMultibase:
+              type: string
   beheroes.doxchain.idp.MsgAuthenticationResponse:
     type: object
     properties:

@@ -62,13 +62,22 @@ func (didf DidTokenFactory) Create(creator string, url string) *didTypes.Did {
 		did.Path = REGEX_DID_PATH.FindStringSubmatch(url)[0]
 		did.Query = REGEX_DID_QUERY.FindStringSubmatch(url)[0]
 		did.Fragment = REGEX_DID_FRAGMENT.FindStringSubmatch(url)[0]
-
-		params := REGEX_DID_PARAMS.FindStringSubmatch(url)
+		params := REGEX_DID_PARAMS.FindStringSubmatch(url)[0]
 
 		if len(params) > 0 {
-			did.Parameters = []*didTypes.DidParameter{}
+			did.Parameters = []*didTypes.DidParameter{}			
+			match := REGEX_DID_PARAM.FindStringSubmatch(params)
+			
+			for i, name := range REGEX_DID_PARAM.SubexpNames() {
+				if i > 0 && i <= len(match) {
+					didParam := didTypes.DidParameter{
+						Name: name,
+						Value: match[i],
+					}
 
-			//TODO: Extract params
+					did.Parameters = append(did.Parameters, &didParam)
+				}
+			}
 		}
 	}
 
