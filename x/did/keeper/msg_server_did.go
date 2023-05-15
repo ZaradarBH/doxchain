@@ -12,13 +12,10 @@ import (
 func (k msgServer) CreateDid(goCtx context.Context, msg *types.MsgCreateDid) (*types.MsgCreateDidResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	fullyQualifiedDidIdentifier := k.AppendDid(
-		ctx,
-		*msg.Did,
-	)
+	k.SetDid(ctx, *msg.Did)
 
 	return &types.MsgCreateDidResponse{
-		FullyQualifiedDidIdentifier: fullyQualifiedDidIdentifier,
+		FullyQualifiedDidIdentifier: msg.Did.GetFullyQualifiedDidIdentifier(),
 	}, nil
 }
 
@@ -28,6 +25,7 @@ func (k msgServer) UpdateDid(goCtx context.Context, msg *types.MsgUpdateDid) (*t
 	// Checks that the element exists
 	fullyQualifiedDidIdentifier := msg.Did.GetFullyQualifiedDidIdentifier()
 	val, found := k.GetDid(ctx, fullyQualifiedDidIdentifier)
+
 	if !found {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, fmt.Sprintf("key %s doesn't exist", fullyQualifiedDidIdentifier))
 	}

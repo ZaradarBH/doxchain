@@ -6,7 +6,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
-// SetAccessTokenRegistry set a specific AccessTokenRegistry in the store from its index
+// SetAccessTokenRegistry set a specific AccessTokenRegistry in the store based on its tenant
 func (k Keeper) SetAccessTokenRegistry(ctx sdk.Context, AccessTokenRegistry types.AccessTokenRegistry) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AccessTokenRegistryKeyPrefix))
 	b := k.cdc.MustMarshal(&AccessTokenRegistry)
