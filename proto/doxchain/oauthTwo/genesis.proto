@@ -12,9 +12,9 @@ option go_package = "github.com/be-heroes/doxchain/x/oauthtwo/types";
 
 // GenesisState defines the oauth module's genesis state.
 message GenesisState {
-           Params                    params                        = 1 [(gogoproto.nullable) = false];
-  repeated DeviceCodeRegistry        deviceCodeRegistryList        = 2 [(gogoproto.nullable) = false];
-  repeated AccessTokenRegistry       accessTokenRegistryList       = 3 [(gogoproto.nullable) = false];
-  repeated AuthorizationCodeRegistry authorizationCodeRegistryList = 4 [(gogoproto.nullable) = false];
+  Params params = 1 [(gogoproto.nullable) = false];
+  repeated DeviceCodeRegistry deviceCodeRegistries = 2 [(gogoproto.nullable) = false];
+  repeated AccessTokenRegistry accessTokenRegistries = 3 [(gogoproto.nullable) = false];
+  repeated AuthorizationCodeRegistry authorizationCodeRegistries = 4 [(gogoproto.nullable) = false];
 }
 

@@ -11,15 +11,14 @@ import "doxchain/did/did.proto";
 option go_package = "github.com/be-heroes/doxchain/x/did/types";
 
 // Query defines the gRPC querier service.
-service Query {
-  
+service Query {  
   // Parameters queries the parameters of the module.
   rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/doxchain/did/params";  
   }
   
   // Queries a list of Did items.
-  rpc Did    (QueryGetDidRequest) returns (QueryGetDidResponse) {
+  rpc Did (QueryGetDidRequest) returns (QueryGetDidResponse) {
     option (google.api.http).get = "/doxchain/did/did/{fullyQualifiedDidIdentifier}";  
   }
 
@@ -50,7 +49,7 @@ message QueryAllDidRequest {
 }
 
 message QueryAllDidResponse {
-  repeated Did                                    didList        = 1 [(gogoproto.nullable) = false];
-           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+  repeated Did didList = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 

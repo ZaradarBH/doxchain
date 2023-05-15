@@ -7,10 +7,10 @@ option go_package = "github.com/be-heroes/doxchain/x/oauthtwo/types";
 
 message AccessTokenRegistry {
   string tenant = 1; 
-  repeated AccessTokenInfo issued = 2 [(gogoproto.nullable) = false]; 
+  repeated AccessTokenEntry issued = 2 [(gogoproto.nullable) = false]; 
 }
 
-message AccessTokenInfo {
+message AccessTokenEntry {
   string creator = 1;
   string identifier = 2;
   int64 expiresAt = 3;

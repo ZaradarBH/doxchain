@@ -26,13 +26,13 @@ func (k Keeper) Authorize(ctx sdk.Context, msg types.MsgAuthorizeRequest) (types
 		return response, sdkerrors.Wrap(types.TokenServiceError, "AuthorizationCodeRegistry cache could not be found for tenant")
 	}
 
-	authorizationCodeInfo := types.AuthorizationCodeInfo{
+	authorizationCodeEntry := types.AuthorizationCodeEntry{
 		Creator:           msg.Creator,
 		AuthorizationCode: response.AuthorizationCode,
 		ExpiresAt:         ctx.BlockTime().Add(time.Minute * 3).Unix(),
 	}
 
-	tenantAuthorizationCodeRegistry.Codes = append(tenantAuthorizationCodeRegistry.Codes, authorizationCodeInfo)
+	tenantAuthorizationCodeRegistry.Codes = append(tenantAuthorizationCodeRegistry.Codes, authorizationCodeEntry)
 
 	k.SetAuthorizationCodeRegistry(ctx, tenantAuthorizationCodeRegistry)
 

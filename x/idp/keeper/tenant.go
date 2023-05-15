@@ -8,26 +8,75 @@ import (
 	"github.com/be-heroes/doxchain/x/idp/types"
 )
 
-// GetTenant for a given tenant identifier
-func (k Keeper) GetTenant(ctx sdk.Context, tenantIdentifier string) (tenant types.Tenant, err error) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), []byte{})
-	tenantListBytes := store.Get(types.KeyPrefix(types.TenantListKey))
+// SetTenantRegistry set a specific TenantRegistry in the store based on its tenant
+func (k Keeper) SetTenantRegistry(ctx sdk.Context, TenantRegistry types.TenantRegistry) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.TenantRegistryKeyPrefix))
+	b := k.cdc.MustMarshal(&TenantRegistry)
+	store.Set(types.TenantRegistryKey(
+		TenantRegistry.Creator,
+	), b)
+}
 
-	if tenantListBytes == nil {
-		return types.Tenant{}, sdkerrors.Wrap(types.TenantListError, "No tenant list found")
+// GetTenantRegistry returns a TenantRegistry from its creator
+func (k Keeper) GetTenantRegistry(
+	ctx sdk.Context,
+	creator string,
+) (val types.TenantRegistry, found bool) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.TenantRegistryKeyPrefix))
+
+	b := store.Get(types.TenantRegistryKey(
+		creator,
+	))
+
+	if b == nil {
+		return val, false
 	}
 
+	k.cdc.MustUnmarshal(b, &val)
+
+	return val, true
+}
+
+// RemoveTenantRegistry removes a TenantRegistry from the store
+func (k Keeper) RemoveTenantRegistry(
+	ctx sdk.Context,
+	creator string,
+) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.TenantRegistryKeyPrefix))
+
+	store.Delete(types.TenantRegistryKey(
+		creator,
+	))
+}
+
+// GetAllTenantRegistry returns all TenantRegistry
+func (k Keeper) GetAllTenantRegistry(ctx sdk.Context) (list []types.TenantRegistry) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.TenantRegistryKeyPrefix))
+	iterator := sdk.KVStorePrefixIterator(store, []byte{})
+
+	defer iterator.Close()
+
+	for ; iterator.Valid(); iterator.Next() {
+		var val types.TenantRegistry
+		k.cdc.MustUnmarshal(iterator.Value(), &val)
+		list = append(list, val)
+	}
+
+	return
+}
+
+// GetTenant for a given tenant identifier
+func (k Keeper) GetTenant(ctx sdk.Context, tenantIdentifier string) (tenant types.TenantEntry, err error) {
 	matched := false
-	tenants := &types.TenantRegistry{}
 
-	k.cdc.MustUnmarshal(tenantListBytes, tenants)
-
-	for _, tenantEntry := range tenants.Tenants {
-		if tenantEntry.Identifier == tenantIdentifier {
-			tenant = *tenantEntry
-			matched = true
-
-			break
+	for _, registry := range k.GetAllTenantRegistry(ctx) {
+		for _, tenantEntry := range registry.Tenants {
+			if tenantEntry.Identifier == tenantIdentifier {
+				tenant = *tenantEntry
+				matched = true
+	
+				break
+			}
 		}
 	}
 

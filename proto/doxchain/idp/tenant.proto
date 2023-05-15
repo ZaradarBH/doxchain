@@ -8,10 +8,10 @@ option go_package = "github.com/be-heroes/doxchain/x/idp/types";
 
 message TenantRegistry {
   string creator  = 1;
-  repeated Tenant tenants = 2;
+  repeated TenantEntry tenants = 2;
 }
 
-message Tenant {  
+message TenantEntry {  
   string creator  = 1;
   string identifier = 2;
   AccessClientList accessClientList = 3 [(gogoproto.nullable) = false];

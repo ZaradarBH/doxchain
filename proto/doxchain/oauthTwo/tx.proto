@@ -8,9 +8,9 @@ option go_package = "github.com/be-heroes/doxchain/x/oauthtwo/types";
 
 // Msg defines the Msg service.
 service Msg {
-  rpc Token                           (MsgTokenRequest                   ) returns (MsgTokenResponse                          );
-  rpc DeviceCode                      (MsgDeviceCodeRequest              ) returns (MsgDeviceCodeResponse                     );
-  rpc Authorize                       (MsgAuthorizeRequest               ) returns (MsgAuthorizeResponse                      );
+  rpc Token (MsgTokenRequest) returns (MsgTokenResponse);
+  rpc DeviceCode (MsgDeviceCodeRequest) returns (MsgDeviceCodeResponse);
+  rpc Authorize (MsgAuthorizeRequest) returns (MsgAuthorizeResponse);
 }
 
 message MsgTokenRequest {

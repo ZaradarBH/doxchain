@@ -7,10 +7,10 @@ option go_package = "github.com/be-heroes/doxchain/x/oauthtwo/types";
 
 message DeviceCodeRegistry {
   string tenant = 1; 
-  repeated DeviceCodeInfo codes = 2 [(gogoproto.nullable) = false]; 
+  repeated DeviceCodeEntry codes = 2 [(gogoproto.nullable) = false]; 
 }
 
-message DeviceCodeInfo {
+message DeviceCodeEntry {
   string creator = 1;
   string deviceCode = 2; 
   int64 expiresAt = 3;

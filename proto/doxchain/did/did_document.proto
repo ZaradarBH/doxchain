@@ -11,13 +11,13 @@ option go_package = "github.com/be-heroes/doxchain/x/did/types";
 message DidDocument {
   repeated string context = 1;
   Did id = 2 [(gogoproto.nullable) = false];
-  Did controller = 3 [(gogoproto.nullable) = false];
-  repeated Did alsoKnownAs = 4 [(gogoproto.nullable) = false];
-  repeated VerificationMethod verificationMethod = 5 [(gogoproto.nullable) = false];
-  repeated VerificationRelationship authentication = 6 [(gogoproto.nullable) = false];
-  repeated VerificationRelationship assertionMethod = 7 [(gogoproto.nullable) = false];
-  repeated VerificationRelationship keyAgreement = 8 [(gogoproto.nullable) = false];
-  repeated VerificationRelationship capabilityInvocation = 9 [(gogoproto.nullable) = false];
-  repeated VerificationRelationship capabilityDelegation = 10 [(gogoproto.nullable) = false];
-  repeated Service service = 11 [(gogoproto.nullable) = false];
+  Did controller = 3 [(gogoproto.nullable) = true];
+  repeated Did alsoKnownAs = 4 [(gogoproto.nullable) = true];
+  repeated VerificationMethod verificationMethod = 5 [(gogoproto.nullable) = true];
+  repeated VerificationRelationship authentication = 6 [(gogoproto.nullable) = true];
+  repeated VerificationRelationship assertionMethod = 7 [(gogoproto.nullable) = true];
+  repeated VerificationRelationship keyAgreement = 8 [(gogoproto.nullable) = true];
+  repeated VerificationRelationship capabilityInvocation = 9 [(gogoproto.nullable) = true];
+  repeated VerificationRelationship capabilityDelegation = 10 [(gogoproto.nullable) = true];
+  repeated Service service = 11 [(gogoproto.nullable) = true];
 }

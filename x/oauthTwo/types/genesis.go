@@ -10,9 +10,9 @@ const DefaultIndex uint64 = 1
 // DefaultGenesis returns the default genesis state
 func DefaultGenesis() *GenesisState {
 	return &GenesisState{
-		DeviceCodeRegistryList:        []DeviceCodeRegistry{},
-		AccessTokenRegistryList:       []AccessTokenRegistry{},
-		AuthorizationCodeRegistryList: []AuthorizationCodeRegistry{},
+		DeviceCodeRegistries:        []DeviceCodeRegistry{},
+		AccessTokenRegistries:       []AccessTokenRegistry{},
+		AuthorizationCodeRegistries: []AuthorizationCodeRegistry{},
 		// this line is used by starport scaffolding # genesis/types/default
 		Params: DefaultParams(),
 	}
@@ -24,7 +24,7 @@ func (gs GenesisState) Validate() error {
 	// Check for duplicated index in DeviceCodeRegistry
 	DeviceCodeRegistryIndexMap := make(map[string]struct{})
 
-	for _, elem := range gs.DeviceCodeRegistryList {
+	for _, elem := range gs.DeviceCodeRegistries {
 		tenant := string(DeviceCodeRegistryKey(elem.Tenant))
 		if _, ok := DeviceCodeRegistryIndexMap[tenant]; ok {
 			return fmt.Errorf("duplicated tenant for DeviceCodeRegistry")
@@ -34,7 +34,7 @@ func (gs GenesisState) Validate() error {
 	// Check for duplicated index in AccessTokenRegistry
 	AccessTokenRegistryIndexMap := make(map[string]struct{})
 
-	for _, elem := range gs.AccessTokenRegistryList {
+	for _, elem := range gs.AccessTokenRegistries {
 		tenant := string(AccessTokenRegistryKey(elem.Tenant))
 		if _, ok := AccessTokenRegistryIndexMap[tenant]; ok {
 			return fmt.Errorf("duplicated tenant for AccessTokenRegistry")
@@ -44,7 +44,7 @@ func (gs GenesisState) Validate() error {
 	// Check for duplicated index in authorizationCodeRegistry
 	authorizationCodeRegistryIndexMap := make(map[string]struct{})
 
-	for _, elem := range gs.AuthorizationCodeRegistryList {
+	for _, elem := range gs.AuthorizationCodeRegistries {
 		tenant := string(AuthorizationCodeRegistryKey(elem.Tenant))
 		if _, ok := authorizationCodeRegistryIndexMap[tenant]; ok {
 			return fmt.Errorf("duplicated tenant for authorizationCodeRegistry")

@@ -30,13 +30,13 @@ func (k Keeper) DeviceCode(ctx sdk.Context, msg types.MsgDeviceCodeRequest) (typ
 		return response, sdkerrors.Wrap(types.TokenServiceError, "DeviceCodeRegistry cache could not be found for tenant")
 	}
 
-	deviceCodeInfo := types.DeviceCodeInfo{
+	deviceCodeEntry := types.DeviceCodeEntry{
 		Creator:    msg.Creator,
 		DeviceCode: response.DeviceCode,
 		ExpiresAt:  ctx.BlockTime().Add(time.Minute * 15).Unix(),
 	}
 
-	tenantDeviceCodeRegistry.Codes = append(tenantDeviceCodeRegistry.Codes, deviceCodeInfo)
+	tenantDeviceCodeRegistry.Codes = append(tenantDeviceCodeRegistry.Codes, deviceCodeEntry)
 
 	k.SetDeviceCodeRegistry(ctx, tenantDeviceCodeRegistry)
 

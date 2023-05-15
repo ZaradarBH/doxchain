@@ -7,10 +7,10 @@ option go_package = "github.com/be-heroes/doxchain/x/oauthtwo/types";
 
 message AuthorizationCodeRegistry {
   string tenant = 1; 
-  repeated AuthorizationCodeInfo codes = 2 [(gogoproto.nullable) = false]; 
+  repeated AuthorizationCodeEntry codes = 2 [(gogoproto.nullable) = false]; 
 }
 
-message AuthorizationCodeInfo {
+message AuthorizationCodeEntry {
   string creator = 1;
   string authorizationCode = 2; 
   int64 expiresAt = 3;
