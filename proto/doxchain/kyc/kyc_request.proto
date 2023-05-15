@@ -9,5 +9,4 @@ option go_package = "github.com/be-heroes/doxchain/x/kyc/types";
 message KYCRequest {    
   beheroes.doxchain.did.Did  did = 1;
   bool approved = 2; 
-  //TODO: Add additional message fields after talking with the regulation experts
 }

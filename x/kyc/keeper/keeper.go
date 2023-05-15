@@ -24,6 +24,7 @@ type (
 	}
 )
 
+//TODO: Add additional KYCRequest fields after talking with the regulation experts
 //TODO: Implement KYC process concept
 //TODO: Implement KYC approver concept
 func NewKeeper(

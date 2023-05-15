@@ -8,6 +8,5 @@ option go_package = "github.com/be-heroes/doxchain/x/aml/types";
 
 message AMLRequest {    
   beheroes.doxchain.did.Did  did = 1;
-  bool approved = 2; 
-  //TODO: Add additional message fields after talking with the regulation experts
+  bool approved = 2;
 }

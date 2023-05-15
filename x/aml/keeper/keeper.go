@@ -23,6 +23,8 @@ type (
 	}
 )
 
+
+//TODO: Add additional AMLRequest fields after talking with the regulation experts
 //TODO: Implement AML process concept
 //TODO: Implement AML approver concept
 func NewKeeper(
