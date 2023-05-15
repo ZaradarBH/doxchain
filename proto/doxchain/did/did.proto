@@ -16,48 +16,41 @@ message Did {
   repeated DidParameter parameters = 8 [(gogoproto.nullable) = true];
 }
 
+message DidDocument {
+  repeated string context = 1;
+  Did id = 2 [(gogoproto.nullable) = false];
+  Did controller = 3 [(gogoproto.nullable) = false];
+  repeated Did alsoKnownAs = 4 [(gogoproto.nullable) = false];
+  repeated VerificationMethod verificationMethod = 5 [(gogoproto.nullable) = false];
+  repeated VerificationRelationship authentication = 6 [(gogoproto.nullable) = false];
+  repeated VerificationRelationship assertionMethod = 7 [(gogoproto.nullable) = false];
+  repeated VerificationRelationship keyAgreement = 8 [(gogoproto.nullable) = false];
+  repeated VerificationRelationship capabilityInvocation = 9 [(gogoproto.nullable) = false];
+  repeated VerificationRelationship capabilityDelegation = 10 [(gogoproto.nullable) = false];
+  repeated Service service = 11 [(gogoproto.nullable) = false];
+}
+
 message DidParameter { 
   string name = 1;
   string value = 2;
 }
 
-message DidDocument {
-  string creator = 1;
-  repeated string context = 2;
-  Did id = 3;
-  Did controller = 4;
-  repeated Did alsoKnownAs = 5;
-  repeated VerificationMethod verificationMethod = 6;
-  repeated VerificationRelationship authentication = 7;
-  repeated VerificationRelationship assertionMethod = 8;
-  repeated VerificationRelationship keyAgreement = 9;
-  repeated VerificationRelationship capabilityInvocation = 10;
-  repeated VerificationRelationship capabilityDelegation = 11;
-  repeated Service service = 12;
-}
-
 message VerificationMethod {
-  Did id = 1;
+  Did id = 1 [(gogoproto.nullable) = false];
   string type = 2;
-  Did controller = 3;  
+  Did controller = 3 [(gogoproto.nullable) = false];  
   oneof key_oneof {
     string publicKeyJwk = 4;
     string publicKeyMultibase = 5;
   }
-}
-
-message Service {
-  Did id = 1;
-  string type = 2;
-  string serviceEndpoint = 3;
 }
 
 message VerificationRelationship {
-  Did id = 1;
+  VerificationMethod verificationMethod = 1 [(gogoproto.nullable) = false];
+}
+
+message Service {
+  Did id = 1 [(gogoproto.nullable) = false];
   string type = 2;
-  Did controller = 3;   
-  oneof key_oneof {
-    string publicKeyJwk = 4;
-    string publicKeyMultibase = 5;
-  }
+  string serviceEndpoint = 3;
 }

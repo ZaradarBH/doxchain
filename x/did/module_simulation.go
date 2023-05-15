@@ -36,6 +36,10 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgDeleteDid int = 100
 
+	opWeightMsgDidDocument = "op_weight_msg_did_document"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgDidDocument int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 

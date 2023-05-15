@@ -18,7 +18,7 @@ func (k msgServer) CreateAMLRequest(goCtx context.Context, msg *types.MsgCreateA
 	}
 
 	var aMLRequest = types.AMLRequest{
-		Did:   &msg.Did,
+		Did:      &msg.Did,
 		Approved: false,
 	}
 

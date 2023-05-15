@@ -1,7 +1,7 @@
 package types
 
 import (
-"fmt"
+	"fmt"
 )
 
 // DefaultIndex is the default global index
@@ -11,7 +11,7 @@ const DefaultIndex uint64 = 1
 func DefaultGenesis() *GenesisState {
 	return &GenesisState{
 		PartitionedPoolRegistryList: []PartitionedPoolRegistry{},
-// this line is used by starport scaffolding # genesis/types/default
+		// this line is used by starport scaffolding # genesis/types/default
 		Params: DefaultParams(),
 	}
 }
@@ -20,16 +20,16 @@ func DefaultGenesis() *GenesisState {
 // failure.
 func (gs GenesisState) Validate() error {
 	// Check for duplicated index in partitionedPools
-partitionedPoolsIndexMap := make(map[string]struct{})
+	partitionedPoolsIndexMap := make(map[string]struct{})
 
-for _, elem := range gs.PartitionedPoolRegistryList {
-	creator := string(PartitionedPoolRegistryKey(elem.Creator))
-	if _, ok := partitionedPoolsIndexMap[creator]; ok {
-		return fmt.Errorf("duplicated creator for PartitionedPoolRegistries")
+	for _, elem := range gs.PartitionedPoolRegistryList {
+		creator := string(PartitionedPoolRegistryKey(elem.Creator))
+		if _, ok := partitionedPoolsIndexMap[creator]; ok {
+			return fmt.Errorf("duplicated creator for PartitionedPoolRegistries")
+		}
+		partitionedPoolsIndexMap[creator] = struct{}{}
 	}
-	partitionedPoolsIndexMap[creator] = struct{}{}
-}
-// this line is used by starport scaffolding # genesis/types/validate
+	// this line is used by starport scaffolding # genesis/types/validate
 
 	return gs.Params.Validate()
 }

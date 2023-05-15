@@ -40,7 +40,7 @@ func (k Keeper) AppendAMLRequest(
 	count := k.GetAMLRequestCount(ctx)
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AMLRequestKey))
 	appendedValue := k.cdc.MustMarshal(&request)
-	
+
 	store.Set(GetAMLRequestIDBytes(request.Did.Creator), appendedValue)
 
 	// Update AMLRequest count

@@ -1,7 +1,7 @@
 package keeper_test
 
 import (
-    "strconv"
+	"strconv"
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -10,9 +10,9 @@ import (
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
-	"github.com/be-heroes/doxchain/x/abs/types"
-	"github.com/be-heroes/doxchain/testutil/nullify"
 	keepertest "github.com/be-heroes/doxchain/testutil/keeper"
+	"github.com/be-heroes/doxchain/testutil/nullify"
+	"github.com/be-heroes/doxchain/x/abs/types"
 )
 
 // Prevent strconv unused error
@@ -29,28 +29,25 @@ func TestPartitionedPoolsQuerySingle(t *testing.T) {
 		err      error
 	}{
 		{
-			desc:     "First",
-			request:  &types.QueryGetPartitionedPoolsRequest{
-			    Index: msgs[0].Index,
-                
+			desc: "First",
+			request: &types.QueryGetPartitionedPoolsRequest{
+				Index: msgs[0].Index,
 			},
 			response: &types.QueryGetPartitionedPoolsResponse{PartitionedPools: msgs[0]},
 		},
 		{
-			desc:     "Second",
-			request:  &types.QueryGetPartitionedPoolsRequest{
-			    Index: msgs[1].Index,
-                
+			desc: "Second",
+			request: &types.QueryGetPartitionedPoolsRequest{
+				Index: msgs[1].Index,
 			},
 			response: &types.QueryGetPartitionedPoolsResponse{PartitionedPools: msgs[1]},
 		},
 		{
-			desc:    "KeyNotFound",
+			desc: "KeyNotFound",
 			request: &types.QueryGetPartitionedPoolsRequest{
-			    Index:strconv.Itoa(100000),
-                
+				Index: strconv.Itoa(100000),
 			},
-			err:     status.Error(codes.NotFound, "not found"),
+			err: status.Error(codes.NotFound, "not found"),
 		},
 		{
 			desc: "InvalidRequest",
@@ -94,9 +91,9 @@ func TestPartitionedPoolsQueryPaginated(t *testing.T) {
 			require.NoError(t, err)
 			require.LessOrEqual(t, len(resp.PartitionedPools), step)
 			require.Subset(t,
-            	nullify.Fill(msgs),
-            	nullify.Fill(resp.PartitionedPools),
-            )
+				nullify.Fill(msgs),
+				nullify.Fill(resp.PartitionedPools),
+			)
 		}
 	})
 	t.Run("ByKey", func(t *testing.T) {
@@ -107,9 +104,9 @@ func TestPartitionedPoolsQueryPaginated(t *testing.T) {
 			require.NoError(t, err)
 			require.LessOrEqual(t, len(resp.PartitionedPools), step)
 			require.Subset(t,
-            	nullify.Fill(msgs),
-            	nullify.Fill(resp.PartitionedPools),
-            )
+				nullify.Fill(msgs),
+				nullify.Fill(resp.PartitionedPools),
+			)
 			next = resp.Pagination.NextKey
 		}
 	})

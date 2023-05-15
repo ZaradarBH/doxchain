@@ -6,28 +6,28 @@ import (
 )
 
 const (
-	TypeMsgCreateDid = "create_did"
-	TypeMsgUpdateDid = "update_did"
-	TypeMsgDeleteDid = "delete_did"
+	TypeMsgCreateDidRequest = "create_did"
+	TypeMsgUpdateDidRequest = "update_did"
+	TypeMsgDeleteDidRequest = "delete_did"
 )
 
-var _ sdk.Msg = &MsgCreateDid{}
+var _ sdk.Msg = &MsgCreateDidRequest{}
 
-func NewMsgCreateDid(did Did) *MsgCreateDid {
-	return &MsgCreateDid{
-		Did: &did,
+func NewMsgCreateDidRequest(did Did) *MsgCreateDidRequest {
+	return &MsgCreateDidRequest{
+		Did: did,
 	}
 }
 
-func (msg *MsgCreateDid) Route() string {
+func (msg *MsgCreateDidRequest) Route() string {
 	return RouterKey
 }
 
-func (msg *MsgCreateDid) Type() string {
-	return TypeMsgCreateDid
+func (msg *MsgCreateDidRequest) Type() string {
+	return TypeMsgCreateDidRequest
 }
 
-func (msg *MsgCreateDid) GetSigners() []sdk.AccAddress {
+func (msg *MsgCreateDidRequest) GetSigners() []sdk.AccAddress {
 	creator, err := sdk.AccAddressFromBech32(msg.Did.Creator)
 	if err != nil {
 		panic(err)
@@ -35,12 +35,12 @@ func (msg *MsgCreateDid) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{creator}
 }
 
-func (msg *MsgCreateDid) GetSignBytes() []byte {
+func (msg *MsgCreateDidRequest) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(msg)
 	return sdk.MustSortJSON(bz)
 }
 
-func (msg *MsgCreateDid) ValidateBasic() error {
+func (msg *MsgCreateDidRequest) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Did.Creator)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
@@ -48,23 +48,23 @@ func (msg *MsgCreateDid) ValidateBasic() error {
 	return nil
 }
 
-var _ sdk.Msg = &MsgUpdateDid{}
+var _ sdk.Msg = &MsgUpdateDidRequest{}
 
-func NewMsgUpdateDid(did Did) *MsgUpdateDid {
-	return &MsgUpdateDid{
-		Did: &did,
+func NewMsgUpdateDidRequest(did Did) *MsgUpdateDidRequest {
+	return &MsgUpdateDidRequest{
+		Did: did,
 	}
 }
 
-func (msg *MsgUpdateDid) Route() string {
+func (msg *MsgUpdateDidRequest) Route() string {
 	return RouterKey
 }
 
-func (msg *MsgUpdateDid) Type() string {
-	return TypeMsgUpdateDid
+func (msg *MsgUpdateDidRequest) Type() string {
+	return TypeMsgUpdateDidRequest
 }
 
-func (msg *MsgUpdateDid) GetSigners() []sdk.AccAddress {
+func (msg *MsgUpdateDidRequest) GetSigners() []sdk.AccAddress {
 	creator, err := sdk.AccAddressFromBech32(msg.Did.Creator)
 	if err != nil {
 		panic(err)
@@ -72,12 +72,12 @@ func (msg *MsgUpdateDid) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{creator}
 }
 
-func (msg *MsgUpdateDid) GetSignBytes() []byte {
+func (msg *MsgUpdateDidRequest) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(msg)
 	return sdk.MustSortJSON(bz)
 }
 
-func (msg *MsgUpdateDid) ValidateBasic() error {
+func (msg *MsgUpdateDidRequest) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Did.Creator)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
@@ -85,23 +85,23 @@ func (msg *MsgUpdateDid) ValidateBasic() error {
 	return nil
 }
 
-var _ sdk.Msg = &MsgDeleteDid{}
+var _ sdk.Msg = &MsgDeleteDidRequest{}
 
-func NewMsgDeleteDid(creator string, fullyQualifiedDidIdentifier string) *MsgDeleteDid {
-	return &MsgDeleteDid{
+func NewMsgDeleteDidRequest(creator string, fullyQualifiedDidIdentifier string) *MsgDeleteDidRequest {
+	return &MsgDeleteDidRequest{
 		Creator:                     creator,
 		FullyQualifiedDidIdentifier: fullyQualifiedDidIdentifier,
 	}
 }
-func (msg *MsgDeleteDid) Route() string {
+func (msg *MsgDeleteDidRequest) Route() string {
 	return RouterKey
 }
 
-func (msg *MsgDeleteDid) Type() string {
-	return TypeMsgDeleteDid
+func (msg *MsgDeleteDidRequest) Type() string {
+	return TypeMsgDeleteDidRequest
 }
 
-func (msg *MsgDeleteDid) GetSigners() []sdk.AccAddress {
+func (msg *MsgDeleteDidRequest) GetSigners() []sdk.AccAddress {
 	creator, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		panic(err)
@@ -109,12 +109,12 @@ func (msg *MsgDeleteDid) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{creator}
 }
 
-func (msg *MsgDeleteDid) GetSignBytes() []byte {
+func (msg *MsgDeleteDidRequest) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(msg)
 	return sdk.MustSortJSON(bz)
 }
 
-func (msg *MsgDeleteDid) ValidateBasic() error {
+func (msg *MsgDeleteDidRequest) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)

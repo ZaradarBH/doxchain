@@ -15,7 +15,7 @@ import (
 	"github.com/be-heroes/doxchain/testutil/network"
 	"github.com/be-heroes/doxchain/testutil/nullify"
 	"github.com/be-heroes/doxchain/x/abs/client/cli"
-    "github.com/be-heroes/doxchain/x/abs/types"
+	"github.com/be-heroes/doxchain/x/abs/types"
 )
 
 // Prevent strconv unused error
@@ -25,12 +25,11 @@ func networkWithPartitionedPoolsObjects(t *testing.T, n int) (*network.Network, 
 	t.Helper()
 	cfg := network.DefaultConfig()
 	state := types.GenesisState{}
-    require.NoError(t, cfg.Codec.UnmarshalJSON(cfg.GenesisState[types.ModuleName], &state))
+	require.NoError(t, cfg.Codec.UnmarshalJSON(cfg.GenesisState[types.ModuleName], &state))
 
 	for i := 0; i < n; i++ {
 		partitionedPools := types.PartitionedPools{
 			Index: strconv.Itoa(i),
-			
 		}
 		nullify.Fill(&partitionedPools)
 		state.PartitionedPoolsList = append(state.PartitionedPoolsList, partitionedPools)
@@ -49,32 +48,31 @@ func TestShowPartitionedPools(t *testing.T) {
 		fmt.Sprintf("--%s=json", tmcli.OutputFlag),
 	}
 	for _, tc := range []struct {
-		desc string
+		desc    string
 		idIndex string
-        
+
 		args []string
 		err  error
 		obj  types.PartitionedPools
 	}{
 		{
-			desc: "found",
+			desc:    "found",
 			idIndex: objs[0].Index,
-            
+
 			args: common,
 			obj:  objs[0],
 		},
 		{
-			desc: "not found",
+			desc:    "not found",
 			idIndex: strconv.Itoa(100000),
-            
+
 			args: common,
 			err:  status.Error(codes.NotFound, "not found"),
 		},
 	} {
 		t.Run(tc.desc, func(t *testing.T) {
 			args := []string{
-			    tc.idIndex,
-                
+				tc.idIndex,
 			}
 			args = append(args, tc.args...)
 			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdShowPartitionedPools(), args)
@@ -125,9 +123,9 @@ func TestListPartitionedPools(t *testing.T) {
 			require.NoError(t, net.Config.Codec.UnmarshalJSON(out.Bytes(), &resp))
 			require.LessOrEqual(t, len(resp.PartitionedPools), step)
 			require.Subset(t,
-            	nullify.Fill(objs),
-            	nullify.Fill(resp.PartitionedPools),
-            )
+				nullify.Fill(objs),
+				nullify.Fill(resp.PartitionedPools),
+			)
 		}
 	})
 	t.Run("ByKey", func(t *testing.T) {
@@ -141,9 +139,9 @@ func TestListPartitionedPools(t *testing.T) {
 			require.NoError(t, net.Config.Codec.UnmarshalJSON(out.Bytes(), &resp))
 			require.LessOrEqual(t, len(resp.PartitionedPools), step)
 			require.Subset(t,
-            	nullify.Fill(objs),
-            	nullify.Fill(resp.PartitionedPools),
-            )
+				nullify.Fill(objs),
+				nullify.Fill(resp.PartitionedPools),
+			)
 			next = resp.Pagination.NextKey
 		}
 	})

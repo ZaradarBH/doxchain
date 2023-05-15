@@ -20,7 +20,7 @@ type (
 		paramstore paramtypes.Subspace
 
 		accountKeeper types.AccountKeeper
-		didKeeper types.DidKeeper
+		didKeeper     types.DidKeeper
 	}
 )
 
@@ -33,7 +33,7 @@ func NewKeeper(
 	memKey storetypes.StoreKey,
 	ps paramtypes.Subspace,
 
-	accountKeeper types.AccountKeeper,	
+	accountKeeper types.AccountKeeper,
 	didKeeper types.DidKeeper,
 ) *Keeper {
 	// set KeyTable if it has not already been set

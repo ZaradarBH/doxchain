@@ -32,7 +32,7 @@ func GetTxCmd() *cobra.Command {
 
 	cmd.AddCommand(CmdUpdateBreakFactor())
 	cmd.AddCommand(CmdCreatePartitionedPoolRegistry())
-// this line is used by starport scaffolding # 1
+	// this line is used by starport scaffolding # 1
 
 	return cmd
 }

@@ -36,7 +36,7 @@ func (k Keeper) SetDid(ctx sdk.Context, did types.Did) {
 	b := k.cdc.MustMarshal(&did)
 
 	store.Set(GetDidIDBytes(did.GetFullyQualifiedDidIdentifier()), b)
-	
+
 	k.SetDidCount(ctx, k.GetDidCount(ctx)+1)
 }
 

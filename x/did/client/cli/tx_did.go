@@ -28,7 +28,7 @@ func CmdCreateDid() *cobra.Command {
 				return err
 			}
 
-			msg := types.NewMsgCreateDid(did)
+			msg := types.NewMsgCreateDidRequest(did)
 			if err := msg.ValidateBasic(); err != nil {
 				return err
 			}
@@ -59,7 +59,7 @@ func CmdUpdateDid() *cobra.Command {
 				return err
 			}
 
-			msg := types.NewMsgUpdateDid(did)
+			msg := types.NewMsgUpdateDidRequest(did)
 			if err := msg.ValidateBasic(); err != nil {
 				return err
 			}
@@ -83,7 +83,7 @@ func CmdDeleteDid() *cobra.Command {
 				return err
 			}
 
-			msg := types.NewMsgDeleteDid(clientCtx.GetFromAddress().String(), args[0])
+			msg := types.NewMsgDeleteDidRequest(clientCtx.GetFromAddress().String(), args[0])
 			if err := msg.ValidateBasic(); err != nil {
 				return err
 			}

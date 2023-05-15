@@ -18,7 +18,7 @@ func NewMsgTokenRequest(creator string, tenant string, clientId string, clientSe
 		Scope:               scope,
 		GrantType:           grantType,
 		DeviceCode:          deviceCode,
-		AuthorizationCode:	 authorizationCode,
+		AuthorizationCode:   authorizationCode,
 		ClientAssertion:     clientAssertion,
 		ClientAssertionType: clientAssertionType,
 	}

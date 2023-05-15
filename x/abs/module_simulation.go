@@ -52,14 +52,14 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 	absGenesis := types.GenesisState{
 		Params: types.DefaultParams(),
 		PartitionedPoolRegistryList: []types.PartitionedPoolRegistry{
-		{
-			Creator: sample.AccAddress(),
-},
-		{
-			Creator: sample.AccAddress(),
-},
-	},
-	// this line is used by starport scaffolding # simapp/module/genesisState
+			{
+				Creator: sample.AccAddress(),
+			},
+			{
+				Creator: sample.AccAddress(),
+			},
+		},
+		// this line is used by starport scaffolding # simapp/module/genesisState
 	}
 	simState.GenState[types.ModuleName] = simState.Cdc.MustMarshalJSON(&absGenesis)
 }

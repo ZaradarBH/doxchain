@@ -1,12 +1,12 @@
 package cli
 
 import (
-    "context"
-	
-    "github.com/spf13/cobra"
+	"context"
+
+	"github.com/be-heroes/doxchain/x/abs/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
-    "github.com/be-heroes/doxchain/x/abs/types"
+	"github.com/spf13/cobra"
 )
 
 func CmdListPartitionedPoolRegistries() *cobra.Command {
@@ -14,30 +14,30 @@ func CmdListPartitionedPoolRegistries() *cobra.Command {
 		Use:   "list-partitioned-pool-registries",
 		Short: "list all partitionedPoolRegistries",
 		RunE: func(cmd *cobra.Command, args []string) error {
-            clientCtx := client.GetClientContextFromCmd(cmd)
-            pageReq, err := client.ReadPageRequest(cmd.Flags())
+			clientCtx := client.GetClientContextFromCmd(cmd)
+			pageReq, err := client.ReadPageRequest(cmd.Flags())
 
-            if err != nil {
-                return err
-            }
+			if err != nil {
+				return err
+			}
 
-            queryClient := types.NewQueryClient(clientCtx)
-            res, err := queryClient.PartitionedPoolRegistryAll(context.Background(), &types.QueryAllPartitionedPoolRegistriesRequest{
-                Pagination: pageReq,
-            })
-            
-            if err != nil {
-                return err
-            }
+			queryClient := types.NewQueryClient(clientCtx)
+			res, err := queryClient.PartitionedPoolRegistryAll(context.Background(), &types.QueryAllPartitionedPoolRegistriesRequest{
+				Pagination: pageReq,
+			})
 
-            return clientCtx.PrintProto(res)
+			if err != nil {
+				return err
+			}
+
+			return clientCtx.PrintProto(res)
 		},
 	}
 
 	flags.AddPaginationFlagsToCmd(cmd, cmd.Use)
 	flags.AddQueryFlagsToCmd(cmd)
 
-    return cmd
+	return cmd
 }
 
 func CmdShowPartitionedPoolRegistry() *cobra.Command {
@@ -46,21 +46,21 @@ func CmdShowPartitionedPoolRegistry() *cobra.Command {
 		Short: "shows a partitionedPoolRegistry",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
-            clientCtx := client.GetClientContextFromCmd(cmd)
-            queryClient := types.NewQueryClient(clientCtx)
-            res, err := queryClient.PartitionedPoolRegistry(context.Background(), &types.QueryGetPartitionedPoolRegistryRequest{
-                Creator: args[0],                
-            })
+			clientCtx := client.GetClientContextFromCmd(cmd)
+			queryClient := types.NewQueryClient(clientCtx)
+			res, err := queryClient.PartitionedPoolRegistry(context.Background(), &types.QueryGetPartitionedPoolRegistryRequest{
+				Creator: args[0],
+			})
 
-            if err != nil {
-                return err
-            }
+			if err != nil {
+				return err
+			}
 
-            return clientCtx.PrintProto(res)
+			return clientCtx.PrintProto(res)
 		},
 	}
 
 	flags.AddQueryFlagsToCmd(cmd)
 
-    return cmd
+	return cmd
 }

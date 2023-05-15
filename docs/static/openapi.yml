@@ -13,7 +13,7 @@ paths:
           schema:
             type: object
             properties:
-              partitionedPoolRegistries:
+              partitionedPoolRegistryList:
                 type: array
                 items:
                   type: object
@@ -44877,7 +44877,7 @@ definitions:
   beheroes.doxchain.abs.QueryAllPartitionedPoolRegistriesResponse:
     type: object
     properties:
-      partitionedPoolRegistries:
+      partitionedPoolRegistryList:
         type: array
         items:
           type: object
@@ -45553,12 +45553,533 @@ definitions:
         type: string
       value:
         type: string
+  beheroes.doxchain.did.DidDocument:
+    type: object
+    properties:
+      context:
+        type: array
+        items:
+          type: string
+      id:
+        type: object
+        properties:
+          creator:
+            type: string
+          url:
+            type: string
+          methodName:
+            type: string
+          methodId:
+            type: string
+          path:
+            type: string
+          fragment:
+            type: string
+          query:
+            type: string
+          parameters:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
+      controller:
+        type: object
+        properties:
+          creator:
+            type: string
+          url:
+            type: string
+          methodName:
+            type: string
+          methodId:
+            type: string
+          path:
+            type: string
+          fragment:
+            type: string
+          query:
+            type: string
+          parameters:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
+      alsoKnownAs:
+        type: array
+        items:
+          type: object
+          properties:
+            creator:
+              type: string
+            url:
+              type: string
+            methodName:
+              type: string
+            methodId:
+              type: string
+            path:
+              type: string
+            fragment:
+              type: string
+            query:
+              type: string
+            parameters:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  value:
+                    type: string
+      verificationMethod:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: object
+              properties:
+                creator:
+                  type: string
+                url:
+                  type: string
+                methodName:
+                  type: string
+                methodId:
+                  type: string
+                path:
+                  type: string
+                fragment:
+                  type: string
+                query:
+                  type: string
+                parameters:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      value:
+                        type: string
+            type:
+              type: string
+            controller:
+              type: object
+              properties:
+                creator:
+                  type: string
+                url:
+                  type: string
+                methodName:
+                  type: string
+                methodId:
+                  type: string
+                path:
+                  type: string
+                fragment:
+                  type: string
+                query:
+                  type: string
+                parameters:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      value:
+                        type: string
+            publicKeyJwk:
+              type: string
+            publicKeyMultibase:
+              type: string
+      authentication:
+        type: array
+        items:
+          type: object
+          properties:
+            verificationMethod:
+              type: object
+              properties:
+                id:
+                  type: object
+                  properties:
+                    creator:
+                      type: string
+                    url:
+                      type: string
+                    methodName:
+                      type: string
+                    methodId:
+                      type: string
+                    path:
+                      type: string
+                    fragment:
+                      type: string
+                    query:
+                      type: string
+                    parameters:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          value:
+                            type: string
+                type:
+                  type: string
+                controller:
+                  type: object
+                  properties:
+                    creator:
+                      type: string
+                    url:
+                      type: string
+                    methodName:
+                      type: string
+                    methodId:
+                      type: string
+                    path:
+                      type: string
+                    fragment:
+                      type: string
+                    query:
+                      type: string
+                    parameters:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          value:
+                            type: string
+                publicKeyJwk:
+                  type: string
+                publicKeyMultibase:
+                  type: string
+      assertionMethod:
+        type: array
+        items:
+          type: object
+          properties:
+            verificationMethod:
+              type: object
+              properties:
+                id:
+                  type: object
+                  properties:
+                    creator:
+                      type: string
+                    url:
+                      type: string
+                    methodName:
+                      type: string
+                    methodId:
+                      type: string
+                    path:
+                      type: string
+                    fragment:
+                      type: string
+                    query:
+                      type: string
+                    parameters:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          value:
+                            type: string
+                type:
+                  type: string
+                controller:
+                  type: object
+                  properties:
+                    creator:
+                      type: string
+                    url:
+                      type: string
+                    methodName:
+                      type: string
+                    methodId:
+                      type: string
+                    path:
+                      type: string
+                    fragment:
+                      type: string
+                    query:
+                      type: string
+                    parameters:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          value:
+                            type: string
+                publicKeyJwk:
+                  type: string
+                publicKeyMultibase:
+                  type: string
+      keyAgreement:
+        type: array
+        items:
+          type: object
+          properties:
+            verificationMethod:
+              type: object
+              properties:
+                id:
+                  type: object
+                  properties:
+                    creator:
+                      type: string
+                    url:
+                      type: string
+                    methodName:
+                      type: string
+                    methodId:
+                      type: string
+                    path:
+                      type: string
+                    fragment:
+                      type: string
+                    query:
+                      type: string
+                    parameters:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          value:
+                            type: string
+                type:
+                  type: string
+                controller:
+                  type: object
+                  properties:
+                    creator:
+                      type: string
+                    url:
+                      type: string
+                    methodName:
+                      type: string
+                    methodId:
+                      type: string
+                    path:
+                      type: string
+                    fragment:
+                      type: string
+                    query:
+                      type: string
+                    parameters:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          value:
+                            type: string
+                publicKeyJwk:
+                  type: string
+                publicKeyMultibase:
+                  type: string
+      capabilityInvocation:
+        type: array
+        items:
+          type: object
+          properties:
+            verificationMethod:
+              type: object
+              properties:
+                id:
+                  type: object
+                  properties:
+                    creator:
+                      type: string
+                    url:
+                      type: string
+                    methodName:
+                      type: string
+                    methodId:
+                      type: string
+                    path:
+                      type: string
+                    fragment:
+                      type: string
+                    query:
+                      type: string
+                    parameters:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          value:
+                            type: string
+                type:
+                  type: string
+                controller:
+                  type: object
+                  properties:
+                    creator:
+                      type: string
+                    url:
+                      type: string
+                    methodName:
+                      type: string
+                    methodId:
+                      type: string
+                    path:
+                      type: string
+                    fragment:
+                      type: string
+                    query:
+                      type: string
+                    parameters:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          value:
+                            type: string
+                publicKeyJwk:
+                  type: string
+                publicKeyMultibase:
+                  type: string
+      capabilityDelegation:
+        type: array
+        items:
+          type: object
+          properties:
+            verificationMethod:
+              type: object
+              properties:
+                id:
+                  type: object
+                  properties:
+                    creator:
+                      type: string
+                    url:
+                      type: string
+                    methodName:
+                      type: string
+                    methodId:
+                      type: string
+                    path:
+                      type: string
+                    fragment:
+                      type: string
+                    query:
+                      type: string
+                    parameters:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          value:
+                            type: string
+                type:
+                  type: string
+                controller:
+                  type: object
+                  properties:
+                    creator:
+                      type: string
+                    url:
+                      type: string
+                    methodName:
+                      type: string
+                    methodId:
+                      type: string
+                    path:
+                      type: string
+                    fragment:
+                      type: string
+                    query:
+                      type: string
+                    parameters:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          value:
+                            type: string
+                publicKeyJwk:
+                  type: string
+                publicKeyMultibase:
+                  type: string
+      service:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: object
+              properties:
+                creator:
+                  type: string
+                url:
+                  type: string
+                methodName:
+                  type: string
+                methodId:
+                  type: string
+                path:
+                  type: string
+                fragment:
+                  type: string
+                query:
+                  type: string
+                parameters:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      value:
+                        type: string
+            type:
+              type: string
+            serviceEndpoint:
+              type: string
+  beheroes.doxchain.did.MsgCreateDidDocumentResponse:
+    type: object
   beheroes.doxchain.did.MsgCreateDidResponse:
     type: object
     properties:
       fullyQualifiedDidIdentifier:
         type: string
+  beheroes.doxchain.did.MsgDeleteDidDocumentResponse:
+    type: object
   beheroes.doxchain.did.MsgDeleteDidResponse:
+    type: object
+  beheroes.doxchain.did.MsgUpdateDidDocumentResponse:
     type: object
   beheroes.doxchain.did.MsgUpdateDidResponse:
     type: object
@@ -45658,6 +46179,164 @@ definitions:
         description: params holds all the parameters of this module.
         type: object
     description: QueryParamsResponse is response type for the Query/Params RPC method.
+  beheroes.doxchain.did.Service:
+    type: object
+    properties:
+      id:
+        type: object
+        properties:
+          creator:
+            type: string
+          url:
+            type: string
+          methodName:
+            type: string
+          methodId:
+            type: string
+          path:
+            type: string
+          fragment:
+            type: string
+          query:
+            type: string
+          parameters:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
+      type:
+        type: string
+      serviceEndpoint:
+        type: string
+  beheroes.doxchain.did.VerificationMethod:
+    type: object
+    properties:
+      id:
+        type: object
+        properties:
+          creator:
+            type: string
+          url:
+            type: string
+          methodName:
+            type: string
+          methodId:
+            type: string
+          path:
+            type: string
+          fragment:
+            type: string
+          query:
+            type: string
+          parameters:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
+      type:
+        type: string
+      controller:
+        type: object
+        properties:
+          creator:
+            type: string
+          url:
+            type: string
+          methodName:
+            type: string
+          methodId:
+            type: string
+          path:
+            type: string
+          fragment:
+            type: string
+          query:
+            type: string
+          parameters:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
+      publicKeyJwk:
+        type: string
+      publicKeyMultibase:
+        type: string
+  beheroes.doxchain.did.VerificationRelationship:
+    type: object
+    properties:
+      verificationMethod:
+        type: object
+        properties:
+          id:
+            type: object
+            properties:
+              creator:
+                type: string
+              url:
+                type: string
+              methodName:
+                type: string
+              methodId:
+                type: string
+              path:
+                type: string
+              fragment:
+                type: string
+              query:
+                type: string
+              parameters:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    value:
+                      type: string
+          type:
+            type: string
+          controller:
+            type: object
+            properties:
+              creator:
+                type: string
+              url:
+                type: string
+              methodName:
+                type: string
+              methodId:
+                type: string
+              path:
+                type: string
+              fragment:
+                type: string
+              query:
+                type: string
+              parameters:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    value:
+                      type: string
+          publicKeyJwk:
+            type: string
+          publicKeyMultibase:
+            type: string
   beheroes.doxchain.idp.MsgAuthenticationResponse:
     type: object
     properties:

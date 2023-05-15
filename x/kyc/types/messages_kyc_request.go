@@ -1,9 +1,9 @@
 package types
 
 import (
+	didTypes "github.com/be-heroes/doxchain/x/did/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	didTypes "github.com/be-heroes/doxchain/x/did/types"
 )
 
 const (
@@ -15,8 +15,8 @@ var _ sdk.Msg = &MsgCreateKYCRequest{}
 
 func NewMsgCreateKYCRequest(creator string, did didTypes.Did) *MsgCreateKYCRequest {
 	return &MsgCreateKYCRequest{
-		Creator:   creator,
-		Did: did,		
+		Creator: creator,
+		Did:     did,
 	}
 }
 

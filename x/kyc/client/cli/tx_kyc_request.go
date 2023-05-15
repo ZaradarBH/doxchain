@@ -1,12 +1,12 @@
 package cli
 
 import (
+	utils "github.com/be-heroes/doxchain/utils/did"
 	"github.com/be-heroes/doxchain/x/kyc/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/client/tx"
 	"github.com/spf13/cobra"
-	utils "github.com/be-heroes/doxchain/utils/did"
 )
 
 func CmdCreateKYCRequest() *cobra.Command {
@@ -24,7 +24,7 @@ func CmdCreateKYCRequest() *cobra.Command {
 			creator := clientCtx.GetFromAddress().String()
 			did := utils.NewDidTokenFactory().Create(creator, args[0])
 			msg := types.NewMsgCreateKYCRequest(creator, *did)
-			
+
 			if err := msg.ValidateBasic(); err != nil {
 				return err
 			}
@@ -55,7 +55,7 @@ func CmdDeleteKYCRequest() *cobra.Command {
 			if err := msg.ValidateBasic(); err != nil {
 				return err
 			}
-			
+
 			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msg)
 		},
 	}

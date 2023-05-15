@@ -1,34 +1,37 @@
 package cli
 
 import (
-	"github.com/be-heroes/doxchain/x/abs/types"
+	"strconv"
+
+	"github.com/be-heroes/doxchain/x/did/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/client/tx"
 	"github.com/spf13/cobra"
 )
 
-func CmdCreatePartitionedPoolRegistry() *cobra.Command {
-	cmd := &cobra.Command{
-		Use:   "create-partitioned-pool-registry [denom]",
-		Short: "Create a new partitionedPoolRegistry",
-		Args:  cobra.ExactArgs(1),
-		RunE: func(cmd *cobra.Command, args []string) (err error) {
-			clientCtx, err := client.GetClientTxContext(cmd)
+var _ = strconv.Itoa(0)
 
+func CmdCreateDidDocument() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "did-document",
+		Short: "Broadcast message DidDocument",
+		Args:  cobra.ExactArgs(0),
+		RunE: func(cmd *cobra.Command, args []string) (err error) {
+
+			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
 				return err
 			}
 
-			msg := types.NewMsgCreatePartitionedPoolRegistryRequest(
+			//TODO: Map diddocument args
+			msg := types.NewMsgCreateDidDocumentRequest(
 				clientCtx.GetFromAddress().String(),
-				args[0],
+				types.DidDocument{},
 			)
-
 			if err := msg.ValidateBasic(); err != nil {
 				return err
 			}
-
 			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msg)
 		},
 	}

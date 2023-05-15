@@ -22,8 +22,8 @@ func (k msgServer) CreateKYCRequest(goCtx context.Context, msg *types.MsgCreateK
 	}
 
 	var kYCRequest = types.KYCRequest{
-		Did:   &msg.Did,
-		Approved:  false,
+		Did:      &msg.Did,
+		Approved: false,
 	}
 
 	k.SetKYCRequest(

@@ -1,9 +1,9 @@
 package types
 
 import (
+	didTypes "github.com/be-heroes/doxchain/x/did/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	didTypes "github.com/be-heroes/doxchain/x/did/types"
 )
 
 const (
@@ -15,8 +15,8 @@ var _ sdk.Msg = &MsgCreateAMLRequest{}
 
 func NewMsgCreateAMLRequest(creator string, did didTypes.Did) *MsgCreateAMLRequest {
 	return &MsgCreateAMLRequest{
-		Creator:   creator,
-		Did: did,
+		Creator: creator,
+		Did:     did,
 	}
 }
 

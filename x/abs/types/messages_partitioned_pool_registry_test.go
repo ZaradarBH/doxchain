@@ -3,9 +3,9 @@ package types
 import (
 	"testing"
 
+	"github.com/be-heroes/doxchain/testutil/sample"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/stretchr/testify/require"
-	"github.com/be-heroes/doxchain/testutil/sample"
 )
 
 func TestMsgCreatePartitionedPools_ValidateBasic(t *testing.T) {

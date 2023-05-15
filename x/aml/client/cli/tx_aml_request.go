@@ -1,12 +1,12 @@
 package cli
 
 import (
+	utils "github.com/be-heroes/doxchain/utils/did"
 	"github.com/be-heroes/doxchain/x/aml/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/client/tx"
 	"github.com/spf13/cobra"
-	utils "github.com/be-heroes/doxchain/utils/did"
 )
 
 func CmdCreateAMLRequest() *cobra.Command {

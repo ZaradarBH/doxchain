@@ -1,16 +1,16 @@
 package keeper_test
 
 import (
-    "strconv"
+	"strconv"
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/stretchr/testify/require"
 
-    keepertest "github.com/be-heroes/doxchain/testutil/keeper"
-    "github.com/be-heroes/doxchain/x/abs/keeper"
-    "github.com/be-heroes/doxchain/x/abs/types"
+	keepertest "github.com/be-heroes/doxchain/testutil/keeper"
+	"github.com/be-heroes/doxchain/x/abs/keeper"
+	"github.com/be-heroes/doxchain/x/abs/types"
 )
 
 // Prevent strconv unused error
@@ -23,14 +23,12 @@ func TestPartitionedPoolsMsgServerCreate(t *testing.T) {
 	creator := "A"
 	for i := 0; i < 5; i++ {
 		expected := &types.MsgCreatePartitionedPools{Creator: creator,
-		    Index: strconv.Itoa(i),
-            
+			Index: strconv.Itoa(i),
 		}
 		_, err := srv.CreatePartitionedPools(wctx, expected)
 		require.NoError(t, err)
 		rst, found := k.GetPartitionedPools(ctx,
-		    expected.Index,
-            
+			expected.Index,
 		)
 		require.True(t, found)
 		require.Equal(t, expected.Creator, rst.Creator)
@@ -46,27 +44,24 @@ func TestPartitionedPoolsMsgServerUpdate(t *testing.T) {
 		err     error
 	}{
 		{
-			desc:    "Completed",
+			desc: "Completed",
 			request: &types.MsgUpdatePartitionedPools{Creator: creator,
-			    Index: strconv.Itoa(0),
-                
+				Index: strconv.Itoa(0),
 			},
 		},
 		{
-			desc:    "Unauthorized",
+			desc: "Unauthorized",
 			request: &types.MsgUpdatePartitionedPools{Creator: "B",
-			    Index: strconv.Itoa(0),
-                
+				Index: strconv.Itoa(0),
 			},
-			err:     sdkerrors.ErrUnauthorized,
+			err: sdkerrors.ErrUnauthorized,
 		},
 		{
-			desc:    "KeyNotFound",
+			desc: "KeyNotFound",
 			request: &types.MsgUpdatePartitionedPools{Creator: creator,
-			    Index: strconv.Itoa(100000),
-                
+				Index: strconv.Itoa(100000),
 			},
-			err:     sdkerrors.ErrKeyNotFound,
+			err: sdkerrors.ErrKeyNotFound,
 		},
 	} {
 		t.Run(tc.desc, func(t *testing.T) {
@@ -74,8 +69,7 @@ func TestPartitionedPoolsMsgServerUpdate(t *testing.T) {
 			srv := keeper.NewMsgServerImpl(*k)
 			wctx := sdk.WrapSDKContext(ctx)
 			expected := &types.MsgCreatePartitionedPools{Creator: creator,
-			    Index: strconv.Itoa(0),
-                
+				Index: strconv.Itoa(0),
 			}
 			_, err := srv.CreatePartitionedPools(wctx, expected)
 			require.NoError(t, err)
@@ -86,8 +80,7 @@ func TestPartitionedPoolsMsgServerUpdate(t *testing.T) {
 			} else {
 				require.NoError(t, err)
 				rst, found := k.GetPartitionedPools(ctx,
-				    expected.Index,
-                    
+					expected.Index,
 				)
 				require.True(t, found)
 				require.Equal(t, expected.Creator, rst.Creator)
@@ -105,27 +98,24 @@ func TestPartitionedPoolsMsgServerDelete(t *testing.T) {
 		err     error
 	}{
 		{
-			desc:    "Completed",
+			desc: "Completed",
 			request: &types.MsgDeletePartitionedPools{Creator: creator,
-			    Index: strconv.Itoa(0),
-                
+				Index: strconv.Itoa(0),
 			},
 		},
 		{
-			desc:    "Unauthorized",
+			desc: "Unauthorized",
 			request: &types.MsgDeletePartitionedPools{Creator: "B",
-			    Index: strconv.Itoa(0),
-                
+				Index: strconv.Itoa(0),
 			},
-			err:     sdkerrors.ErrUnauthorized,
+			err: sdkerrors.ErrUnauthorized,
 		},
 		{
-			desc:    "KeyNotFound",
+			desc: "KeyNotFound",
 			request: &types.MsgDeletePartitionedPools{Creator: creator,
-			    Index: strconv.Itoa(100000),
-                
+				Index: strconv.Itoa(100000),
 			},
-			err:     sdkerrors.ErrKeyNotFound,
+			err: sdkerrors.ErrKeyNotFound,
 		},
 	} {
 		t.Run(tc.desc, func(t *testing.T) {
@@ -134,8 +124,7 @@ func TestPartitionedPoolsMsgServerDelete(t *testing.T) {
 			wctx := sdk.WrapSDKContext(ctx)
 
 			_, err := srv.CreatePartitionedPools(wctx, &types.MsgCreatePartitionedPools{Creator: creator,
-			    Index: strconv.Itoa(0),
-                
+				Index: strconv.Itoa(0),
 			})
 			require.NoError(t, err)
 			_, err = srv.DeletePartitionedPools(wctx, tc.request)
@@ -144,8 +133,7 @@ func TestPartitionedPoolsMsgServerDelete(t *testing.T) {
 			} else {
 				require.NoError(t, err)
 				_, found := k.GetPartitionedPools(ctx,
-				    tc.request.Index,
-                    
+					tc.request.Index,
 				)
 				require.False(t, found)
 			}

@@ -41,7 +41,7 @@ func (k Keeper) AppendKYCRequest(
 	count := k.GetKYCRequestCount(ctx)
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.KYCRequestKey))
 	appendedValue := k.cdc.MustMarshal(&request)
-	
+
 	store.Set(GetKYCRequestIDBytes(request.Did.Creator), appendedValue)
 
 	// Update KYCRequest count

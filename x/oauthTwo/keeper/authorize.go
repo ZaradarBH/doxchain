@@ -19,7 +19,7 @@ func (k Keeper) Authorize(ctx sdk.Context, msg types.MsgAuthorizeRequest) (types
 	}
 
 	response.AuthorizationCode, _ = utils.GenerateRandomString(32)
-	
+
 	tenantAuthorizationCodeRegistry, found := k.GetAuthorizationCodeRegistry(ctx, msg.Tenant)
 
 	if !found {
