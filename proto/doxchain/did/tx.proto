@@ -41,14 +41,14 @@ message MsgDeleteDidResponse {}
 
 message MsgCreateDidDocumentRequest {
   string creator = 1;
-  DidDocument document = 2 [(gogoproto.nullable) = false];
+  DidDocument didDocument = 2 [(gogoproto.nullable) = false];
 }
 
 message MsgCreateDidDocumentResponse {}
 
 message MsgUpdateDidDocumentRequest {
   string creator = 1;
-  DidDocument document = 2 [(gogoproto.nullable) = false];
+  DidDocument didDocument = 2 [(gogoproto.nullable) = false];
 }
 
 message MsgUpdateDidDocumentResponse {}

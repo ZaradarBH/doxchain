@@ -12,7 +12,7 @@ import (
 
 func CmdCreateDid() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "create-did [didjson]",
+		Use:   "create-did [did-json]",
 		Short: "Create a new did",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
@@ -29,9 +29,11 @@ func CmdCreateDid() *cobra.Command {
 			}
 
 			msg := types.NewMsgCreateDidRequest(did)
+
 			if err := msg.ValidateBasic(); err != nil {
 				return err
 			}
+
 			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msg)
 		},
 	}
@@ -43,11 +45,12 @@ func CmdCreateDid() *cobra.Command {
 
 func CmdUpdateDid() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "update-did [didjson]",
+		Use:   "update-did [did-json]",
 		Short: "Update a did",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 			clientCtx, err := client.GetClientTxContext(cmd)
+
 			if err != nil {
 				return err
 			}
@@ -60,9 +63,11 @@ func CmdUpdateDid() *cobra.Command {
 			}
 
 			msg := types.NewMsgUpdateDidRequest(did)
+
 			if err := msg.ValidateBasic(); err != nil {
 				return err
 			}
+
 			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msg)
 		},
 	}
@@ -79,14 +84,17 @@ func CmdDeleteDid() *cobra.Command {
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientTxContext(cmd)
+
 			if err != nil {
 				return err
 			}
 
 			msg := types.NewMsgDeleteDidRequest(clientCtx.GetFromAddress().String(), args[0])
+			
 			if err := msg.ValidateBasic(); err != nil {
 				return err
 			}
+
 			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msg)
 		},
 	}

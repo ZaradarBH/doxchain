@@ -11,10 +11,10 @@ const TypeMsgDeleteDidDocumentRequest = "delete_did_document"
 
 var _ sdk.Msg = &MsgCreateDidDocumentRequest{}
 
-func NewMsgCreateDidDocumentRequest(creator string, document DidDocument) *MsgCreateDidDocumentRequest {
+func NewMsgCreateDidDocumentRequest(creator string, didDocument DidDocument) *MsgCreateDidDocumentRequest {
 	return &MsgCreateDidDocumentRequest{
 		Creator: creator,
-		Document: document,
+		DidDocument: didDocument,
 	}
 }
 
@@ -49,10 +49,10 @@ func (msg *MsgCreateDidDocumentRequest) ValidateBasic() error {
 
 var _ sdk.Msg = &MsgUpdateDidDocumentRequest{}
 
-func NewMsgUpdateDidDocumentRequest(creator string, document DidDocument) *MsgUpdateDidDocumentRequest {
+func NewMsgUpdateDidDocumentRequest(creator string, didDocument DidDocument) *MsgUpdateDidDocumentRequest {
 	return &MsgUpdateDidDocumentRequest{
 		Creator: creator,
-		Document: document,
+		DidDocument: didDocument,
 	}
 }
 

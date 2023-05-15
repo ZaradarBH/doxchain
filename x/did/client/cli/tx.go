@@ -34,6 +34,7 @@ func GetTxCmd() *cobra.Command {
 	cmd.AddCommand(CmdUpdateDid())
 	cmd.AddCommand(CmdDeleteDid())
 	cmd.AddCommand(CmdCreateDidDocument())
+	//TODO: Implement Update & Delete commands
 	// this line is used by starport scaffolding # 1
 
 	return cmd
