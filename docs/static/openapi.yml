@@ -784,9 +784,6 @@ paths:
                               type: string
                   approved:
                     type: boolean
-                    title: >-
-                      TODO: Add additional message fields after talking with the
-                      regulation experts
         default:
           description: An unexpected error response.
           schema:
@@ -45738,9 +45735,6 @@ definitions:
                   type: string
       approved:
         type: boolean
-        title: >-
-          TODO: Add additional message fields after talking with the regulation
-          experts
   beheroes.doxchain.kyc.MsgCreateKYCRequestResponse:
     type: object
   beheroes.doxchain.kyc.MsgDeleteKYCRequestResponse:
@@ -45782,9 +45776,6 @@ definitions:
                       type: string
           approved:
             type: boolean
-            title: >-
-              TODO: Add additional message fields after talking with the
-              regulation experts
   beheroes.doxchain.kyc.QueryParamsResponse:
     type: object
     properties:
