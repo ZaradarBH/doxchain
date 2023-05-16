@@ -47536,9 +47536,15 @@ definitions:
     properties:
       token:
         type: string
+  beheroes.doxchain.idp.MsgCreateClientRegistrationResponse:
+    type: object
   beheroes.doxchain.idp.MsgCreateClientRegistryResponse:
     type: object
+  beheroes.doxchain.idp.MsgDeleteClientRegistrationResponse:
+    type: object
   beheroes.doxchain.idp.MsgDeleteClientRegistryResponse:
+    type: object
+  beheroes.doxchain.idp.MsgUpdateClientRegistrationResponse:
     type: object
   beheroes.doxchain.idp.MsgUpdateClientRegistryResponse:
     type: object

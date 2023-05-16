@@ -21,19 +21,19 @@ func (k Keeper) GetDotWellKnown(goCtx context.Context, req *types.QueryGetDotWel
 	}
 
 	response := &types.QueryGetDotWellKnownResponse{
-		Issuer: configuration.Issuer,
-		AuthorizationEndpoint: configuration.AuthorizationEndpoint,
-		TokenEndpoint: configuration.TokenEndpoint,
-		TokenEndpointAuthMethodsSupported: configuration.TokenEndpointAuthMethodsSupported,
+		Issuer:                                 configuration.Issuer,
+		AuthorizationEndpoint:                  configuration.AuthorizationEndpoint,
+		TokenEndpoint:                          configuration.TokenEndpoint,
+		TokenEndpointAuthMethodsSupported:      configuration.TokenEndpointAuthMethodsSupported,
 		TokenEndpointAuthSigningAlgosSupported: configuration.TokenEndpointAuthSigningAlgosSupported,
-		UserInfoEndpoint: configuration.UserInfoEndpoint,
-		JwksUri: configuration.JwksUri,
-		RegistrationEndpoint: configuration.RegistrationEndpoint,
-		ScopesSupported: configuration.ScopesSupported,
-		ResponseTypesSupported: configuration.ResponseTypesSupported,
-		ServiceDocumentation: configuration.ServiceDocumentation,
-		UiLocalesSupported: configuration.UiLocalesSupported,
+		UserInfoEndpoint:                       configuration.UserInfoEndpoint,
+		JwksUri:                                configuration.JwksUri,
+		RegistrationEndpoint:                   configuration.RegistrationEndpoint,
+		ScopesSupported:                        configuration.ScopesSupported,
+		ResponseTypesSupported:                 configuration.ResponseTypesSupported,
+		ServiceDocumentation:                   configuration.ServiceDocumentation,
+		UiLocalesSupported:                     configuration.UiLocalesSupported,
 	}
-	
+
 	return response, nil
 }

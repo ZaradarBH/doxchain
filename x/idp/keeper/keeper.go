@@ -25,7 +25,6 @@ type (
 	}
 )
 
-//TODO: Finish ClientRegistration concept
 //TODO: Implement ClientRegistrationGraph concept to infer audience relationships
 func NewKeeper(
 	cdc codec.BinaryCodec,

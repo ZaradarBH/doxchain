@@ -3,18 +3,21 @@ syntax = "proto3";
 package beheroes.doxchain.idp;
 
 import "gogoproto/gogo.proto";
+import "doxchain/idp/client_registration.proto";
 import "doxchain/idp/client_registry.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/idp/types";
 
 // Msg defines the Msg service.
 service Msg {
-  rpc Login                (MsgAuthenticationRequest) returns (MsgAuthenticationResponse           );
-  rpc CreateClientRegistry (MsgCreateClientRegistry) returns (MsgCreateClientRegistryResponse);
-  rpc UpdateClientRegistry (MsgUpdateClientRegistry) returns (MsgUpdateClientRegistryResponse);
-  rpc DeleteClientRegistry (MsgDeleteClientRegistry) returns (MsgDeleteClientRegistryResponse);
+  rpc Login                    (MsgAuthenticationRequest   ) returns (MsgAuthenticationResponse          );
+  rpc CreateClientRegistry     (MsgCreateClientRegistry    ) returns (MsgCreateClientRegistryResponse    );
+  rpc UpdateClientRegistry     (MsgUpdateClientRegistry    ) returns (MsgUpdateClientRegistryResponse    );
+  rpc DeleteClientRegistry     (MsgDeleteClientRegistry    ) returns (MsgDeleteClientRegistryResponse    );
+  rpc CreateClientRegistration (MsgCreateClientRegistration) returns (MsgCreateClientRegistrationResponse);
+  rpc UpdateClientRegistration (MsgUpdateClientRegistration) returns (MsgUpdateClientRegistrationResponse);
+  rpc DeleteClientRegistration (MsgDeleteClientRegistration) returns (MsgDeleteClientRegistrationResponse);
 }
-
 message MsgAuthenticationRequest {
   string creator = 1;
   string tenant  = 2;
@@ -41,4 +44,23 @@ message MsgDeleteClientRegistry {
 }
 
 message MsgDeleteClientRegistryResponse {}
+
+message MsgCreateClientRegistration {
+  ClientRegistration clientRegistration = 2;
+}
+
+message MsgCreateClientRegistrationResponse {}
+
+message MsgUpdateClientRegistration {
+  ClientRegistration clientRegistration = 2;
+}
+
+message MsgUpdateClientRegistrationResponse {}
+
+message MsgDeleteClientRegistration {
+  string creator = 1;
+  string name = 2;
+}
+
+message MsgDeleteClientRegistrationResponse {}
 

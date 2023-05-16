@@ -18,11 +18,16 @@ func (k Keeper) DeviceCode(ctx sdk.Context, msg types.MsgDeviceCodeRequest) (typ
 		return response, err
 	}
 
+	tenantConfiguration, err := k.idpKeeper.GetTenantConfiguration(ctx, msg.Tenant)
+
+	if err != nil {
+		return response, err
+	}
+
 	//TODO: Validate ClientId and Scope
-	//TODO: Implement support for verification uri in tenant
 	response.DeviceCode, _ = utils.GenerateRandomString(32)
 	response.UserCode, _ = utils.GenerateRandomString(8)
-	response.VerificationUri = "http://tenant_verification_uri/"
+	response.VerificationUri = tenantConfiguration.AuthorizationEndpoint
 
 	tenantDeviceCodeRegistry, found := k.GetDeviceCodeRegistry(ctx, msg.Tenant)
 

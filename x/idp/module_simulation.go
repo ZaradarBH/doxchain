@@ -40,6 +40,18 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgDeleteClientRegistry int = 100
 
+	opWeightMsgCreateClientRegistration = "op_weight_msg_create_client_registration"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgCreateClientRegistration int = 100
+
+	opWeightMsgUpdateClientRegistration = "op_weight_msg_update_client_registration"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgUpdateClientRegistration int = 100
+
+	opWeightMsgDeleteClientRegistration = "op_weight_msg_delete_client_registration"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgDeleteClientRegistration int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -88,6 +100,39 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 			weightMsgAuthenticationRequest = defaultWeightMsgAuthenticationRequest
 		},
 	)
+
+	var weightMsgCreateClientRegistration int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgCreateClientRegistration, &weightMsgCreateClientRegistration, nil,
+		func(_ *rand.Rand) {
+			weightMsgCreateClientRegistration = defaultWeightMsgCreateClientRegistration
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgCreateClientRegistration,
+		idpsimulation.SimulateMsgCreateClientRegistration(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgUpdateClientRegistration int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgUpdateClientRegistration, &weightMsgUpdateClientRegistration, nil,
+		func(_ *rand.Rand) {
+			weightMsgUpdateClientRegistration = defaultWeightMsgUpdateClientRegistration
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgUpdateClientRegistration,
+		idpsimulation.SimulateMsgUpdateClientRegistration(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgDeleteClientRegistration int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgDeleteClientRegistration, &weightMsgDeleteClientRegistration, nil,
+		func(_ *rand.Rand) {
+			weightMsgDeleteClientRegistration = defaultWeightMsgDeleteClientRegistration
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgDeleteClientRegistration,
+		idpsimulation.SimulateMsgDeleteClientRegistration(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
 
 	// this line is used by starport scaffolding # simapp/module/operation
 

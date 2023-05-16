@@ -99,7 +99,7 @@ func (k Keeper) GetTenantConfiguration(ctx sdk.Context, identifier string) (conf
 		return configuration, err
 	}
 
-	configuration = tenant.TenantConfiguration;
+	configuration = tenant.TenantConfiguration
 
 	return configuration, nil
 }

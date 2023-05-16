@@ -55,7 +55,7 @@ func CmdShowClientRegistry() *cobra.Command {
 			}
 
 			res, err := queryClient.ClientRegistry(context.Background(), params)
-			
+
 			if err != nil {
 				return err
 			}

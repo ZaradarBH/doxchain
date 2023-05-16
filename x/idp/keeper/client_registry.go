@@ -61,3 +61,32 @@ func (k Keeper) GetAllClientRegistry(ctx sdk.Context) (list []types.ClientRegist
 
 	return
 }
+
+func (k Keeper) SetClientRegistration(ctx sdk.Context, clientRegistration types.ClientRegistration) {
+	clientRegistry, _ := k.GetClientRegistry(ctx, clientRegistration.Id.Creator)
+
+	for index, existingClientRegistration := range clientRegistry.Registrations { 
+		if existingClientRegistration.Id.GetFullyQualifiedDidIdentifier() == clientRegistration.Id.GetFullyQualifiedDidIdentifier() {
+			clientRegistry.Registrations = append(clientRegistry.Registrations[:index], clientRegistry.Registrations[index+1:]...)
+
+			break;
+		}
+	}
+	
+	clientRegistry.Registrations = append(clientRegistry.Registrations, &clientRegistration)
+
+	k.SetClientRegistry(ctx, clientRegistry)
+}
+
+func (k Keeper) RemoveClientRegistration(ctx sdk.Context, creator string, name string) {
+	clientRegistry, _ := k.GetClientRegistry(ctx, creator)
+
+	for index, existingClientRegistration := range clientRegistry.Registrations { 
+		if existingClientRegistration.Name == name {
+			clientRegistry.Registrations = append(clientRegistry.Registrations[:index], clientRegistry.Registrations[index+1:]...)
+
+			k.SetClientRegistry(ctx, clientRegistry)
+			break;
+		}
+	}
+}
