@@ -24,7 +24,7 @@ func (k Keeper) AddToWatchlist(ctx sdk.Context, addr sdk.AccAddress, coins sdk.C
 	watchlistEntry.Coins = watchlistEntry.Coins.Add(coins...)
 
 	for _, watchlistEntryCoinPtr := range watchlistEntry.Coins {
-		//TODO: Implement TRA (throttled rolling average) logic
+		//TODO: Finish TRA (throttled rolling average) concept
 		throttledRollingAverage := sdk.ZeroInt()
 
 		if throttledRollingAverage.GT(watchlistEntryCoinPtr.Amount) {

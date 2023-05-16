@@ -36,9 +36,10 @@ func (k Keeper) DeviceCode(ctx sdk.Context, msg types.MsgDeviceCodeRequest) (typ
 	}
 
 	deviceCodeEntry := types.DeviceCodeEntry{
-		Creator:    msg.Creator,
+		Creator: msg.Creator,
 		DeviceCode: response.DeviceCode,
-		ExpiresAt:  ctx.BlockTime().Add(time.Minute * 15).Unix(),
+		UserCode: response.UserCode,
+		ExpiresAt: ctx.BlockTime().Add(time.Minute * 15).Unix(),
 	}
 
 	tenantDeviceCodeRegistry.Codes = append(tenantDeviceCodeRegistry.Codes, deviceCodeEntry)

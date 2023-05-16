@@ -13,5 +13,6 @@ message DeviceCodeRegistry {
 message DeviceCodeEntry {
   string creator = 1;
   string deviceCode = 2; 
-  int64 expiresAt = 3;
+  string userCode = 3; 
+  int64 expiresAt = 4;
 }
