@@ -11,23 +11,23 @@ import (
 
 func CmdListClientRegistry() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "list-client-registrations",
+		Use:   "list-client-registries",
 		Short: "list all ClientRegistry",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx := client.GetClientContextFromCmd(cmd)
-
 			pageReq, err := client.ReadPageRequest(cmd.Flags())
+
 			if err != nil {
 				return err
 			}
 
 			queryClient := types.NewQueryClient(clientCtx)
-
 			params := &types.QueryAllClientRegistryRequest{
 				Pagination: pageReq,
 			}
 
 			res, err := queryClient.ClientRegistryAll(context.Background(), params)
+
 			if err != nil {
 				return err
 			}

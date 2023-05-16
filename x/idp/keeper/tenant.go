@@ -11,10 +11,8 @@ import (
 // SetTenantRegistry set a specific TenantRegistry in the store based on its tenant
 func (k Keeper) SetTenantRegistry(ctx sdk.Context, TenantRegistry types.TenantRegistry) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.TenantRegistryKeyPrefix))
-	b := k.cdc.MustMarshal(&TenantRegistry)
-	store.Set(types.TenantRegistryKey(
-		TenantRegistry.Creator,
-	), b)
+
+	store.Set(types.TenantRegistryKey(TenantRegistry.Creator), k.cdc.MustMarshal(&TenantRegistry))
 }
 
 // GetTenantRegistry returns a TenantRegistry from its creator
@@ -24,9 +22,7 @@ func (k Keeper) GetTenantRegistry(
 ) (val types.TenantRegistry, found bool) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.TenantRegistryKeyPrefix))
 
-	b := store.Get(types.TenantRegistryKey(
-		creator,
-	))
+	b := store.Get(types.TenantRegistryKey(creator))
 
 	if b == nil {
 		return val, false
@@ -44,9 +40,7 @@ func (k Keeper) RemoveTenantRegistry(
 ) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.TenantRegistryKeyPrefix))
 
-	store.Delete(types.TenantRegistryKey(
-		creator,
-	))
+	store.Delete(types.TenantRegistryKey(creator))
 }
 
 // GetAllTenantRegistry returns all TenantRegistry
@@ -92,8 +86,20 @@ func (k Keeper) GetAccessClientList(ctx sdk.Context, tenantIdentifier string) (a
 	tenant, err := k.GetTenant(ctx, tenantIdentifier)
 
 	if err != nil {
-		return types.AccessClientList{}, err
+		return acl, err
 	}
 
 	return tenant.AccessClientList, nil
+}
+
+func (k Keeper) GetTenantConfiguration(ctx sdk.Context, identifier string) (configuration types.TenantConfiguration, err error) {
+	tenant, err := k.GetTenant(ctx, identifier)
+
+	if err != nil {
+		return configuration, err
+	}
+
+	configuration = tenant.TenantConfiguration;
+
+	return configuration, nil
 }

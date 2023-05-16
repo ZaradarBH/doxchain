@@ -15,21 +15,19 @@ service Query {
   
   // Parameters queries the parameters of the module.
   rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
-    option (google.api.http).get = "/be-heroes/doxchain/idp/params";
-  
+    option (google.api.http).get = "/be-heroes/doxchain/idp/params";  
   }
   
   // Queries a list of GetDotWellKnown items.
   rpc GetDotWellKnown (QueryGetDotWellKnownRequest) returns (QueryGetDotWellKnownResponse) {
-    option (google.api.http).get = "/be-heroes/doxchain/idp/get_dot_well_known";
-  
+    option (google.api.http).get = "/be-heroes/doxchain/idp/{tenant}/.well-known";  
   }
   
   // Queries a list of ClientRegistry items.
-  rpc ClientRegistry    (QueryGetClientRegistryRequest) returns (QueryGetClientRegistryResponse) {
+  rpc ClientRegistry (QueryGetClientRegistryRequest) returns (QueryGetClientRegistryResponse) {
     option (google.api.http).get = "/be-heroes/doxchain/idp/client_registry/{creator}";
-  
   }
+
   rpc ClientRegistryAll (QueryAllClientRegistryRequest) returns (QueryAllClientRegistryResponse) {
     option (google.api.http).get = "/be-heroes/doxchain/idp/client_registry";  
   }
@@ -43,7 +41,9 @@ message QueryParamsResponse {
   Params params = 1 [(gogoproto.nullable) = false];
 }
 
-message QueryGetDotWellKnownRequest {}
+message QueryGetDotWellKnownRequest {
+  string tenant = 1;
+}
 
 message QueryGetDotWellKnownResponse {
            string issuer                                 =  1 [json_name = "issuer"                                          ];
