@@ -44,7 +44,7 @@ func (k Keeper) AddToWatchlist(ctx sdk.Context, addr sdk.AccAddress, coins sdk.C
 		}
 	}
 
-	//TODO: Decide how to implement blockExpireOffset (constant | dynamic | param)
+	//TODO: Manage blockExpireOffset via consensus params
 	blockExpireOffset := uint64(100000)
 
 	if watchlistEntry.GetBlockHeight()+blockExpireOffset <= blockHeight {

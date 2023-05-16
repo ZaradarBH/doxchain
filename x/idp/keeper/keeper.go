@@ -25,8 +25,8 @@ type (
 	}
 )
 
-//TODO: Finish AppRegistration concept
-//TODO: Implement AppRegistrationGraph concept to infer audience relationships
+//TODO: Finish ClientRegistration concept
+//TODO: Implement ClientRegistrationGraph concept to infer audience relationships
 //TODO: Implement IDP metadata logic (.well-known, etc)
 func NewKeeper(
 	cdc codec.BinaryCodec,

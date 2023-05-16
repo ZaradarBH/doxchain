@@ -24,9 +24,7 @@ type (
 	}
 )
 
-//TODO: Add additional KYCRequest fields after talking with the regulation experts
-//TODO: Implement KYC process concept
-//TODO: Implement KYC approver concept
+//TODO: Manage KYC approval via consensus params
 func NewKeeper(
 	cdc codec.BinaryCodec,
 	storeKey,

@@ -23,9 +23,7 @@ type (
 	}
 )
 
-//TODO: Add additional AMLRequest fields after talking with the regulation experts
-//TODO: Implement AML process concept
-//TODO: Implement AML approver concept
+//TODO: Manage AML approval via consensus params
 func NewKeeper(
 	cdc codec.BinaryCodec,
 	storeKey,
