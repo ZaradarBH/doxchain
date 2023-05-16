@@ -2,9 +2,10 @@ package simulation
 
 import (
 	"math/rand"
+	"strconv"
 
-	"github.com/be-heroes/doxchain/x/did/keeper"
-	"github.com/be-heroes/doxchain/x/did/types"
+	"github.com/be-heroes/doxchain/x/idp/keeper"
+	"github.com/be-heroes/doxchain/x/idp/types"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	simappparams "github.com/cosmos/cosmos-sdk/simapp/params"
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -12,7 +13,10 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/simulation"
 )
 
-func SimulateMsgCreateDid(
+// Prevent strconv unused error
+var _ = strconv.IntSize
+
+func SimulateMsgCreateClientRegistry(
 	ak types.AccountKeeper,
 	bk types.BankKeeper,
 	k keeper.Keeper,
@@ -21,18 +25,15 @@ func SimulateMsgCreateDid(
 	) (simtypes.OperationMsg, []simtypes.FutureOperation, error) {
 		simAccount, _ := simtypes.RandomAcc(r, accs)
 
-		did := types.Did{
-			Creator:    simAccount.Address.String(),
-			Url:        "did:example:123/path?service=agent#degree",
-			MethodName: "example",
-			MethodId:   "123",
-			Path:       "path",
-			Fragment:   "degree",
-			Query:      "service=agent",
+		i := r.Int()
+		msg := &types.MsgCreateClientRegistry{
+			Creator: simAccount.Address.String(),
+			Index:   strconv.Itoa(i),
 		}
 
-		msg := &types.MsgCreateDidRequest{
-			Did: did,
+		_, found := k.GetClientRegistry(ctx, msg.Index)
+		if found {
+			return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "ClientRegistry already exist"), nil, nil
 		}
 
 		txCtx := simulation.OperationInput{
@@ -53,7 +54,7 @@ func SimulateMsgCreateDid(
 	}
 }
 
-func SimulateMsgUpdateDid(
+func SimulateMsgUpdateClientRegistry(
 	ak types.AccountKeeper,
 	bk types.BankKeeper,
 	k keeper.Keeper,
@@ -61,25 +62,24 @@ func SimulateMsgUpdateDid(
 	return func(r *rand.Rand, app *baseapp.BaseApp, ctx sdk.Context, accs []simtypes.Account, chainID string,
 	) (simtypes.OperationMsg, []simtypes.FutureOperation, error) {
 		var (
-			simAccount = simtypes.Account{}
-			did        = types.Did{}
-			msg        = &types.MsgUpdateDidRequest{}
-			allDid     = k.GetAllDid(ctx)
-			found      = false
+			simAccount             = simtypes.Account{}
+			ClientRegistry    = types.ClientRegistry{}
+			msg                    = &types.MsgUpdateClientRegistry{}
+			allClientRegistry = k.GetAllClientRegistry(ctx)
+			found                  = false
 		)
-		for _, obj := range allDid {
+		for _, obj := range allClientRegistry {
 			simAccount, found = FindAccount(accs, obj.Creator)
 			if found {
-				did = obj
+				ClientRegistry = obj
 				break
 			}
 		}
 		if !found {
-			return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "did creator not found"), nil, nil
+			return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "ClientRegistry creator not found"), nil, nil
 		}
-
-		msg.Did = did
-
+		msg.Creator = simAccount.Address.String()
+		_ = ClientRegistry
 		txCtx := simulation.OperationInput{
 			R:               r,
 			App:             app,
@@ -98,7 +98,7 @@ func SimulateMsgUpdateDid(
 	}
 }
 
-func SimulateMsgDeleteDid(
+func SimulateMsgDeleteClientRegistry(
 	ak types.AccountKeeper,
 	bk types.BankKeeper,
 	k keeper.Keeper,
@@ -106,23 +106,24 @@ func SimulateMsgDeleteDid(
 	return func(r *rand.Rand, app *baseapp.BaseApp, ctx sdk.Context, accs []simtypes.Account, chainID string,
 	) (simtypes.OperationMsg, []simtypes.FutureOperation, error) {
 		var (
-			simAccount = simtypes.Account{}
-			did        = types.Did{}
-			msg        = &types.MsgDeleteDidRequest{}
-			allDid     = k.GetAllDid(ctx)
-			found      = false
+			simAccount             = simtypes.Account{}
+			ClientRegistry    = types.ClientRegistry{}
+			msg                    = &types.MsgUpdateClientRegistry{}
+			allClientRegistry = k.GetAllClientRegistry(ctx)
+			found                  = false
 		)
-		for _, obj := range allDid {
+		for _, obj := range allClientRegistry {
 			simAccount, found = FindAccount(accs, obj.Creator)
 			if found {
-				did = obj
+				ClientRegistry = obj
 				break
 			}
 		}
 		if !found {
-			return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "did creator not found"), nil, nil
+			return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "ClientRegistry creator not found"), nil, nil
 		}
-
+		msg.Creator = simAccount.Address.String()
+		_ = ClientRegistry
 		txCtx := simulation.OperationInput{
 			R:               r,
 			App:             app,
@@ -137,9 +138,6 @@ func SimulateMsgDeleteDid(
 			AccountKeeper:   ak,
 			Bankkeeper:      bk,
 		}
-
-		_ = did
-
 		return simulation.GenAndDeliverTxWithRandFees(txCtx)
 	}
 }

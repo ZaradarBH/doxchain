@@ -27,6 +27,66 @@ paths:
                         properties:
                           denom:
                             type: string
+                          desiredState:
+                            type: object
+                            properties:
+                              threshold:
+                                type: object
+                                properties:
+                                  softCap:
+                                    type: string
+                                    format: uint64
+                                  hardCap:
+                                    type: string
+                                    format: uint64
+                              Corridors:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    threshold:
+                                      type: object
+                                      properties:
+                                        softCap:
+                                          type: string
+                                          format: uint64
+                                        hardCap:
+                                          type: string
+                                          format: uint64
+                                    target:
+                                      type: object
+                                      properties:
+                                        denom:
+                                          type: string
+                                        amount:
+                                          type: string
+                                      description: >-
+                                        Coin defines a token with a denomination
+                                        and an amount.
+
+
+                                        NOTE: The amount field is an Int which
+                                        implements the custom method
+
+                                        signatures required by gogoproto.
+                          accessClientList:
+                            type: object
+                            properties:
+                              creator:
+                                type: string
+                              entries:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    user:
+                                      type: string
+                                    canRead:
+                                      type: boolean
+                                    canWrite:
+                                      type: boolean
+                                    canExecute:
+                                      type: boolean
               pagination:
                 type: object
                 properties:
@@ -154,6 +214,66 @@ paths:
                       properties:
                         denom:
                           type: string
+                        desiredState:
+                          type: object
+                          properties:
+                            threshold:
+                              type: object
+                              properties:
+                                softCap:
+                                  type: string
+                                  format: uint64
+                                hardCap:
+                                  type: string
+                                  format: uint64
+                            Corridors:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  threshold:
+                                    type: object
+                                    properties:
+                                      softCap:
+                                        type: string
+                                        format: uint64
+                                      hardCap:
+                                        type: string
+                                        format: uint64
+                                  target:
+                                    type: object
+                                    properties:
+                                      denom:
+                                        type: string
+                                      amount:
+                                        type: string
+                                    description: >-
+                                      Coin defines a token with a denomination
+                                      and an amount.
+
+
+                                      NOTE: The amount field is an Int which
+                                      implements the custom method
+
+                                      signatures required by gogoproto.
+                        accessClientList:
+                          type: object
+                          properties:
+                            creator:
+                              type: string
+                            entries:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  user:
+                                    type: string
+                                  canRead:
+                                    type: boolean
+                                  canWrite:
+                                    type: boolean
+                                  canExecute:
+                                    type: boolean
         default:
           description: An unexpected error response.
           schema:
@@ -647,6 +767,125 @@ paths:
                     '@type':
                       type: string
                   additionalProperties: {}
+      tags:
+        - Query
+  /be-heroes/doxchain/idp/client_registrations:
+    get:
+      operationId: BeheroesDoxchainIdpClientRegistryAll
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/beheroes.doxchain.idp.QueryAllClientRegistryResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: pagination.key
+          description: |-
+            key is a value returned in PageResponse.next_key to begin
+            querying the next page most efficiently. Only one of offset or key
+            should be set.
+          in: query
+          required: false
+          type: string
+          format: byte
+        - name: pagination.offset
+          description: >-
+            offset is a numeric offset that can be used when key is unavailable.
+
+            It is less efficient than using key. Only one of offset or key
+            should
+
+            be set.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.limit
+          description: >-
+            limit is the total number of results to be returned in the result
+            page.
+
+            If left empty it will default to a value to be set by each app.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.count_total
+          description: >-
+            count_total is set to true  to indicate that the result set should
+            include
+
+            a count of the total number of items available for pagination in
+            UIs.
+
+            count_total is only respected when offset is used. It is ignored
+            when key
+
+            is set.
+          in: query
+          required: false
+          type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+
+
+            Since: cosmos-sdk 0.43
+          in: query
+          required: false
+          type: boolean
+      tags:
+        - Query
+  /be-heroes/doxchain/idp/client_registrations/{index}:
+    get:
+      summary: Queries a list of ClientRegistry items.
+      operationId: BeheroesDoxchainIdpClientRegistry
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/beheroes.doxchain.idp.QueryGetClientRegistryResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: index
+          in: path
+          required: true
+          type: string
       tags:
         - Query
   /be-heroes/doxchain/idp/get_dot_well_known:
@@ -44857,11 +45096,144 @@ definitions:
   beheroes.doxchain.abs.Params:
     type: object
     description: Params defines the parameters for the module.
+  beheroes.doxchain.abs.ParitionedPoolConfiguration:
+    type: object
+    properties:
+      threshold:
+        type: object
+        properties:
+          softCap:
+            type: string
+            format: uint64
+          hardCap:
+            type: string
+            format: uint64
+      Corridors:
+        type: array
+        items:
+          type: object
+          properties:
+            threshold:
+              type: object
+              properties:
+                softCap:
+                  type: string
+                  format: uint64
+                hardCap:
+                  type: string
+                  format: uint64
+            target:
+              type: object
+              properties:
+                denom:
+                  type: string
+                amount:
+                  type: string
+              description: >-
+                Coin defines a token with a denomination and an amount.
+
+
+                NOTE: The amount field is an Int which implements the custom
+                method
+
+                signatures required by gogoproto.
+  beheroes.doxchain.abs.ParitionedPoolCorridor:
+    type: object
+    properties:
+      threshold:
+        type: object
+        properties:
+          softCap:
+            type: string
+            format: uint64
+          hardCap:
+            type: string
+            format: uint64
+      target:
+        type: object
+        properties:
+          denom:
+            type: string
+          amount:
+            type: string
+        description: |-
+          Coin defines a token with a denomination and an amount.
+
+          NOTE: The amount field is an Int which implements the custom method
+          signatures required by gogoproto.
+  beheroes.doxchain.abs.ParitionedPoolThreshold:
+    type: object
+    properties:
+      softCap:
+        type: string
+        format: uint64
+      hardCap:
+        type: string
+        format: uint64
   beheroes.doxchain.abs.PartitionedPool:
     type: object
     properties:
       denom:
         type: string
+      desiredState:
+        type: object
+        properties:
+          threshold:
+            type: object
+            properties:
+              softCap:
+                type: string
+                format: uint64
+              hardCap:
+                type: string
+                format: uint64
+          Corridors:
+            type: array
+            items:
+              type: object
+              properties:
+                threshold:
+                  type: object
+                  properties:
+                    softCap:
+                      type: string
+                      format: uint64
+                    hardCap:
+                      type: string
+                      format: uint64
+                target:
+                  type: object
+                  properties:
+                    denom:
+                      type: string
+                    amount:
+                      type: string
+                  description: >-
+                    Coin defines a token with a denomination and an amount.
+
+
+                    NOTE: The amount field is an Int which implements the custom
+                    method
+
+                    signatures required by gogoproto.
+      accessClientList:
+        type: object
+        properties:
+          creator:
+            type: string
+          entries:
+            type: array
+            items:
+              type: object
+              properties:
+                user:
+                  type: string
+                canRead:
+                  type: boolean
+                canWrite:
+                  type: boolean
+                canExecute:
+                  type: boolean
   beheroes.doxchain.abs.PartitionedPoolRegistry:
     type: object
     properties:
@@ -44874,6 +45246,66 @@ definitions:
           properties:
             denom:
               type: string
+            desiredState:
+              type: object
+              properties:
+                threshold:
+                  type: object
+                  properties:
+                    softCap:
+                      type: string
+                      format: uint64
+                    hardCap:
+                      type: string
+                      format: uint64
+                Corridors:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      threshold:
+                        type: object
+                        properties:
+                          softCap:
+                            type: string
+                            format: uint64
+                          hardCap:
+                            type: string
+                            format: uint64
+                      target:
+                        type: object
+                        properties:
+                          denom:
+                            type: string
+                          amount:
+                            type: string
+                        description: >-
+                          Coin defines a token with a denomination and an
+                          amount.
+
+
+                          NOTE: The amount field is an Int which implements the
+                          custom method
+
+                          signatures required by gogoproto.
+            accessClientList:
+              type: object
+              properties:
+                creator:
+                  type: string
+                entries:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      user:
+                        type: string
+                      canRead:
+                        type: boolean
+                      canWrite:
+                        type: boolean
+                      canExecute:
+                        type: boolean
   beheroes.doxchain.abs.QueryAllPartitionedPoolRegistriesResponse:
     type: object
     properties:
@@ -44891,6 +45323,66 @@ definitions:
                 properties:
                   denom:
                     type: string
+                  desiredState:
+                    type: object
+                    properties:
+                      threshold:
+                        type: object
+                        properties:
+                          softCap:
+                            type: string
+                            format: uint64
+                          hardCap:
+                            type: string
+                            format: uint64
+                      Corridors:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            threshold:
+                              type: object
+                              properties:
+                                softCap:
+                                  type: string
+                                  format: uint64
+                                hardCap:
+                                  type: string
+                                  format: uint64
+                            target:
+                              type: object
+                              properties:
+                                denom:
+                                  type: string
+                                amount:
+                                  type: string
+                              description: >-
+                                Coin defines a token with a denomination and an
+                                amount.
+
+
+                                NOTE: The amount field is an Int which
+                                implements the custom method
+
+                                signatures required by gogoproto.
+                  accessClientList:
+                    type: object
+                    properties:
+                      creator:
+                        type: string
+                      entries:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            user:
+                              type: string
+                            canRead:
+                              type: boolean
+                            canWrite:
+                              type: boolean
+                            canExecute:
+                              type: boolean
       pagination:
         type: object
         properties:
@@ -44937,6 +45429,66 @@ definitions:
               properties:
                 denom:
                   type: string
+                desiredState:
+                  type: object
+                  properties:
+                    threshold:
+                      type: object
+                      properties:
+                        softCap:
+                          type: string
+                          format: uint64
+                        hardCap:
+                          type: string
+                          format: uint64
+                    Corridors:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          threshold:
+                            type: object
+                            properties:
+                              softCap:
+                                type: string
+                                format: uint64
+                              hardCap:
+                                type: string
+                                format: uint64
+                          target:
+                            type: object
+                            properties:
+                              denom:
+                                type: string
+                              amount:
+                                type: string
+                            description: >-
+                              Coin defines a token with a denomination and an
+                              amount.
+
+
+                              NOTE: The amount field is an Int which implements
+                              the custom method
+
+                              signatures required by gogoproto.
+                accessClientList:
+                  type: object
+                  properties:
+                    creator:
+                      type: string
+                    entries:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          user:
+                            type: string
+                          canRead:
+                            type: boolean
+                          canWrite:
+                            type: boolean
+                          canExecute:
+                            type: boolean
   beheroes.doxchain.abs.QueryParamsResponse:
     type: object
     properties:
@@ -45029,6 +45581,35 @@ definitions:
 
             NOTE: The amount field is an Int which implements the custom method
             signatures required by gogoproto.
+  beheroes.doxchain.idp.AccessClientList:
+    type: object
+    properties:
+      creator:
+        type: string
+      entries:
+        type: array
+        items:
+          type: object
+          properties:
+            user:
+              type: string
+            canRead:
+              type: boolean
+            canWrite:
+              type: boolean
+            canExecute:
+              type: boolean
+  beheroes.doxchain.idp.AccessClientListEntry:
+    type: object
+    properties:
+      user:
+        type: string
+      canRead:
+        type: boolean
+      canWrite:
+        type: boolean
+      canExecute:
+        type: boolean
   cosmos.base.query.v1beta1.PageRequest:
     type: object
     properties:
@@ -46520,14 +47101,69 @@ definitions:
               type: string
             publicKeyMultibase:
               type: string
+  beheroes.doxchain.idp.ClientRegistry:
+    type: object
+    properties:
+      creator:
+        type: string
+      registrations:
+        type: array
+        items:
+          $ref: '#/definitions/beheroes.doxchain.idp.ClientRegistry'
+          type: object
   beheroes.doxchain.idp.MsgAuthenticationResponse:
     type: object
     properties:
       token:
         type: string
+  beheroes.doxchain.idp.MsgCreateClientRegistryResponse:
+    type: object
+  beheroes.doxchain.idp.MsgDeleteClientRegistryResponse:
+    type: object
+  beheroes.doxchain.idp.MsgUpdateClientRegistryResponse:
+    type: object
   beheroes.doxchain.idp.Params:
     type: object
     description: Params defines the parameters for the module.
+  beheroes.doxchain.idp.QueryAllClientRegistryResponse:
+    type: object
+    properties:
+      ClientRegistry:
+        type: array
+        items:
+          $ref: '#/definitions/beheroes.doxchain.idp.ClientRegistry'
+          type: object
+      pagination:
+        type: object
+        properties:
+          next_key:
+            type: string
+            format: byte
+            description: |-
+              next_key is the key to be passed to PageRequest.key to
+              query the next page most efficiently. It will be empty if
+              there are no more results.
+          total:
+            type: string
+            format: uint64
+            title: >-
+              total is total number of results available if
+              PageRequest.count_total
+
+              was set, its value is undefined otherwise
+        description: |-
+          PageResponse is to be embedded in gRPC response messages where the
+          corresponding request message has used PageRequest.
+
+           message SomeResponse {
+                   repeated Bar results = 1;
+                   PageResponse page = 2;
+           }
+  beheroes.doxchain.idp.QueryGetClientRegistryResponse:
+    type: object
+    properties:
+      ClientRegistry:
+        $ref: '#/definitions/beheroes.doxchain.idp.ClientRegistry'
   beheroes.doxchain.idp.QueryGetDotWellKnownResponse:
     type: object
     properties:

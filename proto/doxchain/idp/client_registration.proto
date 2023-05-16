@@ -1,0 +1,8 @@
+syntax = "proto3";
+package beheroes.doxchain.idp;
+
+option go_package = "github.com/be-heroes/doxchain/x/idp/types";
+
+message ClientRegistration {  
+  string id = 1; 
+}

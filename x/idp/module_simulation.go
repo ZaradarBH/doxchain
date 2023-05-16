@@ -28,6 +28,18 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgAuthenticationRequest int = 100
 
+	opWeightMsgCreateClientRegistry = "op_weight_msg_client_registrations"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgCreateClientRegistry int = 100
+
+	opWeightMsgUpdateClientRegistry = "op_weight_msg_client_registrations"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgUpdateClientRegistry int = 100
+
+	opWeightMsgDeleteClientRegistry = "op_weight_msg_client_registrations"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgDeleteClientRegistry int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -39,6 +51,14 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 	}
 	idpGenesis := types.GenesisState{
 		Params: types.DefaultParams(),
+		ClientRegistryList: []types.ClientRegistry{
+			{
+				Creator: sample.AccAddress(),
+			},
+			{
+				Creator: sample.AccAddress(),
+			},
+		},
 		// this line is used by starport scaffolding # simapp/module/genesisState
 	}
 	simState.GenState[types.ModuleName] = simState.Cdc.MustMarshalJSON(&idpGenesis)
@@ -68,6 +88,39 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 			weightMsgAuthenticationRequest = defaultWeightMsgAuthenticationRequest
 		},
 	)
+
+	var weightMsgCreateClientRegistry int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgCreateClientRegistry, &weightMsgCreateClientRegistry, nil,
+		func(_ *rand.Rand) {
+			weightMsgCreateClientRegistry = defaultWeightMsgCreateClientRegistry
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgCreateClientRegistry,
+		idpsimulation.SimulateMsgCreateClientRegistry(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgUpdateClientRegistry int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgUpdateClientRegistry, &weightMsgUpdateClientRegistry, nil,
+		func(_ *rand.Rand) {
+			weightMsgUpdateClientRegistry = defaultWeightMsgUpdateClientRegistry
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgUpdateClientRegistry,
+		idpsimulation.SimulateMsgUpdateClientRegistry(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgDeleteClientRegistry int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgDeleteClientRegistry, &weightMsgDeleteClientRegistry, nil,
+		func(_ *rand.Rand) {
+			weightMsgDeleteClientRegistry = defaultWeightMsgDeleteClientRegistry
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgDeleteClientRegistry,
+		idpsimulation.SimulateMsgDeleteClientRegistry(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
 
 	// this line is used by starport scaffolding # simapp/module/operation
 

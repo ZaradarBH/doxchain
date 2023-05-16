@@ -1,8 +1,8 @@
 package keeper
 
 import (
-	"fmt"
 	"encoding/binary"
+	"fmt"
 
 	"github.com/be-heroes/doxchain/x/did/types"
 	"github.com/cosmos/cosmos-sdk/store/prefix"
@@ -98,7 +98,7 @@ func (k Keeper) GetAllDid(ctx sdk.Context) (list []types.Did) {
 	return
 }
 
-// CanOverrideDid check if a did can be safely overwritten without causing and "unapproved identifier collision or ownership error" 
+// CanOverrideDid check if a did can be safely overwritten without causing and "unapproved identifier collision or ownership error"
 func (k Keeper) CanOverrideDid(ctx sdk.Context, did types.Did, override bool) error {
 	fullyQualifiedDidIdentifier := did.GetFullyQualifiedDidIdentifier()
 	match, found := k.GetDid(ctx, fullyQualifiedDidIdentifier)
@@ -107,7 +107,7 @@ func (k Keeper) CanOverrideDid(ctx sdk.Context, did types.Did, override bool) er
 		if !override {
 			return sdkerrors.Wrap(types.DidIdentifierCollisionError, fmt.Sprintf("Did with identifier: %s already exists in KVStore", fullyQualifiedDidIdentifier))
 		}
-		
+
 		if did.Creator != match.Creator {
 			return sdkerrors.Wrap(types.DidOwnershipError, fmt.Sprintf("Did owned by creator: %s cannot be overriden by creator: %s", match.Creator, did.Creator))
 		}

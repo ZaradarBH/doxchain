@@ -1,14 +1,18 @@
 syntax = "proto3";
+
 package beheroes.doxchain.idp;
 
 import "gogoproto/gogo.proto";
 import "doxchain/idp/params.proto";
 import "doxchain/idp/tenant_registry.proto";
+import "doxchain/idp/client_registrations.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/idp/types";
 
 // GenesisState defines the idp module's genesis state.
 message GenesisState {
-  Params params = 1 [(gogoproto.nullable) = false];
-  repeated TenantRegistry tenantRegistries = 2 [(gogoproto.nullable) = false];
+           Params              params                  = 1 [(gogoproto.nullable) = false];
+  repeated TenantRegistry      tenantRegistries        = 2 [(gogoproto.nullable) = false];
+  repeated ClientRegistry ClientRegistryList = 3 [(gogoproto.nullable) = false];
 }
+

@@ -3,29 +3,31 @@ package cli
 import (
 	"context"
 
-	"github.com/be-heroes/doxchain/x/did/types"
+	"github.com/be-heroes/doxchain/x/idp/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/spf13/cobra"
 )
 
-func CmdListDid() *cobra.Command {
+func CmdListClientRegistry() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "list-did",
-		Short: "list all dids",
+		Use:   "list-client-registrations",
+		Short: "list all ClientRegistry",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx := client.GetClientContextFromCmd(cmd)
-			pageReq, err := client.ReadPageRequest(cmd.Flags())
 
+			pageReq, err := client.ReadPageRequest(cmd.Flags())
 			if err != nil {
 				return err
 			}
 
 			queryClient := types.NewQueryClient(clientCtx)
-			res, err := queryClient.DidAll(context.Background(), &types.QueryAllDidRequest{
-				Pagination: pageReq,
-			})
 
+			params := &types.QueryAllClientRegistryRequest{
+				Pagination: pageReq,
+			}
+
+			res, err := queryClient.ClientRegistryAll(context.Background(), params)
 			if err != nil {
 				return err
 			}
@@ -40,18 +42,23 @@ func CmdListDid() *cobra.Command {
 	return cmd
 }
 
-func CmdShowDid() *cobra.Command {
+func CmdShowClientRegistry() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "show-did [fullyQualifiedDidIdentifier]",
-		Short: "Shows a did",
+		Use:   "show-client-registrations [index]",
+		Short: "shows a ClientRegistry",
 		Args:  cobra.ExactArgs(1),
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(cmd *cobra.Command, args []string) (err error) {
 			clientCtx := client.GetClientContextFromCmd(cmd)
-			queryClient := types.NewQueryClient(clientCtx)
-			res, err := queryClient.Did(context.Background(), &types.QueryGetDidRequest{
-				FullyQualifiedDidIdentifier: args[0],
-			})
 
+			queryClient := types.NewQueryClient(clientCtx)
+
+			argIndex := args[0]
+
+			params := &types.QueryGetClientRegistryRequest{
+				Index: argIndex,
+			}
+
+			res, err := queryClient.ClientRegistry(context.Background(), params)
 			if err != nil {
 				return err
 			}

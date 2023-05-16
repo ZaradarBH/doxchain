@@ -39,7 +39,7 @@ func CmdCreateDidDocument() *cobra.Command {
 			if err := msg.ValidateBasic(); err != nil {
 				return err
 			}
-			
+
 			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msg)
 		},
 	}
@@ -96,7 +96,7 @@ func CmdDeleteDidDocument() *cobra.Command {
 			}
 
 			msg := types.NewMsgDeleteDidDocumentRequest(clientCtx.GetFromAddress().String(), args[0])
-			
+
 			if err := msg.ValidateBasic(); err != nil {
 				return err
 			}

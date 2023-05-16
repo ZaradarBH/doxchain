@@ -74,7 +74,7 @@ func (k Keeper) GetTenant(ctx sdk.Context, tenantIdentifier string) (tenant type
 			if tenantEntry.Identifier == tenantIdentifier {
 				tenant = *tenantEntry
 				matched = true
-	
+
 				break
 			}
 		}

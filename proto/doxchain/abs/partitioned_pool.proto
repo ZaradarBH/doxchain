@@ -2,9 +2,32 @@ syntax = "proto3";
 package beheroes.doxchain.abs;
 
 import "gogoproto/gogo.proto";
+import "doxchain/idp/access_client_list.proto";
+import "cosmos/base/v1beta1/coin.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/abs/types";
 
 message PartitionedPool {
   string denom = 1;
+  ParitionedPoolConfiguration desiredState = 2 [(gogoproto.nullable) = true];
+  beheroes.doxchain.idp.AccessClientList accessClientList = 3 [(gogoproto.nullable) = true];
+}
+
+message ParitionedPoolConfiguration {
+  ParitionedPoolThreshold threshold = 1 [(gogoproto.nullable) = false];
+  repeated ParitionedPoolCorridor Corridors = 2 [(gogoproto.nullable) = true];
+}
+
+message ParitionedPoolCorridor {
+  ParitionedPoolThreshold threshold = 1 [(gogoproto.nullable) = false];
+  cosmos.base.v1beta1.Coin target = 2 [
+    (gogoproto.nullable) = false,
+    (gogoproto.moretags) = "yaml:\"coin\"",
+    (gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"
+  ];
+}
+
+message ParitionedPoolThreshold {
+  uint64 softCap = 1;
+  uint64 hardCap = 2;
 }

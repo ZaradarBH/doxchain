@@ -13,7 +13,7 @@ var _ sdk.Msg = &MsgCreateDidDocumentRequest{}
 
 func NewMsgCreateDidDocumentRequest(creator string, didDocument DidDocument) *MsgCreateDidDocumentRequest {
 	return &MsgCreateDidDocumentRequest{
-		Creator: creator,
+		Creator:     creator,
 		DidDocument: didDocument,
 	}
 }
@@ -51,7 +51,7 @@ var _ sdk.Msg = &MsgUpdateDidDocumentRequest{}
 
 func NewMsgUpdateDidDocumentRequest(creator string, didDocument DidDocument) *MsgUpdateDidDocumentRequest {
 	return &MsgUpdateDidDocumentRequest{
-		Creator: creator,
+		Creator:     creator,
 		DidDocument: didDocument,
 	}
 }
@@ -89,7 +89,7 @@ var _ sdk.Msg = &MsgDeleteDidDocumentRequest{}
 
 func NewMsgDeleteDidDocumentRequest(creator string, fullyQualifiedDidIdentifier string) *MsgDeleteDidDocumentRequest {
 	return &MsgDeleteDidDocumentRequest{
-		Creator: creator,
+		Creator:                     creator,
 		FullyQualifiedDidIdentifier: fullyQualifiedDidIdentifier,
 	}
 }

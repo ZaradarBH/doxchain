@@ -9,7 +9,7 @@ import (
 
 func (k msgServer) CreateDidDocument(goCtx context.Context, msg *types.MsgCreateDidDocumentRequest) (*types.MsgCreateDidDocumentResponse, error) {
 	err := k.Keeper.SetDidDocument(sdk.UnwrapSDKContext(goCtx), msg.DidDocument, false)
-	
+
 	if err != nil {
 		return nil, err
 	}
@@ -21,7 +21,7 @@ func (k msgServer) CreateDidDocument(goCtx context.Context, msg *types.MsgCreate
 
 func (k msgServer) UpdateDidDocument(goCtx context.Context, msg *types.MsgUpdateDidDocumentRequest) (*types.MsgUpdateDidDocumentResponse, error) {
 	err := k.SetDidDocument(sdk.UnwrapSDKContext(goCtx), msg.DidDocument, true)
-	
+
 	if err != nil {
 		return nil, err
 	}
@@ -35,6 +35,6 @@ func (k msgServer) DeleteDidDocument(goCtx context.Context, msg *types.MsgDelete
 	if err != nil {
 		return nil, err
 	}
-	
+
 	return &types.MsgDeleteDidDocumentResponse{}, nil
 }
