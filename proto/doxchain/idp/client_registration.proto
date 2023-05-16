@@ -1,8 +1,20 @@
 syntax = "proto3";
 package beheroes.doxchain.idp;
 
+import "gogoproto/gogo.proto";
+import "doxchain/did/did.proto";
+import "doxchain/idp/access_client_list.proto";
+
 option go_package = "github.com/be-heroes/doxchain/x/idp/types";
 
-message ClientRegistration {  
-  string id = 1; 
+message ClientRegistration {   
+  AccessClientList accessClientList = 1 [(gogoproto.nullable) = false];
+  beheroes.doxchain.did.Did id = 2;
+  beheroes.doxchain.did.Did appId = 3;
+  string name = 4;
+  repeated string appRoles = 5;
+  uint32 accessTokenAcceptedVersion = 6;
+  uint32 allowPublicClient = 7;
+  repeated string replyUrls = 8;
+  repeated string tags = 9;
 }
