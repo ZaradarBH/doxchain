@@ -66,13 +66,13 @@ func (k Keeper) GetAllTenantRegistry(ctx sdk.Context) (list []types.TenantRegist
 }
 
 // GetTenant for a given tenant identifier
-func (k Keeper) GetTenant(ctx sdk.Context, tenantIdentifier string) (tenant types.TenantEntry, err error) {
+func (k Keeper) GetTenant(ctx sdk.Context, tenantIdentifier string) (tenant types.TenantRegistration, err error) {
 	matched := false
 
 	for _, registry := range k.GetAllTenantRegistry(ctx) {
-		for _, tenantEntry := range registry.Tenants {
-			if tenantEntry.Identifier == tenantIdentifier {
-				tenant = *tenantEntry
+		for _, tenantRegistration := range registry.Tenants {
+			if tenantRegistration.Identifier == tenantIdentifier {
+				tenant = *tenantRegistration
 				matched = true
 
 				break

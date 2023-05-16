@@ -5,6 +5,7 @@ package types
 
 import (
 	fmt "fmt"
+	types "github.com/be-heroes/doxchain/x/did/types"
 	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
 	io "io"
@@ -24,8 +25,8 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 type TenantRegistry struct {
-	Creator string         `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
-	Tenants []*TenantEntry `protobuf:"bytes,2,rep,name=tenants,proto3" json:"tenants,omitempty"`
+	Creator string                `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	Tenants []*TenantRegistration `protobuf:"bytes,2,rep,name=tenants,proto3" json:"tenants,omitempty"`
 }
 
 func (m *TenantRegistry) Reset()         { *m = TenantRegistry{} }
@@ -68,30 +69,32 @@ func (m *TenantRegistry) GetCreator() string {
 	return ""
 }
 
-func (m *TenantRegistry) GetTenants() []*TenantEntry {
+func (m *TenantRegistry) GetTenants() []*TenantRegistration {
 	if m != nil {
 		return m.Tenants
 	}
 	return nil
 }
 
-type TenantEntry struct {
-	Identifier       string           `protobuf:"bytes,1,opt,name=identifier,proto3" json:"identifier,omitempty"`
-	AccessClientList AccessClientList `protobuf:"bytes,2,opt,name=accessClientList,proto3" json:"accessClientList"`
+type TenantRegistration struct {
+	Identifier          string              `protobuf:"bytes,1,opt,name=identifier,proto3" json:"identifier,omitempty"`
+	Id                  types.Did           `protobuf:"bytes,2,opt,name=id,proto3" json:"id"`
+	TenantConfiguration TenantConfiguration `protobuf:"bytes,3,opt,name=tenantConfiguration,proto3" json:"tenantConfiguration"`
+	AccessClientList    AccessClientList    `protobuf:"bytes,4,opt,name=accessClientList,proto3" json:"accessClientList"`
 }
 
-func (m *TenantEntry) Reset()         { *m = TenantEntry{} }
-func (m *TenantEntry) String() string { return proto.CompactTextString(m) }
-func (*TenantEntry) ProtoMessage()    {}
-func (*TenantEntry) Descriptor() ([]byte, []int) {
+func (m *TenantRegistration) Reset()         { *m = TenantRegistration{} }
+func (m *TenantRegistration) String() string { return proto.CompactTextString(m) }
+func (*TenantRegistration) ProtoMessage()    {}
+func (*TenantRegistration) Descriptor() ([]byte, []int) {
 	return fileDescriptor_e9a7aaeb8fae848b, []int{1}
 }
-func (m *TenantEntry) XXX_Unmarshal(b []byte) error {
+func (m *TenantRegistration) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *TenantEntry) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *TenantRegistration) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_TenantEntry.Marshal(b, m, deterministic)
+		return xxx_messageInfo_TenantRegistration.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -101,35 +104,182 @@ func (m *TenantEntry) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) 
 		return b[:n], nil
 	}
 }
-func (m *TenantEntry) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_TenantEntry.Merge(m, src)
+func (m *TenantRegistration) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TenantRegistration.Merge(m, src)
 }
-func (m *TenantEntry) XXX_Size() int {
+func (m *TenantRegistration) XXX_Size() int {
 	return m.Size()
 }
-func (m *TenantEntry) XXX_DiscardUnknown() {
-	xxx_messageInfo_TenantEntry.DiscardUnknown(m)
+func (m *TenantRegistration) XXX_DiscardUnknown() {
+	xxx_messageInfo_TenantRegistration.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_TenantEntry proto.InternalMessageInfo
+var xxx_messageInfo_TenantRegistration proto.InternalMessageInfo
 
-func (m *TenantEntry) GetIdentifier() string {
+func (m *TenantRegistration) GetIdentifier() string {
 	if m != nil {
 		return m.Identifier
 	}
 	return ""
 }
 
-func (m *TenantEntry) GetAccessClientList() AccessClientList {
+func (m *TenantRegistration) GetId() types.Did {
+	if m != nil {
+		return m.Id
+	}
+	return types.Did{}
+}
+
+func (m *TenantRegistration) GetTenantConfiguration() TenantConfiguration {
+	if m != nil {
+		return m.TenantConfiguration
+	}
+	return TenantConfiguration{}
+}
+
+func (m *TenantRegistration) GetAccessClientList() AccessClientList {
 	if m != nil {
 		return m.AccessClientList
 	}
 	return AccessClientList{}
 }
 
+type TenantConfiguration struct {
+	Issuer                                 string   `protobuf:"bytes,1,opt,name=issuer,proto3" json:"issuer,omitempty"`
+	AuthorizationEndpoint                  string   `protobuf:"bytes,2,opt,name=authorizationEndpoint,proto3" json:"authorizationEndpoint,omitempty"`
+	TokenEndpoint                          string   `protobuf:"bytes,3,opt,name=tokenEndpoint,proto3" json:"tokenEndpoint,omitempty"`
+	TokenEndpointAuthMethodsSupported      []string `protobuf:"bytes,4,rep,name=tokenEndpointAuthMethodsSupported,proto3" json:"tokenEndpointAuthMethodsSupported,omitempty"`
+	TokenEndpointAuthSigningAlgosSupported []string `protobuf:"bytes,5,rep,name=tokenEndpointAuthSigningAlgosSupported,proto3" json:"tokenEndpointAuthSigningAlgosSupported,omitempty"`
+	UserInfoEndpoint                       string   `protobuf:"bytes,6,opt,name=userInfoEndpoint,proto3" json:"userInfoEndpoint,omitempty"`
+	JwksUri                                string   `protobuf:"bytes,7,opt,name=jwksUri,proto3" json:"jwksUri,omitempty"`
+	RegistrationEndpoint                   string   `protobuf:"bytes,8,opt,name=registrationEndpoint,proto3" json:"registrationEndpoint,omitempty"`
+	ScopesSupported                        string   `protobuf:"bytes,9,opt,name=scopesSupported,proto3" json:"scopesSupported,omitempty"`
+	ResponseTypesSupported                 string   `protobuf:"bytes,10,opt,name=responseTypesSupported,proto3" json:"responseTypesSupported,omitempty"`
+	ServiceDocumentation                   string   `protobuf:"bytes,11,opt,name=serviceDocumentation,proto3" json:"serviceDocumentation,omitempty"`
+	UiLocalesSupported                     string   `protobuf:"bytes,12,opt,name=uiLocalesSupported,proto3" json:"uiLocalesSupported,omitempty"`
+}
+
+func (m *TenantConfiguration) Reset()         { *m = TenantConfiguration{} }
+func (m *TenantConfiguration) String() string { return proto.CompactTextString(m) }
+func (*TenantConfiguration) ProtoMessage()    {}
+func (*TenantConfiguration) Descriptor() ([]byte, []int) {
+	return fileDescriptor_e9a7aaeb8fae848b, []int{2}
+}
+func (m *TenantConfiguration) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *TenantConfiguration) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_TenantConfiguration.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *TenantConfiguration) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_TenantConfiguration.Merge(m, src)
+}
+func (m *TenantConfiguration) XXX_Size() int {
+	return m.Size()
+}
+func (m *TenantConfiguration) XXX_DiscardUnknown() {
+	xxx_messageInfo_TenantConfiguration.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_TenantConfiguration proto.InternalMessageInfo
+
+func (m *TenantConfiguration) GetIssuer() string {
+	if m != nil {
+		return m.Issuer
+	}
+	return ""
+}
+
+func (m *TenantConfiguration) GetAuthorizationEndpoint() string {
+	if m != nil {
+		return m.AuthorizationEndpoint
+	}
+	return ""
+}
+
+func (m *TenantConfiguration) GetTokenEndpoint() string {
+	if m != nil {
+		return m.TokenEndpoint
+	}
+	return ""
+}
+
+func (m *TenantConfiguration) GetTokenEndpointAuthMethodsSupported() []string {
+	if m != nil {
+		return m.TokenEndpointAuthMethodsSupported
+	}
+	return nil
+}
+
+func (m *TenantConfiguration) GetTokenEndpointAuthSigningAlgosSupported() []string {
+	if m != nil {
+		return m.TokenEndpointAuthSigningAlgosSupported
+	}
+	return nil
+}
+
+func (m *TenantConfiguration) GetUserInfoEndpoint() string {
+	if m != nil {
+		return m.UserInfoEndpoint
+	}
+	return ""
+}
+
+func (m *TenantConfiguration) GetJwksUri() string {
+	if m != nil {
+		return m.JwksUri
+	}
+	return ""
+}
+
+func (m *TenantConfiguration) GetRegistrationEndpoint() string {
+	if m != nil {
+		return m.RegistrationEndpoint
+	}
+	return ""
+}
+
+func (m *TenantConfiguration) GetScopesSupported() string {
+	if m != nil {
+		return m.ScopesSupported
+	}
+	return ""
+}
+
+func (m *TenantConfiguration) GetResponseTypesSupported() string {
+	if m != nil {
+		return m.ResponseTypesSupported
+	}
+	return ""
+}
+
+func (m *TenantConfiguration) GetServiceDocumentation() string {
+	if m != nil {
+		return m.ServiceDocumentation
+	}
+	return ""
+}
+
+func (m *TenantConfiguration) GetUiLocalesSupported() string {
+	if m != nil {
+		return m.UiLocalesSupported
+	}
+	return ""
+}
+
 func init() {
 	proto.RegisterType((*TenantRegistry)(nil), "beheroes.doxchain.idp.TenantRegistry")
-	proto.RegisterType((*TenantEntry)(nil), "beheroes.doxchain.idp.TenantEntry")
+	proto.RegisterType((*TenantRegistration)(nil), "beheroes.doxchain.idp.TenantRegistration")
+	proto.RegisterType((*TenantConfiguration)(nil), "beheroes.doxchain.idp.TenantConfiguration")
 }
 
 func init() {
@@ -137,26 +287,43 @@ func init() {
 }
 
 var fileDescriptor_e9a7aaeb8fae848b = []byte{
-	// 293 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x74, 0x91, 0x3d, 0x4b, 0xc4, 0x30,
-	0x18, 0xc7, 0x9b, 0x53, 0x3c, 0x4c, 0x41, 0xa4, 0x28, 0x94, 0x1b, 0x62, 0x29, 0x88, 0x75, 0x30,
-	0x85, 0x73, 0x75, 0xf1, 0x0e, 0x37, 0xa7, 0xe2, 0xa2, 0x4b, 0x69, 0xd3, 0xc7, 0x36, 0x70, 0x26,
-	0x25, 0x89, 0x70, 0xfd, 0x06, 0x8e, 0x7e, 0xac, 0x1b, 0x6f, 0x74, 0x12, 0x69, 0xbf, 0x88, 0xd8,
-	0x58, 0x39, 0xdf, 0xb6, 0xbc, 0xfc, 0xf2, 0xff, 0xfd, 0x79, 0x82, 0xc3, 0x42, 0x2e, 0x59, 0x95,
-	0x71, 0x11, 0xf3, 0xa2, 0x8e, 0x0d, 0x88, 0x4c, 0x98, 0x54, 0x41, 0xc9, 0xb5, 0x51, 0x0d, 0xad,
-	0x95, 0x34, 0xd2, 0x3b, 0xcc, 0xa1, 0x02, 0x25, 0x41, 0xd3, 0x01, 0xa6, 0xbc, 0xa8, 0x27, 0x07,
-	0xa5, 0x2c, 0x65, 0x4f, 0xc4, 0x1f, 0x2b, 0x0b, 0x4f, 0x8e, 0xbf, 0x05, 0x66, 0x8c, 0x81, 0xd6,
-	0x29, 0x5b, 0x70, 0x10, 0x26, 0x5d, 0x70, 0x6d, 0x2c, 0x16, 0x56, 0x78, 0xef, 0xa6, 0x97, 0x25,
-	0x9f, 0x2e, 0xcf, 0xc7, 0x63, 0xa6, 0x20, 0x33, 0x52, 0xf9, 0x28, 0x40, 0xd1, 0x6e, 0x32, 0x6c,
-	0xbd, 0x0b, 0x3c, 0xb6, 0xc5, 0xb4, 0x3f, 0x0a, 0xb6, 0x22, 0x77, 0x1a, 0xd2, 0x3f, 0x1b, 0x51,
-	0x9b, 0x78, 0x25, 0x8c, 0x6a, 0x92, 0xe1, 0x49, 0xf8, 0x84, 0xb0, 0xbb, 0x71, 0xe1, 0x11, 0x8c,
-	0x79, 0x01, 0xc2, 0xf0, 0x7b, 0x0e, 0x83, 0x6a, 0xe3, 0xc4, 0xbb, 0xc5, 0xfb, 0xb6, 0xf5, 0xbc,
-	0x2f, 0x7d, 0xcd, 0xb5, 0xf1, 0x47, 0x01, 0x8a, 0xdc, 0xe9, 0xc9, 0x3f, 0xda, 0xcb, 0x1f, 0xf8,
-	0x6c, 0x7b, 0xf5, 0x7a, 0xe4, 0x24, 0xbf, 0x62, 0x66, 0xf3, 0x55, 0x4b, 0xd0, 0xba, 0x25, 0xe8,
-	0xad, 0x25, 0xe8, 0xb9, 0x23, 0xce, 0xba, 0x23, 0xce, 0x4b, 0x47, 0x9c, 0xbb, 0xd3, 0x92, 0x9b,
-	0xea, 0x31, 0xa7, 0x4c, 0x3e, 0xc4, 0x39, 0x9c, 0x59, 0x4b, 0xfc, 0x35, 0xca, 0xa5, 0xfd, 0x9d,
-	0xa6, 0x06, 0x9d, 0xef, 0xf4, 0x03, 0x3c, 0x7f, 0x0f, 0x00, 0x00, 0xff, 0xff, 0x3b, 0x47, 0xd5,
-	0x2b, 0xba, 0x01, 0x00, 0x00,
+	// 570 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x54, 0xcd, 0x6e, 0xd3, 0x4c,
+	0x14, 0x8d, 0x93, 0x7c, 0xcd, 0x97, 0x09, 0x3f, 0xd5, 0xb4, 0x8d, 0xac, 0x2c, 0x4c, 0x88, 0xf8,
+	0x49, 0x2b, 0xe1, 0xa0, 0x80, 0xd8, 0xa7, 0x29, 0x0b, 0xa4, 0xb0, 0x71, 0x0b, 0x12, 0x6c, 0x22,
+	0xc7, 0x33, 0xb1, 0x2f, 0x4d, 0x67, 0xac, 0x99, 0x31, 0xb4, 0x3c, 0x05, 0x2f, 0xc1, 0xbb, 0x74,
+	0xd9, 0x25, 0x2b, 0x84, 0x92, 0x07, 0xe0, 0x15, 0x90, 0x67, 0x9c, 0x10, 0x37, 0x2e, 0xb0, 0xb0,
+	0xe4, 0xb9, 0xe7, 0xdc, 0x73, 0xce, 0x5c, 0x5d, 0x0d, 0xea, 0x10, 0x7e, 0x1e, 0x44, 0x3e, 0xb0,
+	0x1e, 0x90, 0xb8, 0xa7, 0x28, 0xf3, 0x99, 0x1a, 0x0b, 0x1a, 0x82, 0x54, 0xe2, 0xc2, 0x8d, 0x05,
+	0x57, 0x1c, 0xef, 0x4d, 0x68, 0x44, 0x05, 0xa7, 0xd2, 0x5d, 0x92, 0x5d, 0x20, 0x71, 0x6b, 0x37,
+	0xe4, 0x21, 0xd7, 0x8c, 0x5e, 0xfa, 0x67, 0xc8, 0xad, 0xe6, 0x4a, 0x90, 0x00, 0x49, 0xbf, 0xac,
+	0xfe, 0x30, 0x67, 0xe4, 0x07, 0x01, 0x95, 0x72, 0x1c, 0xcc, 0x80, 0x32, 0x35, 0x9e, 0x81, 0x54,
+	0x86, 0xd6, 0xe1, 0xe8, 0xce, 0x89, 0x0e, 0xe1, 0x65, 0x19, 0xb0, 0x8d, 0x6a, 0x81, 0xa0, 0xbe,
+	0xe2, 0xc2, 0xb6, 0xda, 0x56, 0xb7, 0xee, 0x2d, 0x8f, 0x78, 0x88, 0x6a, 0x26, 0xb0, 0xb4, 0xcb,
+	0xed, 0x4a, 0xb7, 0xd1, 0xdf, 0x77, 0x0b, 0x93, 0xba, 0x39, 0x45, 0x5f, 0x01, 0x67, 0xde, 0xb2,
+	0xb3, 0xf3, 0xb5, 0x8c, 0xf0, 0x26, 0x8e, 0x1d, 0x84, 0x80, 0x50, 0xa6, 0x60, 0x0a, 0x74, 0x69,
+	0xbc, 0x56, 0xc1, 0x4f, 0x51, 0x19, 0x88, 0x5d, 0x6e, 0x5b, 0xdd, 0x46, 0xbf, 0x55, 0x60, 0x9b,
+	0x5e, 0xfc, 0x08, 0xc8, 0x61, 0xf5, 0xf2, 0xfb, 0xbd, 0x92, 0x57, 0x06, 0x82, 0x27, 0x68, 0xc7,
+	0x78, 0x0e, 0x39, 0x9b, 0x42, 0x98, 0x18, 0x23, 0xbb, 0xa2, 0x25, 0x0e, 0xfe, 0x98, 0x3c, 0xd7,
+	0x91, 0x49, 0x16, 0x89, 0xe1, 0x77, 0x68, 0xdb, 0x4c, 0x76, 0xa8, 0x07, 0x3b, 0x02, 0xa9, 0xec,
+	0xaa, 0x36, 0x78, 0x7c, 0x83, 0xc1, 0xe0, 0x1a, 0x3d, 0x53, 0xdf, 0x90, 0xe9, 0xfc, 0xac, 0xa2,
+	0x9d, 0x82, 0x34, 0xb8, 0x89, 0xb6, 0x40, 0xca, 0x64, 0x35, 0xa4, 0xec, 0x84, 0x9f, 0xa3, 0x3d,
+	0x3f, 0x51, 0x11, 0x17, 0xf0, 0x59, 0x13, 0x5f, 0x32, 0x12, 0x73, 0x60, 0x4a, 0xcf, 0xac, 0xee,
+	0x15, 0x83, 0xf8, 0x01, 0xba, 0xad, 0xf8, 0x29, 0xfd, 0xcd, 0xae, 0x68, 0x76, 0xbe, 0x88, 0x47,
+	0xe8, 0x7e, 0xae, 0x30, 0x48, 0x54, 0xf4, 0x9a, 0xaa, 0x88, 0x13, 0x79, 0x9c, 0xc4, 0x31, 0x17,
+	0x8a, 0x12, 0xbb, 0xda, 0xae, 0x74, 0xeb, 0xde, 0xdf, 0x89, 0xf8, 0x2d, 0x7a, 0xb4, 0x41, 0x3a,
+	0x86, 0x90, 0x01, 0x0b, 0x07, 0xb3, 0x90, 0xaf, 0x49, 0xfe, 0xa7, 0x25, 0xff, 0x91, 0x8d, 0x0f,
+	0xd0, 0x76, 0x22, 0xa9, 0x78, 0xc5, 0xa6, 0x7c, 0x75, 0x9d, 0x2d, 0x7d, 0x9d, 0x8d, 0x7a, 0xba,
+	0xe4, 0x1f, 0x3e, 0x9d, 0xca, 0x37, 0x02, 0xec, 0x9a, 0x59, 0xf2, 0xec, 0x88, 0xfb, 0x68, 0x57,
+	0xac, 0x2d, 0xe6, 0x4a, 0xe9, 0x7f, 0x4d, 0x2b, 0xc4, 0x70, 0x17, 0xdd, 0x95, 0x01, 0x8f, 0xe9,
+	0x5a, 0xf4, 0xba, 0xa6, 0x5f, 0x2f, 0xe3, 0x17, 0xa8, 0x29, 0xa8, 0x8c, 0x39, 0x93, 0xf4, 0xe4,
+	0x22, 0xd7, 0x80, 0x74, 0xc3, 0x0d, 0x68, 0x9a, 0x4a, 0x52, 0xf1, 0x11, 0x02, 0x7a, 0xc4, 0x83,
+	0xe4, 0x8c, 0x32, 0x65, 0xb6, 0xb9, 0x61, 0x52, 0x15, 0x61, 0xd8, 0x45, 0x38, 0x81, 0x11, 0x0f,
+	0xfc, 0xd9, 0xba, 0xcf, 0x2d, 0xdd, 0x51, 0x80, 0x1c, 0x0e, 0x2f, 0xe7, 0x8e, 0x75, 0x35, 0x77,
+	0xac, 0x1f, 0x73, 0xc7, 0xfa, 0xb2, 0x70, 0x4a, 0x57, 0x0b, 0xa7, 0xf4, 0x6d, 0xe1, 0x94, 0xde,
+	0xef, 0x87, 0xa0, 0xa2, 0x64, 0xe2, 0x06, 0xfc, 0xac, 0x37, 0xa1, 0x4f, 0xcc, 0x5e, 0xf7, 0x56,
+	0x0f, 0xcc, 0xb9, 0x79, 0xcb, 0xd2, 0xc4, 0x93, 0x2d, 0xfd, 0xac, 0x3c, 0xfb, 0x15, 0x00, 0x00,
+	0xff, 0xff, 0x86, 0x19, 0x4e, 0xdb, 0xe8, 0x04, 0x00, 0x00,
 }
 
 func (m *TenantRegistry) Marshal() (dAtA []byte, err error) {
@@ -203,7 +370,7 @@ func (m *TenantRegistry) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *TenantEntry) Marshal() (dAtA []byte, err error) {
+func (m *TenantRegistration) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -213,12 +380,12 @@ func (m *TenantEntry) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *TenantEntry) MarshalTo(dAtA []byte) (int, error) {
+func (m *TenantRegistration) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *TenantEntry) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *TenantRegistration) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -232,11 +399,142 @@ func (m *TenantEntry) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 		i = encodeVarintTenantRegistry(dAtA, i, uint64(size))
 	}
 	i--
+	dAtA[i] = 0x22
+	{
+		size, err := m.TenantConfiguration.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarintTenantRegistry(dAtA, i, uint64(size))
+	}
+	i--
+	dAtA[i] = 0x1a
+	{
+		size, err := m.Id.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarintTenantRegistry(dAtA, i, uint64(size))
+	}
+	i--
 	dAtA[i] = 0x12
 	if len(m.Identifier) > 0 {
 		i -= len(m.Identifier)
 		copy(dAtA[i:], m.Identifier)
 		i = encodeVarintTenantRegistry(dAtA, i, uint64(len(m.Identifier)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *TenantConfiguration) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *TenantConfiguration) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *TenantConfiguration) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.UiLocalesSupported) > 0 {
+		i -= len(m.UiLocalesSupported)
+		copy(dAtA[i:], m.UiLocalesSupported)
+		i = encodeVarintTenantRegistry(dAtA, i, uint64(len(m.UiLocalesSupported)))
+		i--
+		dAtA[i] = 0x62
+	}
+	if len(m.ServiceDocumentation) > 0 {
+		i -= len(m.ServiceDocumentation)
+		copy(dAtA[i:], m.ServiceDocumentation)
+		i = encodeVarintTenantRegistry(dAtA, i, uint64(len(m.ServiceDocumentation)))
+		i--
+		dAtA[i] = 0x5a
+	}
+	if len(m.ResponseTypesSupported) > 0 {
+		i -= len(m.ResponseTypesSupported)
+		copy(dAtA[i:], m.ResponseTypesSupported)
+		i = encodeVarintTenantRegistry(dAtA, i, uint64(len(m.ResponseTypesSupported)))
+		i--
+		dAtA[i] = 0x52
+	}
+	if len(m.ScopesSupported) > 0 {
+		i -= len(m.ScopesSupported)
+		copy(dAtA[i:], m.ScopesSupported)
+		i = encodeVarintTenantRegistry(dAtA, i, uint64(len(m.ScopesSupported)))
+		i--
+		dAtA[i] = 0x4a
+	}
+	if len(m.RegistrationEndpoint) > 0 {
+		i -= len(m.RegistrationEndpoint)
+		copy(dAtA[i:], m.RegistrationEndpoint)
+		i = encodeVarintTenantRegistry(dAtA, i, uint64(len(m.RegistrationEndpoint)))
+		i--
+		dAtA[i] = 0x42
+	}
+	if len(m.JwksUri) > 0 {
+		i -= len(m.JwksUri)
+		copy(dAtA[i:], m.JwksUri)
+		i = encodeVarintTenantRegistry(dAtA, i, uint64(len(m.JwksUri)))
+		i--
+		dAtA[i] = 0x3a
+	}
+	if len(m.UserInfoEndpoint) > 0 {
+		i -= len(m.UserInfoEndpoint)
+		copy(dAtA[i:], m.UserInfoEndpoint)
+		i = encodeVarintTenantRegistry(dAtA, i, uint64(len(m.UserInfoEndpoint)))
+		i--
+		dAtA[i] = 0x32
+	}
+	if len(m.TokenEndpointAuthSigningAlgosSupported) > 0 {
+		for iNdEx := len(m.TokenEndpointAuthSigningAlgosSupported) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.TokenEndpointAuthSigningAlgosSupported[iNdEx])
+			copy(dAtA[i:], m.TokenEndpointAuthSigningAlgosSupported[iNdEx])
+			i = encodeVarintTenantRegistry(dAtA, i, uint64(len(m.TokenEndpointAuthSigningAlgosSupported[iNdEx])))
+			i--
+			dAtA[i] = 0x2a
+		}
+	}
+	if len(m.TokenEndpointAuthMethodsSupported) > 0 {
+		for iNdEx := len(m.TokenEndpointAuthMethodsSupported) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.TokenEndpointAuthMethodsSupported[iNdEx])
+			copy(dAtA[i:], m.TokenEndpointAuthMethodsSupported[iNdEx])
+			i = encodeVarintTenantRegistry(dAtA, i, uint64(len(m.TokenEndpointAuthMethodsSupported[iNdEx])))
+			i--
+			dAtA[i] = 0x22
+		}
+	}
+	if len(m.TokenEndpoint) > 0 {
+		i -= len(m.TokenEndpoint)
+		copy(dAtA[i:], m.TokenEndpoint)
+		i = encodeVarintTenantRegistry(dAtA, i, uint64(len(m.TokenEndpoint)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.AuthorizationEndpoint) > 0 {
+		i -= len(m.AuthorizationEndpoint)
+		copy(dAtA[i:], m.AuthorizationEndpoint)
+		i = encodeVarintTenantRegistry(dAtA, i, uint64(len(m.AuthorizationEndpoint)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Issuer) > 0 {
+		i -= len(m.Issuer)
+		copy(dAtA[i:], m.Issuer)
+		i = encodeVarintTenantRegistry(dAtA, i, uint64(len(m.Issuer)))
 		i--
 		dAtA[i] = 0xa
 	}
@@ -273,7 +571,7 @@ func (m *TenantRegistry) Size() (n int) {
 	return n
 }
 
-func (m *TenantEntry) Size() (n int) {
+func (m *TenantRegistration) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -283,8 +581,73 @@ func (m *TenantEntry) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovTenantRegistry(uint64(l))
 	}
+	l = m.Id.Size()
+	n += 1 + l + sovTenantRegistry(uint64(l))
+	l = m.TenantConfiguration.Size()
+	n += 1 + l + sovTenantRegistry(uint64(l))
 	l = m.AccessClientList.Size()
 	n += 1 + l + sovTenantRegistry(uint64(l))
+	return n
+}
+
+func (m *TenantConfiguration) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Issuer)
+	if l > 0 {
+		n += 1 + l + sovTenantRegistry(uint64(l))
+	}
+	l = len(m.AuthorizationEndpoint)
+	if l > 0 {
+		n += 1 + l + sovTenantRegistry(uint64(l))
+	}
+	l = len(m.TokenEndpoint)
+	if l > 0 {
+		n += 1 + l + sovTenantRegistry(uint64(l))
+	}
+	if len(m.TokenEndpointAuthMethodsSupported) > 0 {
+		for _, s := range m.TokenEndpointAuthMethodsSupported {
+			l = len(s)
+			n += 1 + l + sovTenantRegistry(uint64(l))
+		}
+	}
+	if len(m.TokenEndpointAuthSigningAlgosSupported) > 0 {
+		for _, s := range m.TokenEndpointAuthSigningAlgosSupported {
+			l = len(s)
+			n += 1 + l + sovTenantRegistry(uint64(l))
+		}
+	}
+	l = len(m.UserInfoEndpoint)
+	if l > 0 {
+		n += 1 + l + sovTenantRegistry(uint64(l))
+	}
+	l = len(m.JwksUri)
+	if l > 0 {
+		n += 1 + l + sovTenantRegistry(uint64(l))
+	}
+	l = len(m.RegistrationEndpoint)
+	if l > 0 {
+		n += 1 + l + sovTenantRegistry(uint64(l))
+	}
+	l = len(m.ScopesSupported)
+	if l > 0 {
+		n += 1 + l + sovTenantRegistry(uint64(l))
+	}
+	l = len(m.ResponseTypesSupported)
+	if l > 0 {
+		n += 1 + l + sovTenantRegistry(uint64(l))
+	}
+	l = len(m.ServiceDocumentation)
+	if l > 0 {
+		n += 1 + l + sovTenantRegistry(uint64(l))
+	}
+	l = len(m.UiLocalesSupported)
+	if l > 0 {
+		n += 1 + l + sovTenantRegistry(uint64(l))
+	}
 	return n
 }
 
@@ -384,7 +747,7 @@ func (m *TenantRegistry) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Tenants = append(m.Tenants, &TenantEntry{})
+			m.Tenants = append(m.Tenants, &TenantRegistration{})
 			if err := m.Tenants[len(m.Tenants)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
@@ -410,7 +773,7 @@ func (m *TenantRegistry) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *TenantEntry) Unmarshal(dAtA []byte) error {
+func (m *TenantRegistration) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -433,10 +796,10 @@ func (m *TenantEntry) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: TenantEntry: wiretype end group for non-group")
+			return fmt.Errorf("proto: TenantRegistration: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: TenantEntry: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: TenantRegistration: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -473,6 +836,72 @@ func (m *TenantEntry) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTenantRegistry
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthTenantRegistry
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthTenantRegistry
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.Id.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field TenantConfiguration", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTenantRegistry
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthTenantRegistry
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthTenantRegistry
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.TenantConfiguration.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field AccessClientList", wireType)
 			}
 			var msglen int
@@ -503,6 +932,440 @@ func (m *TenantEntry) Unmarshal(dAtA []byte) error {
 			if err := m.AccessClientList.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTenantRegistry(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTenantRegistry
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *TenantConfiguration) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTenantRegistry
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: TenantConfiguration: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: TenantConfiguration: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Issuer", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTenantRegistry
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTenantRegistry
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTenantRegistry
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Issuer = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field AuthorizationEndpoint", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTenantRegistry
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTenantRegistry
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTenantRegistry
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.AuthorizationEndpoint = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field TokenEndpoint", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTenantRegistry
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTenantRegistry
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTenantRegistry
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.TokenEndpoint = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field TokenEndpointAuthMethodsSupported", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTenantRegistry
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTenantRegistry
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTenantRegistry
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.TokenEndpointAuthMethodsSupported = append(m.TokenEndpointAuthMethodsSupported, string(dAtA[iNdEx:postIndex]))
+			iNdEx = postIndex
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field TokenEndpointAuthSigningAlgosSupported", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTenantRegistry
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTenantRegistry
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTenantRegistry
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.TokenEndpointAuthSigningAlgosSupported = append(m.TokenEndpointAuthSigningAlgosSupported, string(dAtA[iNdEx:postIndex]))
+			iNdEx = postIndex
+		case 6:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field UserInfoEndpoint", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTenantRegistry
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTenantRegistry
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTenantRegistry
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.UserInfoEndpoint = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 7:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field JwksUri", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTenantRegistry
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTenantRegistry
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTenantRegistry
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.JwksUri = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 8:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field RegistrationEndpoint", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTenantRegistry
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTenantRegistry
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTenantRegistry
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.RegistrationEndpoint = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 9:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ScopesSupported", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTenantRegistry
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTenantRegistry
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTenantRegistry
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ScopesSupported = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 10:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ResponseTypesSupported", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTenantRegistry
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTenantRegistry
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTenantRegistry
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ResponseTypesSupported = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 11:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ServiceDocumentation", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTenantRegistry
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTenantRegistry
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTenantRegistry
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ServiceDocumentation = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 12:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field UiLocalesSupported", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTenantRegistry
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTenantRegistry
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTenantRegistry
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.UiLocalesSupported = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex

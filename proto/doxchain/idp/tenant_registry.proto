@@ -2,16 +2,34 @@ syntax = "proto3";
 package beheroes.doxchain.idp;
 
 import "gogoproto/gogo.proto";
+import "doxchain/did/did.proto";
 import "doxchain/idp/access_client_list.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/idp/types";
 
 message TenantRegistry {
   string creator  = 1;
-  repeated TenantEntry tenants = 2;
+  repeated TenantRegistration tenants = 2;
 }
 
-message TenantEntry {  
+message TenantRegistration {  
   string identifier = 1;
-  AccessClientList accessClientList = 2 [(gogoproto.nullable) = false];
+  beheroes.doxchain.did.Did id = 2 [(gogoproto.nullable) = false];
+  TenantConfiguration tenantConfiguration = 3 [(gogoproto.nullable) = false];
+  AccessClientList accessClientList = 4 [(gogoproto.nullable) = false];
+}
+
+message TenantConfiguration {  
+  string issuer = 1;
+  string authorizationEndpoint = 2;
+  string tokenEndpoint = 3;
+  repeated string tokenEndpointAuthMethodsSupported = 4;
+  repeated string tokenEndpointAuthSigningAlgosSupported = 5;
+  string userInfoEndpoint = 6;
+  string jwksUri = 7;
+  string registrationEndpoint = 8;
+  string scopesSupported = 9;
+  string responseTypesSupported = 10;
+  string serviceDocumentation = 11;
+  string uiLocalesSupported = 12;
 }
