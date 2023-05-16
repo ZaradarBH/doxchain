@@ -32,4 +32,5 @@ message TenantConfiguration {
   string responseTypesSupported = 10;
   string serviceDocumentation = 11;
   string uiLocalesSupported = 12;
+  string loginEndpoint = 13;
 }

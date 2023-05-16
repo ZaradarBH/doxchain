@@ -27,7 +27,7 @@ func (k Keeper) DeviceCode(ctx sdk.Context, msg types.MsgDeviceCodeRequest) (typ
 	//TODO: Validate ClientId and Scope
 	response.DeviceCode, _ = utils.GenerateRandomString(32)
 	response.UserCode, _ = utils.GenerateRandomString(8)
-	response.VerificationUri = tenantConfiguration.AuthorizationEndpoint
+	response.VerificationUri = tenantConfiguration.LoginEndpoint
 
 	tenantDeviceCodeRegistry, found := k.GetDeviceCodeRegistry(ctx, msg.Tenant)
 
