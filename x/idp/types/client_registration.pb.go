@@ -5,6 +5,8 @@ package types
 
 import (
 	fmt "fmt"
+	types "github.com/be-heroes/doxchain/x/did/types"
+	_ "github.com/gogo/protobuf/gogoproto"
 	proto "github.com/gogo/protobuf/proto"
 	io "io"
 	math "math"
@@ -23,7 +25,15 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 type ClientRegistration struct {
-	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	AccessClientList           AccessClientList `protobuf:"bytes,1,opt,name=accessClientList,proto3" json:"accessClientList"`
+	Id                         *types.Did       `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
+	AppId                      *types.Did       `protobuf:"bytes,3,opt,name=appId,proto3" json:"appId,omitempty"`
+	Name                       string           `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
+	AppRoles                   []string         `protobuf:"bytes,5,rep,name=appRoles,proto3" json:"appRoles,omitempty"`
+	AccessTokenAcceptedVersion uint32           `protobuf:"varint,6,opt,name=accessTokenAcceptedVersion,proto3" json:"accessTokenAcceptedVersion,omitempty"`
+	AllowPublicClient          uint32           `protobuf:"varint,7,opt,name=allowPublicClient,proto3" json:"allowPublicClient,omitempty"`
+	ReplyUrls                  []string         `protobuf:"bytes,8,rep,name=replyUrls,proto3" json:"replyUrls,omitempty"`
+	Tags                       []string         `protobuf:"bytes,9,rep,name=tags,proto3" json:"tags,omitempty"`
 }
 
 func (m *ClientRegistration) Reset()         { *m = ClientRegistration{} }
@@ -59,11 +69,67 @@ func (m *ClientRegistration) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_ClientRegistration proto.InternalMessageInfo
 
-func (m *ClientRegistration) GetId() string {
+func (m *ClientRegistration) GetAccessClientList() AccessClientList {
+	if m != nil {
+		return m.AccessClientList
+	}
+	return AccessClientList{}
+}
+
+func (m *ClientRegistration) GetId() *types.Did {
 	if m != nil {
 		return m.Id
 	}
+	return nil
+}
+
+func (m *ClientRegistration) GetAppId() *types.Did {
+	if m != nil {
+		return m.AppId
+	}
+	return nil
+}
+
+func (m *ClientRegistration) GetName() string {
+	if m != nil {
+		return m.Name
+	}
 	return ""
+}
+
+func (m *ClientRegistration) GetAppRoles() []string {
+	if m != nil {
+		return m.AppRoles
+	}
+	return nil
+}
+
+func (m *ClientRegistration) GetAccessTokenAcceptedVersion() uint32 {
+	if m != nil {
+		return m.AccessTokenAcceptedVersion
+	}
+	return 0
+}
+
+func (m *ClientRegistration) GetAllowPublicClient() uint32 {
+	if m != nil {
+		return m.AllowPublicClient
+	}
+	return 0
+}
+
+func (m *ClientRegistration) GetReplyUrls() []string {
+	if m != nil {
+		return m.ReplyUrls
+	}
+	return nil
+}
+
+func (m *ClientRegistration) GetTags() []string {
+	if m != nil {
+		return m.Tags
+	}
+	return nil
 }
 
 func init() {
@@ -75,18 +141,32 @@ func init() {
 }
 
 var fileDescriptor_b44e633ad8377f2d = []byte{
-	// 170 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x52, 0x4b, 0xc9, 0xaf, 0x48,
-	0xce, 0x48, 0xcc, 0xcc, 0xd3, 0xcf, 0x4c, 0x29, 0xd0, 0x4f, 0xce, 0xc9, 0x4c, 0xcd, 0x2b, 0x89,
-	0x2f, 0x4a, 0x4d, 0xcf, 0x2c, 0x2e, 0x29, 0x4a, 0x2c, 0xc9, 0xcc, 0xcf, 0xd3, 0x2b, 0x28, 0xca,
-	0x2f, 0xc9, 0x17, 0x12, 0x4d, 0x4a, 0xcd, 0x48, 0x2d, 0xca, 0x4f, 0x2d, 0xd6, 0x83, 0x69, 0xd0,
-	0xcb, 0x4c, 0x29, 0x50, 0x52, 0xe1, 0x12, 0x72, 0x06, 0xeb, 0x09, 0x42, 0xd2, 0x22, 0xc4, 0xc7,
-	0xc5, 0x94, 0x99, 0x22, 0xc1, 0xa8, 0xc0, 0xa8, 0xc1, 0x19, 0xc4, 0x94, 0x99, 0xe2, 0xe4, 0x7c,
-	0xe2, 0x91, 0x1c, 0xe3, 0x85, 0x47, 0x72, 0x8c, 0x0f, 0x1e, 0xc9, 0x31, 0x4e, 0x78, 0x2c, 0xc7,
-	0x70, 0xe1, 0xb1, 0x1c, 0xc3, 0x8d, 0xc7, 0x72, 0x0c, 0x51, 0x9a, 0xe9, 0x99, 0x25, 0x19, 0xa5,
-	0x49, 0x7a, 0xc9, 0xf9, 0xb9, 0xfa, 0x49, 0xa9, 0xba, 0x10, 0x2b, 0xf4, 0xe1, 0x6e, 0xaa, 0x00,
-	0xbb, 0xaa, 0xa4, 0xb2, 0x20, 0xb5, 0x38, 0x89, 0x0d, 0xec, 0x10, 0x63, 0x40, 0x00, 0x00, 0x00,
-	0xff, 0xff, 0xfb, 0x14, 0x64, 0x81, 0xb2, 0x00, 0x00, 0x00,
+	// 388 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x84, 0x91, 0xdd, 0x6a, 0xdb, 0x30,
+	0x14, 0xc7, 0xed, 0x7c, 0x2d, 0xd6, 0x18, 0x6c, 0x62, 0x1b, 0xc2, 0x0c, 0xcf, 0x0c, 0xb6, 0x79,
+	0x63, 0xb3, 0xc7, 0x76, 0x3f, 0x68, 0xd2, 0x9b, 0x42, 0x2f, 0x8a, 0x69, 0x0b, 0xed, 0x4d, 0x90,
+	0x2d, 0xe1, 0x88, 0x2a, 0x96, 0xb0, 0x14, 0x9a, 0xbc, 0x45, 0x5f, 0xa0, 0xef, 0x93, 0xcb, 0x5c,
+	0xf6, 0xaa, 0x94, 0xe4, 0x45, 0x8a, 0xa5, 0x34, 0xfd, 0x48, 0x68, 0x2f, 0x0c, 0xc7, 0xe7, 0xfc,
+	0xce, 0xff, 0xfc, 0x8f, 0x0e, 0xf8, 0x46, 0xc4, 0x24, 0x1f, 0x62, 0x56, 0x26, 0x8c, 0xc8, 0x24,
+	0xe7, 0x8c, 0x96, 0x7a, 0x50, 0xd1, 0x82, 0x29, 0x5d, 0x61, 0xcd, 0x44, 0x19, 0xcb, 0x4a, 0x68,
+	0x01, 0x3f, 0x64, 0x74, 0x48, 0x2b, 0x41, 0x55, 0x7c, 0xd7, 0x10, 0x33, 0x22, 0xfd, 0xf7, 0x85,
+	0x28, 0x84, 0x21, 0x92, 0x3a, 0xb2, 0xb0, 0xff, 0x71, 0x2d, 0x4a, 0x18, 0xa9, 0xbf, 0x55, 0xfe,
+	0xeb, 0xa3, 0x61, 0x38, 0xcf, 0xa9, 0x52, 0x83, 0xd5, 0x4c, 0xce, 0x94, 0xb6, 0xd8, 0x97, 0xcb,
+	0x26, 0x80, 0x7d, 0x93, 0x4d, 0x1f, 0x18, 0x81, 0x27, 0xe0, 0xad, 0x6d, 0xb1, 0xb5, 0x7d, 0xa6,
+	0x34, 0x72, 0x43, 0x37, 0x7a, 0xfd, 0xf7, 0x7b, 0xbc, 0xd5, 0x5d, 0xbc, 0xf3, 0x04, 0xef, 0xb5,
+	0x66, 0xd7, 0x9f, 0x9d, 0x74, 0x43, 0x06, 0xfe, 0x04, 0x0d, 0x46, 0x50, 0xc3, 0x88, 0xf9, 0x5b,
+	0xc4, 0xea, 0x15, 0x76, 0x19, 0x49, 0x1b, 0x8c, 0xc0, 0x3f, 0xa0, 0x8d, 0xa5, 0xdc, 0x23, 0xa8,
+	0xf9, 0x22, 0x6e, 0x41, 0x08, 0x41, 0xab, 0xc4, 0x23, 0x8a, 0x5a, 0xa1, 0x1b, 0x79, 0xa9, 0x89,
+	0xa1, 0x0f, 0xba, 0x58, 0xca, 0x54, 0x70, 0xaa, 0x50, 0x3b, 0x6c, 0x46, 0x5e, 0xba, 0xfe, 0x87,
+	0xff, 0x81, 0x6f, 0x1d, 0x1e, 0x8a, 0x33, 0x5a, 0xd6, 0x4b, 0x48, 0x4d, 0xc9, 0x31, 0xad, 0x14,
+	0x13, 0x25, 0xea, 0x84, 0x6e, 0xf4, 0x26, 0x7d, 0x86, 0x80, 0xbf, 0xc0, 0x3b, 0xcc, 0xb9, 0x38,
+	0x3f, 0x18, 0x67, 0x9c, 0xe5, 0x76, 0x4d, 0xf4, 0xca, 0xb4, 0x6d, 0x16, 0xe0, 0x27, 0xe0, 0x55,
+	0x54, 0xf2, 0xe9, 0x51, 0xc5, 0x15, 0xea, 0x1a, 0x2b, 0xf7, 0x89, 0xda, 0xbb, 0xc6, 0x85, 0x42,
+	0x9e, 0x29, 0x98, 0xb8, 0xd7, 0x9f, 0x2d, 0x02, 0x77, 0xbe, 0x08, 0xdc, 0x9b, 0x45, 0xe0, 0x5e,
+	0x2c, 0x03, 0x67, 0xbe, 0x0c, 0x9c, 0xab, 0x65, 0xe0, 0x9c, 0xfe, 0x28, 0x98, 0x1e, 0x8e, 0xb3,
+	0x38, 0x17, 0xa3, 0x24, 0xa3, 0xbf, 0xed, 0xbb, 0x24, 0xeb, 0xab, 0x4f, 0xcc, 0xdd, 0xf5, 0x54,
+	0x52, 0x95, 0x75, 0xcc, 0xad, 0xff, 0xdd, 0x06, 0x00, 0x00, 0xff, 0xff, 0xac, 0x6e, 0x2a, 0xb6,
+	0x81, 0x02, 0x00, 0x00,
 }
 
 func (m *ClientRegistration) Marshal() (dAtA []byte, err error) {
@@ -109,13 +189,84 @@ func (m *ClientRegistration) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
-	if len(m.Id) > 0 {
-		i -= len(m.Id)
-		copy(dAtA[i:], m.Id)
-		i = encodeVarintClientRegistration(dAtA, i, uint64(len(m.Id)))
-		i--
-		dAtA[i] = 0xa
+	if len(m.Tags) > 0 {
+		for iNdEx := len(m.Tags) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.Tags[iNdEx])
+			copy(dAtA[i:], m.Tags[iNdEx])
+			i = encodeVarintClientRegistration(dAtA, i, uint64(len(m.Tags[iNdEx])))
+			i--
+			dAtA[i] = 0x4a
+		}
 	}
+	if len(m.ReplyUrls) > 0 {
+		for iNdEx := len(m.ReplyUrls) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.ReplyUrls[iNdEx])
+			copy(dAtA[i:], m.ReplyUrls[iNdEx])
+			i = encodeVarintClientRegistration(dAtA, i, uint64(len(m.ReplyUrls[iNdEx])))
+			i--
+			dAtA[i] = 0x42
+		}
+	}
+	if m.AllowPublicClient != 0 {
+		i = encodeVarintClientRegistration(dAtA, i, uint64(m.AllowPublicClient))
+		i--
+		dAtA[i] = 0x38
+	}
+	if m.AccessTokenAcceptedVersion != 0 {
+		i = encodeVarintClientRegistration(dAtA, i, uint64(m.AccessTokenAcceptedVersion))
+		i--
+		dAtA[i] = 0x30
+	}
+	if len(m.AppRoles) > 0 {
+		for iNdEx := len(m.AppRoles) - 1; iNdEx >= 0; iNdEx-- {
+			i -= len(m.AppRoles[iNdEx])
+			copy(dAtA[i:], m.AppRoles[iNdEx])
+			i = encodeVarintClientRegistration(dAtA, i, uint64(len(m.AppRoles[iNdEx])))
+			i--
+			dAtA[i] = 0x2a
+		}
+	}
+	if len(m.Name) > 0 {
+		i -= len(m.Name)
+		copy(dAtA[i:], m.Name)
+		i = encodeVarintClientRegistration(dAtA, i, uint64(len(m.Name)))
+		i--
+		dAtA[i] = 0x22
+	}
+	if m.AppId != nil {
+		{
+			size, err := m.AppId.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintClientRegistration(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x1a
+	}
+	if m.Id != nil {
+		{
+			size, err := m.Id.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintClientRegistration(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x12
+	}
+	{
+		size, err := m.AccessClientList.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarintClientRegistration(dAtA, i, uint64(size))
+	}
+	i--
+	dAtA[i] = 0xa
 	return len(dAtA) - i, nil
 }
 
@@ -136,9 +287,43 @@ func (m *ClientRegistration) Size() (n int) {
 	}
 	var l int
 	_ = l
-	l = len(m.Id)
+	l = m.AccessClientList.Size()
+	n += 1 + l + sovClientRegistration(uint64(l))
+	if m.Id != nil {
+		l = m.Id.Size()
+		n += 1 + l + sovClientRegistration(uint64(l))
+	}
+	if m.AppId != nil {
+		l = m.AppId.Size()
+		n += 1 + l + sovClientRegistration(uint64(l))
+	}
+	l = len(m.Name)
 	if l > 0 {
 		n += 1 + l + sovClientRegistration(uint64(l))
+	}
+	if len(m.AppRoles) > 0 {
+		for _, s := range m.AppRoles {
+			l = len(s)
+			n += 1 + l + sovClientRegistration(uint64(l))
+		}
+	}
+	if m.AccessTokenAcceptedVersion != 0 {
+		n += 1 + sovClientRegistration(uint64(m.AccessTokenAcceptedVersion))
+	}
+	if m.AllowPublicClient != 0 {
+		n += 1 + sovClientRegistration(uint64(m.AllowPublicClient))
+	}
+	if len(m.ReplyUrls) > 0 {
+		for _, s := range m.ReplyUrls {
+			l = len(s)
+			n += 1 + l + sovClientRegistration(uint64(l))
+		}
+	}
+	if len(m.Tags) > 0 {
+		for _, s := range m.Tags {
+			l = len(s)
+			n += 1 + l + sovClientRegistration(uint64(l))
+		}
 	}
 	return n
 }
@@ -180,7 +365,112 @@ func (m *ClientRegistration) Unmarshal(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field AccessClientList", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowClientRegistration
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthClientRegistration
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthClientRegistration
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.AccessClientList.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowClientRegistration
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthClientRegistration
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthClientRegistration
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Id == nil {
+				m.Id = &types.Did{}
+			}
+			if err := m.Id.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field AppId", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowClientRegistration
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthClientRegistration
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthClientRegistration
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.AppId == nil {
+				m.AppId = &types.Did{}
+			}
+			if err := m.AppId.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -208,7 +498,141 @@ func (m *ClientRegistration) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Id = string(dAtA[iNdEx:postIndex])
+			m.Name = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field AppRoles", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowClientRegistration
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthClientRegistration
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthClientRegistration
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.AppRoles = append(m.AppRoles, string(dAtA[iNdEx:postIndex]))
+			iNdEx = postIndex
+		case 6:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field AccessTokenAcceptedVersion", wireType)
+			}
+			m.AccessTokenAcceptedVersion = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowClientRegistration
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.AccessTokenAcceptedVersion |= uint32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 7:
+			if wireType != 0 {
+				return fmt.Errorf("proto: wrong wireType = %d for field AllowPublicClient", wireType)
+			}
+			m.AllowPublicClient = 0
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowClientRegistration
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				m.AllowPublicClient |= uint32(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+		case 8:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ReplyUrls", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowClientRegistration
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthClientRegistration
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthClientRegistration
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ReplyUrls = append(m.ReplyUrls, string(dAtA[iNdEx:postIndex]))
+			iNdEx = postIndex
+		case 9:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Tags", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowClientRegistration
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthClientRegistration
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthClientRegistration
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Tags = append(m.Tags, string(dAtA[iNdEx:postIndex]))
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
