@@ -13,14 +13,9 @@ const (
 
 var _ sdk.Msg = &MsgCreateClientRegistry{}
 
-func NewMsgCreateClientRegistry(
-	creator string,
-	index string,
-
-) *MsgCreateClientRegistry {
+func NewMsgCreateClientRegistry(clientRegistry ClientRegistry) *MsgCreateClientRegistry {
 	return &MsgCreateClientRegistry{
-		Creator: creator,
-		Index:   index,
+		ClientRegistry: &clientRegistry,
 	}
 }
 
@@ -33,7 +28,7 @@ func (msg *MsgCreateClientRegistry) Type() string {
 }
 
 func (msg *MsgCreateClientRegistry) GetSigners() []sdk.AccAddress {
-	creator, err := sdk.AccAddressFromBech32(msg.Creator)
+	creator, err := sdk.AccAddressFromBech32(msg.ClientRegistry.Creator)
 	if err != nil {
 		panic(err)
 	}
@@ -46,7 +41,7 @@ func (msg *MsgCreateClientRegistry) GetSignBytes() []byte {
 }
 
 func (msg *MsgCreateClientRegistry) ValidateBasic() error {
-	_, err := sdk.AccAddressFromBech32(msg.Creator)
+	_, err := sdk.AccAddressFromBech32(msg.ClientRegistry.Creator)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
@@ -55,14 +50,9 @@ func (msg *MsgCreateClientRegistry) ValidateBasic() error {
 
 var _ sdk.Msg = &MsgUpdateClientRegistry{}
 
-func NewMsgUpdateClientRegistry(
-	creator string,
-	index string,
-
-) *MsgUpdateClientRegistry {
+func NewMsgUpdateClientRegistry(clientRegistry ClientRegistry) *MsgUpdateClientRegistry {
 	return &MsgUpdateClientRegistry{
-		Creator: creator,
-		Index:   index,
+		ClientRegistry: &clientRegistry,
 	}
 }
 
@@ -75,7 +65,7 @@ func (msg *MsgUpdateClientRegistry) Type() string {
 }
 
 func (msg *MsgUpdateClientRegistry) GetSigners() []sdk.AccAddress {
-	creator, err := sdk.AccAddressFromBech32(msg.Creator)
+	creator, err := sdk.AccAddressFromBech32(msg.ClientRegistry.Creator)
 	if err != nil {
 		panic(err)
 	}
@@ -88,7 +78,7 @@ func (msg *MsgUpdateClientRegistry) GetSignBytes() []byte {
 }
 
 func (msg *MsgUpdateClientRegistry) ValidateBasic() error {
-	_, err := sdk.AccAddressFromBech32(msg.Creator)
+	_, err := sdk.AccAddressFromBech32(msg.ClientRegistry.Creator)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
@@ -99,12 +89,9 @@ var _ sdk.Msg = &MsgDeleteClientRegistry{}
 
 func NewMsgDeleteClientRegistry(
 	creator string,
-	index string,
-
 ) *MsgDeleteClientRegistry {
 	return &MsgDeleteClientRegistry{
 		Creator: creator,
-		Index:   index,
 	}
 }
 func (msg *MsgDeleteClientRegistry) Route() string {

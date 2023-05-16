@@ -2,17 +2,19 @@ syntax = "proto3";
 
 package beheroes.doxchain.idp;
 
-import "doxchain/idp/client_registrations.proto";
+import "gogoproto/gogo.proto";
+import "doxchain/idp/client_registry.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/idp/types";
 
 // Msg defines the Msg service.
 service Msg {
-  rpc Login                     (MsgAuthenticationRequest    ) returns (MsgAuthenticationResponse           );
+  rpc Login                (MsgAuthenticationRequest) returns (MsgAuthenticationResponse           );
   rpc CreateClientRegistry (MsgCreateClientRegistry) returns (MsgCreateClientRegistryResponse);
   rpc UpdateClientRegistry (MsgUpdateClientRegistry) returns (MsgUpdateClientRegistryResponse);
   rpc DeleteClientRegistry (MsgDeleteClientRegistry) returns (MsgDeleteClientRegistryResponse);
 }
+
 message MsgAuthenticationRequest {
   string creator = 1;
   string tenant  = 2;
@@ -23,22 +25,19 @@ message MsgAuthenticationResponse {
 }
 
 message MsgCreateClientRegistry {
-  string creator = 1;
-  string index   = 2;
+  ClientRegistry clientRegistry = 1;
 }
 
 message MsgCreateClientRegistryResponse {}
 
 message MsgUpdateClientRegistry {
-  string creator = 1;
-  string index   = 2;
+  ClientRegistry clientRegistry = 1;
 }
 
 message MsgUpdateClientRegistryResponse {}
 
 message MsgDeleteClientRegistry {
   string creator = 1;
-  string index   = 2;
 }
 
 message MsgDeleteClientRegistryResponse {}

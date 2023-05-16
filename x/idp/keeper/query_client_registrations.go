@@ -47,7 +47,7 @@ func (k Keeper) ClientRegistry(goCtx context.Context, req *types.QueryGetClientR
 
 	val, found := k.GetClientRegistry(
 		ctx,
-		req.Index,
+		req.Creator,
 	)
 	if !found {
 		return nil, status.Error(codes.NotFound, "not found")

@@ -25,7 +25,7 @@ type (
 	}
 )
 
-//TODO: Implement AppRegistration concept
+//TODO: Finish AppRegistration concept
 //TODO: Implement AppRegistrationGraph concept to infer audience relationships
 //TODO: Implement IDP metadata logic (.well-known, etc)
 func NewKeeper(

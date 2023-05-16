@@ -8,6 +8,6 @@ option go_package = "github.com/be-heroes/doxchain/x/idp/types";
 
 message ClientRegistry {
   string creator = 1;
-  repeated ClientRegistry registrations = 2 [(gogoproto.nullable) = false];
+  repeated ClientRegistration registrations = 2 [(gogoproto.nullable) = true];
 }
 

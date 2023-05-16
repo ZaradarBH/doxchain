@@ -12,7 +12,6 @@ message TenantRegistry {
 }
 
 message TenantEntry {  
-  string creator  = 1;
-  string identifier = 2;
-  AccessClientList accessClientList = 3 [(gogoproto.nullable) = false];
+  string identifier = 1;
+  AccessClientList accessClientList = 2 [(gogoproto.nullable) = false];
 }

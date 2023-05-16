@@ -11,9 +11,8 @@ const TypeMsgDeleteDidDocumentRequest = "delete_did_document"
 
 var _ sdk.Msg = &MsgCreateDidDocumentRequest{}
 
-func NewMsgCreateDidDocumentRequest(creator string, didDocument DidDocument) *MsgCreateDidDocumentRequest {
+func NewMsgCreateDidDocumentRequest(didDocument DidDocument) *MsgCreateDidDocumentRequest {
 	return &MsgCreateDidDocumentRequest{
-		Creator:     creator,
 		DidDocument: didDocument,
 	}
 }
@@ -27,7 +26,7 @@ func (msg *MsgCreateDidDocumentRequest) Type() string {
 }
 
 func (msg *MsgCreateDidDocumentRequest) GetSigners() []sdk.AccAddress {
-	creator, err := sdk.AccAddressFromBech32(msg.Creator)
+	creator, err := sdk.AccAddressFromBech32(msg.DidDocument.Id.Creator)
 	if err != nil {
 		panic(err)
 	}
@@ -40,7 +39,7 @@ func (msg *MsgCreateDidDocumentRequest) GetSignBytes() []byte {
 }
 
 func (msg *MsgCreateDidDocumentRequest) ValidateBasic() error {
-	_, err := sdk.AccAddressFromBech32(msg.Creator)
+	_, err := sdk.AccAddressFromBech32(msg.DidDocument.Id.Creator)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
@@ -49,9 +48,8 @@ func (msg *MsgCreateDidDocumentRequest) ValidateBasic() error {
 
 var _ sdk.Msg = &MsgUpdateDidDocumentRequest{}
 
-func NewMsgUpdateDidDocumentRequest(creator string, didDocument DidDocument) *MsgUpdateDidDocumentRequest {
+func NewMsgUpdateDidDocumentRequest(didDocument DidDocument) *MsgUpdateDidDocumentRequest {
 	return &MsgUpdateDidDocumentRequest{
-		Creator:     creator,
 		DidDocument: didDocument,
 	}
 }
@@ -65,7 +63,7 @@ func (msg *MsgUpdateDidDocumentRequest) Type() string {
 }
 
 func (msg *MsgUpdateDidDocumentRequest) GetSigners() []sdk.AccAddress {
-	creator, err := sdk.AccAddressFromBech32(msg.Creator)
+	creator, err := sdk.AccAddressFromBech32(msg.DidDocument.Id.Creator)
 	if err != nil {
 		panic(err)
 	}
@@ -78,7 +76,7 @@ func (msg *MsgUpdateDidDocumentRequest) GetSignBytes() []byte {
 }
 
 func (msg *MsgUpdateDidDocumentRequest) ValidateBasic() error {
-	_, err := sdk.AccAddressFromBech32(msg.Creator)
+	_, err := sdk.AccAddressFromBech32(msg.DidDocument.Id.Creator)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}

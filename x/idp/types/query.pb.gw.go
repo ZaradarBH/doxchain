@@ -80,15 +80,15 @@ func request_Query_ClientRegistry_0(ctx context.Context, marshaler runtime.Marsh
 		_   = err
 	)
 
-	val, ok = pathParams["index"]
+	val, ok = pathParams["creator"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "index")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "creator")
 	}
 
-	protoReq.Index, err = runtime.String(val)
+	protoReq.Creator, err = runtime.String(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "index", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "creator", err)
 	}
 
 	msg, err := client.ClientRegistry(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -107,15 +107,15 @@ func local_request_Query_ClientRegistry_0(ctx context.Context, marshaler runtime
 		_   = err
 	)
 
-	val, ok = pathParams["index"]
+	val, ok = pathParams["creator"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "index")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "creator")
 	}
 
-	protoReq.Index, err = runtime.String(val)
+	protoReq.Creator, err = runtime.String(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "index", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "creator", err)
 	}
 
 	msg, err := server.ClientRegistry(ctx, &protoReq)
@@ -386,9 +386,9 @@ var (
 
 	pattern_Query_GetDotWellKnown_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"be-heroes", "doxchain", "idp", "get_dot_well_known"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_ClientRegistry_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"be-heroes", "doxchain", "idp", "client_registrations", "index"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_ClientRegistry_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"be-heroes", "doxchain", "idp", "client_registry", "creator"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_ClientRegistryAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"be-heroes", "doxchain", "idp", "client_registrations"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_ClientRegistryAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"be-heroes", "doxchain", "idp", "client_registry"}, "", runtime.AssumeColonVerbOpt(true)))
 )
 
 var (

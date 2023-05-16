@@ -44,21 +44,18 @@ func CmdListClientRegistry() *cobra.Command {
 
 func CmdShowClientRegistry() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "show-client-registrations [index]",
+		Use:   "show-client-registry [creator]",
 		Short: "shows a ClientRegistry",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 			clientCtx := client.GetClientContextFromCmd(cmd)
-
 			queryClient := types.NewQueryClient(clientCtx)
-
-			argIndex := args[0]
-
 			params := &types.QueryGetClientRegistryRequest{
-				Index: argIndex,
+				Creator: args[0],
 			}
 
 			res, err := queryClient.ClientRegistry(context.Background(), params)
+			
 			if err != nil {
 				return err
 			}

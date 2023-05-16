@@ -89,39 +89,6 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		},
 	)
 
-	var weightMsgCreateClientRegistry int
-	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgCreateClientRegistry, &weightMsgCreateClientRegistry, nil,
-		func(_ *rand.Rand) {
-			weightMsgCreateClientRegistry = defaultWeightMsgCreateClientRegistry
-		},
-	)
-	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgCreateClientRegistry,
-		idpsimulation.SimulateMsgCreateClientRegistry(am.accountKeeper, am.bankKeeper, am.keeper),
-	))
-
-	var weightMsgUpdateClientRegistry int
-	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgUpdateClientRegistry, &weightMsgUpdateClientRegistry, nil,
-		func(_ *rand.Rand) {
-			weightMsgUpdateClientRegistry = defaultWeightMsgUpdateClientRegistry
-		},
-	)
-	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgUpdateClientRegistry,
-		idpsimulation.SimulateMsgUpdateClientRegistry(am.accountKeeper, am.bankKeeper, am.keeper),
-	))
-
-	var weightMsgDeleteClientRegistry int
-	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgDeleteClientRegistry, &weightMsgDeleteClientRegistry, nil,
-		func(_ *rand.Rand) {
-			weightMsgDeleteClientRegistry = defaultWeightMsgDeleteClientRegistry
-		},
-	)
-	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgDeleteClientRegistry,
-		idpsimulation.SimulateMsgDeleteClientRegistry(am.accountKeeper, am.bankKeeper, am.keeper),
-	))
-
 	// this line is used by starport scaffolding # simapp/module/operation
 
 	return operations

@@ -6,7 +6,7 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "doxchain/idp/params.proto";
-import "doxchain/idp/client_registrations.proto";
+import "doxchain/idp/client_registry.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/idp/types";
 
@@ -27,20 +27,18 @@ service Query {
   
   // Queries a list of ClientRegistry items.
   rpc ClientRegistry    (QueryGetClientRegistryRequest) returns (QueryGetClientRegistryResponse) {
-    option (google.api.http).get = "/be-heroes/doxchain/idp/client_registrations/{index}";
+    option (google.api.http).get = "/be-heroes/doxchain/idp/client_registry/{creator}";
   
   }
   rpc ClientRegistryAll (QueryAllClientRegistryRequest) returns (QueryAllClientRegistryResponse) {
-    option (google.api.http).get = "/be-heroes/doxchain/idp/client_registrations";
-  
+    option (google.api.http).get = "/be-heroes/doxchain/idp/client_registry";  
   }
 }
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
 
 // QueryParamsResponse is response type for the Query/Params RPC method.
-message QueryParamsResponse {
-  
+message QueryParamsResponse {  
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
 }
@@ -63,7 +61,7 @@ message QueryGetDotWellKnownResponse {
 }
 
 message QueryGetClientRegistryRequest {
-  string index = 1;
+  string creator = 1;
 }
 
 message QueryGetClientRegistryResponse {
