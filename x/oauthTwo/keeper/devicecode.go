@@ -7,6 +7,7 @@ import (
 
 	"github.com/be-heroes/doxchain/utils"
 	"github.com/be-heroes/doxchain/x/oauthtwo/types"
+	idpTypes "github.com/be-heroes/doxchain/x/idp/types"
 )
 
 // DeviceCode method for simple oauth keeper
@@ -29,13 +30,13 @@ func (k Keeper) DeviceCode(ctx sdk.Context, msg types.MsgDeviceCodeRequest) (typ
 	response.UserCode, _ = utils.GenerateRandomString(8)
 	response.VerificationUri = tenantConfiguration.LoginEndpoint
 
-	tenantDeviceCodeRegistry, found := k.GetDeviceCodeRegistry(ctx, msg.Tenant)
+	tenantDeviceCodeRegistry, found := k.idpKeeper.GetDeviceCodeRegistry(ctx, msg.Tenant)
 
 	if !found {
 		return response, sdkerrors.Wrap(types.TokenServiceError, "DeviceCodeRegistry cache could not be found for tenant")
 	}
 
-	deviceCodeEntry := types.DeviceCodeEntry{
+	deviceCodeEntry := idpTypes.DeviceCodeEntry{
 		Creator: msg.Creator,
 		DeviceCode: response.DeviceCode,
 		UserCode: response.UserCode,
@@ -44,7 +45,7 @@ func (k Keeper) DeviceCode(ctx sdk.Context, msg types.MsgDeviceCodeRequest) (typ
 
 	tenantDeviceCodeRegistry.Codes = append(tenantDeviceCodeRegistry.Codes, deviceCodeEntry)
 
-	k.SetDeviceCodeRegistry(ctx, tenantDeviceCodeRegistry)
+	k.idpKeeper.SetDeviceCodeRegistry(ctx, tenantDeviceCodeRegistry)
 
 	return response, nil
 }

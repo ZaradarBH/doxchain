@@ -63,7 +63,7 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 	}
 	idpGenesis := types.GenesisState{
 		Params: types.DefaultParams(),
-		ClientRegistryList: []types.ClientRegistry{
+		ClientRegistries: []types.ClientRegistry{
 			{
 				Creator: sample.AccAddress(),
 			},

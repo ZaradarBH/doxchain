@@ -83,14 +83,6 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 	}
 	oauthGenesis := types.GenesisState{
 		Params: types.DefaultParams(),
-		DeviceCodeRegistries: []types.DeviceCodeRegistry{
-			{
-				Tenant: "0",
-			},
-			{
-				Tenant: "1",
-			},
-		},
 		AccessTokenRegistries: []types.AccessTokenRegistry{
 			{
 				Tenant: "0",

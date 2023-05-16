@@ -154,6 +154,30 @@ func (AppModule) ConsensusVersion() uint64 { return 1 }
 func (am AppModule) BeginBlock(_ sdk.Context, _ abci.RequestBeginBlock) {}
 
 // EndBlock contains the logic that is automatically triggered at the end of each block
-func (am AppModule) EndBlock(_ sdk.Context, _ abci.RequestEndBlock) []abci.ValidatorUpdate {
+func (am AppModule) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.ValidatorUpdate {
+	deviceCodeRegistries := am.keeper.GetAllDeviceCodeRegistry(ctx)
+
+	for _, deviceCodeRegistry := range deviceCodeRegistries {
+		registryUpdated := false
+
+		for index, deviceCodeInfo := range deviceCodeRegistry.Codes {
+			if deviceCodeInfo.ExpiresAt < ctx.BlockTime().Unix() {
+				deviceCodeRegistry.Codes = append(deviceCodeRegistry.Codes[:index], deviceCodeRegistry.Codes[index+1:]...)
+
+				ctx.EventManager().EmitEvent(
+					sdk.NewEvent(types.EventTypeDeviceCodeExpired,
+						sdk.NewAttribute(types.AttributeKeyDeviceCode, deviceCodeInfo.DeviceCode),
+					),
+				)
+
+				registryUpdated = true
+			}
+		}
+
+		if registryUpdated {
+			am.keeper.SetDeviceCodeRegistry(ctx, deviceCodeRegistry)
+		}
+	}
+
 	return []abci.ValidatorUpdate{}
 }

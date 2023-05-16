@@ -1,17 +1,17 @@
 package keeper
 
 import (
-	"github.com/be-heroes/doxchain/x/oauthtwo/types"
+	"github.com/be-heroes/doxchain/x/idp/types"
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 // SetDeviceCodeRegistry set a specific DeviceCodeRegistry in the store from its index
-func (k Keeper) SetDeviceCodeRegistry(ctx sdk.Context, DeviceCodeRegistry types.DeviceCodeRegistry) {
+func (k Keeper) SetDeviceCodeRegistry(ctx sdk.Context, deviceCodeRegistry types.DeviceCodeRegistry) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DeviceCodeRegistryKeyPrefix))
-	b := k.cdc.MustMarshal(&DeviceCodeRegistry)
+	b := k.cdc.MustMarshal(&deviceCodeRegistry)
 	store.Set(types.DeviceCodeRegistryKey(
-		DeviceCodeRegistry.Tenant,
+		deviceCodeRegistry.Tenant,
 	), b)
 }
 
