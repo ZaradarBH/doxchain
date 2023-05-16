@@ -44,7 +44,9 @@ message MsgCreateDidDocumentRequest {
   DidDocument didDocument = 2 [(gogoproto.nullable) = false];
 }
 
-message MsgCreateDidDocumentResponse {}
+message MsgCreateDidDocumentResponse {
+  string fullyQualifiedDidIdentifier = 1;
+}
 
 message MsgUpdateDidDocumentRequest {
   string creator = 1;

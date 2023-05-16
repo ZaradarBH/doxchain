@@ -1,47 +1,40 @@
 package keeper
 
 import (
-	"fmt"
 	"context"
 
 	"github.com/be-heroes/doxchain/x/did/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
 func (k msgServer) CreateDidDocument(goCtx context.Context, msg *types.MsgCreateDidDocumentRequest) (*types.MsgCreateDidDocumentResponse, error) {
-	ctx := sdk.UnwrapSDKContext(goCtx)
-
-	k.Keeper.SetDidDocument(ctx, msg.DidDocument)
+	err := k.Keeper.SetDidDocument(sdk.UnwrapSDKContext(goCtx), msg.DidDocument, false)
 	
-	return &types.MsgCreateDidDocumentResponse{}, nil
+	if err != nil {
+		return nil, err
+	}
+
+	return &types.MsgCreateDidDocumentResponse{
+		FullyQualifiedDidIdentifier: msg.DidDocument.Id.GetFullyQualifiedDidIdentifier(),
+	}, nil
 }
 
 func (k msgServer) UpdateDidDocument(goCtx context.Context, msg *types.MsgUpdateDidDocumentRequest) (*types.MsgUpdateDidDocumentResponse, error) {
-	ctx := sdk.UnwrapSDKContext(goCtx)
-
-	// Checks that the element exists
-	fullyQualifiedDidIdentifier := msg.DidDocument.Id.GetFullyQualifiedDidIdentifier()
-	val, found := k.GetDidDocument(ctx, fullyQualifiedDidIdentifier)
-
-	if !found {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, fmt.Sprintf("key %s doesn't exist", fullyQualifiedDidIdentifier))
+	err := k.SetDidDocument(sdk.UnwrapSDKContext(goCtx), msg.DidDocument, true)
+	
+	if err != nil {
+		return nil, err
 	}
-
-	// Checks if the msg creator is the same as the current owner
-	if msg.DidDocument.Id.Creator != val.Id.Creator {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "incorrect owner")
-	}
-
-	k.Keeper.SetDidDocument(ctx, msg.DidDocument)
 
 	return &types.MsgUpdateDidDocumentResponse{}, nil
 }
 
 func (k msgServer) DeleteDidDocument(goCtx context.Context, msg *types.MsgDeleteDidDocumentRequest) (*types.MsgDeleteDidDocumentResponse, error) {
-	ctx := sdk.UnwrapSDKContext(goCtx)
+	err := k.Keeper.RemoveDidDocument(sdk.UnwrapSDKContext(goCtx), msg.FullyQualifiedDidIdentifier)
 
-	k.Keeper.RemoveDidDocument(ctx, msg.FullyQualifiedDidIdentifier)
-
+	if err != nil {
+		return nil, err
+	}
+	
 	return &types.MsgDeleteDidDocumentResponse{}, nil
 }

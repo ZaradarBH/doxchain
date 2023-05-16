@@ -1,11 +1,13 @@
 package keeper
 
 import (
+	"fmt"
 	"encoding/binary"
 
 	"github.com/be-heroes/doxchain/x/did/types"
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
 // GetDidDocumentCount fetches the DidDocument counter from the KVStore
@@ -31,13 +33,20 @@ func (k Keeper) SetDidDocumentCount(ctx sdk.Context, count uint64) {
 }
 
 // SetDidDocument adds a DidDocument to the KVStore and updates the DidDocument counter
-func (k Keeper) SetDidDocument(ctx sdk.Context, didDocument types.DidDocument) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DidDocumentKey))
-	b := k.cdc.MustMarshal(&didDocument)
+func (k Keeper) SetDidDocument(ctx sdk.Context, didDocument types.DidDocument, override bool) error {
+	err := k.CanOverrideDidDocument(ctx, didDocument, override)
 
-	store.Set(GetDidDocumentIDBytes(didDocument.Id.GetFullyQualifiedDidIdentifier()), b)
+	if err != nil {
+		return err
+	}
+
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DidDocumentKey))
+
+	store.Set(GetDidDocumentIDBytes(didDocument.Id.GetFullyQualifiedDidIdentifier()), k.cdc.MustMarshal(&didDocument))
 
 	k.SetDidDocumentCount(ctx, k.GetDidDocumentCount(ctx)+1)
+	
+	return nil
 }
 
 // GetDidDocument returns a DidDocument from its FullyQualifiedDidDocumentIdentifier (DidDocument:MethodName:MethoDidDocument)
@@ -55,10 +64,22 @@ func (k Keeper) GetDidDocument(ctx sdk.Context, fullyQualifiedDidIdentifier stri
 }
 
 // RemoveDidDocument removes a DidDocument from the KVStore
-func (k Keeper) RemoveDidDocument(ctx sdk.Context, fullyQualifiedDidIdentifier string) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DidDocumentKey))
+func (k Keeper) RemoveDidDocument(ctx sdk.Context, fullyQualifiedDidIdentifier string) error {
+	match, exists := k.GetDidDocument(ctx, fullyQualifiedDidIdentifier)
 
-	store.Delete(GetDidDocumentIDBytes(fullyQualifiedDidIdentifier))
+	if exists {
+		err := k.CanOverrideDidDocument(ctx, match, true)
+
+		if err != nil {
+			return err
+		}
+
+		store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DidDocumentKey))
+
+		store.Delete(GetDidDocumentIDBytes(fullyQualifiedDidIdentifier))
+	}
+
+	return nil
 }
 
 // GetAllDidDocument returns all DidDocuments in the KVStore
@@ -75,6 +96,24 @@ func (k Keeper) GetAllDidDocument(ctx sdk.Context) (list []types.DidDocument) {
 	}
 
 	return
+}
+
+// CanOverrideDidDocument check if a DidDocument can be safely overwritten without causing and "unapproved identifier collision or ownership error" 
+func (k Keeper) CanOverrideDidDocument(ctx sdk.Context, document types.DidDocument, override bool) error {
+	fullyQualifiedDidIdentifier := document.Id.GetFullyQualifiedDidIdentifier();
+	match, found := k.GetDidDocument(ctx, fullyQualifiedDidIdentifier)
+
+	if found {
+		if !override {
+			return sdkerrors.Wrap(types.DidIdentifierCollisionError, fmt.Sprintf("DidDocument with identifier: %s already exists in KVStore", fullyQualifiedDidIdentifier))
+		}
+		
+		if document.Id.Creator != match.Id.Creator {
+			return sdkerrors.Wrap(types.DidOwnershipError, fmt.Sprintf("DidDocument owned by creator: %s cannot be overriden by creator: %s", match.Id.Creator, document.Id.Creator))
+		}
+	}
+
+	return nil
 }
 
 // GetDidDocumentIDBytes returns the byte representation of the DidDocument

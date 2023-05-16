@@ -46220,6 +46220,9 @@ definitions:
               type: string
   beheroes.doxchain.did.MsgCreateDidDocumentResponse:
     type: object
+    properties:
+      fullyQualifiedDidIdentifier:
+        type: string
   beheroes.doxchain.did.MsgCreateDidResponse:
     type: object
     properties:

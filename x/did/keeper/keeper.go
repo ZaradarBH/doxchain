@@ -24,7 +24,7 @@ type (
 	}
 )
 
-//TODO: Implement Did / DidDocument validation to ensure verification relationships are valid
+//TODO: Concept for validating ValidationMethods & ValidationRelationships in accordancee with the W3C spec
 func NewKeeper(
 	cdc codec.BinaryCodec,
 	storeKey,

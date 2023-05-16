@@ -10,7 +10,7 @@ import (
 func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) {
 	// Set all the did
 	for _, elem := range genState.DidList {
-		k.SetDid(ctx, elem)
+		k.SetDid(ctx, elem, true)
 	}
 
 	// Set did count
