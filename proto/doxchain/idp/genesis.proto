@@ -3,7 +3,7 @@ package beheroes.doxchain.idp;
 
 import "gogoproto/gogo.proto";
 import "doxchain/idp/params.proto";
-import "doxchain/idp/tenant.proto";
+import "doxchain/idp/tenant_registry.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/idp/types";
 
