@@ -2,10 +2,11 @@ syntax = "proto3";
 package beheroes.doxchain.aml.v1beta1;
 
 import "gogoproto/gogo.proto";
+import "doxchain/did/v1beta1/did.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/aml/types";
 
-//TODO: Manage AML approval via consensus params
 message Params {
   option (gogoproto.goproto_stringer) = false;  
+  repeated beheroes.doxchain.did.v1beta1.Did approvers = 1 [(gogoproto.nullable) = false];
 }

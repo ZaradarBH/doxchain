@@ -526,7 +526,35 @@ paths:
               params:
                 description: params holds all the parameters of this module.
                 type: object
-                title: 'TODO: Manage AML approval via consensus params'
+                properties:
+                  approvers:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        creator:
+                          type: string
+                        url:
+                          type: string
+                        methodName:
+                          type: string
+                        methodId:
+                          type: string
+                        path:
+                          type: string
+                        fragment:
+                          type: string
+                        query:
+                          type: string
+                        parameters:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              value:
+                                type: string
         default:
           description: An unexpected error response.
           schema:
@@ -1299,6 +1327,35 @@ paths:
             properties:
               params:
                 type: object
+                properties:
+                  approvers:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        creator:
+                          type: string
+                        url:
+                          type: string
+                        methodName:
+                          type: string
+                        methodId:
+                          type: string
+                        path:
+                          type: string
+                        fragment:
+                          type: string
+                        query:
+                          type: string
+                        parameters:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              value:
+                                type: string
         default:
           description: An unexpected error response.
           schema:
@@ -46363,7 +46420,35 @@ definitions:
     type: object
   beheroes.doxchain.aml.v1beta1.Params:
     type: object
-    title: 'TODO: Manage AML approval via consensus params'
+    properties:
+      approvers:
+        type: array
+        items:
+          type: object
+          properties:
+            creator:
+              type: string
+            url:
+              type: string
+            methodName:
+              type: string
+            methodId:
+              type: string
+            path:
+              type: string
+            fragment:
+              type: string
+            query:
+              type: string
+            parameters:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  value:
+                    type: string
   beheroes.doxchain.aml.v1beta1.QueryGetAMLRequestResponse:
     type: object
     properties:
@@ -46404,7 +46489,35 @@ definitions:
       params:
         description: params holds all the parameters of this module.
         type: object
-        title: 'TODO: Manage AML approval via consensus params'
+        properties:
+          approvers:
+            type: array
+            items:
+              type: object
+              properties:
+                creator:
+                  type: string
+                url:
+                  type: string
+                methodName:
+                  type: string
+                methodId:
+                  type: string
+                path:
+                  type: string
+                fragment:
+                  type: string
+                query:
+                  type: string
+                parameters:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      value:
+                        type: string
   beheroes.doxchain.did.v1beta1.DidDocument:
     type: object
     properties:
@@ -47965,6 +48078,35 @@ definitions:
     type: object
   beheroes.doxchain.kyc.v1beta1.Params:
     type: object
+    properties:
+      approvers:
+        type: array
+        items:
+          type: object
+          properties:
+            creator:
+              type: string
+            url:
+              type: string
+            methodName:
+              type: string
+            methodId:
+              type: string
+            path:
+              type: string
+            fragment:
+              type: string
+            query:
+              type: string
+            parameters:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  value:
+                    type: string
   beheroes.doxchain.kyc.v1beta1.QueryGetKYCRequestResponse:
     type: object
     properties:
@@ -48004,6 +48146,35 @@ definitions:
     properties:
       params:
         type: object
+        properties:
+          approvers:
+            type: array
+            items:
+              type: object
+              properties:
+                creator:
+                  type: string
+                url:
+                  type: string
+                methodName:
+                  type: string
+                methodId:
+                  type: string
+                path:
+                  type: string
+                fragment:
+                  type: string
+                query:
+                  type: string
+                parameters:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      value:
+                        type: string
   beheroes.doxchain.oauthtwo.v1beta1.MsgAuthorizeResponse:
     type: object
     properties:
