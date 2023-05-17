@@ -6,5 +6,6 @@ import "gogoproto/gogo.proto";
 option go_package = "github.com/be-heroes/doxchain/x/oracle/types";
 
 message Params {
-  option (gogoproto.goproto_stringer) = false;  
+  option (gogoproto.goproto_stringer) = false;
+  
 }

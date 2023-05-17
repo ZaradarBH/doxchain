@@ -309,38 +309,7 @@ paths:
             properties:
               params:
                 type: object
-                properties:
-                  operators:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        creator:
-                          type: string
-                        url:
-                          type: string
-                        methodName:
-                          type: string
-                        methodId:
-                          type: string
-                        path:
-                          type: string
-                        fragment:
-                          type: string
-                        query:
-                          type: string
-                        parameters:
-                          type: array
-                          items:
-                            type: object
-                            properties:
-                              name:
-                                type: string
-                              value:
-                                type: string
-                  blockExpireOffset:
-                    type: string
-                    format: uint64
+                title: 'TODO: Manage BreakFactor via consensus params'
         default:
           description: An unexpected error response.
           schema:
@@ -529,35 +498,7 @@ paths:
               params:
                 description: params holds all the parameters of this module.
                 type: object
-                properties:
-                  approvers:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        creator:
-                          type: string
-                        url:
-                          type: string
-                        methodName:
-                          type: string
-                        methodId:
-                          type: string
-                        path:
-                          type: string
-                        fragment:
-                          type: string
-                        query:
-                          type: string
-                        parameters:
-                          type: array
-                          items:
-                            type: object
-                            properties:
-                              name:
-                                type: string
-                              value:
-                                type: string
+                title: 'TODO: Manage AML approval via consensus params'
         default:
           description: An unexpected error response.
           schema:
@@ -1330,35 +1271,6 @@ paths:
             properties:
               params:
                 type: object
-                properties:
-                  approvers:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        creator:
-                          type: string
-                        url:
-                          type: string
-                        methodName:
-                          type: string
-                        methodId:
-                          type: string
-                        path:
-                          type: string
-                        fragment:
-                          type: string
-                        query:
-                          type: string
-                        parameters:
-                          type: array
-                          items:
-                            type: object
-                            properties:
-                              name:
-                                type: string
-                              value:
-                                type: string
         default:
           description: An unexpected error response.
           schema:
@@ -45371,38 +45283,7 @@ definitions:
     type: object
   beheroes.doxchain.abs.v1beta1.Params:
     type: object
-    properties:
-      operators:
-        type: array
-        items:
-          type: object
-          properties:
-            creator:
-              type: string
-            url:
-              type: string
-            methodName:
-              type: string
-            methodId:
-              type: string
-            path:
-              type: string
-            fragment:
-              type: string
-            query:
-              type: string
-            parameters:
-              type: array
-              items:
-                type: object
-                properties:
-                  name:
-                    type: string
-                  value:
-                    type: string
-      blockExpireOffset:
-        type: string
-        format: uint64
+    title: 'TODO: Manage BreakFactor via consensus params'
   beheroes.doxchain.abs.v1beta1.ParitionedPoolConfiguration:
     type: object
     properties:
@@ -45801,38 +45682,7 @@ definitions:
     properties:
       params:
         type: object
-        properties:
-          operators:
-            type: array
-            items:
-              type: object
-              properties:
-                creator:
-                  type: string
-                url:
-                  type: string
-                methodName:
-                  type: string
-                methodId:
-                  type: string
-                path:
-                  type: string
-                fragment:
-                  type: string
-                query:
-                  type: string
-                parameters:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                      value:
-                        type: string
-          blockExpireOffset:
-            type: string
-            format: uint64
+        title: 'TODO: Manage BreakFactor via consensus params'
   beheroes.doxchain.abs.v1beta1.QueryWatchlistResponse:
     type: object
     properties:
@@ -45918,39 +45768,6 @@ definitions:
 
             NOTE: The amount field is an Int which implements the custom method
             signatures required by gogoproto.
-  beheroes.doxchain.did.v1beta1.Did:
-    type: object
-    properties:
-      creator:
-        type: string
-      url:
-        type: string
-      methodName:
-        type: string
-      methodId:
-        type: string
-      path:
-        type: string
-      fragment:
-        type: string
-      query:
-        type: string
-      parameters:
-        type: array
-        items:
-          type: object
-          properties:
-            name:
-              type: string
-            value:
-              type: string
-  beheroes.doxchain.did.v1beta1.DidParameter:
-    type: object
-    properties:
-      name:
-        type: string
-      value:
-        type: string
   beheroes.doxchain.idp.v1beta1.AccessClientList:
     type: object
     properties:
@@ -46429,35 +46246,7 @@ definitions:
     type: object
   beheroes.doxchain.aml.v1beta1.Params:
     type: object
-    properties:
-      approvers:
-        type: array
-        items:
-          type: object
-          properties:
-            creator:
-              type: string
-            url:
-              type: string
-            methodName:
-              type: string
-            methodId:
-              type: string
-            path:
-              type: string
-            fragment:
-              type: string
-            query:
-              type: string
-            parameters:
-              type: array
-              items:
-                type: object
-                properties:
-                  name:
-                    type: string
-                  value:
-                    type: string
+    title: 'TODO: Manage AML approval via consensus params'
   beheroes.doxchain.aml.v1beta1.QueryGetAMLRequestResponse:
     type: object
     properties:
@@ -46498,35 +46287,40 @@ definitions:
       params:
         description: params holds all the parameters of this module.
         type: object
-        properties:
-          approvers:
-            type: array
-            items:
-              type: object
-              properties:
-                creator:
-                  type: string
-                url:
-                  type: string
-                methodName:
-                  type: string
-                methodId:
-                  type: string
-                path:
-                  type: string
-                fragment:
-                  type: string
-                query:
-                  type: string
-                parameters:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                      value:
-                        type: string
+        title: 'TODO: Manage AML approval via consensus params'
+  beheroes.doxchain.did.v1beta1.Did:
+    type: object
+    properties:
+      creator:
+        type: string
+      url:
+        type: string
+      methodName:
+        type: string
+      methodId:
+        type: string
+      path:
+        type: string
+      fragment:
+        type: string
+      query:
+        type: string
+      parameters:
+        type: array
+        items:
+          type: object
+          properties:
+            name:
+              type: string
+            value:
+              type: string
+  beheroes.doxchain.did.v1beta1.DidParameter:
+    type: object
+    properties:
+      name:
+        type: string
+      value:
+        type: string
   beheroes.doxchain.did.v1beta1.DidDocument:
     type: object
     properties:
@@ -48012,35 +47806,6 @@ definitions:
     type: object
   beheroes.doxchain.kyc.v1beta1.Params:
     type: object
-    properties:
-      approvers:
-        type: array
-        items:
-          type: object
-          properties:
-            creator:
-              type: string
-            url:
-              type: string
-            methodName:
-              type: string
-            methodId:
-              type: string
-            path:
-              type: string
-            fragment:
-              type: string
-            query:
-              type: string
-            parameters:
-              type: array
-              items:
-                type: object
-                properties:
-                  name:
-                    type: string
-                  value:
-                    type: string
   beheroes.doxchain.kyc.v1beta1.QueryGetKYCRequestResponse:
     type: object
     properties:
@@ -48080,35 +47845,6 @@ definitions:
     properties:
       params:
         type: object
-        properties:
-          approvers:
-            type: array
-            items:
-              type: object
-              properties:
-                creator:
-                  type: string
-                url:
-                  type: string
-                methodName:
-                  type: string
-                methodId:
-                  type: string
-                path:
-                  type: string
-                fragment:
-                  type: string
-                query:
-                  type: string
-                parameters:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                      value:
-                        type: string
   beheroes.doxchain.oauthtwo.v1beta1.MsgAuthorizeResponse:
     type: object
     properties:

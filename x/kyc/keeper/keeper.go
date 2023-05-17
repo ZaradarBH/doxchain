@@ -24,6 +24,7 @@ type (
 	}
 )
 
+//TODO: Manage KYC approval via consensus params
 func NewKeeper(
 	cdc codec.BinaryCodec,
 	storeKey,

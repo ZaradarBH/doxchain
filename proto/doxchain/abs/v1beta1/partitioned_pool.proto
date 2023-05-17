@@ -4,6 +4,7 @@ package beheroes.doxchain.abs.v1beta1;
 import "gogoproto/gogo.proto";
 import "doxchain/idp/v1beta1/access_client_list.proto";
 import "doxchain/abs/v1beta1/partitioned_pool_configuraton.proto";
+import "cosmos/base/v1beta1/coin.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/abs/types";
 

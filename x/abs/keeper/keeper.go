@@ -26,7 +26,8 @@ type (
 	}
 )
 
-//TODO: Implement PartitionedPool logic
+//TODO: Finish PartitionedPool concept
+//TODO: Finish Watchlist concept
 func NewKeeper(
 	cdc codec.BinaryCodec,
 	storeKey,
