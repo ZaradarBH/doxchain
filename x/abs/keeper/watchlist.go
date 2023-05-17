@@ -44,7 +44,7 @@ func (k Keeper) AddToWatchlist(ctx sdk.Context, addr sdk.AccAddress, coins sdk.C
 		}
 	}
 
-	blockExpireOffset := k.paramstore.Get(types.ParamStoreKeyBlockExpireOffset).Int64()
+	blockExpireOffset := k.paramstore.Get(types.ParamStoreKeyBlockExpireOffset).Uint64()
 
 	if watchlistEntry.GetBlockHeight()+blockExpireOffset <= blockHeight {
 		k.DeleteAddressWatchlist(ctx, addr)
