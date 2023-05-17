@@ -1,12 +1,12 @@
-package types
+package utils
 
 type Graph[T interface{}, W interface{}] struct {
-	Vertices map[int]*Vertex[T, W]
+	Vertices map[uint64]*Vertex[T, W]
 }
 
 type Vertex[T interface{}, W interface{}] struct {
 	Value T
-	Edges map[int]*Edge[T, W]
+	Edges map[uint64]*Edge[T, W]
 }
 
 type Edge[T interface{}, W interface{}] struct {
@@ -14,27 +14,26 @@ type Edge[T interface{}, W interface{}] struct {
 	Vertex *Vertex[T, W]
 }
 
-func (this *Graph[T, W]) AddVertex(key int, value T) {
-	this.Vertices[key] = &Vertex[T, W]{Value: value, Edges: map[int]*Edge[T, W]{}}
+func (g *Graph[T, W]) AddVertex(key uint64, value T) {
+	g.Vertices[key] = &Vertex[T, W]{Value: value, Edges: map[uint64]*Edge[T, W]{}}
 }
 
-func (this *Graph[T, W]) AddEdge(srcKey int, destKey int, weight W) {
-	// check if src & dest exist
-	if _, ok := this.Vertices[srcKey]; !ok {
+func (g *Graph[T, W]) AddEdge(key uint64, destKey uint64, weight W) {
+	if _, ok := g.Vertices[key]; !ok {
 		return
 	}
 
-	if _, ok := this.Vertices[destKey]; !ok {
+	if _, ok := g.Vertices[destKey]; !ok {
 		return
 	}
 
-	this.Vertices[srcKey].Edges[destKey] = &Edge[T, W]{Weight: weight, Vertex: this.Vertices[destKey]}
+	g.Vertices[key].Edges[destKey] = &Edge[T, W]{Weight: weight, Vertex: g.Vertices[destKey]}
 }
 
-func (this *Graph[T, W]) Neighbors(srcKey int) []T {
+func (g *Graph[T, W]) Neighbors(key uint64) []T {
 	result := []T{}
 
-	for _, edge := range this.Vertices[srcKey].Edges {
+	for _, edge := range g.Vertices[key].Edges {
 		result = append(result, edge.Vertex.Value)
 	}
 
