@@ -601,7 +601,6 @@ func New(
 		keys[idpmoduletypes.MemStoreKey],
 		app.GetSubspace(idpmoduletypes.ModuleName),
 
-		app.OAuthTwoKeeper,
 		app.AuthzKeeper,
 		app.EvidenceKeeper,
 	)

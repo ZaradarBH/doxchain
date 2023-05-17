@@ -18,8 +18,7 @@ type (
 		storeKey   storetypes.StoreKey
 		memKey     storetypes.StoreKey
 		paramstore paramtypes.Subspace
-
-		oauthTwoKeeper types.OAuthTwoKeeper
+		
 		authzKeeper    types.AuthzKeeper
 		evidenceKeeper types.EvidenceKeeper
 	}
@@ -32,7 +31,6 @@ func NewKeeper(
 	memKey storetypes.StoreKey,
 	ps paramtypes.Subspace,
 
-	oauthTwoKeeper types.OAuthTwoKeeper,
 	authzKeeper types.AuthzKeeper,
 	evidenceKeeper types.EvidenceKeeper,
 ) *Keeper {
@@ -47,7 +45,6 @@ func NewKeeper(
 		memKey:     memKey,
 		paramstore: ps,
 
-		oauthTwoKeeper: oauthTwoKeeper,
 		authzKeeper:    authzKeeper,
 		evidenceKeeper: evidenceKeeper,
 	}
