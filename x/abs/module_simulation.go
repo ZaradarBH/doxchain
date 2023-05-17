@@ -51,7 +51,7 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 	}
 	absGenesis := types.GenesisState{
 		Params: types.DefaultParams(),
-		PartitionedPoolRegistryList: []types.PartitionedPoolRegistry{
+		PartitionedPoolRegistries: []types.PartitionedPoolRegistry{
 			{
 				Creator: sample.AccAddress(),
 			},

@@ -6,7 +6,7 @@ info:
 paths:
   /be-heroes/doxchain/abs/partitioned_pool_registries:
     get:
-      operationId: BeheroesDoxchainAbsPartitionedPoolRegistryAll
+      operationId: BeheroesDoxchainAbsV1Beta1PartitionedPoolRegistryAll
       responses:
         '200':
           description: A successful response.
@@ -195,7 +195,7 @@ paths:
   /be-heroes/doxchain/abs/partitioned_pool_registries/{creator}:
     get:
       summary: Queries a list of PartitionedPools items.
-      operationId: BeheroesDoxchainAbsPartitionedPoolRegistry
+      operationId: BeheroesDoxchainAbsV1Beta1PartitionedPoolRegistry
       responses:
         '200':
           description: A successful response.
@@ -302,7 +302,7 @@ paths:
   /doxchain/abs/params:
     get:
       summary: Parameters queries the parameters of the module.
-      operationId: BeheroesDoxchainAbsParams
+      operationId: BeheroesDoxchainAbsV1Beta1Params
       responses:
         '200':
           description: A successful response.
@@ -338,7 +338,7 @@ paths:
   /doxchain/abs/query_break_factor:
     get:
       summary: Queries a list of QueryBreakFactor items.
-      operationId: BeheroesDoxchainAbsQueryBreakFactor
+      operationId: BeheroesDoxchainAbsV1Beta1QueryBreakFactor
       responses:
         '200':
           description: A successful response.
@@ -370,7 +370,7 @@ paths:
   /doxchain/abs/query_watchlist:
     get:
       summary: Queries watchlist.
-      operationId: BeheroesDoxchainAbsQueryWatchlist
+      operationId: BeheroesDoxchainAbsV1Beta1QueryWatchlist
       responses:
         '200':
           description: A successful response.
@@ -431,7 +431,7 @@ paths:
   /be-heroes/doxchain/aml/aml_request:
     get:
       summary: Queries a AMLRequest by index.
-      operationId: BeheroesDoxchainAmlAMLRequest
+      operationId: BeheroesDoxchainAmlV1Beta1AMLRequest
       responses:
         '200':
           description: A successful response.
@@ -497,7 +497,7 @@ paths:
   /be-heroes/doxchain/aml/params:
     get:
       summary: Parameters queries the parameters of the module.
-      operationId: BeheroesDoxchainAmlParams
+      operationId: BeheroesDoxchainAmlV1Beta1Params
       responses:
         '200':
           description: A successful response.
@@ -532,7 +532,7 @@ paths:
         - Query
   /doxchain/did/did:
     get:
-      operationId: BeheroesDoxchainDidDidAll
+      operationId: BeheroesDoxchainDidV1Beta1DidAll
       responses:
         '200':
           description: A successful response.
@@ -675,7 +675,7 @@ paths:
   /doxchain/did/did/{fullyQualifiedDidIdentifier}:
     get:
       summary: Queries a list of Did items.
-      operationId: BeheroesDoxchainDidDid
+      operationId: BeheroesDoxchainDidV1Beta1Did
       responses:
         '200':
           description: A successful response.
@@ -736,7 +736,7 @@ paths:
   /doxchain/did/params:
     get:
       summary: Parameters queries the parameters of the module.
-      operationId: BeheroesDoxchainDidParams
+      operationId: BeheroesDoxchainDidV1Beta1Params
       responses:
         '200':
           description: A successful response.
@@ -771,7 +771,7 @@ paths:
         - Query
   /be-heroes/doxchain/idp/client_registry:
     get:
-      operationId: BeheroesDoxchainIdpClientRegistryAll
+      operationId: BeheroesDoxchainIdpV1Beta1ClientRegistryAll
       responses:
         '200':
           description: A successful response.
@@ -988,7 +988,7 @@ paths:
   /be-heroes/doxchain/idp/client_registry/{creator}:
     get:
       summary: Queries a list of ClientRegistry items.
-      operationId: BeheroesDoxchainIdpClientRegistry
+      operationId: BeheroesDoxchainIdpV1Beta1ClientRegistry
       responses:
         '200':
           description: A successful response.
@@ -1123,7 +1123,7 @@ paths:
   /be-heroes/doxchain/idp/params:
     get:
       summary: Parameters queries the parameters of the module.
-      operationId: BeheroesDoxchainIdpParams
+      operationId: BeheroesDoxchainIdpV1Beta1Params
       responses:
         '200':
           description: A successful response.
@@ -1159,7 +1159,7 @@ paths:
   /be-heroes/doxchain/idp/{tenant}/.well-known:
     get:
       summary: Queries a list of GetDotWellKnown items.
-      operationId: BeheroesDoxchainIdpGetDotWellKnown
+      operationId: BeheroesDoxchainIdpV1Beta1GetDotWellKnown
       responses:
         '200':
           description: A successful response.
@@ -1222,7 +1222,7 @@ paths:
   /be-heroes/doxchain/kyc/kyc_request:
     get:
       summary: Queries a KYCRequest by index.
-      operationId: BeheroesDoxchainKycKYCRequest
+      operationId: BeheroesDoxchainKycV1Beta1KYCRequest
       responses:
         '200':
           description: A successful response.
@@ -1288,7 +1288,7 @@ paths:
   /be-heroes/doxchain/kyc/params:
     get:
       summary: Parameters queries the parameters of the module.
-      operationId: BeheroesDoxchainKycParams
+      operationId: BeheroesDoxchainKycV1Beta1Params
       responses:
         '200':
           description: A successful response.
@@ -1324,7 +1324,7 @@ paths:
   /be-heroes/doxchain/oauthtwo/params:
     get:
       summary: Parameters queries the parameters of the module.
-      operationId: BeheroesDoxchainOauthtwoParams
+      operationId: BeheroesDoxchainOauthtwoV1Beta1Params
       responses:
         '200':
           description: A successful response.
@@ -1396,7 +1396,7 @@ paths:
   /be-heroes/doxchain/samltwo/params:
     get:
       summary: Parameters queries the parameters of the module.
-      operationId: BeheroesDoxchainSamltwoParams
+      operationId: BeheroesDoxchainSamltwoV1Beta1Params
       responses:
         '200':
           description: A successful response.
@@ -45326,14 +45326,16 @@ paths:
       tags:
         - Query
 definitions:
-  beheroes.doxchain.abs.MsgCreatePartitionedPoolRegistryResponse:
+  beheroes.doxchain.abs.v1beta1.MsgCreatePartitionedPoolRegistryResponse:
     type: object
-  beheroes.doxchain.abs.MsgUpdateBreakFactorResponse:
+  beheroes.doxchain.abs.v1beta1.MsgUpdateBreakFactorResponse:
     type: object
-  beheroes.doxchain.abs.Params:
+  beheroes.doxchain.abs.v1beta1.Params:
     type: object
-    description: Params defines the parameters for the module.
-  beheroes.doxchain.abs.ParitionedPoolConfiguration:
+    description: |-
+      TODO: Implement BreakFactor parameter
+      Params defines the parameters for the module.
+  beheroes.doxchain.abs.v1beta1.ParitionedPoolConfiguration:
     type: object
     properties:
       threshold:
@@ -45374,7 +45376,7 @@ definitions:
                 method
 
                 signatures required by gogoproto.
-  beheroes.doxchain.abs.ParitionedPoolCorridor:
+  beheroes.doxchain.abs.v1beta1.ParitionedPoolCorridor:
     type: object
     properties:
       threshold:
@@ -45398,7 +45400,7 @@ definitions:
 
           NOTE: The amount field is an Int which implements the custom method
           signatures required by gogoproto.
-  beheroes.doxchain.abs.ParitionedPoolThreshold:
+  beheroes.doxchain.abs.v1beta1.ParitionedPoolThreshold:
     type: object
     properties:
       softCap:
@@ -45407,7 +45409,7 @@ definitions:
       hardCap:
         type: string
         format: uint64
-  beheroes.doxchain.abs.PartitionedPool:
+  beheroes.doxchain.abs.v1beta1.PartitionedPool:
     type: object
     properties:
       denom:
@@ -45471,7 +45473,7 @@ definitions:
                   type: boolean
                 canExecute:
                   type: boolean
-  beheroes.doxchain.abs.PartitionedPoolRegistry:
+  beheroes.doxchain.abs.v1beta1.PartitionedPoolRegistry:
     type: object
     properties:
       creator:
@@ -45543,7 +45545,7 @@ definitions:
                         type: boolean
                       canExecute:
                         type: boolean
-  beheroes.doxchain.abs.QueryAllPartitionedPoolRegistriesResponse:
+  beheroes.doxchain.abs.v1beta1.QueryAllPartitionedPoolRegistriesResponse:
     type: object
     properties:
       partitionedPoolRegistryList:
@@ -45646,12 +45648,12 @@ definitions:
                    repeated Bar results = 1;
                    PageResponse page = 2;
            }
-  beheroes.doxchain.abs.QueryBreakFactorResponse:
+  beheroes.doxchain.abs.v1beta1.QueryBreakFactorResponse:
     type: object
     properties:
       value:
         type: string
-  beheroes.doxchain.abs.QueryGetPartitionedPoolRegistryResponse:
+  beheroes.doxchain.abs.v1beta1.QueryGetPartitionedPoolRegistryResponse:
     type: object
     properties:
       partitionedPoolRegistry:
@@ -45726,14 +45728,14 @@ definitions:
                             type: boolean
                           canExecute:
                             type: boolean
-  beheroes.doxchain.abs.QueryParamsResponse:
+  beheroes.doxchain.abs.v1beta1.QueryParamsResponse:
     type: object
     properties:
       params:
         description: params holds all the parameters of this module.
         type: object
     description: QueryParamsResponse is response type for the Query/Params RPC method.
-  beheroes.doxchain.abs.QueryWatchlistResponse:
+  beheroes.doxchain.abs.v1beta1.QueryWatchlistResponse:
     type: object
     properties:
       watchlist:
@@ -45766,7 +45768,7 @@ definitions:
                       custom method
 
                       signatures required by gogoproto.
-  beheroes.doxchain.abs.Watchlist:
+  beheroes.doxchain.abs.v1beta1.Watchlist:
     type: object
     properties:
       entries:
@@ -45796,7 +45798,7 @@ definitions:
                   method
 
                   signatures required by gogoproto.
-  beheroes.doxchain.abs.WatchlistEntry:
+  beheroes.doxchain.abs.v1beta1.WatchlistEntry:
     type: object
     properties:
       address:
@@ -45818,7 +45820,7 @@ definitions:
 
             NOTE: The amount field is an Int which implements the custom method
             signatures required by gogoproto.
-  beheroes.doxchain.idp.AccessClientList:
+  beheroes.doxchain.idp.v1beta1.AccessClientList:
     type: object
     properties:
       creator:
@@ -45836,7 +45838,7 @@ definitions:
               type: boolean
             canExecute:
               type: boolean
-  beheroes.doxchain.idp.AccessClientListEntry:
+  beheroes.doxchain.idp.v1beta1.AccessClientListEntry:
     type: object
     properties:
       user:
@@ -46259,7 +46261,7 @@ definitions:
                   "@type": "type.googleapis.com/google.protobuf.Duration",
                   "value": "1.212s"
                 }
-  beheroes.doxchain.aml.AMLRequest:
+  beheroes.doxchain.aml.v1beta1.AMLRequest:
     type: object
     properties:
       did:
@@ -46290,14 +46292,14 @@ definitions:
                   type: string
       approved:
         type: boolean
-  beheroes.doxchain.aml.MsgCreateAMLRequestResponse:
+  beheroes.doxchain.aml.v1beta1.MsgCreateAMLRequestResponse:
     type: object
-  beheroes.doxchain.aml.MsgDeleteAMLRequestResponse:
+  beheroes.doxchain.aml.v1beta1.MsgDeleteAMLRequestResponse:
     type: object
-  beheroes.doxchain.aml.Params:
+  beheroes.doxchain.aml.v1beta1.Params:
     type: object
     description: Params defines the parameters for the module.
-  beheroes.doxchain.aml.QueryGetAMLRequestResponse:
+  beheroes.doxchain.aml.v1beta1.QueryGetAMLRequestResponse:
     type: object
     properties:
       Request:
@@ -46331,14 +46333,14 @@ definitions:
                       type: string
           approved:
             type: boolean
-  beheroes.doxchain.aml.QueryParamsResponse:
+  beheroes.doxchain.aml.v1beta1.QueryParamsResponse:
     type: object
     properties:
       params:
         description: params holds all the parameters of this module.
         type: object
     description: QueryParamsResponse is response type for the Query/Params RPC method.
-  beheroes.doxchain.did.Did:
+  beheroes.doxchain.did.v1beta1.Did:
     type: object
     properties:
       creator:
@@ -46364,14 +46366,14 @@ definitions:
               type: string
             value:
               type: string
-  beheroes.doxchain.did.DidParameter:
+  beheroes.doxchain.did.v1beta1.DidParameter:
     type: object
     properties:
       name:
         type: string
       value:
         type: string
-  beheroes.doxchain.did.DidDocument:
+  beheroes.doxchain.did.v1beta1.DidDocument:
     type: object
     properties:
       context:
@@ -47036,28 +47038,28 @@ definitions:
               type: string
             serviceEndpoint:
               type: string
-  beheroes.doxchain.did.MsgCreateDidDocumentResponse:
+  beheroes.doxchain.did.v1beta1.MsgCreateDidDocumentResponse:
     type: object
     properties:
       fullyQualifiedDidIdentifier:
         type: string
-  beheroes.doxchain.did.MsgCreateDidResponse:
+  beheroes.doxchain.did.v1beta1.MsgCreateDidResponse:
     type: object
     properties:
       fullyQualifiedDidIdentifier:
         type: string
-  beheroes.doxchain.did.MsgDeleteDidDocumentResponse:
+  beheroes.doxchain.did.v1beta1.MsgDeleteDidDocumentResponse:
     type: object
-  beheroes.doxchain.did.MsgDeleteDidResponse:
+  beheroes.doxchain.did.v1beta1.MsgDeleteDidResponse:
     type: object
-  beheroes.doxchain.did.MsgUpdateDidDocumentResponse:
+  beheroes.doxchain.did.v1beta1.MsgUpdateDidDocumentResponse:
     type: object
-  beheroes.doxchain.did.MsgUpdateDidResponse:
+  beheroes.doxchain.did.v1beta1.MsgUpdateDidResponse:
     type: object
-  beheroes.doxchain.did.Params:
+  beheroes.doxchain.did.v1beta1.Params:
     type: object
     description: Params defines the parameters for the module.
-  beheroes.doxchain.did.QueryAllDidResponse:
+  beheroes.doxchain.did.v1beta1.QueryAllDidResponse:
     type: object
     properties:
       didList:
@@ -47114,7 +47116,7 @@ definitions:
                    repeated Bar results = 1;
                    PageResponse page = 2;
            }
-  beheroes.doxchain.did.QueryGetDidResponse:
+  beheroes.doxchain.did.v1beta1.QueryGetDidResponse:
     type: object
     properties:
       Did:
@@ -47143,14 +47145,14 @@ definitions:
                   type: string
                 value:
                   type: string
-  beheroes.doxchain.did.QueryParamsResponse:
+  beheroes.doxchain.did.v1beta1.QueryParamsResponse:
     type: object
     properties:
       params:
         description: params holds all the parameters of this module.
         type: object
     description: QueryParamsResponse is response type for the Query/Params RPC method.
-  beheroes.doxchain.did.Service:
+  beheroes.doxchain.did.v1beta1.Service:
     type: object
     properties:
       id:
@@ -47183,7 +47185,7 @@ definitions:
         type: string
       serviceEndpoint:
         type: string
-  beheroes.doxchain.did.VerificationMethod:
+  beheroes.doxchain.did.v1beta1.VerificationMethod:
     type: object
     properties:
       id:
@@ -47244,7 +47246,7 @@ definitions:
         type: string
       publicKeyMultibase:
         type: string
-  beheroes.doxchain.did.VerificationRelationship:
+  beheroes.doxchain.did.v1beta1.VerificationRelationship:
     type: object
     properties:
       referenced:
@@ -47338,7 +47340,7 @@ definitions:
               type: string
             publicKeyMultibase:
               type: string
-  beheroes.doxchain.idp.ClientRegistration:
+  beheroes.doxchain.idp.v1beta1.ClientRegistration:
     type: object
     properties:
       id:
@@ -47431,7 +47433,7 @@ definitions:
                   type: boolean
                 canExecute:
                   type: boolean
-  beheroes.doxchain.idp.ClientRegistry:
+  beheroes.doxchain.idp.v1beta1.ClientRegistry:
     type: object
     properties:
       creator:
@@ -47531,29 +47533,29 @@ definitions:
                         type: boolean
                       canExecute:
                         type: boolean
-  beheroes.doxchain.idp.MsgAuthenticationResponse:
+  beheroes.doxchain.idp.v1beta1.MsgAuthenticationResponse:
     type: object
     properties:
       token:
         type: string
-  beheroes.doxchain.idp.MsgCreateClientRegistrationRelationshipResponse:
+  beheroes.doxchain.idp.v1beta1.MsgCreateClientRegistrationRelationshipResponse:
     type: object
-  beheroes.doxchain.idp.MsgCreateClientRegistrationResponse:
+  beheroes.doxchain.idp.v1beta1.MsgCreateClientRegistrationResponse:
     type: object
-  beheroes.doxchain.idp.MsgCreateClientRegistryResponse:
+  beheroes.doxchain.idp.v1beta1.MsgCreateClientRegistryResponse:
     type: object
-  beheroes.doxchain.idp.MsgDeleteClientRegistrationResponse:
+  beheroes.doxchain.idp.v1beta1.MsgDeleteClientRegistrationResponse:
     type: object
-  beheroes.doxchain.idp.MsgDeleteClientRegistryResponse:
+  beheroes.doxchain.idp.v1beta1.MsgDeleteClientRegistryResponse:
     type: object
-  beheroes.doxchain.idp.MsgUpdateClientRegistrationResponse:
+  beheroes.doxchain.idp.v1beta1.MsgUpdateClientRegistrationResponse:
     type: object
-  beheroes.doxchain.idp.MsgUpdateClientRegistryResponse:
+  beheroes.doxchain.idp.v1beta1.MsgUpdateClientRegistryResponse:
     type: object
-  beheroes.doxchain.idp.Params:
+  beheroes.doxchain.idp.v1beta1.Params:
     type: object
     description: Params defines the parameters for the module.
-  beheroes.doxchain.idp.QueryAllClientRegistryResponse:
+  beheroes.doxchain.idp.v1beta1.QueryAllClientRegistryResponse:
     type: object
     properties:
       ClientRegistry:
@@ -47684,7 +47686,7 @@ definitions:
                    repeated Bar results = 1;
                    PageResponse page = 2;
            }
-  beheroes.doxchain.idp.QueryGetClientRegistryResponse:
+  beheroes.doxchain.idp.v1beta1.QueryGetClientRegistryResponse:
     type: object
     properties:
       ClientRegistry:
@@ -47787,7 +47789,7 @@ definitions:
                             type: boolean
                           canExecute:
                             type: boolean
-  beheroes.doxchain.idp.QueryGetDotWellKnownResponse:
+  beheroes.doxchain.idp.v1beta1.QueryGetDotWellKnownResponse:
     type: object
     properties:
       issuer:
@@ -47818,14 +47820,14 @@ definitions:
         type: string
       uiLocalesSupported:
         type: string
-  beheroes.doxchain.idp.QueryParamsResponse:
+  beheroes.doxchain.idp.v1beta1.QueryParamsResponse:
     type: object
     properties:
       params:
         description: params holds all the parameters of this module.
         type: object
     description: QueryParamsResponse is response type for the Query/Params RPC method.
-  beheroes.doxchain.kyc.KYCRequest:
+  beheroes.doxchain.kyc.v1beta1.KYCRequest:
     type: object
     properties:
       did:
@@ -47856,14 +47858,14 @@ definitions:
                   type: string
       approved:
         type: boolean
-  beheroes.doxchain.kyc.MsgCreateKYCRequestResponse:
+  beheroes.doxchain.kyc.v1beta1.MsgCreateKYCRequestResponse:
     type: object
-  beheroes.doxchain.kyc.MsgDeleteKYCRequestResponse:
+  beheroes.doxchain.kyc.v1beta1.MsgDeleteKYCRequestResponse:
     type: object
-  beheroes.doxchain.kyc.Params:
+  beheroes.doxchain.kyc.v1beta1.Params:
     type: object
     description: Params defines the parameters for the module.
-  beheroes.doxchain.kyc.QueryGetKYCRequestResponse:
+  beheroes.doxchain.kyc.v1beta1.QueryGetKYCRequestResponse:
     type: object
     properties:
       Request:
@@ -47897,19 +47899,19 @@ definitions:
                       type: string
           approved:
             type: boolean
-  beheroes.doxchain.kyc.QueryParamsResponse:
+  beheroes.doxchain.kyc.v1beta1.QueryParamsResponse:
     type: object
     properties:
       params:
         description: params holds all the parameters of this module.
         type: object
     description: QueryParamsResponse is response type for the Query/Params RPC method.
-  beheroes.doxchain.oauthtwo.MsgAuthorizeResponse:
+  beheroes.doxchain.oauthtwo.v1beta1.MsgAuthorizeResponse:
     type: object
     properties:
       authorizationCode:
         type: string
-  beheroes.doxchain.oauthtwo.MsgDeviceCodeResponse:
+  beheroes.doxchain.oauthtwo.v1beta1.MsgDeviceCodeResponse:
     type: object
     properties:
       deviceCode:
@@ -47918,7 +47920,7 @@ definitions:
         type: string
       verification_uri:
         type: string
-  beheroes.doxchain.oauthtwo.MsgTokenResponse:
+  beheroes.doxchain.oauthtwo.v1beta1.MsgTokenResponse:
     type: object
     properties:
       accessToken:
@@ -47928,10 +47930,10 @@ definitions:
       expiresIn:
         type: string
         format: int64
-  beheroes.doxchain.oauthtwo.Params:
+  beheroes.doxchain.oauthtwo.v1beta1.Params:
     type: object
     description: Params defines the parameters for the module.
-  beheroes.doxchain.oauthtwo.QueryParamsResponse:
+  beheroes.doxchain.oauthtwo.v1beta1.QueryParamsResponse:
     type: object
     properties:
       params:
@@ -47948,10 +47950,10 @@ definitions:
         description: params holds all the parameters of this module.
         type: object
     description: QueryParamsResponse is response type for the Query/Params RPC method.
-  beheroes.doxchain.samltwo.Params:
+  beheroes.doxchain.samltwo.v1beta1.Params:
     type: object
     description: Params defines the parameters for the module.
-  beheroes.doxchain.samltwo.QueryParamsResponse:
+  beheroes.doxchain.samltwo.v1beta1.QueryParamsResponse:
     type: object
     properties:
       params:

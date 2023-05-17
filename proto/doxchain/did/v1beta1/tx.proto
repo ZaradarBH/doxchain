@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package beheroes.doxchain.did.v1beta1;
+
+import "gogoproto/gogo.proto";
+import "doxchain/did/v1beta1/did.proto";
+import "doxchain/did/v1beta1/did_document.proto";
+
+option go_package = "github.com/be-heroes/doxchain/x/did/types";
+
+// Msg defines the Msg service.
+service Msg {
+  rpc CreateDid   (MsgCreateDidRequest) returns (MsgCreateDidResponse);
+  rpc UpdateDid   (MsgUpdateDidRequest) returns (MsgUpdateDidResponse);
+  rpc DeleteDid   (MsgDeleteDidRequest) returns (MsgDeleteDidResponse);
+  rpc CreateDidDocument (MsgCreateDidDocumentRequest) returns (MsgCreateDidDocumentResponse);
+  rpc UpdateDidDocument (MsgUpdateDidDocumentRequest) returns (MsgUpdateDidDocumentResponse);
+  rpc DeleteDidDocument (MsgDeleteDidDocumentRequest) returns (MsgDeleteDidDocumentResponse);
+}
+
+message MsgCreateDidRequest {
+  Did did = 1 [(gogoproto.nullable) = false];
+}
+
+message MsgCreateDidResponse {
+  string fullyQualifiedDidIdentifier = 1;
+}
+
+message MsgUpdateDidRequest {
+  Did did = 1 [(gogoproto.nullable) = false];
+}
+
+message MsgUpdateDidResponse {}
+
+message MsgDeleteDidRequest {
+  string creator                     = 1;
+  string fullyQualifiedDidIdentifier = 2;
+}
+
+message MsgDeleteDidResponse {}
+
+message MsgCreateDidDocumentRequest {
+  DidDocument didDocument = 1 [(gogoproto.nullable) = false];
+}
+
+message MsgCreateDidDocumentResponse {
+  string fullyQualifiedDidIdentifier = 1;
+}
+
+message MsgUpdateDidDocumentRequest {
+  DidDocument didDocument = 1 [(gogoproto.nullable) = false];
+}
+
+message MsgUpdateDidDocumentResponse {}
+
+message MsgDeleteDidDocumentRequest {
+  string creator = 1;
+  string fullyQualifiedDidIdentifier = 2;
+}
+
+message MsgDeleteDidDocumentResponse {}
+

@@ -22,7 +22,7 @@ func (k msgServer) CreateKYCRequest(goCtx context.Context, msg *types.MsgCreateK
 	}
 
 	var kYCRequest = types.KYCRequest{
-		Did:      &msg.Did,
+		Did:      msg.Did,
 		Approved: false,
 	}
 

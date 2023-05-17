@@ -1,0 +1,13 @@
+syntax = "proto3";
+package beheroes.doxchain.idp.v1beta1;
+
+import "gogoproto/gogo.proto";
+import "doxchain/idp/v1beta1/client_registration.proto";
+
+option go_package = "github.com/be-heroes/doxchain/x/idp/types";
+
+message ClientRegistry {
+  string creator = 1;
+  repeated ClientRegistration registrations = 2 [(gogoproto.nullable) = true];
+}
+

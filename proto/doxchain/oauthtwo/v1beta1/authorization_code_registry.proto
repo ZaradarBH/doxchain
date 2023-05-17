@@ -1,0 +1,17 @@
+syntax = "proto3";
+package beheroes.doxchain.oauthtwo.v1beta1;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/be-heroes/doxchain/x/oauthtwo/types";
+
+message AuthorizationCodeRegistry {
+  string tenant = 1; 
+  repeated AuthorizationCodeEntry codes = 2 [(gogoproto.nullable) = false]; 
+}
+
+message AuthorizationCodeEntry {
+  string creator = 1;
+  string authorizationCode = 2; 
+  int64 expiresAt = 3;
+}
