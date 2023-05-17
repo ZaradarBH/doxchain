@@ -22,12 +22,12 @@ func TestGenesisState_Validate(t *testing.T) {
 			desc: "valid genesis state",
 			genState: &types.GenesisState{
 
-				PartitionedPoolsList: []types.PartitionedPools{
+				PartitionedPoolRegistries: []types.PartitionedPoolRegistry{
 					{
-						Index: "0",
+						Creator: "0",
 					},
 					{
-						Index: "1",
+						Creator: "1",
 					},
 				},
 				// this line is used by starport scaffolding # types/genesis/validField
@@ -37,12 +37,12 @@ func TestGenesisState_Validate(t *testing.T) {
 		{
 			desc: "duplicated partitionedPools",
 			genState: &types.GenesisState{
-				PartitionedPoolsList: []types.PartitionedPools{
+				PartitionedPoolRegistries: []types.PartitionedPoolRegistry{
 					{
-						Index: "0",
+						Creator: "0",
 					},
 					{
-						Index: "0",
+						Creator: "0",
 					},
 				},
 			},
