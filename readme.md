@@ -18,12 +18,9 @@ Doxchain is a decentralized identity provider (DIDP) built on Cosmos SDK. It aim
 
 To get started with Doxchain, follow these steps:
 
-1. Clone the repository:
+1. Clone the repository: `git clone https://github.com/be-heroes/doxchain.git`
 
-
-git clone https://github.com/be-heroes/doxchain.git
-
-[TOOD: Finish this]
+[TOOD: Finish this section]
 
 ## Contributing
 
