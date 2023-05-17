@@ -1293,7 +1293,6 @@ paths:
         - Query
   /be-heroes/doxchain/oauthtwo/params:
     get:
-      summary: Parameters queries the parameters of the module.
       operationId: BeheroesDoxchainOauthtwoV1Beta1Params
       responses:
         '200':
@@ -1302,11 +1301,7 @@ paths:
             type: object
             properties:
               params:
-                description: params holds all the parameters of this module.
                 type: object
-            description: >-
-              QueryParamsResponse is response type for the Query/Params RPC
-              method.
         default:
           description: An unexpected error response.
           schema:
@@ -47876,14 +47871,11 @@ definitions:
         format: int64
   beheroes.doxchain.oauthtwo.v1beta1.Params:
     type: object
-    description: Params defines the parameters for the module.
   beheroes.doxchain.oauthtwo.v1beta1.QueryParamsResponse:
     type: object
     properties:
       params:
-        description: params holds all the parameters of this module.
         type: object
-    description: QueryParamsResponse is response type for the Query/Params RPC method.
   beheroes.doxchain.oracle.Params:
     type: object
   beheroes.doxchain.oracle.QueryParamsResponse:

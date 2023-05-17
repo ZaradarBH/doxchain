@@ -27,8 +27,8 @@ func (k Keeper) Authorize(ctx sdk.Context, msg types.MsgAuthorizeRequest) (types
 
 		userCodeFound := false
 
-		for _, deviceCodeEntry := range tenantDeviceCodeRegistry.Codes {
-			if deviceCodeEntry.UserCode == msg.UserCode && deviceCodeEntry.Creator == msg.Creator {
+		for _, deviceCodeRegistryEntry := range tenantDeviceCodeRegistry.Codes {
+			if deviceCodeRegistryEntry.UserCode == msg.UserCode && deviceCodeRegistryEntry.Creator == msg.Creator {
 				userCodeFound = true
 			}
 		}
@@ -46,13 +46,13 @@ func (k Keeper) Authorize(ctx sdk.Context, msg types.MsgAuthorizeRequest) (types
 		return response, sdkerrors.Wrap(types.TokenServiceError, "AuthorizationCodeRegistry cache could not be found for tenant")
 	}
 
-	authorizationCodeEntry := types.AuthorizationCodeEntry{
+	authorizationCodeRegistryEntry := types.AuthorizationCodeRegistryEntry{
 		Creator:           msg.Creator,
 		AuthorizationCode: response.AuthorizationCode,
 		ExpiresAt:         ctx.BlockTime().Add(time.Minute * 3).Unix(),
 	}
 
-	tenantAuthorizationCodeRegistry.Codes = append(tenantAuthorizationCodeRegistry.Codes, authorizationCodeEntry)
+	tenantAuthorizationCodeRegistry.Codes = append(tenantAuthorizationCodeRegistry.Codes, authorizationCodeRegistryEntry)
 
 	k.SetAuthorizationCodeRegistry(ctx, tenantAuthorizationCodeRegistry)
 

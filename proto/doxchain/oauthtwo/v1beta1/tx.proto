@@ -6,7 +6,6 @@ import "doxchain/oauthtwo/v1beta1/authorization_code_registry.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/oauthtwo/types";
 
-// Msg defines the Msg service.
 service Msg {
   rpc Token (MsgTokenRequest) returns (MsgTokenResponse);
   rpc DeviceCode (MsgDeviceCodeRequest) returns (MsgDeviceCodeResponse);

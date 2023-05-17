@@ -25,8 +25,8 @@ func (k Keeper) GenerateAuthorizationCodeToken(ctx sdk.Context, msg types.MsgTok
 		return response, sdkerrors.Wrap(types.TokenServiceError, "AuthorizationCodeRegistry cache could not be found for tenant")
 	}
 
-	for index, authorizationCodeInfo := range tenantAuthorizationCodeRegistry.Codes {
-		if authorizationCodeInfo.AuthorizationCode == msg.AuthorizationCode && authorizationCodeInfo.Creator == msg.Creator {
+	for index, authorizationCodeRegistryEntry := range tenantAuthorizationCodeRegistry.Codes {
+		if authorizationCodeRegistryEntry.AuthorizationCode == msg.AuthorizationCode && authorizationCodeRegistryEntry.Creator == msg.Creator {
 			jwtToken := utils.NewJwtTokenFactory(utils.WithContext(&ctx)).Create(msg.Tenant, msg.Creator, msg.ClientId, time.Minute*3)
 			claims := jwtToken.Claims.(jwt.MapClaims)
 			signedToken, err := jwtToken.SignedString([]byte(msg.AuthorizationCode))
@@ -45,7 +45,7 @@ func (k Keeper) GenerateAuthorizationCodeToken(ctx sdk.Context, msg types.MsgTok
 				return response, sdkerrors.Wrap(types.TokenServiceError, "Failed to fetch access tokens cache for tenant")
 			}
 
-			tenantAccessTokenRegistry.Issued = append(tenantAccessTokenRegistry.Issued, types.AccessTokenEntry{
+			tenantAccessTokenRegistry.Issued = append(tenantAccessTokenRegistry.Issued, types.AccessTokenRegistryEntry{
 				Creator:    msg.Creator,
 				Identifier: claims["jti"].(string),
 				ExpiresAt:  response.ExpiresIn,

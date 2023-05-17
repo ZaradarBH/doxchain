@@ -10,19 +10,14 @@ import "doxchain/oauthtwo/v1beta1/authorization_code_registry.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/oauthtwo/types";
 
-// Query defines the gRPC querier service.
 service Query {
-  // Parameters queries the parameters of the module.
   rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/be-heroes/doxchain/oauthtwo/params";  
   }
 }
 
-// QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
 
-// QueryParamsResponse is response type for the Query/Params RPC method.
 message QueryParamsResponse {
-  // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
 }

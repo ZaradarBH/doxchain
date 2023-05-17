@@ -2,16 +2,11 @@ syntax = "proto3";
 package beheroes.doxchain.oauthtwo.v1beta1;
 
 import "gogoproto/gogo.proto";
+import "doxchain/oauthtwo/v1beta1/access_token_registry_entry.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/oauthtwo/types";
 
 message AccessTokenRegistry {
   string tenant = 1; 
-  repeated AccessTokenEntry issued = 2 [(gogoproto.nullable) = false]; 
-}
-
-message AccessTokenEntry {
-  string creator = 1;
-  string identifier = 2;
-  int64 expiresAt = 3;
+  repeated AccessTokenRegistryEntry issued = 2 [(gogoproto.nullable) = false]; 
 }

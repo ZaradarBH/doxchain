@@ -24,8 +24,8 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 type AccessTokenRegistry struct {
-	Tenant string             `protobuf:"bytes,1,opt,name=tenant,proto3" json:"tenant,omitempty"`
-	Issued []AccessTokenEntry `protobuf:"bytes,2,rep,name=issued,proto3" json:"issued"`
+	Tenant string                     `protobuf:"bytes,1,opt,name=tenant,proto3" json:"tenant,omitempty"`
+	Issued []AccessTokenRegistryEntry `protobuf:"bytes,2,rep,name=issued,proto3" json:"issued"`
 }
 
 func (m *AccessTokenRegistry) Reset()         { *m = AccessTokenRegistry{} }
@@ -68,76 +68,15 @@ func (m *AccessTokenRegistry) GetTenant() string {
 	return ""
 }
 
-func (m *AccessTokenRegistry) GetIssued() []AccessTokenEntry {
+func (m *AccessTokenRegistry) GetIssued() []AccessTokenRegistryEntry {
 	if m != nil {
 		return m.Issued
 	}
 	return nil
 }
 
-type AccessTokenEntry struct {
-	Creator    string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
-	Identifier string `protobuf:"bytes,2,opt,name=identifier,proto3" json:"identifier,omitempty"`
-	ExpiresAt  int64  `protobuf:"varint,3,opt,name=expiresAt,proto3" json:"expiresAt,omitempty"`
-}
-
-func (m *AccessTokenEntry) Reset()         { *m = AccessTokenEntry{} }
-func (m *AccessTokenEntry) String() string { return proto.CompactTextString(m) }
-func (*AccessTokenEntry) ProtoMessage()    {}
-func (*AccessTokenEntry) Descriptor() ([]byte, []int) {
-	return fileDescriptor_8ca55a9be0394d39, []int{1}
-}
-func (m *AccessTokenEntry) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *AccessTokenEntry) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_AccessTokenEntry.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *AccessTokenEntry) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_AccessTokenEntry.Merge(m, src)
-}
-func (m *AccessTokenEntry) XXX_Size() int {
-	return m.Size()
-}
-func (m *AccessTokenEntry) XXX_DiscardUnknown() {
-	xxx_messageInfo_AccessTokenEntry.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_AccessTokenEntry proto.InternalMessageInfo
-
-func (m *AccessTokenEntry) GetCreator() string {
-	if m != nil {
-		return m.Creator
-	}
-	return ""
-}
-
-func (m *AccessTokenEntry) GetIdentifier() string {
-	if m != nil {
-		return m.Identifier
-	}
-	return ""
-}
-
-func (m *AccessTokenEntry) GetExpiresAt() int64 {
-	if m != nil {
-		return m.ExpiresAt
-	}
-	return 0
-}
-
 func init() {
 	proto.RegisterType((*AccessTokenRegistry)(nil), "beheroes.doxchain.oauthtwo.v1beta1.AccessTokenRegistry")
-	proto.RegisterType((*AccessTokenEntry)(nil), "beheroes.doxchain.oauthtwo.v1beta1.AccessTokenEntry")
 }
 
 func init() {
@@ -145,26 +84,23 @@ func init() {
 }
 
 var fileDescriptor_8ca55a9be0394d39 = []byte{
-	// 301 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x84, 0x91, 0xbd, 0x4e, 0xc3, 0x30,
-	0x10, 0x80, 0xe3, 0x16, 0x15, 0xd5, 0x2c, 0xc8, 0x20, 0x14, 0x21, 0x64, 0xaa, 0x4e, 0x5d, 0xb0,
-	0x55, 0x7e, 0x1e, 0xa0, 0x95, 0x90, 0x98, 0x23, 0x26, 0x96, 0xca, 0x49, 0x8f, 0xc4, 0x20, 0xec,
-	0xca, 0xbe, 0x42, 0x33, 0xf2, 0x06, 0x3c, 0x56, 0xc7, 0x8e, 0x4c, 0x08, 0x25, 0x2f, 0x82, 0x9a,
-	0x26, 0xb4, 0x62, 0x61, 0xf3, 0x9d, 0xef, 0xfb, 0xce, 0xbe, 0xa3, 0x37, 0x53, 0xbb, 0x48, 0x32,
-	0xa5, 0x8d, 0xb4, 0x6a, 0x8e, 0x19, 0xbe, 0x59, 0xf9, 0x3a, 0x8c, 0x01, 0xd5, 0x50, 0xaa, 0x24,
-	0x01, 0xef, 0x27, 0x68, 0x9f, 0xc1, 0x4c, 0x1c, 0xa4, 0xda, 0xa3, 0xcb, 0xc5, 0xcc, 0x59, 0xb4,
-	0xac, 0x1f, 0x43, 0x06, 0xce, 0x82, 0x17, 0x0d, 0x2f, 0x1a, 0x5e, 0xd4, 0xfc, 0xe9, 0x71, 0x6a,
-	0x53, 0x5b, 0x95, 0xcb, 0xf5, 0x69, 0x43, 0xf6, 0xdf, 0x09, 0x3d, 0x1a, 0x55, 0xe6, 0xfb, 0xb5,
-	0x38, 0xaa, 0xbd, 0xec, 0x84, 0x76, 0x10, 0x8c, 0x32, 0x18, 0x92, 0x1e, 0x19, 0x74, 0xa3, 0x3a,
-	0x62, 0x11, 0xed, 0x68, 0xef, 0xe7, 0x30, 0x0d, 0x5b, 0xbd, 0xf6, 0xe0, 0xe0, 0xf2, 0x5a, 0xfc,
-	0xdf, 0x5a, 0xec, 0x34, 0xb8, 0x35, 0xe8, 0xf2, 0xf1, 0xde, 0xf2, 0xeb, 0x3c, 0x88, 0x6a, 0x53,
-	0xff, 0x89, 0x1e, 0xfe, 0xad, 0x60, 0x21, 0xdd, 0x4f, 0x1c, 0x28, 0xb4, 0xae, 0x7e, 0x40, 0x13,
-	0x32, 0x4e, 0xa9, 0x9e, 0x82, 0x41, 0xfd, 0xa8, 0xc1, 0x85, 0xad, 0xea, 0x72, 0x27, 0xc3, 0xce,
-	0x68, 0x17, 0x16, 0x33, 0xed, 0xc0, 0x8f, 0x30, 0x6c, 0xf7, 0xc8, 0xa0, 0x1d, 0x6d, 0x13, 0xe3,
-	0xbb, 0x65, 0xc1, 0xc9, 0xaa, 0xe0, 0xe4, 0xbb, 0xe0, 0xe4, 0xa3, 0xe4, 0xc1, 0xaa, 0xe4, 0xc1,
-	0x67, 0xc9, 0x83, 0x07, 0x91, 0x6a, 0xcc, 0xe6, 0xb1, 0x48, 0xec, 0x8b, 0x8c, 0xe1, 0x62, 0xf3,
-	0x29, 0xf9, 0xbb, 0x8f, 0xc5, 0x76, 0x23, 0x98, 0xcf, 0xc0, 0xc7, 0x9d, 0x6a, 0x80, 0x57, 0x3f,
-	0x01, 0x00, 0x00, 0xff, 0xff, 0x2d, 0xff, 0x50, 0xab, 0xb3, 0x01, 0x00, 0x00,
+	// 253 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x32, 0x4d, 0xc9, 0xaf, 0x48,
+	0xce, 0x48, 0xcc, 0xcc, 0xd3, 0xcf, 0x4f, 0x2c, 0x2d, 0xc9, 0x28, 0x29, 0xcf, 0xd7, 0x2f, 0x33,
+	0x4c, 0x4a, 0x2d, 0x49, 0x34, 0xd4, 0x4f, 0x4c, 0x4e, 0x4e, 0x2d, 0x2e, 0x8e, 0x2f, 0xc9, 0xcf,
+	0x4e, 0xcd, 0x8b, 0x2f, 0x4a, 0x4d, 0xcf, 0x2c, 0x2e, 0x29, 0xaa, 0xd4, 0x2b, 0x28, 0xca, 0x2f,
+	0xc9, 0x17, 0x52, 0x4a, 0x4a, 0xcd, 0x48, 0x2d, 0xca, 0x4f, 0x2d, 0xd6, 0x83, 0xe9, 0xd7, 0x83,
+	0xe9, 0xd7, 0x83, 0xea, 0x97, 0x12, 0x49, 0xcf, 0x4f, 0xcf, 0x07, 0x2b, 0xd7, 0x07, 0xb1, 0x20,
+	0x3a, 0xa5, 0xac, 0x49, 0xb4, 0x30, 0x3e, 0x35, 0x0f, 0x6e, 0xad, 0x52, 0x27, 0x23, 0x97, 0xb0,
+	0x23, 0x58, 0x55, 0x08, 0x48, 0x51, 0x10, 0x54, 0x8d, 0x90, 0x18, 0x17, 0x5b, 0x49, 0x6a, 0x5e,
+	0x62, 0x5e, 0x89, 0x04, 0xa3, 0x02, 0xa3, 0x06, 0x67, 0x10, 0x94, 0x27, 0x14, 0xc5, 0xc5, 0x96,
+	0x59, 0x5c, 0x5c, 0x9a, 0x9a, 0x22, 0xc1, 0xa4, 0xc0, 0xac, 0xc1, 0x6d, 0x64, 0xa3, 0x47, 0xd8,
+	0xdd, 0x7a, 0x58, 0x2c, 0x70, 0x05, 0xb9, 0xc1, 0x89, 0xe5, 0xc4, 0x3d, 0x79, 0x86, 0x20, 0xa8,
+	0x89, 0x4e, 0x1e, 0x27, 0x1e, 0xc9, 0x31, 0x5e, 0x78, 0x24, 0xc7, 0xf8, 0xe0, 0x91, 0x1c, 0xe3,
+	0x84, 0xc7, 0x72, 0x0c, 0x17, 0x1e, 0xcb, 0x31, 0xdc, 0x78, 0x2c, 0xc7, 0x10, 0xa5, 0x97, 0x9e,
+	0x59, 0x92, 0x51, 0x9a, 0xa4, 0x97, 0x9c, 0x9f, 0xab, 0x9f, 0x94, 0xaa, 0x0b, 0xb1, 0x50, 0x1f,
+	0xee, 0xef, 0x0a, 0x84, 0xcf, 0x4b, 0x2a, 0x0b, 0x52, 0x8b, 0x93, 0xd8, 0xc0, 0x9e, 0x33, 0x06,
+	0x04, 0x00, 0x00, 0xff, 0xff, 0x87, 0xba, 0xbb, 0x53, 0x8c, 0x01, 0x00, 0x00,
 }
 
 func (m *AccessTokenRegistry) Marshal() (dAtA []byte, err error) {
@@ -211,48 +147,6 @@ func (m *AccessTokenRegistry) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *AccessTokenEntry) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *AccessTokenEntry) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *AccessTokenEntry) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.ExpiresAt != 0 {
-		i = encodeVarintAccessTokenRegistry(dAtA, i, uint64(m.ExpiresAt))
-		i--
-		dAtA[i] = 0x18
-	}
-	if len(m.Identifier) > 0 {
-		i -= len(m.Identifier)
-		copy(dAtA[i:], m.Identifier)
-		i = encodeVarintAccessTokenRegistry(dAtA, i, uint64(len(m.Identifier)))
-		i--
-		dAtA[i] = 0x12
-	}
-	if len(m.Creator) > 0 {
-		i -= len(m.Creator)
-		copy(dAtA[i:], m.Creator)
-		i = encodeVarintAccessTokenRegistry(dAtA, i, uint64(len(m.Creator)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
 func encodeVarintAccessTokenRegistry(dAtA []byte, offset int, v uint64) int {
 	offset -= sovAccessTokenRegistry(v)
 	base := offset
@@ -279,26 +173,6 @@ func (m *AccessTokenRegistry) Size() (n int) {
 			l = e.Size()
 			n += 1 + l + sovAccessTokenRegistry(uint64(l))
 		}
-	}
-	return n
-}
-
-func (m *AccessTokenEntry) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.Creator)
-	if l > 0 {
-		n += 1 + l + sovAccessTokenRegistry(uint64(l))
-	}
-	l = len(m.Identifier)
-	if l > 0 {
-		n += 1 + l + sovAccessTokenRegistry(uint64(l))
-	}
-	if m.ExpiresAt != 0 {
-		n += 1 + sovAccessTokenRegistry(uint64(m.ExpiresAt))
 	}
 	return n
 }
@@ -399,144 +273,11 @@ func (m *AccessTokenRegistry) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Issued = append(m.Issued, AccessTokenEntry{})
+			m.Issued = append(m.Issued, AccessTokenRegistryEntry{})
 			if err := m.Issued[len(m.Issued)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
-		default:
-			iNdEx = preIndex
-			skippy, err := skipAccessTokenRegistry(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthAccessTokenRegistry
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *AccessTokenEntry) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowAccessTokenRegistry
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: AccessTokenEntry: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: AccessTokenEntry: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAccessTokenRegistry
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAccessTokenRegistry
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAccessTokenRegistry
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Creator = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Identifier", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAccessTokenRegistry
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthAccessTokenRegistry
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthAccessTokenRegistry
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Identifier = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 3:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ExpiresAt", wireType)
-			}
-			m.ExpiresAt = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowAccessTokenRegistry
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.ExpiresAt |= int64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
 		default:
 			iNdEx = preIndex
 			skippy, err := skipAccessTokenRegistry(dAtA[iNdEx:])
