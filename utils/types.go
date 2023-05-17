@@ -1,17 +1,17 @@
 package utils
 
 type Graph[T interface{}, W interface{}] struct {
-	Vertices map[uint64]*Vertex[T, W]
+	Vertices map[uint64]*Vertex[T, W] `json:"vertices"`
 }
 
 type Vertex[T interface{}, W interface{}] struct {
-	Value T
-	Edges map[uint64]*Edge[T, W]
+	Value T `json:"value"`
+	Edges map[uint64]*Edge[T, W] `json:"edges"`
 }
 
 type Edge[T interface{}, W interface{}] struct {
-	Weight W
-	Vertex *Vertex[T, W]
+	Weight W `json:"weight"`
+	Vertex *Vertex[T, W] `json:"vertex"`
 }
 
 func (g *Graph[T, W]) AddVertex(key uint64, value T) {

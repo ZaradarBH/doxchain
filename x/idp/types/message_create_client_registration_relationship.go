@@ -3,18 +3,15 @@ package types
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	didTypes "github.com/be-heroes/doxchain/x/did/types"
 )
 
 const TypeMsgCreateClientRegistrationRelationshipRequest = "create_client_registration_relationship"
 
 var _ sdk.Msg = &MsgCreateClientRegistrationRelationshipRequest{}
 
-func NewMsgCreateClientRegistrationRelationshipRequest(ownerId didTypes.Did, destinationId didTypes.Did, accessClientList AccessClientList) *MsgCreateClientRegistrationRelationshipRequest {
+func NewMsgCreateClientRegistrationRelationshipRequest(clientRegistrationRelationship ClientRegistrationRelationship) *MsgCreateClientRegistrationRelationshipRequest {
 	return &MsgCreateClientRegistrationRelationshipRequest{
-		OwnerId: ownerId,
-		DestinationId: destinationId,
-		AccessClientList: accessClientList,
+		ClientRegistrationRelationship: clientRegistrationRelationship,
 	}
 }
 
@@ -27,7 +24,7 @@ func (msg *MsgCreateClientRegistrationRelationshipRequest) Type() string {
 }
 
 func (msg *MsgCreateClientRegistrationRelationshipRequest) GetSigners() []sdk.AccAddress {
-	creator, err := sdk.AccAddressFromBech32(msg.OwnerId.Creator)
+	creator, err := sdk.AccAddressFromBech32(msg.ClientRegistrationRelationship.OwnerId.Creator)
 	if err != nil {
 		panic(err)
 	}
@@ -40,7 +37,7 @@ func (msg *MsgCreateClientRegistrationRelationshipRequest) GetSignBytes() []byte
 }
 
 func (msg *MsgCreateClientRegistrationRelationshipRequest) ValidateBasic() error {
-	_, err := sdk.AccAddressFromBech32(msg.OwnerId.Creator)
+	_, err := sdk.AccAddressFromBech32(msg.ClientRegistrationRelationship.OwnerId.Creator)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}

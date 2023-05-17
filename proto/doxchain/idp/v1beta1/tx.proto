@@ -3,9 +3,8 @@ syntax = "proto3";
 package beheroes.doxchain.idp.v1beta1;
 
 import "gogoproto/gogo.proto";
-import "doxchain/idp/v1beta1/access_client_list.proto";
+import "doxchain/idp/v1beta1/client_registration_relationship.proto";
 import "doxchain/idp/v1beta1/client_registration.proto";
-import "doxchain/did/v1beta1/did.proto";
 import "doxchain/idp/v1beta1/client_registry.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/idp/types";
@@ -68,9 +67,7 @@ message MsgDeleteClientRegistration {
 message MsgDeleteClientRegistrationResponse {}
 
 message MsgCreateClientRegistrationRelationshipRequest {
-  beheroes.doxchain.did.v1beta1.Did ownerId = 1 [(gogoproto.nullable) = false];
-  beheroes.doxchain.did.v1beta1.Did destinationId = 2 [(gogoproto.nullable) = false];  
-  AccessClientList accessClientList = 3 [(gogoproto.nullable) = false];
+  ClientRegistrationRelationship clientRegistrationRelationship = 1 [(gogoproto.nullable) = false];
 }
 
 message MsgCreateClientRegistrationRelationshipResponse {}

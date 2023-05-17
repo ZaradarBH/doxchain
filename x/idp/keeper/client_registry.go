@@ -2,9 +2,9 @@ package keeper
 
 import (
 	types "github.com/be-heroes/doxchain/x/idp/types"
-	didTypes "github.com/be-heroes/doxchain/x/did/types"
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
 // SetClientRegistry set a specific ClientRegistry in the store from its index
@@ -112,19 +112,52 @@ func (k Keeper) GetClientRegistration(ctx sdk.Context, creator string, fullyQual
 	return types.ClientRegistration{}
 }
 
-func (k Keeper) SetClientRegistrationRelationship(ctx sdk.Context, ownerId didTypes.Did, destinationId didTypes.Did, acl types.AccessClientList) {
-	ownerRegistration := k.GetClientRegistration(ctx, ownerId.Creator, ownerId.GetFullyQualifiedDidIdentifier())
+func (k Keeper) SetClientRegistrationRelationship(ctx sdk.Context, clientRegistrationRelationship types.ClientRegistrationRelationship) error {
+	ownerRegistration := k.GetClientRegistration(ctx, clientRegistrationRelationship.OwnerId.Creator, clientRegistrationRelationship.OwnerId.GetFullyQualifiedDidIdentifier())
 
 	if &ownerRegistration == nil {
-		return
+		return sdkerrors.Wrap(types.AccessClientListError, "Invalid owner")
 	}
 
-	destinationRegistration := k.GetClientRegistration(ctx, destinationId.Creator, destinationId.GetFullyQualifiedDidIdentifier())
+	destinationRegistration := k.GetClientRegistration(ctx, clientRegistrationRelationship.DestinationId.Creator, clientRegistrationRelationship.DestinationId.GetFullyQualifiedDidIdentifier())
 
 	if &destinationRegistration == nil {
-		return
+		return sdkerrors.Wrap(types.AccessClientListError, "Invalid destination")
 	}
 
+	for _, aclEntry := range clientRegistrationRelationship.AccessClientList.Entries {
+		matchOwner := false;
+		matchDestination := false;
+
+		for _, aclEntryOwner := range ownerRegistration.AccessClientList.Entries {
+			if aclEntryOwner.User == aclEntry.User {
+				matchOwner = true;
+			}
+		}
+
+		for _, aclEntryDestination := range destinationRegistration.AccessClientList.Entries {
+			if aclEntryDestination.User == aclEntry.User {
+				matchDestination = true;
+			}
+		}
+
+		if !matchOwner || !matchDestination {
+			return sdkerrors.Wrap(types.AccessClientListError, "Illigal relationship. Acl must match both owner and destination acls")
+		}
+	}
+
+	// store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ClientRegistrationGraphKeyPrefix))
+	// graph := utils.Graph[didTypes.Did, types.AccessClientList]{}
+	// jsonData, err := json.Marshal(graph)
+	
+	// if err != nil {
+	// 	return sdkerrors.Wrap(types.AccessClientListError, "Unable to serialize relationship graph")
+	// }
+
+	// b := k.cdc.Marshal(&jsonData)
+	// store.Set(types.ClientRegistrationGraphKey(
+	//  	ownerRegistration.Id.Creator,
+	// ), b)
 	//TODO: Implement graph mapping, merge & persistance logic
-	return
+	return nil
 }

@@ -3,8 +3,7 @@ package cli
 import (
 	"strconv"
 
-	idpTypes "github.com/be-heroes/doxchain/x/idp/types"
-	didTypes "github.com/be-heroes/doxchain/x/did/types"
+	types "github.com/be-heroes/doxchain/x/idp/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/client/tx"
@@ -15,7 +14,7 @@ var _ = strconv.Itoa(0)
 
 func CmdCreateClientRegistrationRelationship() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "create-client-registration-relationship [owner-did] [destination-did] [access-client-list]",
+		Use:   "create-client-registration-relationship [client-registration-relationship-json]",
 		Short: "Broadcast message CreateClientRegistrationRelationshipRequest",
 		Args:  cobra.ExactArgs(0),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
@@ -25,32 +24,16 @@ func CmdCreateClientRegistrationRelationship() *cobra.Command {
 				return err
 			}
 
-			var ownerDid didTypes.Did
-			var destinationDid didTypes.Did
-			var acl idpTypes.AccessClientList
+			var crr types.ClientRegistrationRelationship
 
-			err = clientCtx.Codec.UnmarshalJSON([]byte(args[0]), &ownerDid)
+			err = clientCtx.Codec.UnmarshalJSON([]byte(args[0]), &crr)
 
 			if err != nil {
 				return err
 			}
 
-			err = clientCtx.Codec.UnmarshalJSON([]byte(args[1]), &destinationDid)
-
-			if err != nil {
-				return err
-			}
-
-			err = clientCtx.Codec.UnmarshalJSON([]byte(args[2]), &acl)
-
-			if err != nil {
-				return err
-			}
-
-			msg := idpTypes.NewMsgCreateClientRegistrationRelationshipRequest(
-				ownerDid,
-				destinationDid,
-				acl,
+			msg := types.NewMsgCreateClientRegistrationRelationshipRequest(
+				crr,
 			)
 
 			if err := msg.ValidateBasic(); err != nil {

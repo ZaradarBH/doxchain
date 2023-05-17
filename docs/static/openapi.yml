@@ -47378,6 +47378,79 @@ definitions:
                   type: boolean
                 canExecute:
                   type: boolean
+  beheroes.doxchain.idp.v1beta1.ClientRegistrationRelationship:
+    type: object
+    properties:
+      ownerId:
+        type: object
+        properties:
+          creator:
+            type: string
+          url:
+            type: string
+          methodName:
+            type: string
+          methodId:
+            type: string
+          path:
+            type: string
+          fragment:
+            type: string
+          query:
+            type: string
+          parameters:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
+      destinationId:
+        type: object
+        properties:
+          creator:
+            type: string
+          url:
+            type: string
+          methodName:
+            type: string
+          methodId:
+            type: string
+          path:
+            type: string
+          fragment:
+            type: string
+          query:
+            type: string
+          parameters:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
+      accessClientList:
+        type: object
+        properties:
+          creator:
+            type: string
+          entries:
+            type: array
+            items:
+              type: object
+              properties:
+                user:
+                  type: string
+                canRead:
+                  type: boolean
+                canWrite:
+                  type: boolean
+                canExecute:
+                  type: boolean
   beheroes.doxchain.idp.v1beta1.ClientRegistry:
     type: object
     properties:
