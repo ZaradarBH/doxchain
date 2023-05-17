@@ -19,10 +19,6 @@ func (k msgServer) CreatePartitionedPoolRegistry(goCtx context.Context, msg *typ
 		}
 	}
 
-	if partitionedPoolRegistry.Creator != msg.Creator {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "Only the creator of a partioned pool can interface with it after its inception")
-	}
-
 	for _, partitionedPool := range partitionedPoolRegistry.Pools {
 		if partitionedPool.Denom == msg.Denom {
 			return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "Denom already exists")

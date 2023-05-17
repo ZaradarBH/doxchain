@@ -13,8 +13,13 @@ func (k msgServer) CreateAMLRequest(goCtx context.Context, msg *types.MsgCreateA
 
 	// Check if the value already exists
 	_, isFound := k.GetAMLRequest(ctx, msg.Creator)
+
 	if isFound {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "already set")
+	}
+	
+	if msg.Creator != msg.Did.Creator {
+		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "impersonation is not allowed in the AML process")
 	}
 
 	var aMLRequest = types.AMLRequest{
@@ -26,14 +31,16 @@ func (k msgServer) CreateAMLRequest(goCtx context.Context, msg *types.MsgCreateA
 		ctx,
 		aMLRequest,
 	)
+
 	return &types.MsgCreateAMLRequestResponse{}, nil
 }
 
 func (k msgServer) DeleteAMLRequest(goCtx context.Context, msg *types.MsgDeleteAMLRequest) (*types.MsgDeleteAMLRequestResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
-
+	
 	// Check if the value exists
 	valFound, isFound := k.GetAMLRequest(ctx, msg.Creator)
+
 	if !isFound {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "not set")
 	}

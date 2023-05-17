@@ -13,6 +13,7 @@ func (k msgServer) CreateKYCRequest(goCtx context.Context, msg *types.MsgCreateK
 
 	// Check if the value already exists
 	_, isFound := k.GetKYCRequest(ctx, msg.Creator)
+
 	if isFound {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "already set")
 	}
@@ -39,6 +40,7 @@ func (k msgServer) DeleteKYCRequest(goCtx context.Context, msg *types.MsgDeleteK
 
 	// Check if the value exists
 	valFound, isFound := k.GetKYCRequest(ctx, msg.Creator)
+	
 	if !isFound {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "not set")
 	}

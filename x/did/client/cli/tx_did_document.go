@@ -32,6 +32,7 @@ func CmdCreateDidDocument() *cobra.Command {
 			}
 
 			msg := types.NewMsgCreateDidDocumentRequest(
+				clientCtx.GetFromAddress().String(),
 				didDocument,
 			)
 
@@ -67,7 +68,7 @@ func CmdUpdateDidDocument() *cobra.Command {
 				return err
 			}
 
-			msg := types.NewMsgUpdateDidDocumentRequest(didDocument)
+			msg := types.NewMsgUpdateDidDocumentRequest(clientCtx.GetFromAddress().String(), didDocument)
 
 			if err := msg.ValidateBasic(); err != nil {
 				return err

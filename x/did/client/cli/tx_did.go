@@ -26,7 +26,7 @@ func CmdCreateDid() *cobra.Command {
 				return err
 			}
 
-			msg := types.NewMsgCreateDidRequest(did)
+			msg := types.NewMsgCreateDidRequest(clientCtx.GetFromAddress().String(), did)
 
 			if err := msg.ValidateBasic(); err != nil {
 				return err
@@ -60,7 +60,7 @@ func CmdUpdateDid() *cobra.Command {
 				return err
 			}
 
-			msg := types.NewMsgUpdateDidRequest(did)
+			msg := types.NewMsgUpdateDidRequest(clientCtx.GetFromAddress().String(), did)
 
 			if err := msg.ValidateBasic(); err != nil {
 				return err

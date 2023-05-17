@@ -13,8 +13,9 @@ const (
 
 var _ sdk.Msg = &MsgCreateDidRequest{}
 
-func NewMsgCreateDidRequest(did Did) *MsgCreateDidRequest {
+func NewMsgCreateDidRequest(creator string, did Did) *MsgCreateDidRequest {
 	return &MsgCreateDidRequest{
+		Creator: creator,
 		Did: did,
 	}
 }
@@ -28,7 +29,7 @@ func (msg *MsgCreateDidRequest) Type() string {
 }
 
 func (msg *MsgCreateDidRequest) GetSigners() []sdk.AccAddress {
-	creator, err := sdk.AccAddressFromBech32(msg.Did.Creator)
+	creator, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		panic(err)
 	}
@@ -41,7 +42,7 @@ func (msg *MsgCreateDidRequest) GetSignBytes() []byte {
 }
 
 func (msg *MsgCreateDidRequest) ValidateBasic() error {
-	_, err := sdk.AccAddressFromBech32(msg.Did.Creator)
+	_, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
@@ -50,8 +51,9 @@ func (msg *MsgCreateDidRequest) ValidateBasic() error {
 
 var _ sdk.Msg = &MsgUpdateDidRequest{}
 
-func NewMsgUpdateDidRequest(did Did) *MsgUpdateDidRequest {
+func NewMsgUpdateDidRequest(creator string, did Did) *MsgUpdateDidRequest {
 	return &MsgUpdateDidRequest{
+		Creator: creator,
 		Did: did,
 	}
 }
@@ -65,7 +67,7 @@ func (msg *MsgUpdateDidRequest) Type() string {
 }
 
 func (msg *MsgUpdateDidRequest) GetSigners() []sdk.AccAddress {
-	creator, err := sdk.AccAddressFromBech32(msg.Did.Creator)
+	creator, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		panic(err)
 	}
@@ -78,7 +80,7 @@ func (msg *MsgUpdateDidRequest) GetSignBytes() []byte {
 }
 
 func (msg *MsgUpdateDidRequest) ValidateBasic() error {
-	_, err := sdk.AccAddressFromBech32(msg.Did.Creator)
+	_, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
