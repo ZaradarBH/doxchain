@@ -1,7 +1,8 @@
 package keeper
 
 import (
-	"github.com/be-heroes/doxchain/x/idp/types"
+	types "github.com/be-heroes/doxchain/x/idp/types"
+	didTypes "github.com/be-heroes/doxchain/x/did/types"
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
@@ -26,6 +27,7 @@ func (k Keeper) GetClientRegistry(
 	b := store.Get(types.ClientRegistryKey(
 		creator,
 	))
+	
 	if b == nil {
 		return val, false
 	}
@@ -63,30 +65,66 @@ func (k Keeper) GetAllClientRegistry(ctx sdk.Context) (list []types.ClientRegist
 }
 
 func (k Keeper) SetClientRegistration(ctx sdk.Context, clientRegistration types.ClientRegistration) {
-	clientRegistry, _ := k.GetClientRegistry(ctx, clientRegistration.Id.Creator)
+	clientRegistry, found := k.GetClientRegistry(ctx, clientRegistration.Id.Creator)
 
-	for index, existingClientRegistration := range clientRegistry.Registrations {
-		if existingClientRegistration.Id.GetFullyQualifiedDidIdentifier() == clientRegistration.Id.GetFullyQualifiedDidIdentifier() {
-			clientRegistry.Registrations = append(clientRegistry.Registrations[:index], clientRegistry.Registrations[index+1:]...)
+	if found {
+		for index, existingClientRegistration := range clientRegistry.Registrations {
+			if existingClientRegistration.Id.GetFullyQualifiedDidIdentifier() == clientRegistration.Id.GetFullyQualifiedDidIdentifier() {
+				clientRegistry.Registrations = append(clientRegistry.Registrations[:index], clientRegistry.Registrations[index+1:]...)
 
-			break
+				break
+			}
 		}
+
+		clientRegistry.Registrations = append(clientRegistry.Registrations, &clientRegistration)
+
+		k.SetClientRegistry(ctx, clientRegistry)
 	}
-
-	clientRegistry.Registrations = append(clientRegistry.Registrations, &clientRegistration)
-
-	k.SetClientRegistry(ctx, clientRegistry)
 }
 
 func (k Keeper) RemoveClientRegistration(ctx sdk.Context, creator string, name string) {
-	clientRegistry, _ := k.GetClientRegistry(ctx, creator)
+	clientRegistry, found := k.GetClientRegistry(ctx, creator)
 
-	for index, existingClientRegistration := range clientRegistry.Registrations {
-		if existingClientRegistration.Name == name {
-			clientRegistry.Registrations = append(clientRegistry.Registrations[:index], clientRegistry.Registrations[index+1:]...)
+	if found {
+		for index, existingClientRegistration := range clientRegistry.Registrations {
+			if existingClientRegistration.Name == name {
+				clientRegistry.Registrations = append(clientRegistry.Registrations[:index], clientRegistry.Registrations[index+1:]...)
 
-			k.SetClientRegistry(ctx, clientRegistry)
-			break
+				k.SetClientRegistry(ctx, clientRegistry)
+
+				break
+			}
 		}
 	}
+}
+
+func (k Keeper) GetClientRegistration(ctx sdk.Context, creator string, fullyQualifiedDidIdentifier string) types.ClientRegistration {
+	clientRegistry, found := k.GetClientRegistry(ctx, creator)
+
+	if found {
+		for _, existingClientRegistration := range clientRegistry.Registrations {
+			if existingClientRegistration.Id.GetFullyQualifiedDidIdentifier() == fullyQualifiedDidIdentifier {
+				return *existingClientRegistration
+			}
+		}
+	}
+	
+	return types.ClientRegistration{}
+}
+
+func (k Keeper) SetClientRegistrationRelationship(ctx sdk.Context, ownerId didTypes.Did, destinationId didTypes.Did, acl types.AccessClientList) {
+	ownerRegistration := k.GetClientRegistration(ctx, ownerId.Creator, ownerId.GetFullyQualifiedDidIdentifier())
+
+	if &ownerRegistration == nil {
+		return
+	}
+
+	destinationRegistration := k.GetClientRegistration(ctx, destinationId.Creator, destinationId.GetFullyQualifiedDidIdentifier())
+
+	if &destinationRegistration == nil {
+		return
+	}
+
+	//TODO: Implement graph mapping, merge & persistance logic
+	return
 }

@@ -8,10 +8,7 @@ import (
 )
 
 func (k msgServer) CreateClientRegistrationRelationship(goCtx context.Context, msg *types.MsgCreateClientRegistrationRelationshipRequest) (*types.MsgCreateClientRegistrationRelationshipResponse, error) {
-	ctx := sdk.UnwrapSDKContext(goCtx)
-
-	// TODO: Handling the message
-	_ = ctx
+	k.Keeper.SetClientRegistrationRelationship(sdk.UnwrapSDKContext(goCtx), msg.OwnerId, msg.DestionationId, msg.AccessClientList)
 
 	return &types.MsgCreateClientRegistrationRelationshipResponse{}, nil
 }

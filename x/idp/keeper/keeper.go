@@ -24,7 +24,6 @@ type (
 	}
 )
 
-//TODO: Implement ClientRegistrationGraph concept to infer audience relationships
 func NewKeeper(
 	cdc codec.BinaryCodec,
 	storeKey,
