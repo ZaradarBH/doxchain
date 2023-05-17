@@ -27,8 +27,8 @@ type BankKeeper interface {
 }
 
 type IdpKeeper interface {
-	AuthorizeCreator(ctx sdk.Context, tenant string, creator string) (bool, error)
+	AuthorizeCreator(ctx sdk.Context, fullyQualifiedDidIdentifier string, creator string) (bool, error)
 	GetTenantConfiguration(ctx sdk.Context, identifier string) (configuration idpTypes.TenantConfiguration, err error)
 	SetDeviceCodeRegistry(ctx sdk.Context, deviceCodeRegistry idpTypes.DeviceCodeRegistry)
-	GetDeviceCodeRegistry(ctx sdk.Context, tenant string) (val idpTypes.DeviceCodeRegistry, found bool)
+	GetDeviceCodeRegistry(ctx sdk.Context, fullyQualifiedDidIdentifier string) (val idpTypes.DeviceCodeRegistry, found bool)
 }

@@ -32,8 +32,8 @@ func (k Keeper) Login(ctx sdk.Context, msg types.MsgAuthenticationRequest) (type
 }
 
 // AuthorizeCreator checks if a creator belongs to a given tenant
-func (k Keeper) AuthorizeCreator(ctx sdk.Context, tenant string, creator string) (bool, error) {
-	acl, err := k.GetAccessClientList(ctx, tenant)
+func (k Keeper) AuthorizeCreator(ctx sdk.Context, fullyQualifiedDidIdentifier string, creator string) (bool, error) {
+	acl, err := k.GetAccessClientList(ctx, fullyQualifiedDidIdentifier)
 
 	if err != nil {
 		return false, err

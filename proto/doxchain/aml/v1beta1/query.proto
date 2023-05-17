@@ -10,23 +10,18 @@ import "doxchain/aml/v1beta1/aml_request.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/aml/types";
 
-// Query defines the gRPC querier service.
 service Query {  
-  // Parameters queries the parameters of the module.
   rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/be-heroes/doxchain/aml/params";  
   }
-  
-  // Queries a AMLRequest by index.
+
   rpc AMLRequest (QueryGetAMLRequestRequest) returns (QueryGetAMLRequestResponse) {
     option (google.api.http).get = "/be-heroes/doxchain/aml/aml_request";  
   }
 }
 
-// QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
 
-// QueryParamsResponse is response type for the Query/Params RPC method.
 message QueryParamsResponse {  
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];

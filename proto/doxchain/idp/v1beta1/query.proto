@@ -10,20 +10,15 @@ import "doxchain/idp/v1beta1/client_registry.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/idp/types";
 
-// Query defines the gRPC querier service.
 service Query {
-  
-  // Parameters queries the parameters of the module.
   rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/be-heroes/doxchain/idp/params";  
   }
   
-  // Queries a list of GetDotWellKnown items.
   rpc GetDotWellKnown (QueryGetDotWellKnownRequest) returns (QueryGetDotWellKnownResponse) {
-    option (google.api.http).get = "/be-heroes/doxchain/idp/{tenant}/.well-known";  
+    option (google.api.http).get = "/be-heroes/doxchain/idp/{fullyQualifiedDidIdentifier}/.well-known";  
   }
   
-  // Queries a list of ClientRegistry items.
   rpc ClientRegistry (QueryGetClientRegistryRequest) returns (QueryGetClientRegistryResponse) {
     option (google.api.http).get = "/be-heroes/doxchain/idp/client_registry/{creator}";
   }
@@ -32,17 +27,15 @@ service Query {
     option (google.api.http).get = "/be-heroes/doxchain/idp/client_registry";  
   }
 }
-// QueryParamsRequest is request type for the Query/Params RPC method.
+
 message QueryParamsRequest {}
 
-// QueryParamsResponse is response type for the Query/Params RPC method.
 message QueryParamsResponse {  
-  // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
 }
 
 message QueryGetDotWellKnownRequest {
-  string tenant = 1;
+  string fullyQualifiedDidIdentifier = 1;
 }
 
 message QueryGetDotWellKnownResponse {
@@ -73,7 +66,6 @@ message QueryAllClientRegistryRequest {
 }
 
 message QueryAllClientRegistryResponse {
-  repeated ClientRegistry                    ClientRegistry = 1 [(gogoproto.nullable) = false];
-           cosmos.base.query.v1beta1.PageResponse pagination          = 2;
+  repeated ClientRegistry ClientRegistry = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
-

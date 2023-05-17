@@ -8,7 +8,6 @@ import "doxchain/kyc/v1beta1/kyc_request.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/kyc/types";
 
-// Msg defines the Msg service.
 service Msg {
   rpc CreateKYCRequest (MsgCreateKYCRequest) returns (MsgCreateKYCRequestResponse);
   rpc DeleteKYCRequest (MsgDeleteKYCRequest) returns (MsgDeleteKYCRequestResponse);

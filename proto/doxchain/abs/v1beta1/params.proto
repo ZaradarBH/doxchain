@@ -5,8 +5,7 @@ import "gogoproto/gogo.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/abs/types";
 
-//TODO: Implement BreakFactor parameter
-// Params defines the parameters for the module.
+//TODO: Manage BreakFactor via consensus params
 message Params {
   option (gogoproto.goproto_stringer) = false;  
 }

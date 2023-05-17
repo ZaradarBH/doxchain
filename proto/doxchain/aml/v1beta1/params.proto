@@ -5,7 +5,7 @@ import "gogoproto/gogo.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/aml/types";
 
-// Params defines the parameters for the module.
+//TODO: Manage AML approval via consensus params
 message Params {
   option (gogoproto.goproto_stringer) = false;  
 }

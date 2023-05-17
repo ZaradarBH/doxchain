@@ -11,26 +11,20 @@ import "doxchain/abs/v1beta1/partitioned_pool_registry.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/abs/types";
 
-// Query defines the gRPC querier service.
 service Query {
-  
-  // Parameters queries the parameters of the module.
   rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/doxchain/abs/params";  
   }
   
-  // Queries a list of QueryBreakFactor items.
   rpc QueryBreakFactor (QueryBreakFactorRequest) returns (QueryBreakFactorResponse) {
     option (google.api.http).get = "/doxchain/abs/query_break_factor";  
   }
   
-  // Queries watchlist.
   rpc QueryWatchlist (QueryWatchlistRequest) returns (QueryWatchlistResponse) {
     option (google.api.http).get = "/doxchain/abs/query_watchlist";  
   }
   
-  // Queries a list of PartitionedPools items.
-  rpc PartitionedPoolRegistry    (QueryGetPartitionedPoolRegistryRequest) returns (QueryGetPartitionedPoolRegistryResponse) {
+  rpc PartitionedPoolRegistry (QueryGetPartitionedPoolRegistryRequest) returns (QueryGetPartitionedPoolRegistryResponse) {
     option (google.api.http).get = "/be-heroes/doxchain/abs/partitioned_pool_registries/{creator}";  
   }
 
@@ -39,12 +33,9 @@ service Query {
   }
 }
 
-// QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
 
-// QueryParamsResponse is response type for the Query/Params RPC method.
 message QueryParamsResponse {  
-  // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
 }
 

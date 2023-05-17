@@ -9,7 +9,6 @@ import "doxchain/did/v1beta1/did_document.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/did/types";
 
-// GenesisState defines the did module's genesis state.
 message GenesisState {
   Params params = 1 [(gogoproto.nullable) = false];
   repeated Did didList = 2 [(gogoproto.nullable) = false];

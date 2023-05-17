@@ -28,7 +28,6 @@ type (
 
 //TODO: Finish PartitionedPool concept
 //TODO: Finish Watchlist concept
-//TODO: Manage breakfactor via consensus params
 func NewKeeper(
 	cdc codec.BinaryCodec,
 	storeKey,

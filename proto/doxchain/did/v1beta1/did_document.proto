@@ -4,6 +4,7 @@ package beheroes.doxchain.did.v1beta1;
 import "gogoproto/gogo.proto";
 import "doxchain/did/v1beta1/did.proto";
 import "doxchain/did/v1beta1/verification_method.proto";
+import "doxchain/did/v1beta1/verification_relationship.proto";
 import "doxchain/did/v1beta1/service.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/did/types";

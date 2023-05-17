@@ -59,14 +59,14 @@ func (k Keeper) GetAllTenantRegistry(ctx sdk.Context) (list []types.TenantRegist
 	return
 }
 
-// GetTenant for a given tenant identifier
-func (k Keeper) GetTenant(ctx sdk.Context, tenantIdentifier string) (tenant types.TenantRegistration, err error) {
+// GetTenant for a given tenant identifier (fullyQualifiedDidIdentifier)
+func (k Keeper) GetTenant(ctx sdk.Context, fullyQualifiedDidIdentifier string) (tenant types.TenantRegistryEntry, err error) {
 	matched := false
 
 	for _, registry := range k.GetAllTenantRegistry(ctx) {
-		for _, tenantRegistration := range registry.Tenants {
-			if tenantRegistration.Identifier == tenantIdentifier {
-				tenant = *tenantRegistration
+		for _, tenantRegistryEntry := range registry.Tenants {
+			if tenantRegistryEntry.Id.GetFullyQualifiedDidIdentifier() == fullyQualifiedDidIdentifier {
+				tenant = tenantRegistryEntry
 				matched = true
 
 				break
@@ -81,9 +81,9 @@ func (k Keeper) GetTenant(ctx sdk.Context, tenantIdentifier string) (tenant type
 	return tenant, err
 }
 
-// GetAccessClientList for a given tenant identifier
-func (k Keeper) GetAccessClientList(ctx sdk.Context, tenantIdentifier string) (acl types.AccessClientList, err error) {
-	tenant, err := k.GetTenant(ctx, tenantIdentifier)
+// GetAccessClientList for a given tenant identifier (fullyQualifiedDidIdentifier)
+func (k Keeper) GetAccessClientList(ctx sdk.Context, fullyQualifiedDidIdentifier string) (acl types.AccessClientList, err error) {
+	tenant, err := k.GetTenant(ctx, fullyQualifiedDidIdentifier)
 
 	if err != nil {
 		return acl, err
@@ -92,8 +92,8 @@ func (k Keeper) GetAccessClientList(ctx sdk.Context, tenantIdentifier string) (a
 	return tenant.AccessClientList, nil
 }
 
-func (k Keeper) GetTenantConfiguration(ctx sdk.Context, identifier string) (configuration types.TenantConfiguration, err error) {
-	tenant, err := k.GetTenant(ctx, identifier)
+func (k Keeper) GetTenantConfiguration(ctx sdk.Context, fullyQualifiedDidIdentifier string) (configuration types.TenantConfiguration, err error) {
+	tenant, err := k.GetTenant(ctx, fullyQualifiedDidIdentifier)
 
 	if err != nil {
 		return configuration, err

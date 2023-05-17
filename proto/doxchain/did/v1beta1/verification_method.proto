@@ -15,8 +15,3 @@ message VerificationMethod {
     string publicKeyMultibase = 5;
   }
 }
-
-message VerificationRelationship {
-  repeated Did referenced = 1 [(gogoproto.nullable) = false];
-  repeated VerificationMethod embedded = 2 [(gogoproto.nullable) = false];
-}

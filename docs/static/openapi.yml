@@ -194,7 +194,6 @@ paths:
         - Query
   /be-heroes/doxchain/abs/partitioned_pool_registries/{creator}:
     get:
-      summary: Queries a list of PartitionedPools items.
       operationId: BeheroesDoxchainAbsV1Beta1PartitionedPoolRegistry
       responses:
         '200':
@@ -301,7 +300,6 @@ paths:
         - Query
   /doxchain/abs/params:
     get:
-      summary: Parameters queries the parameters of the module.
       operationId: BeheroesDoxchainAbsV1Beta1Params
       responses:
         '200':
@@ -310,11 +308,8 @@ paths:
             type: object
             properties:
               params:
-                description: params holds all the parameters of this module.
                 type: object
-            description: >-
-              QueryParamsResponse is response type for the Query/Params RPC
-              method.
+                title: 'TODO: Manage BreakFactor via consensus params'
         default:
           description: An unexpected error response.
           schema:
@@ -337,7 +332,6 @@ paths:
         - Query
   /doxchain/abs/query_break_factor:
     get:
-      summary: Queries a list of QueryBreakFactor items.
       operationId: BeheroesDoxchainAbsV1Beta1QueryBreakFactor
       responses:
         '200':
@@ -369,7 +363,6 @@ paths:
         - Query
   /doxchain/abs/query_watchlist:
     get:
-      summary: Queries watchlist.
       operationId: BeheroesDoxchainAbsV1Beta1QueryWatchlist
       responses:
         '200':
@@ -430,7 +423,6 @@ paths:
         - Query
   /be-heroes/doxchain/aml/aml_request:
     get:
-      summary: Queries a AMLRequest by index.
       operationId: BeheroesDoxchainAmlV1Beta1AMLRequest
       responses:
         '200':
@@ -496,7 +488,6 @@ paths:
         - Query
   /be-heroes/doxchain/aml/params:
     get:
-      summary: Parameters queries the parameters of the module.
       operationId: BeheroesDoxchainAmlV1Beta1Params
       responses:
         '200':
@@ -507,9 +498,7 @@ paths:
               params:
                 description: params holds all the parameters of this module.
                 type: object
-            description: >-
-              QueryParamsResponse is response type for the Query/Params RPC
-              method.
+                title: 'TODO: Manage AML approval via consensus params'
         default:
           description: An unexpected error response.
           schema:
@@ -674,7 +663,6 @@ paths:
         - Query
   /doxchain/did/did/{fullyQualifiedDidIdentifier}:
     get:
-      summary: Queries a list of Did items.
       operationId: BeheroesDoxchainDidV1Beta1Did
       responses:
         '200':
@@ -735,7 +723,6 @@ paths:
         - Query
   /doxchain/did/params:
     get:
-      summary: Parameters queries the parameters of the module.
       operationId: BeheroesDoxchainDidV1Beta1Params
       responses:
         '200':
@@ -744,11 +731,7 @@ paths:
             type: object
             properties:
               params:
-                description: params holds all the parameters of this module.
                 type: object
-            description: >-
-              QueryParamsResponse is response type for the Query/Params RPC
-              method.
         default:
           description: An unexpected error response.
           schema:
@@ -987,7 +970,6 @@ paths:
         - Query
   /be-heroes/doxchain/idp/client_registry/{creator}:
     get:
-      summary: Queries a list of ClientRegistry items.
       operationId: BeheroesDoxchainIdpV1Beta1ClientRegistry
       responses:
         '200':
@@ -1122,7 +1104,6 @@ paths:
         - Query
   /be-heroes/doxchain/idp/params:
     get:
-      summary: Parameters queries the parameters of the module.
       operationId: BeheroesDoxchainIdpV1Beta1Params
       responses:
         '200':
@@ -1131,11 +1112,7 @@ paths:
             type: object
             properties:
               params:
-                description: params holds all the parameters of this module.
                 type: object
-            description: >-
-              QueryParamsResponse is response type for the Query/Params RPC
-              method.
         default:
           description: An unexpected error response.
           schema:
@@ -1156,9 +1133,8 @@ paths:
                   additionalProperties: {}
       tags:
         - Query
-  /be-heroes/doxchain/idp/{tenant}/.well-known:
+  /be-heroes/doxchain/idp/{fullyQualifiedDidIdentifier}/.well-known:
     get:
-      summary: Queries a list of GetDotWellKnown items.
       operationId: BeheroesDoxchainIdpV1Beta1GetDotWellKnown
       responses:
         '200':
@@ -1213,7 +1189,7 @@ paths:
                       type: string
                   additionalProperties: {}
       parameters:
-        - name: tenant
+        - name: fullyQualifiedDidIdentifier
           in: path
           required: true
           type: string
@@ -1221,7 +1197,6 @@ paths:
         - Query
   /be-heroes/doxchain/kyc/kyc_request:
     get:
-      summary: Queries a KYCRequest by index.
       operationId: BeheroesDoxchainKycV1Beta1KYCRequest
       responses:
         '200':
@@ -1287,7 +1262,6 @@ paths:
         - Query
   /be-heroes/doxchain/kyc/params:
     get:
-      summary: Parameters queries the parameters of the module.
       operationId: BeheroesDoxchainKycV1Beta1Params
       responses:
         '200':
@@ -1296,11 +1270,7 @@ paths:
             type: object
             properties:
               params:
-                description: params holds all the parameters of this module.
                 type: object
-            description: >-
-              QueryParamsResponse is response type for the Query/Params RPC
-              method.
         default:
           description: An unexpected error response.
           schema:
@@ -1359,7 +1329,6 @@ paths:
         - Query
   /be-heroes/doxchain/oracle/params:
     get:
-      summary: Parameters queries the parameters of the module.
       operationId: BeheroesDoxchainOracleParams
       responses:
         '200':
@@ -1370,9 +1339,6 @@ paths:
               params:
                 description: params holds all the parameters of this module.
                 type: object
-            description: >-
-              QueryParamsResponse is response type for the Query/Params RPC
-              method.
         default:
           description: An unexpected error response.
           schema:
@@ -1395,7 +1361,6 @@ paths:
         - Query
   /be-heroes/doxchain/samltwo/params:
     get:
-      summary: Parameters queries the parameters of the module.
       operationId: BeheroesDoxchainSamltwoV1Beta1Params
       responses:
         '200':
@@ -1404,11 +1369,7 @@ paths:
             type: object
             properties:
               params:
-                description: params holds all the parameters of this module.
                 type: object
-            description: >-
-              QueryParamsResponse is response type for the Query/Params RPC
-              method.
         default:
           description: An unexpected error response.
           schema:
@@ -34008,7 +33969,6 @@ paths:
         - Query
   /doxchain/doxchain/params:
     get:
-      summary: Parameters queries the parameters of the module.
       operationId: DoxchainDoxchainParams
       responses:
         '200':
@@ -34017,11 +33977,7 @@ paths:
             type: object
             properties:
               params:
-                description: params holds all the parameters of this module.
                 type: object
-            description: >-
-              QueryParamsResponse is response type for the Query/Params RPC
-              method.
         default:
           description: An unexpected error response.
           schema:
@@ -45332,9 +45288,7 @@ definitions:
     type: object
   beheroes.doxchain.abs.v1beta1.Params:
     type: object
-    description: |-
-      TODO: Implement BreakFactor parameter
-      Params defines the parameters for the module.
+    title: 'TODO: Manage BreakFactor via consensus params'
   beheroes.doxchain.abs.v1beta1.ParitionedPoolConfiguration:
     type: object
     properties:
@@ -45732,9 +45686,8 @@ definitions:
     type: object
     properties:
       params:
-        description: params holds all the parameters of this module.
         type: object
-    description: QueryParamsResponse is response type for the Query/Params RPC method.
+        title: 'TODO: Manage BreakFactor via consensus params'
   beheroes.doxchain.abs.v1beta1.QueryWatchlistResponse:
     type: object
     properties:
@@ -46298,7 +46251,7 @@ definitions:
     type: object
   beheroes.doxchain.aml.v1beta1.Params:
     type: object
-    description: Params defines the parameters for the module.
+    title: 'TODO: Manage AML approval via consensus params'
   beheroes.doxchain.aml.v1beta1.QueryGetAMLRequestResponse:
     type: object
     properties:
@@ -46339,7 +46292,7 @@ definitions:
       params:
         description: params holds all the parameters of this module.
         type: object
-    description: QueryParamsResponse is response type for the Query/Params RPC method.
+        title: 'TODO: Manage AML approval via consensus params'
   beheroes.doxchain.did.v1beta1.Did:
     type: object
     properties:
@@ -47058,7 +47011,6 @@ definitions:
     type: object
   beheroes.doxchain.did.v1beta1.Params:
     type: object
-    description: Params defines the parameters for the module.
   beheroes.doxchain.did.v1beta1.QueryAllDidResponse:
     type: object
     properties:
@@ -47149,9 +47101,7 @@ definitions:
     type: object
     properties:
       params:
-        description: params holds all the parameters of this module.
         type: object
-    description: QueryParamsResponse is response type for the Query/Params RPC method.
   beheroes.doxchain.did.v1beta1.Service:
     type: object
     properties:
@@ -47554,7 +47504,6 @@ definitions:
     type: object
   beheroes.doxchain.idp.v1beta1.Params:
     type: object
-    description: Params defines the parameters for the module.
   beheroes.doxchain.idp.v1beta1.QueryAllClientRegistryResponse:
     type: object
     properties:
@@ -47824,9 +47773,7 @@ definitions:
     type: object
     properties:
       params:
-        description: params holds all the parameters of this module.
         type: object
-    description: QueryParamsResponse is response type for the Query/Params RPC method.
   beheroes.doxchain.kyc.v1beta1.KYCRequest:
     type: object
     properties:
@@ -47864,7 +47811,6 @@ definitions:
     type: object
   beheroes.doxchain.kyc.v1beta1.Params:
     type: object
-    description: Params defines the parameters for the module.
   beheroes.doxchain.kyc.v1beta1.QueryGetKYCRequestResponse:
     type: object
     properties:
@@ -47903,9 +47849,7 @@ definitions:
     type: object
     properties:
       params:
-        description: params holds all the parameters of this module.
         type: object
-    description: QueryParamsResponse is response type for the Query/Params RPC method.
   beheroes.doxchain.oauthtwo.v1beta1.MsgAuthorizeResponse:
     type: object
     properties:
@@ -47942,24 +47886,19 @@ definitions:
     description: QueryParamsResponse is response type for the Query/Params RPC method.
   beheroes.doxchain.oracle.Params:
     type: object
-    description: Params defines the parameters for the module.
   beheroes.doxchain.oracle.QueryParamsResponse:
     type: object
     properties:
       params:
         description: params holds all the parameters of this module.
         type: object
-    description: QueryParamsResponse is response type for the Query/Params RPC method.
   beheroes.doxchain.samltwo.v1beta1.Params:
     type: object
-    description: Params defines the parameters for the module.
   beheroes.doxchain.samltwo.v1beta1.QueryParamsResponse:
     type: object
     properties:
       params:
-        description: params holds all the parameters of this module.
         type: object
-    description: QueryParamsResponse is response type for the Query/Params RPC method.
   cosmos.auth.v1beta1.AddressBytesToStringResponse:
     type: object
     properties:
@@ -70475,14 +70414,11 @@ definitions:
     description: Period defines a length of time and amount of coins that will vest.
   doxchain.doxchain.Params:
     type: object
-    description: Params defines the parameters for the module.
   doxchain.doxchain.QueryParamsResponse:
     type: object
     properties:
       params:
-        description: params holds all the parameters of this module.
         type: object
-    description: QueryParamsResponse is response type for the Query/Params RPC method.
   ibc.applications.interchain_accounts.controller.v1.MsgRegisterInterchainAccountResponse:
     type: object
     properties:

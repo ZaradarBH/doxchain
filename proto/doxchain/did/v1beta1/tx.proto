@@ -8,7 +8,6 @@ import "doxchain/did/v1beta1/did_document.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/did/types";
 
-// Msg defines the Msg service.
 service Msg {
   rpc CreateDid   (MsgCreateDidRequest) returns (MsgCreateDidResponse);
   rpc UpdateDid   (MsgUpdateDidRequest) returns (MsgUpdateDidResponse);

@@ -30,7 +30,6 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
-// QueryParamsRequest is request type for the Query/Params RPC method.
 type QueryParamsRequest struct {
 }
 
@@ -67,9 +66,7 @@ func (m *QueryParamsRequest) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_QueryParamsRequest proto.InternalMessageInfo
 
-// QueryParamsResponse is response type for the Query/Params RPC method.
 type QueryParamsResponse struct {
-	// params holds all the parameters of this module.
 	Params Params `protobuf:"bytes,1,opt,name=params,proto3" json:"params"`
 }
 
@@ -542,13 +539,9 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type QueryClient interface {
-	// Parameters queries the parameters of the module.
 	Params(ctx context.Context, in *QueryParamsRequest, opts ...grpc.CallOption) (*QueryParamsResponse, error)
-	// Queries a list of QueryBreakFactor items.
 	QueryBreakFactor(ctx context.Context, in *QueryBreakFactorRequest, opts ...grpc.CallOption) (*QueryBreakFactorResponse, error)
-	// Queries watchlist.
 	QueryWatchlist(ctx context.Context, in *QueryWatchlistRequest, opts ...grpc.CallOption) (*QueryWatchlistResponse, error)
-	// Queries a list of PartitionedPools items.
 	PartitionedPoolRegistry(ctx context.Context, in *QueryGetPartitionedPoolRegistryRequest, opts ...grpc.CallOption) (*QueryGetPartitionedPoolRegistryResponse, error)
 	PartitionedPoolRegistryAll(ctx context.Context, in *QueryAllPartitionedPoolRegistriesRequest, opts ...grpc.CallOption) (*QueryAllPartitionedPoolRegistriesResponse, error)
 }
@@ -608,13 +601,9 @@ func (c *queryClient) PartitionedPoolRegistryAll(ctx context.Context, in *QueryA
 
 // QueryServer is the server API for Query service.
 type QueryServer interface {
-	// Parameters queries the parameters of the module.
 	Params(context.Context, *QueryParamsRequest) (*QueryParamsResponse, error)
-	// Queries a list of QueryBreakFactor items.
 	QueryBreakFactor(context.Context, *QueryBreakFactorRequest) (*QueryBreakFactorResponse, error)
-	// Queries watchlist.
 	QueryWatchlist(context.Context, *QueryWatchlistRequest) (*QueryWatchlistResponse, error)
-	// Queries a list of PartitionedPools items.
 	PartitionedPoolRegistry(context.Context, *QueryGetPartitionedPoolRegistryRequest) (*QueryGetPartitionedPoolRegistryResponse, error)
 	PartitionedPoolRegistryAll(context.Context, *QueryAllPartitionedPoolRegistriesRequest) (*QueryAllPartitionedPoolRegistriesResponse, error)
 }

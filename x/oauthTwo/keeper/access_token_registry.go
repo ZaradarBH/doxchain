@@ -18,12 +18,12 @@ func (k Keeper) SetAccessTokenRegistry(ctx sdk.Context, AccessTokenRegistry type
 // GetAccessTokenRegistry returns a AccessTokenRegistry from its index
 func (k Keeper) GetAccessTokenRegistry(
 	ctx sdk.Context,
-	tenant string,
+	fullyQualifiedDidIdentifier string,
 ) (val types.AccessTokenRegistry, found bool) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AccessTokenRegistryKeyPrefix))
 
 	b := store.Get(types.AccessTokenRegistryKey(
-		tenant,
+		fullyQualifiedDidIdentifier,
 	))
 	if b == nil {
 		return val, false
@@ -36,12 +36,12 @@ func (k Keeper) GetAccessTokenRegistry(
 // RemoveAccessTokenRegistry removes a AccessTokenRegistry from the store
 func (k Keeper) RemoveAccessTokenRegistry(
 	ctx sdk.Context,
-	tenant string,
+	fullyQualifiedDidIdentifier string,
 
 ) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AccessTokenRegistryKeyPrefix))
 	store.Delete(types.AccessTokenRegistryKey(
-		tenant,
+		fullyQualifiedDidIdentifier,
 	))
 }
 

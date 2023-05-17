@@ -10,7 +10,6 @@ import "doxchain/idp/v1beta1/device_code_registry.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/idp/types";
 
-// GenesisState defines the idp module's genesis state.
 message GenesisState {
  Params params = 1 [(gogoproto.nullable) = false];
  repeated TenantRegistry tenantRegistries = 2 [(gogoproto.nullable) = false];

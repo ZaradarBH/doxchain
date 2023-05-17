@@ -6,7 +6,6 @@ import "doxchain/doxchain/v1beta1/params.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/doxchain/types";
 
-// GenesisState defines the doxchain module's genesis state.
 message GenesisState {
   Params params = 1 [(gogoproto.nullable) = false];
 }

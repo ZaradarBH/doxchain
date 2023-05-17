@@ -2,6 +2,7 @@ syntax = "proto3";
 package beheroes.doxchain.did.v1beta1;
 
 import "gogoproto/gogo.proto";
+import "doxchain/did/v1beta1/did_parameter.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/did/types";
 
@@ -14,9 +15,4 @@ message Did {
   string fragment = 6;
   string query = 7;
   repeated DidParameter parameters = 8 [(gogoproto.nullable) = true];
-}
-
-message DidParameter { 
-  string name = 1;
-  string value = 2;
 }

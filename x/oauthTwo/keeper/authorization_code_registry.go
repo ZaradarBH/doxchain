@@ -18,13 +18,13 @@ func (k Keeper) SetAuthorizationCodeRegistry(ctx sdk.Context, authorizationCodeR
 // GetAuthorizationCodeRegistry returns a authorizationCodeRegistry from its tenant
 func (k Keeper) GetAuthorizationCodeRegistry(
 	ctx sdk.Context,
-	tenant string,
+	fullyQualifiedDidIdentifier string,
 
 ) (val types.AuthorizationCodeRegistry, found bool) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AuthorizationCodeRegistryKeyPrefix))
 
 	b := store.Get(types.AuthorizationCodeRegistryKey(
-		tenant,
+		fullyQualifiedDidIdentifier,
 	))
 	if b == nil {
 		return val, false
@@ -37,12 +37,12 @@ func (k Keeper) GetAuthorizationCodeRegistry(
 // RemoveAuthorizationCodeRegistry removes a authorizationCodeRegistry from the store
 func (k Keeper) RemoveAuthorizationCodeRegistry(
 	ctx sdk.Context,
-	tenant string,
+	fullyQualifiedDidIdentifier string,
 
 ) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AuthorizationCodeRegistryKeyPrefix))
 	store.Delete(types.AuthorizationCodeRegistryKey(
-		tenant,
+		fullyQualifiedDidIdentifier,
 	))
 }
 

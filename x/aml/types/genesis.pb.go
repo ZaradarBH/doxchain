@@ -23,7 +23,6 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
-// GenesisState defines the aml module's genesis state.
 type GenesisState struct {
 	Params       Params       `protobuf:"bytes,1,opt,name=params,proto3" json:"params"`
 	RequestList  []AMLRequest `protobuf:"bytes,2,rep,name=requestList,proto3" json:"requestList"`

@@ -8,7 +8,6 @@ import "doxchain/abs/v1beta1/partitioned_pool_registry.proto";
 option go_package = "github.com/be-heroes/doxchain/x/abs/types";
 
 //TODO: Implement support for updating and deleting partitioned pool registries
-// Msg defines the Msg service.
 service Msg {
   rpc UpdateBreakFactor      (MsgUpdateBreakFactorRequest) returns (MsgUpdateBreakFactorResponse);
   rpc CreatePartitionedPoolRegistry (MsgCreatePartitionedPoolRegistryRequest) returns (MsgCreatePartitionedPoolRegistryResponse);

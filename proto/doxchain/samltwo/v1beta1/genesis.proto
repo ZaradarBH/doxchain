@@ -6,7 +6,6 @@ import "doxchain/samltwo/v1beta1/params.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/samltwo/types";
 
-// GenesisState defines the saml module's genesis state.
 message GenesisState {
   Params params = 1 [(gogoproto.nullable) = false];
 }

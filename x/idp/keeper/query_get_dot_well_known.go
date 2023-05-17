@@ -14,7 +14,7 @@ func (k Keeper) GetDotWellKnown(goCtx context.Context, req *types.QueryGetDotWel
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
 
-	configuration, err := k.GetTenantConfiguration(sdk.UnwrapSDKContext(goCtx), req.Tenant)
+	configuration, err := k.GetTenantConfiguration(sdk.UnwrapSDKContext(goCtx), req.FullyQualifiedDidIdentifier)
 
 	if err != nil {
 		return nil, err

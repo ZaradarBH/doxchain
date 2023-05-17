@@ -23,7 +23,6 @@ type (
 	}
 )
 
-//TODO: Manage AML approval via consensus params
 func NewKeeper(
 	cdc codec.BinaryCodec,
 	storeKey,

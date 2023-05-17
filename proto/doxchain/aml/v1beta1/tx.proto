@@ -8,7 +8,6 @@ import "doxchain/did/v1beta1/did.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/aml/types";
 
-// Msg defines the Msg service.
 service Msg {
   rpc CreateAMLRequest (MsgCreateAMLRequest) returns (MsgCreateAMLRequestResponse);
   rpc DeleteAMLRequest (MsgDeleteAMLRequest) returns (MsgDeleteAMLRequestResponse);

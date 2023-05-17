@@ -10,7 +10,6 @@ import "doxchain/idp/v1beta1/client_registry.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/idp/types";
 
-// Msg defines the Msg service.
 service Msg {
   rpc Login                                (MsgAuthenticationRequest               ) returns (MsgAuthenticationResponse                      );
   rpc CreateClientRegistry                 (MsgCreateClientRegistry                ) returns (MsgCreateClientRegistryResponse                );
@@ -21,6 +20,7 @@ service Msg {
   rpc DeleteClientRegistration             (MsgDeleteClientRegistration            ) returns (MsgDeleteClientRegistrationResponse            );
   rpc CreateClientRegistrationRelationship (MsgCreateClientRegistrationRelationshipRequest) returns (MsgCreateClientRegistrationRelationshipResponse);
 }
+
 message MsgAuthenticationRequest {
   string creator = 1;
   string tenant  = 2;
