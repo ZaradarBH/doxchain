@@ -112,20 +112,20 @@ func (k Keeper) GetClientRegistration(ctx sdk.Context, creator string, fullyQual
 	return types.ClientRegistration{}
 }
 
-func (k Keeper) SetClientRegistrationRelationship(ctx sdk.Context, clientRegistrationRelationship types.ClientRegistrationRelationship) error {
-	ownerRegistration := k.GetClientRegistration(ctx, clientRegistrationRelationship.OwnerId.Creator, clientRegistrationRelationship.OwnerId.GetFullyQualifiedDidIdentifier())
+func (k Keeper) SetClientRegistrationRelationship(ctx sdk.Context, clientRegistrationRelationshipRegistryEntry types.ClientRegistrationRelationshipRegistryEntry) error {
+	ownerRegistration := k.GetClientRegistration(ctx, clientRegistrationRelationshipRegistryEntry.OwnerId.Creator, clientRegistrationRelationshipRegistryEntry.OwnerId.GetFullyQualifiedDidIdentifier())
 
 	if &ownerRegistration == nil {
 		return sdkerrors.Wrap(types.AccessClientListError, "Invalid owner")
 	}
 
-	destinationRegistration := k.GetClientRegistration(ctx, clientRegistrationRelationship.DestinationId.Creator, clientRegistrationRelationship.DestinationId.GetFullyQualifiedDidIdentifier())
+	destinationRegistration := k.GetClientRegistration(ctx, clientRegistrationRelationshipRegistryEntry.DestinationId.Creator, clientRegistrationRelationshipRegistryEntry.DestinationId.GetFullyQualifiedDidIdentifier())
 
 	if &destinationRegistration == nil {
 		return sdkerrors.Wrap(types.AccessClientListError, "Invalid destination")
 	}
 
-	for _, aclEntry := range clientRegistrationRelationship.AccessClientList.Entries {
+	for _, aclEntry := range clientRegistrationRelationshipRegistryEntry.AccessClientList.Entries {
 		matchOwner := false;
 		matchDestination := false;
 
@@ -146,18 +146,73 @@ func (k Keeper) SetClientRegistrationRelationship(ctx sdk.Context, clientRegistr
 		}
 	}
 
-	// store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ClientRegistrationGraphKeyPrefix))
-	// graph := utils.Graph[didTypes.Did, types.AccessClientList]{}
-	// jsonData, err := json.Marshal(graph)
+	var clientRegistrationRelationshipRegistry types.ClientRegistrationRelationshipRegistry
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ClientRegistrationRelationshipRegistryKeyPrefix))
 	
-	// if err != nil {
-	// 	return sdkerrors.Wrap(types.AccessClientListError, "Unable to serialize relationship graph")
-	// }
+	b := store.Get(types.ClientRegistrationRelationshipRegistryKey(
+		clientRegistrationRelationshipRegistryEntry.OwnerId.Creator,
+	))
+		
+	if b == nil {
+		clientRegistrationRelationshipRegistry = types.ClientRegistrationRelationshipRegistry{}
+	} else {
+		k.cdc.MustUnmarshal(b, &clientRegistrationRelationshipRegistry)	
+	}
+	
+	for index, existingEntry := range clientRegistrationRelationshipRegistry.Relationships {
+		if clientRegistrationRelationshipRegistryEntry.OwnerId.GetFullyQualifiedDidIdentifier() == existingEntry.OwnerId.GetFullyQualifiedDidIdentifier() && clientRegistrationRelationshipRegistryEntry.DestinationId.GetFullyQualifiedDidIdentifier() == existingEntry.DestinationId.GetFullyQualifiedDidIdentifier() {
+			clientRegistrationRelationshipRegistry.Relationships = append(clientRegistrationRelationshipRegistry.Relationships[:index], clientRegistrationRelationshipRegistry.Relationships[index+1:]...)
+		}
+	}
 
-	// b := k.cdc.Marshal(&jsonData)
-	// store.Set(types.ClientRegistrationGraphKey(
-	//  	ownerRegistration.Id.Creator,
-	// ), b)
-	//TODO: Implement graph mapping, merge & persistance logic
+	clientRegistrationRelationshipRegistry.Relationships = append(clientRegistrationRelationshipRegistry.Relationships, clientRegistrationRelationshipRegistryEntry)
+
+	b = k.cdc.MustMarshal(&clientRegistrationRelationshipRegistry)
+
+	store.Set(types.ClientRegistrationRelationshipRegistryKey(
+		clientRegistrationRelationshipRegistryEntry.OwnerId.Creator,
+	), b)
+
+	return nil
+}
+
+func (k Keeper) RemoveClientRegistrationRelationship(ctx sdk.Context, clientRegistrationRelationshipRegistryEntry types.ClientRegistrationRelationshipRegistryEntry) error {
+	ownerRegistration := k.GetClientRegistration(ctx, clientRegistrationRelationshipRegistryEntry.OwnerId.Creator, clientRegistrationRelationshipRegistryEntry.OwnerId.GetFullyQualifiedDidIdentifier())
+
+	if &ownerRegistration == nil {
+		return sdkerrors.Wrap(types.AccessClientListError, "Invalid owner")
+	}
+
+	destinationRegistration := k.GetClientRegistration(ctx, clientRegistrationRelationshipRegistryEntry.DestinationId.Creator, clientRegistrationRelationshipRegistryEntry.DestinationId.GetFullyQualifiedDidIdentifier())
+
+	if &destinationRegistration == nil {
+		return sdkerrors.Wrap(types.AccessClientListError, "Invalid destination")
+	}
+
+	var clientRegistrationRelationshipRegistry types.ClientRegistrationRelationshipRegistry
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ClientRegistrationRelationshipRegistryKeyPrefix))
+	
+	b := store.Get(types.ClientRegistrationRelationshipRegistryKey(
+		clientRegistrationRelationshipRegistryEntry.OwnerId.Creator,
+	))
+		
+	if b == nil {
+		clientRegistrationRelationshipRegistry = types.ClientRegistrationRelationshipRegistry{}
+	} else {
+		k.cdc.MustUnmarshal(b, &clientRegistrationRelationshipRegistry)	
+	}
+	
+	for index, existingEntry := range clientRegistrationRelationshipRegistry.Relationships {
+		if clientRegistrationRelationshipRegistryEntry.OwnerId.GetFullyQualifiedDidIdentifier() == existingEntry.OwnerId.GetFullyQualifiedDidIdentifier() && clientRegistrationRelationshipRegistryEntry.DestinationId.GetFullyQualifiedDidIdentifier() == existingEntry.DestinationId.GetFullyQualifiedDidIdentifier() {
+			clientRegistrationRelationshipRegistry.Relationships = append(clientRegistrationRelationshipRegistry.Relationships[:index], clientRegistrationRelationshipRegistry.Relationships[index+1:]...)
+		}
+	}
+
+	b = k.cdc.MustMarshal(&clientRegistrationRelationshipRegistry)
+
+	store.Set(types.ClientRegistrationRelationshipRegistryKey(
+		clientRegistrationRelationshipRegistryEntry.OwnerId.Creator,
+	), b)
+
 	return nil
 }

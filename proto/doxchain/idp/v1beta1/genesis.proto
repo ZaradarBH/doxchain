@@ -7,6 +7,7 @@ import "doxchain/idp/v1beta1/params.proto";
 import "doxchain/idp/v1beta1/tenant_registry.proto";
 import "doxchain/idp/v1beta1/client_registry.proto";
 import "doxchain/idp/v1beta1/device_code_registry.proto";
+import "doxchain/idp/v1beta1/client_registration_relationship_registry.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/idp/types";
 
@@ -15,5 +16,6 @@ message GenesisState {
  repeated TenantRegistry tenantRegistries = 2 [(gogoproto.nullable) = false];
  repeated ClientRegistry clientRegistries = 3 [(gogoproto.nullable) = false];
  repeated DeviceCodeRegistry deviceCodeRegistries = 4 [(gogoproto.nullable) = false];
+ repeated ClientRegistrationRelationshipRegistry clientRegistrationRelationshipRegistries = 5 [(gogoproto.nullable) = false];
 }
 

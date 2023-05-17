@@ -1,0 +1,12 @@
+syntax = "proto3";
+package beheroes.doxchain.idp.v1beta1;
+
+import "gogoproto/gogo.proto";
+import "doxchain/idp/v1beta1/client_registration_relationship_registry_entry.proto";
+
+option go_package = "github.com/be-heroes/doxchain/x/idp/types";
+
+message ClientRegistrationRelationshipRegistry {   
+  string creator = 1;
+  repeated ClientRegistrationRelationshipRegistryEntry relationships = 2 [(gogoproto.nullable) = false];
+}

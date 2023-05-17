@@ -14,7 +14,7 @@ var _ = strconv.Itoa(0)
 
 func CmdCreateClientRegistrationRelationship() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "create-client-registration-relationship [client-registration-relationship-json]",
+		Use:   "create-client-registration-relationship [client-registration-relationship-registry-entry-json]",
 		Short: "Broadcast message CreateClientRegistrationRelationshipRequest",
 		Args:  cobra.ExactArgs(0),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
@@ -24,7 +24,7 @@ func CmdCreateClientRegistrationRelationship() *cobra.Command {
 				return err
 			}
 
-			var crr types.ClientRegistrationRelationship
+			var crr types.ClientRegistrationRelationshipRegistryEntry
 
 			err = clientCtx.Codec.UnmarshalJSON([]byte(args[0]), &crr)
 

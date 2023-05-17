@@ -47378,7 +47378,7 @@ definitions:
                   type: boolean
                 canExecute:
                   type: boolean
-  beheroes.doxchain.idp.v1beta1.ClientRegistrationRelationship:
+  beheroes.doxchain.idp.v1beta1.ClientRegistrationRelationshipRegistryEntry:
     type: object
     properties:
       ownerId:
@@ -47561,6 +47561,8 @@ definitions:
   beheroes.doxchain.idp.v1beta1.MsgCreateClientRegistrationResponse:
     type: object
   beheroes.doxchain.idp.v1beta1.MsgCreateClientRegistryResponse:
+    type: object
+  beheroes.doxchain.idp.v1beta1.MsgDeleteClientRegistrationRelationshipResponse:
     type: object
   beheroes.doxchain.idp.v1beta1.MsgDeleteClientRegistrationResponse:
     type: object

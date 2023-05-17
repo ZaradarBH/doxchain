@@ -1,8 +1,6 @@
 syntax = "proto3";
 package beheroes.doxchain.idp.v1beta1;
 
-import "gogoproto/gogo.proto";
-
 option go_package = "github.com/be-heroes/doxchain/x/idp/types";
 
 message DeviceCodeRegistryEntry {
