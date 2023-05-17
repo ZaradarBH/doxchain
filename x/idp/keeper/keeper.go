@@ -18,7 +18,7 @@ type (
 		storeKey   storetypes.StoreKey
 		memKey     storetypes.StoreKey
 		paramstore paramtypes.Subspace
-		
+
 		authzKeeper    types.AuthzKeeper
 		evidenceKeeper types.EvidenceKeeper
 	}

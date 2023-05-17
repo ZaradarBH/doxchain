@@ -1,7 +1,7 @@
 package types
 
 const (
-	EventTypeDeviceCodeExpired        = "device_code_expired"
+	EventTypeDeviceCodeExpired = "device_code_expired"
 
-	AttributeKeyDeviceCode        = "device_code"
+	AttributeKeyDeviceCode = "device_code"
 )

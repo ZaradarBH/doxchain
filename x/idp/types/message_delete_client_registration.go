@@ -12,7 +12,7 @@ var _ sdk.Msg = &MsgDeleteClientRegistration{}
 func NewMsgDeleteClientRegistration(creator string, name string) *MsgDeleteClientRegistration {
 	return &MsgDeleteClientRegistration{
 		Creator: creator,
-		Name: name,
+		Name:    name,
 	}
 }
 

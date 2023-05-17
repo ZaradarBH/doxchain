@@ -6,6 +6,7 @@ package types
 import (
 	context "context"
 	fmt "fmt"
+	types "github.com/be-heroes/doxchain/x/did/types"
 	_ "github.com/gogo/protobuf/gogoproto"
 	grpc1 "github.com/gogo/protobuf/grpc"
 	proto "github.com/gogo/protobuf/proto"
@@ -612,6 +613,110 @@ func (m *MsgDeleteClientRegistrationResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_MsgDeleteClientRegistrationResponse proto.InternalMessageInfo
 
+type MsgCreateClientRegistrationRelationshipRequest struct {
+	OwnerId          types.Did        `protobuf:"bytes,1,opt,name=ownerId,proto3" json:"ownerId"`
+	DestinationId    types.Did        `protobuf:"bytes,2,opt,name=destinationId,proto3" json:"destinationId"`
+	AccessClientList AccessClientList `protobuf:"bytes,3,opt,name=accessClientList,proto3" json:"accessClientList"`
+}
+
+func (m *MsgCreateClientRegistrationRelationshipRequest) Reset() {
+	*m = MsgCreateClientRegistrationRelationshipRequest{}
+}
+func (m *MsgCreateClientRegistrationRelationshipRequest) String() string {
+	return proto.CompactTextString(m)
+}
+func (*MsgCreateClientRegistrationRelationshipRequest) ProtoMessage() {}
+func (*MsgCreateClientRegistrationRelationshipRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d303193384f0350d, []int{14}
+}
+func (m *MsgCreateClientRegistrationRelationshipRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgCreateClientRegistrationRelationshipRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgCreateClientRegistrationRelationshipRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgCreateClientRegistrationRelationshipRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgCreateClientRegistrationRelationshipRequest.Merge(m, src)
+}
+func (m *MsgCreateClientRegistrationRelationshipRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgCreateClientRegistrationRelationshipRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgCreateClientRegistrationRelationshipRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgCreateClientRegistrationRelationshipRequest proto.InternalMessageInfo
+
+func (m *MsgCreateClientRegistrationRelationshipRequest) GetOwnerId() types.Did {
+	if m != nil {
+		return m.OwnerId
+	}
+	return types.Did{}
+}
+
+func (m *MsgCreateClientRegistrationRelationshipRequest) GetDestinationId() types.Did {
+	if m != nil {
+		return m.DestinationId
+	}
+	return types.Did{}
+}
+
+func (m *MsgCreateClientRegistrationRelationshipRequest) GetAccessClientList() AccessClientList {
+	if m != nil {
+		return m.AccessClientList
+	}
+	return AccessClientList{}
+}
+
+type MsgCreateClientRegistrationRelationshipResponse struct {
+}
+
+func (m *MsgCreateClientRegistrationRelationshipResponse) Reset() {
+	*m = MsgCreateClientRegistrationRelationshipResponse{}
+}
+func (m *MsgCreateClientRegistrationRelationshipResponse) String() string {
+	return proto.CompactTextString(m)
+}
+func (*MsgCreateClientRegistrationRelationshipResponse) ProtoMessage() {}
+func (*MsgCreateClientRegistrationRelationshipResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_d303193384f0350d, []int{15}
+}
+func (m *MsgCreateClientRegistrationRelationshipResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgCreateClientRegistrationRelationshipResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgCreateClientRegistrationRelationshipResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgCreateClientRegistrationRelationshipResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgCreateClientRegistrationRelationshipResponse.Merge(m, src)
+}
+func (m *MsgCreateClientRegistrationRelationshipResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgCreateClientRegistrationRelationshipResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgCreateClientRegistrationRelationshipResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgCreateClientRegistrationRelationshipResponse proto.InternalMessageInfo
+
 func init() {
 	proto.RegisterType((*MsgAuthenticationRequest)(nil), "beheroes.doxchain.idp.MsgAuthenticationRequest")
 	proto.RegisterType((*MsgAuthenticationResponse)(nil), "beheroes.doxchain.idp.MsgAuthenticationResponse")
@@ -627,45 +732,55 @@ func init() {
 	proto.RegisterType((*MsgUpdateClientRegistrationResponse)(nil), "beheroes.doxchain.idp.MsgUpdateClientRegistrationResponse")
 	proto.RegisterType((*MsgDeleteClientRegistration)(nil), "beheroes.doxchain.idp.MsgDeleteClientRegistration")
 	proto.RegisterType((*MsgDeleteClientRegistrationResponse)(nil), "beheroes.doxchain.idp.MsgDeleteClientRegistrationResponse")
+	proto.RegisterType((*MsgCreateClientRegistrationRelationshipRequest)(nil), "beheroes.doxchain.idp.MsgCreateClientRegistrationRelationshipRequest")
+	proto.RegisterType((*MsgCreateClientRegistrationRelationshipResponse)(nil), "beheroes.doxchain.idp.MsgCreateClientRegistrationRelationshipResponse")
 }
 
 func init() { proto.RegisterFile("doxchain/idp/tx.proto", fileDescriptor_d303193384f0350d) }
 
 var fileDescriptor_d303193384f0350d = []byte{
-	// 514 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xbc, 0x96, 0x31, 0x6f, 0xd3, 0x40,
-	0x14, 0xc7, 0x63, 0xa0, 0xad, 0x78, 0x95, 0x18, 0x4e, 0x29, 0x18, 0x23, 0x19, 0x30, 0x2a, 0xa2,
-	0x03, 0x36, 0xb8, 0x12, 0x03, 0x1b, 0x84, 0x8d, 0x66, 0x89, 0xc4, 0x00, 0x0b, 0x72, 0x9c, 0x27,
-	0xfb, 0xa0, 0xbd, 0x33, 0xbe, 0x8b, 0x94, 0x2e, 0x7c, 0x00, 0x26, 0x46, 0x3e, 0x12, 0x63, 0x47,
-	0x46, 0x94, 0x7c, 0x11, 0x94, 0xf3, 0x25, 0x22, 0xed, 0xdd, 0xb9, 0x5e, 0xb2, 0xf9, 0xec, 0xf7,
-	0xfe, 0xff, 0x9f, 0xdf, 0xd3, 0x5f, 0x36, 0x1c, 0x4c, 0xf8, 0x2c, 0x2f, 0x33, 0xca, 0x12, 0x3a,
-	0xa9, 0x12, 0x39, 0x8b, 0xab, 0x9a, 0x4b, 0x4e, 0x0e, 0xc6, 0x58, 0x62, 0xcd, 0x51, 0xc4, 0xab,
-	0xe7, 0x31, 0x9d, 0x54, 0x41, 0xbf, 0xe0, 0x05, 0x57, 0x15, 0xc9, 0xf2, 0xaa, 0x29, 0x0e, 0x9e,
-	0x6e, 0x68, 0xe4, 0xa7, 0x14, 0x99, 0xfc, 0x5c, 0x63, 0x41, 0x85, 0xac, 0x33, 0x49, 0x39, 0xd3,
-	0x75, 0x91, 0xa3, 0xee, 0xbc, 0xa9, 0x89, 0x4e, 0xc0, 0x1f, 0x8a, 0xe2, 0xcd, 0x54, 0x96, 0xc8,
-	0x24, 0xcd, 0x55, 0xfb, 0x08, 0xbf, 0x4d, 0x51, 0x48, 0xe2, 0xc3, 0x5e, 0x5e, 0x63, 0x26, 0x79,
-	0xed, 0x7b, 0x8f, 0xbc, 0x67, 0xb7, 0x47, 0xab, 0x23, 0xb9, 0x0b, 0xbb, 0x12, 0x59, 0xc6, 0xa4,
-	0x7f, 0x43, 0x3d, 0xd0, 0xa7, 0xe8, 0x25, 0xdc, 0x37, 0xa8, 0x89, 0x8a, 0x33, 0x81, 0xa4, 0x0f,
-	0x3b, 0x92, 0x7f, 0x45, 0xa6, 0xc5, 0x9a, 0x43, 0x54, 0xc2, 0xbd, 0xa1, 0x28, 0x06, 0x4b, 0x61,
-	0x1c, 0x28, 0xc4, 0x91, 0x26, 0x24, 0x43, 0xb8, 0x93, 0x6f, 0xdc, 0x51, 0x9d, 0xfb, 0xe9, 0x61,
-	0x6c, 0x9c, 0x56, 0xbc, 0xd9, 0x3e, 0xba, 0xd4, 0x1c, 0x3d, 0x86, 0x87, 0x16, 0xa7, 0x15, 0xa2,
-	0x86, 0xf9, 0x50, 0x4d, 0xb6, 0x04, 0x63, 0x72, 0x5a, 0xc3, 0x1c, 0x2b, 0x98, 0x77, 0x78, 0x8a,
-	0x57, 0x60, 0xac, 0x9b, 0xd1, 0xba, 0xa6, 0xa6, 0xb5, 0xee, 0x0c, 0x1e, 0x98, 0xe7, 0xa0, 0xd6,
-	0x45, 0x3e, 0x02, 0xc9, 0xaf, 0xdc, 0x55, 0x7b, 0xde, 0x4f, 0x8f, 0xae, 0xf3, 0xb2, 0xcd, 0xd6,
-	0x0d, 0x22, 0xd1, 0x21, 0x3c, 0x71, 0x38, 0x5f, 0x02, 0x34, 0xcc, 0x66, 0x4b, 0x80, 0x36, 0xe7,
-	0x35, 0xe0, 0x7b, 0x05, 0x68, 0x18, 0x72, 0x03, 0x68, 0xcf, 0x0d, 0x81, 0x5b, 0x2c, 0x3b, 0x43,
-	0x9d, 0x1a, 0x75, 0xad, 0x3d, 0x6d, 0x62, 0x2b, 0xcf, 0xf4, 0xd7, 0x1e, 0xdc, 0x1c, 0x8a, 0x82,
-	0x7c, 0x81, 0x9d, 0x13, 0x5e, 0x50, 0x46, 0x12, 0xcb, 0xab, 0xda, 0xe2, 0x1c, 0xbc, 0xb8, 0x7e,
-	0x83, 0x4e, 0xec, 0x77, 0xe8, 0x1b, 0x83, 0x19, 0xdb, 0x95, 0x4c, 0xf5, 0xc1, 0xab, 0x6e, 0xf5,
-	0xff, 0xfb, 0x1b, 0xb3, 0xe8, 0xf0, 0x37, 0xd5, 0xbb, 0xfc, 0x5d, 0x09, 0x5c, 0xfa, 0x1b, 0xe3,
-	0xe7, 0xf0, 0x37, 0xd5, 0xbb, 0xfc, 0x5d, 0x49, 0x25, 0x3f, 0x3c, 0xf0, 0xad, 0x39, 0x4d, 0x3b,
-	0x0d, 0x55, 0xf5, 0x04, 0xaf, 0xbb, 0xf7, 0x6c, 0xc0, 0x58, 0x33, 0x99, 0x76, 0x9a, 0x70, 0x2b,
-	0x4c, 0x5b, 0x02, 0x15, 0x8c, 0x35, 0x7f, 0x69, 0xa7, 0x71, 0xb7, 0xc2, 0xb4, 0x45, 0xf3, 0xed,
-	0xe0, 0xf7, 0x3c, 0xf4, 0x2e, 0xe6, 0xa1, 0xf7, 0x77, 0x1e, 0x7a, 0x3f, 0x17, 0x61, 0xef, 0x62,
-	0x11, 0xf6, 0xfe, 0x2c, 0xc2, 0xde, 0xa7, 0xa3, 0x82, 0xca, 0x72, 0x3a, 0x8e, 0x73, 0x7e, 0x96,
-	0x8c, 0xf1, 0x79, 0x63, 0x90, 0xac, 0x3f, 0xcb, 0xb3, 0xe6, 0x27, 0xe0, 0xbc, 0x42, 0x31, 0xde,
-	0x55, 0xdf, 0xe3, 0xe3, 0x7f, 0x01, 0x00, 0x00, 0xff, 0xff, 0x6f, 0xf3, 0xbb, 0xfb, 0x21, 0x08,
-	0x00, 0x00,
+	// 652 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xbc, 0x56, 0x4f, 0x6f, 0xd3, 0x30,
+	0x1c, 0x6d, 0xf6, 0x17, 0x3c, 0x81, 0x90, 0xb5, 0x8d, 0x10, 0xa4, 0x0c, 0x02, 0x03, 0x76, 0x20,
+	0x61, 0x99, 0xc4, 0x61, 0xb7, 0xad, 0x63, 0xd2, 0x44, 0x7b, 0xa9, 0xc4, 0x61, 0x5c, 0xa6, 0x34,
+	0xb1, 0x12, 0x43, 0x67, 0x87, 0xd8, 0x15, 0xdd, 0x85, 0x0f, 0xc0, 0x05, 0xbe, 0x0c, 0xdf, 0x61,
+	0xc7, 0x1e, 0x39, 0x21, 0xd4, 0x7e, 0x11, 0x54, 0xc7, 0x8d, 0x48, 0x6b, 0xa7, 0x2d, 0x48, 0x3b,
+	0x54, 0xcd, 0x9f, 0xf7, 0x7b, 0xef, 0xf5, 0xb9, 0x7e, 0x32, 0xd8, 0x8a, 0x68, 0x2f, 0x4c, 0x02,
+	0x4c, 0x3c, 0x1c, 0xa5, 0x1e, 0xef, 0xb9, 0x69, 0x46, 0x39, 0x85, 0x5b, 0x6d, 0x94, 0xa0, 0x8c,
+	0x22, 0xe6, 0x8e, 0xdf, 0xbb, 0x38, 0x4a, 0xad, 0xcd, 0x98, 0xc6, 0x54, 0x20, 0xbc, 0xd1, 0x55,
+	0x0e, 0xb6, 0x76, 0x4b, 0x1c, 0x41, 0x18, 0x22, 0xc6, 0x2e, 0xc2, 0x0e, 0x46, 0x84, 0x5f, 0x74,
+	0x30, 0xe3, 0x12, 0xf6, 0xac, 0x04, 0x93, 0xef, 0x33, 0x14, 0x63, 0xc6, 0xb3, 0x80, 0x63, 0x4a,
+	0x24, 0x6e, 0xbb, 0xc0, 0x45, 0x38, 0x1a, 0x7d, 0xe4, 0x73, 0xa7, 0x62, 0xfe, 0x2a, 0xc7, 0x38,
+	0x0d, 0x60, 0x36, 0x59, 0x7c, 0xd4, 0xe5, 0x09, 0x22, 0x1c, 0x87, 0x82, 0xb6, 0x85, 0x3e, 0x75,
+	0x11, 0xe3, 0xd0, 0x04, 0xeb, 0x61, 0x86, 0x02, 0x4e, 0x33, 0xd3, 0x78, 0x64, 0xbc, 0xb8, 0xdd,
+	0x1a, 0xdf, 0xc2, 0x6d, 0xb0, 0xc6, 0x11, 0x09, 0x08, 0x37, 0x97, 0xc4, 0x0b, 0x79, 0xe7, 0xec,
+	0x83, 0x07, 0x0a, 0x36, 0x96, 0x52, 0xc2, 0x10, 0xdc, 0x04, 0xab, 0x9c, 0x7e, 0x44, 0x44, 0x92,
+	0xe5, 0x37, 0x4e, 0x02, 0xee, 0x37, 0x59, 0x5c, 0x1f, 0x11, 0xa3, 0xba, 0xb0, 0xd8, 0x92, 0x0e,
+	0x61, 0x13, 0xdc, 0x0d, 0x4b, 0x4f, 0xc4, 0xe4, 0x86, 0xbf, 0xeb, 0x2a, 0xc3, 0x76, 0xcb, 0xe3,
+	0xad, 0x89, 0x61, 0xe7, 0x31, 0xd8, 0xd1, 0x28, 0x8d, 0x2d, 0x4a, 0x33, 0xef, 0xd2, 0xe8, 0x86,
+	0xcc, 0xa8, 0x94, 0x0a, 0x33, 0x07, 0xc2, 0xcc, 0x09, 0xea, 0xa0, 0x29, 0x33, 0xda, 0x95, 0x91,
+	0xbc, 0xaa, 0xa1, 0x82, 0xb7, 0x07, 0x1e, 0xaa, 0x73, 0x10, 0xcb, 0x05, 0xcf, 0x01, 0x0c, 0xa7,
+	0x9e, 0x8a, 0x75, 0xde, 0xf0, 0xf7, 0xe6, 0xf9, 0xb1, 0xf9, 0xaa, 0x2b, 0x48, 0x9c, 0x5d, 0xf0,
+	0xa4, 0x42, 0x79, 0xc2, 0xa0, 0x22, 0x9b, 0x1b, 0x32, 0xa8, 0x53, 0x2e, 0x0c, 0xbe, 0x15, 0x06,
+	0x15, 0x21, 0xe7, 0x06, 0xf5, 0xfb, 0x06, 0x82, 0x15, 0x12, 0x5c, 0x22, 0xb9, 0x6b, 0xc4, 0xb5,
+	0xd4, 0xd4, 0x91, 0x15, 0x9a, 0xdf, 0x96, 0x80, 0x5b, 0x19, 0x5e, 0x47, 0x7c, 0xb3, 0x04, 0xa7,
+	0xe3, 0xfd, 0x7b, 0x08, 0xd6, 0xe9, 0x67, 0x82, 0xb2, 0xb3, 0x48, 0xfe, 0x57, 0x2d, 0x45, 0x3a,
+	0xa3, 0xba, 0x38, 0xc1, 0xd1, 0xf1, 0xca, 0xf5, 0xaf, 0x9d, 0x5a, 0x6b, 0x3c, 0x00, 0x4f, 0xc1,
+	0x9d, 0x08, 0x31, 0x8e, 0x89, 0x60, 0x3d, 0x8b, 0x64, 0xbe, 0xb3, 0x19, 0xca, 0x63, 0xf0, 0x1c,
+	0xdc, 0xcb, 0xfb, 0x2d, 0xb7, 0xdc, 0xc0, 0x8c, 0x9b, 0xcb, 0x82, 0xea, 0xb9, 0x66, 0xa9, 0x8e,
+	0x26, 0xe0, 0x92, 0x77, 0x8a, 0xc6, 0xd9, 0x07, 0xde, 0xdc, 0x81, 0xe4, 0x21, 0xfa, 0xfd, 0x5b,
+	0x60, 0xb9, 0xc9, 0x62, 0xf8, 0x01, 0xac, 0x36, 0x68, 0x8c, 0x09, 0xf4, 0x34, 0x26, 0x74, 0x9d,
+	0x68, 0xbd, 0x9a, 0x7f, 0x40, 0xd6, 0xde, 0x17, 0xb0, 0xa9, 0x6c, 0x37, 0x57, 0xcf, 0xa4, 0xc2,
+	0x5b, 0xaf, 0x17, 0xc3, 0xff, 0xad, 0xaf, 0x2c, 0xb4, 0x0a, 0x7d, 0x15, 0xbe, 0x4a, 0xbf, 0xaa,
+	0xc6, 0x46, 0xfa, 0xca, 0x0e, 0xab, 0xd0, 0x57, 0xe1, 0xab, 0xf4, 0xab, 0xea, 0x0e, 0x7e, 0x35,
+	0x80, 0xa9, 0x2d, 0x3b, 0x7f, 0xa1, 0x50, 0xc5, 0x8c, 0x75, 0xb8, 0xf8, 0x4c, 0xc9, 0x8c, 0xb6,
+	0xd8, 0xfc, 0x85, 0x12, 0x9e, 0x69, 0x66, 0x56, 0x8d, 0x09, 0x33, 0xda, 0x12, 0xf3, 0x17, 0x8a,
+	0x7b, 0xa6, 0x99, 0x59, 0xfd, 0x06, 0x7f, 0x18, 0xe0, 0xe9, 0x3c, 0x7b, 0x19, 0xbe, 0xf9, 0x97,
+	0xf8, 0xa7, 0xca, 0xd1, 0x3a, 0xfd, 0x5f, 0x9a, 0xdc, 0xf7, 0x71, 0xfd, 0x7a, 0x60, 0x1b, 0xfd,
+	0x81, 0x6d, 0xfc, 0x1e, 0xd8, 0xc6, 0xf7, 0xa1, 0x5d, 0xeb, 0x0f, 0xed, 0xda, 0xcf, 0xa1, 0x5d,
+	0x7b, 0xbf, 0x17, 0x63, 0x9e, 0x74, 0xdb, 0x6e, 0x48, 0x2f, 0xbd, 0x36, 0x7a, 0x99, 0x8b, 0x79,
+	0xc5, 0x99, 0xac, 0x97, 0x1f, 0x20, 0xaf, 0x52, 0xc4, 0xda, 0x6b, 0xe2, 0x30, 0x76, 0xf0, 0x27,
+	0x00, 0x00, 0xff, 0xff, 0x1d, 0xad, 0x9d, 0x73, 0x5d, 0x0a, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -687,6 +802,7 @@ type MsgClient interface {
 	CreateClientRegistration(ctx context.Context, in *MsgCreateClientRegistration, opts ...grpc.CallOption) (*MsgCreateClientRegistrationResponse, error)
 	UpdateClientRegistration(ctx context.Context, in *MsgUpdateClientRegistration, opts ...grpc.CallOption) (*MsgUpdateClientRegistrationResponse, error)
 	DeleteClientRegistration(ctx context.Context, in *MsgDeleteClientRegistration, opts ...grpc.CallOption) (*MsgDeleteClientRegistrationResponse, error)
+	CreateClientRegistrationRelationship(ctx context.Context, in *MsgCreateClientRegistrationRelationshipRequest, opts ...grpc.CallOption) (*MsgCreateClientRegistrationRelationshipResponse, error)
 }
 
 type msgClient struct {
@@ -760,6 +876,15 @@ func (c *msgClient) DeleteClientRegistration(ctx context.Context, in *MsgDeleteC
 	return out, nil
 }
 
+func (c *msgClient) CreateClientRegistrationRelationship(ctx context.Context, in *MsgCreateClientRegistrationRelationshipRequest, opts ...grpc.CallOption) (*MsgCreateClientRegistrationRelationshipResponse, error) {
+	out := new(MsgCreateClientRegistrationRelationshipResponse)
+	err := c.cc.Invoke(ctx, "/beheroes.doxchain.idp.Msg/CreateClientRegistrationRelationship", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 type MsgServer interface {
 	Login(context.Context, *MsgAuthenticationRequest) (*MsgAuthenticationResponse, error)
@@ -769,6 +894,7 @@ type MsgServer interface {
 	CreateClientRegistration(context.Context, *MsgCreateClientRegistration) (*MsgCreateClientRegistrationResponse, error)
 	UpdateClientRegistration(context.Context, *MsgUpdateClientRegistration) (*MsgUpdateClientRegistrationResponse, error)
 	DeleteClientRegistration(context.Context, *MsgDeleteClientRegistration) (*MsgDeleteClientRegistrationResponse, error)
+	CreateClientRegistrationRelationship(context.Context, *MsgCreateClientRegistrationRelationshipRequest) (*MsgCreateClientRegistrationRelationshipResponse, error)
 }
 
 // UnimplementedMsgServer can be embedded to have forward compatible implementations.
@@ -795,6 +921,9 @@ func (*UnimplementedMsgServer) UpdateClientRegistration(ctx context.Context, req
 }
 func (*UnimplementedMsgServer) DeleteClientRegistration(ctx context.Context, req *MsgDeleteClientRegistration) (*MsgDeleteClientRegistrationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteClientRegistration not implemented")
+}
+func (*UnimplementedMsgServer) CreateClientRegistrationRelationship(ctx context.Context, req *MsgCreateClientRegistrationRelationshipRequest) (*MsgCreateClientRegistrationRelationshipResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateClientRegistrationRelationship not implemented")
 }
 
 func RegisterMsgServer(s grpc1.Server, srv MsgServer) {
@@ -927,6 +1056,24 @@ func _Msg_DeleteClientRegistration_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_CreateClientRegistrationRelationship_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgCreateClientRegistrationRelationshipRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).CreateClientRegistrationRelationship(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/beheroes.doxchain.idp.Msg/CreateClientRegistrationRelationship",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).CreateClientRegistrationRelationship(ctx, req.(*MsgCreateClientRegistrationRelationshipRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Msg_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "beheroes.doxchain.idp.Msg",
 	HandlerType: (*MsgServer)(nil),
@@ -958,6 +1105,10 @@ var _Msg_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteClientRegistration",
 			Handler:    _Msg_DeleteClientRegistration_Handler,
+		},
+		{
+			MethodName: "CreateClientRegistrationRelationship",
+			Handler:    _Msg_CreateClientRegistrationRelationship_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -1376,6 +1527,82 @@ func (m *MsgDeleteClientRegistrationResponse) MarshalToSizedBuffer(dAtA []byte) 
 	return len(dAtA) - i, nil
 }
 
+func (m *MsgCreateClientRegistrationRelationshipRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgCreateClientRegistrationRelationshipRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgCreateClientRegistrationRelationshipRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	{
+		size, err := m.AccessClientList.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarintTx(dAtA, i, uint64(size))
+	}
+	i--
+	dAtA[i] = 0x1a
+	{
+		size, err := m.DestinationId.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarintTx(dAtA, i, uint64(size))
+	}
+	i--
+	dAtA[i] = 0x12
+	{
+		size, err := m.OwnerId.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarintTx(dAtA, i, uint64(size))
+	}
+	i--
+	dAtA[i] = 0xa
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgCreateClientRegistrationRelationshipResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgCreateClientRegistrationRelationshipResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgCreateClientRegistrationRelationshipResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintTx(dAtA []byte, offset int, v uint64) int {
 	offset -= sovTx(v)
 	base := offset
@@ -1545,6 +1772,30 @@ func (m *MsgDeleteClientRegistration) Size() (n int) {
 }
 
 func (m *MsgDeleteClientRegistrationResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	return n
+}
+
+func (m *MsgCreateClientRegistrationRelationshipRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = m.OwnerId.Size()
+	n += 1 + l + sovTx(uint64(l))
+	l = m.DestinationId.Size()
+	n += 1 + l + sovTx(uint64(l))
+	l = m.AccessClientList.Size()
+	n += 1 + l + sovTx(uint64(l))
+	return n
+}
+
+func (m *MsgCreateClientRegistrationRelationshipResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -2572,6 +2823,205 @@ func (m *MsgDeleteClientRegistrationResponse) Unmarshal(dAtA []byte) error {
 		}
 		if fieldNum <= 0 {
 			return fmt.Errorf("proto: MsgDeleteClientRegistrationResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgCreateClientRegistrationRelationshipRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgCreateClientRegistrationRelationshipRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgCreateClientRegistrationRelationshipRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field OwnerId", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.OwnerId.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DestinationId", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.DestinationId.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field AccessClientList", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.AccessClientList.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgCreateClientRegistrationRelationshipResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgCreateClientRegistrationRelationshipResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgCreateClientRegistrationRelationshipResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:

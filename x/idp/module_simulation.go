@@ -52,6 +52,10 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgDeleteClientRegistration int = 100
 
+	opWeightMsgCreateClientRegistrationRelationship = "op_weight_msg_create_client_registration_relationship"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgCreateClientRegistrationRelationship int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -132,6 +136,17 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgDeleteClientRegistration,
 		idpsimulation.SimulateMsgDeleteClientRegistration(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgCreateClientRegistrationRelationship int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgCreateClientRegistrationRelationship, &weightMsgCreateClientRegistrationRelationship, nil,
+		func(_ *rand.Rand) {
+			weightMsgCreateClientRegistrationRelationship = defaultWeightMsgCreateClientRegistrationRelationship
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgCreateClientRegistrationRelationship,
+		idpsimulation.SimulateMsgCreateClientRegistrationRelationship(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
 	// this line is used by starport scaffolding # simapp/module/operation

@@ -3,20 +3,23 @@ syntax = "proto3";
 package beheroes.doxchain.idp;
 
 import "gogoproto/gogo.proto";
+import "doxchain/idp/access_client_list.proto";
 import "doxchain/idp/client_registration.proto";
+import "doxchain/did/did.proto";
 import "doxchain/idp/client_registry.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/idp/types";
 
 // Msg defines the Msg service.
 service Msg {
-  rpc Login                    (MsgAuthenticationRequest   ) returns (MsgAuthenticationResponse          );
-  rpc CreateClientRegistry     (MsgCreateClientRegistry    ) returns (MsgCreateClientRegistryResponse    );
-  rpc UpdateClientRegistry     (MsgUpdateClientRegistry    ) returns (MsgUpdateClientRegistryResponse    );
-  rpc DeleteClientRegistry     (MsgDeleteClientRegistry    ) returns (MsgDeleteClientRegistryResponse    );
-  rpc CreateClientRegistration (MsgCreateClientRegistration) returns (MsgCreateClientRegistrationResponse);
-  rpc UpdateClientRegistration (MsgUpdateClientRegistration) returns (MsgUpdateClientRegistrationResponse);
-  rpc DeleteClientRegistration (MsgDeleteClientRegistration) returns (MsgDeleteClientRegistrationResponse);
+  rpc Login                                (MsgAuthenticationRequest               ) returns (MsgAuthenticationResponse                      );
+  rpc CreateClientRegistry                 (MsgCreateClientRegistry                ) returns (MsgCreateClientRegistryResponse                );
+  rpc UpdateClientRegistry                 (MsgUpdateClientRegistry                ) returns (MsgUpdateClientRegistryResponse                );
+  rpc DeleteClientRegistry                 (MsgDeleteClientRegistry                ) returns (MsgDeleteClientRegistryResponse                );
+  rpc CreateClientRegistration             (MsgCreateClientRegistration            ) returns (MsgCreateClientRegistrationResponse            );
+  rpc UpdateClientRegistration             (MsgUpdateClientRegistration            ) returns (MsgUpdateClientRegistrationResponse            );
+  rpc DeleteClientRegistration             (MsgDeleteClientRegistration            ) returns (MsgDeleteClientRegistrationResponse            );
+  rpc CreateClientRegistrationRelationship (MsgCreateClientRegistrationRelationshipRequest) returns (MsgCreateClientRegistrationRelationshipResponse);
 }
 message MsgAuthenticationRequest {
   string creator = 1;
@@ -59,8 +62,16 @@ message MsgUpdateClientRegistrationResponse {}
 
 message MsgDeleteClientRegistration {
   string creator = 1;
-  string name = 2;
+  string name    = 2;
 }
 
 message MsgDeleteClientRegistrationResponse {}
+
+message MsgCreateClientRegistrationRelationshipRequest {
+  beheroes.doxchain.did.Did ownerId = 1 [(gogoproto.nullable) = false];
+  beheroes.doxchain.did.Did destinationId = 2 [(gogoproto.nullable) = false];  
+  AccessClientList accessClientList = 3 [(gogoproto.nullable) = false];
+}
+
+message MsgCreateClientRegistrationRelationshipResponse {}
 

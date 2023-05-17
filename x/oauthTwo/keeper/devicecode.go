@@ -6,8 +6,8 @@ import (
 	"time"
 
 	"github.com/be-heroes/doxchain/utils"
-	"github.com/be-heroes/doxchain/x/oauthtwo/types"
 	idpTypes "github.com/be-heroes/doxchain/x/idp/types"
+	"github.com/be-heroes/doxchain/x/oauthtwo/types"
 )
 
 // DeviceCode method for simple oauth keeper
@@ -37,10 +37,10 @@ func (k Keeper) DeviceCode(ctx sdk.Context, msg types.MsgDeviceCodeRequest) (typ
 	}
 
 	deviceCodeEntry := idpTypes.DeviceCodeEntry{
-		Creator: msg.Creator,
+		Creator:    msg.Creator,
 		DeviceCode: response.DeviceCode,
-		UserCode: response.UserCode,
-		ExpiresAt: ctx.BlockTime().Add(time.Minute * 15).Unix(),
+		UserCode:   response.UserCode,
+		ExpiresAt:  ctx.BlockTime().Add(time.Minute * 15).Unix(),
 	}
 
 	tenantDeviceCodeRegistry.Codes = append(tenantDeviceCodeRegistry.Codes, deviceCodeEntry)
