@@ -59,10 +59,8 @@ paths:
                                 properties:
                                   softCap:
                                     type: string
-                                    format: uint64
                                   hardCap:
                                     type: string
-                                    format: uint64
                               Corridors:
                                 type: array
                                 items:
@@ -73,10 +71,8 @@ paths:
                                       properties:
                                         softCap:
                                           type: string
-                                          format: uint64
                                         hardCap:
                                           type: string
-                                          format: uint64
                                     target:
                                       type: object
                                       properties:
@@ -317,10 +313,8 @@ paths:
                               properties:
                                 softCap:
                                   type: string
-                                  format: uint64
                                 hardCap:
                                   type: string
-                                  format: uint64
                             Corridors:
                               type: array
                               items:
@@ -331,10 +325,8 @@ paths:
                                     properties:
                                       softCap:
                                         type: string
-                                        format: uint64
                                       hardCap:
                                         type: string
-                                        format: uint64
                                   target:
                                     type: object
                                     properties:
@@ -45695,10 +45687,8 @@ definitions:
         properties:
           softCap:
             type: string
-            format: uint64
           hardCap:
             type: string
-            format: uint64
       Corridors:
         type: array
         items:
@@ -45709,10 +45699,8 @@ definitions:
               properties:
                 softCap:
                   type: string
-                  format: uint64
                 hardCap:
                   type: string
-                  format: uint64
             target:
               type: object
               properties:
@@ -45736,10 +45724,8 @@ definitions:
         properties:
           softCap:
             type: string
-            format: uint64
           hardCap:
             type: string
-            format: uint64
       target:
         type: object
         properties:
@@ -45757,10 +45743,8 @@ definitions:
     properties:
       softCap:
         type: string
-        format: uint64
       hardCap:
         type: string
-        format: uint64
   beheroes.doxchain.abs.v1beta1.PartitionedPool:
     type: object
     properties:
@@ -45774,10 +45758,8 @@ definitions:
             properties:
               softCap:
                 type: string
-                format: uint64
               hardCap:
                 type: string
-                format: uint64
           Corridors:
             type: array
             items:
@@ -45788,10 +45770,8 @@ definitions:
                   properties:
                     softCap:
                       type: string
-                      format: uint64
                     hardCap:
                       type: string
-                      format: uint64
                 target:
                   type: object
                   properties:
@@ -45917,10 +45897,8 @@ definitions:
                   properties:
                     softCap:
                       type: string
-                      format: uint64
                     hardCap:
                       type: string
-                      format: uint64
                 Corridors:
                   type: array
                   items:
@@ -45931,10 +45909,8 @@ definitions:
                         properties:
                           softCap:
                             type: string
-                            format: uint64
                           hardCap:
                             type: string
-                            format: uint64
                       target:
                         type: object
                         properties:
@@ -46066,10 +46042,8 @@ definitions:
                         properties:
                           softCap:
                             type: string
-                            format: uint64
                           hardCap:
                             type: string
-                            format: uint64
                       Corridors:
                         type: array
                         items:
@@ -46080,10 +46054,8 @@ definitions:
                               properties:
                                 softCap:
                                   type: string
-                                  format: uint64
                                 hardCap:
                                   type: string
-                                  format: uint64
                             target:
                               type: object
                               properties:
@@ -46244,10 +46216,8 @@ definitions:
                       properties:
                         softCap:
                           type: string
-                          format: uint64
                         hardCap:
                           type: string
-                          format: uint64
                     Corridors:
                       type: array
                       items:
@@ -46258,10 +46228,8 @@ definitions:
                             properties:
                               softCap:
                                 type: string
-                                format: uint64
                               hardCap:
                                 type: string
-                                format: uint64
                           target:
                             type: object
                             properties:

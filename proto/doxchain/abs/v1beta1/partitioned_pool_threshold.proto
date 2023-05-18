@@ -1,9 +1,11 @@
 syntax = "proto3";
 package beheroes.doxchain.abs.v1beta1;
 
+import "gogoproto/gogo.proto";
+
 option go_package = "github.com/be-heroes/doxchain/x/abs/types";
 
 message ParitionedPoolThreshold {
-  uint64 softCap = 1;
-  uint64 hardCap = 2;
+  string softCap = 1 [(gogoproto.moretags) = "yaml:\"softCap\"", (gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (gogoproto.nullable) = false];
+  string hardCap = 2 [(gogoproto.moretags) = "yaml:\"hardCap\"", (gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (gogoproto.nullable) = false];
 }
