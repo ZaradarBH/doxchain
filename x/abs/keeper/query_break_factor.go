@@ -15,6 +15,6 @@ func (k Keeper) QueryBreakFactor(goCtx context.Context, req *types.QueryBreakFac
 	}
 
 	return &types.QueryBreakFactorResponse{
-		Value: k.GetBreakFactor(sdk.UnwrapSDKContext(goCtx)).String(),
+		BreakFactor: k.GetBreakFactor(sdk.UnwrapSDKContext(goCtx)).String(),
 	}, nil
 }

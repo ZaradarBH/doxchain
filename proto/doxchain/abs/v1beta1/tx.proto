@@ -16,7 +16,7 @@ message MsgUpdateBreakFactorRequest {
   option           (gogoproto.equal) = false;
   option (gogoproto.goproto_getters) = false;
   string creator = 1 [(gogoproto.moretags) = "yaml:\"creator\""];
-  string value   = 2 [(gogoproto.moretags) = "yaml:\"value\""  ];
+  string breakFactor = 2 [(gogoproto.moretags) = "yaml:\"breakFactor\"", (gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (gogoproto.nullable) = false];
 }
 
 message MsgUpdateBreakFactorResponse {}

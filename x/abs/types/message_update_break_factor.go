@@ -9,10 +9,10 @@ const TypeMsgUpdateBreakFactor = "update_break_factor"
 
 var _ sdk.Msg = &MsgUpdateBreakFactorRequest{}
 
-func NewMsgUpdateBreakFactorRequest(creator string, value string) *MsgUpdateBreakFactorRequest {
+func NewMsgUpdateBreakFactorRequest(creator string, breakFactor sdk.Dec) *MsgUpdateBreakFactorRequest {
 	return &MsgUpdateBreakFactorRequest{
 		Creator: creator,
-		Value:   value,
+		BreakFactor: breakFactor,
 	}
 }
 

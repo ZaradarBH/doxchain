@@ -23,17 +23,7 @@ func (k msgServer) UpdateBreakFactor(goCtx context.Context, msg *types.MsgUpdate
 	}
 
 	if isOperator {
-		decValue, err := sdk.NewDecFromStr(msg.Value)
-
-		if err != nil {
-			return nil, err
-		}
-
-		err = k.Keeper.SetBreakFactor(ctx, decValue)
-
-		if err != nil {
-			return nil, err
-		}
+		k.Keeper.SetBreakFactor(ctx, msg.BreakFactor)
 	}
 
 	return &types.MsgUpdateBreakFactorResponse{}, nil

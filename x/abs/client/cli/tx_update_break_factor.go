@@ -8,13 +8,14 @@ import (
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/client/tx"
 	"github.com/spf13/cobra"
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 var _ = strconv.Itoa(0)
 
 func CmdUpdateBreakFactor() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "update-break-factor [value]",
+		Use:   "update-break-factor [breakFactor]",
 		Short: "Broadcast message UpdateBreakFactor",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
@@ -24,9 +25,15 @@ func CmdUpdateBreakFactor() *cobra.Command {
 				return err
 			}
 
+			decValue, err := sdk.NewDecFromStr(args[0])
+
+			if err != nil {
+				return err
+			}
+
 			msg := types.NewMsgUpdateBreakFactorRequest(
 				clientCtx.GetFromAddress().String(),
-				args[0],
+				decValue,
 			)
 
 			if err := msg.ValidateBasic(); err != nil {

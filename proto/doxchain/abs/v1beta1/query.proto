@@ -42,7 +42,7 @@ message QueryParamsResponse {
 message QueryBreakFactorRequest {}
 
 message QueryBreakFactorResponse {
-  string value = 1;
+  string breakFactor = 1;
 }
 
 message QueryWatchlistRequest {}

@@ -415,7 +415,7 @@ paths:
           schema:
             type: object
             properties:
-              value:
+              breakFactor:
                 type: string
         default:
           description: An unexpected error response.
@@ -45809,7 +45809,7 @@ definitions:
   beheroes.doxchain.abs.v1beta1.QueryBreakFactorResponse:
     type: object
     properties:
-      value:
+      breakFactor:
         type: string
   beheroes.doxchain.abs.v1beta1.QueryGetPartitionedPoolRegistryResponse:
     type: object
