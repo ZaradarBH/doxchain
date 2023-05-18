@@ -7,6 +7,7 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
 	utils "github.com/be-heroes/doxchain/utils/jwt"
+	didUtils "github.com/be-heroes/doxchain/utils/did"
 	"github.com/be-heroes/doxchain/x/oauthtwo/types"
 	"github.com/golang-jwt/jwt"
 )
@@ -26,7 +27,7 @@ func (k Keeper) GenerateAuthorizationCodeToken(ctx sdk.Context, msg types.MsgTok
 	}
 
 	for index, authorizationCodeRegistryEntry := range tenantAuthorizationCodeRegistry.Codes {
-		if authorizationCodeRegistryEntry.AuthorizationCode == msg.AuthorizationCode && authorizationCodeRegistryEntry.Creator == msg.Creator {
+		if authorizationCodeRegistryEntry.AuthorizationCode == msg.AuthorizationCode && authorizationCodeRegistryEntry.Owner.Creator == msg.Creator {
 			jwtToken := utils.NewJwtTokenFactory(utils.WithContext(&ctx)).Create(msg.Tenant, msg.Creator, msg.ClientId, time.Minute*3)
 			claims := jwtToken.Claims.(jwt.MapClaims)
 			signedToken, err := jwtToken.SignedString([]byte(msg.AuthorizationCode))
@@ -46,9 +47,9 @@ func (k Keeper) GenerateAuthorizationCodeToken(ctx sdk.Context, msg types.MsgTok
 			}
 
 			tenantAccessTokenRegistry.Issued = append(tenantAccessTokenRegistry.Issued, types.AccessTokenRegistryEntry{
-				Creator:    msg.Creator,
+				Owner: *didUtils.NewDidTokenFactory().Create(msg.Creator, ""),
 				Identifier: claims["jti"].(string),
-				ExpiresAt:  response.ExpiresIn,
+				ExpiresAt: response.ExpiresIn,
 			})
 
 			k.SetAccessTokenRegistry(ctx, tenantAccessTokenRegistry)

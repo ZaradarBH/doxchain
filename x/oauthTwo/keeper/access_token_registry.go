@@ -11,7 +11,7 @@ func (k Keeper) SetAccessTokenRegistry(ctx sdk.Context, AccessTokenRegistry type
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AccessTokenRegistryKeyPrefix))
 	b := k.cdc.MustMarshal(&AccessTokenRegistry)
 	store.Set(types.AccessTokenRegistryKey(
-		AccessTokenRegistry.Tenant,
+		AccessTokenRegistry.Owner.Creator,
 	), b)
 }
 

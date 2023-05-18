@@ -24,7 +24,7 @@ func (gs GenesisState) Validate() error {
 	AccessTokenRegistryIndexMap := make(map[string]struct{})
 
 	for _, elem := range gs.AccessTokenRegistries {
-		tenant := string(AccessTokenRegistryKey(elem.Tenant))
+		tenant := string(AccessTokenRegistryKey(elem.Owner.Creator))
 		if _, ok := AccessTokenRegistryIndexMap[tenant]; ok {
 			return fmt.Errorf("duplicated tenant for AccessTokenRegistry")
 		}
@@ -34,7 +34,7 @@ func (gs GenesisState) Validate() error {
 	authorizationCodeRegistryIndexMap := make(map[string]struct{})
 
 	for _, elem := range gs.AuthorizationCodeRegistries {
-		tenant := string(AuthorizationCodeRegistryKey(elem.Tenant))
+		tenant := string(AuthorizationCodeRegistryKey(elem.Owner.Creator))
 		if _, ok := authorizationCodeRegistryIndexMap[tenant]; ok {
 			return fmt.Errorf("duplicated tenant for authorizationCodeRegistry")
 		}

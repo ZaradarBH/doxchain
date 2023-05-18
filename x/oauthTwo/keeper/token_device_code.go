@@ -7,6 +7,7 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
 	utils "github.com/be-heroes/doxchain/utils/jwt"
+	didUtils "github.com/be-heroes/doxchain/utils/did"
 	"github.com/be-heroes/doxchain/x/oauthtwo/types"
 	"github.com/golang-jwt/jwt"
 )
@@ -46,9 +47,9 @@ func (k Keeper) GenerateDeviceCodeToken(ctx sdk.Context, msg types.MsgTokenReque
 			}
 
 			tenantAccessTokenRegistry.Issued = append(tenantAccessTokenRegistry.Issued, types.AccessTokenRegistryEntry{
-				Creator:    msg.Creator,
+				Owner: *didUtils.NewDidTokenFactory().Create(msg.Creator, ""),
 				Identifier: claims["jti"].(string),
-				ExpiresAt:  response.ExpiresIn,
+				ExpiresAt: response.ExpiresIn,
 			})
 
 			k.SetAccessTokenRegistry(ctx, tenantAccessTokenRegistry)

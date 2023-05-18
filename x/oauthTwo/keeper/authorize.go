@@ -7,6 +7,7 @@ import (
 
 	"github.com/be-heroes/doxchain/utils"
 	"github.com/be-heroes/doxchain/x/oauthtwo/types"
+	didUtils "github.com/be-heroes/doxchain/utils/did"
 )
 
 // Authorize method for simple oauth keeper
@@ -47,9 +48,9 @@ func (k Keeper) Authorize(ctx sdk.Context, msg types.MsgAuthorizeRequest) (types
 	}
 
 	authorizationCodeRegistryEntry := types.AuthorizationCodeRegistryEntry{
-		Creator:           msg.Creator,
+		Owner: *didUtils.NewDidTokenFactory().Create(msg.Creator, ""),
 		AuthorizationCode: response.AuthorizationCode,
-		ExpiresAt:         ctx.BlockTime().Add(time.Minute * 3).Unix(),
+		ExpiresAt: ctx.BlockTime().Add(time.Minute * 3).Unix(),
 	}
 
 	tenantAuthorizationCodeRegistry.Codes = append(tenantAuthorizationCodeRegistry.Codes, authorizationCodeRegistryEntry)

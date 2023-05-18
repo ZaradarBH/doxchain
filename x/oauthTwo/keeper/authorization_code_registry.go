@@ -11,7 +11,7 @@ func (k Keeper) SetAuthorizationCodeRegistry(ctx sdk.Context, authorizationCodeR
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AuthorizationCodeRegistryKeyPrefix))
 	b := k.cdc.MustMarshal(&authorizationCodeRegistry)
 	store.Set(types.AuthorizationCodeRegistryKey(
-		authorizationCodeRegistry.Tenant,
+		authorizationCodeRegistry.Owner.Creator,
 	), b)
 }
 

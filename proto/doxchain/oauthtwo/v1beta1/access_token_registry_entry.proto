@@ -1,10 +1,13 @@
 syntax = "proto3";
 package beheroes.doxchain.oauthtwo.v1beta1;
 
+import "gogoproto/gogo.proto";
+import "doxchain/did/v1beta1/did.proto";
+
 option go_package = "github.com/be-heroes/doxchain/x/oauthtwo/types";
 
 message AccessTokenRegistryEntry {
-  string creator = 1;
+  beheroes.doxchain.did.v1beta1.Did owner = 1 [(gogoproto.nullable) = false];
   string identifier = 2;
   int64 expiresAt = 3;
 }
