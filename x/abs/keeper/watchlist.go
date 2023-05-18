@@ -44,10 +44,14 @@ func (k Keeper) AddToWatchlist(ctx sdk.Context, addr sdk.AccAddress, coins sdk.C
 		}
 	}
 
-	//TODO: Manage blockExpireOffset via consensus params
-	blockExpireOffset := uint64(100000)
+	var blockExpireOffset sdk.Int
 
-	if watchlistEntry.GetBlockHeight()+blockExpireOffset <= blockHeight {
+	k.paramstore.Get(ctx, types.ParamStoreKeyBlockExpireOffset, &blockExpireOffset)
+
+	//TODO: Manage blockExpireOffset via consensus params
+	//blockExpireOffset := uint64(100000)
+
+	if watchlistEntry.GetBlockHeight()+blockExpireOffset.Uint64() <= blockHeight {
 		k.DeleteAddressWatchlist(ctx, addr)
 	} else {
 		k.SetAddressWatchlist(ctx, addr, watchlistEntry)
