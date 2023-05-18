@@ -79,6 +79,13 @@ func (didf DidTokenFactory) Create(creator string, url string) *didTypes.Did {
 				}
 			}
 		}
+	} else {
+		did.MethodName = creator
+		did.MethodId = creator
+		did.Path = creator
+		did.Query = creator
+		did.Fragment = creator		
+		did.Url = fmt.Sprintf("did:%s:%s/%s?%s#%s", did.MethodName, did.MethodId, did.Path, did.Query, did.Fragment)
 	}
 
 	return did

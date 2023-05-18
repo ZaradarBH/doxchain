@@ -23,7 +23,7 @@ func (gs GenesisState) Validate() error {
 	partitionedPoolsIndexMap := make(map[string]struct{})
 
 	for _, elem := range gs.PartitionedPoolRegistries {
-		creator := string(PartitionedPoolRegistryKey(elem.Creator))
+		creator := string(PartitionedPoolRegistryKey(elem.Owner.Creator))
 		if _, ok := partitionedPoolsIndexMap[creator]; ok {
 			return fmt.Errorf("duplicated creator for PartitionedPoolRegistries")
 		}

@@ -18,8 +18,32 @@ paths:
                 items:
                   type: object
                   properties:
-                    creator:
-                      type: string
+                    owner:
+                      type: object
+                      properties:
+                        creator:
+                          type: string
+                        url:
+                          type: string
+                        methodName:
+                          type: string
+                        methodId:
+                          type: string
+                        path:
+                          type: string
+                        fragment:
+                          type: string
+                        query:
+                          type: string
+                        parameters:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              value:
+                                type: string
                     pools:
                       type: array
                       items:
@@ -204,8 +228,32 @@ paths:
               partitionedPoolRegistry:
                 type: object
                 properties:
-                  creator:
-                    type: string
+                  owner:
+                    type: object
+                    properties:
+                      creator:
+                        type: string
+                      url:
+                        type: string
+                      methodName:
+                        type: string
+                      methodId:
+                        type: string
+                      path:
+                        type: string
+                      fragment:
+                        type: string
+                      query:
+                        type: string
+                      parameters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            value:
+                              type: string
                   pools:
                     type: array
                     items:
@@ -45538,8 +45586,32 @@ definitions:
   beheroes.doxchain.abs.v1beta1.PartitionedPoolRegistry:
     type: object
     properties:
-      creator:
-        type: string
+      owner:
+        type: object
+        properties:
+          creator:
+            type: string
+          url:
+            type: string
+          methodName:
+            type: string
+          methodId:
+            type: string
+          path:
+            type: string
+          fragment:
+            type: string
+          query:
+            type: string
+          parameters:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
       pools:
         type: array
         items:
@@ -45615,8 +45687,32 @@ definitions:
         items:
           type: object
           properties:
-            creator:
-              type: string
+            owner:
+              type: object
+              properties:
+                creator:
+                  type: string
+                url:
+                  type: string
+                methodName:
+                  type: string
+                methodId:
+                  type: string
+                path:
+                  type: string
+                fragment:
+                  type: string
+                query:
+                  type: string
+                parameters:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      value:
+                        type: string
             pools:
               type: array
               items:
@@ -45721,8 +45817,32 @@ definitions:
       partitionedPoolRegistry:
         type: object
         properties:
-          creator:
-            type: string
+          owner:
+            type: object
+            properties:
+              creator:
+                type: string
+              url:
+                type: string
+              methodName:
+                type: string
+              methodId:
+                type: string
+              path:
+                type: string
+              fragment:
+                type: string
+              query:
+                type: string
+              parameters:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    value:
+                      type: string
           pools:
             type: array
             items:

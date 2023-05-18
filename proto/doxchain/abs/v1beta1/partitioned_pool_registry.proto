@@ -3,10 +3,11 @@ package beheroes.doxchain.abs.v1beta1;
 
 import "gogoproto/gogo.proto";
 import "doxchain/abs/v1beta1/partitioned_pool.proto";
+import "doxchain/did/v1beta1/did.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/abs/types";
 
 message PartitionedPoolRegistry {
-  string creator = 1;
+  beheroes.doxchain.did.v1beta1.Did owner = 1;
   repeated PartitionedPool pools = 2 [(gogoproto.nullable) = false]; 
 }

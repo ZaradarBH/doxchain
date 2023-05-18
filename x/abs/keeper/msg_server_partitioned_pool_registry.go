@@ -3,19 +3,22 @@ package keeper
 import (
 	"context"
 
-	"github.com/be-heroes/doxchain/x/abs/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+	
+	"github.com/be-heroes/doxchain/x/abs/types"
+	utils "github.com/be-heroes/doxchain/utils/did"
 )
 
 func (k msgServer) CreatePartitionedPoolRegistry(goCtx context.Context, msg *types.MsgCreatePartitionedPoolRegistryRequest) (*types.MsgCreatePartitionedPoolRegistryResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 	partitionedPoolRegistry, isFound := k.GetPartitionedPoolRegistry(ctx, msg.Creator)
+	creatorDid := utils.NewDidTokenFactory().Create(msg.Creator, "")
 
 	if !isFound {
 		partitionedPoolRegistry = types.PartitionedPoolRegistry{
-			Creator: msg.Creator,
-			Pools:   []types.PartitionedPool{},
+			Owner: creatorDid,
+			Pools: []types.PartitionedPool{},
 		}
 	}
 

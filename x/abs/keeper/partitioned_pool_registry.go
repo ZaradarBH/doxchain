@@ -11,7 +11,7 @@ func (k Keeper) SetPartitionedPoolRegistry(ctx sdk.Context, partitionedPoolRegis
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.PartitionedPoolRegistryKeyPrefix))
 	b := k.cdc.MustMarshal(&partitionedPoolRegistry)
 	store.Set(types.PartitionedPoolRegistryKey(
-		partitionedPoolRegistry.Creator,
+		partitionedPoolRegistry.Owner.Creator,
 	), b)
 }
 
