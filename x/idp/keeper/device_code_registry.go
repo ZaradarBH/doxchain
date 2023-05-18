@@ -11,7 +11,7 @@ func (k Keeper) SetDeviceCodeRegistry(ctx sdk.Context, deviceCodeRegistry types.
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DeviceCodeRegistryKeyPrefix))
 	b := k.cdc.MustMarshal(&deviceCodeRegistry)
 	store.Set(types.DeviceCodeRegistryKey(
-		deviceCodeRegistry.Tenant,
+		deviceCodeRegistry.Owner.Creator,
 	), b)
 }
 

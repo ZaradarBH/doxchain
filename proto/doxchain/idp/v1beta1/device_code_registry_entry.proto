@@ -1,10 +1,13 @@
 syntax = "proto3";
 package beheroes.doxchain.idp.v1beta1;
 
+import "gogoproto/gogo.proto";
+import "doxchain/did/v1beta1/did.proto";
+
 option go_package = "github.com/be-heroes/doxchain/x/idp/types";
 
 message DeviceCodeRegistryEntry {
-  string creator = 1;
+  beheroes.doxchain.did.v1beta1.Did owner = 1 [(gogoproto.nullable) = false];
   string deviceCode = 2; 
   string userCode = 3; 
   int64 expiresAt = 4;

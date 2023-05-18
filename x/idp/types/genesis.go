@@ -24,18 +24,18 @@ func (gs GenesisState) Validate() error {
 	DeviceCodeRegistryIndexMap := make(map[string]struct{})
 
 	for _, elem := range gs.DeviceCodeRegistries {
-		tenant := string(DeviceCodeRegistryKey(elem.Tenant))
-		if _, ok := DeviceCodeRegistryIndexMap[tenant]; ok {
-			return fmt.Errorf("duplicated tenant for DeviceCodeRegistry")
+		creator := string(DeviceCodeRegistryKey(elem.Owner.Creator))
+		if _, ok := DeviceCodeRegistryIndexMap[creator]; ok {
+			return fmt.Errorf("duplicated creator for DeviceCodeRegistry")
 		}
-		DeviceCodeRegistryIndexMap[tenant] = struct{}{}
+		DeviceCodeRegistryIndexMap[creator] = struct{}{}
 	}
 
 	// Check for duplicated index in ClientRegistry
 	ClientRegistryIndexMap := make(map[string]struct{})
 
 	for _, elem := range gs.ClientRegistries {
-		creator := string(ClientRegistryKey(elem.Creator))
+		creator := string(ClientRegistryKey(elem.Owner.Creator))
 		if _, ok := ClientRegistryIndexMap[creator]; ok {
 			return fmt.Errorf("duplicated creator for ClientRegistry")
 		}

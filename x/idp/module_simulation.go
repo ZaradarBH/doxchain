@@ -12,6 +12,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/module"
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
+	utils "github.com/be-heroes/doxchain/utils/did"
 )
 
 // avoid unused import issue
@@ -69,10 +70,10 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 		Params: types.DefaultParams(),
 		ClientRegistries: []types.ClientRegistry{
 			{
-				Creator: sample.AccAddress(),
+				Owner: *utils.NewDidTokenFactory().Create(sample.AccAddress(), ""),
 			},
 			{
-				Creator: sample.AccAddress(),
+				Owner: *utils.NewDidTokenFactory().Create(sample.AccAddress(), ""),
 			},
 		},
 		// this line is used by starport scaffolding # simapp/module/genesisState

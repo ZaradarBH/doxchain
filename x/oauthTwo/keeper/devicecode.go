@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/be-heroes/doxchain/utils"
+	didUtils "github.com/be-heroes/doxchain/utils/did"
 	idpTypes "github.com/be-heroes/doxchain/x/idp/types"
 	"github.com/be-heroes/doxchain/x/oauthtwo/types"
 )
@@ -35,9 +36,10 @@ func (k Keeper) DeviceCode(ctx sdk.Context, msg types.MsgDeviceCodeRequest) (typ
 	if !found {
 		return response, sdkerrors.Wrap(types.TokenServiceError, "DeviceCodeRegistry cache could not be found for tenant")
 	}
-
+	
+	ownerDid := didUtils.NewDidTokenFactory().Create(msg.Creator, "")
 	deviceCodeRegistryEntry := idpTypes.DeviceCodeRegistryEntry{
-		Creator:    msg.Creator,
+		Owner: *ownerDid,
 		DeviceCode: response.DeviceCode,
 		UserCode:   response.UserCode,
 		ExpiresAt:  ctx.BlockTime().Add(time.Minute * 15).Unix(),

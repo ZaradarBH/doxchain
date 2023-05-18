@@ -31,13 +31,15 @@ message MsgAuthenticationResponse {
 }
 
 message MsgCreateClientRegistry {
-  ClientRegistry clientRegistry = 1;
+  string creator = 1;
+  ClientRegistry clientRegistry = 2 [(gogoproto.nullable) = false];
 }
 
 message MsgCreateClientRegistryResponse {}
 
 message MsgUpdateClientRegistry {
-  ClientRegistry clientRegistry = 1;
+  string creator = 1;
+  ClientRegistry clientRegistry = 2 [(gogoproto.nullable) = false];
 }
 
 message MsgUpdateClientRegistryResponse {}
@@ -49,13 +51,15 @@ message MsgDeleteClientRegistry {
 message MsgDeleteClientRegistryResponse {}
 
 message MsgCreateClientRegistration {
-  ClientRegistration clientRegistration = 2;
+  string creator = 1;
+  ClientRegistration clientRegistration = 2 [(gogoproto.nullable) = false];
 }
 
 message MsgCreateClientRegistrationResponse {}
 
 message MsgUpdateClientRegistration {
-  ClientRegistration clientRegistration = 2;
+  string creator = 1;
+  ClientRegistration clientRegistration = 2 [(gogoproto.nullable) = false];
 }
 
 message MsgUpdateClientRegistrationResponse {}
@@ -68,13 +72,15 @@ message MsgDeleteClientRegistration {
 message MsgDeleteClientRegistrationResponse {}
 
 message MsgCreateClientRegistrationRelationshipRequest {
-  ClientRegistrationRelationshipRegistryEntry clientRegistrationRelationshipRegistryEntry = 1 [(gogoproto.nullable) = false];
+  string creator = 1;
+  ClientRegistrationRelationshipRegistryEntry clientRegistrationRelationshipRegistryEntry = 2 [(gogoproto.nullable) = false];
 }
 
 message MsgCreateClientRegistrationRelationshipResponse {}
 
 message MsgDeleteClientRegistrationRelationshipRequest {
-  ClientRegistrationRelationshipRegistryEntry clientRegistrationRelationshipRegistryEntry = 1 [(gogoproto.nullable) = false];
+  string creator = 1;
+  ClientRegistrationRelationshipRegistryEntry clientRegistrationRelationshipRegistryEntry = 2 [(gogoproto.nullable) = false];
 }
 
 message MsgDeleteClientRegistrationRelationshipResponse {}

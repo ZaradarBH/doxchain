@@ -12,7 +12,7 @@ import (
 func (k Keeper) SetTenantRegistry(ctx sdk.Context, TenantRegistry types.TenantRegistry) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.TenantRegistryKeyPrefix))
 
-	store.Set(types.TenantRegistryKey(TenantRegistry.Creator), k.cdc.MustMarshal(&TenantRegistry))
+	store.Set(types.TenantRegistryKey(TenantRegistry.Owner.Creator), k.cdc.MustMarshal(&TenantRegistry))
 }
 
 // GetTenantRegistry returns a TenantRegistry from its creator

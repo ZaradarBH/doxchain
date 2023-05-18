@@ -24,7 +24,7 @@ func (msg *MsgCreateClientRegistrationRelationshipRequest) Type() string {
 }
 
 func (msg *MsgCreateClientRegistrationRelationshipRequest) GetSigners() []sdk.AccAddress {
-	creator, err := sdk.AccAddressFromBech32(msg.ClientRegistrationRelationshipRegistryEntry.OwnerId.Creator)
+	creator, err := sdk.AccAddressFromBech32(msg.ClientRegistrationRelationshipRegistryEntry.Owner.Creator)
 	if err != nil {
 		panic(err)
 	}
@@ -37,7 +37,7 @@ func (msg *MsgCreateClientRegistrationRelationshipRequest) GetSignBytes() []byte
 }
 
 func (msg *MsgCreateClientRegistrationRelationshipRequest) ValidateBasic() error {
-	_, err := sdk.AccAddressFromBech32(msg.ClientRegistrationRelationshipRegistryEntry.OwnerId.Creator)
+	_, err := sdk.AccAddressFromBech32(msg.ClientRegistrationRelationshipRegistryEntry.Owner.Creator)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}

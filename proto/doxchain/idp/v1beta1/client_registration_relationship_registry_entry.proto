@@ -8,7 +8,7 @@ import "doxchain/idp/v1beta1/access_client_list.proto";
 option go_package = "github.com/be-heroes/doxchain/x/idp/types";
 
 message ClientRegistrationRelationshipRegistryEntry {   
-  beheroes.doxchain.did.v1beta1.Did ownerId = 1 [(gogoproto.nullable) = false];
-  beheroes.doxchain.did.v1beta1.Did destinationId = 2 [(gogoproto.nullable) = false];  
+  beheroes.doxchain.did.v1beta1.Did owner = 1 [(gogoproto.nullable) = false];
+  beheroes.doxchain.did.v1beta1.Did destination = 2 [(gogoproto.nullable) = false];  
   AccessClientList accessClientList = 3 [(gogoproto.nullable) = false];
 }

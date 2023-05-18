@@ -28,7 +28,7 @@ func (k Keeper) Authorize(ctx sdk.Context, msg types.MsgAuthorizeRequest) (types
 		userCodeFound := false
 
 		for _, deviceCodeRegistryEntry := range tenantDeviceCodeRegistry.Codes {
-			if deviceCodeRegistryEntry.UserCode == msg.UserCode && deviceCodeRegistryEntry.Creator == msg.Creator {
+			if deviceCodeRegistryEntry.UserCode == msg.UserCode && deviceCodeRegistryEntry.Owner.Creator == msg.Creator {
 				userCodeFound = true
 			}
 		}

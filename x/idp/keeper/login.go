@@ -40,7 +40,7 @@ func (k Keeper) AuthorizeCreator(ctx sdk.Context, fullyQualifiedDidIdentifier st
 	}
 
 	for _, aclEntry := range acl.Entries {
-		if aclEntry.User == creator {
+		if aclEntry.User.Creator == creator {
 			return true, nil
 		}
 	}

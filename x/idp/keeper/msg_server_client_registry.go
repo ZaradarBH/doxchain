@@ -14,7 +14,7 @@ func (k msgServer) CreateClientRegistry(goCtx context.Context, msg *types.MsgCre
 	// Check if the value already exists
 	_, isFound := k.GetClientRegistry(
 		ctx,
-		msg.ClientRegistry.Creator,
+		msg.ClientRegistry.Owner.Creator,
 	)
 
 	if isFound {
@@ -23,7 +23,7 @@ func (k msgServer) CreateClientRegistry(goCtx context.Context, msg *types.MsgCre
 
 	k.SetClientRegistry(
 		ctx,
-		*msg.ClientRegistry,
+		msg.ClientRegistry,
 	)
 
 	return &types.MsgCreateClientRegistryResponse{}, nil
@@ -35,18 +35,18 @@ func (k msgServer) UpdateClientRegistry(goCtx context.Context, msg *types.MsgUpd
 	// Check if the value exists
 	valFound, isFound := k.GetClientRegistry(
 		ctx,
-		msg.ClientRegistry.Creator,
+		msg.ClientRegistry.Owner.Creator,
 	)
 	if !isFound {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "creator not set")
 	}
 
 	// Checks if the the msg creator is the same as the current owner
-	if msg.ClientRegistry.Creator != valFound.Creator {
+	if msg.ClientRegistry.Owner.Creator != valFound.Owner.Creator {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "incorrect owner")
 	}
 
-	k.SetClientRegistry(ctx, *msg.ClientRegistry)
+	k.SetClientRegistry(ctx, msg.ClientRegistry)
 
 	return &types.MsgUpdateClientRegistryResponse{}, nil
 }
@@ -64,7 +64,7 @@ func (k msgServer) DeleteClientRegistry(goCtx context.Context, msg *types.MsgDel
 	}
 
 	// Checks if the the msg creator is the same as the current owner
-	if msg.Creator != valFound.Creator {
+	if msg.Creator != valFound.Owner.Creator {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "incorrect owner")
 	}
 

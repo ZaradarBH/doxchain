@@ -3,11 +3,12 @@ package beheroes.doxchain.idp.v1beta1;
 
 import "gogoproto/gogo.proto";
 import "doxchain/idp/v1beta1/client_registration.proto";
+import "doxchain/did/v1beta1/did.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/idp/types";
 
 message ClientRegistry {
-  string creator = 1;
-  repeated ClientRegistration registrations = 2 [(gogoproto.nullable) = true];
+  beheroes.doxchain.did.v1beta1.Did owner = 1 [(gogoproto.nullable) = false];
+  repeated ClientRegistration registrations = 2 [(gogoproto.nullable) = false];
 }
 

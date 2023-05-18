@@ -8,7 +8,7 @@ import (
 )
 
 func (k msgServer) CreateClientRegistration(goCtx context.Context, msg *types.MsgCreateClientRegistration) (*types.MsgCreateClientRegistrationResponse, error) {
-	k.Keeper.SetClientRegistration(sdk.UnwrapSDKContext(goCtx), *msg.ClientRegistration)
+	k.Keeper.SetClientRegistration(sdk.UnwrapSDKContext(goCtx), msg.ClientRegistration)
 
 	return &types.MsgCreateClientRegistrationResponse{}, nil
 }

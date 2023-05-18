@@ -96,15 +96,63 @@ paths:
                           accessClientList:
                             type: object
                             properties:
-                              creator:
-                                type: string
+                              owner:
+                                type: object
+                                properties:
+                                  creator:
+                                    type: string
+                                  url:
+                                    type: string
+                                  methodName:
+                                    type: string
+                                  methodId:
+                                    type: string
+                                  path:
+                                    type: string
+                                  fragment:
+                                    type: string
+                                  query:
+                                    type: string
+                                  parameters:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        name:
+                                          type: string
+                                        value:
+                                          type: string
                               entries:
                                 type: array
                                 items:
                                   type: object
                                   properties:
                                     user:
-                                      type: string
+                                      type: object
+                                      properties:
+                                        creator:
+                                          type: string
+                                        url:
+                                          type: string
+                                        methodName:
+                                          type: string
+                                        methodId:
+                                          type: string
+                                        path:
+                                          type: string
+                                        fragment:
+                                          type: string
+                                        query:
+                                          type: string
+                                        parameters:
+                                          type: array
+                                          items:
+                                            type: object
+                                            properties:
+                                              name:
+                                                type: string
+                                              value:
+                                                type: string
                                     canRead:
                                       type: boolean
                                     canWrite:
@@ -306,15 +354,63 @@ paths:
                         accessClientList:
                           type: object
                           properties:
-                            creator:
-                              type: string
+                            owner:
+                              type: object
+                              properties:
+                                creator:
+                                  type: string
+                                url:
+                                  type: string
+                                methodName:
+                                  type: string
+                                methodId:
+                                  type: string
+                                path:
+                                  type: string
+                                fragment:
+                                  type: string
+                                query:
+                                  type: string
+                                parameters:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      name:
+                                        type: string
+                                      value:
+                                        type: string
                             entries:
                               type: array
                               items:
                                 type: object
                                 properties:
                                   user:
-                                    type: string
+                                    type: object
+                                    properties:
+                                      creator:
+                                        type: string
+                                      url:
+                                        type: string
+                                      methodName:
+                                        type: string
+                                      methodId:
+                                        type: string
+                                      path:
+                                        type: string
+                                      fragment:
+                                        type: string
+                                      query:
+                                        type: string
+                                      parameters:
+                                        type: array
+                                        items:
+                                          type: object
+                                          properties:
+                                            name:
+                                              type: string
+                                            value:
+                                              type: string
                                   canRead:
                                     type: boolean
                                   canWrite:
@@ -869,8 +965,32 @@ paths:
                 items:
                   type: object
                   properties:
-                    creator:
-                      type: string
+                    owner:
+                      type: object
+                      properties:
+                        creator:
+                          type: string
+                        url:
+                          type: string
+                        methodName:
+                          type: string
+                        methodId:
+                          type: string
+                        path:
+                          type: string
+                        fragment:
+                          type: string
+                        query:
+                          type: string
+                        parameters:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              value:
+                                type: string
                     registrations:
                       type: array
                       items:
@@ -951,15 +1071,63 @@ paths:
                           accessClientList:
                             type: object
                             properties:
-                              creator:
-                                type: string
+                              owner:
+                                type: object
+                                properties:
+                                  creator:
+                                    type: string
+                                  url:
+                                    type: string
+                                  methodName:
+                                    type: string
+                                  methodId:
+                                    type: string
+                                  path:
+                                    type: string
+                                  fragment:
+                                    type: string
+                                  query:
+                                    type: string
+                                  parameters:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        name:
+                                          type: string
+                                        value:
+                                          type: string
                               entries:
                                 type: array
                                 items:
                                   type: object
                                   properties:
                                     user:
-                                      type: string
+                                      type: object
+                                      properties:
+                                        creator:
+                                          type: string
+                                        url:
+                                          type: string
+                                        methodName:
+                                          type: string
+                                        methodId:
+                                          type: string
+                                        path:
+                                          type: string
+                                        fragment:
+                                          type: string
+                                        query:
+                                          type: string
+                                        parameters:
+                                          type: array
+                                          items:
+                                            type: object
+                                            properties:
+                                              name:
+                                                type: string
+                                              value:
+                                                type: string
                                     canRead:
                                       type: boolean
                                     canWrite:
@@ -1083,8 +1251,32 @@ paths:
               ClientRegistry:
                 type: object
                 properties:
-                  creator:
-                    type: string
+                  owner:
+                    type: object
+                    properties:
+                      creator:
+                        type: string
+                      url:
+                        type: string
+                      methodName:
+                        type: string
+                      methodId:
+                        type: string
+                      path:
+                        type: string
+                      fragment:
+                        type: string
+                      query:
+                        type: string
+                      parameters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            value:
+                              type: string
                   registrations:
                     type: array
                     items:
@@ -1165,15 +1357,63 @@ paths:
                         accessClientList:
                           type: object
                           properties:
-                            creator:
-                              type: string
+                            owner:
+                              type: object
+                              properties:
+                                creator:
+                                  type: string
+                                url:
+                                  type: string
+                                methodName:
+                                  type: string
+                                methodId:
+                                  type: string
+                                path:
+                                  type: string
+                                fragment:
+                                  type: string
+                                query:
+                                  type: string
+                                parameters:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      name:
+                                        type: string
+                                      value:
+                                        type: string
                             entries:
                               type: array
                               items:
                                 type: object
                                 properties:
                                   user:
-                                    type: string
+                                    type: object
+                                    properties:
+                                      creator:
+                                        type: string
+                                      url:
+                                        type: string
+                                      methodName:
+                                        type: string
+                                      methodId:
+                                        type: string
+                                      path:
+                                        type: string
+                                      fragment:
+                                        type: string
+                                      query:
+                                        type: string
+                                      parameters:
+                                        type: array
+                                        items:
+                                          type: object
+                                          properties:
+                                            name:
+                                              type: string
+                                            value:
+                                              type: string
                                   canRead:
                                     type: boolean
                                   canWrite:
@@ -45566,15 +45806,63 @@ definitions:
       accessClientList:
         type: object
         properties:
-          creator:
-            type: string
+          owner:
+            type: object
+            properties:
+              creator:
+                type: string
+              url:
+                type: string
+              methodName:
+                type: string
+              methodId:
+                type: string
+              path:
+                type: string
+              fragment:
+                type: string
+              query:
+                type: string
+              parameters:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    value:
+                      type: string
           entries:
             type: array
             items:
               type: object
               properties:
                 user:
-                  type: string
+                  type: object
+                  properties:
+                    creator:
+                      type: string
+                    url:
+                      type: string
+                    methodName:
+                      type: string
+                    methodId:
+                      type: string
+                    path:
+                      type: string
+                    fragment:
+                      type: string
+                    query:
+                      type: string
+                    parameters:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          value:
+                            type: string
                 canRead:
                   type: boolean
                 canWrite:
@@ -45662,15 +45950,63 @@ definitions:
             accessClientList:
               type: object
               properties:
-                creator:
-                  type: string
+                owner:
+                  type: object
+                  properties:
+                    creator:
+                      type: string
+                    url:
+                      type: string
+                    methodName:
+                      type: string
+                    methodId:
+                      type: string
+                    path:
+                      type: string
+                    fragment:
+                      type: string
+                    query:
+                      type: string
+                    parameters:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          value:
+                            type: string
                 entries:
                   type: array
                   items:
                     type: object
                     properties:
                       user:
-                        type: string
+                        type: object
+                        properties:
+                          creator:
+                            type: string
+                          url:
+                            type: string
+                          methodName:
+                            type: string
+                          methodId:
+                            type: string
+                          path:
+                            type: string
+                          fragment:
+                            type: string
+                          query:
+                            type: string
+                          parameters:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                value:
+                                  type: string
                       canRead:
                         type: boolean
                       canWrite:
@@ -45763,15 +46099,63 @@ definitions:
                   accessClientList:
                     type: object
                     properties:
-                      creator:
-                        type: string
+                      owner:
+                        type: object
+                        properties:
+                          creator:
+                            type: string
+                          url:
+                            type: string
+                          methodName:
+                            type: string
+                          methodId:
+                            type: string
+                          path:
+                            type: string
+                          fragment:
+                            type: string
+                          query:
+                            type: string
+                          parameters:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                value:
+                                  type: string
                       entries:
                         type: array
                         items:
                           type: object
                           properties:
                             user:
-                              type: string
+                              type: object
+                              properties:
+                                creator:
+                                  type: string
+                                url:
+                                  type: string
+                                methodName:
+                                  type: string
+                                methodId:
+                                  type: string
+                                path:
+                                  type: string
+                                fragment:
+                                  type: string
+                                query:
+                                  type: string
+                                parameters:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      name:
+                                        type: string
+                                      value:
+                                        type: string
                             canRead:
                               type: boolean
                             canWrite:
@@ -45893,15 +46277,63 @@ definitions:
                 accessClientList:
                   type: object
                   properties:
-                    creator:
-                      type: string
+                    owner:
+                      type: object
+                      properties:
+                        creator:
+                          type: string
+                        url:
+                          type: string
+                        methodName:
+                          type: string
+                        methodId:
+                          type: string
+                        path:
+                          type: string
+                        fragment:
+                          type: string
+                        query:
+                          type: string
+                        parameters:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              value:
+                                type: string
                     entries:
                       type: array
                       items:
                         type: object
                         properties:
                           user:
-                            type: string
+                            type: object
+                            properties:
+                              creator:
+                                type: string
+                              url:
+                                type: string
+                              methodName:
+                                type: string
+                              methodId:
+                                type: string
+                              path:
+                                type: string
+                              fragment:
+                                type: string
+                              query:
+                                type: string
+                              parameters:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    name:
+                                      type: string
+                                    value:
+                                      type: string
                           canRead:
                             type: boolean
                           canWrite:
@@ -46063,15 +46495,63 @@ definitions:
   beheroes.doxchain.idp.v1beta1.AccessClientList:
     type: object
     properties:
-      creator:
-        type: string
+      owner:
+        type: object
+        properties:
+          creator:
+            type: string
+          url:
+            type: string
+          methodName:
+            type: string
+          methodId:
+            type: string
+          path:
+            type: string
+          fragment:
+            type: string
+          query:
+            type: string
+          parameters:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
       entries:
         type: array
         items:
           type: object
           properties:
             user:
-              type: string
+              type: object
+              properties:
+                creator:
+                  type: string
+                url:
+                  type: string
+                methodName:
+                  type: string
+                methodId:
+                  type: string
+                path:
+                  type: string
+                fragment:
+                  type: string
+                query:
+                  type: string
+                parameters:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      value:
+                        type: string
             canRead:
               type: boolean
             canWrite:
@@ -46082,7 +46562,31 @@ definitions:
     type: object
     properties:
       user:
-        type: string
+        type: object
+        properties:
+          creator:
+            type: string
+          url:
+            type: string
+          methodName:
+            type: string
+          methodId:
+            type: string
+          path:
+            type: string
+          fragment:
+            type: string
+          query:
+            type: string
+          parameters:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
       canRead:
         type: boolean
       canWrite:
@@ -47677,15 +48181,63 @@ definitions:
       accessClientList:
         type: object
         properties:
-          creator:
-            type: string
+          owner:
+            type: object
+            properties:
+              creator:
+                type: string
+              url:
+                type: string
+              methodName:
+                type: string
+              methodId:
+                type: string
+              path:
+                type: string
+              fragment:
+                type: string
+              query:
+                type: string
+              parameters:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    value:
+                      type: string
           entries:
             type: array
             items:
               type: object
               properties:
                 user:
-                  type: string
+                  type: object
+                  properties:
+                    creator:
+                      type: string
+                    url:
+                      type: string
+                    methodName:
+                      type: string
+                    methodId:
+                      type: string
+                    path:
+                      type: string
+                    fragment:
+                      type: string
+                    query:
+                      type: string
+                    parameters:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          value:
+                            type: string
                 canRead:
                   type: boolean
                 canWrite:
@@ -47695,7 +48247,7 @@ definitions:
   beheroes.doxchain.idp.v1beta1.ClientRegistrationRelationshipRegistryEntry:
     type: object
     properties:
-      ownerId:
+      owner:
         type: object
         properties:
           creator:
@@ -47721,7 +48273,7 @@ definitions:
                   type: string
                 value:
                   type: string
-      destinationId:
+      destination:
         type: object
         properties:
           creator:
@@ -47750,15 +48302,63 @@ definitions:
       accessClientList:
         type: object
         properties:
-          creator:
-            type: string
+          owner:
+            type: object
+            properties:
+              creator:
+                type: string
+              url:
+                type: string
+              methodName:
+                type: string
+              methodId:
+                type: string
+              path:
+                type: string
+              fragment:
+                type: string
+              query:
+                type: string
+              parameters:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    value:
+                      type: string
           entries:
             type: array
             items:
               type: object
               properties:
                 user:
-                  type: string
+                  type: object
+                  properties:
+                    creator:
+                      type: string
+                    url:
+                      type: string
+                    methodName:
+                      type: string
+                    methodId:
+                      type: string
+                    path:
+                      type: string
+                    fragment:
+                      type: string
+                    query:
+                      type: string
+                    parameters:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          value:
+                            type: string
                 canRead:
                   type: boolean
                 canWrite:
@@ -47768,8 +48368,32 @@ definitions:
   beheroes.doxchain.idp.v1beta1.ClientRegistry:
     type: object
     properties:
-      creator:
-        type: string
+      owner:
+        type: object
+        properties:
+          creator:
+            type: string
+          url:
+            type: string
+          methodName:
+            type: string
+          methodId:
+            type: string
+          path:
+            type: string
+          fragment:
+            type: string
+          query:
+            type: string
+          parameters:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
       registrations:
         type: array
         items:
@@ -47850,15 +48474,63 @@ definitions:
             accessClientList:
               type: object
               properties:
-                creator:
-                  type: string
+                owner:
+                  type: object
+                  properties:
+                    creator:
+                      type: string
+                    url:
+                      type: string
+                    methodName:
+                      type: string
+                    methodId:
+                      type: string
+                    path:
+                      type: string
+                    fragment:
+                      type: string
+                    query:
+                      type: string
+                    parameters:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          value:
+                            type: string
                 entries:
                   type: array
                   items:
                     type: object
                     properties:
                       user:
-                        type: string
+                        type: object
+                        properties:
+                          creator:
+                            type: string
+                          url:
+                            type: string
+                          methodName:
+                            type: string
+                          methodId:
+                            type: string
+                          path:
+                            type: string
+                          fragment:
+                            type: string
+                          query:
+                            type: string
+                          parameters:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                value:
+                                  type: string
                       canRead:
                         type: boolean
                       canWrite:
@@ -47896,8 +48568,32 @@ definitions:
         items:
           type: object
           properties:
-            creator:
-              type: string
+            owner:
+              type: object
+              properties:
+                creator:
+                  type: string
+                url:
+                  type: string
+                methodName:
+                  type: string
+                methodId:
+                  type: string
+                path:
+                  type: string
+                fragment:
+                  type: string
+                query:
+                  type: string
+                parameters:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      value:
+                        type: string
             registrations:
               type: array
               items:
@@ -47978,15 +48674,63 @@ definitions:
                   accessClientList:
                     type: object
                     properties:
-                      creator:
-                        type: string
+                      owner:
+                        type: object
+                        properties:
+                          creator:
+                            type: string
+                          url:
+                            type: string
+                          methodName:
+                            type: string
+                          methodId:
+                            type: string
+                          path:
+                            type: string
+                          fragment:
+                            type: string
+                          query:
+                            type: string
+                          parameters:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                value:
+                                  type: string
                       entries:
                         type: array
                         items:
                           type: object
                           properties:
                             user:
-                              type: string
+                              type: object
+                              properties:
+                                creator:
+                                  type: string
+                                url:
+                                  type: string
+                                methodName:
+                                  type: string
+                                methodId:
+                                  type: string
+                                path:
+                                  type: string
+                                fragment:
+                                  type: string
+                                query:
+                                  type: string
+                                parameters:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      name:
+                                        type: string
+                                      value:
+                                        type: string
                             canRead:
                               type: boolean
                             canWrite:
@@ -48025,8 +48769,32 @@ definitions:
       ClientRegistry:
         type: object
         properties:
-          creator:
-            type: string
+          owner:
+            type: object
+            properties:
+              creator:
+                type: string
+              url:
+                type: string
+              methodName:
+                type: string
+              methodId:
+                type: string
+              path:
+                type: string
+              fragment:
+                type: string
+              query:
+                type: string
+              parameters:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    value:
+                      type: string
           registrations:
             type: array
             items:
@@ -48107,15 +48875,63 @@ definitions:
                 accessClientList:
                   type: object
                   properties:
-                    creator:
-                      type: string
+                    owner:
+                      type: object
+                      properties:
+                        creator:
+                          type: string
+                        url:
+                          type: string
+                        methodName:
+                          type: string
+                        methodId:
+                          type: string
+                        path:
+                          type: string
+                        fragment:
+                          type: string
+                        query:
+                          type: string
+                        parameters:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              value:
+                                type: string
                     entries:
                       type: array
                       items:
                         type: object
                         properties:
                           user:
-                            type: string
+                            type: object
+                            properties:
+                              creator:
+                                type: string
+                              url:
+                                type: string
+                              methodName:
+                                type: string
+                              methodId:
+                                type: string
+                              path:
+                                type: string
+                              fragment:
+                                type: string
+                              query:
+                                type: string
+                              parameters:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    name:
+                                      type: string
+                                    value:
+                                      type: string
                           canRead:
                             type: boolean
                           canWrite:

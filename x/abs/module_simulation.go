@@ -54,10 +54,10 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 		Params: types.DefaultParams(),
 		PartitionedPoolRegistries: []types.PartitionedPoolRegistry{
 			{
-				Owner: utils.NewDidTokenFactory().Create(sample.AccAddress(), ""),
+				Owner: *utils.NewDidTokenFactory().Create(sample.AccAddress(), ""),
 			},
 			{
-				Owner: utils.NewDidTokenFactory().Create(sample.AccAddress(), ""),
+				Owner: *utils.NewDidTokenFactory().Create(sample.AccAddress(), ""),
 			},
 		},
 		// this line is used by starport scaffolding # simapp/module/genesisState

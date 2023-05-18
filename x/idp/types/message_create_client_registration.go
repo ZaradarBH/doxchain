@@ -11,7 +11,7 @@ var _ sdk.Msg = &MsgCreateClientRegistration{}
 
 func NewMsgCreateClientRegistration(clientRegistration ClientRegistration) *MsgCreateClientRegistration {
 	return &MsgCreateClientRegistration{
-		ClientRegistration: &clientRegistration,
+		ClientRegistration: clientRegistration,
 	}
 }
 

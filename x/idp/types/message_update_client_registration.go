@@ -11,7 +11,7 @@ var _ sdk.Msg = &MsgUpdateClientRegistration{}
 
 func NewMsgUpdateClientRegistration(clientRegistration ClientRegistration) *MsgUpdateClientRegistration {
 	return &MsgUpdateClientRegistration{
-		ClientRegistration: &clientRegistration,
+		ClientRegistration: clientRegistration,
 	}
 }
 

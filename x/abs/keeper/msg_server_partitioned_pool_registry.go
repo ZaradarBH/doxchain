@@ -13,11 +13,11 @@ import (
 func (k msgServer) CreatePartitionedPoolRegistry(goCtx context.Context, msg *types.MsgCreatePartitionedPoolRegistryRequest) (*types.MsgCreatePartitionedPoolRegistryResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 	partitionedPoolRegistry, isFound := k.GetPartitionedPoolRegistry(ctx, msg.Creator)
-	creatorDid := utils.NewDidTokenFactory().Create(msg.Creator, "")
+	ownerDid := utils.NewDidTokenFactory().Create(msg.Creator, "")
 
 	if !isFound {
 		partitionedPoolRegistry = types.PartitionedPoolRegistry{
-			Owner: creatorDid,
+			Owner: *ownerDid,
 			Pools: []types.PartitionedPool{},
 		}
 	}

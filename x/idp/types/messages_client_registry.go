@@ -15,7 +15,7 @@ var _ sdk.Msg = &MsgCreateClientRegistry{}
 
 func NewMsgCreateClientRegistry(clientRegistry ClientRegistry) *MsgCreateClientRegistry {
 	return &MsgCreateClientRegistry{
-		ClientRegistry: &clientRegistry,
+		ClientRegistry: clientRegistry,
 	}
 }
 
@@ -28,7 +28,7 @@ func (msg *MsgCreateClientRegistry) Type() string {
 }
 
 func (msg *MsgCreateClientRegistry) GetSigners() []sdk.AccAddress {
-	creator, err := sdk.AccAddressFromBech32(msg.ClientRegistry.Creator)
+	creator, err := sdk.AccAddressFromBech32(msg.ClientRegistry.Owner.Creator)
 	if err != nil {
 		panic(err)
 	}
@@ -41,7 +41,7 @@ func (msg *MsgCreateClientRegistry) GetSignBytes() []byte {
 }
 
 func (msg *MsgCreateClientRegistry) ValidateBasic() error {
-	_, err := sdk.AccAddressFromBech32(msg.ClientRegistry.Creator)
+	_, err := sdk.AccAddressFromBech32(msg.ClientRegistry.Owner.Creator)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
@@ -52,7 +52,7 @@ var _ sdk.Msg = &MsgUpdateClientRegistry{}
 
 func NewMsgUpdateClientRegistry(clientRegistry ClientRegistry) *MsgUpdateClientRegistry {
 	return &MsgUpdateClientRegistry{
-		ClientRegistry: &clientRegistry,
+		ClientRegistry: clientRegistry,
 	}
 }
 
@@ -65,7 +65,7 @@ func (msg *MsgUpdateClientRegistry) Type() string {
 }
 
 func (msg *MsgUpdateClientRegistry) GetSigners() []sdk.AccAddress {
-	creator, err := sdk.AccAddressFromBech32(msg.ClientRegistry.Creator)
+	creator, err := sdk.AccAddressFromBech32(msg.ClientRegistry.Owner.Creator)
 	if err != nil {
 		panic(err)
 	}
@@ -78,7 +78,7 @@ func (msg *MsgUpdateClientRegistry) GetSignBytes() []byte {
 }
 
 func (msg *MsgUpdateClientRegistry) ValidateBasic() error {
-	_, err := sdk.AccAddressFromBech32(msg.ClientRegistry.Creator)
+	_, err := sdk.AccAddressFromBech32(msg.ClientRegistry.Owner.Creator)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}

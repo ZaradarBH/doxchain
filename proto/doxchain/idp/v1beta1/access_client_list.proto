@@ -3,10 +3,11 @@ package beheroes.doxchain.idp.v1beta1;
 
 import "gogoproto/gogo.proto";
 import "doxchain/idp/v1beta1/access_client_list_entry.proto";
+import "doxchain/did/v1beta1/did.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/idp/types";
 
 message AccessClientList {
-  string creator = 1;
+  beheroes.doxchain.did.v1beta1.Did owner = 1 [(gogoproto.nullable) = false];
   repeated AccessClientListEntry entries = 2 [(gogoproto.nullable) = false];
 }
