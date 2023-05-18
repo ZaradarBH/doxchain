@@ -41,19 +41,19 @@ func (k Keeper) AppendAMLRequest(
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AMLRequestKey))
 	appendedValue := k.cdc.MustMarshal(&request)
 
-	store.Set(GetAMLRequestIDBytes(request.Did.Creator), appendedValue)
+	store.Set(GetAMLRequestIDBytes(request.Owner.Creator), appendedValue)
 
 	// Update AMLRequest count
 	k.SetAMLRequestCount(ctx, count+1)
 
-	return request.Did.Creator
+	return request.Owner.Creator
 }
 
 // SetAMLRequest set a specific AMLRequest in the store
 func (k Keeper) SetAMLRequest(ctx sdk.Context, request types.AMLRequest) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AMLRequestKey))
 	b := k.cdc.MustMarshal(&request)
-	store.Set(GetAMLRequestIDBytes(request.Did.Creator), b)
+	store.Set(GetAMLRequestIDBytes(request.Owner.Creator), b)
 }
 
 // GetAMLRequest returns a AMLRequest object from its creator

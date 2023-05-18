@@ -18,12 +18,12 @@ func (k msgServer) CreateAMLRequest(goCtx context.Context, msg *types.MsgCreateA
 		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "already set")
 	}
 	
-	if msg.Creator != msg.Did.Creator {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "impersonation is not allowed in the AML process")
+	if msg.Creator != msg.Owner.Creator {
+		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "impersonation is not supported")
 	}
 
 	var aMLRequest = types.AMLRequest{
-		Did:      msg.Did,
+		Owner:      msg.Owner,
 		Approved: false,
 	}
 
@@ -46,8 +46,8 @@ func (k msgServer) DeleteAMLRequest(goCtx context.Context, msg *types.MsgDeleteA
 	}
 
 	// Checks if the the msg creator is the same as the current owner
-	if msg.Creator != valFound.Did.Creator {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "incorrect owner")
+	if msg.Creator != valFound.Owner.Creator {
+		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "impersonation is not supported")
 	}
 
 	k.RemoveAMLRequest(ctx, msg.Creator)

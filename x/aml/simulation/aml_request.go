@@ -63,7 +63,7 @@ func SimulateMsgDeleteAMLRequest(
 		if !found {
 			return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "aMLRequest store is empty"), nil, nil
 		}
-		simAccount, found = FindAccount(accs, aMLRequest.Did.Creator)
+		simAccount, found = FindAccount(accs, aMLRequest.Owner.Creator)
 		if !found {
 			return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "aMLRequest creator not found"), nil, nil
 		}

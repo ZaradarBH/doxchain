@@ -18,12 +18,12 @@ func (k msgServer) CreateKYCRequest(goCtx context.Context, msg *types.MsgCreateK
 		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "already set")
 	}
 
-	if msg.Did.Creator != msg.Creator {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "impersonation is not supported yet")
+	if msg.Owner.Creator != msg.Creator {
+		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "impersonation is not supported")
 	}
 
 	var kYCRequest = types.KYCRequest{
-		Did:      msg.Did,
+		Owner: msg.Owner,
 		Approved: false,
 	}
 
@@ -46,8 +46,8 @@ func (k msgServer) DeleteKYCRequest(goCtx context.Context, msg *types.MsgDeleteK
 	}
 
 	// Checks if the the msg creator is the same as the current owner
-	if msg.Creator != valFound.Did.Creator {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "impersonation not supported yet")
+	if msg.Creator != valFound.Owner.Creator {
+		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "impersonation not supported")
 	}
 
 	k.RemoveKYCRequest(ctx, msg.Creator)

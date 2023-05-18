@@ -15,7 +15,7 @@ service Msg {
 
 message MsgCreateAMLRequest {
   string creator = 1;
-  beheroes.doxchain.did.v1beta1.Did  did = 2 [(gogoproto.nullable) = false];  
+  beheroes.doxchain.did.v1beta1.Did owner = 2 [(gogoproto.nullable) = false];  
 }
 
 message MsgCreateAMLRequestResponse {}

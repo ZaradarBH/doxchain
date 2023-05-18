@@ -13,10 +13,10 @@ const (
 
 var _ sdk.Msg = &MsgCreateKYCRequest{}
 
-func NewMsgCreateKYCRequest(creator string, did didTypes.Did) *MsgCreateKYCRequest {
+func NewMsgCreateKYCRequest(creator string, owner didTypes.Did) *MsgCreateKYCRequest {
 	return &MsgCreateKYCRequest{
 		Creator: creator,
-		Did:     did,
+		Owner: owner,
 	}
 }
 

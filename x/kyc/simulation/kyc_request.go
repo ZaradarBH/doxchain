@@ -63,7 +63,7 @@ func SimulateMsgDeleteKYCRequest(
 		if !found {
 			return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "kYCRequest store is empty"), nil, nil
 		}
-		simAccount, found = FindAccount(accs, kYCRequest.Did.Creator)
+		simAccount, found = FindAccount(accs, kYCRequest.Owner.Creator)
 		if !found {
 			return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "kYCRequest creator not found"), nil, nil
 		}

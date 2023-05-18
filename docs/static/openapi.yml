@@ -509,7 +509,7 @@ paths:
               Request:
                 type: object
                 properties:
-                  did:
+                  owner:
                     type: object
                     properties:
                       creator:
@@ -572,7 +572,6 @@ paths:
             type: object
             properties:
               params:
-                description: params holds all the parameters of this module.
                 type: object
                 properties:
                   approvers:
@@ -1311,7 +1310,7 @@ paths:
               Request:
                 type: object
                 properties:
-                  did:
+                  Owner:
                     type: object
                     properties:
                       creator:
@@ -1465,7 +1464,6 @@ paths:
             type: object
             properties:
               params:
-                description: params holds all the parameters of this module.
                 type: object
         default:
           description: An unexpected error response.
@@ -46506,7 +46504,7 @@ definitions:
   beheroes.doxchain.aml.v1beta1.AMLRequest:
     type: object
     properties:
-      did:
+      owner:
         type: object
         properties:
           creator:
@@ -46575,7 +46573,7 @@ definitions:
       Request:
         type: object
         properties:
-          did:
+          owner:
             type: object
             properties:
               creator:
@@ -46607,7 +46605,6 @@ definitions:
     type: object
     properties:
       params:
-        description: params holds all the parameters of this module.
         type: object
         properties:
           approvers:
@@ -48164,7 +48161,7 @@ definitions:
   beheroes.doxchain.kyc.v1beta1.KYCRequest:
     type: object
     properties:
-      did:
+      Owner:
         type: object
         properties:
           creator:
@@ -48233,7 +48230,7 @@ definitions:
       Request:
         type: object
         properties:
-          did:
+          Owner:
             type: object
             properties:
               creator:
@@ -48332,7 +48329,6 @@ definitions:
     type: object
     properties:
       params:
-        description: params holds all the parameters of this module.
         type: object
   beheroes.doxchain.samltwo.v1beta1.Params:
     type: object

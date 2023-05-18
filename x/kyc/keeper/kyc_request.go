@@ -42,19 +42,19 @@ func (k Keeper) AppendKYCRequest(
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.KYCRequestKey))
 	appendedValue := k.cdc.MustMarshal(&request)
 
-	store.Set(GetKYCRequestIDBytes(request.Did.Creator), appendedValue)
+	store.Set(GetKYCRequestIDBytes(request.Owner.Creator), appendedValue)
 
 	// Update KYCRequest count
 	k.SetKYCRequestCount(ctx, count+1)
 
-	return request.Did.Creator
+	return request.Owner.Creator
 }
 
 // SetKYCRequest set a specific KYCRequest in the store
 func (k Keeper) SetKYCRequest(ctx sdk.Context, request types.KYCRequest) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.KYCRequestKey))
 	b := k.cdc.MustMarshal(&request)
-	store.Set(GetKYCRequestIDBytes(request.Did.Creator), b)
+	store.Set(GetKYCRequestIDBytes(request.Owner.Creator), b)
 }
 
 // GetKYCRequest returns a KYCRequest object from its creator

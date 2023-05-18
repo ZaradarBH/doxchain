@@ -13,10 +13,10 @@ const (
 
 var _ sdk.Msg = &MsgCreateAMLRequest{}
 
-func NewMsgCreateAMLRequest(creator string, did didTypes.Did) *MsgCreateAMLRequest {
+func NewMsgCreateAMLRequest(creator string, owner didTypes.Did) *MsgCreateAMLRequest {
 	return &MsgCreateAMLRequest{
 		Creator: creator,
-		Did:     did,
+		Owner:     owner,
 	}
 }
 
