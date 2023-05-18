@@ -20,7 +20,7 @@ func (k msgServer) CreateDidDocument(goCtx context.Context, msg *types.MsgCreate
 	}
 
 	return &types.MsgCreateDidDocumentResponse{
-		FullyQualifiedDidIdentifier: msg.DidDocument.Id.GetW3CIdentifier(),
+		FullyQualifiedW3CIdentifier: msg.DidDocument.Id.GetW3CIdentifier(),
 	}, nil
 }
 
@@ -42,7 +42,7 @@ func (k msgServer) DeleteDidDocument(goCtx context.Context, msg *types.MsgDelete
 	ctx := sdk.UnwrapSDKContext(goCtx)
 	
 	// Check if the value exists
-	valFound, isFound := k.GetDidDocument(ctx, msg.FullyQualifiedDidIdentifier)
+	valFound, isFound := k.GetDidDocument(ctx, msg.FullyQualifiedW3CIdentifier)
 
 	if !isFound {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "not set")
@@ -53,7 +53,7 @@ func (k msgServer) DeleteDidDocument(goCtx context.Context, msg *types.MsgDelete
 		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "incorrect owner")
 	}
 	
-	err := k.Keeper.RemoveDidDocument(ctx, msg.FullyQualifiedDidIdentifier)
+	err := k.Keeper.RemoveDidDocument(ctx, msg.FullyQualifiedW3CIdentifier)
 
 	if err != nil {
 		return nil, err

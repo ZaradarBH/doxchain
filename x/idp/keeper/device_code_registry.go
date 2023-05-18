@@ -18,12 +18,12 @@ func (k Keeper) SetDeviceCodeRegistry(ctx sdk.Context, deviceCodeRegistry types.
 // GetDeviceCodeRegistry returns a DeviceCodeRegistry from its index
 func (k Keeper) GetDeviceCodeRegistry(
 	ctx sdk.Context,
-	fullyQualifiedDidIdentifier string,
+	fullyQualifiedW3CIdentifier string,
 ) (val types.DeviceCodeRegistry, found bool) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DeviceCodeRegistryKeyPrefix))
 
 	b := store.Get(types.DeviceCodeRegistryKey(
-		fullyQualifiedDidIdentifier,
+		fullyQualifiedW3CIdentifier,
 	))
 	if b == nil {
 		return val, false
@@ -36,12 +36,12 @@ func (k Keeper) GetDeviceCodeRegistry(
 // RemoveDeviceCodeRegistry removes a DeviceCodeRegistry from the store
 func (k Keeper) RemoveDeviceCodeRegistry(
 	ctx sdk.Context,
-	fullyQualifiedDidIdentifier string,
+	fullyQualifiedW3CIdentifier string,
 
 ) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DeviceCodeRegistryKeyPrefix))
 	store.Delete(types.DeviceCodeRegistryKey(
-		fullyQualifiedDidIdentifier,
+		fullyQualifiedW3CIdentifier,
 	))
 }
 

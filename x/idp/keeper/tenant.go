@@ -59,14 +59,14 @@ func (k Keeper) GetAllTenantRegistry(ctx sdk.Context) (list []types.TenantRegist
 	return
 }
 
-// GetTenant for a given tenant identifier (fullyQualifiedDidIdentifier)
-func (k Keeper) GetTenant(ctx sdk.Context, fullyQualifiedDidIdentifier string) (tenant types.TenantRegistryEntry, err error) {
+// GetTenant for a given tenant identifier (fullyQualifiedW3CIdentifier)
+func (k Keeper) GetTenant(ctx sdk.Context, fullyQualifiedW3CIdentifier string) (tenant types.TenantRegistryEntry, err error) {
 	matched := false
 
 	//TODO: We need to benchmark how well it performs. If its a big deal it might be worth having a "graph" of tenant fullyqualifieddididentifiers (ids) to speed up this lookup
 	for _, registry := range k.GetAllTenantRegistry(ctx) {
 		for _, tenantRegistryEntry := range registry.Tenants {
-			if tenantRegistryEntry.Id.GetW3CIdentifier() == fullyQualifiedDidIdentifier {
+			if tenantRegistryEntry.Id.GetW3CIdentifier() == fullyQualifiedW3CIdentifier {
 				tenant = tenantRegistryEntry
 				matched = true
 
@@ -82,9 +82,9 @@ func (k Keeper) GetTenant(ctx sdk.Context, fullyQualifiedDidIdentifier string) (
 	return tenant, err
 }
 
-// GetAccessClientList for a given tenant identifier (fullyQualifiedDidIdentifier)
-func (k Keeper) GetAccessClientList(ctx sdk.Context, fullyQualifiedDidIdentifier string) (acl types.AccessClientList, err error) {
-	tenant, err := k.GetTenant(ctx, fullyQualifiedDidIdentifier)
+// GetAccessClientList for a given tenant identifier (fullyQualifiedW3CIdentifier)
+func (k Keeper) GetAccessClientList(ctx sdk.Context, fullyQualifiedW3CIdentifier string) (acl types.AccessClientList, err error) {
+	tenant, err := k.GetTenant(ctx, fullyQualifiedW3CIdentifier)
 
 	if err != nil {
 		return acl, err
@@ -93,8 +93,8 @@ func (k Keeper) GetAccessClientList(ctx sdk.Context, fullyQualifiedDidIdentifier
 	return tenant.AccessClientList, nil
 }
 
-func (k Keeper) GetTenantConfiguration(ctx sdk.Context, fullyQualifiedDidIdentifier string) (configuration types.TenantConfiguration, err error) {
-	tenant, err := k.GetTenant(ctx, fullyQualifiedDidIdentifier)
+func (k Keeper) GetTenantConfiguration(ctx sdk.Context, fullyQualifiedW3CIdentifier string) (configuration types.TenantConfiguration, err error) {
+	tenant, err := k.GetTenant(ctx, fullyQualifiedW3CIdentifier)
 
 	if err != nil {
 		return configuration, err

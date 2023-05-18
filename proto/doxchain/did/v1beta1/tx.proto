@@ -23,7 +23,7 @@ message MsgCreateDidRequest {
 }
 
 message MsgCreateDidResponse {
-  string fullyQualifiedDidIdentifier = 1;
+  string fullyQualifiedW3CIdentifier = 1;
 }
 
 message MsgUpdateDidRequest {
@@ -35,7 +35,7 @@ message MsgUpdateDidResponse {}
 
 message MsgDeleteDidRequest {
   string creator                     = 1;
-  string fullyQualifiedDidIdentifier = 2;
+  string fullyQualifiedW3CIdentifier = 2;
 }
 
 message MsgDeleteDidResponse {}
@@ -46,7 +46,7 @@ message MsgCreateDidDocumentRequest {
 }
 
 message MsgCreateDidDocumentResponse {
-  string fullyQualifiedDidIdentifier = 1;
+  string fullyQualifiedW3CIdentifier = 1;
 }
 
 message MsgUpdateDidDocumentRequest {
@@ -58,7 +58,7 @@ message MsgUpdateDidDocumentResponse {}
 
 message MsgDeleteDidDocumentRequest {
   string creator = 1;
-  string fullyQualifiedDidIdentifier = 2;
+  string fullyQualifiedW3CIdentifier = 2;
 }
 
 message MsgDeleteDidDocumentResponse {}

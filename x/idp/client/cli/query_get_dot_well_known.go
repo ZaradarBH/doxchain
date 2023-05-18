@@ -25,7 +25,7 @@ func CmdGetDotWellKnown() *cobra.Command {
 
 			queryClient := types.NewQueryClient(clientCtx)
 			res, err := queryClient.GetDotWellKnown(cmd.Context(), &types.QueryGetDotWellKnownRequest{
-				FullyQualifiedDidIdentifier: args[0],
+				FullyQualifiedW3CIdentifier: args[0],
 			})
 
 			if err != nil {

@@ -16,7 +16,7 @@ service Query {
   }
   
   rpc GetDotWellKnown (QueryGetDotWellKnownRequest) returns (QueryGetDotWellKnownResponse) {
-    option (google.api.http).get = "/be-heroes/doxchain/idp/{fullyQualifiedDidIdentifier}/.well-known";  
+    option (google.api.http).get = "/be-heroes/doxchain/idp/{fullyQualifiedW3CIdentifier}/.well-known";  
   }
   
   rpc ClientRegistry (QueryGetClientRegistryRequest) returns (QueryGetClientRegistryResponse) {
@@ -35,7 +35,7 @@ message QueryParamsResponse {
 }
 
 message QueryGetDotWellKnownRequest {
-  string fullyQualifiedDidIdentifier = 1;
+  string fullyQualifiedW3CIdentifier = 1;
 }
 
 message QueryGetDotWellKnownResponse {

@@ -20,7 +20,7 @@ func (k msgServer) CreateDid(goCtx context.Context, msg *types.MsgCreateDidReque
 	}
 
 	return &types.MsgCreateDidResponse{
-		FullyQualifiedDidIdentifier: msg.Did.GetW3CIdentifier(),
+		FullyQualifiedW3CIdentifier: msg.Did.GetW3CIdentifier(),
 	}, nil
 }
 
@@ -42,7 +42,7 @@ func (k msgServer) DeleteDid(goCtx context.Context, msg *types.MsgDeleteDidReque
 	ctx := sdk.UnwrapSDKContext(goCtx)
 	
 	// Check if the value exists
-	valFound, isFound := k.GetDid(ctx, msg.FullyQualifiedDidIdentifier)
+	valFound, isFound := k.GetDid(ctx, msg.FullyQualifiedW3CIdentifier)
 
 	if !isFound {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "not set")
@@ -53,7 +53,7 @@ func (k msgServer) DeleteDid(goCtx context.Context, msg *types.MsgDeleteDidReque
 		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "incorrect owner")
 	}
 
-	err := k.RemoveDid(ctx, msg.FullyQualifiedDidIdentifier)
+	err := k.RemoveDid(ctx, msg.FullyQualifiedW3CIdentifier)
 
 	if err != nil {
 		return nil, err

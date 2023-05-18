@@ -62,15 +62,15 @@ func request_Query_GetDotWellKnown_0(ctx context.Context, marshaler runtime.Mars
 		_   = err
 	)
 
-	val, ok = pathParams["fullyQualifiedDidIdentifier"]
+	val, ok = pathParams["fullyQualifiedW3CIdentifier"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "fullyQualifiedDidIdentifier")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "fullyQualifiedW3CIdentifier")
 	}
 
-	protoReq.FullyQualifiedDidIdentifier, err = runtime.String(val)
+	protoReq.FullyQualifiedW3CIdentifier, err = runtime.String(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "fullyQualifiedDidIdentifier", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "fullyQualifiedW3CIdentifier", err)
 	}
 
 	msg, err := client.GetDotWellKnown(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -89,15 +89,15 @@ func local_request_Query_GetDotWellKnown_0(ctx context.Context, marshaler runtim
 		_   = err
 	)
 
-	val, ok = pathParams["fullyQualifiedDidIdentifier"]
+	val, ok = pathParams["fullyQualifiedW3CIdentifier"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "fullyQualifiedDidIdentifier")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "fullyQualifiedW3CIdentifier")
 	}
 
-	protoReq.FullyQualifiedDidIdentifier, err = runtime.String(val)
+	protoReq.FullyQualifiedW3CIdentifier, err = runtime.String(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "fullyQualifiedDidIdentifier", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "fullyQualifiedW3CIdentifier", err)
 	}
 
 	msg, err := server.GetDotWellKnown(ctx, &protoReq)
@@ -420,7 +420,7 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 var (
 	pattern_Query_Params_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"be-heroes", "doxchain", "idp", "params"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_GetDotWellKnown_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4}, []string{"be-heroes", "doxchain", "idp", "fullyQualifiedDidIdentifier", ".well-known"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_GetDotWellKnown_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4}, []string{"be-heroes", "doxchain", "idp", "fullyQualifiedW3CIdentifier", ".well-known"}, "", runtime.AssumeColonVerbOpt(true)))
 
 	pattern_Query_ClientRegistry_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"be-heroes", "doxchain", "idp", "client_registry", "creator"}, "", runtime.AssumeColonVerbOpt(true)))
 

@@ -49,10 +49,10 @@ func (k Keeper) SetDid(ctx sdk.Context, did types.Did, override bool) error {
 	return nil
 }
 
-// GetDid returns a Did from its FullyQualifiedDidIdentifier (did:MethodName:MethodId)
-func (k Keeper) GetDid(ctx sdk.Context, fullyQualifiedDidIdentifier string) (val types.Did, found bool) {
+// GetDid returns a Did from its FullyQualifiedW3CIdentifier (did:MethodName:MethodId)
+func (k Keeper) GetDid(ctx sdk.Context, fullyQualifiedW3CIdentifier string) (val types.Did, found bool) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DidKey))
-	b := store.Get(GetDidIDBytes(fullyQualifiedDidIdentifier))
+	b := store.Get(GetDidIDBytes(fullyQualifiedW3CIdentifier))
 
 	if b == nil {
 		return val, false
@@ -64,8 +64,8 @@ func (k Keeper) GetDid(ctx sdk.Context, fullyQualifiedDidIdentifier string) (val
 }
 
 // RemoveDid removes a Did from the KVStore
-func (k Keeper) RemoveDid(ctx sdk.Context, fullyQualifiedDidIdentifier string) error {
-	match, exists := k.GetDid(ctx, fullyQualifiedDidIdentifier)
+func (k Keeper) RemoveDid(ctx sdk.Context, fullyQualifiedW3CIdentifier string) error {
+	match, exists := k.GetDid(ctx, fullyQualifiedW3CIdentifier)
 
 	if exists {
 		err := k.CanOverrideDid(ctx, match, true)
@@ -76,7 +76,7 @@ func (k Keeper) RemoveDid(ctx sdk.Context, fullyQualifiedDidIdentifier string) e
 
 		store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DidKey))
 
-		store.Delete(GetDidIDBytes(fullyQualifiedDidIdentifier))
+		store.Delete(GetDidIDBytes(fullyQualifiedW3CIdentifier))
 	}
 
 	return nil
@@ -100,12 +100,12 @@ func (k Keeper) GetAllDid(ctx sdk.Context) (list []types.Did) {
 
 // CanOverrideDid check if a did can be safely overwritten without causing and "unapproved identifier collision or ownership error"
 func (k Keeper) CanOverrideDid(ctx sdk.Context, did types.Did, override bool) error {
-	fullyQualifiedDidIdentifier := did.GetW3CIdentifier()
-	match, found := k.GetDid(ctx, fullyQualifiedDidIdentifier)
+	fullyQualifiedW3CIdentifier := did.GetW3CIdentifier()
+	match, found := k.GetDid(ctx, fullyQualifiedW3CIdentifier)
 
 	if found {
 		if !override {
-			return sdkerrors.Wrap(types.DidIdentifierCollisionError, fmt.Sprintf("Did with identifier: %s already exists in KVStore", fullyQualifiedDidIdentifier))
+			return sdkerrors.Wrap(types.DidIdentifierCollisionError, fmt.Sprintf("Did with identifier: %s already exists in KVStore", fullyQualifiedW3CIdentifier))
 		}
 
 		if did.Creator != match.Creator {

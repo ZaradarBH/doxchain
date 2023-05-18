@@ -85,8 +85,8 @@ func CmdUpdateDidDocument() *cobra.Command {
 
 func CmdDeleteDidDocument() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "delete-did-document [fullyQualifiedDidIdentifier]",
-		Short: "Delete a DidDocument by fullyQualifiedDidIdentifier",
+		Use:   "delete-did-document [fullyQualifiedW3CIdentifier]",
+		Short: "Delete a DidDocument by fullyQualifiedW3CIdentifier",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientTxContext(cmd)

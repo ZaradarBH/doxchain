@@ -21,7 +21,7 @@ func TestDidMsgServerCreate(t *testing.T) {
 				MethodId:   string(i),
 			}})
 		require.NoError(t, err)
-		require.Equal(t, fmt.Sprintf("did:method:%d", i), resp.FullyQualifiedDidIdentifier)
+		require.Equal(t, fmt.Sprintf("did:method:%d", i), resp.FullyQualifiedW3CIdentifier)
 	}
 }
 
@@ -98,7 +98,7 @@ func TestDidMsgServerDelete(t *testing.T) {
 		},
 		{
 			desc:    "KeyNotFound",
-			request: &types.MsgDeleteDid{Creator: creator, FullyQualifiedDidIdentifier: "did:method:id"},
+			request: &types.MsgDeleteDid{Creator: creator, FullyQualifiedW3CIdentifier: "did:method:id"},
 			err:     sdkerrors.ErrKeyNotFound,
 		},
 	} {

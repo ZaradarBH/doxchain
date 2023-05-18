@@ -50,9 +50,9 @@ func (k Keeper) SetDidDocument(ctx sdk.Context, didDocument types.DidDocument, o
 }
 
 // GetDidDocument returns a DidDocument from its FullyQualifiedDidDocumentIdentifier (DidDocument:MethodName:MethoDidDocument)
-func (k Keeper) GetDidDocument(ctx sdk.Context, fullyQualifiedDidIdentifier string) (val types.DidDocument, found bool) {
+func (k Keeper) GetDidDocument(ctx sdk.Context, fullyQualifiedW3CIdentifier string) (val types.DidDocument, found bool) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DidDocumentKey))
-	b := store.Get(GetDidDocumentIDBytes(fullyQualifiedDidIdentifier))
+	b := store.Get(GetDidDocumentIDBytes(fullyQualifiedW3CIdentifier))
 
 	if b == nil {
 		return val, false
@@ -64,8 +64,8 @@ func (k Keeper) GetDidDocument(ctx sdk.Context, fullyQualifiedDidIdentifier stri
 }
 
 // RemoveDidDocument removes a DidDocument from the KVStore
-func (k Keeper) RemoveDidDocument(ctx sdk.Context, fullyQualifiedDidIdentifier string) error {
-	match, exists := k.GetDidDocument(ctx, fullyQualifiedDidIdentifier)
+func (k Keeper) RemoveDidDocument(ctx sdk.Context, fullyQualifiedW3CIdentifier string) error {
+	match, exists := k.GetDidDocument(ctx, fullyQualifiedW3CIdentifier)
 
 	if exists {
 		err := k.CanOverrideDidDocument(ctx, match, true)
@@ -76,7 +76,7 @@ func (k Keeper) RemoveDidDocument(ctx sdk.Context, fullyQualifiedDidIdentifier s
 
 		store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DidDocumentKey))
 
-		store.Delete(GetDidDocumentIDBytes(fullyQualifiedDidIdentifier))
+		store.Delete(GetDidDocumentIDBytes(fullyQualifiedW3CIdentifier))
 	}
 
 	return nil
@@ -100,12 +100,12 @@ func (k Keeper) GetAllDidDocument(ctx sdk.Context) (list []types.DidDocument) {
 
 // CanOverrideDidDocument check if a DidDocument can be safely overwritten without causing and "unapproved identifier collision or ownership error"
 func (k Keeper) CanOverrideDidDocument(ctx sdk.Context, document types.DidDocument, override bool) error {
-	fullyQualifiedDidIdentifier := document.Id.GetW3CIdentifier()
-	match, found := k.GetDidDocument(ctx, fullyQualifiedDidIdentifier)
+	fullyQualifiedW3CIdentifier := document.Id.GetW3CIdentifier()
+	match, found := k.GetDidDocument(ctx, fullyQualifiedW3CIdentifier)
 
 	if found {
 		if !override {
-			return sdkerrors.Wrap(types.DidIdentifierCollisionError, fmt.Sprintf("DidDocument with identifier: %s already exists in KVStore", fullyQualifiedDidIdentifier))
+			return sdkerrors.Wrap(types.DidIdentifierCollisionError, fmt.Sprintf("DidDocument with identifier: %s already exists in KVStore", fullyQualifiedW3CIdentifier))
 		}
 
 		if document.Id.Creator != match.Id.Creator {

@@ -22,12 +22,12 @@ func (gs GenesisState) Validate() error {
 	// Check for duplicated ID in did
 	didIdMap := make(map[string]bool)
 	for _, elem := range gs.DidList {
-		fullyQualifiedDidIdentifier := fmt.Sprintf("did:%s:%s", elem.MethodName, elem.MethodId)
+		fullyQualifiedW3CIdentifier := fmt.Sprintf("did:%s:%s", elem.MethodName, elem.MethodId)
 
-		if _, ok := didIdMap[fullyQualifiedDidIdentifier]; ok {
+		if _, ok := didIdMap[fullyQualifiedW3CIdentifier]; ok {
 			return fmt.Errorf("duplicated id for did")
 		}
-		didIdMap[fullyQualifiedDidIdentifier] = true
+		didIdMap[fullyQualifiedW3CIdentifier] = true
 	}
 	// this line is used by starport scaffolding # genesis/types/validate
 

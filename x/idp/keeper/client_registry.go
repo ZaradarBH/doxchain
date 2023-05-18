@@ -98,12 +98,12 @@ func (k Keeper) RemoveClientRegistration(ctx sdk.Context, creator string, name s
 	}
 }
 
-func (k Keeper) GetClientRegistration(ctx sdk.Context, creator string, fullyQualifiedDidIdentifier string) types.ClientRegistration {
+func (k Keeper) GetClientRegistration(ctx sdk.Context, creator string, fullyQualifiedW3CIdentifier string) types.ClientRegistration {
 	clientRegistry, found := k.GetClientRegistry(ctx, creator)
 
 	if found {
 		for _, existingClientRegistration := range clientRegistry.Registrations {
-			if existingClientRegistration.Id.GetW3CIdentifier() == fullyQualifiedDidIdentifier {
+			if existingClientRegistration.Id.GetW3CIdentifier() == fullyQualifiedW3CIdentifier {
 				return existingClientRegistration
 			}
 		}

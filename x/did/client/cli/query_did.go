@@ -42,14 +42,14 @@ func CmdListDid() *cobra.Command {
 
 func CmdShowDid() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "show-did [fullyQualifiedDidIdentifier]",
+		Use:   "show-did [fullyQualifiedW3CIdentifier]",
 		Short: "Shows a did",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx := client.GetClientContextFromCmd(cmd)
 			queryClient := types.NewQueryClient(clientCtx)
 			res, err := queryClient.Did(context.Background(), &types.QueryGetDidRequest{
-				FullyQualifiedDidIdentifier: args[0],
+				FullyQualifiedW3CIdentifier: args[0],
 			})
 
 			if err != nil {

@@ -87,10 +87,10 @@ func (msg *MsgUpdateDidDocumentRequest) ValidateBasic() error {
 
 var _ sdk.Msg = &MsgDeleteDidDocumentRequest{}
 
-func NewMsgDeleteDidDocumentRequest(creator string, fullyQualifiedDidIdentifier string) *MsgDeleteDidDocumentRequest {
+func NewMsgDeleteDidDocumentRequest(creator string, fullyQualifiedW3CIdentifier string) *MsgDeleteDidDocumentRequest {
 	return &MsgDeleteDidDocumentRequest{
 		Creator:                     creator,
-		FullyQualifiedDidIdentifier: fullyQualifiedDidIdentifier,
+		FullyQualifiedW3CIdentifier: fullyQualifiedW3CIdentifier,
 	}
 }
 

@@ -89,10 +89,10 @@ func (msg *MsgUpdateDidRequest) ValidateBasic() error {
 
 var _ sdk.Msg = &MsgDeleteDidRequest{}
 
-func NewMsgDeleteDidRequest(creator string, fullyQualifiedDidIdentifier string) *MsgDeleteDidRequest {
+func NewMsgDeleteDidRequest(creator string, fullyQualifiedW3CIdentifier string) *MsgDeleteDidRequest {
 	return &MsgDeleteDidRequest{
 		Creator:                     creator,
-		FullyQualifiedDidIdentifier: fullyQualifiedDidIdentifier,
+		FullyQualifiedW3CIdentifier: fullyQualifiedW3CIdentifier,
 	}
 }
 func (msg *MsgDeleteDidRequest) Route() string {
