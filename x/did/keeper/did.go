@@ -42,7 +42,7 @@ func (k Keeper) SetDid(ctx sdk.Context, did types.Did, override bool) error {
 
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DidKey))
 
-	store.Set(GetDidIDBytes(did.GetFullyQualifiedDidIdentifier()), k.cdc.MustMarshal(&did))
+	store.Set(GetDidIDBytes(did.GetW3CIdentifier()), k.cdc.MustMarshal(&did))
 
 	k.SetDidCount(ctx, k.GetDidCount(ctx)+1)
 
@@ -100,7 +100,7 @@ func (k Keeper) GetAllDid(ctx sdk.Context) (list []types.Did) {
 
 // CanOverrideDid check if a did can be safely overwritten without causing and "unapproved identifier collision or ownership error"
 func (k Keeper) CanOverrideDid(ctx sdk.Context, did types.Did, override bool) error {
-	fullyQualifiedDidIdentifier := did.GetFullyQualifiedDidIdentifier()
+	fullyQualifiedDidIdentifier := did.GetW3CIdentifier()
 	match, found := k.GetDid(ctx, fullyQualifiedDidIdentifier)
 
 	if found {

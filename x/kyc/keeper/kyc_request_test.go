@@ -23,7 +23,7 @@ func TestDidGet(t *testing.T) {
 	keeper, ctx := keepertest.DidKeeper(t)
 	items := createNDid(keeper, ctx, 10)
 	for _, item := range items {
-		got, found := keeper.GetDid(ctx, item.GetFullyQualifiedDidIdentifier())
+		got, found := keeper.GetDid(ctx, item.GetW3CIdentifier())
 		require.True(t, found)
 		require.Equal(t,
 			nullify.Fill(&item),
@@ -36,8 +36,8 @@ func TestDidRemove(t *testing.T) {
 	keeper, ctx := keepertest.DidKeeper(t)
 	items := createNDid(keeper, ctx, 10)
 	for _, item := range items {
-		keeper.RemoveDid(ctx, item.GetFullyQualifiedDidIdentifier())
-		_, found := keeper.GetDid(ctx, item.GetFullyQualifiedDidIdentifier())
+		keeper.RemoveDid(ctx, item.GetW3CIdentifier())
+		_, found := keeper.GetDid(ctx, item.GetW3CIdentifier())
 		require.False(t, found)
 	}
 }

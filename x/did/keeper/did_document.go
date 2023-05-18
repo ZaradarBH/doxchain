@@ -42,7 +42,7 @@ func (k Keeper) SetDidDocument(ctx sdk.Context, didDocument types.DidDocument, o
 
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DidDocumentKey))
 
-	store.Set(GetDidDocumentIDBytes(didDocument.Id.GetFullyQualifiedDidIdentifier()), k.cdc.MustMarshal(&didDocument))
+	store.Set(GetDidDocumentIDBytes(didDocument.Id.GetW3CIdentifier()), k.cdc.MustMarshal(&didDocument))
 
 	k.SetDidDocumentCount(ctx, k.GetDidDocumentCount(ctx)+1)
 
@@ -100,7 +100,7 @@ func (k Keeper) GetAllDidDocument(ctx sdk.Context) (list []types.DidDocument) {
 
 // CanOverrideDidDocument check if a DidDocument can be safely overwritten without causing and "unapproved identifier collision or ownership error"
 func (k Keeper) CanOverrideDidDocument(ctx sdk.Context, document types.DidDocument, override bool) error {
-	fullyQualifiedDidIdentifier := document.Id.GetFullyQualifiedDidIdentifier()
+	fullyQualifiedDidIdentifier := document.Id.GetW3CIdentifier()
 	match, found := k.GetDidDocument(ctx, fullyQualifiedDidIdentifier)
 
 	if found {

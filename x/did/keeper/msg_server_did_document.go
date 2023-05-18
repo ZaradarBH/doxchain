@@ -20,7 +20,7 @@ func (k msgServer) CreateDidDocument(goCtx context.Context, msg *types.MsgCreate
 	}
 
 	return &types.MsgCreateDidDocumentResponse{
-		FullyQualifiedDidIdentifier: msg.DidDocument.Id.GetFullyQualifiedDidIdentifier(),
+		FullyQualifiedDidIdentifier: msg.DidDocument.Id.GetW3CIdentifier(),
 	}, nil
 }
 

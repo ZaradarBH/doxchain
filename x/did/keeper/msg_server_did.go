@@ -20,7 +20,7 @@ func (k msgServer) CreateDid(goCtx context.Context, msg *types.MsgCreateDidReque
 	}
 
 	return &types.MsgCreateDidResponse{
-		FullyQualifiedDidIdentifier: msg.Did.GetFullyQualifiedDidIdentifier(),
+		FullyQualifiedDidIdentifier: msg.Did.GetW3CIdentifier(),
 	}, nil
 }
 

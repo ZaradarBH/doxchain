@@ -69,7 +69,7 @@ func (k Keeper) SetClientRegistration(ctx sdk.Context, clientRegistration types.
 
 	if found {
 		for index, existingClientRegistration := range clientRegistry.Registrations {
-			if existingClientRegistration.Id.GetFullyQualifiedDidIdentifier() == clientRegistration.Id.GetFullyQualifiedDidIdentifier() {
+			if existingClientRegistration.Id.GetW3CIdentifier() == clientRegistration.Id.GetW3CIdentifier() {
 				clientRegistry.Registrations = append(clientRegistry.Registrations[:index], clientRegistry.Registrations[index+1:]...)
 
 				break
@@ -103,7 +103,7 @@ func (k Keeper) GetClientRegistration(ctx sdk.Context, creator string, fullyQual
 
 	if found {
 		for _, existingClientRegistration := range clientRegistry.Registrations {
-			if existingClientRegistration.Id.GetFullyQualifiedDidIdentifier() == fullyQualifiedDidIdentifier {
+			if existingClientRegistration.Id.GetW3CIdentifier() == fullyQualifiedDidIdentifier {
 				return *existingClientRegistration
 			}
 		}
@@ -113,13 +113,13 @@ func (k Keeper) GetClientRegistration(ctx sdk.Context, creator string, fullyQual
 }
 
 func (k Keeper) SetClientRegistrationRelationship(ctx sdk.Context, clientRegistrationRelationshipRegistryEntry types.ClientRegistrationRelationshipRegistryEntry) error {
-	ownerRegistration := k.GetClientRegistration(ctx, clientRegistrationRelationshipRegistryEntry.OwnerId.Creator, clientRegistrationRelationshipRegistryEntry.OwnerId.GetFullyQualifiedDidIdentifier())
+	ownerRegistration := k.GetClientRegistration(ctx, clientRegistrationRelationshipRegistryEntry.OwnerId.Creator, clientRegistrationRelationshipRegistryEntry.OwnerId.GetW3CIdentifier())
 
 	if &ownerRegistration == nil {
 		return sdkerrors.Wrap(types.AccessClientListError, "Invalid owner")
 	}
 
-	destinationRegistration := k.GetClientRegistration(ctx, clientRegistrationRelationshipRegistryEntry.DestinationId.Creator, clientRegistrationRelationshipRegistryEntry.DestinationId.GetFullyQualifiedDidIdentifier())
+	destinationRegistration := k.GetClientRegistration(ctx, clientRegistrationRelationshipRegistryEntry.DestinationId.Creator, clientRegistrationRelationshipRegistryEntry.DestinationId.GetW3CIdentifier())
 
 	if &destinationRegistration == nil {
 		return sdkerrors.Wrap(types.AccessClientListError, "Invalid destination")
@@ -160,7 +160,7 @@ func (k Keeper) SetClientRegistrationRelationship(ctx sdk.Context, clientRegistr
 	}
 	
 	for index, existingEntry := range clientRegistrationRelationshipRegistry.Relationships {
-		if clientRegistrationRelationshipRegistryEntry.OwnerId.GetFullyQualifiedDidIdentifier() == existingEntry.OwnerId.GetFullyQualifiedDidIdentifier() && clientRegistrationRelationshipRegistryEntry.DestinationId.GetFullyQualifiedDidIdentifier() == existingEntry.DestinationId.GetFullyQualifiedDidIdentifier() {
+		if clientRegistrationRelationshipRegistryEntry.OwnerId.GetW3CIdentifier() == existingEntry.OwnerId.GetW3CIdentifier() && clientRegistrationRelationshipRegistryEntry.DestinationId.GetW3CIdentifier() == existingEntry.DestinationId.GetW3CIdentifier() {
 			clientRegistrationRelationshipRegistry.Relationships = append(clientRegistrationRelationshipRegistry.Relationships[:index], clientRegistrationRelationshipRegistry.Relationships[index+1:]...)
 		}
 	}
@@ -177,13 +177,13 @@ func (k Keeper) SetClientRegistrationRelationship(ctx sdk.Context, clientRegistr
 }
 
 func (k Keeper) RemoveClientRegistrationRelationship(ctx sdk.Context, clientRegistrationRelationshipRegistryEntry types.ClientRegistrationRelationshipRegistryEntry) error {
-	ownerRegistration := k.GetClientRegistration(ctx, clientRegistrationRelationshipRegistryEntry.OwnerId.Creator, clientRegistrationRelationshipRegistryEntry.OwnerId.GetFullyQualifiedDidIdentifier())
+	ownerRegistration := k.GetClientRegistration(ctx, clientRegistrationRelationshipRegistryEntry.OwnerId.Creator, clientRegistrationRelationshipRegistryEntry.OwnerId.GetW3CIdentifier())
 
 	if &ownerRegistration == nil {
 		return sdkerrors.Wrap(types.AccessClientListError, "Invalid owner")
 	}
 
-	destinationRegistration := k.GetClientRegistration(ctx, clientRegistrationRelationshipRegistryEntry.DestinationId.Creator, clientRegistrationRelationshipRegistryEntry.DestinationId.GetFullyQualifiedDidIdentifier())
+	destinationRegistration := k.GetClientRegistration(ctx, clientRegistrationRelationshipRegistryEntry.DestinationId.Creator, clientRegistrationRelationshipRegistryEntry.DestinationId.GetW3CIdentifier())
 
 	if &destinationRegistration == nil {
 		return sdkerrors.Wrap(types.AccessClientListError, "Invalid destination")
@@ -203,7 +203,7 @@ func (k Keeper) RemoveClientRegistrationRelationship(ctx sdk.Context, clientRegi
 	}
 	
 	for index, existingEntry := range clientRegistrationRelationshipRegistry.Relationships {
-		if clientRegistrationRelationshipRegistryEntry.OwnerId.GetFullyQualifiedDidIdentifier() == existingEntry.OwnerId.GetFullyQualifiedDidIdentifier() && clientRegistrationRelationshipRegistryEntry.DestinationId.GetFullyQualifiedDidIdentifier() == existingEntry.DestinationId.GetFullyQualifiedDidIdentifier() {
+		if clientRegistrationRelationshipRegistryEntry.OwnerId.GetW3CIdentifier() == existingEntry.OwnerId.GetW3CIdentifier() && clientRegistrationRelationshipRegistryEntry.DestinationId.GetW3CIdentifier() == existingEntry.DestinationId.GetW3CIdentifier() {
 			clientRegistrationRelationshipRegistry.Relationships = append(clientRegistrationRelationshipRegistry.Relationships[:index], clientRegistrationRelationshipRegistry.Relationships[index+1:]...)
 		}
 	}

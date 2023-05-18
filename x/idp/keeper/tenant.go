@@ -66,7 +66,7 @@ func (k Keeper) GetTenant(ctx sdk.Context, fullyQualifiedDidIdentifier string) (
 	//TODO: We need to benchmark how well it performs. If its a big deal it might be worth having a "graph" of tenant fullyqualifieddididentifiers (ids) to speed up this lookup
 	for _, registry := range k.GetAllTenantRegistry(ctx) {
 		for _, tenantRegistryEntry := range registry.Tenants {
-			if tenantRegistryEntry.Id.GetFullyQualifiedDidIdentifier() == fullyQualifiedDidIdentifier {
+			if tenantRegistryEntry.Id.GetW3CIdentifier() == fullyQualifiedDidIdentifier {
 				tenant = tenantRegistryEntry
 				matched = true
 
