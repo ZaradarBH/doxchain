@@ -20,5 +20,5 @@ func (k Keeper) KYCRegistration(goCtx context.Context, req *types.QueryGetKYCReg
 		return nil, status.Error(codes.NotFound, "not found")
 	}
 
-	return &types.QueryGetKYCRegistrationResponse{Request: val}, nil
+	return &types.QueryGetKYCRegistrationResponse{Registration: val}, nil
 }

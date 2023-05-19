@@ -20,5 +20,5 @@ func (k Keeper) AMLRegistration(goCtx context.Context, req *types.QueryGetAMLReg
 		return nil, status.Error(codes.NotFound, "not found")
 	}
 
-	return &types.QueryGetAMLRegistrationResponse{Request: val}, nil
+	return &types.QueryGetAMLRegistrationResponse{Registration: val}, nil
 }

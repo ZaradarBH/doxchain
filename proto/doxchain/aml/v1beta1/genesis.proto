@@ -13,4 +13,3 @@ message GenesisState {
   repeated AMLRegistration requestList = 2 [(gogoproto.nullable) = false];
   uint64 requestCount = 3;
 }
-

@@ -596,7 +596,7 @@ paths:
           schema:
             type: object
             properties:
-              Request:
+              registration:
                 type: object
                 properties:
                   owner:
@@ -1541,7 +1541,7 @@ paths:
           schema:
             type: object
             properties:
-              Request:
+              registration:
                 type: object
                 properties:
                   owner:
@@ -47050,7 +47050,7 @@ definitions:
   beheroes.doxchain.aml.v1beta1.QueryGetAMLRegistrationResponse:
     type: object
     properties:
-      Request:
+      registration:
         type: object
         properties:
           owner:
@@ -49021,7 +49021,7 @@ definitions:
   beheroes.doxchain.kyc.v1beta1.QueryGetKYCRegistrationResponse:
     type: object
     properties:
-      Request:
+      registration:
         type: object
         properties:
           owner:

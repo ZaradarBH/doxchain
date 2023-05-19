@@ -30,6 +30,5 @@ message QueryGetKYCRegistrationRequest {
 }
 
 message QueryGetKYCRegistrationResponse {
-  KYCRegistration Request = 1 [(gogoproto.nullable) = false];
+  KYCRegistration registration = 1 [(gogoproto.nullable) = false];
 }
-

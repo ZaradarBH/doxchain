@@ -13,4 +13,3 @@ message GenesisState {
   repeated KYCRegistration requestList = 2 [(gogoproto.nullable) = false];
   uint64 requestCount = 3;
 }
-

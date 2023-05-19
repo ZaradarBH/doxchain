@@ -31,5 +31,5 @@ message QueryGetAMLRegistrationRequest {
 }
 
 message QueryGetAMLRegistrationResponse {
-  AMLRegistration Request = 1 [(gogoproto.nullable) = false];
+  AMLRegistration registration = 1 [(gogoproto.nullable) = false];
 }

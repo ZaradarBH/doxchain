@@ -11,4 +11,3 @@ message ClientRegistrationRegistry {
   beheroes.doxchain.did.v1beta1.Did owner = 1 [(gogoproto.nullable) = false];
   repeated ClientRegistration registrations = 2 [(gogoproto.nullable) = false];
 }
-

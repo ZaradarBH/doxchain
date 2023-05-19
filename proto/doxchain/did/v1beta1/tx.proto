@@ -62,4 +62,3 @@ message MsgDeleteDidDocumentRequest {
 }
 
 message MsgDeleteDidDocumentResponse {}
-

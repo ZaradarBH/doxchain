@@ -16,4 +16,3 @@ message GenesisState {
   repeated DidDocument didDocumentList = 4 [(gogoproto.nullable) = false];
   uint64 didDocumentCount = 5;  
 }
-

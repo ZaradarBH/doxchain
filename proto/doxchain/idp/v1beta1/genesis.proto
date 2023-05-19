@@ -18,4 +18,3 @@ message GenesisState {
  repeated DeviceCodeRegistry deviceCodeRegistries = 4 [(gogoproto.nullable) = false];
  repeated ClientRegistrationRelationshipRegistry clientRegistrationRelationshipRegistries = 5 [(gogoproto.nullable) = false];
 }
-
