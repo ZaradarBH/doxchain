@@ -39,8 +39,6 @@ const (
 	opWeightMsgApproveRequest = "op_weight_msg_approve_request"
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgApproveRequest int = 100
-
-	// this line is used by starport scaffolding # simapp/module/const
 )
 
 // GenerateGenesisState creates a randomized GenState of the module
@@ -51,7 +49,6 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 	}
 	amlGenesis := types.GenesisState{
 		Params: types.DefaultParams(),
-		// this line is used by starport scaffolding # simapp/module/genesisState
 	}
 	simState.GenState[types.ModuleName] = simState.Cdc.MustMarshalJSON(&amlGenesis)
 }
@@ -106,8 +103,6 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		weightMsgApproveRequest,
 		amlsimulation.SimulateMsgApproveRequest(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
-
-	// this line is used by starport scaffolding # simapp/module/operation
 
 	return operations
 }

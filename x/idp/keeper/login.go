@@ -10,7 +10,6 @@ import (
 	"github.com/be-heroes/doxchain/x/idp/types"
 )
 
-// Login method for simple idp keeper
 func (k Keeper) Login(ctx sdk.Context, msg types.MsgAuthenticationRequest) (types.MsgAuthenticationResponse, error) {
 	response := types.MsgAuthenticationResponse{}
 	isAuthorized, err := k.AuthorizeCreator(ctx, msg.Tenant, msg.Creator)
@@ -31,7 +30,6 @@ func (k Keeper) Login(ctx sdk.Context, msg types.MsgAuthenticationRequest) (type
 	return response, nil
 }
 
-// AuthorizeCreator checks if a creator belongs to a given tenant
 func (k Keeper) AuthorizeCreator(ctx sdk.Context, fullyQualifiedW3CIdentifier string, creator string) (bool, error) {
 	acl, err := k.GetAccessClientList(ctx, fullyQualifiedW3CIdentifier)
 

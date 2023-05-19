@@ -29,7 +29,6 @@ func NewKeeper(
 	ps paramtypes.Subspace,
 
 ) *Keeper {
-	// set KeyTable if it has not already been set
 	if !ps.HasKeyTable() {
 		ps = ps.WithKeyTable(types.ParamKeyTable())
 	}

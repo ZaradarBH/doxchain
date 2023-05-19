@@ -18,7 +18,6 @@ import (
 	"github.com/be-heroes/doxchain/x/abs/types"
 )
 
-// Prevent strconv unused error
 var _ = strconv.IntSize
 
 func networkWithPartitionedPoolsObjects(t *testing.T, n int) (*network.Network, []types.PartitionedPools) {

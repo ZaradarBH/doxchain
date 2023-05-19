@@ -17,32 +17,20 @@ func RegisterCodec(cdc *codec.LegacyAmino) {
 	cdc.RegisterConcrete(&MsgDeleteClientRegistrationRequest{}, "idp/DeleteClientRegistrationRequest", nil)
 	cdc.RegisterConcrete(&MsgCreateClientRegistrationRelationshipRequest{}, "idp/CreateClientRegistrationRelationshipRequest", nil)
 	cdc.RegisterConcrete(&MsgDeleteClientRegistrationRelationshipRequest{}, "idp/DeleteClientRegistrationRelationshipRequest", nil)
-	// this line is used by starport scaffolding # 2
 }
 
 func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgAuthenticationRequest{},
-	)
-	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgCreateClientRegistrationRegistryRequest{},
 		&MsgUpdateClientRegistrationRegistryRequest{},
 		&MsgDeleteClientRegistrationRegistryRequest{},
-	)
-	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgCreateClientRegistrationRequest{},
-	)
-	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgUpdateClientRegistrationRequest{},
-	)
-	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgDeleteClientRegistrationRequest{},
-	)
-	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgCreateClientRegistrationRelationshipRequest{},
 		&MsgDeleteClientRegistrationRelationshipRequest{},
 	)
-	// this line is used by starport scaffolding # 3
 
 	msgservice.RegisterMsgServiceDesc(registry, &_Msg_serviceDesc)
 }

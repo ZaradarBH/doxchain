@@ -41,14 +41,12 @@ func (k msgServer) UpdateDidDocument(goCtx context.Context, msg *types.MsgUpdate
 func (k msgServer) DeleteDidDocument(goCtx context.Context, msg *types.MsgDeleteDidDocumentRequest) (*types.MsgDeleteDidDocumentResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 	
-	// Check if the value exists
 	valFound, isFound := k.GetDidDocument(ctx, msg.FullyQualifiedW3CIdentifier)
 
 	if !isFound {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "not set")
 	}
 
-	// Checks if the the msg creator is the same as the current owner
 	if msg.Creator != valFound.Id.Creator {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "incorrect owner")
 	}

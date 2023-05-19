@@ -10,7 +10,6 @@ import (
 	didUtils "github.com/be-heroes/doxchain/utils/did"
 )
 
-// Authorize method for simple oauth keeper
 func (k Keeper) Authorize(ctx sdk.Context, msg types.MsgAuthorizeRequest) (types.MsgAuthorizeResponse, error) {
 	response := types.MsgAuthorizeResponse{}
 	isAuthorized, err := k.idpKeeper.AuthorizeCreator(ctx, msg.Tenant, msg.Creator)

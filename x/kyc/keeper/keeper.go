@@ -33,7 +33,6 @@ func NewKeeper(
 	accountKeeper types.AccountKeeper,
 	didKeeper types.DidKeeper,
 ) *Keeper {
-	// set KeyTable if it has not already been set
 	if !ps.HasKeyTable() {
 		ps = ps.WithKeyTable(types.ParamKeyTable())
 	}

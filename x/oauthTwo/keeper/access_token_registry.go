@@ -6,7 +6,6 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
-// SetAccessTokenRegistry set a specific AccessTokenRegistry in the store based on its tenant
 func (k Keeper) SetAccessTokenRegistry(ctx sdk.Context, AccessTokenRegistry types.AccessTokenRegistry) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AccessTokenRegistryKeyPrefix))
 	b := k.cdc.MustMarshal(&AccessTokenRegistry)
@@ -15,7 +14,6 @@ func (k Keeper) SetAccessTokenRegistry(ctx sdk.Context, AccessTokenRegistry type
 	), b)
 }
 
-// GetAccessTokenRegistry returns a AccessTokenRegistry from its index
 func (k Keeper) GetAccessTokenRegistry(
 	ctx sdk.Context,
 	fullyQualifiedW3CIdentifier string,
@@ -33,7 +31,6 @@ func (k Keeper) GetAccessTokenRegistry(
 	return val, true
 }
 
-// RemoveAccessTokenRegistry removes a AccessTokenRegistry from the store
 func (k Keeper) RemoveAccessTokenRegistry(
 	ctx sdk.Context,
 	fullyQualifiedW3CIdentifier string,
@@ -45,7 +42,6 @@ func (k Keeper) RemoveAccessTokenRegistry(
 	))
 }
 
-// GetAllAccessTokenRegistry returns all AccessTokenRegistry
 func (k Keeper) GetAllAccessTokenRegistry(ctx sdk.Context) (list []types.AccessTokenRegistry) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AccessTokenRegistryKeyPrefix))
 	iterator := sdk.KVStorePrefixIterator(store, []byte{})

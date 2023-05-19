@@ -12,7 +12,6 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-// Prevent strconv unused error
 var _ = strconv.IntSize
 
 func createNClientRegistrationRegistry(keeper *keeper.Keeper, ctx sdk.Context, n int) []types.ClientRegistrationRegistry {

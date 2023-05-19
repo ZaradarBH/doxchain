@@ -6,24 +6,22 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/auth/types"
 )
 
+//TODO: Remove AuthzKeeper from module
 type AuthzKeeper interface {
 	// Methods imported from authz should be defined here
 }
 
+//TODO: Remove EvidenceKeeper from module
 type EvidenceKeeper interface {
 	// Methods imported from evidence should be defined here
 }
 
-// AccountKeeper defines the expected account keeper used for simulations (noalias)
 type AccountKeeper interface {
 	GetAccount(ctx sdk.Context, addr sdk.AccAddress) types.AccountI
-	// Methods imported from account should be defined here
 }
 
-// BankKeeper defines the expected interface needed to retrieve account balances.
 type BankKeeper interface {
 	SpendableCoins(ctx sdk.Context, addr sdk.AccAddress) sdk.Coins
-	// Methods imported from bank should be defined here
 }
 
 type IdpKeeper interface {

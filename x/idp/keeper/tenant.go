@@ -8,14 +8,12 @@ import (
 	"github.com/be-heroes/doxchain/x/idp/types"
 )
 
-// SetTenantRegistry set a specific TenantRegistry in the store based on its tenant
 func (k Keeper) SetTenantRegistry(ctx sdk.Context, TenantRegistry types.TenantRegistry) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.TenantRegistryKeyPrefix))
 
 	store.Set(types.TenantRegistryKey(TenantRegistry.Owner.Creator), k.cdc.MustMarshal(&TenantRegistry))
 }
 
-// GetTenantRegistry returns a TenantRegistry from its creator
 func (k Keeper) GetTenantRegistry(
 	ctx sdk.Context,
 	creator string,
@@ -33,7 +31,6 @@ func (k Keeper) GetTenantRegistry(
 	return val, true
 }
 
-// RemoveTenantRegistry removes a TenantRegistry from the store
 func (k Keeper) RemoveTenantRegistry(
 	ctx sdk.Context,
 	creator string,
@@ -43,7 +40,6 @@ func (k Keeper) RemoveTenantRegistry(
 	store.Delete(types.TenantRegistryKey(creator))
 }
 
-// GetAllTenantRegistry returns all TenantRegistry
 func (k Keeper) GetAllTenantRegistry(ctx sdk.Context) (list []types.TenantRegistry) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.TenantRegistryKeyPrefix))
 	iterator := sdk.KVStorePrefixIterator(store, []byte{})
@@ -59,7 +55,6 @@ func (k Keeper) GetAllTenantRegistry(ctx sdk.Context) (list []types.TenantRegist
 	return
 }
 
-// GetTenant for a given tenant identifier (fullyQualifiedW3CIdentifier)
 func (k Keeper) GetTenant(ctx sdk.Context, fullyQualifiedW3CIdentifier string) (tenant types.TenantRegistryEntry, err error) {
 	matched := false
 
@@ -82,7 +77,6 @@ func (k Keeper) GetTenant(ctx sdk.Context, fullyQualifiedW3CIdentifier string) (
 	return tenant, err
 }
 
-// GetAccessClientList for a given tenant identifier (fullyQualifiedW3CIdentifier)
 func (k Keeper) GetAccessClientList(ctx sdk.Context, fullyQualifiedW3CIdentifier string) (acl types.AccessClientList, err error) {
 	tenant, err := k.GetTenant(ctx, fullyQualifiedW3CIdentifier)
 

@@ -33,7 +33,6 @@ func NewKeeper(
 	authzKeeper types.AuthzKeeper,
 	evidenceKeeper types.EvidenceKeeper,
 ) *Keeper {
-	// set KeyTable if it has not already been set
 	if !ps.HasKeyTable() {
 		ps = ps.WithKeyTable(types.ParamKeyTable())
 	}

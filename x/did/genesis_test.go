@@ -23,7 +23,6 @@ func TestGenesis(t *testing.T) {
 			},
 		},
 		DidCount: 2,
-		// this line is used by starport scaffolding # genesis/test/state
 	}
 
 	k, ctx := keepertest.DidKeeper(t)
@@ -36,5 +35,4 @@ func TestGenesis(t *testing.T) {
 
 	require.ElementsMatch(t, genesisState.DidList, got.DidList)
 	require.Equal(t, genesisState.DidCount, got.DidCount)
-	// this line is used by starport scaffolding # genesis/test/assert
 }

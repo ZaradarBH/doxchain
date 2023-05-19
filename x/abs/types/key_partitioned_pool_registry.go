@@ -5,11 +5,9 @@ import "encoding/binary"
 var _ binary.ByteOrder
 
 const (
-	// PartitionedPoolRegistryKeyPrefix is the prefix to retrieve all PartitionedPools
 	PartitionedPoolRegistryKeyPrefix = "PartitionedPoolRegistry/value/"
 )
 
-// PartitionedPoolsKey returns the store key to retrieve a PartitionedPools from the index fields
 func PartitionedPoolRegistryKey(
 	creator string,
 ) []byte {

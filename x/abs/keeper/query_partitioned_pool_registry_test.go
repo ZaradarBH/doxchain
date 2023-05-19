@@ -15,7 +15,6 @@ import (
 	"github.com/be-heroes/doxchain/x/abs/types"
 )
 
-// Prevent strconv unused error
 var _ = strconv.IntSize
 
 func TestPartitionedPoolsQuerySingle(t *testing.T) {

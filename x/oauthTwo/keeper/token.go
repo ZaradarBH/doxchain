@@ -7,7 +7,6 @@ import (
 	"github.com/be-heroes/doxchain/x/oauthtwo/types"
 )
 
-// Token method for simple oauth keeper
 func (k Keeper) Token(ctx sdk.Context, msg types.MsgTokenRequest) (types.MsgTokenResponse, error) {
 	//TODO: Validate ClientId and Scope
 	switch msg.GrantType {

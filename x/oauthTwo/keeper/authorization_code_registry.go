@@ -6,7 +6,6 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
-// SetAuthorizationCodeRegistry set a specific authorizationCodeRegistry in the store from its index
 func (k Keeper) SetAuthorizationCodeRegistry(ctx sdk.Context, authorizationCodeRegistry types.AuthorizationCodeRegistry) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AuthorizationCodeRegistryKeyPrefix))
 	b := k.cdc.MustMarshal(&authorizationCodeRegistry)
@@ -15,7 +14,6 @@ func (k Keeper) SetAuthorizationCodeRegistry(ctx sdk.Context, authorizationCodeR
 	), b)
 }
 
-// GetAuthorizationCodeRegistry returns a authorizationCodeRegistry from its tenant
 func (k Keeper) GetAuthorizationCodeRegistry(
 	ctx sdk.Context,
 	fullyQualifiedW3CIdentifier string,
@@ -34,7 +32,6 @@ func (k Keeper) GetAuthorizationCodeRegistry(
 	return val, true
 }
 
-// RemoveAuthorizationCodeRegistry removes a authorizationCodeRegistry from the store
 func (k Keeper) RemoveAuthorizationCodeRegistry(
 	ctx sdk.Context,
 	fullyQualifiedW3CIdentifier string,
@@ -46,7 +43,6 @@ func (k Keeper) RemoveAuthorizationCodeRegistry(
 	))
 }
 
-// GetAllAuthorizationCodeRegistry returns all authorizationCodeRegistry
 func (k Keeper) GetAllAuthorizationCodeRegistry(ctx sdk.Context) (list []types.AuthorizationCodeRegistry) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AuthorizationCodeRegistryKeyPrefix))
 	iterator := sdk.KVStorePrefixIterator(store, []byte{})

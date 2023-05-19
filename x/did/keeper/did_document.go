@@ -10,7 +10,6 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-// GetDidDocumentCount fetches the DidDocument counter from the KVStore
 func (k Keeper) GetDidDocumentCount(ctx sdk.Context) uint64 {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), []byte{})
 	bz := store.Get(types.KeyPrefix(types.DidDocumentCountKey))
@@ -22,7 +21,6 @@ func (k Keeper) GetDidDocumentCount(ctx sdk.Context) uint64 {
 	return binary.BigEndian.Uint64(bz)
 }
 
-// SetDidDocumentCount updates the DidDocument counter in the KVStore
 func (k Keeper) SetDidDocumentCount(ctx sdk.Context, count uint64) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), []byte{})
 	bz := make([]byte, 8)
@@ -32,7 +30,6 @@ func (k Keeper) SetDidDocumentCount(ctx sdk.Context, count uint64) {
 	store.Set(types.KeyPrefix(types.DidDocumentCountKey), bz)
 }
 
-// SetDidDocument adds a DidDocument to the KVStore and updates the DidDocument counter
 func (k Keeper) SetDidDocument(ctx sdk.Context, didDocument types.DidDocument, override bool) error {
 	err := k.CanOverrideDidDocument(ctx, didDocument, override)
 
@@ -49,7 +46,6 @@ func (k Keeper) SetDidDocument(ctx sdk.Context, didDocument types.DidDocument, o
 	return nil
 }
 
-// GetDidDocument returns a DidDocument from its FullyQualifiedDidDocumentIdentifier (DidDocument:MethodName:MethoDidDocument)
 func (k Keeper) GetDidDocument(ctx sdk.Context, fullyQualifiedW3CIdentifier string) (val types.DidDocument, found bool) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DidDocumentKey))
 	b := store.Get(GetDidDocumentIDBytes(fullyQualifiedW3CIdentifier))
@@ -63,7 +59,6 @@ func (k Keeper) GetDidDocument(ctx sdk.Context, fullyQualifiedW3CIdentifier stri
 	return val, true
 }
 
-// RemoveDidDocument removes a DidDocument from the KVStore
 func (k Keeper) RemoveDidDocument(ctx sdk.Context, fullyQualifiedW3CIdentifier string) error {
 	match, exists := k.GetDidDocument(ctx, fullyQualifiedW3CIdentifier)
 
@@ -82,7 +77,6 @@ func (k Keeper) RemoveDidDocument(ctx sdk.Context, fullyQualifiedW3CIdentifier s
 	return nil
 }
 
-// GetAllDidDocument returns all DidDocuments in the KVStore
 func (k Keeper) GetAllDidDocument(ctx sdk.Context) (list []types.DidDocument) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DidDocumentKey))
 	iterator := sdk.KVStorePrefixIterator(store, []byte{})
@@ -98,7 +92,6 @@ func (k Keeper) GetAllDidDocument(ctx sdk.Context) (list []types.DidDocument) {
 	return
 }
 
-// CanOverrideDidDocument check if a DidDocument can be safely overwritten without causing and "unapproved identifier collision or ownership error"
 func (k Keeper) CanOverrideDidDocument(ctx sdk.Context, document types.DidDocument, override bool) error {
 	fullyQualifiedW3CIdentifier := document.Id.GetW3CIdentifier()
 	match, found := k.GetDidDocument(ctx, fullyQualifiedW3CIdentifier)
@@ -116,12 +109,10 @@ func (k Keeper) CanOverrideDidDocument(ctx sdk.Context, document types.DidDocume
 	return nil
 }
 
-// GetDidDocumentIDBytes returns the byte representation of the DidDocument
 func GetDidDocumentIDBytes(DidDocument string) []byte {
 	return []byte(DidDocument)
 }
 
-// GetDidDocumentIDFromBytes returns ID in uint64 format from a byte array
 func GetDidDocumentIDFromBytes(bz []byte) string {
 	return string(bz)
 }

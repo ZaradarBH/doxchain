@@ -7,7 +7,6 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-// SetClientRegistrationRegistry set a specific ClientRegistrationRegistry in the store from its index
 func (k Keeper) SetClientRegistrationRegistry(ctx sdk.Context, ClientRegistrationRegistry types.ClientRegistrationRegistry) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ClientRegistrationRegistryKeyPrefix))
 	b := k.cdc.MustMarshal(&ClientRegistrationRegistry)
@@ -16,7 +15,6 @@ func (k Keeper) SetClientRegistrationRegistry(ctx sdk.Context, ClientRegistratio
 	), b)
 }
 
-// GetClientRegistrationRegistry returns a ClientRegistrationRegistry from its index
 func (k Keeper) GetClientRegistrationRegistry(
 	ctx sdk.Context,
 	creator string,
@@ -36,7 +34,6 @@ func (k Keeper) GetClientRegistrationRegistry(
 	return val, true
 }
 
-// RemoveClientRegistrationRegistry removes a ClientRegistrationRegistry from the store
 func (k Keeper) RemoveClientRegistrationRegistry(
 	ctx sdk.Context,
 	creator string,
@@ -48,7 +45,6 @@ func (k Keeper) RemoveClientRegistrationRegistry(
 	))
 }
 
-// GetAllClientRegistrationRegistry returns all ClientRegistrationRegistry
 func (k Keeper) GetAllClientRegistrationRegistry(ctx sdk.Context) (list []types.ClientRegistrationRegistry) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ClientRegistrationRegistryKeyPrefix))
 	iterator := sdk.KVStorePrefixIterator(store, []byte{})

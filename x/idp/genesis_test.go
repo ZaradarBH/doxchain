@@ -22,7 +22,6 @@ func TestGenesis(t *testing.T) {
 				Index: "1",
 			},
 		},
-		// this line is used by starport scaffolding # genesis/test/state
 	}
 
 	k, ctx := keepertest.IdpKeeper(t)
@@ -34,5 +33,4 @@ func TestGenesis(t *testing.T) {
 	nullify.Fill(got)
 
 	require.ElementsMatch(t, genesisState.ClientRegistrationRegistryList, got.ClientRegistrationRegistryList)
-	// this line is used by starport scaffolding # genesis/test/assert
 }

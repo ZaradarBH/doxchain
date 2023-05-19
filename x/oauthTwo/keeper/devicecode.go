@@ -11,7 +11,6 @@ import (
 	"github.com/be-heroes/doxchain/x/oauthtwo/types"
 )
 
-// DeviceCode method for simple oauth keeper
 func (k Keeper) DeviceCode(ctx sdk.Context, msg types.MsgDeviceCodeRequest) (types.MsgDeviceCodeResponse, error) {
 	response := types.MsgDeviceCodeResponse{}
 	isAuthorized, err := k.idpKeeper.AuthorizeCreator(ctx, msg.Tenant, msg.Creator)

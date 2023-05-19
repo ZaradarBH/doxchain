@@ -6,7 +6,6 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
-// SetDeviceCodeRegistry set a specific DeviceCodeRegistry in the store from its index
 func (k Keeper) SetDeviceCodeRegistry(ctx sdk.Context, deviceCodeRegistry types.DeviceCodeRegistry) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DeviceCodeRegistryKeyPrefix))
 	b := k.cdc.MustMarshal(&deviceCodeRegistry)
@@ -15,7 +14,6 @@ func (k Keeper) SetDeviceCodeRegistry(ctx sdk.Context, deviceCodeRegistry types.
 	), b)
 }
 
-// GetDeviceCodeRegistry returns a DeviceCodeRegistry from its index
 func (k Keeper) GetDeviceCodeRegistry(
 	ctx sdk.Context,
 	fullyQualifiedW3CIdentifier string,
@@ -33,7 +31,6 @@ func (k Keeper) GetDeviceCodeRegistry(
 	return val, true
 }
 
-// RemoveDeviceCodeRegistry removes a DeviceCodeRegistry from the store
 func (k Keeper) RemoveDeviceCodeRegistry(
 	ctx sdk.Context,
 	fullyQualifiedW3CIdentifier string,
@@ -45,7 +42,6 @@ func (k Keeper) RemoveDeviceCodeRegistry(
 	))
 }
 
-// GetAllDeviceCodeRegistry returns all DeviceCodeRegistry
 func (k Keeper) GetAllDeviceCodeRegistry(ctx sdk.Context) (list []types.DeviceCodeRegistry) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DeviceCodeRegistryKeyPrefix))
 	iterator := sdk.KVStorePrefixIterator(store, []byte{})

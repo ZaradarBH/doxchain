@@ -35,11 +35,8 @@ const (
 	opWeightMsgDeleteKYCRegistration = "op_weight_msg_kyc_request"
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgDeleteKYCRegistration int = 100
-
-	// this line is used by starport scaffolding # simapp/module/const
 )
 
-// GenerateGenesisState creates a randomized GenState of the module
 func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 	accs := make([]string, len(simState.Accounts))
 	for i, acc := range simState.Accounts {
@@ -47,7 +44,6 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 	}
 	kycGenesis := types.GenesisState{
 		Params: types.DefaultParams(),
-		// this line is used by starport scaffolding # simapp/module/genesisState
 	}
 	simState.GenState[types.ModuleName] = simState.Cdc.MustMarshalJSON(&kycGenesis)
 }
@@ -91,8 +87,6 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		weightMsgDeleteKYCRegistration,
 		kycsimulation.SimulateMsgDeleteKYCRegistration(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
-
-	// this line is used by starport scaffolding # simapp/module/operation
 
 	return operations
 }

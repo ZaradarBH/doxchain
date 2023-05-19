@@ -14,7 +14,6 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/simulation"
 )
 
-// avoid unused import issue
 var (
 	_ = sample.AccAddress
 	_ = didsimulation.FindAccount
@@ -39,8 +38,6 @@ const (
 	opWeightMsgDidDocument = "op_weight_msg_did_document"
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgDidDocument int = 100
-
-	// this line is used by starport scaffolding # simapp/module/const
 )
 
 // GenerateGenesisState creates a randomized GenState of the module
@@ -72,7 +69,6 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 			},
 		},
 		DidCount: 2,
-		// this line is used by starport scaffolding # simapp/module/genesisState
 	}
 	simState.GenState[types.ModuleName] = simState.Cdc.MustMarshalJSON(&didGenesis)
 }
@@ -127,8 +123,6 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		weightMsgDeleteDid,
 		didsimulation.SimulateMsgDeleteDid(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
-
-	// this line is used by starport scaffolding # simapp/module/operation
 
 	return operations
 }

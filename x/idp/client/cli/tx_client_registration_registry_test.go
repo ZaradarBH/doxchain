@@ -16,7 +16,6 @@ import (
 	"github.com/be-heroes/doxchain/x/idp/client/cli"
 )
 
-// Prevent strconv unused error
 var _ = strconv.IntSize
 
 func TestCreateClientRegistrationRegistry(t *testing.T) {

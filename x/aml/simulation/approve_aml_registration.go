@@ -22,7 +22,7 @@ func SimulateMsgApproveRequest(
 			Creator: simAccount.Address.String(),
 		}
 
-		// TODO: Handling the ApproveRequest simulation
+		// TODO: Handling the ApproveAMLRegistrationRequest simulation
 
 		return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "ApproveAMLRegistrationRequest simulation not implemented"), nil, nil
 	}

@@ -16,7 +16,6 @@ import (
 	"github.com/be-heroes/doxchain/x/abs/client/cli"
 )
 
-// Prevent strconv unused error
 var _ = strconv.IntSize
 
 func TestCreatePartitionedPools(t *testing.T) {

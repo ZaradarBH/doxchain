@@ -50,7 +50,6 @@ func (k Keeper) IterateWatchList(ctx sdk.Context, cb func(entry types.WatchlistE
 	}
 }
 
-// AddToWatchlist tracks account spendings inside a 24-hour rolling window and returns a ErrWatchlistSpendingWindowOverflow if a given account exceeds the "throttled rolling average"
 func (k Keeper) AddToWatchlist(ctx sdk.Context, addr sdk.AccAddress, coins sdk.Coins) error {
 	if coins.Empty() || k.accountKeeper.GetAccount(ctx, addr) == nil {
 		return nil

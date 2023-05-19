@@ -38,7 +38,6 @@ func TestGenesis(t *testing.T) {
 				Index: "1",
 			},
 		},
-		// this line is used by starport scaffolding # genesis/test/state
 	}
 
 	k, ctx := keepertest.oauthtwoKeeper(t)
@@ -52,5 +51,4 @@ func TestGenesis(t *testing.T) {
 	require.ElementsMatch(t, genesisState.DeviceCodeRegistries, got.DeviceCodeRegistries)
 	require.ElementsMatch(t, genesisState.AccessTokenRegistries, got.AccessTokenRegistries)
 	require.ElementsMatch(t, genesisState.AuthorizationCodeRegistries, got.AuthorizationCodeRegistries)
-	// this line is used by starport scaffolding # genesis/test/assert
 }
