@@ -18,22 +18,22 @@ func CmdAuthorize() *cobra.Command {
 		Short: "Broadcast message Authorize",
 		Args:  cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
-			argClientId := args[0]
-			argScope := args[1]
-
 			clientCtx, err := client.GetClientTxContext(cmd)
+			
 			if err != nil {
 				return err
 			}
 
 			msg := types.NewMsgAuthorizeRequest(
 				clientCtx.GetFromAddress().String(),
-				argClientId,
-				argScope,
+				args[0],
+				args[1],
 			)
+
 			if err := msg.ValidateBasic(); err != nil {
 				return err
 			}
+
 			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msg)
 		},
 	}

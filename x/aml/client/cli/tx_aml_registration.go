@@ -16,15 +16,18 @@ func CmdCreateAMLRegistration() *cobra.Command {
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 			clientCtx, err := client.GetClientTxContext(cmd)
+			
 			if err != nil {
 				return err
 			}
 
 			did := utils.NewDidTokenFactory().Create(clientCtx.GetFromAddress().String(), args[0])
 			msg := types.NewMsgCreateAMLRegistration(clientCtx.GetFromAddress().String(), *did)
+
 			if err := msg.ValidateBasic(); err != nil {
 				return err
 			}
+
 			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msg)
 		},
 	}

@@ -25,22 +25,27 @@ func (msg *MsgApproveAMLRegistrationRequest) Type() string {
 
 func (msg *MsgApproveAMLRegistrationRequest) GetSigners() []sdk.AccAddress {
   creator, err := sdk.AccAddressFromBech32(msg.Creator)
+  
   if err != nil {
     panic(err)
   }
+
   return []sdk.AccAddress{creator}
 }
 
 func (msg *MsgApproveAMLRegistrationRequest) GetSignBytes() []byte {
   bz := ModuleCdc.MustMarshalJSON(msg)
+
   return sdk.MustSortJSON(bz)
 }
 
 func (msg *MsgApproveAMLRegistrationRequest) ValidateBasic() error {
   _, err := sdk.AccAddressFromBech32(msg.Creator)
-  	if err != nil {
-  		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
-  	}
+  	
+  if err != nil {
+  	return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)	
+  }
+
   return nil
 }
 

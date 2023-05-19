@@ -17,8 +17,8 @@ func (k Keeper) PartitionedPoolRegistryAll(goCtx context.Context, req *types.Que
 	}
 
 	var partitionedPoolRegistryList []types.PartitionedPoolRegistry
-	ctx := sdk.UnwrapSDKContext(goCtx)
 
+	ctx := sdk.UnwrapSDKContext(goCtx)
 	store := ctx.KVStore(k.storeKey)
 	partitionedPoolRegistryStore := prefix.NewStore(store, types.KeyPrefix(types.PartitionedPoolRegistryKeyPrefix))
 

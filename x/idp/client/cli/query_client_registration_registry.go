@@ -50,11 +50,9 @@ func CmdShowClientRegistrationRegistry() *cobra.Command {
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 			clientCtx := client.GetClientContextFromCmd(cmd)
 			queryClient := types.NewQueryClient(clientCtx)
-			params := &types.QueryGetClientRegistrationRegistryRequest{
+			res, err := queryClient.ClientRegistrationRegistry(context.Background(), &types.QueryGetClientRegistrationRegistryRequest{
 				Creator: args[0],
-			}
-
-			res, err := queryClient.ClientRegistrationRegistry(context.Background(), params)
+			})
 
 			if err != nil {
 				return err

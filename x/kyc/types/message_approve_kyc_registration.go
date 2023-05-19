@@ -35,6 +35,7 @@ func (msg *MsgApproveKYCRegistrationRequest) GetSigners() []sdk.AccAddress {
 
 func (msg *MsgApproveKYCRegistrationRequest) GetSignBytes() []byte {
   bz := ModuleCdc.MustMarshalJSON(msg)
+  
   return sdk.MustSortJSON(bz)
 }
 

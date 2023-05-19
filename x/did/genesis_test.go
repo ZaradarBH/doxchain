@@ -13,7 +13,6 @@ import (
 func TestGenesis(t *testing.T) {
 	genesisState := types.GenesisState{
 		Params: types.DefaultParams(),
-
 		DidList: []types.Did{
 			{
 				Id: 0,

@@ -9,6 +9,7 @@ import (
 func (k Keeper) SetAccessTokenRegistry(ctx sdk.Context, AccessTokenRegistry types.AccessTokenRegistry) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AccessTokenRegistryKeyPrefix))
 	b := k.cdc.MustMarshal(&AccessTokenRegistry)
+
 	store.Set(types.AccessTokenRegistryKey(
 		AccessTokenRegistry.Owner.Creator,
 	), b)
@@ -23,11 +24,13 @@ func (k Keeper) GetAccessTokenRegistry(
 	b := store.Get(types.AccessTokenRegistryKey(
 		fullyQualifiedW3CIdentifier,
 	))
+
 	if b == nil {
 		return val, false
 	}
 
 	k.cdc.MustUnmarshal(b, &val)
+
 	return val, true
 }
 
@@ -37,6 +40,7 @@ func (k Keeper) RemoveAccessTokenRegistry(
 
 ) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AccessTokenRegistryKeyPrefix))
+	
 	store.Delete(types.AccessTokenRegistryKey(
 		fullyQualifiedW3CIdentifier,
 	))

@@ -16,12 +16,10 @@ func CmdShowKYCRegistration() *cobra.Command {
 		Args:  cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx := client.GetClientContextFromCmd(cmd)
-
 			queryClient := types.NewQueryClient(clientCtx)
-
 			params := &types.QueryGetKYCRegistrationRequest{}
-
 			res, err := queryClient.KYCRegistration(context.Background(), params)
+			
 			if err != nil {
 				return err
 			}

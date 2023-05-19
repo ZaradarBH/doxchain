@@ -49,6 +49,7 @@ func SimulateMsgCreateDid(
 			AccountKeeper:   ak,
 			Bankkeeper:      bk,
 		}
+		
 		return simulation.GenAndDeliverTxWithRandFees(txCtx)
 	}
 }

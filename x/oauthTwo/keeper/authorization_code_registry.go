@@ -9,6 +9,7 @@ import (
 func (k Keeper) SetAuthorizationCodeRegistry(ctx sdk.Context, authorizationCodeRegistry types.AuthorizationCodeRegistry) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AuthorizationCodeRegistryKeyPrefix))
 	b := k.cdc.MustMarshal(&authorizationCodeRegistry)
+
 	store.Set(types.AuthorizationCodeRegistryKey(
 		authorizationCodeRegistry.Owner.Creator,
 	), b)
@@ -24,11 +25,13 @@ func (k Keeper) GetAuthorizationCodeRegistry(
 	b := store.Get(types.AuthorizationCodeRegistryKey(
 		fullyQualifiedW3CIdentifier,
 	))
+
 	if b == nil {
 		return val, false
 	}
 
 	k.cdc.MustUnmarshal(b, &val)
+
 	return val, true
 }
 
@@ -38,6 +41,7 @@ func (k Keeper) RemoveAuthorizationCodeRegistry(
 
 ) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AuthorizationCodeRegistryKeyPrefix))
+	
 	store.Delete(types.AuthorizationCodeRegistryKey(
 		fullyQualifiedW3CIdentifier,
 	))

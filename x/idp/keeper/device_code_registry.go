@@ -9,6 +9,7 @@ import (
 func (k Keeper) SetDeviceCodeRegistry(ctx sdk.Context, deviceCodeRegistry types.DeviceCodeRegistry) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DeviceCodeRegistryKeyPrefix))
 	b := k.cdc.MustMarshal(&deviceCodeRegistry)
+
 	store.Set(types.DeviceCodeRegistryKey(
 		deviceCodeRegistry.Owner.Creator,
 	), b)
@@ -19,15 +20,16 @@ func (k Keeper) GetDeviceCodeRegistry(
 	fullyQualifiedW3CIdentifier string,
 ) (val types.DeviceCodeRegistry, found bool) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DeviceCodeRegistryKeyPrefix))
-
 	b := store.Get(types.DeviceCodeRegistryKey(
 		fullyQualifiedW3CIdentifier,
 	))
+
 	if b == nil {
 		return val, false
 	}
 
 	k.cdc.MustUnmarshal(b, &val)
+
 	return val, true
 }
 
@@ -37,6 +39,7 @@ func (k Keeper) RemoveDeviceCodeRegistry(
 
 ) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DeviceCodeRegistryKeyPrefix))
+	
 	store.Delete(types.DeviceCodeRegistryKey(
 		fullyQualifiedW3CIdentifier,
 	))

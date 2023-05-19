@@ -43,12 +43,13 @@ func (k Keeper) ClientRegistrationRegistry(goCtx context.Context, req *types.Que
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
-	ctx := sdk.UnwrapSDKContext(goCtx)
 
+	ctx := sdk.UnwrapSDKContext(goCtx)
 	val, found := k.GetClientRegistrationRegistry(
 		ctx,
 		req.Creator,
 	)
+	
 	if !found {
 		return nil, status.Error(codes.NotFound, "not found")
 	}

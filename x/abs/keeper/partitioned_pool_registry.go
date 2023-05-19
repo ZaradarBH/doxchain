@@ -9,6 +9,7 @@ import (
 func (k Keeper) SetPartitionedPoolRegistry(ctx sdk.Context, partitionedPoolRegistry types.PartitionedPoolRegistry) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.PartitionedPoolRegistryKeyPrefix))
 	b := k.cdc.MustMarshal(&partitionedPoolRegistry)
+
 	store.Set(types.PartitionedPoolRegistryKey(
 		partitionedPoolRegistry.Owner.Creator,
 	), b)
@@ -37,6 +38,7 @@ func (k Keeper) RemovePartitionedPoolRegistry(
 	creator string,
 ) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.PartitionedPoolRegistryKeyPrefix))
+	
 	store.Delete(types.PartitionedPoolRegistryKey(
 		creator,
 	))

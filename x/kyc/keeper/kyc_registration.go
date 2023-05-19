@@ -24,6 +24,7 @@ func (k Keeper) SetKYCRegistrationCount(ctx sdk.Context, count uint64) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), []byte{})
 	byteKey := types.KeyPrefix(types.KYCRegistrationCountKey)
 	bz := make([]byte, 8)
+
 	binary.BigEndian.PutUint64(bz, count)
 	store.Set(byteKey, bz)
 }
@@ -46,21 +47,26 @@ func (k Keeper) AppendKYCRegistration(
 func (k Keeper) SetKYCRegistration(ctx sdk.Context, request types.KYCRegistration) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.KYCRegistrationKey))
 	b := k.cdc.MustMarshal(&request)
+
 	store.Set(GetKYCRegistrationIDBytes(request.Owner.Creator), b)
 }
 
 func (k Keeper) GetKYCRegistration(ctx sdk.Context, creator string) (val types.KYCRegistration, found bool) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.KYCRegistrationKey))
 	b := store.Get(GetKYCRegistrationIDBytes(creator))
+
 	if b == nil {
 		return val, false
 	}
+
 	k.cdc.MustUnmarshal(b, &val)
+
 	return val, true
 }
 
 func (k Keeper) RemoveKYCRegistration(ctx sdk.Context, creator string) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.KYCRegistrationKey))
+	
 	store.Delete(GetKYCRegistrationIDBytes(creator))
 }
 

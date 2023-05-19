@@ -10,6 +10,7 @@ import (
 func (k Keeper) SetClientRegistrationRegistry(ctx sdk.Context, ClientRegistrationRegistry types.ClientRegistrationRegistry) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ClientRegistrationRegistryKeyPrefix))
 	b := k.cdc.MustMarshal(&ClientRegistrationRegistry)
+
 	store.Set(types.ClientRegistrationRegistryKey(
 		ClientRegistrationRegistry.Owner.Creator,
 	), b)
@@ -21,7 +22,6 @@ func (k Keeper) GetClientRegistrationRegistry(
 
 ) (val types.ClientRegistrationRegistry, found bool) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ClientRegistrationRegistryKeyPrefix))
-
 	b := store.Get(types.ClientRegistrationRegistryKey(
 		creator,
 	))
@@ -31,6 +31,7 @@ func (k Keeper) GetClientRegistrationRegistry(
 	}
 
 	k.cdc.MustUnmarshal(b, &val)
+
 	return val, true
 }
 
@@ -40,6 +41,7 @@ func (k Keeper) RemoveClientRegistrationRegistry(
 
 ) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ClientRegistrationRegistryKeyPrefix))
+	
 	store.Delete(types.ClientRegistrationRegistryKey(
 		creator,
 	))

@@ -19,7 +19,6 @@ func (k Keeper) GetTenantRegistry(
 	creator string,
 ) (val types.TenantRegistry, found bool) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.TenantRegistryKeyPrefix))
-
 	b := store.Get(types.TenantRegistryKey(creator))
 
 	if b == nil {

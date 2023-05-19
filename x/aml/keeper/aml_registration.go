@@ -46,21 +46,26 @@ func (k Keeper) AppendAMLRegistration(
 func (k Keeper) SetAMLRegistration(ctx sdk.Context, request types.AMLRegistration) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AMLRegistrationKey))
 	b := k.cdc.MustMarshal(&request)
+
 	store.Set(GetAMLRegistrationIDBytes(request.Owner.Creator), b)
 }
 
 func (k Keeper) GetAMLRegistration(ctx sdk.Context, creator string) (val types.AMLRegistration, found bool) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AMLRegistrationKey))
 	b := store.Get(GetAMLRegistrationIDBytes(creator))
+
 	if b == nil {
 		return val, false
 	}
+
 	k.cdc.MustUnmarshal(b, &val)
+
 	return val, true
 }
 
 func (k Keeper) RemoveAMLRegistration(ctx sdk.Context, creator string) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AMLRegistrationKey))
+	
 	store.Delete(GetAMLRegistrationIDBytes(creator))
 }
 

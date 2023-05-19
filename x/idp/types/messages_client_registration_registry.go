@@ -6,9 +6,9 @@ import (
 )
 
 const (
-	TypeMsgCreateClientRegistrationRegistry = "create_client_registrations"
-	TypeMsgUpdateClientRegistrationRegistry = "update_client_registrations"
-	TypeMsgDeleteClientRegistrationRegistry = "delete_client_registrations"
+	TypeMsgCreateClientRegistrationRegistry = "create_client_registration_registry"
+	TypeMsgUpdateClientRegistrationRegistry = "update_client_registration_registry"
+	TypeMsgDeleteClientRegistrationRegistry = "delete_client_registration_registry"
 )
 
 var _ sdk.Msg = &MsgCreateClientRegistrationRegistryRequest{}
@@ -29,22 +29,27 @@ func (msg *MsgCreateClientRegistrationRegistryRequest) Type() string {
 
 func (msg *MsgCreateClientRegistrationRegistryRequest) GetSigners() []sdk.AccAddress {
 	creator, err := sdk.AccAddressFromBech32(msg.ClientRegistrationRegistry.Owner.Creator)
+
 	if err != nil {
 		panic(err)
 	}
+
 	return []sdk.AccAddress{creator}
 }
 
 func (msg *MsgCreateClientRegistrationRegistryRequest) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(msg)
+
 	return sdk.MustSortJSON(bz)
 }
 
 func (msg *MsgCreateClientRegistrationRegistryRequest) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.ClientRegistrationRegistry.Owner.Creator)
+
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
+
 	return nil
 }
 
@@ -66,22 +71,27 @@ func (msg *MsgUpdateClientRegistrationRegistryRequest) Type() string {
 
 func (msg *MsgUpdateClientRegistrationRegistryRequest) GetSigners() []sdk.AccAddress {
 	creator, err := sdk.AccAddressFromBech32(msg.ClientRegistrationRegistry.Owner.Creator)
+
 	if err != nil {
 		panic(err)
 	}
+
 	return []sdk.AccAddress{creator}
 }
 
 func (msg *MsgUpdateClientRegistrationRegistryRequest) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(msg)
+
 	return sdk.MustSortJSON(bz)
 }
 
 func (msg *MsgUpdateClientRegistrationRegistryRequest) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.ClientRegistrationRegistry.Owner.Creator)
+
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
+
 	return nil
 }
 
@@ -104,21 +114,26 @@ func (msg *MsgDeleteClientRegistrationRegistryRequest) Type() string {
 
 func (msg *MsgDeleteClientRegistrationRegistryRequest) GetSigners() []sdk.AccAddress {
 	creator, err := sdk.AccAddressFromBech32(msg.Creator)
+
 	if err != nil {
 		panic(err)
 	}
+
 	return []sdk.AccAddress{creator}
 }
 
 func (msg *MsgDeleteClientRegistrationRegistryRequest) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(msg)
+
 	return sdk.MustSortJSON(bz)
 }
 
 func (msg *MsgDeleteClientRegistrationRegistryRequest) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
+
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
+	
 	return nil
 }

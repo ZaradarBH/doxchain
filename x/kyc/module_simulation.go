@@ -39,12 +39,15 @@ const (
 
 func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 	accs := make([]string, len(simState.Accounts))
+	
 	for i, acc := range simState.Accounts {
 		accs[i] = acc.Address.String()
 	}
+
 	kycGenesis := types.GenesisState{
 		Params: types.DefaultParams(),
 	}
+
 	simState.GenState[types.ModuleName] = simState.Cdc.MustMarshalJSON(&kycGenesis)
 }
 

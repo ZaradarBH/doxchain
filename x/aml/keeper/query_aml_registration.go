@@ -13,9 +13,11 @@ func (k Keeper) AMLRegistration(goCtx context.Context, req *types.QueryGetAMLReg
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
+	
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	val, found := k.GetAMLRegistration(ctx, req.Creator)
+
 	if !found {
 		return nil, status.Error(codes.NotFound, "not found")
 	}

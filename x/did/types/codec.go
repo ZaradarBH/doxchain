@@ -21,8 +21,6 @@ func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 		&MsgCreateDidRequest{},
 		&MsgUpdateDidRequest{},
 		&MsgDeleteDidRequest{},
-	)
-	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgCreateDidDocumentRequest{},
 		&MsgUpdateDidDocumentRequest{},
 		&MsgDeleteDidDocumentRequest{},

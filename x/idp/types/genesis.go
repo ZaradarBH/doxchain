@@ -19,9 +19,11 @@ func (gs GenesisState) Validate() error {
 
 	for _, elem := range gs.DeviceCodeRegistries {
 		creator := string(DeviceCodeRegistryKey(elem.Owner.Creator))
+
 		if _, ok := DeviceCodeRegistryIndexMap[creator]; ok {
 			return fmt.Errorf("duplicated creator for DeviceCodeRegistry")
 		}
+
 		DeviceCodeRegistryIndexMap[creator] = struct{}{}
 	}
 
@@ -29,9 +31,11 @@ func (gs GenesisState) Validate() error {
 
 	for _, elem := range gs.ClientRegistrationRegistries {
 		creator := string(ClientRegistrationRegistryKey(elem.Owner.Creator))
+		
 		if _, ok := ClientRegistrationRegistryIndexMap[creator]; ok {
 			return fmt.Errorf("duplicated creator for ClientRegistrationRegistry")
 		}
+		
 		ClientRegistrationRegistryIndexMap[creator] = struct{}{}
 	}
 

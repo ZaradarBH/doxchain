@@ -10,8 +10,6 @@ import (
 
 func (k msgServer) CreateClientRegistrationRegistry(goCtx context.Context, msg *types.MsgCreateClientRegistrationRegistryRequest) (*types.MsgCreateClientRegistrationRegistryResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
-
-	// Check if the value already exists
 	_, isFound := k.GetClientRegistrationRegistry(
 		ctx,
 		msg.ClientRegistrationRegistry.Owner.Creator,
@@ -31,8 +29,6 @@ func (k msgServer) CreateClientRegistrationRegistry(goCtx context.Context, msg *
 
 func (k msgServer) UpdateClientRegistrationRegistry(goCtx context.Context, msg *types.MsgUpdateClientRegistrationRegistryRequest) (*types.MsgUpdateClientRegistrationRegistryResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
-
-	// Check if the value exists
 	valFound, isFound := k.GetClientRegistrationRegistry(
 		ctx,
 		msg.ClientRegistrationRegistry.Owner.Creator,
@@ -41,7 +37,6 @@ func (k msgServer) UpdateClientRegistrationRegistry(goCtx context.Context, msg *
 		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "creator not set")
 	}
 
-	// Checks if the the msg creator is the same as the current owner
 	if msg.ClientRegistrationRegistry.Owner.Creator != valFound.Owner.Creator {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "incorrect owner")
 	}
@@ -53,8 +48,6 @@ func (k msgServer) UpdateClientRegistrationRegistry(goCtx context.Context, msg *
 
 func (k msgServer) DeleteClientRegistrationRegistry(goCtx context.Context, msg *types.MsgDeleteClientRegistrationRegistryRequest) (*types.MsgDeleteClientRegistrationRegistryResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
-
-	// Check if the value exists
 	valFound, isFound := k.GetClientRegistrationRegistry(
 		ctx,
 		msg.Creator,
@@ -63,7 +56,6 @@ func (k msgServer) DeleteClientRegistrationRegistry(goCtx context.Context, msg *
 		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "index not set")
 	}
 
-	// Checks if the the msg creator is the same as the current owner
 	if msg.Creator != valFound.Owner.Creator {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "incorrect owner")
 	}
