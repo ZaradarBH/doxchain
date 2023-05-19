@@ -8,9 +8,9 @@ import (
 )
 
 func RegisterCodec(cdc *codec.LegacyAmino) {
-	cdc.RegisterConcrete(&MsgCreateKYCRegistrationRequest{}, "kyc/CreateKYCRegistrationRequest", nil)
-	cdc.RegisterConcrete(&MsgDeleteKYCRegistrationRequest{}, "kyc/DeleteKYCRegistrationRequest", nil)
-	cdc.RegisterConcrete(&MsgApproveKYCRegistrationRequest{}, "kyc/ApproveKYCRegistrationRequest", nil)
+	cdc.RegisterConcrete(&MsgCreateKYCRegistrationRequest{}, "kyc/CreateKYCRegistration", nil)
+	cdc.RegisterConcrete(&MsgDeleteKYCRegistrationRequest{}, "kyc/DeleteKYCRegistration", nil)
+	cdc.RegisterConcrete(&MsgApproveKYCRegistrationRequest{}, "kyc/ApproveKYCRegistration", nil)
 }
 
 func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {

@@ -8,8 +8,8 @@ import (
 )
 
 func RegisterCodec(cdc *codec.LegacyAmino) {
-	cdc.RegisterConcrete(&MsgTokenRequest{}, "oauthtwo/token", nil)
-	cdc.RegisterConcrete(&MsgDeviceCodeRequest{}, "oauthtwo/devicecode", nil)
+	cdc.RegisterConcrete(&MsgTokenRequest{}, "oauthtwo/Token", nil)
+	cdc.RegisterConcrete(&MsgDeviceCodeRequest{}, "oauthtwo/DeviceCode", nil)
 	cdc.RegisterConcrete(&MsgAuthorizeRequest{}, "oauthtwo/Authorize", nil)
 }
 
