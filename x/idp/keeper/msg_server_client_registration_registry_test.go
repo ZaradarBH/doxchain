@@ -13,7 +13,6 @@ import (
 	"github.com/be-heroes/doxchain/x/idp/types"
 )
 
-// Prevent strconv unused error
 var _ = strconv.IntSize
 
 func TestClientRegistrationRegistryMsgServerCreate(t *testing.T) {

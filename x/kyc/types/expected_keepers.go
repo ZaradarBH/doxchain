@@ -7,7 +7,6 @@ import (
 
 //TODO: Remove keeper dependency
 type DidKeeper interface {
-	// Methods imported from did should be defined here
 }
 
 type AccountKeeper interface {
