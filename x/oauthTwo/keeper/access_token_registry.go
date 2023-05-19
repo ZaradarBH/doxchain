@@ -6,24 +6,24 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
-// SetAccessTokenRegistry set a specific AccessTokenRegistry in the store from its index
+// SetAccessTokenRegistry set a specific AccessTokenRegistry in the store based on its tenant
 func (k Keeper) SetAccessTokenRegistry(ctx sdk.Context, AccessTokenRegistry types.AccessTokenRegistry) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AccessTokenRegistryKeyPrefix))
 	b := k.cdc.MustMarshal(&AccessTokenRegistry)
 	store.Set(types.AccessTokenRegistryKey(
-		AccessTokenRegistry.Tenant,
+		AccessTokenRegistry.Owner.Creator,
 	), b)
 }
 
 // GetAccessTokenRegistry returns a AccessTokenRegistry from its index
 func (k Keeper) GetAccessTokenRegistry(
 	ctx sdk.Context,
-	tenant string,
+	fullyQualifiedW3CIdentifier string,
 ) (val types.AccessTokenRegistry, found bool) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AccessTokenRegistryKeyPrefix))
 
 	b := store.Get(types.AccessTokenRegistryKey(
-		tenant,
+		fullyQualifiedW3CIdentifier,
 	))
 	if b == nil {
 		return val, false
@@ -36,12 +36,12 @@ func (k Keeper) GetAccessTokenRegistry(
 // RemoveAccessTokenRegistry removes a AccessTokenRegistry from the store
 func (k Keeper) RemoveAccessTokenRegistry(
 	ctx sdk.Context,
-	tenant string,
+	fullyQualifiedW3CIdentifier string,
 
 ) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AccessTokenRegistryKeyPrefix))
 	store.Delete(types.AccessTokenRegistryKey(
-		tenant,
+		fullyQualifiedW3CIdentifier,
 	))
 }
 

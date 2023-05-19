@@ -1,0 +1,13 @@
+syntax = "proto3";
+package beheroes.doxchain.did.v1beta1;
+
+import "gogoproto/gogo.proto";
+import "doxchain/did/v1beta1/did.proto";
+import "doxchain/did/v1beta1/verification_method.proto";
+
+option go_package = "github.com/be-heroes/doxchain/x/did/types";
+
+message VerificationRelationship {
+  repeated Did referenced = 1 [(gogoproto.nullable) = false];
+  repeated VerificationMethod embedded = 2 [(gogoproto.nullable) = false];
+}

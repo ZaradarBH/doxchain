@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package beheroes.doxchain.aml.v1beta1;
+
+import "gogoproto/gogo.proto";
+import "doxchain/aml/v1beta1/params.proto";
+import "doxchain/aml/v1beta1/aml_request.proto";
+
+option go_package = "github.com/be-heroes/doxchain/x/aml/types";
+
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+  repeated AMLRegistration requestList = 2 [(gogoproto.nullable) = false];
+  uint64 requestCount = 3;
+}

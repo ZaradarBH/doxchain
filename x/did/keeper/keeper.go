@@ -24,6 +24,7 @@ type (
 	}
 )
 
+//TODO: Concept for validating ValidationMethods & ValidationRelationships in accordancee with the W3C spec
 func NewKeeper(
 	cdc codec.BinaryCodec,
 	storeKey,
@@ -52,5 +53,3 @@ func NewKeeper(
 func (k Keeper) Logger(ctx sdk.Context) log.Logger {
 	return ctx.Logger().With("module", fmt.Sprintf("x/%s", types.ModuleName))
 }
-
-//TODO: Implement support for DIDDocuments

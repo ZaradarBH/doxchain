@@ -14,7 +14,7 @@ import (
 	"github.com/be-heroes/doxchain/x/kyc/client/cli"
 )
 
-func TestCreateKYCRequest(t *testing.T) {
+func TestCreateKYCRegistration(t *testing.T) {
 	net := network.New(t)
 	val := net.Validators[0]
 	ctx := val.ClientCtx
@@ -40,7 +40,7 @@ func TestCreateKYCRequest(t *testing.T) {
 			var args []string
 			args = append(args, fields...)
 			args = append(args, tc.args...)
-			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdCreateKYCRequest(), args)
+			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdCreateKYCRegistration(), args)
 			if tc.err != nil {
 				require.ErrorIs(t, err, tc.err)
 			} else {
@@ -53,7 +53,7 @@ func TestCreateKYCRequest(t *testing.T) {
 	}
 }
 
-func TestUpdateKYCRequest(t *testing.T) {
+func TestUpdateKYCRegistration(t *testing.T) {
 	net := network.New(t)
 	val := net.Validators[0]
 	ctx := val.ClientCtx
@@ -68,7 +68,7 @@ func TestUpdateKYCRequest(t *testing.T) {
 	var args []string
 	args = append(args, fields...)
 	args = append(args, common...)
-	_, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdCreateKYCRequest(), args)
+	_, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdCreateKYCRegistration(), args)
 	require.NoError(t, err)
 
 	for _, tc := range []struct {
@@ -86,7 +86,7 @@ func TestUpdateKYCRequest(t *testing.T) {
 			var args []string
 			args = append(args, fields...)
 			args = append(args, tc.args...)
-			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdUpdateKYCRequest(), args)
+			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdUpdateKYCRegistration(), args)
 			if tc.err != nil {
 				require.ErrorIs(t, err, tc.err)
 			} else {
@@ -99,7 +99,7 @@ func TestUpdateKYCRequest(t *testing.T) {
 	}
 }
 
-func TestDeleteKYCRequest(t *testing.T) {
+func TestDeleteKYCRegistration(t *testing.T) {
 	net := network.New(t)
 
 	val := net.Validators[0]
@@ -115,7 +115,7 @@ func TestDeleteKYCRequest(t *testing.T) {
 	var args []string
 	args = append(args, fields...)
 	args = append(args, common...)
-	_, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdCreateKYCRequest(), args)
+	_, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdCreateKYCRegistration(), args)
 	require.NoError(t, err)
 
 	for _, tc := range []struct {
@@ -130,7 +130,7 @@ func TestDeleteKYCRequest(t *testing.T) {
 		},
 	} {
 		t.Run(tc.desc, func(t *testing.T) {
-			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdDeleteKYCRequest(), append([]string{}, tc.args...))
+			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdDeleteKYCRegistration(), append([]string{}, tc.args...))
 			if tc.err != nil {
 				require.ErrorIs(t, err, tc.err)
 			} else {

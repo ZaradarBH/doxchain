@@ -22,7 +22,7 @@ func TestGenesisState_Validate(t *testing.T) {
 			desc: "valid genesis state",
 			genState: &types.GenesisState{
 
-				DeviceCodeRegistryList: []types.DeviceCodeRegistry{
+				DeviceCodeRegistries: []types.DeviceCodeRegistry{
 					{
 						Tenant: "0",
 					},
@@ -30,7 +30,7 @@ func TestGenesisState_Validate(t *testing.T) {
 						Tenant: "1",
 					},
 				},
-				AccessTokenRegistryList: []types.AccessTokenRegistry{
+				AccessTokenRegistries: []types.AccessTokenRegistry{
 					{
 						Tenant: "0",
 					},
@@ -38,7 +38,7 @@ func TestGenesisState_Validate(t *testing.T) {
 						Tenant: "1",
 					},
 				},
-				AuthorizationCodeRegistryList: []types.AuthorizationCodeRegistry{
+				AuthorizationCodeRegistries: []types.AuthorizationCodeRegistry{
 					{
 						Index: "0",
 					},
@@ -53,7 +53,7 @@ func TestGenesisState_Validate(t *testing.T) {
 		{
 			desc: "duplicated DeviceCodeRegistry",
 			genState: &types.GenesisState{
-				DeviceCodeRegistryList: []types.DeviceCodeRegistry{
+				DeviceCodeRegistries: []types.DeviceCodeRegistry{
 					{
 						Tenant: "0",
 					},
@@ -67,7 +67,7 @@ func TestGenesisState_Validate(t *testing.T) {
 		{
 			desc: "duplicated AccessTokenRegistry",
 			genState: &types.GenesisState{
-				AccessTokenRegistryList: []types.AccessTokenRegistry{
+				AccessTokenRegistries: []types.AccessTokenRegistry{
 					{
 						Tenant: "0",
 					},
@@ -81,7 +81,7 @@ func TestGenesisState_Validate(t *testing.T) {
 		{
 			desc: "duplicated authorizationCodeRegistry",
 			genState: &types.GenesisState{
-				AuthorizationCodeRegistryList: []types.AuthorizationCodeRegistry{
+				AuthorizationCodeRegistries: []types.AuthorizationCodeRegistry{
 					{
 						Index: "0",
 					},

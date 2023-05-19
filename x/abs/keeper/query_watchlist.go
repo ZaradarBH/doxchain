@@ -14,11 +14,9 @@ func (k Keeper) QueryWatchlist(goCtx context.Context, req *types.QueryWatchlistR
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
 
-	ctx := sdk.UnwrapSDKContext(goCtx)
-
 	watchlist := types.Watchlist{Entries: []types.WatchlistEntry{}}
 
-	k.IterateWatchList(ctx, func(entry types.WatchlistEntry) bool {
+	k.IterateWatchList(sdk.UnwrapSDKContext(goCtx), func(entry types.WatchlistEntry) bool {
 		watchlist.Entries = append(watchlist.Entries, entry)
 
 		return false

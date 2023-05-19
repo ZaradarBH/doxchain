@@ -1,0 +1,24 @@
+syntax = "proto3";
+package beheroes.doxchain.did.v1beta1;
+
+import "gogoproto/gogo.proto";
+import "doxchain/did/v1beta1/did.proto";
+import "doxchain/did/v1beta1/verification_method.proto";
+import "doxchain/did/v1beta1/verification_relationship.proto";
+import "doxchain/did/v1beta1/service.proto";
+
+option go_package = "github.com/be-heroes/doxchain/x/did/types";
+
+message DidDocument {
+  repeated string context = 1;
+  Did id = 2 [(gogoproto.nullable) = false];
+  Did controller = 3 [(gogoproto.nullable) = true];
+  repeated Did alsoKnownAs = 4 [(gogoproto.nullable) = true];
+  repeated VerificationMethod verificationMethod = 5 [(gogoproto.nullable) = true];
+  repeated VerificationRelationship authentication = 6 [(gogoproto.nullable) = true];
+  repeated VerificationRelationship assertionMethod = 7 [(gogoproto.nullable) = true];
+  repeated VerificationRelationship keyAgreement = 8 [(gogoproto.nullable) = true];
+  repeated VerificationRelationship capabilityInvocation = 9 [(gogoproto.nullable) = true];
+  repeated VerificationRelationship capabilityDelegation = 10 [(gogoproto.nullable) = true];
+  repeated Service service = 11 [(gogoproto.nullable) = true];
+}

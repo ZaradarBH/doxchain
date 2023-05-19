@@ -1,7 +1,0 @@
-syntax = "proto3";
-package doxchain.doxchain;
-
-option go_package = "github.com/be-heroes/doxchain/x/doxchain/types";
-
-// Msg defines the Msg service.
-service Msg {}

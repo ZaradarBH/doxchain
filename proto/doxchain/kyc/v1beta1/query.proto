@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package beheroes.doxchain.kyc.v1beta1;
+
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "doxchain/kyc/v1beta1/params.proto";
+import "doxchain/kyc/v1beta1/kyc_request.proto";
+
+option go_package = "github.com/be-heroes/doxchain/x/kyc/types";
+service Query {
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/be-heroes/doxchain/kyc/params";  
+  }
+  
+  rpc KYCRegistration (QueryGetKYCRegistrationRequest) returns (QueryGetKYCRegistrationResponse) {
+    option (google.api.http).get = "/be-heroes/doxchain/kyc/kyc_request";  
+  }
+}
+
+message QueryParamsRequest {}
+
+message QueryParamsResponse {  
+  Params params = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryGetKYCRegistrationRequest {
+  string creator = 1;
+}
+
+message QueryGetKYCRegistrationResponse {
+  KYCRegistration registration = 1 [(gogoproto.nullable) = false];
+}

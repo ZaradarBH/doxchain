@@ -15,14 +15,13 @@ func TestGenesis(t *testing.T) {
 		Params: types.DefaultParams(),
 
 		PartitionedPoolsList: []types.PartitionedPools{
-		{
-			Index: "0",
-},
-		{
-			Index: "1",
-},
-	},
-	// this line is used by starport scaffolding # genesis/test/state
+			{
+				Index: "0",
+			},
+			{
+				Index: "1",
+			},
+		},
 	}
 
 	k, ctx := keepertest.AbsKeeper(t)
@@ -34,5 +33,4 @@ func TestGenesis(t *testing.T) {
 	nullify.Fill(got)
 
 	require.ElementsMatch(t, genesisState.PartitionedPoolsList, got.PartitionedPoolsList)
-// this line is used by starport scaffolding # genesis/test/assert
 }

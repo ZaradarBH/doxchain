@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package beheroes.doxchain.aml.v1beta1;
+
+import "gogoproto/gogo.proto";
+import "doxchain/aml/v1beta1/aml_request.proto";
+import "doxchain/did/v1beta1/did.proto";
+
+option go_package = "github.com/be-heroes/doxchain/x/aml/types";
+
+service Msg {
+  rpc CreateAMLRegistration (MsgCreateAMLRegistrationRequest) returns (MsgCreateAMLRegistrationResponse);
+  rpc DeleteAMLRegistration (MsgDeleteAMLRegistrationRequest) returns (MsgDeleteAMLRegistrationResponse);
+  rpc ApproveAMLRegistration (MsgApproveAMLRegistrationRequest) returns (MsgApproveAMLRegistrationResponse);
+}
+
+message MsgCreateAMLRegistrationRequest {
+  string creator = 1;
+  beheroes.doxchain.did.v1beta1.Did owner = 2 [(gogoproto.nullable) = false];  
+}
+
+message MsgCreateAMLRegistrationResponse {}
+
+message MsgDeleteAMLRegistrationRequest {
+  string creator = 1;
+}
+
+message MsgDeleteAMLRegistrationResponse {}
+
+message MsgApproveAMLRegistrationRequest {  
+  string creator = 1;
+  beheroes.doxchain.did.v1beta1.Did target = 2 [(gogoproto.nullable) = false];
+}
+
+message MsgApproveAMLRegistrationResponse {}

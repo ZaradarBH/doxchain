@@ -8,21 +8,21 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestMsgCreateAMLRequest_ValidateBasic(t *testing.T) {
+func TestMsgCreateAMLRegistration_ValidateBasic(t *testing.T) {
 	tests := []struct {
 		name string
-		msg  MsgCreateAMLRequest
+		msg  MsgCreateAMLRegistration
 		err  error
 	}{
 		{
 			name: "invalid address",
-			msg: MsgCreateAMLRequest{
+			msg: MsgCreateAMLRegistration{
 				Creator: "invalid_address",
 			},
 			err: sdkerrors.ErrInvalidAddress,
 		}, {
 			name: "valid address",
-			msg: MsgCreateAMLRequest{
+			msg: MsgCreateAMLRegistration{
 				Creator: sample.AccAddress(),
 			},
 		},
@@ -39,21 +39,21 @@ func TestMsgCreateAMLRequest_ValidateBasic(t *testing.T) {
 	}
 }
 
-func TestMsgUpdateAMLRequest_ValidateBasic(t *testing.T) {
+func TestMsgUpdateAMLRegistration_ValidateBasic(t *testing.T) {
 	tests := []struct {
 		name string
-		msg  MsgUpdateAMLRequest
+		msg  MsgUpdateAMLRegistration
 		err  error
 	}{
 		{
 			name: "invalid address",
-			msg: MsgUpdateAMLRequest{
+			msg: MsgUpdateAMLRegistration{
 				Creator: "invalid_address",
 			},
 			err: sdkerrors.ErrInvalidAddress,
 		}, {
 			name: "valid address",
-			msg: MsgUpdateAMLRequest{
+			msg: MsgUpdateAMLRegistration{
 				Creator: sample.AccAddress(),
 			},
 		},
@@ -70,21 +70,21 @@ func TestMsgUpdateAMLRequest_ValidateBasic(t *testing.T) {
 	}
 }
 
-func TestMsgDeleteAMLRequest_ValidateBasic(t *testing.T) {
+func TestMsgDeleteAMLRegistration_ValidateBasic(t *testing.T) {
 	tests := []struct {
 		name string
-		msg  MsgDeleteAMLRequest
+		msg  MsgDeleteAMLRegistration
 		err  error
 	}{
 		{
 			name: "invalid address",
-			msg: MsgDeleteAMLRequest{
+			msg: MsgDeleteAMLRegistration{
 				Creator: "invalid_address",
 			},
 			err: sdkerrors.ErrInvalidAddress,
 		}, {
 			name: "valid address",
-			msg: MsgDeleteAMLRequest{
+			msg: MsgDeleteAMLRegistration{
 				Creator: sample.AccAddress(),
 			},
 		},

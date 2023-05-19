@@ -21,7 +21,7 @@ func SimulateMsgCreateDid(
 	) (simtypes.OperationMsg, []simtypes.FutureOperation, error) {
 		simAccount, _ := simtypes.RandomAcc(r, accs)
 
-		did := &types.Did{
+		did := types.Did{
 			Creator:    simAccount.Address.String(),
 			Url:        "did:example:123/path?service=agent#degree",
 			MethodName: "example",
@@ -31,7 +31,7 @@ func SimulateMsgCreateDid(
 			Query:      "service=agent",
 		}
 
-		msg := &types.MsgCreateDid{
+		msg := &types.MsgCreateDidRequest{
 			Did: did,
 		}
 
@@ -63,7 +63,7 @@ func SimulateMsgUpdateDid(
 		var (
 			simAccount = simtypes.Account{}
 			did        = types.Did{}
-			msg        = &types.MsgUpdateDid{}
+			msg        = &types.MsgUpdateDidRequest{}
 			allDid     = k.GetAllDid(ctx)
 			found      = false
 		)
@@ -77,7 +77,8 @@ func SimulateMsgUpdateDid(
 		if !found {
 			return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "did creator not found"), nil, nil
 		}
-		msg.Did = &did
+
+		msg.Did = did
 
 		txCtx := simulation.OperationInput{
 			R:               r,
@@ -107,7 +108,7 @@ func SimulateMsgDeleteDid(
 		var (
 			simAccount = simtypes.Account{}
 			did        = types.Did{}
-			msg        = &types.MsgUpdateDid{}
+			msg        = &types.MsgDeleteDidRequest{}
 			allDid     = k.GetAllDid(ctx)
 			found      = false
 		)
@@ -121,7 +122,6 @@ func SimulateMsgDeleteDid(
 		if !found {
 			return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "did creator not found"), nil, nil
 		}
-		msg.Did = &did
 
 		txCtx := simulation.OperationInput{
 			R:               r,
@@ -137,6 +137,9 @@ func SimulateMsgDeleteDid(
 			AccountKeeper:   ak,
 			Bankkeeper:      bk,
 		}
+
+		_ = did
+
 		return simulation.GenAndDeliverTxWithRandFees(txCtx)
 	}
 }

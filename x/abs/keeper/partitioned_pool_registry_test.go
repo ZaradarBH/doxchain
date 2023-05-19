@@ -4,10 +4,10 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/be-heroes/doxchain/x/abs/keeper"
-	"github.com/be-heroes/doxchain/x/abs/types"
 	keepertest "github.com/be-heroes/doxchain/testutil/keeper"
 	"github.com/be-heroes/doxchain/testutil/nullify"
+	"github.com/be-heroes/doxchain/x/abs/keeper"
+	"github.com/be-heroes/doxchain/x/abs/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/stretchr/testify/require"
 )
@@ -19,7 +19,7 @@ func createNPartitionedPools(keeper *keeper.Keeper, ctx sdk.Context, n int) []ty
 	items := make([]types.PartitionedPools, n)
 	for i := range items {
 		items[i].Index = strconv.Itoa(i)
-        
+
 		keeper.SetPartitionedPools(ctx, items[i])
 	}
 	return items
@@ -30,8 +30,7 @@ func TestPartitionedPoolsGet(t *testing.T) {
 	items := createNPartitionedPools(keeper, ctx, 10)
 	for _, item := range items {
 		rst, found := keeper.GetPartitionedPools(ctx,
-		    item.Index,
-            
+			item.Index,
 		)
 		require.True(t, found)
 		require.Equal(t,
@@ -45,12 +44,10 @@ func TestPartitionedPoolsRemove(t *testing.T) {
 	items := createNPartitionedPools(keeper, ctx, 10)
 	for _, item := range items {
 		keeper.RemovePartitionedPools(ctx,
-		    item.Index,
-            
+			item.Index,
 		)
 		_, found := keeper.GetPartitionedPools(ctx,
-		    item.Index,
-            
+			item.Index,
 		)
 		require.False(t, found)
 	}

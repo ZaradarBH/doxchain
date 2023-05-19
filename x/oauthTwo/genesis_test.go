@@ -14,7 +14,7 @@ func TestGenesis(t *testing.T) {
 	genesisState := types.GenesisState{
 		Params: types.DefaultParams(),
 
-		DeviceCodeRegistryList: []types.DeviceCodeRegistry{
+		DeviceCodeRegistries: []types.DeviceCodeRegistry{
 			{
 				Tenant: "0",
 			},
@@ -22,7 +22,7 @@ func TestGenesis(t *testing.T) {
 				Tenant: "1",
 			},
 		},
-		AccessTokenRegistryList: []types.AccessTokenRegistry{
+		AccessTokenRegistries: []types.AccessTokenRegistry{
 			{
 				Tenant: "0",
 			},
@@ -30,7 +30,7 @@ func TestGenesis(t *testing.T) {
 				Tenant: "1",
 			},
 		},
-		AuthorizationCodeRegistryList: []types.AuthorizationCodeRegistry{
+		AuthorizationCodeRegistries: []types.AuthorizationCodeRegistry{
 			{
 				Index: "0",
 			},
@@ -49,8 +49,8 @@ func TestGenesis(t *testing.T) {
 	nullify.Fill(&genesisState)
 	nullify.Fill(got)
 
-	require.ElementsMatch(t, genesisState.DeviceCodeRegistryList, got.DeviceCodeRegistryList)
-	require.ElementsMatch(t, genesisState.AccessTokenRegistryList, got.AccessTokenRegistryList)
-	require.ElementsMatch(t, genesisState.AuthorizationCodeRegistryList, got.AuthorizationCodeRegistryList)
+	require.ElementsMatch(t, genesisState.DeviceCodeRegistries, got.DeviceCodeRegistries)
+	require.ElementsMatch(t, genesisState.AccessTokenRegistries, got.AccessTokenRegistries)
+	require.ElementsMatch(t, genesisState.AuthorizationCodeRegistries, got.AuthorizationCodeRegistries)
 	// this line is used by starport scaffolding # genesis/test/assert
 }

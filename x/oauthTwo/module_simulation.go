@@ -12,6 +12,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/module"
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
+	didUtils "github.com/be-heroes/doxchain/utils/did"
 )
 
 // avoid unused import issue
@@ -83,28 +84,20 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 	}
 	oauthGenesis := types.GenesisState{
 		Params: types.DefaultParams(),
-		DeviceCodeRegistryList: []types.DeviceCodeRegistry{
+		AccessTokenRegistries: []types.AccessTokenRegistry{
 			{
-				Tenant: "0",
+				Owner: *didUtils.NewDidTokenFactory().Create("1", ""),
 			},
 			{
-				Tenant: "1",
-			},
-		},
-		AccessTokenRegistryList: []types.AccessTokenRegistry{
-			{
-				Tenant: "0",
-			},
-			{
-				Tenant: "1",
+				Owner: *didUtils.NewDidTokenFactory().Create("2", ""),
 			},
 		},
-		AuthorizationCodeRegistryList: []types.AuthorizationCodeRegistry{
+		AuthorizationCodeRegistries: []types.AuthorizationCodeRegistry{
 			{
-				Tenant: "0",
+				Owner: *didUtils.NewDidTokenFactory().Create("1", ""),
 			},
 			{
-				Tenant: "0",
+				Owner: *didUtils.NewDidTokenFactory().Create("2", ""),
 			},
 		},
 		// this line is used by starport scaffolding # simapp/module/genesisState

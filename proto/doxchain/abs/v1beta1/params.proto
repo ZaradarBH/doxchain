@@ -1,0 +1,13 @@
+syntax = "proto3";
+package beheroes.doxchain.abs.v1beta1;
+
+import "gogoproto/gogo.proto";
+import "doxchain/did/v1beta1/did.proto";
+
+option go_package = "github.com/be-heroes/doxchain/x/abs/types";
+
+message Params {
+  option (gogoproto.goproto_stringer) = false;
+  repeated beheroes.doxchain.did.v1beta1.Did operators = 1 [(gogoproto.nullable) = false];
+  string blockExpireOffset = 2 [(gogoproto.moretags) = "yaml:\"blockExpireOffset\"", (gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", (gogoproto.nullable) = false];
+}

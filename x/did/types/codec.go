@@ -8,17 +8,25 @@ import (
 )
 
 func RegisterCodec(cdc *codec.LegacyAmino) {
-	cdc.RegisterConcrete(&MsgCreateDid{}, "did/CreateDid", nil)
-	cdc.RegisterConcrete(&MsgUpdateDid{}, "did/UpdateDid", nil)
-	cdc.RegisterConcrete(&MsgDeleteDid{}, "did/DeleteDid", nil)
+	cdc.RegisterConcrete(&MsgCreateDidRequest{}, "did/CreateDid", nil)
+	cdc.RegisterConcrete(&MsgUpdateDidRequest{}, "did/UpdateDid", nil)
+	cdc.RegisterConcrete(&MsgDeleteDidRequest{}, "did/DeleteDid", nil)
+	cdc.RegisterConcrete(&MsgCreateDidDocumentRequest{}, "did/CreateDidDocument", nil)
+	cdc.RegisterConcrete(&MsgUpdateDidDocumentRequest{}, "did/UpdateDidDocument", nil)
+	cdc.RegisterConcrete(&MsgDeleteDidDocumentRequest{}, "did/DeleteDidDocument", nil)
 	// this line is used by starport scaffolding # 2
 }
 
 func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 	registry.RegisterImplementations((*sdk.Msg)(nil),
-		&MsgCreateDid{},
-		&MsgUpdateDid{},
-		&MsgDeleteDid{},
+		&MsgCreateDidRequest{},
+		&MsgUpdateDidRequest{},
+		&MsgDeleteDidRequest{},
+	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgCreateDidDocumentRequest{},
+		&MsgUpdateDidDocumentRequest{},
+		&MsgDeleteDidDocumentRequest{},
 	)
 	// this line is used by starport scaffolding # 3
 

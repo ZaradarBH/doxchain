@@ -5,10 +5,6 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/auth/types"
 )
 
-type OAuthTwoKeeper interface {
-	// Methods imported from oauth should be defined here
-}
-
 type AuthzKeeper interface {
 	// Methods imported from authz should be defined here
 }

@@ -1,0 +1,6 @@
+syntax = "proto3";
+package beheroes.doxchain.samltwo.v1beta1;
+
+option go_package = "github.com/be-heroes/doxchain/x/samltwo/types";
+
+service Msg {}

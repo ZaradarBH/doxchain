@@ -1,0 +1,10 @@
+syntax = "proto3";
+package beheroes.doxchain.did.v1beta1;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/be-heroes/doxchain/x/did/types";
+
+message Params {
+  option (gogoproto.goproto_stringer) = false;  
+}

@@ -131,22 +131,18 @@ import (
 	samltwomodule "github.com/be-heroes/doxchain/x/samltwo"
 	samltwomodulekeeper "github.com/be-heroes/doxchain/x/samltwo/keeper"
 	samltwomoduletypes "github.com/be-heroes/doxchain/x/samltwo/types"
-	// this line is used by starport scaffolding # stargate/app/moduleImport
 
 	appparams "github.com/be-heroes/doxchain/app/params"
 	"github.com/be-heroes/doxchain/docs"
 )
 
 const (
-	AccountAddressPrefix = "cosmos"
+	AccountAddressPrefix = "doxc"
 	Name                 = "doxchain"
 )
 
-// this line is used by starport scaffolding # stargate/wasm/app/enabledProposals
-
 func getGovProposalHandlers() []govclient.ProposalHandler {
 	var govProposalHandlers []govclient.ProposalHandler
-	// this line is used by starport scaffolding # stargate/app/govProposalHandlers
 
 	govProposalHandlers = append(govProposalHandlers,
 		paramsclient.ProposalHandler,
@@ -155,7 +151,6 @@ func getGovProposalHandlers() []govclient.ProposalHandler {
 		upgradeclient.LegacyCancelProposalHandler,
 		ibcclientclient.UpdateClientProposalHandler,
 		ibcclientclient.UpgradeProposalHandler,
-		// this line is used by starport scaffolding # stargate/app/govProposalHandler
 	)
 
 	return govProposalHandlers
@@ -198,7 +193,6 @@ var (
 		samltwomodule.AppModuleBasic{},
 		kycmodule.AppModuleBasic{},
 		amlmodule.AppModuleBasic{},
-		// this line is used by starport scaffolding # stargate/app/moduleBasic
 	)
 
 	// module account permissions
@@ -212,7 +206,6 @@ var (
 		govtypes.ModuleName:            {authtypes.Burner},
 		ibctransfertypes.ModuleName:    {authtypes.Minter, authtypes.Burner},
 		absmoduletypes.ModuleName:      {authtypes.Minter, authtypes.Burner, authtypes.Staking},
-		// this line is used by starport scaffolding # stargate/app/maccPerms
 	}
 )
 
@@ -278,18 +271,17 @@ type App struct {
 
 	AbsKeeper absmodulekeeper.Keeper
 
-	oauthtwoKeeper oauthtwomodulekeeper.Keeper
+	OAuthTwoKeeper oauthtwomodulekeeper.Keeper
 
 	IdpKeeper idpmodulekeeper.Keeper
 
 	OracleKeeper oraclemodulekeeper.Keeper
 
-	samltwoKeeper samltwomodulekeeper.Keeper
+	SamlTwoKeeper samltwomodulekeeper.Keeper
 
 	KycKeeper kycmodulekeeper.Keeper
 
 	AmlKeeper amlmodulekeeper.Keeper
-	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// mm is the module manager
 	mm *module.Manager
@@ -299,7 +291,6 @@ type App struct {
 	configurator module.Configurator
 }
 
-// New returns a reference to an initialized blockchain app
 func New(
 	logger log.Logger,
 	db dbm.DB,
@@ -342,7 +333,6 @@ func New(
 		samltwomoduletypes.StoreKey,
 		kycmoduletypes.StoreKey,
 		amlmoduletypes.StoreKey,
-		// this line is used by starport scaffolding # stargate/app/storeKey
 	)
 	tkeys := sdk.NewTransientStoreKeys(paramstypes.TStoreKey)
 	memKeys := sdk.NewMemoryStoreKeys(capabilitytypes.MemStoreKey)
@@ -380,7 +370,6 @@ func New(
 	scopedICAControllerKeeper := app.CapabilityKeeper.ScopeToModule(icacontrollertypes.SubModuleName)
 	scopedTransferKeeper := app.CapabilityKeeper.ScopeToModule(ibctransfertypes.ModuleName)
 	scopedICAHostKeeper := app.CapabilityKeeper.ScopeToModule(icahosttypes.SubModuleName)
-	// this line is used by starport scaffolding # stargate/app/scopedKeeper
 
 	// add keepers
 	app.AccountKeeper = authkeeper.NewAccountKeeper(
@@ -450,10 +439,7 @@ func New(
 	)
 
 	groupConfig := group.DefaultConfig()
-	/*
-		Example of setting group params:
-		groupConfig.MaxMetadataLen = 1000
-	*/
+
 	app.GroupKeeper = groupkeeper.NewKeeper(
 		keys[group.StoreKey],
 		appCodec,
@@ -477,9 +463,6 @@ func New(
 		authtypes.NewModuleAddress(govtypes.ModuleName).String(),
 	)
 
-	// ... other modules keepers
-
-	// Create IBC Keeper
 	app.IBCKeeper = ibckeeper.NewKeeper(
 		appCodec, keys[ibchost.StoreKey],
 		app.GetSubspace(ibchost.ModuleName),
@@ -488,7 +471,6 @@ func New(
 		scopedIBCKeeper,
 	)
 
-	// Create Transfer Keepers
 	app.TransferKeeper = ibctransferkeeper.NewKeeper(
 		appCodec,
 		keys[ibctransfertypes.StoreKey],
@@ -500,6 +482,7 @@ func New(
 		app.BankKeeper,
 		scopedTransferKeeper,
 	)
+
 	transferModule := transfer.NewAppModule(app.TransferKeeper)
 	transferIBCModule := transfer.NewIBCModule(app.TransferKeeper)
 
@@ -513,6 +496,7 @@ func New(
 		scopedICAHostKeeper,
 		app.MsgServiceRouter(),
 	)
+
 	icaControllerKeeper := icacontrollerkeeper.NewKeeper(
 		appCodec, keys[icacontrollertypes.StoreKey],
 		app.GetSubspace(icacontrollertypes.SubModuleName),
@@ -523,14 +507,13 @@ func New(
 	icaModule := ica.NewAppModule(&icaControllerKeeper, &app.ICAHostKeeper)
 	icaHostIBCModule := icahost.NewIBCModule(app.ICAHostKeeper)
 
-	// Create evidence Keeper for to register the IBC light client misbehaviour evidence route
 	evidenceKeeper := evidencekeeper.NewKeeper(
 		appCodec,
 		keys[evidencetypes.StoreKey],
 		&app.StakingKeeper,
 		app.SlashingKeeper,
 	)
-	// If evidence needs to be handled for the app, set routes in router here and seal
+	
 	app.EvidenceKeeper = *evidenceKeeper
 
 	govRouter := govv1beta1.NewRouter()
@@ -540,7 +523,9 @@ func New(
 		AddRoute(distrtypes.RouterKey, distr.NewCommunityPoolSpendProposalHandler(app.DistrKeeper)).
 		AddRoute(upgradetypes.RouterKey, upgrade.NewSoftwareUpgradeProposalHandler(app.UpgradeKeeper)).
 		AddRoute(ibcclienttypes.RouterKey, ibcclient.NewClientProposalHandler(app.IBCKeeper.ClientKeeper))
+
 	govConfig := govtypes.DefaultConfig()
+
 	app.GovKeeper = govkeeper.NewKeeper(
 		appCodec,
 		keys[govtypes.StoreKey],
@@ -559,6 +544,7 @@ func New(
 		keys[doxchainmoduletypes.MemStoreKey],
 		app.GetSubspace(doxchainmoduletypes.ModuleName),
 	)
+
 	doxchainModule := doxchainmodule.NewAppModule(appCodec, app.DoxchainKeeper, app.AccountKeeper, app.BankKeeper)
 
 	app.DidKeeper = *didmodulekeeper.NewKeeper(
@@ -570,6 +556,7 @@ func New(
 		app.AccountKeeper,
 		app.AuthzKeeper,
 	)
+
 	didModule := didmodule.NewAppModule(appCodec, app.DidKeeper, app.AccountKeeper, app.BankKeeper)
 
 	app.AbsKeeper = *absmodulekeeper.NewKeeper(
@@ -581,9 +568,10 @@ func New(
 		app.AccountKeeper,
 		app.BankKeeper,
 	)
+
 	absModule := absmodule.NewAppModule(appCodec, app.AbsKeeper, app.AccountKeeper, app.BankKeeper)
 
-	app.oauthtwoKeeper = *oauthtwomodulekeeper.NewKeeper(
+	app.OAuthTwoKeeper = *oauthtwomodulekeeper.NewKeeper(
 		appCodec,
 		keys[oauthtwomoduletypes.StoreKey],
 		keys[oauthtwomoduletypes.MemStoreKey],
@@ -593,7 +581,8 @@ func New(
 		app.EvidenceKeeper,
 		app.IdpKeeper,
 	)
-	oauthtwomodule := oauthtwomodule.NewAppModule(appCodec, app.oauthtwoKeeper, app.AccountKeeper, app.BankKeeper)
+	
+	oauthtwomodule := oauthtwomodule.NewAppModule(appCodec, app.OAuthTwoKeeper, app.AccountKeeper, app.BankKeeper)
 
 	app.IdpKeeper = *idpmodulekeeper.NewKeeper(
 		appCodec,
@@ -601,10 +590,10 @@ func New(
 		keys[idpmoduletypes.MemStoreKey],
 		app.GetSubspace(idpmoduletypes.ModuleName),
 
-		app.oauthtwoKeeper,
 		app.AuthzKeeper,
 		app.EvidenceKeeper,
 	)
+
 	idpModule := idpmodule.NewAppModule(appCodec, app.IdpKeeper, app.AccountKeeper, app.BankKeeper)
 
 	app.OracleKeeper = *oraclemodulekeeper.NewKeeper(
@@ -613,15 +602,17 @@ func New(
 		keys[oraclemoduletypes.MemStoreKey],
 		app.GetSubspace(oraclemoduletypes.ModuleName),
 	)
+
 	oracleModule := oraclemodule.NewAppModule(appCodec, app.OracleKeeper, app.AccountKeeper, app.BankKeeper)
 
-	app.samltwoKeeper = *samltwomodulekeeper.NewKeeper(
+	app.SamlTwoKeeper = *samltwomodulekeeper.NewKeeper(
 		appCodec,
 		keys[samltwomoduletypes.StoreKey],
 		keys[samltwomoduletypes.MemStoreKey],
 		app.GetSubspace(samltwomoduletypes.ModuleName),
 	)
-	samltwomodule := samltwomodule.NewAppModule(appCodec, app.samltwoKeeper, app.AccountKeeper, app.BankKeeper)
+
+	samltwomodule := samltwomodule.NewAppModule(appCodec, app.SamlTwoKeeper, app.AccountKeeper, app.BankKeeper)
 
 	app.KycKeeper = *kycmodulekeeper.NewKeeper(
 		appCodec,
@@ -630,7 +621,9 @@ func New(
 		app.GetSubspace(kycmoduletypes.ModuleName),
 
 		app.AccountKeeper,
+		app.DidKeeper,
 	)
+
 	kycModule := kycmodule.NewAppModule(appCodec, app.KycKeeper, app.AccountKeeper, app.BankKeeper)
 
 	app.AmlKeeper = *amlmodulekeeper.NewKeeper(
@@ -641,26 +634,24 @@ func New(
 
 		app.AccountKeeper,
 	)
+
 	amlModule := amlmodule.NewAppModule(appCodec, app.AmlKeeper, app.AccountKeeper, app.BankKeeper)
 
-	// this line is used by starport scaffolding # stargate/app/keeperDefinition
-
 	/**** IBC Routing ****/
-
 	// Sealing prevents other modules from creating scoped sub-keepers
 	app.CapabilityKeeper.Seal()
 
 	// Create static IBC router, add transfer route, then set and seal it
 	ibcRouter := ibcporttypes.NewRouter()
-	ibcRouter.AddRoute(icahosttypes.SubModuleName, icaHostIBCModule).
-		AddRoute(ibctransfertypes.ModuleName, transferIBCModule)
-	// this line is used by starport scaffolding # ibc/app/router
+	ibcRouter.
+			AddRoute(icahosttypes.SubModuleName, icaHostIBCModule).
+			AddRoute(ibctransfertypes.ModuleName, transferIBCModule)
+
 	app.IBCKeeper.SetRouter(ibcRouter)
 
 	/**** Module Hooks ****/
 
 	// register hooks after all modules have been initialized
-
 	app.StakingKeeper.SetHooks(
 		stakingtypes.NewMultiStakingHooks(
 			// insert staking hooks receivers here
@@ -683,7 +674,6 @@ func New(
 
 	// NOTE: Any module instantiated in the module manager that is later modified
 	// must be passed by reference here.
-
 	app.mm = module.NewManager(
 		genutil.NewAppModule(
 			app.AccountKeeper, app.StakingKeeper, app.BaseApp.DeliverTx,
@@ -717,7 +707,6 @@ func New(
 		samltwomodule,
 		kycModule,
 		amlModule,
-		// this line is used by starport scaffolding # stargate/app/appModule
 	)
 
 	// During begin block slashing happens after distr.BeginBlocker so that
@@ -755,7 +744,6 @@ func New(
 		samltwomoduletypes.ModuleName,
 		kycmoduletypes.ModuleName,
 		amlmoduletypes.ModuleName,
-		// this line is used by starport scaffolding # stargate/app/beginBlockers
 	)
 
 	app.mm.SetOrderEndBlockers(
@@ -788,7 +776,6 @@ func New(
 		samltwomoduletypes.ModuleName,
 		kycmoduletypes.ModuleName,
 		amlmoduletypes.ModuleName,
-		// this line is used by starport scaffolding # stargate/app/endBlockers
 	)
 
 	// NOTE: The genutils module must occur after staking so that pools are
@@ -826,7 +813,6 @@ func New(
 		samltwomoduletypes.ModuleName,
 		kycmoduletypes.ModuleName,
 		amlmoduletypes.ModuleName,
-		// this line is used by starport scaffolding # stargate/app/initGenesis
 	)
 
 	// Uncomment if you want to set a custom migration order here.
@@ -864,7 +850,6 @@ func New(
 		samltwomodule,
 		kycModule,
 		amlModule,
-		// this line is used by starport scaffolding # stargate/app/appModule
 	)
 	app.sm.RegisterStoreDecoders()
 
@@ -903,25 +888,20 @@ func New(
 
 	app.ScopedIBCKeeper = scopedIBCKeeper
 	app.ScopedTransferKeeper = scopedTransferKeeper
-	// this line is used by starport scaffolding # stargate/app/beforeInitReturn
 
 	return app
 }
 
-// Name returns the name of the App
 func (app *App) Name() string { return app.BaseApp.Name() }
 
-// BeginBlocker application updates every begin block
 func (app *App) BeginBlocker(ctx sdk.Context, req abci.RequestBeginBlock) abci.ResponseBeginBlock {
 	return app.mm.BeginBlock(ctx, req)
 }
 
-// EndBlocker application updates every end block
 func (app *App) EndBlocker(ctx sdk.Context, req abci.RequestEndBlock) abci.ResponseEndBlock {
 	return app.mm.EndBlock(ctx, req)
 }
 
-// InitChainer application update at chain initialization
 func (app *App) InitChainer(ctx sdk.Context, req abci.RequestInitChain) abci.ResponseInitChain {
 	var genesisState GenesisState
 	if err := tmjson.Unmarshal(req.AppStateBytes, &genesisState); err != nil {
@@ -931,12 +911,10 @@ func (app *App) InitChainer(ctx sdk.Context, req abci.RequestInitChain) abci.Res
 	return app.mm.InitGenesis(ctx, app.appCodec, genesisState)
 }
 
-// LoadHeight loads a particular height
 func (app *App) LoadHeight(height int64) error {
 	return app.LoadVersion(height)
 }
 
-// ModuleAccountAddrs returns all the app's module account addresses.
 func (app *App) ModuleAccountAddrs() map[string]bool {
 	modAccAddrs := make(map[string]bool)
 	for acc := range maccPerms {
@@ -946,8 +924,6 @@ func (app *App) ModuleAccountAddrs() map[string]bool {
 	return modAccAddrs
 }
 
-// BlockedModuleAccountAddrs returns all the app's blocked module account
-// addresses.
 func (app *App) BlockedModuleAccountAddrs() map[string]bool {
 	modAccAddrs := app.ModuleAccountAddrs()
 	delete(modAccAddrs, authtypes.NewModuleAddress(govtypes.ModuleName).String())
@@ -955,58 +931,43 @@ func (app *App) BlockedModuleAccountAddrs() map[string]bool {
 	return modAccAddrs
 }
 
-// LegacyAmino returns SimApp's amino codec.
-//
 // NOTE: This is solely to be used for testing purposes as it may be desirable
 // for modules to register their own custom testing types.
 func (app *App) LegacyAmino() *codec.LegacyAmino {
 	return app.cdc
 }
 
-// AppCodec returns an app codec.
-//
 // NOTE: This is solely to be used for testing purposes as it may be desirable
 // for modules to register their own custom testing types.
 func (app *App) AppCodec() codec.Codec {
 	return app.appCodec
 }
 
-// InterfaceRegistry returns an InterfaceRegistry
 func (app *App) InterfaceRegistry() types.InterfaceRegistry {
 	return app.interfaceRegistry
 }
 
-// GetKey returns the KVStoreKey for the provided store key.
-//
 // NOTE: This is solely to be used for testing purposes.
 func (app *App) GetKey(storeKey string) *storetypes.KVStoreKey {
 	return app.keys[storeKey]
 }
 
-// GetTKey returns the TransientStoreKey for the provided store key.
-//
 // NOTE: This is solely to be used for testing purposes.
 func (app *App) GetTKey(storeKey string) *storetypes.TransientStoreKey {
 	return app.tkeys[storeKey]
 }
 
-// GetMemKey returns the MemStoreKey for the provided mem key.
-//
 // NOTE: This is solely used for testing purposes.
 func (app *App) GetMemKey(storeKey string) *storetypes.MemoryStoreKey {
 	return app.memKeys[storeKey]
 }
 
-// GetSubspace returns a param subspace for a given module name.
-//
 // NOTE: This is solely to be used for testing purposes.
 func (app *App) GetSubspace(moduleName string) paramstypes.Subspace {
 	subspace, _ := app.ParamsKeeper.GetSubspace(moduleName)
 	return subspace
 }
 
-// RegisterAPIRoutes registers all application module routes with the provided
-// API server.
 func (app *App) RegisterAPIRoutes(apiSvr *api.Server, apiConfig config.APIConfig) {
 	clientCtx := apiSvr.ClientCtx
 	// Register new tx routes from grpc-gateway.
@@ -1015,20 +976,16 @@ func (app *App) RegisterAPIRoutes(apiSvr *api.Server, apiConfig config.APIConfig
 	tmservice.RegisterGRPCGatewayRoutes(clientCtx, apiSvr.GRPCGatewayRouter)
 	// Register node gRPC service for grpc-gateway.
 	nodeservice.RegisterGRPCGatewayRoutes(clientCtx, apiSvr.GRPCGatewayRouter)
-
 	// Register grpc-gateway routes for all modules.
 	ModuleBasics.RegisterGRPCGatewayRoutes(clientCtx, apiSvr.GRPCGatewayRouter)
-
 	// register app's OpenAPI routes.
 	docs.RegisterOpenAPIService(Name, apiSvr.Router)
 }
 
-// RegisterTxService implements the Application.RegisterTxService method.
 func (app *App) RegisterTxService(clientCtx client.Context) {
 	authtx.RegisterTxService(app.BaseApp.GRPCQueryRouter(), clientCtx, app.BaseApp.Simulate, app.interfaceRegistry)
 }
 
-// RegisterTendermintService implements the Application.RegisterTendermintService method.
 func (app *App) RegisterTendermintService(clientCtx client.Context) {
 	tmservice.RegisterTendermintService(
 		clientCtx,
@@ -1038,12 +995,10 @@ func (app *App) RegisterTendermintService(clientCtx client.Context) {
 	)
 }
 
-// RegisterNodeService implements the Application.RegisterNodeService method.
 func (app *App) RegisterNodeService(clientCtx client.Context) {
 	nodeservice.RegisterNodeService(clientCtx, app.GRPCQueryRouter())
 }
 
-// GetMaccPerms returns a copy of the module account permissions
 func GetMaccPerms() map[string][]string {
 	dupMaccPerms := make(map[string][]string)
 	for k, v := range maccPerms {
@@ -1052,7 +1007,6 @@ func GetMaccPerms() map[string][]string {
 	return dupMaccPerms
 }
 
-// initParamsKeeper init params keeper and its subspaces
 func initParamsKeeper(appCodec codec.BinaryCodec, legacyAmino *codec.LegacyAmino, key, tkey storetypes.StoreKey) paramskeeper.Keeper {
 	paramsKeeper := paramskeeper.NewKeeper(appCodec, legacyAmino, key, tkey)
 
@@ -1077,12 +1031,10 @@ func initParamsKeeper(appCodec codec.BinaryCodec, legacyAmino *codec.LegacyAmino
 	paramsKeeper.Subspace(samltwomoduletypes.ModuleName)
 	paramsKeeper.Subspace(kycmoduletypes.ModuleName)
 	paramsKeeper.Subspace(amlmoduletypes.ModuleName)
-	// this line is used by starport scaffolding # stargate/app/paramSubspace
 
 	return paramsKeeper
 }
 
-// SimulationManager implements the SimulationApp interface
 func (app *App) SimulationManager() *module.SimulationManager {
 	return app.sm
 }

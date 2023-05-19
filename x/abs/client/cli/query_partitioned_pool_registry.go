@@ -1,74 +1,66 @@
 package cli
 
 import (
-    "context"
-	
-    "github.com/spf13/cobra"
+	"context"
+
+	"github.com/be-heroes/doxchain/x/abs/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
-    "github.com/be-heroes/doxchain/x/abs/types"
+	"github.com/spf13/cobra"
 )
 
 func CmdListPartitionedPoolRegistries() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "list-partitioned-pool-registries",
-		Short: "list all partitionedPoolRegistries",
+		Short: "list all PartitionedPoolRegistries",
 		RunE: func(cmd *cobra.Command, args []string) error {
-            clientCtx := client.GetClientContextFromCmd(cmd)
+			clientCtx := client.GetClientContextFromCmd(cmd)
+			pageReq, err := client.ReadPageRequest(cmd.Flags())
 
-            pageReq, err := client.ReadPageRequest(cmd.Flags())
-            if err != nil {
-                return err
-            }
+			if err != nil {
+				return err
+			}
 
-            queryClient := types.NewQueryClient(clientCtx)
+			queryClient := types.NewQueryClient(clientCtx)
+			res, err := queryClient.PartitionedPoolRegistryAll(context.Background(), &types.QueryAllPartitionedPoolRegistriesRequest{
+				Pagination: pageReq,
+			})
 
-            params := &types.QueryAllPartitionedPoolRegistriesRequest{
-                Pagination: pageReq,
-            }
+			if err != nil {
+				return err
+			}
 
-            res, err := queryClient.PartitionedPoolRegistryAll(context.Background(), params)
-            if err != nil {
-                return err
-            }
-
-            return clientCtx.PrintProto(res)
+			return clientCtx.PrintProto(res)
 		},
 	}
 
 	flags.AddPaginationFlagsToCmd(cmd, cmd.Use)
 	flags.AddQueryFlagsToCmd(cmd)
 
-    return cmd
+	return cmd
 }
 
 func CmdShowPartitionedPoolRegistry() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "show-partitioned-pools [creator]",
-		Short: "shows a partitionedPools",
+		Use:   "show-partitioned-pool-registry [creator]",
+		Short: "shows a partitionedPoolRegistry",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
-            clientCtx := client.GetClientContextFromCmd(cmd)
+			clientCtx := client.GetClientContextFromCmd(cmd)
+			queryClient := types.NewQueryClient(clientCtx)
+			res, err := queryClient.PartitionedPoolRegistry(context.Background(), &types.QueryGetPartitionedPoolRegistryRequest{
+				Creator: args[0],
+			})
 
-            queryClient := types.NewQueryClient(clientCtx)
+			if err != nil {
+				return err
+			}
 
-             argIndex := args[0]
-            
-            params := &types.QueryGetPartitionedPoolRegistryRequest{
-                Creator: argIndex,
-                
-            }
-
-            res, err := queryClient.PartitionedPoolRegistry(context.Background(), params)
-            if err != nil {
-                return err
-            }
-
-            return clientCtx.PrintProto(res)
+			return clientCtx.PrintProto(res)
 		},
 	}
 
 	flags.AddQueryFlagsToCmd(cmd)
 
-    return cmd
+	return cmd
 }

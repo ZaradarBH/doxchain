@@ -19,5 +19,6 @@ func KeyPrefix(p string) []byte {
 }
 
 const (
-	KYCRequestKey = "KYCRequest/value/"
+	KYCRegistrationKey      = "KYCRegistration/value/"
+	KYCRegistrationCountKey = "KYCRegistration/count/"
 )

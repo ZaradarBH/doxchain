@@ -2,80 +2,87 @@ package keeper
 
 import (
 	"encoding/binary"
+	"fmt"
 
 	"github.com/be-heroes/doxchain/x/did/types"
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-// GetDidCount get the total number of did
+// GetDidCount fetches the Did counter from the KVStore
 func (k Keeper) GetDidCount(ctx sdk.Context) uint64 {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), []byte{})
-	byteKey := types.KeyPrefix(types.DidCountKey)
-	bz := store.Get(byteKey)
+	bz := store.Get(types.KeyPrefix(types.DidCountKey))
 
-	// Count doesn't exist: no element
 	if bz == nil {
 		return 0
 	}
 
-	// Parse bytes
 	return binary.BigEndian.Uint64(bz)
 }
 
-// SetDidCount set the total number of did
+// SetDidCount updates the Did counter in the KVStore
 func (k Keeper) SetDidCount(ctx sdk.Context, count uint64) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), []byte{})
-	byteKey := types.KeyPrefix(types.DidCountKey)
 	bz := make([]byte, 8)
+
 	binary.BigEndian.PutUint64(bz, count)
-	store.Set(byteKey, bz)
+
+	store.Set(types.KeyPrefix(types.DidCountKey), bz)
 }
 
-// AppendDid appends a did in the store with a new id and update the count
-func (k Keeper) AppendDid(
-	ctx sdk.Context,
-	did types.Did,
-) string {
-	// Get the did count
-	count := k.GetDidCount(ctx)
+// SetDid adds a Did to the KVStore and updates the Did counter
+func (k Keeper) SetDid(ctx sdk.Context, did types.Did, override bool) error {
+	err := k.CanOverrideDid(ctx, did, override)
+
+	if err != nil {
+		return err
+	}
+
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DidKey))
-	appendedValue := k.cdc.MustMarshal(&did)
-	fullyQualifiedDidIdentifier := did.GetFullyQualifiedDidIdentifier()
 
-	store.Set(GetDidIDBytes(fullyQualifiedDidIdentifier), appendedValue)
+	store.Set(GetDidIDBytes(did.GetW3CIdentifier()), k.cdc.MustMarshal(&did))
 
-	// Update did count
-	k.SetDidCount(ctx, count+1)
+	k.SetDidCount(ctx, k.GetDidCount(ctx)+1)
 
-	return fullyQualifiedDidIdentifier
+	return nil
 }
 
-// SetDid set a specific did in the store
-func (k Keeper) SetDid(ctx sdk.Context, did types.Did) {
+// GetDid returns a Did from its FullyQualifiedW3CIdentifier (did:MethodName:MethodId)
+func (k Keeper) GetDid(ctx sdk.Context, fullyQualifiedW3CIdentifier string) (val types.Did, found bool) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DidKey))
-	b := k.cdc.MustMarshal(&did)
-	store.Set(GetDidIDBytes(did.GetFullyQualifiedDidIdentifier()), b)
-}
+	b := store.Get(GetDidIDBytes(fullyQualifiedW3CIdentifier))
 
-// GetDid returns a Did object from its Did identifier
-func (k Keeper) GetDid(ctx sdk.Context, fullyQualifiedDidIdentifier string) (val types.Did, found bool) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DidKey))
-	b := store.Get(GetDidIDBytes(fullyQualifiedDidIdentifier))
 	if b == nil {
 		return val, false
 	}
+
 	k.cdc.MustUnmarshal(b, &val)
+
 	return val, true
 }
 
-// RemoveDid removes a did from the store
-func (k Keeper) RemoveDid(ctx sdk.Context, fullyQualifiedDidIdentifier string) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DidKey))
-	store.Delete(GetDidIDBytes(fullyQualifiedDidIdentifier))
+// RemoveDid removes a Did from the KVStore
+func (k Keeper) RemoveDid(ctx sdk.Context, fullyQualifiedW3CIdentifier string) error {
+	match, exists := k.GetDid(ctx, fullyQualifiedW3CIdentifier)
+
+	if exists {
+		err := k.CanOverrideDid(ctx, match, true)
+
+		if err != nil {
+			return err
+		}
+
+		store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DidKey))
+
+		store.Delete(GetDidIDBytes(fullyQualifiedW3CIdentifier))
+	}
+
+	return nil
 }
 
-// GetAllDid returns all did
+// GetAllDid returns all Dids in the KVStore
 func (k Keeper) GetAllDid(ctx sdk.Context) (list []types.Did) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DidKey))
 	iterator := sdk.KVStorePrefixIterator(store, []byte{})
@@ -89,6 +96,24 @@ func (k Keeper) GetAllDid(ctx sdk.Context) (list []types.Did) {
 	}
 
 	return
+}
+
+// CanOverrideDid check if a did can be safely overwritten without causing and "unapproved identifier collision or ownership error"
+func (k Keeper) CanOverrideDid(ctx sdk.Context, did types.Did, override bool) error {
+	fullyQualifiedW3CIdentifier := did.GetW3CIdentifier()
+	match, found := k.GetDid(ctx, fullyQualifiedW3CIdentifier)
+
+	if found {
+		if !override {
+			return sdkerrors.Wrap(types.DidIdentifierCollisionError, fmt.Sprintf("Did with identifier: %s already exists in KVStore", fullyQualifiedW3CIdentifier))
+		}
+
+		if did.Creator != match.Creator {
+			return sdkerrors.Wrap(types.DidOwnershipError, fmt.Sprintf("Did owned by creator: %s cannot be overriden by creator: %s", match.Creator, did.Creator))
+		}
+	}
+
+	return nil
 }
 
 // GetDidIDBytes returns the byte representation of the Did

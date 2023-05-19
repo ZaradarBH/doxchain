@@ -6,7 +6,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
-	"github.com/be-heroes/doxchain/utils"
+	utils "github.com/be-heroes/doxchain/utils/jwt"
 	"github.com/be-heroes/doxchain/x/idp/types"
 )
 
@@ -32,15 +32,15 @@ func (k Keeper) Login(ctx sdk.Context, msg types.MsgAuthenticationRequest) (type
 }
 
 // AuthorizeCreator checks if a creator belongs to a given tenant
-func (k Keeper) AuthorizeCreator(ctx sdk.Context, tenant string, creator string) (bool, error) {
-	acl, err := k.GetAccessClientList(ctx, tenant)
+func (k Keeper) AuthorizeCreator(ctx sdk.Context, fullyQualifiedW3CIdentifier string, creator string) (bool, error) {
+	acl, err := k.GetAccessClientList(ctx, fullyQualifiedW3CIdentifier)
 
 	if err != nil {
 		return false, err
 	}
 
 	for _, aclEntry := range acl.Entries {
-		if aclEntry.Creator == creator {
+		if aclEntry.User.Creator == creator {
 			return true, nil
 		}
 	}

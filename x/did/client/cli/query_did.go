@@ -12,22 +12,20 @@ import (
 func CmdListDid() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "list-did",
-		Short: "list all did",
+		Short: "list all dids",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx := client.GetClientContextFromCmd(cmd)
-
 			pageReq, err := client.ReadPageRequest(cmd.Flags())
+
 			if err != nil {
 				return err
 			}
 
 			queryClient := types.NewQueryClient(clientCtx)
-
-			params := &types.QueryAllDidRequest{
+			res, err := queryClient.DidAll(context.Background(), &types.QueryAllDidRequest{
 				Pagination: pageReq,
-			}
+			})
 
-			res, err := queryClient.DidAll(context.Background(), params)
 			if err != nil {
 				return err
 			}
@@ -44,18 +42,16 @@ func CmdListDid() *cobra.Command {
 
 func CmdShowDid() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "show-did [fullyQualifiedDidIdentifier]",
-		Short: "shows a did",
+		Use:   "show-did [fullyQualifiedW3CIdentifier]",
+		Short: "Shows a did",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx := client.GetClientContextFromCmd(cmd)
-
 			queryClient := types.NewQueryClient(clientCtx)
-			params := &types.QueryGetDidRequest{
-				FullyQualifiedDidIdentifier: args[0],
-			}
+			res, err := queryClient.Did(context.Background(), &types.QueryGetDidRequest{
+				FullyQualifiedW3CIdentifier: args[0],
+			})
 
-			res, err := queryClient.Did(context.Background(), params)
 			if err != nil {
 				return err
 			}

@@ -14,7 +14,7 @@ func TestGenesis(t *testing.T) {
 	genesisState := types.GenesisState{
 		Params: types.DefaultParams(),
 
-		AMLRequest: &types.AMLRequest{
+		AMLRegistration: &types.AMLRegistration{
 			FirstName: "91",
 			LastName:  "47",
 			Approved:  true,
@@ -30,6 +30,6 @@ func TestGenesis(t *testing.T) {
 	nullify.Fill(&genesisState)
 	nullify.Fill(got)
 
-	require.Equal(t, genesisState.AMLRequest, got.AMLRequest)
+	require.Equal(t, genesisState.AMLRegistration, got.AMLRegistration)
 	// this line is used by starport scaffolding # genesis/test/assert
 }

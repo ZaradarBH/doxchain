@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package beheroes.doxchain.did.v1beta1;
+
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "doxchain/did/v1beta1/params.proto";
+import "doxchain/did/v1beta1/did.proto";
+
+option go_package = "github.com/be-heroes/doxchain/x/did/types";
+
+service Query {  
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/doxchain/did/params";  
+  }
+  
+  rpc Did (QueryGetDidRequest) returns (QueryGetDidResponse) {
+    option (google.api.http).get = "/doxchain/did/did/{fullyQualifiedW3CIdentifier}";  
+  }
+
+  rpc DidAll (QueryAllDidRequest) returns (QueryAllDidResponse) {
+    option (google.api.http).get = "/doxchain/did/did";  
+  }
+}
+
+message QueryParamsRequest {}
+
+message QueryParamsResponse {  
+  Params params = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryGetDidRequest {
+  string fullyQualifiedW3CIdentifier = 1;
+}
+
+message QueryGetDidResponse {
+  Did Did = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllDidRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllDidResponse {
+  repeated Did didList = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}

@@ -22,17 +22,11 @@ func SimulateMsgUpdateBreakFactor(
 			Creator: simAccount.Address.String(),
 		}
 
-		breakFactor, err := sdk.NewDecFromStr(msg.Value)
-
-		if err != nil {
-			return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "unable to parse breakFactor sdk.Dec from string"), nil, err
-		}
-
-		k.SetBreakFactor(ctx, breakFactor)
+		k.SetBreakFactor(ctx, msg.BreakFactor)
 
 		breakFactorFromKeeper := k.GetBreakFactor(ctx)
 
-		if !breakFactor.Equal(breakFactorFromKeeper) {
+		if !msg.BreakFactor.Equal(breakFactorFromKeeper) {
 			return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "Keeper BreakFactor setter input does not match getter output"), nil, nil
 		}
 

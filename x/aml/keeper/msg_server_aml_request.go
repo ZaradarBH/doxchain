@@ -8,70 +8,49 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-func (k msgServer) CreateAMLRequest(goCtx context.Context, msg *types.MsgCreateAMLRequest) (*types.MsgCreateAMLRequestResponse, error) {
+func (k msgServer) CreateAMLRegistration(goCtx context.Context, msg *types.MsgCreateAMLRegistrationRequest) (*types.MsgCreateAMLRegistrationResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	// Check if the value already exists
-	_, isFound := k.GetAMLRequest(ctx)
+	_, isFound := k.GetAMLRegistration(ctx, msg.Creator)
+
 	if isFound {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "already set")
 	}
-
-	var aMLRequest = types.AMLRequest{
-		Creator:   msg.Creator,
-		FirstName: msg.FirstName,
-		LastName:  msg.LastName,
-		Approved:  msg.Approved,
+	
+	if msg.Creator != msg.Owner.Creator {
+		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "impersonation is not supported")
 	}
 
-	k.SetAMLRequest(
+	var aMLRequest = types.AMLRegistration{
+		Owner:      msg.Owner,
+		Approved: false,
+	}
+
+	k.SetAMLRegistration(
 		ctx,
 		aMLRequest,
 	)
-	return &types.MsgCreateAMLRequestResponse{}, nil
+
+	return &types.MsgCreateAMLRegistrationResponse{}, nil
 }
 
-func (k msgServer) UpdateAMLRequest(goCtx context.Context, msg *types.MsgUpdateAMLRequest) (*types.MsgUpdateAMLRequestResponse, error) {
+func (k msgServer) DeleteAMLRegistration(goCtx context.Context, msg *types.MsgDeleteAMLRegistrationRequest) (*types.MsgDeleteAMLRegistrationResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
-
+	
 	// Check if the value exists
-	valFound, isFound := k.GetAMLRequest(ctx)
+	valFound, isFound := k.GetAMLRegistration(ctx, msg.Creator)
+
 	if !isFound {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "not set")
 	}
 
 	// Checks if the the msg creator is the same as the current owner
-	if msg.Creator != valFound.Creator {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "incorrect owner")
+	if msg.Creator != valFound.Owner.Creator {
+		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "impersonation is not supported")
 	}
 
-	var aMLRequest = types.AMLRequest{
-		Creator:   msg.Creator,
-		FirstName: msg.FirstName,
-		LastName:  msg.LastName,
-		Approved:  msg.Approved,
-	}
+	k.RemoveAMLRegistration(ctx, msg.Creator)
 
-	k.SetAMLRequest(ctx, aMLRequest)
-
-	return &types.MsgUpdateAMLRequestResponse{}, nil
-}
-
-func (k msgServer) DeleteAMLRequest(goCtx context.Context, msg *types.MsgDeleteAMLRequest) (*types.MsgDeleteAMLRequestResponse, error) {
-	ctx := sdk.UnwrapSDKContext(goCtx)
-
-	// Check if the value exists
-	valFound, isFound := k.GetAMLRequest(ctx)
-	if !isFound {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "not set")
-	}
-
-	// Checks if the the msg creator is the same as the current owner
-	if msg.Creator != valFound.Creator {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "incorrect owner")
-	}
-
-	k.RemoveAMLRequest(ctx)
-
-	return &types.MsgDeleteAMLRequestResponse{}, nil
+	return &types.MsgDeleteAMLRegistrationResponse{}, nil
 }

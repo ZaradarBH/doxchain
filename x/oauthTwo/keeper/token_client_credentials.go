@@ -6,7 +6,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
-	"github.com/be-heroes/doxchain/utils"
+	utils "github.com/be-heroes/doxchain/utils/jwt"
+	didUtils "github.com/be-heroes/doxchain/utils/did"
 	"github.com/be-heroes/doxchain/x/oauthtwo/types"
 	"github.com/golang-jwt/jwt"
 )
@@ -42,14 +43,13 @@ func (k Keeper) GenerateClientCredentialToken(ctx sdk.Context, msg types.MsgToke
 			return response, sdkerrors.Wrap(types.TokenServiceError, "Failed to fetch access tokens cache for tenant")
 		}
 
-		tenantAccessTokenRegistry.Issued = append(tenantAccessTokenRegistry.Issued, types.AccessTokenInfo{
-			Creator:    msg.Creator,
+		tenantAccessTokenRegistry.Issued = append(tenantAccessTokenRegistry.Issued, types.AccessTokenRegistryEntry{
+			Owner: *didUtils.NewDidTokenFactory().Create(msg.Creator, ""),
 			Identifier: claims["jti"].(string),
-			ExpiresAt:  response.ExpiresIn,
+			ExpiresAt: response.ExpiresIn,
 		})
 
 		k.SetAccessTokenRegistry(ctx, tenantAccessTokenRegistry)
-
 	}
 
 	return response, sdkerrors.Wrap(types.TokenServiceError, "ClientCredential TokenResponse could not be issued")

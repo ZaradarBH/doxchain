@@ -1,0 +1,20 @@
+syntax = "proto3";
+package beheroes.doxchain.idp.v1beta1;
+
+option go_package = "github.com/be-heroes/doxchain/x/idp/types";
+
+message TenantConfiguration {  
+  string issuer = 1;
+  string authorizationEndpoint = 2;
+  string tokenEndpoint = 3;
+  repeated string tokenEndpointAuthMethodsSupported = 4;
+  repeated string tokenEndpointAuthSigningAlgosSupported = 5;
+  string userInfoEndpoint = 6;
+  string jwksUri = 7;
+  string registrationEndpoint = 8;
+  string scopesSupported = 9;
+  string responseTypesSupported = 10;
+  string serviceDocumentation = 11;
+  string uiLocalesSupported = 12;
+  string loginEndpoint = 13;
+}

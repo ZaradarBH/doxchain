@@ -1,0 +1,10 @@
+syntax = "proto3";
+package doxchain.doxchain;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/be-heroes/doxchain/x/doxchain/types";
+
+message Params {
+  option (gogoproto.goproto_stringer) = false;  
+}

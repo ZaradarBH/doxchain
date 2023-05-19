@@ -12,6 +12,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/module"
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
+	utils "github.com/be-heroes/doxchain/utils/did"
 )
 
 // avoid unused import issue
@@ -51,15 +52,15 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 	}
 	absGenesis := types.GenesisState{
 		Params: types.DefaultParams(),
-		PartitionedPoolRegistryList: []types.PartitionedPoolRegistry{
-		{
-			Creator: sample.AccAddress(),
-},
-		{
-			Creator: sample.AccAddress(),
-},
-	},
-	// this line is used by starport scaffolding # simapp/module/genesisState
+		PartitionedPoolRegistries: []types.PartitionedPoolRegistry{
+			{
+				Owner: *utils.NewDidTokenFactory().Create(sample.AccAddress(), ""),
+			},
+			{
+				Owner: *utils.NewDidTokenFactory().Create(sample.AccAddress(), ""),
+			},
+		},
+		// this line is used by starport scaffolding # simapp/module/genesisState
 	}
 	simState.GenState[types.ModuleName] = simState.Cdc.MustMarshalJSON(&absGenesis)
 }

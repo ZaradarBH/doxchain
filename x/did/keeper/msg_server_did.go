@@ -2,61 +2,62 @@ package keeper
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/be-heroes/doxchain/x/did/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-func (k msgServer) CreateDid(goCtx context.Context, msg *types.MsgCreateDid) (*types.MsgCreateDidResponse, error) {
-	ctx := sdk.UnwrapSDKContext(goCtx)
+func (k msgServer) CreateDid(goCtx context.Context, msg *types.MsgCreateDidRequest) (*types.MsgCreateDidResponse, error) {
+	if msg.Creator != msg.Did.Creator {
+		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "impersonation is not allowed")
+	}
 
-	fullyQualifiedDidIdentifier := k.AppendDid(
-		ctx,
-		*msg.Did,
-	)
+	err := k.SetDid(sdk.UnwrapSDKContext(goCtx), msg.Did, false)
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &types.MsgCreateDidResponse{
-		FullyQualifiedDidIdentifier: fullyQualifiedDidIdentifier,
+		FullyQualifiedW3CIdentifier: msg.Did.GetW3CIdentifier(),
 	}, nil
 }
 
-func (k msgServer) UpdateDid(goCtx context.Context, msg *types.MsgUpdateDid) (*types.MsgUpdateDidResponse, error) {
-	ctx := sdk.UnwrapSDKContext(goCtx)
-
-	// Checks that the element exists
-	fullyQualifiedDidIdentifier := msg.Did.GetFullyQualifiedDidIdentifier()
-	val, found := k.GetDid(ctx, fullyQualifiedDidIdentifier)
-	if !found {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, fmt.Sprintf("key %s doesn't exist", fullyQualifiedDidIdentifier))
+func (k msgServer) UpdateDid(goCtx context.Context, msg *types.MsgUpdateDidRequest) (*types.MsgUpdateDidResponse, error) {
+	if msg.Creator != msg.Did.Creator {
+		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "impersonation is not allowed")
 	}
 
-	// Checks if the msg creator is the same as the current owner
-	if msg.Did.Creator != val.Creator {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "incorrect owner")
-	}
+	err := k.SetDid(sdk.UnwrapSDKContext(goCtx), msg.Did, true)
 
-	k.SetDid(ctx, *msg.Did)
+	if err != nil {
+		return nil, err
+	}
 
 	return &types.MsgUpdateDidResponse{}, nil
 }
 
-func (k msgServer) DeleteDid(goCtx context.Context, msg *types.MsgDeleteDid) (*types.MsgDeleteDidResponse, error) {
+func (k msgServer) DeleteDid(goCtx context.Context, msg *types.MsgDeleteDidRequest) (*types.MsgDeleteDidResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
+	
+	// Check if the value exists
+	valFound, isFound := k.GetDid(ctx, msg.FullyQualifiedW3CIdentifier)
 
-	// Checks that the element exists
-	val, found := k.GetDid(ctx, msg.FullyQualifiedDidIdentifier)
-	if !found {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, fmt.Sprintf("key %s doesn't exist", msg.FullyQualifiedDidIdentifier))
+	if !isFound {
+		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "not set")
 	}
 
-	// Checks if the msg creator is the same as the current owner
-	if msg.Creator != val.Creator {
+	// Checks if the the msg creator is the same as the current owner
+	if msg.Creator != valFound.Creator {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "incorrect owner")
 	}
 
-	k.RemoveDid(ctx, msg.FullyQualifiedDidIdentifier)
+	err := k.RemoveDid(ctx, msg.FullyQualifiedW3CIdentifier)
+
+	if err != nil {
+		return nil, err
+	}
 
 	return &types.MsgDeleteDidResponse{}, nil
 }

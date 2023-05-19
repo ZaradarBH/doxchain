@@ -12,8 +12,6 @@ type msgServer struct {
 	BaseKeeper
 }
 
-// NewMsgServerImpl returns an implementation of the bank MsgServer interface
-// for the provided Keeper.
 func NewMsgServerImpl(keeper BaseKeeper) banktypes.MsgServer {
 	return &msgServer{BaseKeeper: keeper}
 }
@@ -22,7 +20,6 @@ var _ banktypes.MsgServer = msgServer{}
 
 func (k msgServer) Send(goCtx context.Context, msg *banktypes.MsgSend) (*banktypes.MsgSendResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
-
 	err := k.abs.AddToWatchlist(ctx, sdk.AccAddress(msg.FromAddress), msg.Amount)
 
 	if err != nil {

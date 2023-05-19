@@ -19,6 +19,8 @@ func KeyPrefix(p string) []byte {
 }
 
 const (
-	DidKey      = "Did/value/"
-	DidCountKey = "Did/count/"
+	DidKey              = "Did/value/"
+	DidCountKey         = "Did/count/"
+	DidDocumentKey      = "DidDocument/value/"
+	DidDocumentCountKey = "DidDocument/count/"
 )

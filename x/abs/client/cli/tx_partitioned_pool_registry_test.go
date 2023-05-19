@@ -2,7 +2,7 @@ package cli_test
 
 import (
 	"fmt"
-    "strconv"
+	"strconv"
 	"testing"
 
 	sdkmath "cosmossdk.io/math"
@@ -24,18 +24,18 @@ func TestCreatePartitionedPools(t *testing.T) {
 	val := net.Validators[0]
 	ctx := val.ClientCtx
 
-    fields := []string{}
+	fields := []string{}
 	for _, tc := range []struct {
-		desc string
-        idIndex string
-        
+		desc    string
+		idIndex string
+
 		args []string
 		err  error
 		code uint32
 	}{
 		{
-            idIndex: strconv.Itoa(0),
-            
+			idIndex: strconv.Itoa(0),
+
 			desc: "valid",
 			args: []string{
 				fmt.Sprintf("--%s=%s", flags.FlagFrom, val.Address.String()),
@@ -46,12 +46,11 @@ func TestCreatePartitionedPools(t *testing.T) {
 		},
 	} {
 		t.Run(tc.desc, func(t *testing.T) {
-            args := []string{
-                tc.idIndex,
-                
-            }
-            args = append(args, fields...)
-            args = append(args, tc.args...)
+			args := []string{
+				tc.idIndex,
+			}
+			args = append(args, fields...)
+			args = append(args, tc.args...)
 			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdCreatePartitionedPools(), args)
 			if tc.err != nil {
 				require.ErrorIs(t, err, tc.err)
@@ -70,51 +69,49 @@ func TestUpdatePartitionedPools(t *testing.T) {
 	val := net.Validators[0]
 	ctx := val.ClientCtx
 
-    fields := []string{}
+	fields := []string{}
 	common := []string{
 		fmt.Sprintf("--%s=%s", flags.FlagFrom, val.Address.String()),
 		fmt.Sprintf("--%s=true", flags.FlagSkipConfirmation),
 		fmt.Sprintf("--%s=%s", flags.FlagBroadcastMode, flags.BroadcastBlock),
 		fmt.Sprintf("--%s=%s", flags.FlagFees, sdk.NewCoins(sdk.NewCoin(net.Config.BondDenom, sdkmath.NewInt(10))).String()),
 	}
-    args := []string{
-        "0",
-        
-    }
+	args := []string{
+		"0",
+	}
 	args = append(args, fields...)
 	args = append(args, common...)
 	_, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdCreatePartitionedPools(), args)
 	require.NoError(t, err)
 
 	for _, tc := range []struct {
-		desc string
+		desc    string
 		idIndex string
-        
+
 		args []string
 		code uint32
 		err  error
 	}{
 		{
-			desc: "valid",
+			desc:    "valid",
 			idIndex: strconv.Itoa(0),
-            
+
 			args: common,
 		},
 		{
-			desc: "key not found",
+			desc:    "key not found",
 			idIndex: strconv.Itoa(100000),
-            
+
 			args: common,
 			code: sdkerrors.ErrKeyNotFound.ABCICode(),
 		},
 	} {
 		t.Run(tc.desc, func(t *testing.T) {
-            args := []string{
-                tc.idIndex,
-                
-            }
-            args = append(args, fields...)
-            args = append(args, tc.args...)
+			args := []string{
+				tc.idIndex,
+			}
+			args = append(args, fields...)
+			args = append(args, tc.args...)
 			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdUpdatePartitionedPools(), args)
 			if tc.err != nil {
 				require.ErrorIs(t, err, tc.err)
@@ -141,43 +138,41 @@ func TestDeletePartitionedPools(t *testing.T) {
 		fmt.Sprintf("--%s=%s", flags.FlagBroadcastMode, flags.BroadcastBlock),
 		fmt.Sprintf("--%s=%s", flags.FlagFees, sdk.NewCoins(sdk.NewCoin(net.Config.BondDenom, sdkmath.NewInt(10))).String()),
 	}
-    args := []string{
-        "0",
-        
-    }
+	args := []string{
+		"0",
+	}
 	args = append(args, fields...)
 	args = append(args, common...)
 	_, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdCreatePartitionedPools(), args)
 	require.NoError(t, err)
 
 	for _, tc := range []struct {
-		desc string
+		desc    string
 		idIndex string
-        
+
 		args []string
 		code uint32
 		err  error
 	}{
 		{
-			desc: "valid",
+			desc:    "valid",
 			idIndex: strconv.Itoa(0),
-            
+
 			args: common,
 		},
 		{
-			desc: "key not found",
+			desc:    "key not found",
 			idIndex: strconv.Itoa(100000),
-            
+
 			args: common,
 			code: sdkerrors.ErrKeyNotFound.ABCICode(),
 		},
 	} {
 		t.Run(tc.desc, func(t *testing.T) {
-		    args := []string{
-                tc.idIndex,
-                
-            }
-            args = append(args, tc.args...)
+			args := []string{
+				tc.idIndex,
+			}
+			args = append(args, tc.args...)
 			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdDeletePartitionedPools(), args)
 			if tc.err != nil {
 				require.ErrorIs(t, err, tc.err)

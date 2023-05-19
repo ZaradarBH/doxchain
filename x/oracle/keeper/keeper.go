@@ -21,6 +21,7 @@ type (
 	}
 )
 
+//TODO: Implement Oracle keeper
 func NewKeeper(
 	cdc codec.BinaryCodec,
 	storeKey,

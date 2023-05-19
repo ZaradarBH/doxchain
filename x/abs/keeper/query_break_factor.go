@@ -14,11 +14,7 @@ func (k Keeper) QueryBreakFactor(goCtx context.Context, req *types.QueryBreakFac
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
 
-	ctx := sdk.UnwrapSDKContext(goCtx)
-
-	value := k.GetBreakFactor(ctx)
-
 	return &types.QueryBreakFactorResponse{
-		Value: value.String(),
+		BreakFactor: k.GetBreakFactor(sdk.UnwrapSDKContext(goCtx)).String(),
 	}, nil
 }

@@ -9,16 +9,16 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-func (k Keeper) KYCRequest(goCtx context.Context, req *types.QueryGetKYCRequestRequest) (*types.QueryGetKYCRequestResponse, error) {
+func (k Keeper) KYCRegistration(goCtx context.Context, req *types.QueryGetKYCRegistrationRequest) (*types.QueryGetKYCRegistrationResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	val, found := k.GetKYCRequest(ctx)
+	val, found := k.GetKYCRegistration(ctx, req.Creator)
 	if !found {
 		return nil, status.Error(codes.NotFound, "not found")
 	}
 
-	return &types.QueryGetKYCRequestResponse{KYCRequest: val}, nil
+	return &types.QueryGetKYCRegistrationResponse{Registration: val}, nil
 }

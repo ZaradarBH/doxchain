@@ -1,0 +1,13 @@
+syntax = "proto3";
+package beheroes.doxchain.oauthtwo.v1beta1;
+
+import "gogoproto/gogo.proto";
+import "doxchain/oauthtwo/v1beta1/authorization_code_registry_entry.proto";
+import "doxchain/did/v1beta1/did.proto";
+
+option go_package = "github.com/be-heroes/doxchain/x/oauthtwo/types";
+
+message AuthorizationCodeRegistry {
+  beheroes.doxchain.did.v1beta1.Did owner = 1 [(gogoproto.nullable) = false];
+  repeated AuthorizationCodeRegistryEntry codes = 2 [(gogoproto.nullable) = false]; 
+}

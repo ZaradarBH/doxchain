@@ -4,27 +4,185 @@ info:
   name: ''
   description: ''
 paths:
-  /be-heroes/doxchain/aml/aml_request:
+  /be-heroes/doxchain/abs/partitioned_pool_registries:
     get:
-      summary: Queries a AMLRequest by index.
-      operationId: BeheroesDoxchainAmlAMLRequest
+      operationId: BeheroesDoxchainAbsV1Beta1PartitionedPoolRegistryAll
       responses:
         '200':
           description: A successful response.
           schema:
             type: object
             properties:
-              AMLRequest:
+              partitionedPoolRegistryList:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    owner:
+                      type: object
+                      properties:
+                        creator:
+                          type: string
+                        url:
+                          type: string
+                        methodName:
+                          type: string
+                        methodId:
+                          type: string
+                        path:
+                          type: string
+                        fragment:
+                          type: string
+                        query:
+                          type: string
+                        parameters:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              value:
+                                type: string
+                    pools:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          denom:
+                            type: string
+                          desiredState:
+                            type: object
+                            properties:
+                              threshold:
+                                type: object
+                                properties:
+                                  softCap:
+                                    type: string
+                                  hardCap:
+                                    type: string
+                              Corridors:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    threshold:
+                                      type: object
+                                      properties:
+                                        softCap:
+                                          type: string
+                                        hardCap:
+                                          type: string
+                                    target:
+                                      type: object
+                                      properties:
+                                        denom:
+                                          type: string
+                                        amount:
+                                          type: string
+                                      description: >-
+                                        Coin defines a token with a denomination
+                                        and an amount.
+
+
+                                        NOTE: The amount field is an Int which
+                                        implements the custom method
+
+                                        signatures required by gogoproto.
+                          accessClientList:
+                            type: object
+                            properties:
+                              owner:
+                                type: object
+                                properties:
+                                  creator:
+                                    type: string
+                                  url:
+                                    type: string
+                                  methodName:
+                                    type: string
+                                  methodId:
+                                    type: string
+                                  path:
+                                    type: string
+                                  fragment:
+                                    type: string
+                                  query:
+                                    type: string
+                                  parameters:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        name:
+                                          type: string
+                                        value:
+                                          type: string
+                              entries:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    user:
+                                      type: object
+                                      properties:
+                                        creator:
+                                          type: string
+                                        url:
+                                          type: string
+                                        methodName:
+                                          type: string
+                                        methodId:
+                                          type: string
+                                        path:
+                                          type: string
+                                        fragment:
+                                          type: string
+                                        query:
+                                          type: string
+                                        parameters:
+                                          type: array
+                                          items:
+                                            type: object
+                                            properties:
+                                              name:
+                                                type: string
+                                              value:
+                                                type: string
+                                    canRead:
+                                      type: boolean
+                                    canWrite:
+                                      type: boolean
+                                    canExecute:
+                                      type: boolean
+              pagination:
                 type: object
                 properties:
-                  firstName:
+                  next_key:
                     type: string
-                  lastName:
+                    format: byte
+                    description: |-
+                      next_key is the key to be passed to PageRequest.key to
+                      query the next page most efficiently. It will be empty if
+                      there are no more results.
+                  total:
                     type: string
-                  approved:
-                    type: boolean
-                  creator:
-                    type: string
+                    format: uint64
+                    title: >-
+                      total is total number of results available if
+                      PageRequest.count_total
+
+                      was set, its value is undefined otherwise
+                description: >-
+                  PageResponse is to be embedded in gRPC response messages where
+                  the
+
+                  corresponding request message has used PageRequest.
+
+                   message SomeResponse {
+                           repeated Bar results = 1;
+                           PageResponse page = 2;
+                   }
         default:
           description: An unexpected error response.
           schema:
@@ -43,12 +201,242 @@ paths:
                     '@type':
                       type: string
                   additionalProperties: {}
+      parameters:
+        - name: pagination.key
+          description: |-
+            key is a value returned in PageResponse.next_key to begin
+            querying the next page most efficiently. Only one of offset or key
+            should be set.
+          in: query
+          required: false
+          type: string
+          format: byte
+        - name: pagination.offset
+          description: >-
+            offset is a numeric offset that can be used when key is unavailable.
+
+            It is less efficient than using key. Only one of offset or key
+            should
+
+            be set.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.limit
+          description: >-
+            limit is the total number of results to be returned in the result
+            page.
+
+            If left empty it will default to a value to be set by each app.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.count_total
+          description: >-
+            count_total is set to true  to indicate that the result set should
+            include
+
+            a count of the total number of items available for pagination in
+            UIs.
+
+            count_total is only respected when offset is used. It is ignored
+            when key
+
+            is set.
+          in: query
+          required: false
+          type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+
+
+            Since: cosmos-sdk 0.43
+          in: query
+          required: false
+          type: boolean
       tags:
         - Query
-  /be-heroes/doxchain/aml/params:
+  /be-heroes/doxchain/abs/partitioned_pool_registries/{creator}:
     get:
-      summary: Parameters queries the parameters of the module.
-      operationId: BeheroesDoxchainAmlParams
+      operationId: BeheroesDoxchainAbsV1Beta1PartitionedPoolRegistry
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              partitionedPoolRegistry:
+                type: object
+                properties:
+                  owner:
+                    type: object
+                    properties:
+                      creator:
+                        type: string
+                      url:
+                        type: string
+                      methodName:
+                        type: string
+                      methodId:
+                        type: string
+                      path:
+                        type: string
+                      fragment:
+                        type: string
+                      query:
+                        type: string
+                      parameters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            value:
+                              type: string
+                  pools:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        denom:
+                          type: string
+                        desiredState:
+                          type: object
+                          properties:
+                            threshold:
+                              type: object
+                              properties:
+                                softCap:
+                                  type: string
+                                hardCap:
+                                  type: string
+                            Corridors:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  threshold:
+                                    type: object
+                                    properties:
+                                      softCap:
+                                        type: string
+                                      hardCap:
+                                        type: string
+                                  target:
+                                    type: object
+                                    properties:
+                                      denom:
+                                        type: string
+                                      amount:
+                                        type: string
+                                    description: >-
+                                      Coin defines a token with a denomination
+                                      and an amount.
+
+
+                                      NOTE: The amount field is an Int which
+                                      implements the custom method
+
+                                      signatures required by gogoproto.
+                        accessClientList:
+                          type: object
+                          properties:
+                            owner:
+                              type: object
+                              properties:
+                                creator:
+                                  type: string
+                                url:
+                                  type: string
+                                methodName:
+                                  type: string
+                                methodId:
+                                  type: string
+                                path:
+                                  type: string
+                                fragment:
+                                  type: string
+                                query:
+                                  type: string
+                                parameters:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      name:
+                                        type: string
+                                      value:
+                                        type: string
+                            entries:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  user:
+                                    type: object
+                                    properties:
+                                      creator:
+                                        type: string
+                                      url:
+                                        type: string
+                                      methodName:
+                                        type: string
+                                      methodId:
+                                        type: string
+                                      path:
+                                        type: string
+                                      fragment:
+                                        type: string
+                                      query:
+                                        type: string
+                                      parameters:
+                                        type: array
+                                        items:
+                                          type: object
+                                          properties:
+                                            name:
+                                              type: string
+                                            value:
+                                              type: string
+                                  canRead:
+                                    type: boolean
+                                  canWrite:
+                                    type: boolean
+                                  canExecute:
+                                    type: boolean
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: creator
+          in: path
+          required: true
+          type: string
+      tags:
+        - Query
+  /doxchain/abs/params:
+    get:
+      operationId: BeheroesDoxchainAbsV1Beta1Params
       responses:
         '200':
           description: A successful response.
@@ -56,11 +444,38 @@ paths:
             type: object
             properties:
               params:
-                description: params holds all the parameters of this module.
                 type: object
-            description: >-
-              QueryParamsResponse is response type for the Query/Params RPC
-              method.
+                properties:
+                  operators:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        creator:
+                          type: string
+                        url:
+                          type: string
+                        methodName:
+                          type: string
+                        methodId:
+                          type: string
+                        path:
+                          type: string
+                        fragment:
+                          type: string
+                        query:
+                          type: string
+                        parameters:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              value:
+                                type: string
+                  blockExpireOffset:
+                    type: string
         default:
           description: An unexpected error response.
           schema:
@@ -81,10 +496,983 @@ paths:
                   additionalProperties: {}
       tags:
         - Query
-  /be-heroes/doxchain/idp/get_dot_well_known:
+  /doxchain/abs/query_break_factor:
     get:
-      summary: Queries a list of GetDotWellKnown items.
-      operationId: BeheroesDoxchainIdpGetDotWellKnown
+      operationId: BeheroesDoxchainAbsV1Beta1QueryBreakFactor
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              breakFactor:
+                type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      tags:
+        - Query
+  /doxchain/abs/query_watchlist:
+    get:
+      operationId: BeheroesDoxchainAbsV1Beta1QueryWatchlist
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              watchlist:
+                type: object
+                properties:
+                  entries:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        address:
+                          type: string
+                        blockHeight:
+                          type: string
+                          format: uint64
+                        coins:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              denom:
+                                type: string
+                              amount:
+                                type: string
+                            description: >-
+                              Coin defines a token with a denomination and an
+                              amount.
+
+
+                              NOTE: The amount field is an Int which implements
+                              the custom method
+
+                              signatures required by gogoproto.
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      tags:
+        - Query
+  /be-heroes/doxchain/aml/aml_request:
+    get:
+      operationId: BeheroesDoxchainAmlV1Beta1AMLRegistration
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              registration:
+                type: object
+                properties:
+                  owner:
+                    type: object
+                    properties:
+                      creator:
+                        type: string
+                      url:
+                        type: string
+                      methodName:
+                        type: string
+                      methodId:
+                        type: string
+                      path:
+                        type: string
+                      fragment:
+                        type: string
+                      query:
+                        type: string
+                      parameters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            value:
+                              type: string
+                  approved:
+                    type: boolean
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: creator
+          in: query
+          required: false
+          type: string
+      tags:
+        - Query
+  /be-heroes/doxchain/aml/params:
+    get:
+      operationId: BeheroesDoxchainAmlV1Beta1Params
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              params:
+                type: object
+                properties:
+                  approvers:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        creator:
+                          type: string
+                        url:
+                          type: string
+                        methodName:
+                          type: string
+                        methodId:
+                          type: string
+                        path:
+                          type: string
+                        fragment:
+                          type: string
+                        query:
+                          type: string
+                        parameters:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              value:
+                                type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      tags:
+        - Query
+  /doxchain/did/did:
+    get:
+      operationId: BeheroesDoxchainDidV1Beta1DidAll
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              didList:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    creator:
+                      type: string
+                    url:
+                      type: string
+                    methodName:
+                      type: string
+                    methodId:
+                      type: string
+                    path:
+                      type: string
+                    fragment:
+                      type: string
+                    query:
+                      type: string
+                    parameters:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          value:
+                            type: string
+              pagination:
+                type: object
+                properties:
+                  next_key:
+                    type: string
+                    format: byte
+                    description: |-
+                      next_key is the key to be passed to PageRequest.key to
+                      query the next page most efficiently. It will be empty if
+                      there are no more results.
+                  total:
+                    type: string
+                    format: uint64
+                    title: >-
+                      total is total number of results available if
+                      PageRequest.count_total
+
+                      was set, its value is undefined otherwise
+                description: >-
+                  PageResponse is to be embedded in gRPC response messages where
+                  the
+
+                  corresponding request message has used PageRequest.
+
+                   message SomeResponse {
+                           repeated Bar results = 1;
+                           PageResponse page = 2;
+                   }
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: pagination.key
+          description: |-
+            key is a value returned in PageResponse.next_key to begin
+            querying the next page most efficiently. Only one of offset or key
+            should be set.
+          in: query
+          required: false
+          type: string
+          format: byte
+        - name: pagination.offset
+          description: >-
+            offset is a numeric offset that can be used when key is unavailable.
+
+            It is less efficient than using key. Only one of offset or key
+            should
+
+            be set.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.limit
+          description: >-
+            limit is the total number of results to be returned in the result
+            page.
+
+            If left empty it will default to a value to be set by each app.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.count_total
+          description: >-
+            count_total is set to true  to indicate that the result set should
+            include
+
+            a count of the total number of items available for pagination in
+            UIs.
+
+            count_total is only respected when offset is used. It is ignored
+            when key
+
+            is set.
+          in: query
+          required: false
+          type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+
+
+            Since: cosmos-sdk 0.43
+          in: query
+          required: false
+          type: boolean
+      tags:
+        - Query
+  /doxchain/did/did/{fullyQualifiedW3CIdentifier}:
+    get:
+      operationId: BeheroesDoxchainDidV1Beta1Did
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              Did:
+                type: object
+                properties:
+                  creator:
+                    type: string
+                  url:
+                    type: string
+                  methodName:
+                    type: string
+                  methodId:
+                    type: string
+                  path:
+                    type: string
+                  fragment:
+                    type: string
+                  query:
+                    type: string
+                  parameters:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        value:
+                          type: string
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: fullyQualifiedW3CIdentifier
+          in: path
+          required: true
+          type: string
+      tags:
+        - Query
+  /doxchain/did/params:
+    get:
+      operationId: BeheroesDoxchainDidV1Beta1Params
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              params:
+                type: object
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      tags:
+        - Query
+  /be-heroes/doxchain/idp/client_registry:
+    get:
+      operationId: BeheroesDoxchainIdpV1Beta1ClientRegistrationRegistryAll
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              clientRegistrationRegistry:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    owner:
+                      type: object
+                      properties:
+                        creator:
+                          type: string
+                        url:
+                          type: string
+                        methodName:
+                          type: string
+                        methodId:
+                          type: string
+                        path:
+                          type: string
+                        fragment:
+                          type: string
+                        query:
+                          type: string
+                        parameters:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              value:
+                                type: string
+                    registrations:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: object
+                            properties:
+                              creator:
+                                type: string
+                              url:
+                                type: string
+                              methodName:
+                                type: string
+                              methodId:
+                                type: string
+                              path:
+                                type: string
+                              fragment:
+                                type: string
+                              query:
+                                type: string
+                              parameters:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    name:
+                                      type: string
+                                    value:
+                                      type: string
+                          appId:
+                            type: object
+                            properties:
+                              creator:
+                                type: string
+                              url:
+                                type: string
+                              methodName:
+                                type: string
+                              methodId:
+                                type: string
+                              path:
+                                type: string
+                              fragment:
+                                type: string
+                              query:
+                                type: string
+                              parameters:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    name:
+                                      type: string
+                                    value:
+                                      type: string
+                          name:
+                            type: string
+                          appRoles:
+                            type: array
+                            items:
+                              type: string
+                          accessTokenAcceptedVersion:
+                            type: integer
+                            format: int64
+                          allowPublicClient:
+                            type: integer
+                            format: int64
+                          replyUrls:
+                            type: array
+                            items:
+                              type: string
+                          tags:
+                            type: array
+                            items:
+                              type: string
+                          accessClientList:
+                            type: object
+                            properties:
+                              owner:
+                                type: object
+                                properties:
+                                  creator:
+                                    type: string
+                                  url:
+                                    type: string
+                                  methodName:
+                                    type: string
+                                  methodId:
+                                    type: string
+                                  path:
+                                    type: string
+                                  fragment:
+                                    type: string
+                                  query:
+                                    type: string
+                                  parameters:
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        name:
+                                          type: string
+                                        value:
+                                          type: string
+                              entries:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    user:
+                                      type: object
+                                      properties:
+                                        creator:
+                                          type: string
+                                        url:
+                                          type: string
+                                        methodName:
+                                          type: string
+                                        methodId:
+                                          type: string
+                                        path:
+                                          type: string
+                                        fragment:
+                                          type: string
+                                        query:
+                                          type: string
+                                        parameters:
+                                          type: array
+                                          items:
+                                            type: object
+                                            properties:
+                                              name:
+                                                type: string
+                                              value:
+                                                type: string
+                                    canRead:
+                                      type: boolean
+                                    canWrite:
+                                      type: boolean
+                                    canExecute:
+                                      type: boolean
+              pagination:
+                type: object
+                properties:
+                  next_key:
+                    type: string
+                    format: byte
+                    description: |-
+                      next_key is the key to be passed to PageRequest.key to
+                      query the next page most efficiently. It will be empty if
+                      there are no more results.
+                  total:
+                    type: string
+                    format: uint64
+                    title: >-
+                      total is total number of results available if
+                      PageRequest.count_total
+
+                      was set, its value is undefined otherwise
+                description: >-
+                  PageResponse is to be embedded in gRPC response messages where
+                  the
+
+                  corresponding request message has used PageRequest.
+
+                   message SomeResponse {
+                           repeated Bar results = 1;
+                           PageResponse page = 2;
+                   }
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: pagination.key
+          description: |-
+            key is a value returned in PageResponse.next_key to begin
+            querying the next page most efficiently. Only one of offset or key
+            should be set.
+          in: query
+          required: false
+          type: string
+          format: byte
+        - name: pagination.offset
+          description: >-
+            offset is a numeric offset that can be used when key is unavailable.
+
+            It is less efficient than using key. Only one of offset or key
+            should
+
+            be set.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.limit
+          description: >-
+            limit is the total number of results to be returned in the result
+            page.
+
+            If left empty it will default to a value to be set by each app.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: pagination.count_total
+          description: >-
+            count_total is set to true  to indicate that the result set should
+            include
+
+            a count of the total number of items available for pagination in
+            UIs.
+
+            count_total is only respected when offset is used. It is ignored
+            when key
+
+            is set.
+          in: query
+          required: false
+          type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+
+
+            Since: cosmos-sdk 0.43
+          in: query
+          required: false
+          type: boolean
+      tags:
+        - Query
+  /be-heroes/doxchain/idp/client_registry/{creator}:
+    get:
+      operationId: BeheroesDoxchainIdpV1Beta1ClientRegistrationRegistry
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              clientRegistrationRegistry:
+                type: object
+                properties:
+                  owner:
+                    type: object
+                    properties:
+                      creator:
+                        type: string
+                      url:
+                        type: string
+                      methodName:
+                        type: string
+                      methodId:
+                        type: string
+                      path:
+                        type: string
+                      fragment:
+                        type: string
+                      query:
+                        type: string
+                      parameters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            value:
+                              type: string
+                  registrations:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: object
+                          properties:
+                            creator:
+                              type: string
+                            url:
+                              type: string
+                            methodName:
+                              type: string
+                            methodId:
+                              type: string
+                            path:
+                              type: string
+                            fragment:
+                              type: string
+                            query:
+                              type: string
+                            parameters:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  name:
+                                    type: string
+                                  value:
+                                    type: string
+                        appId:
+                          type: object
+                          properties:
+                            creator:
+                              type: string
+                            url:
+                              type: string
+                            methodName:
+                              type: string
+                            methodId:
+                              type: string
+                            path:
+                              type: string
+                            fragment:
+                              type: string
+                            query:
+                              type: string
+                            parameters:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  name:
+                                    type: string
+                                  value:
+                                    type: string
+                        name:
+                          type: string
+                        appRoles:
+                          type: array
+                          items:
+                            type: string
+                        accessTokenAcceptedVersion:
+                          type: integer
+                          format: int64
+                        allowPublicClient:
+                          type: integer
+                          format: int64
+                        replyUrls:
+                          type: array
+                          items:
+                            type: string
+                        tags:
+                          type: array
+                          items:
+                            type: string
+                        accessClientList:
+                          type: object
+                          properties:
+                            owner:
+                              type: object
+                              properties:
+                                creator:
+                                  type: string
+                                url:
+                                  type: string
+                                methodName:
+                                  type: string
+                                methodId:
+                                  type: string
+                                path:
+                                  type: string
+                                fragment:
+                                  type: string
+                                query:
+                                  type: string
+                                parameters:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      name:
+                                        type: string
+                                      value:
+                                        type: string
+                            entries:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  user:
+                                    type: object
+                                    properties:
+                                      creator:
+                                        type: string
+                                      url:
+                                        type: string
+                                      methodName:
+                                        type: string
+                                      methodId:
+                                        type: string
+                                      path:
+                                        type: string
+                                      fragment:
+                                        type: string
+                                      query:
+                                        type: string
+                                      parameters:
+                                        type: array
+                                        items:
+                                          type: object
+                                          properties:
+                                            name:
+                                              type: string
+                                            value:
+                                              type: string
+                                  canRead:
+                                    type: boolean
+                                  canWrite:
+                                    type: boolean
+                                  canExecute:
+                                    type: boolean
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: creator
+          in: path
+          required: true
+          type: string
+      tags:
+        - Query
+  /be-heroes/doxchain/idp/params:
+    get:
+      operationId: BeheroesDoxchainIdpV1Beta1Params
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              params:
+                type: object
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      tags:
+        - Query
+  /be-heroes/doxchain/idp/{fullyQualifiedW3CIdentifier}/.well-known:
+    get:
+      operationId: BeheroesDoxchainIdpV1Beta1GetDotWellKnown
       responses:
         '200':
           description: A successful response.
@@ -137,65 +1525,53 @@ paths:
                     '@type':
                       type: string
                   additionalProperties: {}
-      tags:
-        - Query
-  /be-heroes/doxchain/idp/params:
-    get:
-      summary: Parameters queries the parameters of the module.
-      operationId: BeheroesDoxchainIdpParams
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            properties:
-              params:
-                description: params holds all the parameters of this module.
-                type: object
-            description: >-
-              QueryParamsResponse is response type for the Query/Params RPC
-              method.
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
+      parameters:
+        - name: fullyQualifiedW3CIdentifier
+          in: path
+          required: true
+          type: string
       tags:
         - Query
   /be-heroes/doxchain/kyc/kyc_request:
     get:
-      summary: Queries a KYCRequest by index.
-      operationId: BeheroesDoxchainKycKYCRequest
+      operationId: BeheroesDoxchainKycV1Beta1KYCRegistration
       responses:
         '200':
           description: A successful response.
           schema:
             type: object
             properties:
-              KYCRequest:
+              registration:
                 type: object
                 properties:
-                  firstName:
-                    type: string
-                  lastName:
-                    type: string
+                  owner:
+                    type: object
+                    properties:
+                      creator:
+                        type: string
+                      url:
+                        type: string
+                      methodName:
+                        type: string
+                      methodId:
+                        type: string
+                      path:
+                        type: string
+                      fragment:
+                        type: string
+                      query:
+                        type: string
+                      parameters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            value:
+                              type: string
                   approved:
                     type: boolean
-                  creator:
-                    type: string
         default:
           description: An unexpected error response.
           schema:
@@ -214,12 +1590,16 @@ paths:
                     '@type':
                       type: string
                   additionalProperties: {}
+      parameters:
+        - name: creator
+          in: query
+          required: false
+          type: string
       tags:
         - Query
   /be-heroes/doxchain/kyc/params:
     get:
-      summary: Parameters queries the parameters of the module.
-      operationId: BeheroesDoxchainKycParams
+      operationId: BeheroesDoxchainKycV1Beta1Params
       responses:
         '200':
           description: A successful response.
@@ -227,11 +1607,36 @@ paths:
             type: object
             properties:
               params:
-                description: params holds all the parameters of this module.
                 type: object
-            description: >-
-              QueryParamsResponse is response type for the Query/Params RPC
-              method.
+                properties:
+                  approvers:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        creator:
+                          type: string
+                        url:
+                          type: string
+                        methodName:
+                          type: string
+                        methodId:
+                          type: string
+                        path:
+                          type: string
+                        fragment:
+                          type: string
+                        query:
+                          type: string
+                        parameters:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              value:
+                                type: string
         default:
           description: An unexpected error response.
           schema:
@@ -254,8 +1659,7 @@ paths:
         - Query
   /be-heroes/doxchain/oauthtwo/params:
     get:
-      summary: Parameters queries the parameters of the module.
-      operationId: BeheroesDoxchainOauthtwoParams
+      operationId: BeheroesDoxchainOauthtwoV1Beta1Params
       responses:
         '200':
           description: A successful response.
@@ -263,11 +1667,7 @@ paths:
             type: object
             properties:
               params:
-                description: params holds all the parameters of this module.
                 type: object
-            description: >-
-              QueryParamsResponse is response type for the Query/Params RPC
-              method.
         default:
           description: An unexpected error response.
           schema:
@@ -290,7 +1690,6 @@ paths:
         - Query
   /be-heroes/doxchain/oracle/params:
     get:
-      summary: Parameters queries the parameters of the module.
       operationId: BeheroesDoxchainOracleParams
       responses:
         '200':
@@ -299,11 +1698,7 @@ paths:
             type: object
             properties:
               params:
-                description: params holds all the parameters of this module.
                 type: object
-            description: >-
-              QueryParamsResponse is response type for the Query/Params RPC
-              method.
         default:
           description: An unexpected error response.
           schema:
@@ -326,8 +1721,7 @@ paths:
         - Query
   /be-heroes/doxchain/samltwo/params:
     get:
-      summary: Parameters queries the parameters of the module.
-      operationId: BeheroesDoxchainSamltwoParams
+      operationId: BeheroesDoxchainSamltwoV1Beta1Params
       responses:
         '200':
           description: A successful response.
@@ -335,11 +1729,7 @@ paths:
             type: object
             properties:
               params:
-                description: params holds all the parameters of this module.
                 type: object
-            description: >-
-              QueryParamsResponse is response type for the Query/Params RPC
-              method.
         default:
           description: An unexpected error response.
           schema:
@@ -32937,558 +34327,8 @@ paths:
           format: int64
       tags:
         - Query
-  /be-heroes/doxchain/abs/partitioned_pool_registries:
-    get:
-      operationId: DoxchainAbsPartitionedPoolRegistryAll
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            properties:
-              partitionedPoolRegistries:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    creator:
-                      type: string
-                    pools:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          denom:
-                            type: string
-              pagination:
-                type: object
-                properties:
-                  next_key:
-                    type: string
-                    format: byte
-                    description: |-
-                      next_key is the key to be passed to PageRequest.key to
-                      query the next page most efficiently. It will be empty if
-                      there are no more results.
-                  total:
-                    type: string
-                    format: uint64
-                    title: >-
-                      total is total number of results available if
-                      PageRequest.count_total
-
-                      was set, its value is undefined otherwise
-                description: >-
-                  PageResponse is to be embedded in gRPC response messages where
-                  the
-
-                  corresponding request message has used PageRequest.
-
-                   message SomeResponse {
-                           repeated Bar results = 1;
-                           PageResponse page = 2;
-                   }
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      parameters:
-        - name: pagination.key
-          description: |-
-            key is a value returned in PageResponse.next_key to begin
-            querying the next page most efficiently. Only one of offset or key
-            should be set.
-          in: query
-          required: false
-          type: string
-          format: byte
-        - name: pagination.offset
-          description: >-
-            offset is a numeric offset that can be used when key is unavailable.
-
-            It is less efficient than using key. Only one of offset or key
-            should
-
-            be set.
-          in: query
-          required: false
-          type: string
-          format: uint64
-        - name: pagination.limit
-          description: >-
-            limit is the total number of results to be returned in the result
-            page.
-
-            If left empty it will default to a value to be set by each app.
-          in: query
-          required: false
-          type: string
-          format: uint64
-        - name: pagination.count_total
-          description: >-
-            count_total is set to true  to indicate that the result set should
-            include
-
-            a count of the total number of items available for pagination in
-            UIs.
-
-            count_total is only respected when offset is used. It is ignored
-            when key
-
-            is set.
-          in: query
-          required: false
-          type: boolean
-        - name: pagination.reverse
-          description: >-
-            reverse is set to true if results are to be returned in the
-            descending order.
-
-
-            Since: cosmos-sdk 0.43
-          in: query
-          required: false
-          type: boolean
-      tags:
-        - Query
-  /be-heroes/doxchain/abs/partitioned_pool_registries/{creator}:
-    get:
-      summary: Queries a list of PartitionedPools items.
-      operationId: DoxchainAbsPartitionedPoolRegistry
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            properties:
-              partitionedPoolRegistry:
-                type: object
-                properties:
-                  creator:
-                    type: string
-                  pools:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        denom:
-                          type: string
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      parameters:
-        - name: creator
-          in: path
-          required: true
-          type: string
-      tags:
-        - Query
-  /doxchain/abs/params:
-    get:
-      summary: Parameters queries the parameters of the module.
-      operationId: DoxchainAbsParams
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            properties:
-              params:
-                description: params holds all the parameters of this module.
-                type: object
-            description: >-
-              QueryParamsResponse is response type for the Query/Params RPC
-              method.
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      tags:
-        - Query
-  /doxchain/abs/query_break_factor:
-    get:
-      summary: Queries a list of QueryBreakFactor items.
-      operationId: DoxchainAbsQueryBreakFactor
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            properties:
-              value:
-                type: string
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      tags:
-        - Query
-  /doxchain/abs/query_watchlist:
-    get:
-      summary: Queries watchlist.
-      operationId: DoxchainAbsQueryWatchlist
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            properties:
-              watchlist:
-                type: object
-                properties:
-                  entries:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        address:
-                          type: string
-                        blockHeight:
-                          type: string
-                          format: uint64
-                        coins:
-                          type: array
-                          items:
-                            type: object
-                            properties:
-                              denom:
-                                type: string
-                              amount:
-                                type: string
-                            description: >-
-                              Coin defines a token with a denomination and an
-                              amount.
-
-
-                              NOTE: The amount field is an Int which implements
-                              the custom method
-
-                              signatures required by gogoproto.
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      tags:
-        - Query
-  /doxchain/did/did:
-    get:
-      operationId: DoxchainDidDidAll
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            properties:
-              Did:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    creator:
-                      type: string
-                    url:
-                      type: string
-                    methodName:
-                      type: string
-                    methodId:
-                      type: string
-                    path:
-                      type: string
-                    fragment:
-                      type: string
-                    query:
-                      type: string
-                    parameters:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          name:
-                            type: string
-                          value:
-                            type: string
-                    id:
-                      type: string
-                      format: uint64
-              pagination:
-                type: object
-                properties:
-                  next_key:
-                    type: string
-                    format: byte
-                    description: |-
-                      next_key is the key to be passed to PageRequest.key to
-                      query the next page most efficiently. It will be empty if
-                      there are no more results.
-                  total:
-                    type: string
-                    format: uint64
-                    title: >-
-                      total is total number of results available if
-                      PageRequest.count_total
-
-                      was set, its value is undefined otherwise
-                description: >-
-                  PageResponse is to be embedded in gRPC response messages where
-                  the
-
-                  corresponding request message has used PageRequest.
-
-                   message SomeResponse {
-                           repeated Bar results = 1;
-                           PageResponse page = 2;
-                   }
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      parameters:
-        - name: pagination.key
-          description: |-
-            key is a value returned in PageResponse.next_key to begin
-            querying the next page most efficiently. Only one of offset or key
-            should be set.
-          in: query
-          required: false
-          type: string
-          format: byte
-        - name: pagination.offset
-          description: >-
-            offset is a numeric offset that can be used when key is unavailable.
-
-            It is less efficient than using key. Only one of offset or key
-            should
-
-            be set.
-          in: query
-          required: false
-          type: string
-          format: uint64
-        - name: pagination.limit
-          description: >-
-            limit is the total number of results to be returned in the result
-            page.
-
-            If left empty it will default to a value to be set by each app.
-          in: query
-          required: false
-          type: string
-          format: uint64
-        - name: pagination.count_total
-          description: >-
-            count_total is set to true  to indicate that the result set should
-            include
-
-            a count of the total number of items available for pagination in
-            UIs.
-
-            count_total is only respected when offset is used. It is ignored
-            when key
-
-            is set.
-          in: query
-          required: false
-          type: boolean
-        - name: pagination.reverse
-          description: >-
-            reverse is set to true if results are to be returned in the
-            descending order.
-
-
-            Since: cosmos-sdk 0.43
-          in: query
-          required: false
-          type: boolean
-      tags:
-        - Query
-  /doxchain/did/did/{fullyQualifiedDidIdentifier}:
-    get:
-      summary: Queries a list of Did items.
-      operationId: DoxchainDidDid
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            properties:
-              Did:
-                type: object
-                properties:
-                  creator:
-                    type: string
-                  url:
-                    type: string
-                  methodName:
-                    type: string
-                  methodId:
-                    type: string
-                  path:
-                    type: string
-                  fragment:
-                    type: string
-                  query:
-                    type: string
-                  parameters:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        value:
-                          type: string
-                  id:
-                    type: string
-                    format: uint64
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      parameters:
-        - name: fullyQualifiedDidIdentifier
-          in: path
-          required: true
-          type: string
-      tags:
-        - Query
-  /doxchain/did/params:
-    get:
-      summary: Parameters queries the parameters of the module.
-      operationId: DoxchainDidParams
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            properties:
-              params:
-                description: params holds all the parameters of this module.
-                type: object
-            description: >-
-              QueryParamsResponse is response type for the Query/Params RPC
-              method.
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      tags:
-        - Query
   /doxchain/doxchain/params:
     get:
-      summary: Parameters queries the parameters of the module.
       operationId: DoxchainDoxchainParams
       responses:
         '200':
@@ -33497,11 +34337,7 @@ paths:
             type: object
             properties:
               params:
-                description: params holds all the parameters of this module.
                 type: object
-            description: >-
-              QueryParamsResponse is response type for the Query/Params RPC
-              method.
         default:
           description: An unexpected error response.
           schema:
@@ -44806,47 +45642,1020 @@ paths:
       tags:
         - Query
 definitions:
-  beheroes.doxchain.aml.AMLRequest:
+  beheroes.doxchain.abs.v1beta1.MsgCreatePartitionedPoolRegistryResponse:
+    type: object
+  beheroes.doxchain.abs.v1beta1.MsgUpdateBreakFactorResponse:
+    type: object
+  beheroes.doxchain.abs.v1beta1.Params:
     type: object
     properties:
-      firstName:
+      operators:
+        type: array
+        items:
+          type: object
+          properties:
+            creator:
+              type: string
+            url:
+              type: string
+            methodName:
+              type: string
+            methodId:
+              type: string
+            path:
+              type: string
+            fragment:
+              type: string
+            query:
+              type: string
+            parameters:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  value:
+                    type: string
+      blockExpireOffset:
         type: string
-      lastName:
-        type: string
-      approved:
-        type: boolean
-      creator:
-        type: string
-  beheroes.doxchain.aml.MsgCreateAMLRequestResponse:
-    type: object
-  beheroes.doxchain.aml.MsgDeleteAMLRequestResponse:
-    type: object
-  beheroes.doxchain.aml.MsgUpdateAMLRequestResponse:
-    type: object
-  beheroes.doxchain.aml.Params:
-    type: object
-    description: Params defines the parameters for the module.
-  beheroes.doxchain.aml.QueryGetAMLRequestResponse:
+  beheroes.doxchain.abs.v1beta1.ParitionedPoolConfiguration:
     type: object
     properties:
-      AMLRequest:
+      threshold:
         type: object
         properties:
-          firstName:
+          softCap:
             type: string
-          lastName:
+          hardCap:
             type: string
-          approved:
-            type: boolean
+      Corridors:
+        type: array
+        items:
+          type: object
+          properties:
+            threshold:
+              type: object
+              properties:
+                softCap:
+                  type: string
+                hardCap:
+                  type: string
+            target:
+              type: object
+              properties:
+                denom:
+                  type: string
+                amount:
+                  type: string
+              description: >-
+                Coin defines a token with a denomination and an amount.
+
+
+                NOTE: The amount field is an Int which implements the custom
+                method
+
+                signatures required by gogoproto.
+  beheroes.doxchain.abs.v1beta1.ParitionedPoolCorridor:
+    type: object
+    properties:
+      threshold:
+        type: object
+        properties:
+          softCap:
+            type: string
+          hardCap:
+            type: string
+      target:
+        type: object
+        properties:
+          denom:
+            type: string
+          amount:
+            type: string
+        description: |-
+          Coin defines a token with a denomination and an amount.
+
+          NOTE: The amount field is an Int which implements the custom method
+          signatures required by gogoproto.
+  beheroes.doxchain.abs.v1beta1.ParitionedPoolThreshold:
+    type: object
+    properties:
+      softCap:
+        type: string
+      hardCap:
+        type: string
+  beheroes.doxchain.abs.v1beta1.PartitionedPool:
+    type: object
+    properties:
+      denom:
+        type: string
+      desiredState:
+        type: object
+        properties:
+          threshold:
+            type: object
+            properties:
+              softCap:
+                type: string
+              hardCap:
+                type: string
+          Corridors:
+            type: array
+            items:
+              type: object
+              properties:
+                threshold:
+                  type: object
+                  properties:
+                    softCap:
+                      type: string
+                    hardCap:
+                      type: string
+                target:
+                  type: object
+                  properties:
+                    denom:
+                      type: string
+                    amount:
+                      type: string
+                  description: >-
+                    Coin defines a token with a denomination and an amount.
+
+
+                    NOTE: The amount field is an Int which implements the custom
+                    method
+
+                    signatures required by gogoproto.
+      accessClientList:
+        type: object
+        properties:
+          owner:
+            type: object
+            properties:
+              creator:
+                type: string
+              url:
+                type: string
+              methodName:
+                type: string
+              methodId:
+                type: string
+              path:
+                type: string
+              fragment:
+                type: string
+              query:
+                type: string
+              parameters:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    value:
+                      type: string
+          entries:
+            type: array
+            items:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    creator:
+                      type: string
+                    url:
+                      type: string
+                    methodName:
+                      type: string
+                    methodId:
+                      type: string
+                    path:
+                      type: string
+                    fragment:
+                      type: string
+                    query:
+                      type: string
+                    parameters:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          value:
+                            type: string
+                canRead:
+                  type: boolean
+                canWrite:
+                  type: boolean
+                canExecute:
+                  type: boolean
+  beheroes.doxchain.abs.v1beta1.PartitionedPoolRegistry:
+    type: object
+    properties:
+      owner:
+        type: object
+        properties:
           creator:
             type: string
-  beheroes.doxchain.aml.QueryParamsResponse:
+          url:
+            type: string
+          methodName:
+            type: string
+          methodId:
+            type: string
+          path:
+            type: string
+          fragment:
+            type: string
+          query:
+            type: string
+          parameters:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
+      pools:
+        type: array
+        items:
+          type: object
+          properties:
+            denom:
+              type: string
+            desiredState:
+              type: object
+              properties:
+                threshold:
+                  type: object
+                  properties:
+                    softCap:
+                      type: string
+                    hardCap:
+                      type: string
+                Corridors:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      threshold:
+                        type: object
+                        properties:
+                          softCap:
+                            type: string
+                          hardCap:
+                            type: string
+                      target:
+                        type: object
+                        properties:
+                          denom:
+                            type: string
+                          amount:
+                            type: string
+                        description: >-
+                          Coin defines a token with a denomination and an
+                          amount.
+
+
+                          NOTE: The amount field is an Int which implements the
+                          custom method
+
+                          signatures required by gogoproto.
+            accessClientList:
+              type: object
+              properties:
+                owner:
+                  type: object
+                  properties:
+                    creator:
+                      type: string
+                    url:
+                      type: string
+                    methodName:
+                      type: string
+                    methodId:
+                      type: string
+                    path:
+                      type: string
+                    fragment:
+                      type: string
+                    query:
+                      type: string
+                    parameters:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          value:
+                            type: string
+                entries:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      user:
+                        type: object
+                        properties:
+                          creator:
+                            type: string
+                          url:
+                            type: string
+                          methodName:
+                            type: string
+                          methodId:
+                            type: string
+                          path:
+                            type: string
+                          fragment:
+                            type: string
+                          query:
+                            type: string
+                          parameters:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                value:
+                                  type: string
+                      canRead:
+                        type: boolean
+                      canWrite:
+                        type: boolean
+                      canExecute:
+                        type: boolean
+  beheroes.doxchain.abs.v1beta1.QueryAllPartitionedPoolRegistriesResponse:
+    type: object
+    properties:
+      partitionedPoolRegistryList:
+        type: array
+        items:
+          type: object
+          properties:
+            owner:
+              type: object
+              properties:
+                creator:
+                  type: string
+                url:
+                  type: string
+                methodName:
+                  type: string
+                methodId:
+                  type: string
+                path:
+                  type: string
+                fragment:
+                  type: string
+                query:
+                  type: string
+                parameters:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      value:
+                        type: string
+            pools:
+              type: array
+              items:
+                type: object
+                properties:
+                  denom:
+                    type: string
+                  desiredState:
+                    type: object
+                    properties:
+                      threshold:
+                        type: object
+                        properties:
+                          softCap:
+                            type: string
+                          hardCap:
+                            type: string
+                      Corridors:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            threshold:
+                              type: object
+                              properties:
+                                softCap:
+                                  type: string
+                                hardCap:
+                                  type: string
+                            target:
+                              type: object
+                              properties:
+                                denom:
+                                  type: string
+                                amount:
+                                  type: string
+                              description: >-
+                                Coin defines a token with a denomination and an
+                                amount.
+
+
+                                NOTE: The amount field is an Int which
+                                implements the custom method
+
+                                signatures required by gogoproto.
+                  accessClientList:
+                    type: object
+                    properties:
+                      owner:
+                        type: object
+                        properties:
+                          creator:
+                            type: string
+                          url:
+                            type: string
+                          methodName:
+                            type: string
+                          methodId:
+                            type: string
+                          path:
+                            type: string
+                          fragment:
+                            type: string
+                          query:
+                            type: string
+                          parameters:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                value:
+                                  type: string
+                      entries:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            user:
+                              type: object
+                              properties:
+                                creator:
+                                  type: string
+                                url:
+                                  type: string
+                                methodName:
+                                  type: string
+                                methodId:
+                                  type: string
+                                path:
+                                  type: string
+                                fragment:
+                                  type: string
+                                query:
+                                  type: string
+                                parameters:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      name:
+                                        type: string
+                                      value:
+                                        type: string
+                            canRead:
+                              type: boolean
+                            canWrite:
+                              type: boolean
+                            canExecute:
+                              type: boolean
+      pagination:
+        type: object
+        properties:
+          next_key:
+            type: string
+            format: byte
+            description: |-
+              next_key is the key to be passed to PageRequest.key to
+              query the next page most efficiently. It will be empty if
+              there are no more results.
+          total:
+            type: string
+            format: uint64
+            title: >-
+              total is total number of results available if
+              PageRequest.count_total
+
+              was set, its value is undefined otherwise
+        description: |-
+          PageResponse is to be embedded in gRPC response messages where the
+          corresponding request message has used PageRequest.
+
+           message SomeResponse {
+                   repeated Bar results = 1;
+                   PageResponse page = 2;
+           }
+  beheroes.doxchain.abs.v1beta1.QueryBreakFactorResponse:
+    type: object
+    properties:
+      breakFactor:
+        type: string
+  beheroes.doxchain.abs.v1beta1.QueryGetPartitionedPoolRegistryResponse:
+    type: object
+    properties:
+      partitionedPoolRegistry:
+        type: object
+        properties:
+          owner:
+            type: object
+            properties:
+              creator:
+                type: string
+              url:
+                type: string
+              methodName:
+                type: string
+              methodId:
+                type: string
+              path:
+                type: string
+              fragment:
+                type: string
+              query:
+                type: string
+              parameters:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    value:
+                      type: string
+          pools:
+            type: array
+            items:
+              type: object
+              properties:
+                denom:
+                  type: string
+                desiredState:
+                  type: object
+                  properties:
+                    threshold:
+                      type: object
+                      properties:
+                        softCap:
+                          type: string
+                        hardCap:
+                          type: string
+                    Corridors:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          threshold:
+                            type: object
+                            properties:
+                              softCap:
+                                type: string
+                              hardCap:
+                                type: string
+                          target:
+                            type: object
+                            properties:
+                              denom:
+                                type: string
+                              amount:
+                                type: string
+                            description: >-
+                              Coin defines a token with a denomination and an
+                              amount.
+
+
+                              NOTE: The amount field is an Int which implements
+                              the custom method
+
+                              signatures required by gogoproto.
+                accessClientList:
+                  type: object
+                  properties:
+                    owner:
+                      type: object
+                      properties:
+                        creator:
+                          type: string
+                        url:
+                          type: string
+                        methodName:
+                          type: string
+                        methodId:
+                          type: string
+                        path:
+                          type: string
+                        fragment:
+                          type: string
+                        query:
+                          type: string
+                        parameters:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              value:
+                                type: string
+                    entries:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          user:
+                            type: object
+                            properties:
+                              creator:
+                                type: string
+                              url:
+                                type: string
+                              methodName:
+                                type: string
+                              methodId:
+                                type: string
+                              path:
+                                type: string
+                              fragment:
+                                type: string
+                              query:
+                                type: string
+                              parameters:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    name:
+                                      type: string
+                                    value:
+                                      type: string
+                          canRead:
+                            type: boolean
+                          canWrite:
+                            type: boolean
+                          canExecute:
+                            type: boolean
+  beheroes.doxchain.abs.v1beta1.QueryParamsResponse:
     type: object
     properties:
       params:
-        description: params holds all the parameters of this module.
         type: object
-    description: QueryParamsResponse is response type for the Query/Params RPC method.
+        properties:
+          operators:
+            type: array
+            items:
+              type: object
+              properties:
+                creator:
+                  type: string
+                url:
+                  type: string
+                methodName:
+                  type: string
+                methodId:
+                  type: string
+                path:
+                  type: string
+                fragment:
+                  type: string
+                query:
+                  type: string
+                parameters:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      value:
+                        type: string
+          blockExpireOffset:
+            type: string
+  beheroes.doxchain.abs.v1beta1.QueryWatchlistResponse:
+    type: object
+    properties:
+      watchlist:
+        type: object
+        properties:
+          entries:
+            type: array
+            items:
+              type: object
+              properties:
+                address:
+                  type: string
+                blockHeight:
+                  type: string
+                  format: uint64
+                coins:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      denom:
+                        type: string
+                      amount:
+                        type: string
+                    description: >-
+                      Coin defines a token with a denomination and an amount.
+
+
+                      NOTE: The amount field is an Int which implements the
+                      custom method
+
+                      signatures required by gogoproto.
+  beheroes.doxchain.abs.v1beta1.Watchlist:
+    type: object
+    properties:
+      entries:
+        type: array
+        items:
+          type: object
+          properties:
+            address:
+              type: string
+            blockHeight:
+              type: string
+              format: uint64
+            coins:
+              type: array
+              items:
+                type: object
+                properties:
+                  denom:
+                    type: string
+                  amount:
+                    type: string
+                description: >-
+                  Coin defines a token with a denomination and an amount.
+
+
+                  NOTE: The amount field is an Int which implements the custom
+                  method
+
+                  signatures required by gogoproto.
+  beheroes.doxchain.abs.v1beta1.WatchlistEntry:
+    type: object
+    properties:
+      address:
+        type: string
+      blockHeight:
+        type: string
+        format: uint64
+      coins:
+        type: array
+        items:
+          type: object
+          properties:
+            denom:
+              type: string
+            amount:
+              type: string
+          description: |-
+            Coin defines a token with a denomination and an amount.
+
+            NOTE: The amount field is an Int which implements the custom method
+            signatures required by gogoproto.
+  beheroes.doxchain.did.v1beta1.Did:
+    type: object
+    properties:
+      creator:
+        type: string
+      url:
+        type: string
+      methodName:
+        type: string
+      methodId:
+        type: string
+      path:
+        type: string
+      fragment:
+        type: string
+      query:
+        type: string
+      parameters:
+        type: array
+        items:
+          type: object
+          properties:
+            name:
+              type: string
+            value:
+              type: string
+  beheroes.doxchain.did.v1beta1.DidParameter:
+    type: object
+    properties:
+      name:
+        type: string
+      value:
+        type: string
+  beheroes.doxchain.idp.v1beta1.AccessClientList:
+    type: object
+    properties:
+      owner:
+        type: object
+        properties:
+          creator:
+            type: string
+          url:
+            type: string
+          methodName:
+            type: string
+          methodId:
+            type: string
+          path:
+            type: string
+          fragment:
+            type: string
+          query:
+            type: string
+          parameters:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
+      entries:
+        type: array
+        items:
+          type: object
+          properties:
+            user:
+              type: object
+              properties:
+                creator:
+                  type: string
+                url:
+                  type: string
+                methodName:
+                  type: string
+                methodId:
+                  type: string
+                path:
+                  type: string
+                fragment:
+                  type: string
+                query:
+                  type: string
+                parameters:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      value:
+                        type: string
+            canRead:
+              type: boolean
+            canWrite:
+              type: boolean
+            canExecute:
+              type: boolean
+  beheroes.doxchain.idp.v1beta1.AccessClientListEntry:
+    type: object
+    properties:
+      user:
+        type: object
+        properties:
+          creator:
+            type: string
+          url:
+            type: string
+          methodName:
+            type: string
+          methodId:
+            type: string
+          path:
+            type: string
+          fragment:
+            type: string
+          query:
+            type: string
+          parameters:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
+      canRead:
+        type: boolean
+      canWrite:
+        type: boolean
+      canExecute:
+        type: boolean
+  cosmos.base.query.v1beta1.PageRequest:
+    type: object
+    properties:
+      key:
+        type: string
+        format: byte
+        description: |-
+          key is a value returned in PageResponse.next_key to begin
+          querying the next page most efficiently. Only one of offset or key
+          should be set.
+      offset:
+        type: string
+        format: uint64
+        description: |-
+          offset is a numeric offset that can be used when key is unavailable.
+          It is less efficient than using key. Only one of offset or key should
+          be set.
+      limit:
+        type: string
+        format: uint64
+        description: >-
+          limit is the total number of results to be returned in the result
+          page.
+
+          If left empty it will default to a value to be set by each app.
+      count_total:
+        type: boolean
+        description: >-
+          count_total is set to true  to indicate that the result set should
+          include
+
+          a count of the total number of items available for pagination in UIs.
+
+          count_total is only respected when offset is used. It is ignored when
+          key
+
+          is set.
+      reverse:
+        type: boolean
+        description: >-
+          reverse is set to true if results are to be returned in the descending
+          order.
+
+
+          Since: cosmos-sdk 0.43
+    description: |-
+      message SomeRequest {
+               Foo some_parameter = 1;
+               PageRequest pagination = 2;
+       }
+    title: |-
+      PageRequest is to be embedded in gRPC request messages for efficient
+      pagination. Ex:
+  cosmos.base.query.v1beta1.PageResponse:
+    type: object
+    properties:
+      next_key:
+        type: string
+        format: byte
+        description: |-
+          next_key is the key to be passed to PageRequest.key to
+          query the next page most efficiently. It will be empty if
+          there are no more results.
+      total:
+        type: string
+        format: uint64
+        title: |-
+          total is total number of results available if PageRequest.count_total
+          was set, its value is undefined otherwise
+    description: |-
+      PageResponse is to be embedded in gRPC response messages where the
+      corresponding request message has used PageRequest.
+
+       message SomeResponse {
+               repeated Bar results = 1;
+               PageResponse page = 2;
+       }
+  cosmos.base.v1beta1.Coin:
+    type: object
+    properties:
+      denom:
+        type: string
+      amount:
+        type: string
+    description: |-
+      Coin defines a token with a denomination and an amount.
+
+      NOTE: The amount field is an Int which implements the custom method
+      signatures required by gogoproto.
   google.protobuf.Any:
     type: object
     properties:
@@ -45170,15 +46979,1942 @@ definitions:
                   "@type": "type.googleapis.com/google.protobuf.Duration",
                   "value": "1.212s"
                 }
-  beheroes.doxchain.idp.MsgAuthenticationResponse:
+  beheroes.doxchain.aml.v1beta1.AMLRegistration:
+    type: object
+    properties:
+      owner:
+        type: object
+        properties:
+          creator:
+            type: string
+          url:
+            type: string
+          methodName:
+            type: string
+          methodId:
+            type: string
+          path:
+            type: string
+          fragment:
+            type: string
+          query:
+            type: string
+          parameters:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
+      approved:
+        type: boolean
+  beheroes.doxchain.aml.v1beta1.MsgApproveAMLRegistrationResponse:
+    type: object
+  beheroes.doxchain.aml.v1beta1.MsgCreateAMLRegistrationResponse:
+    type: object
+  beheroes.doxchain.aml.v1beta1.MsgDeleteAMLRegistrationResponse:
+    type: object
+  beheroes.doxchain.aml.v1beta1.Params:
+    type: object
+    properties:
+      approvers:
+        type: array
+        items:
+          type: object
+          properties:
+            creator:
+              type: string
+            url:
+              type: string
+            methodName:
+              type: string
+            methodId:
+              type: string
+            path:
+              type: string
+            fragment:
+              type: string
+            query:
+              type: string
+            parameters:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  value:
+                    type: string
+  beheroes.doxchain.aml.v1beta1.QueryGetAMLRegistrationResponse:
+    type: object
+    properties:
+      registration:
+        type: object
+        properties:
+          owner:
+            type: object
+            properties:
+              creator:
+                type: string
+              url:
+                type: string
+              methodName:
+                type: string
+              methodId:
+                type: string
+              path:
+                type: string
+              fragment:
+                type: string
+              query:
+                type: string
+              parameters:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    value:
+                      type: string
+          approved:
+            type: boolean
+  beheroes.doxchain.aml.v1beta1.QueryParamsResponse:
+    type: object
+    properties:
+      params:
+        type: object
+        properties:
+          approvers:
+            type: array
+            items:
+              type: object
+              properties:
+                creator:
+                  type: string
+                url:
+                  type: string
+                methodName:
+                  type: string
+                methodId:
+                  type: string
+                path:
+                  type: string
+                fragment:
+                  type: string
+                query:
+                  type: string
+                parameters:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      value:
+                        type: string
+  beheroes.doxchain.did.v1beta1.DidDocument:
+    type: object
+    properties:
+      context:
+        type: array
+        items:
+          type: string
+      id:
+        type: object
+        properties:
+          creator:
+            type: string
+          url:
+            type: string
+          methodName:
+            type: string
+          methodId:
+            type: string
+          path:
+            type: string
+          fragment:
+            type: string
+          query:
+            type: string
+          parameters:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
+      controller:
+        type: object
+        properties:
+          creator:
+            type: string
+          url:
+            type: string
+          methodName:
+            type: string
+          methodId:
+            type: string
+          path:
+            type: string
+          fragment:
+            type: string
+          query:
+            type: string
+          parameters:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
+      alsoKnownAs:
+        type: array
+        items:
+          type: object
+          properties:
+            creator:
+              type: string
+            url:
+              type: string
+            methodName:
+              type: string
+            methodId:
+              type: string
+            path:
+              type: string
+            fragment:
+              type: string
+            query:
+              type: string
+            parameters:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  value:
+                    type: string
+      verificationMethod:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: object
+              properties:
+                creator:
+                  type: string
+                url:
+                  type: string
+                methodName:
+                  type: string
+                methodId:
+                  type: string
+                path:
+                  type: string
+                fragment:
+                  type: string
+                query:
+                  type: string
+                parameters:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      value:
+                        type: string
+            type:
+              type: string
+            controller:
+              type: object
+              properties:
+                creator:
+                  type: string
+                url:
+                  type: string
+                methodName:
+                  type: string
+                methodId:
+                  type: string
+                path:
+                  type: string
+                fragment:
+                  type: string
+                query:
+                  type: string
+                parameters:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      value:
+                        type: string
+            publicKeyJwk:
+              type: string
+            publicKeyMultibase:
+              type: string
+      authentication:
+        type: array
+        items:
+          type: object
+          properties:
+            referenced:
+              type: array
+              items:
+                type: object
+                properties:
+                  creator:
+                    type: string
+                  url:
+                    type: string
+                  methodName:
+                    type: string
+                  methodId:
+                    type: string
+                  path:
+                    type: string
+                  fragment:
+                    type: string
+                  query:
+                    type: string
+                  parameters:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        value:
+                          type: string
+            embedded:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: object
+                    properties:
+                      creator:
+                        type: string
+                      url:
+                        type: string
+                      methodName:
+                        type: string
+                      methodId:
+                        type: string
+                      path:
+                        type: string
+                      fragment:
+                        type: string
+                      query:
+                        type: string
+                      parameters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            value:
+                              type: string
+                  type:
+                    type: string
+                  controller:
+                    type: object
+                    properties:
+                      creator:
+                        type: string
+                      url:
+                        type: string
+                      methodName:
+                        type: string
+                      methodId:
+                        type: string
+                      path:
+                        type: string
+                      fragment:
+                        type: string
+                      query:
+                        type: string
+                      parameters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            value:
+                              type: string
+                  publicKeyJwk:
+                    type: string
+                  publicKeyMultibase:
+                    type: string
+      assertionMethod:
+        type: array
+        items:
+          type: object
+          properties:
+            referenced:
+              type: array
+              items:
+                type: object
+                properties:
+                  creator:
+                    type: string
+                  url:
+                    type: string
+                  methodName:
+                    type: string
+                  methodId:
+                    type: string
+                  path:
+                    type: string
+                  fragment:
+                    type: string
+                  query:
+                    type: string
+                  parameters:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        value:
+                          type: string
+            embedded:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: object
+                    properties:
+                      creator:
+                        type: string
+                      url:
+                        type: string
+                      methodName:
+                        type: string
+                      methodId:
+                        type: string
+                      path:
+                        type: string
+                      fragment:
+                        type: string
+                      query:
+                        type: string
+                      parameters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            value:
+                              type: string
+                  type:
+                    type: string
+                  controller:
+                    type: object
+                    properties:
+                      creator:
+                        type: string
+                      url:
+                        type: string
+                      methodName:
+                        type: string
+                      methodId:
+                        type: string
+                      path:
+                        type: string
+                      fragment:
+                        type: string
+                      query:
+                        type: string
+                      parameters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            value:
+                              type: string
+                  publicKeyJwk:
+                    type: string
+                  publicKeyMultibase:
+                    type: string
+      keyAgreement:
+        type: array
+        items:
+          type: object
+          properties:
+            referenced:
+              type: array
+              items:
+                type: object
+                properties:
+                  creator:
+                    type: string
+                  url:
+                    type: string
+                  methodName:
+                    type: string
+                  methodId:
+                    type: string
+                  path:
+                    type: string
+                  fragment:
+                    type: string
+                  query:
+                    type: string
+                  parameters:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        value:
+                          type: string
+            embedded:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: object
+                    properties:
+                      creator:
+                        type: string
+                      url:
+                        type: string
+                      methodName:
+                        type: string
+                      methodId:
+                        type: string
+                      path:
+                        type: string
+                      fragment:
+                        type: string
+                      query:
+                        type: string
+                      parameters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            value:
+                              type: string
+                  type:
+                    type: string
+                  controller:
+                    type: object
+                    properties:
+                      creator:
+                        type: string
+                      url:
+                        type: string
+                      methodName:
+                        type: string
+                      methodId:
+                        type: string
+                      path:
+                        type: string
+                      fragment:
+                        type: string
+                      query:
+                        type: string
+                      parameters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            value:
+                              type: string
+                  publicKeyJwk:
+                    type: string
+                  publicKeyMultibase:
+                    type: string
+      capabilityInvocation:
+        type: array
+        items:
+          type: object
+          properties:
+            referenced:
+              type: array
+              items:
+                type: object
+                properties:
+                  creator:
+                    type: string
+                  url:
+                    type: string
+                  methodName:
+                    type: string
+                  methodId:
+                    type: string
+                  path:
+                    type: string
+                  fragment:
+                    type: string
+                  query:
+                    type: string
+                  parameters:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        value:
+                          type: string
+            embedded:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: object
+                    properties:
+                      creator:
+                        type: string
+                      url:
+                        type: string
+                      methodName:
+                        type: string
+                      methodId:
+                        type: string
+                      path:
+                        type: string
+                      fragment:
+                        type: string
+                      query:
+                        type: string
+                      parameters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            value:
+                              type: string
+                  type:
+                    type: string
+                  controller:
+                    type: object
+                    properties:
+                      creator:
+                        type: string
+                      url:
+                        type: string
+                      methodName:
+                        type: string
+                      methodId:
+                        type: string
+                      path:
+                        type: string
+                      fragment:
+                        type: string
+                      query:
+                        type: string
+                      parameters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            value:
+                              type: string
+                  publicKeyJwk:
+                    type: string
+                  publicKeyMultibase:
+                    type: string
+      capabilityDelegation:
+        type: array
+        items:
+          type: object
+          properties:
+            referenced:
+              type: array
+              items:
+                type: object
+                properties:
+                  creator:
+                    type: string
+                  url:
+                    type: string
+                  methodName:
+                    type: string
+                  methodId:
+                    type: string
+                  path:
+                    type: string
+                  fragment:
+                    type: string
+                  query:
+                    type: string
+                  parameters:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        value:
+                          type: string
+            embedded:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: object
+                    properties:
+                      creator:
+                        type: string
+                      url:
+                        type: string
+                      methodName:
+                        type: string
+                      methodId:
+                        type: string
+                      path:
+                        type: string
+                      fragment:
+                        type: string
+                      query:
+                        type: string
+                      parameters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            value:
+                              type: string
+                  type:
+                    type: string
+                  controller:
+                    type: object
+                    properties:
+                      creator:
+                        type: string
+                      url:
+                        type: string
+                      methodName:
+                        type: string
+                      methodId:
+                        type: string
+                      path:
+                        type: string
+                      fragment:
+                        type: string
+                      query:
+                        type: string
+                      parameters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            value:
+                              type: string
+                  publicKeyJwk:
+                    type: string
+                  publicKeyMultibase:
+                    type: string
+      service:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: object
+              properties:
+                creator:
+                  type: string
+                url:
+                  type: string
+                methodName:
+                  type: string
+                methodId:
+                  type: string
+                path:
+                  type: string
+                fragment:
+                  type: string
+                query:
+                  type: string
+                parameters:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      value:
+                        type: string
+            type:
+              type: string
+            serviceEndpoint:
+              type: string
+  beheroes.doxchain.did.v1beta1.MsgCreateDidDocumentResponse:
+    type: object
+    properties:
+      fullyQualifiedW3CIdentifier:
+        type: string
+  beheroes.doxchain.did.v1beta1.MsgCreateDidResponse:
+    type: object
+    properties:
+      fullyQualifiedW3CIdentifier:
+        type: string
+  beheroes.doxchain.did.v1beta1.MsgDeleteDidDocumentResponse:
+    type: object
+  beheroes.doxchain.did.v1beta1.MsgDeleteDidResponse:
+    type: object
+  beheroes.doxchain.did.v1beta1.MsgUpdateDidDocumentResponse:
+    type: object
+  beheroes.doxchain.did.v1beta1.MsgUpdateDidResponse:
+    type: object
+  beheroes.doxchain.did.v1beta1.Params:
+    type: object
+  beheroes.doxchain.did.v1beta1.QueryAllDidResponse:
+    type: object
+    properties:
+      didList:
+        type: array
+        items:
+          type: object
+          properties:
+            creator:
+              type: string
+            url:
+              type: string
+            methodName:
+              type: string
+            methodId:
+              type: string
+            path:
+              type: string
+            fragment:
+              type: string
+            query:
+              type: string
+            parameters:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  value:
+                    type: string
+      pagination:
+        type: object
+        properties:
+          next_key:
+            type: string
+            format: byte
+            description: |-
+              next_key is the key to be passed to PageRequest.key to
+              query the next page most efficiently. It will be empty if
+              there are no more results.
+          total:
+            type: string
+            format: uint64
+            title: >-
+              total is total number of results available if
+              PageRequest.count_total
+
+              was set, its value is undefined otherwise
+        description: |-
+          PageResponse is to be embedded in gRPC response messages where the
+          corresponding request message has used PageRequest.
+
+           message SomeResponse {
+                   repeated Bar results = 1;
+                   PageResponse page = 2;
+           }
+  beheroes.doxchain.did.v1beta1.QueryGetDidResponse:
+    type: object
+    properties:
+      Did:
+        type: object
+        properties:
+          creator:
+            type: string
+          url:
+            type: string
+          methodName:
+            type: string
+          methodId:
+            type: string
+          path:
+            type: string
+          fragment:
+            type: string
+          query:
+            type: string
+          parameters:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
+  beheroes.doxchain.did.v1beta1.QueryParamsResponse:
+    type: object
+    properties:
+      params:
+        type: object
+  beheroes.doxchain.did.v1beta1.Service:
+    type: object
+    properties:
+      id:
+        type: object
+        properties:
+          creator:
+            type: string
+          url:
+            type: string
+          methodName:
+            type: string
+          methodId:
+            type: string
+          path:
+            type: string
+          fragment:
+            type: string
+          query:
+            type: string
+          parameters:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
+      type:
+        type: string
+      serviceEndpoint:
+        type: string
+  beheroes.doxchain.did.v1beta1.VerificationMethod:
+    type: object
+    properties:
+      id:
+        type: object
+        properties:
+          creator:
+            type: string
+          url:
+            type: string
+          methodName:
+            type: string
+          methodId:
+            type: string
+          path:
+            type: string
+          fragment:
+            type: string
+          query:
+            type: string
+          parameters:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
+      type:
+        type: string
+      controller:
+        type: object
+        properties:
+          creator:
+            type: string
+          url:
+            type: string
+          methodName:
+            type: string
+          methodId:
+            type: string
+          path:
+            type: string
+          fragment:
+            type: string
+          query:
+            type: string
+          parameters:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
+      publicKeyJwk:
+        type: string
+      publicKeyMultibase:
+        type: string
+  beheroes.doxchain.did.v1beta1.VerificationRelationship:
+    type: object
+    properties:
+      referenced:
+        type: array
+        items:
+          type: object
+          properties:
+            creator:
+              type: string
+            url:
+              type: string
+            methodName:
+              type: string
+            methodId:
+              type: string
+            path:
+              type: string
+            fragment:
+              type: string
+            query:
+              type: string
+            parameters:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  value:
+                    type: string
+      embedded:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: object
+              properties:
+                creator:
+                  type: string
+                url:
+                  type: string
+                methodName:
+                  type: string
+                methodId:
+                  type: string
+                path:
+                  type: string
+                fragment:
+                  type: string
+                query:
+                  type: string
+                parameters:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      value:
+                        type: string
+            type:
+              type: string
+            controller:
+              type: object
+              properties:
+                creator:
+                  type: string
+                url:
+                  type: string
+                methodName:
+                  type: string
+                methodId:
+                  type: string
+                path:
+                  type: string
+                fragment:
+                  type: string
+                query:
+                  type: string
+                parameters:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      value:
+                        type: string
+            publicKeyJwk:
+              type: string
+            publicKeyMultibase:
+              type: string
+  beheroes.doxchain.idp.v1beta1.ClientRegistration:
+    type: object
+    properties:
+      id:
+        type: object
+        properties:
+          creator:
+            type: string
+          url:
+            type: string
+          methodName:
+            type: string
+          methodId:
+            type: string
+          path:
+            type: string
+          fragment:
+            type: string
+          query:
+            type: string
+          parameters:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
+      appId:
+        type: object
+        properties:
+          creator:
+            type: string
+          url:
+            type: string
+          methodName:
+            type: string
+          methodId:
+            type: string
+          path:
+            type: string
+          fragment:
+            type: string
+          query:
+            type: string
+          parameters:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
+      name:
+        type: string
+      appRoles:
+        type: array
+        items:
+          type: string
+      accessTokenAcceptedVersion:
+        type: integer
+        format: int64
+      allowPublicClient:
+        type: integer
+        format: int64
+      replyUrls:
+        type: array
+        items:
+          type: string
+      tags:
+        type: array
+        items:
+          type: string
+      accessClientList:
+        type: object
+        properties:
+          owner:
+            type: object
+            properties:
+              creator:
+                type: string
+              url:
+                type: string
+              methodName:
+                type: string
+              methodId:
+                type: string
+              path:
+                type: string
+              fragment:
+                type: string
+              query:
+                type: string
+              parameters:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    value:
+                      type: string
+          entries:
+            type: array
+            items:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    creator:
+                      type: string
+                    url:
+                      type: string
+                    methodName:
+                      type: string
+                    methodId:
+                      type: string
+                    path:
+                      type: string
+                    fragment:
+                      type: string
+                    query:
+                      type: string
+                    parameters:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          value:
+                            type: string
+                canRead:
+                  type: boolean
+                canWrite:
+                  type: boolean
+                canExecute:
+                  type: boolean
+  beheroes.doxchain.idp.v1beta1.ClientRegistrationRegistry:
+    type: object
+    properties:
+      owner:
+        type: object
+        properties:
+          creator:
+            type: string
+          url:
+            type: string
+          methodName:
+            type: string
+          methodId:
+            type: string
+          path:
+            type: string
+          fragment:
+            type: string
+          query:
+            type: string
+          parameters:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
+      registrations:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: object
+              properties:
+                creator:
+                  type: string
+                url:
+                  type: string
+                methodName:
+                  type: string
+                methodId:
+                  type: string
+                path:
+                  type: string
+                fragment:
+                  type: string
+                query:
+                  type: string
+                parameters:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      value:
+                        type: string
+            appId:
+              type: object
+              properties:
+                creator:
+                  type: string
+                url:
+                  type: string
+                methodName:
+                  type: string
+                methodId:
+                  type: string
+                path:
+                  type: string
+                fragment:
+                  type: string
+                query:
+                  type: string
+                parameters:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      value:
+                        type: string
+            name:
+              type: string
+            appRoles:
+              type: array
+              items:
+                type: string
+            accessTokenAcceptedVersion:
+              type: integer
+              format: int64
+            allowPublicClient:
+              type: integer
+              format: int64
+            replyUrls:
+              type: array
+              items:
+                type: string
+            tags:
+              type: array
+              items:
+                type: string
+            accessClientList:
+              type: object
+              properties:
+                owner:
+                  type: object
+                  properties:
+                    creator:
+                      type: string
+                    url:
+                      type: string
+                    methodName:
+                      type: string
+                    methodId:
+                      type: string
+                    path:
+                      type: string
+                    fragment:
+                      type: string
+                    query:
+                      type: string
+                    parameters:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          value:
+                            type: string
+                entries:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      user:
+                        type: object
+                        properties:
+                          creator:
+                            type: string
+                          url:
+                            type: string
+                          methodName:
+                            type: string
+                          methodId:
+                            type: string
+                          path:
+                            type: string
+                          fragment:
+                            type: string
+                          query:
+                            type: string
+                          parameters:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                value:
+                                  type: string
+                      canRead:
+                        type: boolean
+                      canWrite:
+                        type: boolean
+                      canExecute:
+                        type: boolean
+  beheroes.doxchain.idp.v1beta1.ClientRegistrationRelationshipRegistryEntry:
+    type: object
+    properties:
+      owner:
+        type: object
+        properties:
+          creator:
+            type: string
+          url:
+            type: string
+          methodName:
+            type: string
+          methodId:
+            type: string
+          path:
+            type: string
+          fragment:
+            type: string
+          query:
+            type: string
+          parameters:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
+      destination:
+        type: object
+        properties:
+          creator:
+            type: string
+          url:
+            type: string
+          methodName:
+            type: string
+          methodId:
+            type: string
+          path:
+            type: string
+          fragment:
+            type: string
+          query:
+            type: string
+          parameters:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
+      accessClientList:
+        type: object
+        properties:
+          owner:
+            type: object
+            properties:
+              creator:
+                type: string
+              url:
+                type: string
+              methodName:
+                type: string
+              methodId:
+                type: string
+              path:
+                type: string
+              fragment:
+                type: string
+              query:
+                type: string
+              parameters:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    value:
+                      type: string
+          entries:
+            type: array
+            items:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    creator:
+                      type: string
+                    url:
+                      type: string
+                    methodName:
+                      type: string
+                    methodId:
+                      type: string
+                    path:
+                      type: string
+                    fragment:
+                      type: string
+                    query:
+                      type: string
+                    parameters:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          value:
+                            type: string
+                canRead:
+                  type: boolean
+                canWrite:
+                  type: boolean
+                canExecute:
+                  type: boolean
+  beheroes.doxchain.idp.v1beta1.MsgAuthenticationResponse:
     type: object
     properties:
       token:
         type: string
-  beheroes.doxchain.idp.Params:
+  beheroes.doxchain.idp.v1beta1.MsgCreateClientRegistrationRegistryResponse:
     type: object
-    description: Params defines the parameters for the module.
-  beheroes.doxchain.idp.QueryGetDotWellKnownResponse:
+  beheroes.doxchain.idp.v1beta1.MsgCreateClientRegistrationRelationshipResponse:
+    type: object
+  beheroes.doxchain.idp.v1beta1.MsgCreateClientRegistrationResponse:
+    type: object
+  beheroes.doxchain.idp.v1beta1.MsgDeleteClientRegistrationRegistryResponse:
+    type: object
+  beheroes.doxchain.idp.v1beta1.MsgDeleteClientRegistrationRelationshipResponse:
+    type: object
+  beheroes.doxchain.idp.v1beta1.MsgDeleteClientRegistrationResponse:
+    type: object
+  beheroes.doxchain.idp.v1beta1.MsgUpdateClientRegistrationRegistryResponse:
+    type: object
+  beheroes.doxchain.idp.v1beta1.MsgUpdateClientRegistrationResponse:
+    type: object
+  beheroes.doxchain.idp.v1beta1.Params:
+    type: object
+  beheroes.doxchain.idp.v1beta1.QueryAllClientRegistrationRegistryResponse:
+    type: object
+    properties:
+      clientRegistrationRegistry:
+        type: array
+        items:
+          type: object
+          properties:
+            owner:
+              type: object
+              properties:
+                creator:
+                  type: string
+                url:
+                  type: string
+                methodName:
+                  type: string
+                methodId:
+                  type: string
+                path:
+                  type: string
+                fragment:
+                  type: string
+                query:
+                  type: string
+                parameters:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      value:
+                        type: string
+            registrations:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: object
+                    properties:
+                      creator:
+                        type: string
+                      url:
+                        type: string
+                      methodName:
+                        type: string
+                      methodId:
+                        type: string
+                      path:
+                        type: string
+                      fragment:
+                        type: string
+                      query:
+                        type: string
+                      parameters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            value:
+                              type: string
+                  appId:
+                    type: object
+                    properties:
+                      creator:
+                        type: string
+                      url:
+                        type: string
+                      methodName:
+                        type: string
+                      methodId:
+                        type: string
+                      path:
+                        type: string
+                      fragment:
+                        type: string
+                      query:
+                        type: string
+                      parameters:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            value:
+                              type: string
+                  name:
+                    type: string
+                  appRoles:
+                    type: array
+                    items:
+                      type: string
+                  accessTokenAcceptedVersion:
+                    type: integer
+                    format: int64
+                  allowPublicClient:
+                    type: integer
+                    format: int64
+                  replyUrls:
+                    type: array
+                    items:
+                      type: string
+                  tags:
+                    type: array
+                    items:
+                      type: string
+                  accessClientList:
+                    type: object
+                    properties:
+                      owner:
+                        type: object
+                        properties:
+                          creator:
+                            type: string
+                          url:
+                            type: string
+                          methodName:
+                            type: string
+                          methodId:
+                            type: string
+                          path:
+                            type: string
+                          fragment:
+                            type: string
+                          query:
+                            type: string
+                          parameters:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                value:
+                                  type: string
+                      entries:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            user:
+                              type: object
+                              properties:
+                                creator:
+                                  type: string
+                                url:
+                                  type: string
+                                methodName:
+                                  type: string
+                                methodId:
+                                  type: string
+                                path:
+                                  type: string
+                                fragment:
+                                  type: string
+                                query:
+                                  type: string
+                                parameters:
+                                  type: array
+                                  items:
+                                    type: object
+                                    properties:
+                                      name:
+                                        type: string
+                                      value:
+                                        type: string
+                            canRead:
+                              type: boolean
+                            canWrite:
+                              type: boolean
+                            canExecute:
+                              type: boolean
+      pagination:
+        type: object
+        properties:
+          next_key:
+            type: string
+            format: byte
+            description: |-
+              next_key is the key to be passed to PageRequest.key to
+              query the next page most efficiently. It will be empty if
+              there are no more results.
+          total:
+            type: string
+            format: uint64
+            title: >-
+              total is total number of results available if
+              PageRequest.count_total
+
+              was set, its value is undefined otherwise
+        description: |-
+          PageResponse is to be embedded in gRPC response messages where the
+          corresponding request message has used PageRequest.
+
+           message SomeResponse {
+                   repeated Bar results = 1;
+                   PageResponse page = 2;
+           }
+  beheroes.doxchain.idp.v1beta1.QueryGetClientRegistrationRegistryResponse:
+    type: object
+    properties:
+      clientRegistrationRegistry:
+        type: object
+        properties:
+          owner:
+            type: object
+            properties:
+              creator:
+                type: string
+              url:
+                type: string
+              methodName:
+                type: string
+              methodId:
+                type: string
+              path:
+                type: string
+              fragment:
+                type: string
+              query:
+                type: string
+              parameters:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    value:
+                      type: string
+          registrations:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: object
+                  properties:
+                    creator:
+                      type: string
+                    url:
+                      type: string
+                    methodName:
+                      type: string
+                    methodId:
+                      type: string
+                    path:
+                      type: string
+                    fragment:
+                      type: string
+                    query:
+                      type: string
+                    parameters:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          value:
+                            type: string
+                appId:
+                  type: object
+                  properties:
+                    creator:
+                      type: string
+                    url:
+                      type: string
+                    methodName:
+                      type: string
+                    methodId:
+                      type: string
+                    path:
+                      type: string
+                    fragment:
+                      type: string
+                    query:
+                      type: string
+                    parameters:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          value:
+                            type: string
+                name:
+                  type: string
+                appRoles:
+                  type: array
+                  items:
+                    type: string
+                accessTokenAcceptedVersion:
+                  type: integer
+                  format: int64
+                allowPublicClient:
+                  type: integer
+                  format: int64
+                replyUrls:
+                  type: array
+                  items:
+                    type: string
+                tags:
+                  type: array
+                  items:
+                    type: string
+                accessClientList:
+                  type: object
+                  properties:
+                    owner:
+                      type: object
+                      properties:
+                        creator:
+                          type: string
+                        url:
+                          type: string
+                        methodName:
+                          type: string
+                        methodId:
+                          type: string
+                        path:
+                          type: string
+                        fragment:
+                          type: string
+                        query:
+                          type: string
+                        parameters:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              value:
+                                type: string
+                    entries:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          user:
+                            type: object
+                            properties:
+                              creator:
+                                type: string
+                              url:
+                                type: string
+                              methodName:
+                                type: string
+                              methodId:
+                                type: string
+                              path:
+                                type: string
+                              fragment:
+                                type: string
+                              query:
+                                type: string
+                              parameters:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    name:
+                                      type: string
+                                    value:
+                                      type: string
+                          canRead:
+                            type: boolean
+                          canWrite:
+                            type: boolean
+                          canExecute:
+                            type: boolean
+  beheroes.doxchain.idp.v1beta1.QueryGetDotWellKnownResponse:
     type: object
     properties:
       issuer:
@@ -45209,60 +48945,153 @@ definitions:
         type: string
       uiLocalesSupported:
         type: string
-  beheroes.doxchain.idp.QueryParamsResponse:
+  beheroes.doxchain.idp.v1beta1.QueryParamsResponse:
     type: object
     properties:
       params:
-        description: params holds all the parameters of this module.
         type: object
-    description: QueryParamsResponse is response type for the Query/Params RPC method.
-  beheroes.doxchain.kyc.KYCRequest:
+  beheroes.doxchain.kyc.v1beta1.KYCRegistration:
     type: object
     properties:
-      firstName:
-        type: string
-      lastName:
-        type: string
-      approved:
-        type: boolean
-      creator:
-        type: string
-  beheroes.doxchain.kyc.MsgCreateKYCRequestResponse:
-    type: object
-  beheroes.doxchain.kyc.MsgDeleteKYCRequestResponse:
-    type: object
-  beheroes.doxchain.kyc.MsgUpdateKYCRequestResponse:
-    type: object
-  beheroes.doxchain.kyc.Params:
-    type: object
-    description: Params defines the parameters for the module.
-  beheroes.doxchain.kyc.QueryGetKYCRequestResponse:
-    type: object
-    properties:
-      KYCRequest:
+      owner:
         type: object
         properties:
-          firstName:
-            type: string
-          lastName:
-            type: string
-          approved:
-            type: boolean
           creator:
             type: string
-  beheroes.doxchain.kyc.QueryParamsResponse:
+          url:
+            type: string
+          methodName:
+            type: string
+          methodId:
+            type: string
+          path:
+            type: string
+          fragment:
+            type: string
+          query:
+            type: string
+          parameters:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
+      approved:
+        type: boolean
+  beheroes.doxchain.kyc.v1beta1.MsgApproveKYCRegistrationResponse:
+    type: object
+  beheroes.doxchain.kyc.v1beta1.MsgCreateKYCRegistrationResponse:
+    type: object
+  beheroes.doxchain.kyc.v1beta1.MsgDeleteKYCRegistrationResponse:
+    type: object
+  beheroes.doxchain.kyc.v1beta1.Params:
+    type: object
+    properties:
+      approvers:
+        type: array
+        items:
+          type: object
+          properties:
+            creator:
+              type: string
+            url:
+              type: string
+            methodName:
+              type: string
+            methodId:
+              type: string
+            path:
+              type: string
+            fragment:
+              type: string
+            query:
+              type: string
+            parameters:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  value:
+                    type: string
+  beheroes.doxchain.kyc.v1beta1.QueryGetKYCRegistrationResponse:
+    type: object
+    properties:
+      registration:
+        type: object
+        properties:
+          owner:
+            type: object
+            properties:
+              creator:
+                type: string
+              url:
+                type: string
+              methodName:
+                type: string
+              methodId:
+                type: string
+              path:
+                type: string
+              fragment:
+                type: string
+              query:
+                type: string
+              parameters:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    value:
+                      type: string
+          approved:
+            type: boolean
+  beheroes.doxchain.kyc.v1beta1.QueryParamsResponse:
     type: object
     properties:
       params:
-        description: params holds all the parameters of this module.
         type: object
-    description: QueryParamsResponse is response type for the Query/Params RPC method.
-  beheroes.doxchain.oauthtwo.MsgAuthorizeResponse:
+        properties:
+          approvers:
+            type: array
+            items:
+              type: object
+              properties:
+                creator:
+                  type: string
+                url:
+                  type: string
+                methodName:
+                  type: string
+                methodId:
+                  type: string
+                path:
+                  type: string
+                fragment:
+                  type: string
+                query:
+                  type: string
+                parameters:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      value:
+                        type: string
+  beheroes.doxchain.oauthtwo.v1beta1.MsgAuthorizeResponse:
     type: object
     properties:
       authorizationCode:
         type: string
-  beheroes.doxchain.oauthtwo.MsgDeviceCodeResponse:
+  beheroes.doxchain.oauthtwo.v1beta1.MsgDeviceCodeResponse:
     type: object
     properties:
       deviceCode:
@@ -45271,7 +49100,7 @@ definitions:
         type: string
       verification_uri:
         type: string
-  beheroes.doxchain.oauthtwo.MsgTokenResponse:
+  beheroes.doxchain.oauthtwo.v1beta1.MsgTokenResponse:
     type: object
     properties:
       accessToken:
@@ -45281,36 +49110,27 @@ definitions:
       expiresIn:
         type: string
         format: int64
-  beheroes.doxchain.oauthtwo.Params:
+  beheroes.doxchain.oauthtwo.v1beta1.Params:
     type: object
-    description: Params defines the parameters for the module.
-  beheroes.doxchain.oauthtwo.QueryParamsResponse:
+  beheroes.doxchain.oauthtwo.v1beta1.QueryParamsResponse:
     type: object
     properties:
       params:
-        description: params holds all the parameters of this module.
         type: object
-    description: QueryParamsResponse is response type for the Query/Params RPC method.
   beheroes.doxchain.oracle.Params:
     type: object
-    description: Params defines the parameters for the module.
   beheroes.doxchain.oracle.QueryParamsResponse:
     type: object
     properties:
       params:
-        description: params holds all the parameters of this module.
         type: object
-    description: QueryParamsResponse is response type for the Query/Params RPC method.
-  beheroes.doxchain.samltwo.Params:
+  beheroes.doxchain.samltwo.v1beta1.Params:
     type: object
-    description: Params defines the parameters for the module.
-  beheroes.doxchain.samltwo.QueryParamsResponse:
+  beheroes.doxchain.samltwo.v1beta1.QueryParamsResponse:
     type: object
     properties:
       params:
-        description: params holds all the parameters of this module.
         type: object
-    description: QueryParamsResponse is response type for the Query/Params RPC method.
   cosmos.auth.v1beta1.AddressBytesToStringResponse:
     type: object
     properties:
@@ -45982,83 +49802,6 @@ definitions:
             type: string
             format: uint64
     description: QueryParamsResponse is the response type for the Query/Params RPC method.
-  cosmos.base.query.v1beta1.PageRequest:
-    type: object
-    properties:
-      key:
-        type: string
-        format: byte
-        description: |-
-          key is a value returned in PageResponse.next_key to begin
-          querying the next page most efficiently. Only one of offset or key
-          should be set.
-      offset:
-        type: string
-        format: uint64
-        description: |-
-          offset is a numeric offset that can be used when key is unavailable.
-          It is less efficient than using key. Only one of offset or key should
-          be set.
-      limit:
-        type: string
-        format: uint64
-        description: >-
-          limit is the total number of results to be returned in the result
-          page.
-
-          If left empty it will default to a value to be set by each app.
-      count_total:
-        type: boolean
-        description: >-
-          count_total is set to true  to indicate that the result set should
-          include
-
-          a count of the total number of items available for pagination in UIs.
-
-          count_total is only respected when offset is used. It is ignored when
-          key
-
-          is set.
-      reverse:
-        type: boolean
-        description: >-
-          reverse is set to true if results are to be returned in the descending
-          order.
-
-
-          Since: cosmos-sdk 0.43
-    description: |-
-      message SomeRequest {
-               Foo some_parameter = 1;
-               PageRequest pagination = 2;
-       }
-    title: |-
-      PageRequest is to be embedded in gRPC request messages for efficient
-      pagination. Ex:
-  cosmos.base.query.v1beta1.PageResponse:
-    type: object
-    properties:
-      next_key:
-        type: string
-        format: byte
-        description: |-
-          next_key is the key to be passed to PageRequest.key to
-          query the next page most efficiently. It will be empty if
-          there are no more results.
-      total:
-        type: string
-        format: uint64
-        title: |-
-          total is total number of results available if PageRequest.count_total
-          was set, its value is undefined otherwise
-    description: |-
-      PageResponse is to be embedded in gRPC response messages where the
-      corresponding request message has used PageRequest.
-
-       message SomeResponse {
-               repeated Bar results = 1;
-               PageResponse page = 2;
-       }
   cosmos.authz.v1beta1.Grant:
     type: object
     properties:
@@ -47708,18 +51451,6 @@ definitions:
     description: |-
       SendEnabled maps coin denom to a send_enabled status (whether a denom is
       sendable).
-  cosmos.base.v1beta1.Coin:
-    type: object
-    properties:
-      denom:
-        type: string
-      amount:
-        type: string
-    description: |-
-      Coin defines a token with a denomination and an amount.
-
-      NOTE: The amount field is an Int which implements the custom method
-      signatures required by gogoproto.
   cosmos.base.node.v1beta1.ConfigResponse:
     type: object
     properties:
@@ -67913,342 +71644,13 @@ definitions:
             NOTE: The amount field is an Int which implements the custom method
             signatures required by gogoproto.
     description: Period defines a length of time and amount of coins that will vest.
-  doxchain.abs.MsgCreatePartitionedPoolRegistryResponse:
-    type: object
-  doxchain.abs.MsgUpdateBreakFactorResponse:
-    type: object
-  doxchain.abs.Params:
-    type: object
-    description: Params defines the parameters for the module.
-  doxchain.abs.PartitionedPool:
-    type: object
-    properties:
-      denom:
-        type: string
-  doxchain.abs.PartitionedPoolRegistry:
-    type: object
-    properties:
-      creator:
-        type: string
-      pools:
-        type: array
-        items:
-          type: object
-          properties:
-            denom:
-              type: string
-  doxchain.abs.QueryAllPartitionedPoolRegistriesResponse:
-    type: object
-    properties:
-      partitionedPoolRegistries:
-        type: array
-        items:
-          type: object
-          properties:
-            creator:
-              type: string
-            pools:
-              type: array
-              items:
-                type: object
-                properties:
-                  denom:
-                    type: string
-      pagination:
-        type: object
-        properties:
-          next_key:
-            type: string
-            format: byte
-            description: |-
-              next_key is the key to be passed to PageRequest.key to
-              query the next page most efficiently. It will be empty if
-              there are no more results.
-          total:
-            type: string
-            format: uint64
-            title: >-
-              total is total number of results available if
-              PageRequest.count_total
-
-              was set, its value is undefined otherwise
-        description: |-
-          PageResponse is to be embedded in gRPC response messages where the
-          corresponding request message has used PageRequest.
-
-           message SomeResponse {
-                   repeated Bar results = 1;
-                   PageResponse page = 2;
-           }
-  doxchain.abs.QueryBreakFactorResponse:
-    type: object
-    properties:
-      value:
-        type: string
-  doxchain.abs.QueryGetPartitionedPoolRegistryResponse:
-    type: object
-    properties:
-      partitionedPoolRegistry:
-        type: object
-        properties:
-          creator:
-            type: string
-          pools:
-            type: array
-            items:
-              type: object
-              properties:
-                denom:
-                  type: string
-  doxchain.abs.QueryParamsResponse:
-    type: object
-    properties:
-      params:
-        description: params holds all the parameters of this module.
-        type: object
-    description: QueryParamsResponse is response type for the Query/Params RPC method.
-  doxchain.abs.QueryWatchlistResponse:
-    type: object
-    properties:
-      watchlist:
-        type: object
-        properties:
-          entries:
-            type: array
-            items:
-              type: object
-              properties:
-                address:
-                  type: string
-                blockHeight:
-                  type: string
-                  format: uint64
-                coins:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      denom:
-                        type: string
-                      amount:
-                        type: string
-                    description: >-
-                      Coin defines a token with a denomination and an amount.
-
-
-                      NOTE: The amount field is an Int which implements the
-                      custom method
-
-                      signatures required by gogoproto.
-  doxchain.abs.Watchlist:
-    type: object
-    properties:
-      entries:
-        type: array
-        items:
-          type: object
-          properties:
-            address:
-              type: string
-            blockHeight:
-              type: string
-              format: uint64
-            coins:
-              type: array
-              items:
-                type: object
-                properties:
-                  denom:
-                    type: string
-                  amount:
-                    type: string
-                description: >-
-                  Coin defines a token with a denomination and an amount.
-
-
-                  NOTE: The amount field is an Int which implements the custom
-                  method
-
-                  signatures required by gogoproto.
-  doxchain.abs.WatchlistEntry:
-    type: object
-    properties:
-      address:
-        type: string
-      blockHeight:
-        type: string
-        format: uint64
-      coins:
-        type: array
-        items:
-          type: object
-          properties:
-            denom:
-              type: string
-            amount:
-              type: string
-          description: |-
-            Coin defines a token with a denomination and an amount.
-
-            NOTE: The amount field is an Int which implements the custom method
-            signatures required by gogoproto.
-  doxchain.did.Did:
-    type: object
-    properties:
-      creator:
-        type: string
-      url:
-        type: string
-      methodName:
-        type: string
-      methodId:
-        type: string
-      path:
-        type: string
-      fragment:
-        type: string
-      query:
-        type: string
-      parameters:
-        type: array
-        items:
-          type: object
-          properties:
-            name:
-              type: string
-            value:
-              type: string
-      id:
-        type: string
-        format: uint64
-  doxchain.did.DidParameter:
-    type: object
-    properties:
-      name:
-        type: string
-      value:
-        type: string
-  doxchain.did.MsgCreateDidResponse:
-    type: object
-    properties:
-      fullyQualifiedDidIdentifier:
-        type: string
-  doxchain.did.MsgDeleteDidResponse:
-    type: object
-  doxchain.did.MsgUpdateDidResponse:
-    type: object
-  doxchain.did.Params:
-    type: object
-    description: Params defines the parameters for the module.
-  doxchain.did.QueryAllDidResponse:
-    type: object
-    properties:
-      Did:
-        type: array
-        items:
-          type: object
-          properties:
-            creator:
-              type: string
-            url:
-              type: string
-            methodName:
-              type: string
-            methodId:
-              type: string
-            path:
-              type: string
-            fragment:
-              type: string
-            query:
-              type: string
-            parameters:
-              type: array
-              items:
-                type: object
-                properties:
-                  name:
-                    type: string
-                  value:
-                    type: string
-            id:
-              type: string
-              format: uint64
-      pagination:
-        type: object
-        properties:
-          next_key:
-            type: string
-            format: byte
-            description: |-
-              next_key is the key to be passed to PageRequest.key to
-              query the next page most efficiently. It will be empty if
-              there are no more results.
-          total:
-            type: string
-            format: uint64
-            title: >-
-              total is total number of results available if
-              PageRequest.count_total
-
-              was set, its value is undefined otherwise
-        description: |-
-          PageResponse is to be embedded in gRPC response messages where the
-          corresponding request message has used PageRequest.
-
-           message SomeResponse {
-                   repeated Bar results = 1;
-                   PageResponse page = 2;
-           }
-  doxchain.did.QueryGetDidResponse:
-    type: object
-    properties:
-      Did:
-        type: object
-        properties:
-          creator:
-            type: string
-          url:
-            type: string
-          methodName:
-            type: string
-          methodId:
-            type: string
-          path:
-            type: string
-          fragment:
-            type: string
-          query:
-            type: string
-          parameters:
-            type: array
-            items:
-              type: object
-              properties:
-                name:
-                  type: string
-                value:
-                  type: string
-          id:
-            type: string
-            format: uint64
-  doxchain.did.QueryParamsResponse:
-    type: object
-    properties:
-      params:
-        description: params holds all the parameters of this module.
-        type: object
-    description: QueryParamsResponse is response type for the Query/Params RPC method.
   doxchain.doxchain.Params:
     type: object
-    description: Params defines the parameters for the module.
   doxchain.doxchain.QueryParamsResponse:
     type: object
     properties:
       params:
-        description: params holds all the parameters of this module.
         type: object
-    description: QueryParamsResponse is response type for the Query/Params RPC method.
   ibc.applications.interchain_accounts.controller.v1.MsgRegisterInterchainAccountResponse:
     type: object
     properties:

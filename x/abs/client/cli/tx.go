@@ -6,9 +6,8 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/cosmos/cosmos-sdk/client"
-	// "github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/be-heroes/doxchain/x/abs/types"
+	"github.com/cosmos/cosmos-sdk/client"
 )
 
 var (
@@ -20,7 +19,6 @@ const (
 	listSeparator              = ","
 )
 
-// GetTxCmd returns the transaction commands for this module
 func GetTxCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:                        types.ModuleName,
@@ -32,7 +30,6 @@ func GetTxCmd() *cobra.Command {
 
 	cmd.AddCommand(CmdUpdateBreakFactor())
 	cmd.AddCommand(CmdCreatePartitionedPoolRegistry())
-// this line is used by starport scaffolding # 1
 
 	return cmd
 }

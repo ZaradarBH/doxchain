@@ -19,23 +19,17 @@ type (
 		memKey     storetypes.StoreKey
 		paramstore paramtypes.Subspace
 
-		oauthTwoKeeper types.OAuthTwoKeeper
 		authzKeeper    types.AuthzKeeper
 		evidenceKeeper types.EvidenceKeeper
 	}
 )
 
-//TODO: Implement AppRegistration concept for ClientId
-//TODO: Implement ClientId2ClientId ACL concept to infer audience relationships
-//TODO: Implement IDP metadata logic
-//TODO: Implement validation concept for ClientId and Scope
 func NewKeeper(
 	cdc codec.BinaryCodec,
 	storeKey,
 	memKey storetypes.StoreKey,
 	ps paramtypes.Subspace,
 
-	oauthTwoKeeper types.OAuthTwoKeeper,
 	authzKeeper types.AuthzKeeper,
 	evidenceKeeper types.EvidenceKeeper,
 ) *Keeper {
@@ -50,7 +44,6 @@ func NewKeeper(
 		memKey:     memKey,
 		paramstore: ps,
 
-		oauthTwoKeeper: oauthTwoKeeper,
 		authzKeeper:    authzKeeper,
 		evidenceKeeper: evidenceKeeper,
 	}

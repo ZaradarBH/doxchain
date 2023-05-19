@@ -19,36 +19,34 @@ func TestGenesisState_Validate(t *testing.T) {
 			valid:    true,
 		},
 		{
-			desc:     "valid genesis state",
+			desc: "valid genesis state",
 			genState: &types.GenesisState{
 
-				PartitionedPoolsList: []types.PartitionedPools{
-	{
-		Index: "0",
-},
-	{
-		Index: "1",
-},
-},
-// this line is used by starport scaffolding # types/genesis/validField
+				PartitionedPoolRegistries: []types.PartitionedPoolRegistry{
+					{
+						Creator: "0",
+					},
+					{
+						Creator: "1",
+					},
+				},
 			},
 			valid: true,
 		},
 		{
-	desc:     "duplicated partitionedPools",
-	genState: &types.GenesisState{
-		PartitionedPoolsList: []types.PartitionedPools{
-			{
-				Index: "0",
-},
-			{
-				Index: "0",
-},
+			desc: "duplicated partitionedPools",
+			genState: &types.GenesisState{
+				PartitionedPoolRegistries: []types.PartitionedPoolRegistry{
+					{
+						Creator: "0",
+					},
+					{
+						Creator: "0",
+					},
+				},
+			},
+			valid: false,
 		},
-	},
-	valid:    false,
-},
-// this line is used by starport scaffolding # types/genesis/testcase
 	} {
 		t.Run(tc.desc, func(t *testing.T) {
 			err := tc.genState.Validate()

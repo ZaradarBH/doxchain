@@ -9,19 +9,19 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func CmdShowAMLRequest() *cobra.Command {
+func CmdShowAMLRegistration() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "show-aml-request",
-		Short: "shows AMLRequest",
+		Short: "shows AMLRegistration",
 		Args:  cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx := client.GetClientContextFromCmd(cmd)
 
 			queryClient := types.NewQueryClient(clientCtx)
 
-			params := &types.QueryGetAMLRequestRequest{}
+			params := &types.QueryGetAMLRegistrationRequest{}
 
-			res, err := queryClient.AMLRequest(context.Background(), params)
+			res, err := queryClient.AMLRegistration(context.Background(), params)
 			if err != nil {
 				return err
 			}

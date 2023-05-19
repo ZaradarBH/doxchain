@@ -1,7 +1,0 @@
-syntax = "proto3";
-package beheroes.doxchain.oracle;
-
-option go_package = "github.com/be-heroes/doxchain/x/oracle/types";
-
-// Msg defines the Msg service.
-service Msg {}

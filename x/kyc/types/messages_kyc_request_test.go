@@ -8,21 +8,21 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestMsgCreateKYCRequest_ValidateBasic(t *testing.T) {
+func TestMsgCreateKYCRegistration_ValidateBasic(t *testing.T) {
 	tests := []struct {
 		name string
-		msg  MsgCreateKYCRequest
+		msg  MsgCreateKYCRegistration
 		err  error
 	}{
 		{
 			name: "invalid address",
-			msg: MsgCreateKYCRequest{
+			msg: MsgCreateKYCRegistration{
 				Creator: "invalid_address",
 			},
 			err: sdkerrors.ErrInvalidAddress,
 		}, {
 			name: "valid address",
-			msg: MsgCreateKYCRequest{
+			msg: MsgCreateKYCRegistration{
 				Creator: sample.AccAddress(),
 			},
 		},
@@ -39,21 +39,21 @@ func TestMsgCreateKYCRequest_ValidateBasic(t *testing.T) {
 	}
 }
 
-func TestMsgUpdateKYCRequest_ValidateBasic(t *testing.T) {
+func TestMsgUpdateKYCRegistration_ValidateBasic(t *testing.T) {
 	tests := []struct {
 		name string
-		msg  MsgUpdateKYCRequest
+		msg  MsgUpdateKYCRegistration
 		err  error
 	}{
 		{
 			name: "invalid address",
-			msg: MsgUpdateKYCRequest{
+			msg: MsgUpdateKYCRegistration{
 				Creator: "invalid_address",
 			},
 			err: sdkerrors.ErrInvalidAddress,
 		}, {
 			name: "valid address",
-			msg: MsgUpdateKYCRequest{
+			msg: MsgUpdateKYCRegistration{
 				Creator: sample.AccAddress(),
 			},
 		},
@@ -70,21 +70,21 @@ func TestMsgUpdateKYCRequest_ValidateBasic(t *testing.T) {
 	}
 }
 
-func TestMsgDeleteKYCRequest_ValidateBasic(t *testing.T) {
+func TestMsgDeleteKYCRegistration_ValidateBasic(t *testing.T) {
 	tests := []struct {
 		name string
-		msg  MsgDeleteKYCRequest
+		msg  MsgDeleteKYCRegistration
 		err  error
 	}{
 		{
 			name: "invalid address",
-			msg: MsgDeleteKYCRequest{
+			msg: MsgDeleteKYCRegistration{
 				Creator: "invalid_address",
 			},
 			err: sdkerrors.ErrInvalidAddress,
 		}, {
 			name: "valid address",
-			msg: MsgDeleteKYCRequest{
+			msg: MsgDeleteKYCRegistration{
 				Creator: sample.AccAddress(),
 			},
 		},

@@ -4,20 +4,23 @@ import (
 	"context"
 
 	"github.com/be-heroes/doxchain/x/abs/types"
+	didTypes "github.com/be-heroes/doxchain/x/did/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 func (k msgServer) UpdateBreakFactor(goCtx context.Context, msg *types.MsgUpdateBreakFactorRequest) (*types.MsgUpdateBreakFactorResponse, error) {
-	decValue, err := sdk.NewDecFromStr(msg.Value)
+	ctx := sdk.UnwrapSDKContext(goCtx)
+	
+	var operators []didTypes.Did
 
-	if err != nil {
-		return nil, err
-	}
+	k.Keeper.paramstore.Get(ctx, types.ParamStoreKeyOperators, &operators)
 
-	err = k.Keeper.SetBreakFactor(sdk.UnwrapSDKContext(goCtx), decValue)
+	for _, operatorId := range operators {
+		if operatorId.Creator == msg.Creator {
+			k.Keeper.SetBreakFactor(ctx, msg.BreakFactor)
 
-	if err != nil {
-		return nil, err
+			break;
+		}
 	}
 
 	return &types.MsgUpdateBreakFactorResponse{}, nil
