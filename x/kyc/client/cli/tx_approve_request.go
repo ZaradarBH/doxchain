@@ -12,10 +12,10 @@ import (
 
 var _ = strconv.Itoa(0)
 
-func CmdApproveKYCRequest() *cobra.Command {
+func CmdApproveKYCRegistration() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "approve-kyc-request",
-		Short: "Broadcast message ApproveKYCRequest",
+		Short: "Broadcast message ApproveKYCRegistration",
 		Args:  cobra.ExactArgs(0),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
       		
@@ -24,7 +24,7 @@ func CmdApproveKYCRequest() *cobra.Command {
 				return err
 			}
 
-			msg := types.NewMsgApproveKYCRequest(
+			msg := types.NewMsgApproveKYCRegistration(
 				clientCtx.GetFromAddress().String(),
 				
 			)

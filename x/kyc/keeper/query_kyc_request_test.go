@@ -13,20 +13,20 @@ import (
 	"github.com/be-heroes/doxchain/x/kyc/types"
 )
 
-func TestKYCRequestQuery(t *testing.T) {
+func TestKYCRegistrationQuery(t *testing.T) {
 	keeper, ctx := keepertest.KycKeeper(t)
 	wctx := sdk.WrapSDKContext(ctx)
-	item := createTestKYCRequest(keeper, ctx)
+	item := createTestKYCRegistration(keeper, ctx)
 	for _, tc := range []struct {
 		desc     string
-		request  *types.QueryGetKYCRequestRequest
-		response *types.QueryGetKYCRequestResponse
+		request  *types.QueryGetKYCRegistrationRequest
+		response *types.QueryGetKYCRegistrationResponse
 		err      error
 	}{
 		{
 			desc:     "First",
-			request:  &types.QueryGetKYCRequestRequest{},
-			response: &types.QueryGetKYCRequestResponse{KYCRequest: item},
+			request:  &types.QueryGetKYCRegistrationRequest{},
+			response: &types.QueryGetKYCRegistrationResponse{KYCRegistration: item},
 		},
 		{
 			desc: "InvalidRequest",
@@ -34,7 +34,7 @@ func TestKYCRequestQuery(t *testing.T) {
 		},
 	} {
 		t.Run(tc.desc, func(t *testing.T) {
-			response, err := keeper.KYCRequest(wctx, tc.request)
+			response, err := keeper.KYCRegistration(wctx, tc.request)
 			if tc.err != nil {
 				require.ErrorIs(t, err, tc.err)
 			} else {

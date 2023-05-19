@@ -110,22 +110,22 @@ func (m *QueryParamsResponse) GetParams() Params {
 	return Params{}
 }
 
-type QueryGetKYCRequestRequest struct {
+type QueryGetKYCRegistrationRequest struct {
 	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 }
 
-func (m *QueryGetKYCRequestRequest) Reset()         { *m = QueryGetKYCRequestRequest{} }
-func (m *QueryGetKYCRequestRequest) String() string { return proto.CompactTextString(m) }
-func (*QueryGetKYCRequestRequest) ProtoMessage()    {}
-func (*QueryGetKYCRequestRequest) Descriptor() ([]byte, []int) {
+func (m *QueryGetKYCRegistrationRequest) Reset()         { *m = QueryGetKYCRegistrationRequest{} }
+func (m *QueryGetKYCRegistrationRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryGetKYCRegistrationRequest) ProtoMessage()    {}
+func (*QueryGetKYCRegistrationRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_f52b05ef9968ac13, []int{2}
 }
-func (m *QueryGetKYCRequestRequest) XXX_Unmarshal(b []byte) error {
+func (m *QueryGetKYCRegistrationRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *QueryGetKYCRequestRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *QueryGetKYCRegistrationRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_QueryGetKYCRequestRequest.Marshal(b, m, deterministic)
+		return xxx_messageInfo_QueryGetKYCRegistrationRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -135,41 +135,41 @@ func (m *QueryGetKYCRequestRequest) XXX_Marshal(b []byte, deterministic bool) ([
 		return b[:n], nil
 	}
 }
-func (m *QueryGetKYCRequestRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryGetKYCRequestRequest.Merge(m, src)
+func (m *QueryGetKYCRegistrationRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGetKYCRegistrationRequest.Merge(m, src)
 }
-func (m *QueryGetKYCRequestRequest) XXX_Size() int {
+func (m *QueryGetKYCRegistrationRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *QueryGetKYCRequestRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryGetKYCRequestRequest.DiscardUnknown(m)
+func (m *QueryGetKYCRegistrationRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGetKYCRegistrationRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_QueryGetKYCRequestRequest proto.InternalMessageInfo
+var xxx_messageInfo_QueryGetKYCRegistrationRequest proto.InternalMessageInfo
 
-func (m *QueryGetKYCRequestRequest) GetCreator() string {
+func (m *QueryGetKYCRegistrationRequest) GetCreator() string {
 	if m != nil {
 		return m.Creator
 	}
 	return ""
 }
 
-type QueryGetKYCRequestResponse struct {
-	Request KYCRequest `protobuf:"bytes,1,opt,name=Request,proto3" json:"Request"`
+type QueryGetKYCRegistrationResponse struct {
+	Request KYCRegistration `protobuf:"bytes,1,opt,name=Request,proto3" json:"Request"`
 }
 
-func (m *QueryGetKYCRequestResponse) Reset()         { *m = QueryGetKYCRequestResponse{} }
-func (m *QueryGetKYCRequestResponse) String() string { return proto.CompactTextString(m) }
-func (*QueryGetKYCRequestResponse) ProtoMessage()    {}
-func (*QueryGetKYCRequestResponse) Descriptor() ([]byte, []int) {
+func (m *QueryGetKYCRegistrationResponse) Reset()         { *m = QueryGetKYCRegistrationResponse{} }
+func (m *QueryGetKYCRegistrationResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryGetKYCRegistrationResponse) ProtoMessage()    {}
+func (*QueryGetKYCRegistrationResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_f52b05ef9968ac13, []int{3}
 }
-func (m *QueryGetKYCRequestResponse) XXX_Unmarshal(b []byte) error {
+func (m *QueryGetKYCRegistrationResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *QueryGetKYCRequestResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *QueryGetKYCRegistrationResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_QueryGetKYCRequestResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_QueryGetKYCRegistrationResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -179,62 +179,63 @@ func (m *QueryGetKYCRequestResponse) XXX_Marshal(b []byte, deterministic bool) (
 		return b[:n], nil
 	}
 }
-func (m *QueryGetKYCRequestResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryGetKYCRequestResponse.Merge(m, src)
+func (m *QueryGetKYCRegistrationResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGetKYCRegistrationResponse.Merge(m, src)
 }
-func (m *QueryGetKYCRequestResponse) XXX_Size() int {
+func (m *QueryGetKYCRegistrationResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *QueryGetKYCRequestResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryGetKYCRequestResponse.DiscardUnknown(m)
+func (m *QueryGetKYCRegistrationResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGetKYCRegistrationResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_QueryGetKYCRequestResponse proto.InternalMessageInfo
+var xxx_messageInfo_QueryGetKYCRegistrationResponse proto.InternalMessageInfo
 
-func (m *QueryGetKYCRequestResponse) GetRequest() KYCRequest {
+func (m *QueryGetKYCRegistrationResponse) GetRequest() KYCRegistration {
 	if m != nil {
 		return m.Request
 	}
-	return KYCRequest{}
+	return KYCRegistration{}
 }
 
 func init() {
 	proto.RegisterType((*QueryParamsRequest)(nil), "beheroes.doxchain.kyc.v1beta1.QueryParamsRequest")
 	proto.RegisterType((*QueryParamsResponse)(nil), "beheroes.doxchain.kyc.v1beta1.QueryParamsResponse")
-	proto.RegisterType((*QueryGetKYCRequestRequest)(nil), "beheroes.doxchain.kyc.v1beta1.QueryGetKYCRequestRequest")
-	proto.RegisterType((*QueryGetKYCRequestResponse)(nil), "beheroes.doxchain.kyc.v1beta1.QueryGetKYCRequestResponse")
+	proto.RegisterType((*QueryGetKYCRegistrationRequest)(nil), "beheroes.doxchain.kyc.v1beta1.QueryGetKYCRegistrationRequest")
+	proto.RegisterType((*QueryGetKYCRegistrationResponse)(nil), "beheroes.doxchain.kyc.v1beta1.QueryGetKYCRegistrationResponse")
 }
 
 func init() { proto.RegisterFile("doxchain/kyc/v1beta1/query.proto", fileDescriptor_f52b05ef9968ac13) }
 
 var fileDescriptor_f52b05ef9968ac13 = []byte{
-	// 413 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x92, 0xc1, 0x4e, 0xe2, 0x40,
-	0x1c, 0xc6, 0x5b, 0xb2, 0x0b, 0xd9, 0xd9, 0xdb, 0x2c, 0x07, 0xb6, 0xd1, 0x8a, 0x35, 0x10, 0xd1,
-	0xd8, 0x09, 0x18, 0x13, 0xbd, 0xc2, 0xc1, 0x18, 0x2f, 0xca, 0x4d, 0x2e, 0x66, 0x5a, 0x27, 0xa5,
-	0x41, 0x3a, 0xa5, 0x33, 0x18, 0x7a, 0xf5, 0x09, 0x4c, 0x3c, 0xf8, 0x16, 0x3e, 0x07, 0x47, 0xa2,
-	0x17, 0x4f, 0xc6, 0x80, 0x0f, 0x62, 0x98, 0x99, 0x8a, 0xc4, 0x2a, 0xea, 0xa9, 0xed, 0xcc, 0xf7,
-	0xfb, 0xbe, 0x6f, 0xfe, 0x1d, 0x50, 0x3c, 0xa3, 0x03, 0xb7, 0x8d, 0xfd, 0x00, 0x75, 0x62, 0x17,
-	0x5d, 0x54, 0x1d, 0xc2, 0x71, 0x15, 0xf5, 0xfa, 0x24, 0x8a, 0xed, 0x30, 0xa2, 0x9c, 0xc2, 0x65,
-	0x87, 0xb4, 0x49, 0x44, 0x09, 0xb3, 0x13, 0xa9, 0xdd, 0x89, 0x5d, 0x5b, 0x49, 0x8d, 0xbc, 0x47,
-	0x3d, 0x2a, 0x94, 0x68, 0xfa, 0x26, 0x21, 0x63, 0xc9, 0xa3, 0xd4, 0x3b, 0x27, 0x08, 0x87, 0x3e,
-	0xc2, 0x41, 0x40, 0x39, 0xe6, 0x3e, 0x0d, 0x98, 0xda, 0xdd, 0x70, 0x29, 0xeb, 0x52, 0x86, 0x1c,
-	0xcc, 0x88, 0xcc, 0x7a, 0x4d, 0x0e, 0xb1, 0xe7, 0x07, 0x42, 0xac, 0xb4, 0xab, 0xa9, 0x05, 0x43,
-	0x1c, 0xe1, 0x6e, 0x62, 0x57, 0x4e, 0x95, 0x74, 0x62, 0xf7, 0x34, 0x22, 0xbd, 0x3e, 0x61, 0x5c,
-	0xea, 0xac, 0x3c, 0x80, 0xc7, 0xd3, 0xb0, 0x23, 0x01, 0x37, 0xe5, 0x9e, 0xd5, 0x02, 0xff, 0xe6,
-	0x56, 0x59, 0x48, 0x03, 0x46, 0x60, 0x03, 0x64, 0x65, 0x48, 0x41, 0x2f, 0xea, 0xeb, 0x7f, 0x6b,
-	0x25, 0xfb, 0xd3, 0x39, 0xd8, 0x12, 0xaf, 0xff, 0x1a, 0x3e, 0xae, 0x68, 0x4d, 0x85, 0x5a, 0x3b,
-	0xe0, 0xbf, 0xf0, 0xde, 0x27, 0xfc, 0xf0, 0xa4, 0xa1, 0x12, 0xd5, 0x03, 0x16, 0x40, 0xce, 0x8d,
-	0x08, 0xe6, 0x34, 0x12, 0x11, 0x7f, 0x9a, 0xc9, 0xa7, 0xe5, 0x01, 0x23, 0x0d, 0x53, 0xcd, 0x0e,
-	0x40, 0x4e, 0x2d, 0xa9, 0x6a, 0x95, 0x05, 0xd5, 0x66, 0x1e, 0xaa, 0x5e, 0xc2, 0xd7, 0xee, 0x32,
-	0xe0, 0xb7, 0x48, 0x82, 0x37, 0x3a, 0xc8, 0xca, 0x23, 0xc0, 0xea, 0x02, 0xbb, 0xf7, 0x33, 0x34,
-	0x6a, 0xdf, 0x41, 0xe4, 0x31, 0xac, 0xf2, 0xe5, 0xfd, 0xf3, 0x75, 0xa6, 0x08, 0x4d, 0xe4, 0x90,
-	0x2d, 0x09, 0xa3, 0xb9, 0x1f, 0x29, 0x67, 0x08, 0x6f, 0x75, 0x00, 0x66, 0x27, 0x80, 0xbb, 0x5f,
-	0x89, 0x4a, 0x9b, 0xb7, 0xb1, 0xf7, 0x03, 0x52, 0x75, 0xdd, 0x14, 0x5d, 0x4b, 0x70, 0xed, 0xa3,
-	0xae, 0x6f, 0x2e, 0x5b, 0xbd, 0x31, 0x1c, 0x9b, 0xfa, 0x68, 0x6c, 0xea, 0x4f, 0x63, 0x53, 0xbf,
-	0x9a, 0x98, 0xda, 0x68, 0x62, 0x6a, 0x0f, 0x13, 0x53, 0x6b, 0x55, 0x3c, 0x9f, 0xb7, 0xfb, 0x8e,
-	0xed, 0xd2, 0x6e, 0x9a, 0xd1, 0x40, 0x58, 0xf1, 0x38, 0x24, 0xcc, 0xc9, 0x8a, 0x2b, 0xbb, 0xfd,
-	0x12, 0x00, 0x00, 0xff, 0xff, 0x5d, 0xd8, 0xfc, 0x5b, 0xa0, 0x03, 0x00, 0x00,
+	// 420 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x52, 0xbd, 0x6e, 0x1a, 0x31,
+	0x1c, 0xbf, 0x43, 0x2d, 0xa8, 0xee, 0x50, 0xc9, 0x65, 0x40, 0xa7, 0xd6, 0xd0, 0xab, 0x40, 0xfd,
+	0x50, 0x6d, 0x41, 0xb7, 0x4a, 0xed, 0x00, 0x43, 0x87, 0x4a, 0x55, 0x7b, 0x5b, 0x59, 0x2a, 0xdf,
+	0xd5, 0x3a, 0x4e, 0x94, 0xf3, 0x61, 0x9b, 0x8a, 0x5b, 0xfb, 0x04, 0x95, 0x3a, 0xe4, 0x69, 0xb2,
+	0x33, 0x22, 0x65, 0xc9, 0x14, 0x25, 0x90, 0x07, 0x89, 0xb0, 0x7d, 0x51, 0x20, 0x10, 0x92, 0x6c,
+	0x77, 0xf6, 0xef, 0xf3, 0xef, 0x3f, 0x68, 0xfc, 0xe2, 0xd3, 0x68, 0x40, 0x93, 0x94, 0x0c, 0xf3,
+	0x88, 0xfc, 0x69, 0x87, 0x4c, 0xd1, 0x36, 0x19, 0x4f, 0x98, 0xc8, 0x71, 0x26, 0xb8, 0xe2, 0xf0,
+	0x79, 0xc8, 0x06, 0x4c, 0x70, 0x26, 0x71, 0x01, 0xc5, 0xc3, 0x3c, 0xc2, 0x16, 0xea, 0x55, 0x63,
+	0x1e, 0x73, 0x8d, 0x24, 0xab, 0x2f, 0x43, 0xf2, 0x9e, 0xc5, 0x9c, 0xc7, 0xbf, 0x19, 0xa1, 0x59,
+	0x42, 0x68, 0x9a, 0x72, 0x45, 0x55, 0xc2, 0x53, 0x69, 0x6f, 0xdf, 0x44, 0x5c, 0x8e, 0xb8, 0x24,
+	0x21, 0x95, 0xcc, 0x78, 0x5d, 0x3a, 0x67, 0x34, 0x4e, 0x52, 0x0d, 0xb6, 0xd8, 0x17, 0x5b, 0x03,
+	0x66, 0x54, 0xd0, 0x51, 0x21, 0xd7, 0xda, 0x0a, 0x19, 0xe6, 0xd1, 0x4f, 0xc1, 0xc6, 0x13, 0x26,
+	0x95, 0xc1, 0xf9, 0x55, 0x00, 0xbf, 0xaf, 0xcc, 0xbe, 0x69, 0x72, 0x60, 0xee, 0xfc, 0x3e, 0x78,
+	0xba, 0x76, 0x2a, 0x33, 0x9e, 0x4a, 0x06, 0x7b, 0xa0, 0x6c, 0x4c, 0x6a, 0x6e, 0xc3, 0x7d, 0xf5,
+	0xb8, 0xd3, 0xc4, 0x37, 0xce, 0x01, 0x1b, 0x7a, 0xf7, 0xc1, 0xec, 0xa4, 0xee, 0x04, 0x96, 0xea,
+	0x7f, 0x00, 0x48, 0x6b, 0x7f, 0x66, 0xea, 0xcb, 0x8f, 0x5e, 0xc0, 0xe2, 0x44, 0x2a, 0xa1, 0xdb,
+	0x59, 0x77, 0x58, 0x03, 0x95, 0x48, 0x30, 0xaa, 0xb8, 0xd0, 0x3e, 0x8f, 0x82, 0xe2, 0xd7, 0x1f,
+	0x83, 0xfa, 0x4e, 0xae, 0xcd, 0xf8, 0x15, 0x54, 0xac, 0x8e, 0x0d, 0x89, 0xf7, 0x84, 0xdc, 0x10,
+	0xb2, 0x69, 0x0b, 0x91, 0xce, 0x59, 0x09, 0x3c, 0xd4, 0x9e, 0xf0, 0xc0, 0x05, 0x65, 0xd3, 0x08,
+	0xb6, 0xf7, 0x68, 0x5e, 0x1f, 0xa9, 0xd7, 0xb9, 0x0b, 0xc5, 0x74, 0xf1, 0x5b, 0x7f, 0x8f, 0xce,
+	0xff, 0x97, 0x1a, 0x10, 0x91, 0x90, 0xbd, 0x33, 0x64, 0xb2, 0xf6, 0xae, 0x66, 0xa4, 0xf0, 0xd0,
+	0x05, 0x4f, 0x36, 0x6a, 0xc0, 0x8f, 0xb7, 0xf1, 0xdb, 0xf9, 0x06, 0xde, 0xa7, 0xfb, 0xd2, 0x6d,
+	0xf4, 0xb7, 0x3a, 0x7a, 0x13, 0xbe, 0xdc, 0x15, 0xfd, 0xca, 0x2a, 0x76, 0x7b, 0xb3, 0x05, 0x72,
+	0xe7, 0x0b, 0xe4, 0x9e, 0x2e, 0x90, 0xfb, 0x6f, 0x89, 0x9c, 0xf9, 0x12, 0x39, 0xc7, 0x4b, 0xe4,
+	0xf4, 0x5f, 0xc7, 0x89, 0x1a, 0x4c, 0x42, 0x1c, 0xf1, 0xd1, 0x36, 0xa1, 0xa9, 0x96, 0x52, 0x79,
+	0xc6, 0x64, 0x58, 0xd6, 0x0b, 0xfd, 0xfe, 0x22, 0x00, 0x00, 0xff, 0xff, 0x52, 0xd4, 0x80, 0x20,
+	0xbe, 0x03, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -250,7 +251,7 @@ const _ = grpc.SupportPackageIsVersion4
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type QueryClient interface {
 	Params(ctx context.Context, in *QueryParamsRequest, opts ...grpc.CallOption) (*QueryParamsResponse, error)
-	KYCRequest(ctx context.Context, in *QueryGetKYCRequestRequest, opts ...grpc.CallOption) (*QueryGetKYCRequestResponse, error)
+	KYCRegistration(ctx context.Context, in *QueryGetKYCRegistrationRequest, opts ...grpc.CallOption) (*QueryGetKYCRegistrationResponse, error)
 }
 
 type queryClient struct {
@@ -270,9 +271,9 @@ func (c *queryClient) Params(ctx context.Context, in *QueryParamsRequest, opts .
 	return out, nil
 }
 
-func (c *queryClient) KYCRequest(ctx context.Context, in *QueryGetKYCRequestRequest, opts ...grpc.CallOption) (*QueryGetKYCRequestResponse, error) {
-	out := new(QueryGetKYCRequestResponse)
-	err := c.cc.Invoke(ctx, "/beheroes.doxchain.kyc.v1beta1.Query/KYCRequest", in, out, opts...)
+func (c *queryClient) KYCRegistration(ctx context.Context, in *QueryGetKYCRegistrationRequest, opts ...grpc.CallOption) (*QueryGetKYCRegistrationResponse, error) {
+	out := new(QueryGetKYCRegistrationResponse)
+	err := c.cc.Invoke(ctx, "/beheroes.doxchain.kyc.v1beta1.Query/KYCRegistration", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -282,7 +283,7 @@ func (c *queryClient) KYCRequest(ctx context.Context, in *QueryGetKYCRequestRequ
 // QueryServer is the server API for Query service.
 type QueryServer interface {
 	Params(context.Context, *QueryParamsRequest) (*QueryParamsResponse, error)
-	KYCRequest(context.Context, *QueryGetKYCRequestRequest) (*QueryGetKYCRequestResponse, error)
+	KYCRegistration(context.Context, *QueryGetKYCRegistrationRequest) (*QueryGetKYCRegistrationResponse, error)
 }
 
 // UnimplementedQueryServer can be embedded to have forward compatible implementations.
@@ -292,8 +293,8 @@ type UnimplementedQueryServer struct {
 func (*UnimplementedQueryServer) Params(ctx context.Context, req *QueryParamsRequest) (*QueryParamsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Params not implemented")
 }
-func (*UnimplementedQueryServer) KYCRequest(ctx context.Context, req *QueryGetKYCRequestRequest) (*QueryGetKYCRequestResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method KYCRequest not implemented")
+func (*UnimplementedQueryServer) KYCRegistration(ctx context.Context, req *QueryGetKYCRegistrationRequest) (*QueryGetKYCRegistrationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method KYCRegistration not implemented")
 }
 
 func RegisterQueryServer(s grpc1.Server, srv QueryServer) {
@@ -318,20 +319,20 @@ func _Query_Params_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Query_KYCRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryGetKYCRequestRequest)
+func _Query_KYCRegistration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryGetKYCRegistrationRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(QueryServer).KYCRequest(ctx, in)
+		return srv.(QueryServer).KYCRegistration(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/beheroes.doxchain.kyc.v1beta1.Query/KYCRequest",
+		FullMethod: "/beheroes.doxchain.kyc.v1beta1.Query/KYCRegistration",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).KYCRequest(ctx, req.(*QueryGetKYCRequestRequest))
+		return srv.(QueryServer).KYCRegistration(ctx, req.(*QueryGetKYCRegistrationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -345,8 +346,8 @@ var _Query_serviceDesc = grpc.ServiceDesc{
 			Handler:    _Query_Params_Handler,
 		},
 		{
-			MethodName: "KYCRequest",
-			Handler:    _Query_KYCRequest_Handler,
+			MethodName: "KYCRegistration",
+			Handler:    _Query_KYCRegistration_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -409,7 +410,7 @@ func (m *QueryParamsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *QueryGetKYCRequestRequest) Marshal() (dAtA []byte, err error) {
+func (m *QueryGetKYCRegistrationRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -419,12 +420,12 @@ func (m *QueryGetKYCRequestRequest) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *QueryGetKYCRequestRequest) MarshalTo(dAtA []byte) (int, error) {
+func (m *QueryGetKYCRegistrationRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *QueryGetKYCRequestRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *QueryGetKYCRegistrationRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -439,7 +440,7 @@ func (m *QueryGetKYCRequestRequest) MarshalToSizedBuffer(dAtA []byte) (int, erro
 	return len(dAtA) - i, nil
 }
 
-func (m *QueryGetKYCRequestResponse) Marshal() (dAtA []byte, err error) {
+func (m *QueryGetKYCRegistrationResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -449,12 +450,12 @@ func (m *QueryGetKYCRequestResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *QueryGetKYCRequestResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *QueryGetKYCRegistrationResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *QueryGetKYCRequestResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *QueryGetKYCRegistrationResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -503,7 +504,7 @@ func (m *QueryParamsResponse) Size() (n int) {
 	return n
 }
 
-func (m *QueryGetKYCRequestRequest) Size() (n int) {
+func (m *QueryGetKYCRegistrationRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -516,7 +517,7 @@ func (m *QueryGetKYCRequestRequest) Size() (n int) {
 	return n
 }
 
-func (m *QueryGetKYCRequestResponse) Size() (n int) {
+func (m *QueryGetKYCRegistrationResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -666,7 +667,7 @@ func (m *QueryParamsResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *QueryGetKYCRequestRequest) Unmarshal(dAtA []byte) error {
+func (m *QueryGetKYCRegistrationRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -689,10 +690,10 @@ func (m *QueryGetKYCRequestRequest) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: QueryGetKYCRequestRequest: wiretype end group for non-group")
+			return fmt.Errorf("proto: QueryGetKYCRegistrationRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryGetKYCRequestRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: QueryGetKYCRegistrationRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -748,7 +749,7 @@ func (m *QueryGetKYCRequestRequest) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *QueryGetKYCRequestResponse) Unmarshal(dAtA []byte) error {
+func (m *QueryGetKYCRegistrationResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -771,10 +772,10 @@ func (m *QueryGetKYCRequestResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: QueryGetKYCRequestResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: QueryGetKYCRegistrationResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryGetKYCRequestResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: QueryGetKYCRegistrationResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:

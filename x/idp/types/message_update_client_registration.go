@@ -7,23 +7,23 @@ import (
 
 const TypeMsgUpdateClientRegistration = "update_client_registration"
 
-var _ sdk.Msg = &MsgUpdateClientRegistration{}
+var _ sdk.Msg = &MsgUpdateClientRegistrationRequest{}
 
-func NewMsgUpdateClientRegistration(clientRegistration ClientRegistration) *MsgUpdateClientRegistration {
-	return &MsgUpdateClientRegistration{
+func NewMsgUpdateClientRegistration(clientRegistration ClientRegistration) *MsgUpdateClientRegistrationRequest {
+	return &MsgUpdateClientRegistrationRequest{
 		ClientRegistration: clientRegistration,
 	}
 }
 
-func (msg *MsgUpdateClientRegistration) Route() string {
+func (msg *MsgUpdateClientRegistrationRequest) Route() string {
 	return RouterKey
 }
 
-func (msg *MsgUpdateClientRegistration) Type() string {
+func (msg *MsgUpdateClientRegistrationRequest) Type() string {
 	return TypeMsgUpdateClientRegistration
 }
 
-func (msg *MsgUpdateClientRegistration) GetSigners() []sdk.AccAddress {
+func (msg *MsgUpdateClientRegistrationRequest) GetSigners() []sdk.AccAddress {
 	creator, err := sdk.AccAddressFromBech32(msg.ClientRegistration.Id.Creator)
 	if err != nil {
 		panic(err)
@@ -31,12 +31,12 @@ func (msg *MsgUpdateClientRegistration) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{creator}
 }
 
-func (msg *MsgUpdateClientRegistration) GetSignBytes() []byte {
+func (msg *MsgUpdateClientRegistrationRequest) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(msg)
 	return sdk.MustSortJSON(bz)
 }
 
-func (msg *MsgUpdateClientRegistration) ValidateBasic() error {
+func (msg *MsgUpdateClientRegistrationRequest) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.ClientRegistration.Id.Creator)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)

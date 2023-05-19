@@ -9,10 +9,10 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func CmdListClientRegistry() *cobra.Command {
+func CmdListClientRegistrationRegistry() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "list-client-registries",
-		Short: "list all ClientRegistry",
+		Short: "list all ClientRegistrationRegistry",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx := client.GetClientContextFromCmd(cmd)
 			pageReq, err := client.ReadPageRequest(cmd.Flags())
@@ -22,11 +22,11 @@ func CmdListClientRegistry() *cobra.Command {
 			}
 
 			queryClient := types.NewQueryClient(clientCtx)
-			params := &types.QueryAllClientRegistryRequest{
+			params := &types.QueryAllClientRegistrationRegistryRequest{
 				Pagination: pageReq,
 			}
 
-			res, err := queryClient.ClientRegistryAll(context.Background(), params)
+			res, err := queryClient.ClientRegistrationRegistryAll(context.Background(), params)
 
 			if err != nil {
 				return err
@@ -42,19 +42,19 @@ func CmdListClientRegistry() *cobra.Command {
 	return cmd
 }
 
-func CmdShowClientRegistry() *cobra.Command {
+func CmdShowClientRegistrationRegistry() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "show-client-registry [creator]",
-		Short: "shows a ClientRegistry",
+		Short: "shows a ClientRegistrationRegistry",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 			clientCtx := client.GetClientContextFromCmd(cmd)
 			queryClient := types.NewQueryClient(clientCtx)
-			params := &types.QueryGetClientRegistryRequest{
+			params := &types.QueryGetClientRegistrationRegistryRequest{
 				Creator: args[0],
 			}
 
-			res, err := queryClient.ClientRegistry(context.Background(), params)
+			res, err := queryClient.ClientRegistrationRegistry(context.Background(), params)
 
 			if err != nil {
 				return err

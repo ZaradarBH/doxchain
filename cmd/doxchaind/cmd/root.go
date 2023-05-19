@@ -34,13 +34,10 @@ import (
 	"github.com/tendermint/tendermint/libs/log"
 	dbm "github.com/tendermint/tm-db"
 
-	// this line is used by starport scaffolding # root/moduleImport
-
 	"github.com/be-heroes/doxchain/app"
 	appparams "github.com/be-heroes/doxchain/app/params"
 )
 
-// NewRootCmd creates a new root command for a Cosmos SDK application
 func NewRootCmd() (*cobra.Command, appparams.EncodingConfig) {
 	encodingConfig := app.MakeEncodingConfig()
 	initClientCtx := client.Context{}.
@@ -144,7 +141,6 @@ func initRootCmd(
 	)
 }
 
-// queryCommand returns the sub-command to send queries to the app
 func queryCommand() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:                        "query",
@@ -169,7 +165,6 @@ func queryCommand() *cobra.Command {
 	return cmd
 }
 
-// txCommand returns the sub-command to send transactions to the app
 func txCommand() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:                        "tx",
@@ -198,7 +193,6 @@ func txCommand() *cobra.Command {
 
 func addModuleInitFlags(startCmd *cobra.Command) {
 	crisis.AddModuleInitFlags(startCmd)
-	// this line is used by starport scaffolding # root/arguments
 }
 
 func overwriteFlagDefaults(c *cobra.Command, defaults map[string]string) {
@@ -221,7 +215,6 @@ type appCreator struct {
 	encodingConfig appparams.EncodingConfig
 }
 
-// newApp creates a new Cosmos SDK app
 func (a appCreator) newApp(
 	logger log.Logger,
 	db dbm.DB,

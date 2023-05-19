@@ -19,7 +19,7 @@ import (
 // Prevent strconv unused error
 var _ = strconv.IntSize
 
-func TestCreateClientRegistry(t *testing.T) {
+func TestCreateClientRegistrationRegistry(t *testing.T) {
 	net := network.New(t)
 	val := net.Validators[0]
 	ctx := val.ClientCtx
@@ -51,7 +51,7 @@ func TestCreateClientRegistry(t *testing.T) {
 			}
 			args = append(args, fields...)
 			args = append(args, tc.args...)
-			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdCreateClientRegistry(), args)
+			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdCreateClientRegistrationRegistry(), args)
 			if tc.err != nil {
 				require.ErrorIs(t, err, tc.err)
 			} else {
@@ -64,7 +64,7 @@ func TestCreateClientRegistry(t *testing.T) {
 	}
 }
 
-func TestUpdateClientRegistry(t *testing.T) {
+func TestUpdateClientRegistrationRegistry(t *testing.T) {
 	net := network.New(t)
 	val := net.Validators[0]
 	ctx := val.ClientCtx
@@ -81,7 +81,7 @@ func TestUpdateClientRegistry(t *testing.T) {
 	}
 	args = append(args, fields...)
 	args = append(args, common...)
-	_, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdCreateClientRegistry(), args)
+	_, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdCreateClientRegistrationRegistry(), args)
 	require.NoError(t, err)
 
 	for _, tc := range []struct {
@@ -112,7 +112,7 @@ func TestUpdateClientRegistry(t *testing.T) {
 			}
 			args = append(args, fields...)
 			args = append(args, tc.args...)
-			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdUpdateClientRegistry(), args)
+			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdUpdateClientRegistrationRegistry(), args)
 			if tc.err != nil {
 				require.ErrorIs(t, err, tc.err)
 			} else {
@@ -125,7 +125,7 @@ func TestUpdateClientRegistry(t *testing.T) {
 	}
 }
 
-func TestDeleteClientRegistry(t *testing.T) {
+func TestDeleteClientRegistrationRegistry(t *testing.T) {
 	net := network.New(t)
 
 	val := net.Validators[0]
@@ -143,7 +143,7 @@ func TestDeleteClientRegistry(t *testing.T) {
 	}
 	args = append(args, fields...)
 	args = append(args, common...)
-	_, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdCreateClientRegistry(), args)
+	_, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdCreateClientRegistrationRegistry(), args)
 	require.NoError(t, err)
 
 	for _, tc := range []struct {
@@ -173,7 +173,7 @@ func TestDeleteClientRegistry(t *testing.T) {
 				tc.idIndex,
 			}
 			args = append(args, tc.args...)
-			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdDeleteClientRegistry(), args)
+			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdDeleteClientRegistrationRegistry(), args)
 			if tc.err != nil {
 				require.ErrorIs(t, err, tc.err)
 			} else {

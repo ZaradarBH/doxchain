@@ -22,7 +22,7 @@ func TestGenesisState_Validate(t *testing.T) {
 			desc: "valid genesis state",
 			genState: &types.GenesisState{
 
-				KYCRequest: &types.KYCRequest{
+				KYCRegistration: &types.KYCRegistration{
 					FirstName: "24",
 					LastName:  "39",
 					Approved:  false,

@@ -5,12 +5,12 @@ import "encoding/binary"
 var _ binary.ByteOrder
 
 const (
-	// ClientRegistryKeyPrefix is the prefix to retrieve all ClientRegistry
-	ClientRegistryKeyPrefix = "ClientRegistry/value/"
+	// ClientRegistrationRegistryKeyPrefix is the prefix to retrieve all ClientRegistrationRegistry
+	ClientRegistrationRegistryKeyPrefix = "ClientRegistrationRegistry/value/"
 )
 
-// ClientRegistryKey returns the store key to retrieve a ClientRegistry from the index fields
-func ClientRegistryKey(
+// ClientRegistrationRegistryKey returns the store key to retrieve a ClientRegistrationRegistry from the index fields
+func ClientRegistrationRegistryKey(
 	index string,
 ) []byte {
 	var key []byte

@@ -12,10 +12,10 @@ import (
 
 var _ = strconv.Itoa(0)
 
-func CmdApproveAMLRequest() *cobra.Command {
+func CmdApproveAMLRegistration() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "approve-aml-request",
-		Short: "Broadcast message ApproveAMLRequest",
+		Short: "Broadcast message ApproveAMLRegistration",
 		Args:  cobra.ExactArgs(0),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
       		
@@ -24,7 +24,7 @@ func CmdApproveAMLRequest() *cobra.Command {
 				return err
 			}
 
-			msg := types.NewMsgApproveAMLRequest(
+			msg := types.NewMsgApproveAMLRegistration(
 				clientCtx.GetFromAddress().String(),
 				
 			)

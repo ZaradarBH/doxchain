@@ -31,9 +31,9 @@ func GetTxCmd() *cobra.Command {
 	}
 
 	cmd.AddCommand(CmdAuthenticationRequest())
-	cmd.AddCommand(CmdCreateClientRegistry())
-	cmd.AddCommand(CmdUpdateClientRegistry())
-	cmd.AddCommand(CmdDeleteClientRegistry())
+	cmd.AddCommand(CmdCreateClientRegistrationRegistry())
+	cmd.AddCommand(CmdUpdateClientRegistrationRegistry())
+	cmd.AddCommand(CmdDeleteClientRegistrationRegistry())
 	cmd.AddCommand(CmdCreateClientRegistration())
 	cmd.AddCommand(CmdUpdateClientRegistration())
 	cmd.AddCommand(CmdDeleteClientRegistration())

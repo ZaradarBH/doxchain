@@ -8,10 +8,10 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
-// GetKYCRequestCount get the total number of requests
-func (k Keeper) GetKYCRequestCount(ctx sdk.Context) uint64 {
+// GetKYCRegistrationCount get the total number of requests
+func (k Keeper) GetKYCRegistrationCount(ctx sdk.Context) uint64 {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), []byte{})
-	byteKey := types.KeyPrefix(types.KYCRequestCountKey)
+	byteKey := types.KeyPrefix(types.KYCRegistrationCountKey)
 	bz := store.Get(byteKey)
 
 	// Count doesn't exist: no element
@@ -23,44 +23,44 @@ func (k Keeper) GetKYCRequestCount(ctx sdk.Context) uint64 {
 	return binary.BigEndian.Uint64(bz)
 }
 
-// SetKYCRequestCount set the total number of requests
-func (k Keeper) SetKYCRequestCount(ctx sdk.Context, count uint64) {
+// SetKYCRegistrationCount set the total number of requests
+func (k Keeper) SetKYCRegistrationCount(ctx sdk.Context, count uint64) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), []byte{})
-	byteKey := types.KeyPrefix(types.KYCRequestCountKey)
+	byteKey := types.KeyPrefix(types.KYCRegistrationCountKey)
 	bz := make([]byte, 8)
 	binary.BigEndian.PutUint64(bz, count)
 	store.Set(byteKey, bz)
 }
 
-// AppendKYCRequest appends a KYCRequest to store with a new id and update the count
-func (k Keeper) AppendKYCRequest(
+// AppendKYCRegistration appends a KYCRegistration to store with a new id and update the count
+func (k Keeper) AppendKYCRegistration(
 	ctx sdk.Context,
-	request types.KYCRequest,
+	request types.KYCRegistration,
 ) string {
 	// Get the request count
-	count := k.GetKYCRequestCount(ctx)
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.KYCRequestKey))
+	count := k.GetKYCRegistrationCount(ctx)
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.KYCRegistrationKey))
 	appendedValue := k.cdc.MustMarshal(&request)
 
-	store.Set(GetKYCRequestIDBytes(request.Owner.Creator), appendedValue)
+	store.Set(GetKYCRegistrationIDBytes(request.Owner.Creator), appendedValue)
 
-	// Update KYCRequest count
-	k.SetKYCRequestCount(ctx, count+1)
+	// Update KYCRegistration count
+	k.SetKYCRegistrationCount(ctx, count+1)
 
 	return request.Owner.Creator
 }
 
-// SetKYCRequest set a specific KYCRequest in the store
-func (k Keeper) SetKYCRequest(ctx sdk.Context, request types.KYCRequest) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.KYCRequestKey))
+// SetKYCRegistration set a specific KYCRegistration in the store
+func (k Keeper) SetKYCRegistration(ctx sdk.Context, request types.KYCRegistration) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.KYCRegistrationKey))
 	b := k.cdc.MustMarshal(&request)
-	store.Set(GetKYCRequestIDBytes(request.Owner.Creator), b)
+	store.Set(GetKYCRegistrationIDBytes(request.Owner.Creator), b)
 }
 
-// GetKYCRequest returns a KYCRequest object from its creator
-func (k Keeper) GetKYCRequest(ctx sdk.Context, creator string) (val types.KYCRequest, found bool) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.KYCRequestKey))
-	b := store.Get(GetKYCRequestIDBytes(creator))
+// GetKYCRegistration returns a KYCRegistration object from its creator
+func (k Keeper) GetKYCRegistration(ctx sdk.Context, creator string) (val types.KYCRegistration, found bool) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.KYCRegistrationKey))
+	b := store.Get(GetKYCRegistrationIDBytes(creator))
 	if b == nil {
 		return val, false
 	}
@@ -69,20 +69,20 @@ func (k Keeper) GetKYCRequest(ctx sdk.Context, creator string) (val types.KYCReq
 }
 
 // RemoveDid removes a did from the store
-func (k Keeper) RemoveKYCRequest(ctx sdk.Context, creator string) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.KYCRequestKey))
-	store.Delete(GetKYCRequestIDBytes(creator))
+func (k Keeper) RemoveKYCRegistration(ctx sdk.Context, creator string) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.KYCRegistrationKey))
+	store.Delete(GetKYCRegistrationIDBytes(creator))
 }
 
-// GetAllKYCRequest returns all requests
-func (k Keeper) GetAllKYCRequest(ctx sdk.Context) (list []types.KYCRequest) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.KYCRequestKey))
+// GetAllKYCRegistration returns all requests
+func (k Keeper) GetAllKYCRegistration(ctx sdk.Context) (list []types.KYCRegistration) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.KYCRegistrationKey))
 	iterator := sdk.KVStorePrefixIterator(store, []byte{})
 
 	defer iterator.Close()
 
 	for ; iterator.Valid(); iterator.Next() {
-		var val types.KYCRequest
+		var val types.KYCRegistration
 		k.cdc.MustUnmarshal(iterator.Value(), &val)
 		list = append(list, val)
 	}
@@ -90,23 +90,23 @@ func (k Keeper) GetAllKYCRequest(ctx sdk.Context) (list []types.KYCRequest) {
 	return
 }
 
-// Approves an KYCRequest in the store
-func (k Keeper) ApproveKYCRequest(ctx sdk.Context, creator string) {
-	request, found := k.GetKYCRequest(ctx, creator)
+// Approves an KYCRegistration in the store
+func (k Keeper) ApproveKYCRegistration(ctx sdk.Context, creator string) {
+	request, found := k.GetKYCRegistration(ctx, creator)
 
 	if found && creator == request.Owner.Creator {
 		request.Approved = true
 
-		k.SetKYCRequest(ctx, request)
+		k.SetKYCRegistration(ctx, request)
 	}
 }
 
-// GetKYCRequestIDBytes returns the byte representation of the Did
-func GetKYCRequestIDBytes(did string) []byte {
+// GetKYCRegistrationIDBytes returns the byte representation of the Did
+func GetKYCRegistrationIDBytes(did string) []byte {
 	return []byte(did)
 }
 
-// GetKYCRequestIDFromBytes returns ID in uint64 format from a byte array
-func GetKYCRequestIDFromBytes(bz []byte) string {
+// GetKYCRegistrationIDFromBytes returns ID in uint64 format from a byte array
+func GetKYCRegistrationIDFromBytes(bz []byte) string {
 	return string(bz)
 }

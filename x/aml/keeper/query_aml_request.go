@@ -9,16 +9,16 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-func (k Keeper) AMLRequest(goCtx context.Context, req *types.QueryGetAMLRequestRequest) (*types.QueryGetAMLRequestResponse, error) {
+func (k Keeper) AMLRegistration(goCtx context.Context, req *types.QueryGetAMLRegistrationRequest) (*types.QueryGetAMLRegistrationResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	val, found := k.GetAMLRequest(ctx, req.Creator)
+	val, found := k.GetAMLRegistration(ctx, req.Creator)
 	if !found {
 		return nil, status.Error(codes.NotFound, "not found")
 	}
 
-	return &types.QueryGetAMLRequestResponse{Request: val}, nil
+	return &types.QueryGetAMLRegistrationResponse{Request: val}, nil
 }

@@ -8,11 +8,11 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-func (k msgServer) CreateKYCRequest(goCtx context.Context, msg *types.MsgCreateKYCRequest) (*types.MsgCreateKYCRequestResponse, error) {
+func (k msgServer) CreateKYCRegistration(goCtx context.Context, msg *types.MsgCreateKYCRegistrationRequest) (*types.MsgCreateKYCRegistrationResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	// Check if the value already exists
-	_, isFound := k.GetKYCRequest(ctx, msg.Creator)
+	_, isFound := k.GetKYCRegistration(ctx, msg.Creator)
 
 	if isFound {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "already set")
@@ -22,24 +22,24 @@ func (k msgServer) CreateKYCRequest(goCtx context.Context, msg *types.MsgCreateK
 		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "impersonation is not supported")
 	}
 
-	var kYCRequest = types.KYCRequest{
+	var kYCRequest = types.KYCRegistration{
 		Owner: msg.Owner,
 		Approved: false,
 	}
 
-	k.SetKYCRequest(
+	k.SetKYCRegistration(
 		ctx,
 		kYCRequest,
 	)
 
-	return &types.MsgCreateKYCRequestResponse{}, nil
+	return &types.MsgCreateKYCRegistrationResponse{}, nil
 }
 
-func (k msgServer) DeleteKYCRequest(goCtx context.Context, msg *types.MsgDeleteKYCRequest) (*types.MsgDeleteKYCRequestResponse, error) {
+func (k msgServer) DeleteKYCRegistration(goCtx context.Context, msg *types.MsgDeleteKYCRegistrationRequest) (*types.MsgDeleteKYCRegistrationResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	// Check if the value exists
-	valFound, isFound := k.GetKYCRequest(ctx, msg.Creator)
+	valFound, isFound := k.GetKYCRegistration(ctx, msg.Creator)
 	
 	if !isFound {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "not set")
@@ -50,7 +50,7 @@ func (k msgServer) DeleteKYCRequest(goCtx context.Context, msg *types.MsgDeleteK
 		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "impersonation not supported")
 	}
 
-	k.RemoveKYCRequest(ctx, msg.Creator)
+	k.RemoveKYCRegistration(ctx, msg.Creator)
 
-	return &types.MsgDeleteKYCRequestResponse{}, nil
+	return &types.MsgDeleteKYCRegistrationResponse{}, nil
 }

@@ -9,14 +9,14 @@ import (
 
 func RegisterCodec(cdc *codec.LegacyAmino) {
 	cdc.RegisterConcrete(&MsgAuthenticationRequest{}, "idp/Login", nil)
-	cdc.RegisterConcrete(&MsgCreateClientRegistry{}, "idp/CreateClientRegistry", nil)
-	cdc.RegisterConcrete(&MsgUpdateClientRegistry{}, "idp/UpdateClientRegistry", nil)
-	cdc.RegisterConcrete(&MsgDeleteClientRegistry{}, "idp/DeleteClientRegistry", nil)
-	cdc.RegisterConcrete(&MsgCreateClientRegistration{}, "idp/CreateClientRegistration", nil)
-	cdc.RegisterConcrete(&MsgUpdateClientRegistration{}, "idp/UpdateClientRegistration", nil)
-	cdc.RegisterConcrete(&MsgDeleteClientRegistration{}, "idp/DeleteClientRegistration", nil)
-	cdc.RegisterConcrete(&MsgCreateClientRegistrationRelationshipRequest{}, "idp/CreateClientRegistrationRelationship", nil)
-	cdc.RegisterConcrete(&MsgDeleteClientRegistrationRelationshipRequest{}, "idp/DeleteClientRegistrationRelationship", nil)
+	cdc.RegisterConcrete(&MsgCreateClientRegistrationRegistryRequest{}, "idp/CreateClientRegistrationRegistryRequest", nil)
+	cdc.RegisterConcrete(&MsgUpdateClientRegistrationRegistryRequest{}, "idp/UpdateClientRegistrationRegistryRequest", nil)
+	cdc.RegisterConcrete(&MsgDeleteClientRegistrationRegistryRequest{}, "idp/DeleteClientRegistrationRegistryRequest", nil)
+	cdc.RegisterConcrete(&MsgCreateClientRegistrationRequest{}, "idp/CreateClientRegistrationRequest", nil)
+	cdc.RegisterConcrete(&MsgUpdateClientRegistrationRequest{}, "idp/UpdateClientRegistrationRequest", nil)
+	cdc.RegisterConcrete(&MsgDeleteClientRegistrationRequest{}, "idp/DeleteClientRegistrationRequest", nil)
+	cdc.RegisterConcrete(&MsgCreateClientRegistrationRelationshipRequest{}, "idp/CreateClientRegistrationRelationshipRequest", nil)
+	cdc.RegisterConcrete(&MsgDeleteClientRegistrationRelationshipRequest{}, "idp/DeleteClientRegistrationRelationshipRequest", nil)
 	// this line is used by starport scaffolding # 2
 }
 
@@ -25,18 +25,18 @@ func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 		&MsgAuthenticationRequest{},
 	)
 	registry.RegisterImplementations((*sdk.Msg)(nil),
-		&MsgCreateClientRegistry{},
-		&MsgUpdateClientRegistry{},
-		&MsgDeleteClientRegistry{},
+		&MsgCreateClientRegistrationRegistryRequest{},
+		&MsgUpdateClientRegistrationRegistryRequest{},
+		&MsgDeleteClientRegistrationRegistryRequest{},
 	)
 	registry.RegisterImplementations((*sdk.Msg)(nil),
-		&MsgCreateClientRegistration{},
+		&MsgCreateClientRegistrationRequest{},
 	)
 	registry.RegisterImplementations((*sdk.Msg)(nil),
-		&MsgUpdateClientRegistration{},
+		&MsgUpdateClientRegistrationRequest{},
 	)
 	registry.RegisterImplementations((*sdk.Msg)(nil),
-		&MsgDeleteClientRegistration{},
+		&MsgDeleteClientRegistrationRequest{},
 	)
 	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgCreateClientRegistrationRelationshipRequest{},

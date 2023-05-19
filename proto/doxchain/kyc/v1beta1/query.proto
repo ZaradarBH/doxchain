@@ -14,7 +14,7 @@ service Query {
     option (google.api.http).get = "/be-heroes/doxchain/kyc/params";  
   }
   
-  rpc KYCRequest (QueryGetKYCRequestRequest) returns (QueryGetKYCRequestResponse) {
+  rpc KYCRegistration (QueryGetKYCRegistrationRequest) returns (QueryGetKYCRegistrationResponse) {
     option (google.api.http).get = "/be-heroes/doxchain/kyc/kyc_request";  
   }
 }
@@ -25,11 +25,11 @@ message QueryParamsResponse {
   Params params = 1 [(gogoproto.nullable) = false];
 }
 
-message QueryGetKYCRequestRequest {
+message QueryGetKYCRegistrationRequest {
   string creator = 1;
 }
 
-message QueryGetKYCRequestResponse {
-  KYCRequest Request = 1 [(gogoproto.nullable) = false];
+message QueryGetKYCRegistrationResponse {
+  KYCRegistration Request = 1 [(gogoproto.nullable) = false];
 }
 

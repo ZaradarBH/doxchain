@@ -9,10 +9,10 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func CmdCreateAMLRequest() *cobra.Command {
+func CmdCreateAMLRegistration() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "create-aml-request [did-url]",
-		Short: "Create AMLRequest",
+		Short: "Create AMLRegistration",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 			clientCtx, err := client.GetClientTxContext(cmd)
@@ -21,7 +21,7 @@ func CmdCreateAMLRequest() *cobra.Command {
 			}
 
 			did := utils.NewDidTokenFactory().Create(clientCtx.GetFromAddress().String(), args[0])
-			msg := types.NewMsgCreateAMLRequest(clientCtx.GetFromAddress().String(), *did)
+			msg := types.NewMsgCreateAMLRegistration(clientCtx.GetFromAddress().String(), *did)
 			if err := msg.ValidateBasic(); err != nil {
 				return err
 			}
@@ -34,10 +34,10 @@ func CmdCreateAMLRequest() *cobra.Command {
 	return cmd
 }
 
-func CmdDeleteAMLRequest() *cobra.Command {
+func CmdDeleteAMLRegistration() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "delete-aml-request",
-		Short: "Delete AMLRequest",
+		Short: "Delete AMLRegistration",
 		Args:  cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientTxContext(cmd)
@@ -45,7 +45,7 @@ func CmdDeleteAMLRequest() *cobra.Command {
 				return err
 			}
 
-			msg := types.NewMsgDeleteAMLRequest(clientCtx.GetFromAddress().String())
+			msg := types.NewMsgDeleteAMLRegistration(clientCtx.GetFromAddress().String())
 			if err := msg.ValidateBasic(); err != nil {
 				return err
 			}

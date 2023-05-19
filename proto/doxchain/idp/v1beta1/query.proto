@@ -6,7 +6,7 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "doxchain/idp/v1beta1/params.proto";
-import "doxchain/idp/v1beta1/client_registry.proto";
+import "doxchain/idp/v1beta1/client_registration_registry.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/idp/types";
 
@@ -19,11 +19,11 @@ service Query {
     option (google.api.http).get = "/be-heroes/doxchain/idp/{fullyQualifiedW3CIdentifier}/.well-known";  
   }
   
-  rpc ClientRegistry (QueryGetClientRegistryRequest) returns (QueryGetClientRegistryResponse) {
+  rpc ClientRegistrationRegistry (QueryGetClientRegistrationRegistryRequest) returns (QueryGetClientRegistrationRegistryResponse) {
     option (google.api.http).get = "/be-heroes/doxchain/idp/client_registry/{creator}";
   }
 
-  rpc ClientRegistryAll (QueryAllClientRegistryRequest) returns (QueryAllClientRegistryResponse) {
+  rpc ClientRegistrationRegistryAll (QueryAllClientRegistrationRegistryRequest) returns (QueryAllClientRegistrationRegistryResponse) {
     option (google.api.http).get = "/be-heroes/doxchain/idp/client_registry";  
   }
 }
@@ -39,33 +39,33 @@ message QueryGetDotWellKnownRequest {
 }
 
 message QueryGetDotWellKnownResponse {
-           string issuer                                 =  1 [json_name = "issuer"                                          ];
-           string authorizationEndpoint                  =  2 [json_name = "authorization_endpoint"                          ];
-           string tokenEndpoint                          =  3 [json_name = "token_endpoint"                                  ];
-  repeated string tokenEndpointAuthMethodsSupported      =  4 [json_name = "token_endpoint_auth_methods_supported"           ];
-  repeated string tokenEndpointAuthSigningAlgosSupported =  5 [json_name = "token_endpoint_auth_signing_alg_values_supported"];
-           string userInfoEndpoint                       =  6 [json_name = "userinfo_endpoint"                               ];
-           string jwksUri                                =  7 [json_name = "jwks_uri"                                        ];
-           string registrationEndpoint                   =  8 [json_name = "registration_endpoint"                           ];
-           string scopesSupported                        =  9 [json_name = "scopes_supported"                                ];
-           string responseTypesSupported                 = 10 [json_name = "response_types_supported"                        ];
-           string serviceDocumentation                   = 11 [json_name = "service_documentation"                           ];
-           string uiLocalesSupported                     = 12 [json_name = "ui_locales_supported"                            ];
+  string issuer = 1 [json_name = "issuer"];
+  string authorizationEndpoint = 2 [json_name = "authorization_endpoint"];
+  string tokenEndpoint = 3 [json_name = "token_endpoint"];
+  repeated string tokenEndpointAuthMethodsSupported = 4 [json_name = "token_endpoint_auth_methods_supported"];
+  repeated string tokenEndpointAuthSigningAlgosSupported = 5 [json_name = "token_endpoint_auth_signing_alg_values_supported"];
+  string userInfoEndpoint = 6 [json_name = "userinfo_endpoint"];
+  string jwksUri = 7 [json_name = "jwks_uri"];
+  string registrationEndpoint = 8 [json_name = "registration_endpoint"];
+  string scopesSupported = 9 [json_name = "scopes_supported"];
+  string responseTypesSupported = 10 [json_name = "response_types_supported"];
+  string serviceDocumentation = 11 [json_name = "service_documentation"];
+  string uiLocalesSupported = 12 [json_name = "ui_locales_supported"];
 }
 
-message QueryGetClientRegistryRequest {
+message QueryGetClientRegistrationRegistryRequest {
   string creator = 1;
 }
 
-message QueryGetClientRegistryResponse {
-  ClientRegistry ClientRegistry = 1 [(gogoproto.nullable) = false];
+message QueryGetClientRegistrationRegistryResponse {
+  ClientRegistrationRegistry clientRegistrationRegistry = 1 [(gogoproto.nullable) = false];
 }
 
-message QueryAllClientRegistryRequest {
+message QueryAllClientRegistrationRegistryRequest {
   cosmos.base.query.v1beta1.PageRequest pagination = 1;
 }
 
-message QueryAllClientRegistryResponse {
-  repeated ClientRegistry ClientRegistry = 1 [(gogoproto.nullable) = false];
+message QueryAllClientRegistrationRegistryResponse {
+  repeated ClientRegistrationRegistry clientRegistrationRegistry = 1 [(gogoproto.nullable) = false];
   cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }

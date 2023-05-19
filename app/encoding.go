@@ -9,7 +9,6 @@ import (
 	"github.com/be-heroes/doxchain/app/params"
 )
 
-// makeEncodingConfig creates an EncodingConfig for an amino based test configuration.
 func makeEncodingConfig() params.EncodingConfig {
 	amino := codec.NewLegacyAmino()
 	interfaceRegistry := types.NewInterfaceRegistry()
@@ -24,7 +23,6 @@ func makeEncodingConfig() params.EncodingConfig {
 	}
 }
 
-// MakeEncodingConfig creates an EncodingConfig for testing
 func MakeEncodingConfig() params.EncodingConfig {
 	encodingConfig := makeEncodingConfig()
 	std.RegisterLegacyAminoCodec(encodingConfig.Amino)

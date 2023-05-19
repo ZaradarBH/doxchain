@@ -9,9 +9,9 @@ import "doxchain/did/v1beta1/did_document.proto";
 option go_package = "github.com/be-heroes/doxchain/x/did/types";
 
 service Msg {
-  rpc CreateDid   (MsgCreateDidRequest) returns (MsgCreateDidResponse);
-  rpc UpdateDid   (MsgUpdateDidRequest) returns (MsgUpdateDidResponse);
-  rpc DeleteDid   (MsgDeleteDidRequest) returns (MsgDeleteDidResponse);
+  rpc CreateDid (MsgCreateDidRequest) returns (MsgCreateDidResponse);
+  rpc UpdateDid (MsgUpdateDidRequest) returns (MsgUpdateDidResponse);
+  rpc DeleteDid (MsgDeleteDidRequest) returns (MsgDeleteDidResponse);
   rpc CreateDidDocument (MsgCreateDidDocumentRequest) returns (MsgCreateDidDocumentResponse);
   rpc UpdateDidDocument (MsgUpdateDidDocumentRequest) returns (MsgUpdateDidDocumentResponse);
   rpc DeleteDidDocument (MsgDeleteDidDocumentRequest) returns (MsgDeleteDidDocumentResponse);

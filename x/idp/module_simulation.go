@@ -29,17 +29,17 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgAuthenticationRequest int = 100
 
-	opWeightMsgCreateClientRegistry = "op_weight_msg_client_registrations"
+	opWeightMsgCreateClientRegistrationRegistry = "op_weight_msg_client_registration_registry"
 	// TODO: Determine the simulation weight value
-	defaultWeightMsgCreateClientRegistry int = 100
+	defaultWeightMsgCreateClientRegistrationRegistry int = 100
 
-	opWeightMsgUpdateClientRegistry = "op_weight_msg_client_registrations"
+	opWeightMsgUpdateClientRegistrationRegistry = "op_weight_msg_client_registration_registry"
 	// TODO: Determine the simulation weight value
-	defaultWeightMsgUpdateClientRegistry int = 100
+	defaultWeightMsgUpdateClientRegistrationRegistry int = 100
 
-	opWeightMsgDeleteClientRegistry = "op_weight_msg_client_registrations"
+	opWeightMsgDeleteClientRegistrationRegistry = "op_weight_msg_client_registration_registry"
 	// TODO: Determine the simulation weight value
-	defaultWeightMsgDeleteClientRegistry int = 100
+	defaultWeightMsgDeleteClientRegistrationRegistry int = 100
 
 	opWeightMsgCreateClientRegistration = "op_weight_msg_create_client_registration"
 	// TODO: Determine the simulation weight value
@@ -68,7 +68,7 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 	}
 	idpGenesis := types.GenesisState{
 		Params: types.DefaultParams(),
-		ClientRegistries: []types.ClientRegistry{
+		ClientRegistrationRegistries: []types.ClientRegistrationRegistry{
 			{
 				Owner: *utils.NewDidTokenFactory().Create(sample.AccAddress(), ""),
 			},

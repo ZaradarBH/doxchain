@@ -12,9 +12,9 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 	for _, elem := range genState.DeviceCodeRegistries {
 		k.SetDeviceCodeRegistry(ctx, elem)
 	}
-	// Set all the ClientRegistry
-	for _, elem := range genState.ClientRegistries {
-		k.SetClientRegistry(ctx, elem)
+	// Set all the ClientRegistrationRegistry
+	for _, elem := range genState.ClientRegistrationRegistries {
+		k.SetClientRegistrationRegistry(ctx, elem)
 	}
 	// this line is used by starport scaffolding # genesis/module/init
 	k.SetParams(ctx, genState.Params)
@@ -26,7 +26,7 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 	genesis.Params = k.GetParams(ctx)
 
 	genesis.DeviceCodeRegistries = k.GetAllDeviceCodeRegistry(ctx)
-	genesis.ClientRegistries = k.GetAllClientRegistry(ctx)
+	genesis.ClientRegistrationRegistries = k.GetAllClientRegistrationRegistry(ctx)
 	// this line is used by starport scaffolding # genesis/module/export
 
 	return genesis

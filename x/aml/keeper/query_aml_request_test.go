@@ -13,20 +13,20 @@ import (
 	"github.com/be-heroes/doxchain/x/aml/types"
 )
 
-func TestAMLRequestQuery(t *testing.T) {
+func TestAMLRegistrationQuery(t *testing.T) {
 	keeper, ctx := keepertest.AmlKeeper(t)
 	wctx := sdk.WrapSDKContext(ctx)
-	item := createTestAMLRequest(keeper, ctx)
+	item := createTestAMLRegistration(keeper, ctx)
 	for _, tc := range []struct {
 		desc     string
-		request  *types.QueryGetAMLRequestRequest
-		response *types.QueryGetAMLRequestResponse
+		request  *types.QueryGetAMLRegistrationRequest
+		response *types.QueryGetAMLRegistrationResponse
 		err      error
 	}{
 		{
 			desc:     "First",
-			request:  &types.QueryGetAMLRequestRequest{},
-			response: &types.QueryGetAMLRequestResponse{AMLRequest: item},
+			request:  &types.QueryGetAMLRegistrationRequest{},
+			response: &types.QueryGetAMLRegistrationResponse{AMLRegistration: item},
 		},
 		{
 			desc: "InvalidRequest",
@@ -34,7 +34,7 @@ func TestAMLRequestQuery(t *testing.T) {
 		},
 	} {
 		t.Run(tc.desc, func(t *testing.T) {
-			response, err := keeper.AMLRequest(wctx, tc.request)
+			response, err := keeper.AMLRegistration(wctx, tc.request)
 			if tc.err != nil {
 				require.ErrorIs(t, err, tc.err)
 			} else {

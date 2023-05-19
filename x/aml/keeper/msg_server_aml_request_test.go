@@ -12,34 +12,34 @@ import (
 	"github.com/be-heroes/doxchain/x/aml/types"
 )
 
-func TestAMLRequestMsgServerCreate(t *testing.T) {
+func TestAMLRegistrationMsgServerCreate(t *testing.T) {
 	k, ctx := keepertest.AmlKeeper(t)
 	srv := keeper.NewMsgServerImpl(*k)
 	wctx := sdk.WrapSDKContext(ctx)
 	creator := "A"
-	expected := &types.MsgCreateAMLRequest{Creator: creator}
-	_, err := srv.CreateAMLRequest(wctx, expected)
+	expected := &types.MsgCreateAMLRegistration{Creator: creator}
+	_, err := srv.CreateAMLRegistration(wctx, expected)
 	require.NoError(t, err)
-	rst, found := k.GetAMLRequest(ctx)
+	rst, found := k.GetAMLRegistration(ctx)
 	require.True(t, found)
 	require.Equal(t, expected.Creator, rst.Creator)
 }
 
-func TestAMLRequestMsgServerUpdate(t *testing.T) {
+func TestAMLRegistrationMsgServerUpdate(t *testing.T) {
 	creator := "A"
 
 	for _, tc := range []struct {
 		desc    string
-		request *types.MsgUpdateAMLRequest
+		request *types.MsgUpdateAMLRegistration
 		err     error
 	}{
 		{
 			desc:    "Completed",
-			request: &types.MsgUpdateAMLRequest{Creator: creator},
+			request: &types.MsgUpdateAMLRegistration{Creator: creator},
 		},
 		{
 			desc:    "Unauthorized",
-			request: &types.MsgUpdateAMLRequest{Creator: "B"},
+			request: &types.MsgUpdateAMLRegistration{Creator: "B"},
 			err:     sdkerrors.ErrUnauthorized,
 		},
 	} {
@@ -47,16 +47,16 @@ func TestAMLRequestMsgServerUpdate(t *testing.T) {
 			k, ctx := keepertest.AmlKeeper(t)
 			srv := keeper.NewMsgServerImpl(*k)
 			wctx := sdk.WrapSDKContext(ctx)
-			expected := &types.MsgCreateAMLRequest{Creator: creator}
-			_, err := srv.CreateAMLRequest(wctx, expected)
+			expected := &types.MsgCreateAMLRegistration{Creator: creator}
+			_, err := srv.CreateAMLRegistration(wctx, expected)
 			require.NoError(t, err)
 
-			_, err = srv.UpdateAMLRequest(wctx, tc.request)
+			_, err = srv.UpdateAMLRegistration(wctx, tc.request)
 			if tc.err != nil {
 				require.ErrorIs(t, err, tc.err)
 			} else {
 				require.NoError(t, err)
-				rst, found := k.GetAMLRequest(ctx)
+				rst, found := k.GetAMLRegistration(ctx)
 				require.True(t, found)
 				require.Equal(t, expected.Creator, rst.Creator)
 			}
@@ -64,21 +64,21 @@ func TestAMLRequestMsgServerUpdate(t *testing.T) {
 	}
 }
 
-func TestAMLRequestMsgServerDelete(t *testing.T) {
+func TestAMLRegistrationMsgServerDelete(t *testing.T) {
 	creator := "A"
 
 	for _, tc := range []struct {
 		desc    string
-		request *types.MsgDeleteAMLRequest
+		request *types.MsgDeleteAMLRegistration
 		err     error
 	}{
 		{
 			desc:    "Completed",
-			request: &types.MsgDeleteAMLRequest{Creator: creator},
+			request: &types.MsgDeleteAMLRegistration{Creator: creator},
 		},
 		{
 			desc:    "Unauthorized",
-			request: &types.MsgDeleteAMLRequest{Creator: "B"},
+			request: &types.MsgDeleteAMLRegistration{Creator: "B"},
 			err:     sdkerrors.ErrUnauthorized,
 		},
 	} {
@@ -87,14 +87,14 @@ func TestAMLRequestMsgServerDelete(t *testing.T) {
 			srv := keeper.NewMsgServerImpl(*k)
 			wctx := sdk.WrapSDKContext(ctx)
 
-			_, err := srv.CreateAMLRequest(wctx, &types.MsgCreateAMLRequest{Creator: creator})
+			_, err := srv.CreateAMLRegistration(wctx, &types.MsgCreateAMLRegistration{Creator: creator})
 			require.NoError(t, err)
-			_, err = srv.DeleteAMLRequest(wctx, tc.request)
+			_, err = srv.DeleteAMLRegistration(wctx, tc.request)
 			if tc.err != nil {
 				require.ErrorIs(t, err, tc.err)
 			} else {
 				require.NoError(t, err)
-				_, found := k.GetAMLRequest(ctx)
+				_, found := k.GetAMLRegistration(ctx)
 				require.False(t, found)
 			}
 		})

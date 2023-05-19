@@ -8,10 +8,10 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func CmdCreateClientRegistry() *cobra.Command {
+func CmdCreateClientRegistrationRegistry() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "create-client-registry [client-registry-json]",
-		Short: "Create a new ClientRegistry",
+		Short: "Create a new ClientRegistrationRegistry",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 			clientCtx, err := client.GetClientTxContext(cmd)
@@ -20,14 +20,14 @@ func CmdCreateClientRegistry() *cobra.Command {
 				return err
 			}
 
-			var clientRegistry types.ClientRegistry
+			var clientRegistry types.ClientRegistrationRegistry
 			err = clientCtx.Codec.UnmarshalJSON([]byte(args[0]), &clientRegistry)
 
 			if err != nil {
 				return err
 			}
 
-			msg := types.NewMsgCreateClientRegistry(clientRegistry)
+			msg := types.NewMsgCreateClientRegistrationRegistry(clientRegistry)
 
 			if err := msg.ValidateBasic(); err != nil {
 				return err
@@ -42,10 +42,10 @@ func CmdCreateClientRegistry() *cobra.Command {
 	return cmd
 }
 
-func CmdUpdateClientRegistry() *cobra.Command {
+func CmdUpdateClientRegistrationRegistry() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "update-client-registry [client-registry-json]",
-		Short: "Update a ClientRegistry",
+		Short: "Update a ClientRegistrationRegistry",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 			clientCtx, err := client.GetClientTxContext(cmd)
@@ -54,14 +54,14 @@ func CmdUpdateClientRegistry() *cobra.Command {
 				return err
 			}
 
-			var clientRegistry types.ClientRegistry
+			var clientRegistry types.ClientRegistrationRegistry
 			err = clientCtx.Codec.UnmarshalJSON([]byte(args[0]), &clientRegistry)
 
 			if err != nil {
 				return err
 			}
 
-			msg := types.NewMsgUpdateClientRegistry(clientRegistry)
+			msg := types.NewMsgUpdateClientRegistrationRegistry(clientRegistry)
 
 			if err := msg.ValidateBasic(); err != nil {
 				return err
@@ -76,10 +76,10 @@ func CmdUpdateClientRegistry() *cobra.Command {
 	return cmd
 }
 
-func CmdDeleteClientRegistry() *cobra.Command {
+func CmdDeleteClientRegistrationRegistry() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "delete-client-registry",
-		Short: "Delete a ClientRegistry",
+		Short: "Delete a ClientRegistrationRegistry",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 			clientCtx, err := client.GetClientTxContext(cmd)
@@ -88,7 +88,7 @@ func CmdDeleteClientRegistry() *cobra.Command {
 				return err
 			}
 
-			msg := types.NewMsgDeleteClientRegistry(clientCtx.GetFromAddress().String())
+			msg := types.NewMsgDeleteClientRegistrationRegistry(clientCtx.GetFromAddress().String())
 
 			if err := msg.ValidateBasic(); err != nil {
 				return err

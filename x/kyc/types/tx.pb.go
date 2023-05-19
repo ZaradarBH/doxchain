@@ -29,23 +29,23 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
-type MsgCreateKYCRequest struct {
+type MsgCreateKYCRegistrationRequest struct {
 	Creator string    `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 	Owner   types.Did `protobuf:"bytes,2,opt,name=owner,proto3" json:"owner"`
 }
 
-func (m *MsgCreateKYCRequest) Reset()         { *m = MsgCreateKYCRequest{} }
-func (m *MsgCreateKYCRequest) String() string { return proto.CompactTextString(m) }
-func (*MsgCreateKYCRequest) ProtoMessage()    {}
-func (*MsgCreateKYCRequest) Descriptor() ([]byte, []int) {
+func (m *MsgCreateKYCRegistrationRequest) Reset()         { *m = MsgCreateKYCRegistrationRequest{} }
+func (m *MsgCreateKYCRegistrationRequest) String() string { return proto.CompactTextString(m) }
+func (*MsgCreateKYCRegistrationRequest) ProtoMessage()    {}
+func (*MsgCreateKYCRegistrationRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_4c40e758cc5e4d17, []int{0}
 }
-func (m *MsgCreateKYCRequest) XXX_Unmarshal(b []byte) error {
+func (m *MsgCreateKYCRegistrationRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgCreateKYCRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgCreateKYCRegistrationRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgCreateKYCRequest.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgCreateKYCRegistrationRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -55,47 +55,47 @@ func (m *MsgCreateKYCRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte,
 		return b[:n], nil
 	}
 }
-func (m *MsgCreateKYCRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgCreateKYCRequest.Merge(m, src)
+func (m *MsgCreateKYCRegistrationRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgCreateKYCRegistrationRequest.Merge(m, src)
 }
-func (m *MsgCreateKYCRequest) XXX_Size() int {
+func (m *MsgCreateKYCRegistrationRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgCreateKYCRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgCreateKYCRequest.DiscardUnknown(m)
+func (m *MsgCreateKYCRegistrationRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgCreateKYCRegistrationRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgCreateKYCRequest proto.InternalMessageInfo
+var xxx_messageInfo_MsgCreateKYCRegistrationRequest proto.InternalMessageInfo
 
-func (m *MsgCreateKYCRequest) GetCreator() string {
+func (m *MsgCreateKYCRegistrationRequest) GetCreator() string {
 	if m != nil {
 		return m.Creator
 	}
 	return ""
 }
 
-func (m *MsgCreateKYCRequest) GetOwner() types.Did {
+func (m *MsgCreateKYCRegistrationRequest) GetOwner() types.Did {
 	if m != nil {
 		return m.Owner
 	}
 	return types.Did{}
 }
 
-type MsgCreateKYCRequestResponse struct {
+type MsgCreateKYCRegistrationResponse struct {
 }
 
-func (m *MsgCreateKYCRequestResponse) Reset()         { *m = MsgCreateKYCRequestResponse{} }
-func (m *MsgCreateKYCRequestResponse) String() string { return proto.CompactTextString(m) }
-func (*MsgCreateKYCRequestResponse) ProtoMessage()    {}
-func (*MsgCreateKYCRequestResponse) Descriptor() ([]byte, []int) {
+func (m *MsgCreateKYCRegistrationResponse) Reset()         { *m = MsgCreateKYCRegistrationResponse{} }
+func (m *MsgCreateKYCRegistrationResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgCreateKYCRegistrationResponse) ProtoMessage()    {}
+func (*MsgCreateKYCRegistrationResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_4c40e758cc5e4d17, []int{1}
 }
-func (m *MsgCreateKYCRequestResponse) XXX_Unmarshal(b []byte) error {
+func (m *MsgCreateKYCRegistrationResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgCreateKYCRequestResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgCreateKYCRegistrationResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgCreateKYCRequestResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgCreateKYCRegistrationResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -105,34 +105,34 @@ func (m *MsgCreateKYCRequestResponse) XXX_Marshal(b []byte, deterministic bool) 
 		return b[:n], nil
 	}
 }
-func (m *MsgCreateKYCRequestResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgCreateKYCRequestResponse.Merge(m, src)
+func (m *MsgCreateKYCRegistrationResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgCreateKYCRegistrationResponse.Merge(m, src)
 }
-func (m *MsgCreateKYCRequestResponse) XXX_Size() int {
+func (m *MsgCreateKYCRegistrationResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgCreateKYCRequestResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgCreateKYCRequestResponse.DiscardUnknown(m)
+func (m *MsgCreateKYCRegistrationResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgCreateKYCRegistrationResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgCreateKYCRequestResponse proto.InternalMessageInfo
+var xxx_messageInfo_MsgCreateKYCRegistrationResponse proto.InternalMessageInfo
 
-type MsgDeleteKYCRequest struct {
+type MsgDeleteKYCRegistrationRequest struct {
 	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 }
 
-func (m *MsgDeleteKYCRequest) Reset()         { *m = MsgDeleteKYCRequest{} }
-func (m *MsgDeleteKYCRequest) String() string { return proto.CompactTextString(m) }
-func (*MsgDeleteKYCRequest) ProtoMessage()    {}
-func (*MsgDeleteKYCRequest) Descriptor() ([]byte, []int) {
+func (m *MsgDeleteKYCRegistrationRequest) Reset()         { *m = MsgDeleteKYCRegistrationRequest{} }
+func (m *MsgDeleteKYCRegistrationRequest) String() string { return proto.CompactTextString(m) }
+func (*MsgDeleteKYCRegistrationRequest) ProtoMessage()    {}
+func (*MsgDeleteKYCRegistrationRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_4c40e758cc5e4d17, []int{2}
 }
-func (m *MsgDeleteKYCRequest) XXX_Unmarshal(b []byte) error {
+func (m *MsgDeleteKYCRegistrationRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgDeleteKYCRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgDeleteKYCRegistrationRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgDeleteKYCRequest.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgDeleteKYCRegistrationRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -142,40 +142,40 @@ func (m *MsgDeleteKYCRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte,
 		return b[:n], nil
 	}
 }
-func (m *MsgDeleteKYCRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgDeleteKYCRequest.Merge(m, src)
+func (m *MsgDeleteKYCRegistrationRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgDeleteKYCRegistrationRequest.Merge(m, src)
 }
-func (m *MsgDeleteKYCRequest) XXX_Size() int {
+func (m *MsgDeleteKYCRegistrationRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgDeleteKYCRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgDeleteKYCRequest.DiscardUnknown(m)
+func (m *MsgDeleteKYCRegistrationRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgDeleteKYCRegistrationRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgDeleteKYCRequest proto.InternalMessageInfo
+var xxx_messageInfo_MsgDeleteKYCRegistrationRequest proto.InternalMessageInfo
 
-func (m *MsgDeleteKYCRequest) GetCreator() string {
+func (m *MsgDeleteKYCRegistrationRequest) GetCreator() string {
 	if m != nil {
 		return m.Creator
 	}
 	return ""
 }
 
-type MsgDeleteKYCRequestResponse struct {
+type MsgDeleteKYCRegistrationResponse struct {
 }
 
-func (m *MsgDeleteKYCRequestResponse) Reset()         { *m = MsgDeleteKYCRequestResponse{} }
-func (m *MsgDeleteKYCRequestResponse) String() string { return proto.CompactTextString(m) }
-func (*MsgDeleteKYCRequestResponse) ProtoMessage()    {}
-func (*MsgDeleteKYCRequestResponse) Descriptor() ([]byte, []int) {
+func (m *MsgDeleteKYCRegistrationResponse) Reset()         { *m = MsgDeleteKYCRegistrationResponse{} }
+func (m *MsgDeleteKYCRegistrationResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgDeleteKYCRegistrationResponse) ProtoMessage()    {}
+func (*MsgDeleteKYCRegistrationResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_4c40e758cc5e4d17, []int{3}
 }
-func (m *MsgDeleteKYCRequestResponse) XXX_Unmarshal(b []byte) error {
+func (m *MsgDeleteKYCRegistrationResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgDeleteKYCRequestResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgDeleteKYCRegistrationResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgDeleteKYCRequestResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgDeleteKYCRegistrationResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -185,35 +185,35 @@ func (m *MsgDeleteKYCRequestResponse) XXX_Marshal(b []byte, deterministic bool) 
 		return b[:n], nil
 	}
 }
-func (m *MsgDeleteKYCRequestResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgDeleteKYCRequestResponse.Merge(m, src)
+func (m *MsgDeleteKYCRegistrationResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgDeleteKYCRegistrationResponse.Merge(m, src)
 }
-func (m *MsgDeleteKYCRequestResponse) XXX_Size() int {
+func (m *MsgDeleteKYCRegistrationResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgDeleteKYCRequestResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgDeleteKYCRequestResponse.DiscardUnknown(m)
+func (m *MsgDeleteKYCRegistrationResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgDeleteKYCRegistrationResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgDeleteKYCRequestResponse proto.InternalMessageInfo
+var xxx_messageInfo_MsgDeleteKYCRegistrationResponse proto.InternalMessageInfo
 
-type MsgApproveKYCRequest struct {
+type MsgApproveKYCRegistrationRequest struct {
 	Creator string    `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 	Target  types.Did `protobuf:"bytes,2,opt,name=target,proto3" json:"target"`
 }
 
-func (m *MsgApproveKYCRequest) Reset()         { *m = MsgApproveKYCRequest{} }
-func (m *MsgApproveKYCRequest) String() string { return proto.CompactTextString(m) }
-func (*MsgApproveKYCRequest) ProtoMessage()    {}
-func (*MsgApproveKYCRequest) Descriptor() ([]byte, []int) {
+func (m *MsgApproveKYCRegistrationRequest) Reset()         { *m = MsgApproveKYCRegistrationRequest{} }
+func (m *MsgApproveKYCRegistrationRequest) String() string { return proto.CompactTextString(m) }
+func (*MsgApproveKYCRegistrationRequest) ProtoMessage()    {}
+func (*MsgApproveKYCRegistrationRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_4c40e758cc5e4d17, []int{4}
 }
-func (m *MsgApproveKYCRequest) XXX_Unmarshal(b []byte) error {
+func (m *MsgApproveKYCRegistrationRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgApproveKYCRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgApproveKYCRegistrationRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgApproveKYCRequest.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgApproveKYCRegistrationRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -223,47 +223,47 @@ func (m *MsgApproveKYCRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte
 		return b[:n], nil
 	}
 }
-func (m *MsgApproveKYCRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgApproveKYCRequest.Merge(m, src)
+func (m *MsgApproveKYCRegistrationRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgApproveKYCRegistrationRequest.Merge(m, src)
 }
-func (m *MsgApproveKYCRequest) XXX_Size() int {
+func (m *MsgApproveKYCRegistrationRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgApproveKYCRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgApproveKYCRequest.DiscardUnknown(m)
+func (m *MsgApproveKYCRegistrationRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgApproveKYCRegistrationRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgApproveKYCRequest proto.InternalMessageInfo
+var xxx_messageInfo_MsgApproveKYCRegistrationRequest proto.InternalMessageInfo
 
-func (m *MsgApproveKYCRequest) GetCreator() string {
+func (m *MsgApproveKYCRegistrationRequest) GetCreator() string {
 	if m != nil {
 		return m.Creator
 	}
 	return ""
 }
 
-func (m *MsgApproveKYCRequest) GetTarget() types.Did {
+func (m *MsgApproveKYCRegistrationRequest) GetTarget() types.Did {
 	if m != nil {
 		return m.Target
 	}
 	return types.Did{}
 }
 
-type MsgApproveKYCRequestResponse struct {
+type MsgApproveKYCRegistrationResponse struct {
 }
 
-func (m *MsgApproveKYCRequestResponse) Reset()         { *m = MsgApproveKYCRequestResponse{} }
-func (m *MsgApproveKYCRequestResponse) String() string { return proto.CompactTextString(m) }
-func (*MsgApproveKYCRequestResponse) ProtoMessage()    {}
-func (*MsgApproveKYCRequestResponse) Descriptor() ([]byte, []int) {
+func (m *MsgApproveKYCRegistrationResponse) Reset()         { *m = MsgApproveKYCRegistrationResponse{} }
+func (m *MsgApproveKYCRegistrationResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgApproveKYCRegistrationResponse) ProtoMessage()    {}
+func (*MsgApproveKYCRegistrationResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_4c40e758cc5e4d17, []int{5}
 }
-func (m *MsgApproveKYCRequestResponse) XXX_Unmarshal(b []byte) error {
+func (m *MsgApproveKYCRegistrationResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgApproveKYCRequestResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgApproveKYCRegistrationResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgApproveKYCRequestResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgApproveKYCRegistrationResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -273,56 +273,56 @@ func (m *MsgApproveKYCRequestResponse) XXX_Marshal(b []byte, deterministic bool)
 		return b[:n], nil
 	}
 }
-func (m *MsgApproveKYCRequestResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgApproveKYCRequestResponse.Merge(m, src)
+func (m *MsgApproveKYCRegistrationResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgApproveKYCRegistrationResponse.Merge(m, src)
 }
-func (m *MsgApproveKYCRequestResponse) XXX_Size() int {
+func (m *MsgApproveKYCRegistrationResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgApproveKYCRequestResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgApproveKYCRequestResponse.DiscardUnknown(m)
+func (m *MsgApproveKYCRegistrationResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgApproveKYCRegistrationResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgApproveKYCRequestResponse proto.InternalMessageInfo
+var xxx_messageInfo_MsgApproveKYCRegistrationResponse proto.InternalMessageInfo
 
 func init() {
-	proto.RegisterType((*MsgCreateKYCRequest)(nil), "beheroes.doxchain.kyc.v1beta1.MsgCreateKYCRequest")
-	proto.RegisterType((*MsgCreateKYCRequestResponse)(nil), "beheroes.doxchain.kyc.v1beta1.MsgCreateKYCRequestResponse")
-	proto.RegisterType((*MsgDeleteKYCRequest)(nil), "beheroes.doxchain.kyc.v1beta1.MsgDeleteKYCRequest")
-	proto.RegisterType((*MsgDeleteKYCRequestResponse)(nil), "beheroes.doxchain.kyc.v1beta1.MsgDeleteKYCRequestResponse")
-	proto.RegisterType((*MsgApproveKYCRequest)(nil), "beheroes.doxchain.kyc.v1beta1.MsgApproveKYCRequest")
-	proto.RegisterType((*MsgApproveKYCRequestResponse)(nil), "beheroes.doxchain.kyc.v1beta1.MsgApproveKYCRequestResponse")
+	proto.RegisterType((*MsgCreateKYCRegistrationRequest)(nil), "beheroes.doxchain.kyc.v1beta1.MsgCreateKYCRegistrationRequest")
+	proto.RegisterType((*MsgCreateKYCRegistrationResponse)(nil), "beheroes.doxchain.kyc.v1beta1.MsgCreateKYCRegistrationResponse")
+	proto.RegisterType((*MsgDeleteKYCRegistrationRequest)(nil), "beheroes.doxchain.kyc.v1beta1.MsgDeleteKYCRegistrationRequest")
+	proto.RegisterType((*MsgDeleteKYCRegistrationResponse)(nil), "beheroes.doxchain.kyc.v1beta1.MsgDeleteKYCRegistrationResponse")
+	proto.RegisterType((*MsgApproveKYCRegistrationRequest)(nil), "beheroes.doxchain.kyc.v1beta1.MsgApproveKYCRegistrationRequest")
+	proto.RegisterType((*MsgApproveKYCRegistrationResponse)(nil), "beheroes.doxchain.kyc.v1beta1.MsgApproveKYCRegistrationResponse")
 }
 
 func init() { proto.RegisterFile("doxchain/kyc/v1beta1/tx.proto", fileDescriptor_4c40e758cc5e4d17) }
 
 var fileDescriptor_4c40e758cc5e4d17 = []byte{
-	// 388 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x93, 0x3f, 0x4f, 0xe3, 0x40,
-	0x10, 0xc5, 0xbd, 0x97, 0xbb, 0x9c, 0x6e, 0xaf, 0xb9, 0xf3, 0xa5, 0x88, 0x7c, 0x97, 0xbd, 0xc8,
-	0x05, 0x0a, 0x05, 0x6b, 0x25, 0xe9, 0x40, 0x42, 0x90, 0xa4, 0x43, 0x69, 0xdc, 0x41, 0x83, 0xfc,
-	0x67, 0xe4, 0x58, 0x81, 0xac, 0xd9, 0xdd, 0x84, 0xb8, 0x45, 0xa2, 0xa7, 0xe3, 0x2b, 0xa5, 0x4c,
-	0x49, 0x85, 0x50, 0xf2, 0x45, 0x50, 0xfc, 0xaf, 0x88, 0x0d, 0x38, 0x74, 0xb6, 0x77, 0xde, 0x7b,
-	0xbf, 0x9d, 0xf1, 0xe0, 0x86, 0xcb, 0xe6, 0xce, 0xc8, 0xf2, 0x27, 0xc6, 0x38, 0x74, 0x8c, 0x59,
-	0xdb, 0x06, 0x69, 0xb5, 0x0d, 0x39, 0xa7, 0x01, 0x67, 0x92, 0xa9, 0x0d, 0x1b, 0x46, 0xc0, 0x19,
-	0x08, 0x9a, 0xd6, 0xd1, 0x71, 0xe8, 0xd0, 0xa4, 0x4e, 0xab, 0x79, 0xcc, 0x63, 0x51, 0xa5, 0xb1,
-	0x79, 0x8a, 0x45, 0x1a, 0xc9, 0x3c, 0x5d, 0xdf, 0xcd, 0x3c, 0x5d, 0xdf, 0x4d, 0xce, 0xf7, 0x0a,
-	0x33, 0xc7, 0xa1, 0x73, 0xc9, 0xe1, 0x66, 0x0a, 0x42, 0xc6, 0x75, 0x3a, 0xc3, 0x7f, 0x86, 0xc2,
-	0xeb, 0x73, 0xb0, 0x24, 0x9c, 0x9d, 0xf7, 0xcd, 0xf8, 0x50, 0xad, 0xe3, 0xef, 0xce, 0xe6, 0x1b,
-	0xe3, 0x75, 0xd4, 0x44, 0xad, 0x1f, 0x66, 0xfa, 0xaa, 0x1e, 0xe3, 0x6f, 0xec, 0x76, 0x02, 0xbc,
-	0xfe, 0xa5, 0x89, 0x5a, 0x3f, 0x3b, 0x3a, 0xcd, 0xd3, 0x6f, 0x28, 0x92, 0x44, 0x3a, 0xf0, 0xdd,
-	0xde, 0xd7, 0xc5, 0xf3, 0x7f, 0xc5, 0x8c, 0x65, 0x7a, 0x03, 0xff, 0x2d, 0x08, 0x34, 0x41, 0x04,
-	0x6c, 0x22, 0x40, 0x37, 0x22, 0x9e, 0x01, 0x5c, 0x41, 0x39, 0x9e, 0xc4, 0x6f, 0x5b, 0x90, 0xf9,
-	0x71, 0x5c, 0x1b, 0x0a, 0xef, 0x34, 0x08, 0x38, 0x9b, 0x95, 0xbb, 0xe0, 0x09, 0xae, 0x4a, 0x8b,
-	0x7b, 0x20, 0x77, 0xbe, 0x61, 0xa2, 0xd3, 0x09, 0xfe, 0x57, 0x94, 0x99, 0x32, 0x75, 0x1e, 0x2b,
-	0xb8, 0x32, 0x14, 0x9e, 0x7a, 0x87, 0xf0, 0xaf, 0x5c, 0xe7, 0x3b, 0xf4, 0xdd, 0xdf, 0x81, 0x16,
-	0x34, 0x4f, 0x3b, 0xdc, 0x5d, 0x93, 0xc2, 0x44, 0x10, 0xb9, 0x76, 0x97, 0x80, 0xd8, 0xd6, 0x94,
-	0x81, 0x78, 0x6b, 0x4a, 0xea, 0x3d, 0xc2, 0xbf, 0xf3, 0x33, 0xea, 0x7e, 0xec, 0x98, 0x13, 0x69,
-	0x47, 0x9f, 0x10, 0xa5, 0x1c, 0xbd, 0xfe, 0x62, 0x45, 0xd0, 0x72, 0x45, 0xd0, 0xcb, 0x8a, 0xa0,
-	0x87, 0x35, 0x51, 0x96, 0x6b, 0xa2, 0x3c, 0xad, 0x89, 0x72, 0xb1, 0xef, 0xf9, 0x72, 0x34, 0xb5,
-	0xa9, 0xc3, 0xae, 0x0d, 0x1b, 0x0e, 0xe2, 0x04, 0x23, 0x5b, 0xb2, 0x79, 0xb4, 0x66, 0x32, 0x0c,
-	0x40, 0xd8, 0xd5, 0x68, 0xb3, 0xba, 0xaf, 0x01, 0x00, 0x00, 0xff, 0xff, 0x23, 0x3c, 0x1b, 0x01,
-	0xf7, 0x03, 0x00, 0x00,
+	// 396 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x93, 0x4f, 0x4f, 0xe2, 0x40,
+	0x18, 0xc6, 0x3b, 0xcb, 0x2e, 0x9b, 0x9d, 0xbd, 0x35, 0xbb, 0x86, 0x34, 0xa1, 0x60, 0x4d, 0x0c,
+	0x1e, 0x9c, 0x06, 0x3c, 0x9a, 0x20, 0x02, 0x37, 0xc3, 0xa5, 0x37, 0xbd, 0x98, 0xfe, 0x79, 0x53,
+	0x1a, 0xb4, 0x53, 0x67, 0x06, 0xa4, 0x31, 0xf1, 0x33, 0x78, 0x34, 0xf1, 0x0b, 0x71, 0xe4, 0xa8,
+	0x17, 0x63, 0xe0, 0x8b, 0x18, 0x3a, 0x85, 0x8b, 0xa5, 0x02, 0xb7, 0x36, 0xf3, 0xbc, 0xef, 0xf3,
+	0x9b, 0xe7, 0x9d, 0x17, 0x97, 0x3d, 0x3a, 0x76, 0xfb, 0x76, 0x10, 0x9a, 0x83, 0xd8, 0x35, 0x47,
+	0x75, 0x07, 0x84, 0x5d, 0x37, 0xc5, 0x98, 0x44, 0x8c, 0x0a, 0xaa, 0x96, 0x1d, 0xe8, 0x03, 0xa3,
+	0xc0, 0xc9, 0x52, 0x47, 0x06, 0xb1, 0x4b, 0x52, 0x9d, 0xf6, 0xcf, 0xa7, 0x3e, 0x4d, 0x94, 0xe6,
+	0xe2, 0x4b, 0x16, 0x69, 0xfa, 0xaa, 0xa7, 0x17, 0x78, 0xab, 0x9e, 0x5e, 0xe0, 0xa5, 0xe7, 0x87,
+	0x99, 0x9e, 0x83, 0xd8, 0xbd, 0x66, 0x70, 0x37, 0x04, 0x2e, 0xa4, 0xce, 0x78, 0xc0, 0x95, 0x1e,
+	0xf7, 0x3b, 0x0c, 0x6c, 0x01, 0x17, 0x97, 0x1d, 0x0b, 0xfc, 0x80, 0x0b, 0x66, 0x8b, 0x80, 0x86,
+	0x96, 0x14, 0xaa, 0x25, 0xfc, 0xdb, 0x5d, 0x9c, 0x53, 0x56, 0x42, 0x55, 0x54, 0xfb, 0x63, 0x2d,
+	0x7f, 0xd5, 0x26, 0xfe, 0x45, 0xef, 0x43, 0x60, 0xa5, 0x1f, 0x55, 0x54, 0xfb, 0xdb, 0x30, 0xc8,
+	0xd7, 0x9b, 0x2c, 0x88, 0x52, 0x77, 0xd2, 0x0d, 0xbc, 0xf6, 0xcf, 0xc9, 0x7b, 0x45, 0xb1, 0x64,
+	0x99, 0x61, 0xe0, 0xea, 0x7a, 0x73, 0x1e, 0xd1, 0x90, 0x83, 0x71, 0x9a, 0x00, 0x76, 0xe1, 0x06,
+	0xb6, 0x07, 0x4c, 0x0d, 0xd6, 0x14, 0xa7, 0x06, 0x8f, 0x89, 0xe6, 0x3c, 0x8a, 0x18, 0x1d, 0x6d,
+	0x1f, 0x41, 0x0b, 0x17, 0x85, 0xcd, 0x7c, 0x10, 0x5b, 0x67, 0x90, 0xd6, 0x19, 0x07, 0x78, 0x3f,
+	0xc7, 0x5f, 0x42, 0x36, 0xde, 0x0a, 0xb8, 0xd0, 0xe3, 0xbe, 0xfa, 0x8c, 0xf0, 0xff, 0xcc, 0xbc,
+	0xd4, 0x26, 0xc9, 0x7d, 0x46, 0xe4, 0x9b, 0x29, 0x6b, 0x67, 0x3b, 0xd7, 0x4b, 0xc4, 0x04, 0x2d,
+	0x33, 0xe9, 0x4d, 0xd0, 0xf2, 0xe6, 0xbb, 0x09, 0x5a, 0xee, 0x88, 0xd5, 0x17, 0x84, 0xf7, 0xb2,
+	0x03, 0x56, 0x37, 0xe8, 0x9d, 0xfb, 0x34, 0xb4, 0xd6, 0xee, 0x0d, 0x24, 0x5d, 0xbb, 0x33, 0x99,
+	0xe9, 0x68, 0x3a, 0xd3, 0xd1, 0xc7, 0x4c, 0x47, 0x4f, 0x73, 0x5d, 0x99, 0xce, 0x75, 0xe5, 0x75,
+	0xae, 0x2b, 0x57, 0x47, 0x7e, 0x20, 0xfa, 0x43, 0x87, 0xb8, 0xf4, 0xd6, 0x74, 0xe0, 0x58, 0xda,
+	0x98, 0xab, 0xcd, 0x1e, 0x27, 0xbb, 0x2d, 0xe2, 0x08, 0xb8, 0x53, 0x4c, 0xd6, 0xf9, 0xe4, 0x33,
+	0x00, 0x00, 0xff, 0xff, 0xb6, 0x81, 0x85, 0x86, 0x6c, 0x04, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -337,9 +337,9 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type MsgClient interface {
-	CreateKYCRequest(ctx context.Context, in *MsgCreateKYCRequest, opts ...grpc.CallOption) (*MsgCreateKYCRequestResponse, error)
-	DeleteKYCRequest(ctx context.Context, in *MsgDeleteKYCRequest, opts ...grpc.CallOption) (*MsgDeleteKYCRequestResponse, error)
-	ApproveKYCRequest(ctx context.Context, in *MsgApproveKYCRequest, opts ...grpc.CallOption) (*MsgApproveKYCRequestResponse, error)
+	CreateKYCRegistration(ctx context.Context, in *MsgCreateKYCRegistrationRequest, opts ...grpc.CallOption) (*MsgCreateKYCRegistrationResponse, error)
+	DeleteKYCRegistration(ctx context.Context, in *MsgDeleteKYCRegistrationRequest, opts ...grpc.CallOption) (*MsgDeleteKYCRegistrationResponse, error)
+	ApproveKYCRegistration(ctx context.Context, in *MsgApproveKYCRegistrationRequest, opts ...grpc.CallOption) (*MsgApproveKYCRegistrationResponse, error)
 }
 
 type msgClient struct {
@@ -350,27 +350,27 @@ func NewMsgClient(cc grpc1.ClientConn) MsgClient {
 	return &msgClient{cc}
 }
 
-func (c *msgClient) CreateKYCRequest(ctx context.Context, in *MsgCreateKYCRequest, opts ...grpc.CallOption) (*MsgCreateKYCRequestResponse, error) {
-	out := new(MsgCreateKYCRequestResponse)
-	err := c.cc.Invoke(ctx, "/beheroes.doxchain.kyc.v1beta1.Msg/CreateKYCRequest", in, out, opts...)
+func (c *msgClient) CreateKYCRegistration(ctx context.Context, in *MsgCreateKYCRegistrationRequest, opts ...grpc.CallOption) (*MsgCreateKYCRegistrationResponse, error) {
+	out := new(MsgCreateKYCRegistrationResponse)
+	err := c.cc.Invoke(ctx, "/beheroes.doxchain.kyc.v1beta1.Msg/CreateKYCRegistration", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *msgClient) DeleteKYCRequest(ctx context.Context, in *MsgDeleteKYCRequest, opts ...grpc.CallOption) (*MsgDeleteKYCRequestResponse, error) {
-	out := new(MsgDeleteKYCRequestResponse)
-	err := c.cc.Invoke(ctx, "/beheroes.doxchain.kyc.v1beta1.Msg/DeleteKYCRequest", in, out, opts...)
+func (c *msgClient) DeleteKYCRegistration(ctx context.Context, in *MsgDeleteKYCRegistrationRequest, opts ...grpc.CallOption) (*MsgDeleteKYCRegistrationResponse, error) {
+	out := new(MsgDeleteKYCRegistrationResponse)
+	err := c.cc.Invoke(ctx, "/beheroes.doxchain.kyc.v1beta1.Msg/DeleteKYCRegistration", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *msgClient) ApproveKYCRequest(ctx context.Context, in *MsgApproveKYCRequest, opts ...grpc.CallOption) (*MsgApproveKYCRequestResponse, error) {
-	out := new(MsgApproveKYCRequestResponse)
-	err := c.cc.Invoke(ctx, "/beheroes.doxchain.kyc.v1beta1.Msg/ApproveKYCRequest", in, out, opts...)
+func (c *msgClient) ApproveKYCRegistration(ctx context.Context, in *MsgApproveKYCRegistrationRequest, opts ...grpc.CallOption) (*MsgApproveKYCRegistrationResponse, error) {
+	out := new(MsgApproveKYCRegistrationResponse)
+	err := c.cc.Invoke(ctx, "/beheroes.doxchain.kyc.v1beta1.Msg/ApproveKYCRegistration", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -379,79 +379,79 @@ func (c *msgClient) ApproveKYCRequest(ctx context.Context, in *MsgApproveKYCRequ
 
 // MsgServer is the server API for Msg service.
 type MsgServer interface {
-	CreateKYCRequest(context.Context, *MsgCreateKYCRequest) (*MsgCreateKYCRequestResponse, error)
-	DeleteKYCRequest(context.Context, *MsgDeleteKYCRequest) (*MsgDeleteKYCRequestResponse, error)
-	ApproveKYCRequest(context.Context, *MsgApproveKYCRequest) (*MsgApproveKYCRequestResponse, error)
+	CreateKYCRegistration(context.Context, *MsgCreateKYCRegistrationRequest) (*MsgCreateKYCRegistrationResponse, error)
+	DeleteKYCRegistration(context.Context, *MsgDeleteKYCRegistrationRequest) (*MsgDeleteKYCRegistrationResponse, error)
+	ApproveKYCRegistration(context.Context, *MsgApproveKYCRegistrationRequest) (*MsgApproveKYCRegistrationResponse, error)
 }
 
 // UnimplementedMsgServer can be embedded to have forward compatible implementations.
 type UnimplementedMsgServer struct {
 }
 
-func (*UnimplementedMsgServer) CreateKYCRequest(ctx context.Context, req *MsgCreateKYCRequest) (*MsgCreateKYCRequestResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateKYCRequest not implemented")
+func (*UnimplementedMsgServer) CreateKYCRegistration(ctx context.Context, req *MsgCreateKYCRegistrationRequest) (*MsgCreateKYCRegistrationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateKYCRegistration not implemented")
 }
-func (*UnimplementedMsgServer) DeleteKYCRequest(ctx context.Context, req *MsgDeleteKYCRequest) (*MsgDeleteKYCRequestResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteKYCRequest not implemented")
+func (*UnimplementedMsgServer) DeleteKYCRegistration(ctx context.Context, req *MsgDeleteKYCRegistrationRequest) (*MsgDeleteKYCRegistrationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteKYCRegistration not implemented")
 }
-func (*UnimplementedMsgServer) ApproveKYCRequest(ctx context.Context, req *MsgApproveKYCRequest) (*MsgApproveKYCRequestResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ApproveKYCRequest not implemented")
+func (*UnimplementedMsgServer) ApproveKYCRegistration(ctx context.Context, req *MsgApproveKYCRegistrationRequest) (*MsgApproveKYCRegistrationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ApproveKYCRegistration not implemented")
 }
 
 func RegisterMsgServer(s grpc1.Server, srv MsgServer) {
 	s.RegisterService(&_Msg_serviceDesc, srv)
 }
 
-func _Msg_CreateKYCRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgCreateKYCRequest)
+func _Msg_CreateKYCRegistration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgCreateKYCRegistrationRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MsgServer).CreateKYCRequest(ctx, in)
+		return srv.(MsgServer).CreateKYCRegistration(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/beheroes.doxchain.kyc.v1beta1.Msg/CreateKYCRequest",
+		FullMethod: "/beheroes.doxchain.kyc.v1beta1.Msg/CreateKYCRegistration",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).CreateKYCRequest(ctx, req.(*MsgCreateKYCRequest))
+		return srv.(MsgServer).CreateKYCRegistration(ctx, req.(*MsgCreateKYCRegistrationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Msg_DeleteKYCRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgDeleteKYCRequest)
+func _Msg_DeleteKYCRegistration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgDeleteKYCRegistrationRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MsgServer).DeleteKYCRequest(ctx, in)
+		return srv.(MsgServer).DeleteKYCRegistration(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/beheroes.doxchain.kyc.v1beta1.Msg/DeleteKYCRequest",
+		FullMethod: "/beheroes.doxchain.kyc.v1beta1.Msg/DeleteKYCRegistration",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).DeleteKYCRequest(ctx, req.(*MsgDeleteKYCRequest))
+		return srv.(MsgServer).DeleteKYCRegistration(ctx, req.(*MsgDeleteKYCRegistrationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Msg_ApproveKYCRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgApproveKYCRequest)
+func _Msg_ApproveKYCRegistration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgApproveKYCRegistrationRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MsgServer).ApproveKYCRequest(ctx, in)
+		return srv.(MsgServer).ApproveKYCRegistration(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/beheroes.doxchain.kyc.v1beta1.Msg/ApproveKYCRequest",
+		FullMethod: "/beheroes.doxchain.kyc.v1beta1.Msg/ApproveKYCRegistration",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).ApproveKYCRequest(ctx, req.(*MsgApproveKYCRequest))
+		return srv.(MsgServer).ApproveKYCRegistration(ctx, req.(*MsgApproveKYCRegistrationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -461,23 +461,23 @@ var _Msg_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*MsgServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "CreateKYCRequest",
-			Handler:    _Msg_CreateKYCRequest_Handler,
+			MethodName: "CreateKYCRegistration",
+			Handler:    _Msg_CreateKYCRegistration_Handler,
 		},
 		{
-			MethodName: "DeleteKYCRequest",
-			Handler:    _Msg_DeleteKYCRequest_Handler,
+			MethodName: "DeleteKYCRegistration",
+			Handler:    _Msg_DeleteKYCRegistration_Handler,
 		},
 		{
-			MethodName: "ApproveKYCRequest",
-			Handler:    _Msg_ApproveKYCRequest_Handler,
+			MethodName: "ApproveKYCRegistration",
+			Handler:    _Msg_ApproveKYCRegistration_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "doxchain/kyc/v1beta1/tx.proto",
 }
 
-func (m *MsgCreateKYCRequest) Marshal() (dAtA []byte, err error) {
+func (m *MsgCreateKYCRegistrationRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -487,12 +487,12 @@ func (m *MsgCreateKYCRequest) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgCreateKYCRequest) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgCreateKYCRegistrationRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgCreateKYCRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgCreateKYCRegistrationRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -517,7 +517,7 @@ func (m *MsgCreateKYCRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgCreateKYCRequestResponse) Marshal() (dAtA []byte, err error) {
+func (m *MsgCreateKYCRegistrationResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -527,12 +527,12 @@ func (m *MsgCreateKYCRequestResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgCreateKYCRequestResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgCreateKYCRegistrationResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgCreateKYCRequestResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgCreateKYCRegistrationResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -540,7 +540,7 @@ func (m *MsgCreateKYCRequestResponse) MarshalToSizedBuffer(dAtA []byte) (int, er
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgDeleteKYCRequest) Marshal() (dAtA []byte, err error) {
+func (m *MsgDeleteKYCRegistrationRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -550,12 +550,12 @@ func (m *MsgDeleteKYCRequest) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgDeleteKYCRequest) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgDeleteKYCRegistrationRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgDeleteKYCRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgDeleteKYCRegistrationRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -570,7 +570,7 @@ func (m *MsgDeleteKYCRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgDeleteKYCRequestResponse) Marshal() (dAtA []byte, err error) {
+func (m *MsgDeleteKYCRegistrationResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -580,12 +580,12 @@ func (m *MsgDeleteKYCRequestResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgDeleteKYCRequestResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgDeleteKYCRegistrationResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgDeleteKYCRequestResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgDeleteKYCRegistrationResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -593,7 +593,7 @@ func (m *MsgDeleteKYCRequestResponse) MarshalToSizedBuffer(dAtA []byte) (int, er
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgApproveKYCRequest) Marshal() (dAtA []byte, err error) {
+func (m *MsgApproveKYCRegistrationRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -603,12 +603,12 @@ func (m *MsgApproveKYCRequest) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgApproveKYCRequest) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgApproveKYCRegistrationRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgApproveKYCRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgApproveKYCRegistrationRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -633,7 +633,7 @@ func (m *MsgApproveKYCRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgApproveKYCRequestResponse) Marshal() (dAtA []byte, err error) {
+func (m *MsgApproveKYCRegistrationResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -643,12 +643,12 @@ func (m *MsgApproveKYCRequestResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgApproveKYCRequestResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgApproveKYCRegistrationResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgApproveKYCRequestResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgApproveKYCRegistrationResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -667,7 +667,7 @@ func encodeVarintTx(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return base
 }
-func (m *MsgCreateKYCRequest) Size() (n int) {
+func (m *MsgCreateKYCRegistrationRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -682,7 +682,7 @@ func (m *MsgCreateKYCRequest) Size() (n int) {
 	return n
 }
 
-func (m *MsgCreateKYCRequestResponse) Size() (n int) {
+func (m *MsgCreateKYCRegistrationResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -691,7 +691,7 @@ func (m *MsgCreateKYCRequestResponse) Size() (n int) {
 	return n
 }
 
-func (m *MsgDeleteKYCRequest) Size() (n int) {
+func (m *MsgDeleteKYCRegistrationRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -704,7 +704,7 @@ func (m *MsgDeleteKYCRequest) Size() (n int) {
 	return n
 }
 
-func (m *MsgDeleteKYCRequestResponse) Size() (n int) {
+func (m *MsgDeleteKYCRegistrationResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -713,7 +713,7 @@ func (m *MsgDeleteKYCRequestResponse) Size() (n int) {
 	return n
 }
 
-func (m *MsgApproveKYCRequest) Size() (n int) {
+func (m *MsgApproveKYCRegistrationRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -728,7 +728,7 @@ func (m *MsgApproveKYCRequest) Size() (n int) {
 	return n
 }
 
-func (m *MsgApproveKYCRequestResponse) Size() (n int) {
+func (m *MsgApproveKYCRegistrationResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -743,7 +743,7 @@ func sovTx(x uint64) (n int) {
 func sozTx(x uint64) (n int) {
 	return sovTx(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
-func (m *MsgCreateKYCRequest) Unmarshal(dAtA []byte) error {
+func (m *MsgCreateKYCRegistrationRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -766,10 +766,10 @@ func (m *MsgCreateKYCRequest) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgCreateKYCRequest: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgCreateKYCRegistrationRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgCreateKYCRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgCreateKYCRegistrationRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -858,7 +858,7 @@ func (m *MsgCreateKYCRequest) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgCreateKYCRequestResponse) Unmarshal(dAtA []byte) error {
+func (m *MsgCreateKYCRegistrationResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -881,10 +881,10 @@ func (m *MsgCreateKYCRequestResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgCreateKYCRequestResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgCreateKYCRegistrationResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgCreateKYCRequestResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgCreateKYCRegistrationResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:
@@ -908,7 +908,7 @@ func (m *MsgCreateKYCRequestResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgDeleteKYCRequest) Unmarshal(dAtA []byte) error {
+func (m *MsgDeleteKYCRegistrationRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -931,10 +931,10 @@ func (m *MsgDeleteKYCRequest) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgDeleteKYCRequest: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgDeleteKYCRegistrationRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgDeleteKYCRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgDeleteKYCRegistrationRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -990,7 +990,7 @@ func (m *MsgDeleteKYCRequest) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgDeleteKYCRequestResponse) Unmarshal(dAtA []byte) error {
+func (m *MsgDeleteKYCRegistrationResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1013,10 +1013,10 @@ func (m *MsgDeleteKYCRequestResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgDeleteKYCRequestResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgDeleteKYCRegistrationResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgDeleteKYCRequestResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgDeleteKYCRegistrationResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:
@@ -1040,7 +1040,7 @@ func (m *MsgDeleteKYCRequestResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgApproveKYCRequest) Unmarshal(dAtA []byte) error {
+func (m *MsgApproveKYCRegistrationRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1063,10 +1063,10 @@ func (m *MsgApproveKYCRequest) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgApproveKYCRequest: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgApproveKYCRegistrationRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgApproveKYCRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgApproveKYCRegistrationRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -1155,7 +1155,7 @@ func (m *MsgApproveKYCRequest) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgApproveKYCRequestResponse) Unmarshal(dAtA []byte) error {
+func (m *MsgApproveKYCRegistrationResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1178,10 +1178,10 @@ func (m *MsgApproveKYCRequestResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgApproveKYCRequestResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgApproveKYCRegistrationResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgApproveKYCRequestResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgApproveKYCRegistrationResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:

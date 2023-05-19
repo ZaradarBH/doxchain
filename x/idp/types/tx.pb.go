@@ -124,23 +124,27 @@ func (m *MsgAuthenticationResponse) GetToken() string {
 	return ""
 }
 
-type MsgCreateClientRegistry struct {
-	Creator        string         `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
-	ClientRegistry ClientRegistry `protobuf:"bytes,2,opt,name=clientRegistry,proto3" json:"clientRegistry"`
+type MsgCreateClientRegistrationRegistryRequest struct {
+	Creator                    string                     `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	ClientRegistrationRegistry ClientRegistrationRegistry `protobuf:"bytes,2,opt,name=clientRegistrationRegistry,proto3" json:"clientRegistrationRegistry"`
 }
 
-func (m *MsgCreateClientRegistry) Reset()         { *m = MsgCreateClientRegistry{} }
-func (m *MsgCreateClientRegistry) String() string { return proto.CompactTextString(m) }
-func (*MsgCreateClientRegistry) ProtoMessage()    {}
-func (*MsgCreateClientRegistry) Descriptor() ([]byte, []int) {
+func (m *MsgCreateClientRegistrationRegistryRequest) Reset() {
+	*m = MsgCreateClientRegistrationRegistryRequest{}
+}
+func (m *MsgCreateClientRegistrationRegistryRequest) String() string {
+	return proto.CompactTextString(m)
+}
+func (*MsgCreateClientRegistrationRegistryRequest) ProtoMessage() {}
+func (*MsgCreateClientRegistrationRegistryRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_62b7b5f173be8e44, []int{2}
 }
-func (m *MsgCreateClientRegistry) XXX_Unmarshal(b []byte) error {
+func (m *MsgCreateClientRegistrationRegistryRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgCreateClientRegistry) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgCreateClientRegistrationRegistryRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgCreateClientRegistry.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgCreateClientRegistrationRegistryRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -150,47 +154,51 @@ func (m *MsgCreateClientRegistry) XXX_Marshal(b []byte, deterministic bool) ([]b
 		return b[:n], nil
 	}
 }
-func (m *MsgCreateClientRegistry) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgCreateClientRegistry.Merge(m, src)
+func (m *MsgCreateClientRegistrationRegistryRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgCreateClientRegistrationRegistryRequest.Merge(m, src)
 }
-func (m *MsgCreateClientRegistry) XXX_Size() int {
+func (m *MsgCreateClientRegistrationRegistryRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgCreateClientRegistry) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgCreateClientRegistry.DiscardUnknown(m)
+func (m *MsgCreateClientRegistrationRegistryRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgCreateClientRegistrationRegistryRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgCreateClientRegistry proto.InternalMessageInfo
+var xxx_messageInfo_MsgCreateClientRegistrationRegistryRequest proto.InternalMessageInfo
 
-func (m *MsgCreateClientRegistry) GetCreator() string {
+func (m *MsgCreateClientRegistrationRegistryRequest) GetCreator() string {
 	if m != nil {
 		return m.Creator
 	}
 	return ""
 }
 
-func (m *MsgCreateClientRegistry) GetClientRegistry() ClientRegistry {
+func (m *MsgCreateClientRegistrationRegistryRequest) GetClientRegistrationRegistry() ClientRegistrationRegistry {
 	if m != nil {
-		return m.ClientRegistry
+		return m.ClientRegistrationRegistry
 	}
-	return ClientRegistry{}
+	return ClientRegistrationRegistry{}
 }
 
-type MsgCreateClientRegistryResponse struct {
+type MsgCreateClientRegistrationRegistryResponse struct {
 }
 
-func (m *MsgCreateClientRegistryResponse) Reset()         { *m = MsgCreateClientRegistryResponse{} }
-func (m *MsgCreateClientRegistryResponse) String() string { return proto.CompactTextString(m) }
-func (*MsgCreateClientRegistryResponse) ProtoMessage()    {}
-func (*MsgCreateClientRegistryResponse) Descriptor() ([]byte, []int) {
+func (m *MsgCreateClientRegistrationRegistryResponse) Reset() {
+	*m = MsgCreateClientRegistrationRegistryResponse{}
+}
+func (m *MsgCreateClientRegistrationRegistryResponse) String() string {
+	return proto.CompactTextString(m)
+}
+func (*MsgCreateClientRegistrationRegistryResponse) ProtoMessage() {}
+func (*MsgCreateClientRegistrationRegistryResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_62b7b5f173be8e44, []int{3}
 }
-func (m *MsgCreateClientRegistryResponse) XXX_Unmarshal(b []byte) error {
+func (m *MsgCreateClientRegistrationRegistryResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgCreateClientRegistryResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgCreateClientRegistrationRegistryResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgCreateClientRegistryResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgCreateClientRegistrationRegistryResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -200,35 +208,39 @@ func (m *MsgCreateClientRegistryResponse) XXX_Marshal(b []byte, deterministic bo
 		return b[:n], nil
 	}
 }
-func (m *MsgCreateClientRegistryResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgCreateClientRegistryResponse.Merge(m, src)
+func (m *MsgCreateClientRegistrationRegistryResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgCreateClientRegistrationRegistryResponse.Merge(m, src)
 }
-func (m *MsgCreateClientRegistryResponse) XXX_Size() int {
+func (m *MsgCreateClientRegistrationRegistryResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgCreateClientRegistryResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgCreateClientRegistryResponse.DiscardUnknown(m)
+func (m *MsgCreateClientRegistrationRegistryResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgCreateClientRegistrationRegistryResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgCreateClientRegistryResponse proto.InternalMessageInfo
+var xxx_messageInfo_MsgCreateClientRegistrationRegistryResponse proto.InternalMessageInfo
 
-type MsgUpdateClientRegistry struct {
-	Creator        string         `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
-	ClientRegistry ClientRegistry `protobuf:"bytes,2,opt,name=clientRegistry,proto3" json:"clientRegistry"`
+type MsgUpdateClientRegistrationRegistryRequest struct {
+	Creator                    string                     `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	ClientRegistrationRegistry ClientRegistrationRegistry `protobuf:"bytes,2,opt,name=clientRegistrationRegistry,proto3" json:"clientRegistrationRegistry"`
 }
 
-func (m *MsgUpdateClientRegistry) Reset()         { *m = MsgUpdateClientRegistry{} }
-func (m *MsgUpdateClientRegistry) String() string { return proto.CompactTextString(m) }
-func (*MsgUpdateClientRegistry) ProtoMessage()    {}
-func (*MsgUpdateClientRegistry) Descriptor() ([]byte, []int) {
+func (m *MsgUpdateClientRegistrationRegistryRequest) Reset() {
+	*m = MsgUpdateClientRegistrationRegistryRequest{}
+}
+func (m *MsgUpdateClientRegistrationRegistryRequest) String() string {
+	return proto.CompactTextString(m)
+}
+func (*MsgUpdateClientRegistrationRegistryRequest) ProtoMessage() {}
+func (*MsgUpdateClientRegistrationRegistryRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_62b7b5f173be8e44, []int{4}
 }
-func (m *MsgUpdateClientRegistry) XXX_Unmarshal(b []byte) error {
+func (m *MsgUpdateClientRegistrationRegistryRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgUpdateClientRegistry) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgUpdateClientRegistrationRegistryRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgUpdateClientRegistry.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgUpdateClientRegistrationRegistryRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -238,47 +250,51 @@ func (m *MsgUpdateClientRegistry) XXX_Marshal(b []byte, deterministic bool) ([]b
 		return b[:n], nil
 	}
 }
-func (m *MsgUpdateClientRegistry) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgUpdateClientRegistry.Merge(m, src)
+func (m *MsgUpdateClientRegistrationRegistryRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgUpdateClientRegistrationRegistryRequest.Merge(m, src)
 }
-func (m *MsgUpdateClientRegistry) XXX_Size() int {
+func (m *MsgUpdateClientRegistrationRegistryRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgUpdateClientRegistry) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgUpdateClientRegistry.DiscardUnknown(m)
+func (m *MsgUpdateClientRegistrationRegistryRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgUpdateClientRegistrationRegistryRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgUpdateClientRegistry proto.InternalMessageInfo
+var xxx_messageInfo_MsgUpdateClientRegistrationRegistryRequest proto.InternalMessageInfo
 
-func (m *MsgUpdateClientRegistry) GetCreator() string {
+func (m *MsgUpdateClientRegistrationRegistryRequest) GetCreator() string {
 	if m != nil {
 		return m.Creator
 	}
 	return ""
 }
 
-func (m *MsgUpdateClientRegistry) GetClientRegistry() ClientRegistry {
+func (m *MsgUpdateClientRegistrationRegistryRequest) GetClientRegistrationRegistry() ClientRegistrationRegistry {
 	if m != nil {
-		return m.ClientRegistry
+		return m.ClientRegistrationRegistry
 	}
-	return ClientRegistry{}
+	return ClientRegistrationRegistry{}
 }
 
-type MsgUpdateClientRegistryResponse struct {
+type MsgUpdateClientRegistrationRegistryResponse struct {
 }
 
-func (m *MsgUpdateClientRegistryResponse) Reset()         { *m = MsgUpdateClientRegistryResponse{} }
-func (m *MsgUpdateClientRegistryResponse) String() string { return proto.CompactTextString(m) }
-func (*MsgUpdateClientRegistryResponse) ProtoMessage()    {}
-func (*MsgUpdateClientRegistryResponse) Descriptor() ([]byte, []int) {
+func (m *MsgUpdateClientRegistrationRegistryResponse) Reset() {
+	*m = MsgUpdateClientRegistrationRegistryResponse{}
+}
+func (m *MsgUpdateClientRegistrationRegistryResponse) String() string {
+	return proto.CompactTextString(m)
+}
+func (*MsgUpdateClientRegistrationRegistryResponse) ProtoMessage() {}
+func (*MsgUpdateClientRegistrationRegistryResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_62b7b5f173be8e44, []int{5}
 }
-func (m *MsgUpdateClientRegistryResponse) XXX_Unmarshal(b []byte) error {
+func (m *MsgUpdateClientRegistrationRegistryResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgUpdateClientRegistryResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgUpdateClientRegistrationRegistryResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgUpdateClientRegistryResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgUpdateClientRegistrationRegistryResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -288,34 +304,38 @@ func (m *MsgUpdateClientRegistryResponse) XXX_Marshal(b []byte, deterministic bo
 		return b[:n], nil
 	}
 }
-func (m *MsgUpdateClientRegistryResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgUpdateClientRegistryResponse.Merge(m, src)
+func (m *MsgUpdateClientRegistrationRegistryResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgUpdateClientRegistrationRegistryResponse.Merge(m, src)
 }
-func (m *MsgUpdateClientRegistryResponse) XXX_Size() int {
+func (m *MsgUpdateClientRegistrationRegistryResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgUpdateClientRegistryResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgUpdateClientRegistryResponse.DiscardUnknown(m)
+func (m *MsgUpdateClientRegistrationRegistryResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgUpdateClientRegistrationRegistryResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgUpdateClientRegistryResponse proto.InternalMessageInfo
+var xxx_messageInfo_MsgUpdateClientRegistrationRegistryResponse proto.InternalMessageInfo
 
-type MsgDeleteClientRegistry struct {
+type MsgDeleteClientRegistrationRegistryRequest struct {
 	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 }
 
-func (m *MsgDeleteClientRegistry) Reset()         { *m = MsgDeleteClientRegistry{} }
-func (m *MsgDeleteClientRegistry) String() string { return proto.CompactTextString(m) }
-func (*MsgDeleteClientRegistry) ProtoMessage()    {}
-func (*MsgDeleteClientRegistry) Descriptor() ([]byte, []int) {
+func (m *MsgDeleteClientRegistrationRegistryRequest) Reset() {
+	*m = MsgDeleteClientRegistrationRegistryRequest{}
+}
+func (m *MsgDeleteClientRegistrationRegistryRequest) String() string {
+	return proto.CompactTextString(m)
+}
+func (*MsgDeleteClientRegistrationRegistryRequest) ProtoMessage() {}
+func (*MsgDeleteClientRegistrationRegistryRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_62b7b5f173be8e44, []int{6}
 }
-func (m *MsgDeleteClientRegistry) XXX_Unmarshal(b []byte) error {
+func (m *MsgDeleteClientRegistrationRegistryRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgDeleteClientRegistry) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgDeleteClientRegistrationRegistryRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgDeleteClientRegistry.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgDeleteClientRegistrationRegistryRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -325,40 +345,44 @@ func (m *MsgDeleteClientRegistry) XXX_Marshal(b []byte, deterministic bool) ([]b
 		return b[:n], nil
 	}
 }
-func (m *MsgDeleteClientRegistry) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgDeleteClientRegistry.Merge(m, src)
+func (m *MsgDeleteClientRegistrationRegistryRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgDeleteClientRegistrationRegistryRequest.Merge(m, src)
 }
-func (m *MsgDeleteClientRegistry) XXX_Size() int {
+func (m *MsgDeleteClientRegistrationRegistryRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgDeleteClientRegistry) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgDeleteClientRegistry.DiscardUnknown(m)
+func (m *MsgDeleteClientRegistrationRegistryRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgDeleteClientRegistrationRegistryRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgDeleteClientRegistry proto.InternalMessageInfo
+var xxx_messageInfo_MsgDeleteClientRegistrationRegistryRequest proto.InternalMessageInfo
 
-func (m *MsgDeleteClientRegistry) GetCreator() string {
+func (m *MsgDeleteClientRegistrationRegistryRequest) GetCreator() string {
 	if m != nil {
 		return m.Creator
 	}
 	return ""
 }
 
-type MsgDeleteClientRegistryResponse struct {
+type MsgDeleteClientRegistrationRegistryResponse struct {
 }
 
-func (m *MsgDeleteClientRegistryResponse) Reset()         { *m = MsgDeleteClientRegistryResponse{} }
-func (m *MsgDeleteClientRegistryResponse) String() string { return proto.CompactTextString(m) }
-func (*MsgDeleteClientRegistryResponse) ProtoMessage()    {}
-func (*MsgDeleteClientRegistryResponse) Descriptor() ([]byte, []int) {
+func (m *MsgDeleteClientRegistrationRegistryResponse) Reset() {
+	*m = MsgDeleteClientRegistrationRegistryResponse{}
+}
+func (m *MsgDeleteClientRegistrationRegistryResponse) String() string {
+	return proto.CompactTextString(m)
+}
+func (*MsgDeleteClientRegistrationRegistryResponse) ProtoMessage() {}
+func (*MsgDeleteClientRegistrationRegistryResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_62b7b5f173be8e44, []int{7}
 }
-func (m *MsgDeleteClientRegistryResponse) XXX_Unmarshal(b []byte) error {
+func (m *MsgDeleteClientRegistrationRegistryResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgDeleteClientRegistryResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgDeleteClientRegistrationRegistryResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgDeleteClientRegistryResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgDeleteClientRegistrationRegistryResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -368,35 +392,35 @@ func (m *MsgDeleteClientRegistryResponse) XXX_Marshal(b []byte, deterministic bo
 		return b[:n], nil
 	}
 }
-func (m *MsgDeleteClientRegistryResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgDeleteClientRegistryResponse.Merge(m, src)
+func (m *MsgDeleteClientRegistrationRegistryResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgDeleteClientRegistrationRegistryResponse.Merge(m, src)
 }
-func (m *MsgDeleteClientRegistryResponse) XXX_Size() int {
+func (m *MsgDeleteClientRegistrationRegistryResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgDeleteClientRegistryResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgDeleteClientRegistryResponse.DiscardUnknown(m)
+func (m *MsgDeleteClientRegistrationRegistryResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgDeleteClientRegistrationRegistryResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgDeleteClientRegistryResponse proto.InternalMessageInfo
+var xxx_messageInfo_MsgDeleteClientRegistrationRegistryResponse proto.InternalMessageInfo
 
-type MsgCreateClientRegistration struct {
+type MsgCreateClientRegistrationRequest struct {
 	Creator            string             `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 	ClientRegistration ClientRegistration `protobuf:"bytes,2,opt,name=clientRegistration,proto3" json:"clientRegistration"`
 }
 
-func (m *MsgCreateClientRegistration) Reset()         { *m = MsgCreateClientRegistration{} }
-func (m *MsgCreateClientRegistration) String() string { return proto.CompactTextString(m) }
-func (*MsgCreateClientRegistration) ProtoMessage()    {}
-func (*MsgCreateClientRegistration) Descriptor() ([]byte, []int) {
+func (m *MsgCreateClientRegistrationRequest) Reset()         { *m = MsgCreateClientRegistrationRequest{} }
+func (m *MsgCreateClientRegistrationRequest) String() string { return proto.CompactTextString(m) }
+func (*MsgCreateClientRegistrationRequest) ProtoMessage()    {}
+func (*MsgCreateClientRegistrationRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_62b7b5f173be8e44, []int{8}
 }
-func (m *MsgCreateClientRegistration) XXX_Unmarshal(b []byte) error {
+func (m *MsgCreateClientRegistrationRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgCreateClientRegistration) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgCreateClientRegistrationRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgCreateClientRegistration.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgCreateClientRegistrationRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -406,26 +430,26 @@ func (m *MsgCreateClientRegistration) XXX_Marshal(b []byte, deterministic bool) 
 		return b[:n], nil
 	}
 }
-func (m *MsgCreateClientRegistration) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgCreateClientRegistration.Merge(m, src)
+func (m *MsgCreateClientRegistrationRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgCreateClientRegistrationRequest.Merge(m, src)
 }
-func (m *MsgCreateClientRegistration) XXX_Size() int {
+func (m *MsgCreateClientRegistrationRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgCreateClientRegistration) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgCreateClientRegistration.DiscardUnknown(m)
+func (m *MsgCreateClientRegistrationRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgCreateClientRegistrationRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgCreateClientRegistration proto.InternalMessageInfo
+var xxx_messageInfo_MsgCreateClientRegistrationRequest proto.InternalMessageInfo
 
-func (m *MsgCreateClientRegistration) GetCreator() string {
+func (m *MsgCreateClientRegistrationRequest) GetCreator() string {
 	if m != nil {
 		return m.Creator
 	}
 	return ""
 }
 
-func (m *MsgCreateClientRegistration) GetClientRegistration() ClientRegistration {
+func (m *MsgCreateClientRegistrationRequest) GetClientRegistration() ClientRegistration {
 	if m != nil {
 		return m.ClientRegistration
 	}
@@ -468,23 +492,23 @@ func (m *MsgCreateClientRegistrationResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_MsgCreateClientRegistrationResponse proto.InternalMessageInfo
 
-type MsgUpdateClientRegistration struct {
+type MsgUpdateClientRegistrationRequest struct {
 	Creator            string             `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 	ClientRegistration ClientRegistration `protobuf:"bytes,2,opt,name=clientRegistration,proto3" json:"clientRegistration"`
 }
 
-func (m *MsgUpdateClientRegistration) Reset()         { *m = MsgUpdateClientRegistration{} }
-func (m *MsgUpdateClientRegistration) String() string { return proto.CompactTextString(m) }
-func (*MsgUpdateClientRegistration) ProtoMessage()    {}
-func (*MsgUpdateClientRegistration) Descriptor() ([]byte, []int) {
+func (m *MsgUpdateClientRegistrationRequest) Reset()         { *m = MsgUpdateClientRegistrationRequest{} }
+func (m *MsgUpdateClientRegistrationRequest) String() string { return proto.CompactTextString(m) }
+func (*MsgUpdateClientRegistrationRequest) ProtoMessage()    {}
+func (*MsgUpdateClientRegistrationRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_62b7b5f173be8e44, []int{10}
 }
-func (m *MsgUpdateClientRegistration) XXX_Unmarshal(b []byte) error {
+func (m *MsgUpdateClientRegistrationRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgUpdateClientRegistration) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgUpdateClientRegistrationRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgUpdateClientRegistration.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgUpdateClientRegistrationRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -494,26 +518,26 @@ func (m *MsgUpdateClientRegistration) XXX_Marshal(b []byte, deterministic bool) 
 		return b[:n], nil
 	}
 }
-func (m *MsgUpdateClientRegistration) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgUpdateClientRegistration.Merge(m, src)
+func (m *MsgUpdateClientRegistrationRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgUpdateClientRegistrationRequest.Merge(m, src)
 }
-func (m *MsgUpdateClientRegistration) XXX_Size() int {
+func (m *MsgUpdateClientRegistrationRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgUpdateClientRegistration) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgUpdateClientRegistration.DiscardUnknown(m)
+func (m *MsgUpdateClientRegistrationRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgUpdateClientRegistrationRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgUpdateClientRegistration proto.InternalMessageInfo
+var xxx_messageInfo_MsgUpdateClientRegistrationRequest proto.InternalMessageInfo
 
-func (m *MsgUpdateClientRegistration) GetCreator() string {
+func (m *MsgUpdateClientRegistrationRequest) GetCreator() string {
 	if m != nil {
 		return m.Creator
 	}
 	return ""
 }
 
-func (m *MsgUpdateClientRegistration) GetClientRegistration() ClientRegistration {
+func (m *MsgUpdateClientRegistrationRequest) GetClientRegistration() ClientRegistration {
 	if m != nil {
 		return m.ClientRegistration
 	}
@@ -556,23 +580,23 @@ func (m *MsgUpdateClientRegistrationResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_MsgUpdateClientRegistrationResponse proto.InternalMessageInfo
 
-type MsgDeleteClientRegistration struct {
+type MsgDeleteClientRegistrationRequest struct {
 	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 	Name    string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 }
 
-func (m *MsgDeleteClientRegistration) Reset()         { *m = MsgDeleteClientRegistration{} }
-func (m *MsgDeleteClientRegistration) String() string { return proto.CompactTextString(m) }
-func (*MsgDeleteClientRegistration) ProtoMessage()    {}
-func (*MsgDeleteClientRegistration) Descriptor() ([]byte, []int) {
+func (m *MsgDeleteClientRegistrationRequest) Reset()         { *m = MsgDeleteClientRegistrationRequest{} }
+func (m *MsgDeleteClientRegistrationRequest) String() string { return proto.CompactTextString(m) }
+func (*MsgDeleteClientRegistrationRequest) ProtoMessage()    {}
+func (*MsgDeleteClientRegistrationRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_62b7b5f173be8e44, []int{12}
 }
-func (m *MsgDeleteClientRegistration) XXX_Unmarshal(b []byte) error {
+func (m *MsgDeleteClientRegistrationRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgDeleteClientRegistration) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgDeleteClientRegistrationRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgDeleteClientRegistration.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgDeleteClientRegistrationRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -582,26 +606,26 @@ func (m *MsgDeleteClientRegistration) XXX_Marshal(b []byte, deterministic bool) 
 		return b[:n], nil
 	}
 }
-func (m *MsgDeleteClientRegistration) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgDeleteClientRegistration.Merge(m, src)
+func (m *MsgDeleteClientRegistrationRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgDeleteClientRegistrationRequest.Merge(m, src)
 }
-func (m *MsgDeleteClientRegistration) XXX_Size() int {
+func (m *MsgDeleteClientRegistrationRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgDeleteClientRegistration) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgDeleteClientRegistration.DiscardUnknown(m)
+func (m *MsgDeleteClientRegistrationRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgDeleteClientRegistrationRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgDeleteClientRegistration proto.InternalMessageInfo
+var xxx_messageInfo_MsgDeleteClientRegistrationRequest proto.InternalMessageInfo
 
-func (m *MsgDeleteClientRegistration) GetCreator() string {
+func (m *MsgDeleteClientRegistrationRequest) GetCreator() string {
 	if m != nil {
 		return m.Creator
 	}
 	return ""
 }
 
-func (m *MsgDeleteClientRegistration) GetName() string {
+func (m *MsgDeleteClientRegistrationRequest) GetName() string {
 	if m != nil {
 		return m.Name
 	}
@@ -839,17 +863,17 @@ var xxx_messageInfo_MsgDeleteClientRegistrationRelationshipResponse proto.Intern
 func init() {
 	proto.RegisterType((*MsgAuthenticationRequest)(nil), "beheroes.doxchain.idp.v1beta1.MsgAuthenticationRequest")
 	proto.RegisterType((*MsgAuthenticationResponse)(nil), "beheroes.doxchain.idp.v1beta1.MsgAuthenticationResponse")
-	proto.RegisterType((*MsgCreateClientRegistry)(nil), "beheroes.doxchain.idp.v1beta1.MsgCreateClientRegistry")
-	proto.RegisterType((*MsgCreateClientRegistryResponse)(nil), "beheroes.doxchain.idp.v1beta1.MsgCreateClientRegistryResponse")
-	proto.RegisterType((*MsgUpdateClientRegistry)(nil), "beheroes.doxchain.idp.v1beta1.MsgUpdateClientRegistry")
-	proto.RegisterType((*MsgUpdateClientRegistryResponse)(nil), "beheroes.doxchain.idp.v1beta1.MsgUpdateClientRegistryResponse")
-	proto.RegisterType((*MsgDeleteClientRegistry)(nil), "beheroes.doxchain.idp.v1beta1.MsgDeleteClientRegistry")
-	proto.RegisterType((*MsgDeleteClientRegistryResponse)(nil), "beheroes.doxchain.idp.v1beta1.MsgDeleteClientRegistryResponse")
-	proto.RegisterType((*MsgCreateClientRegistration)(nil), "beheroes.doxchain.idp.v1beta1.MsgCreateClientRegistration")
+	proto.RegisterType((*MsgCreateClientRegistrationRegistryRequest)(nil), "beheroes.doxchain.idp.v1beta1.MsgCreateClientRegistrationRegistryRequest")
+	proto.RegisterType((*MsgCreateClientRegistrationRegistryResponse)(nil), "beheroes.doxchain.idp.v1beta1.MsgCreateClientRegistrationRegistryResponse")
+	proto.RegisterType((*MsgUpdateClientRegistrationRegistryRequest)(nil), "beheroes.doxchain.idp.v1beta1.MsgUpdateClientRegistrationRegistryRequest")
+	proto.RegisterType((*MsgUpdateClientRegistrationRegistryResponse)(nil), "beheroes.doxchain.idp.v1beta1.MsgUpdateClientRegistrationRegistryResponse")
+	proto.RegisterType((*MsgDeleteClientRegistrationRegistryRequest)(nil), "beheroes.doxchain.idp.v1beta1.MsgDeleteClientRegistrationRegistryRequest")
+	proto.RegisterType((*MsgDeleteClientRegistrationRegistryResponse)(nil), "beheroes.doxchain.idp.v1beta1.MsgDeleteClientRegistrationRegistryResponse")
+	proto.RegisterType((*MsgCreateClientRegistrationRequest)(nil), "beheroes.doxchain.idp.v1beta1.MsgCreateClientRegistrationRequest")
 	proto.RegisterType((*MsgCreateClientRegistrationResponse)(nil), "beheroes.doxchain.idp.v1beta1.MsgCreateClientRegistrationResponse")
-	proto.RegisterType((*MsgUpdateClientRegistration)(nil), "beheroes.doxchain.idp.v1beta1.MsgUpdateClientRegistration")
+	proto.RegisterType((*MsgUpdateClientRegistrationRequest)(nil), "beheroes.doxchain.idp.v1beta1.MsgUpdateClientRegistrationRequest")
 	proto.RegisterType((*MsgUpdateClientRegistrationResponse)(nil), "beheroes.doxchain.idp.v1beta1.MsgUpdateClientRegistrationResponse")
-	proto.RegisterType((*MsgDeleteClientRegistration)(nil), "beheroes.doxchain.idp.v1beta1.MsgDeleteClientRegistration")
+	proto.RegisterType((*MsgDeleteClientRegistrationRequest)(nil), "beheroes.doxchain.idp.v1beta1.MsgDeleteClientRegistrationRequest")
 	proto.RegisterType((*MsgDeleteClientRegistrationResponse)(nil), "beheroes.doxchain.idp.v1beta1.MsgDeleteClientRegistrationResponse")
 	proto.RegisterType((*MsgCreateClientRegistrationRelationshipRequest)(nil), "beheroes.doxchain.idp.v1beta1.MsgCreateClientRegistrationRelationshipRequest")
 	proto.RegisterType((*MsgCreateClientRegistrationRelationshipResponse)(nil), "beheroes.doxchain.idp.v1beta1.MsgCreateClientRegistrationRelationshipResponse")
@@ -860,48 +884,48 @@ func init() {
 func init() { proto.RegisterFile("doxchain/idp/v1beta1/tx.proto", fileDescriptor_62b7b5f173be8e44) }
 
 var fileDescriptor_62b7b5f173be8e44 = []byte{
-	// 655 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe4, 0x97, 0xcf, 0x6e, 0xd3, 0x4c,
-	0x14, 0xc5, 0x33, 0xdf, 0xd7, 0x16, 0x71, 0x2b, 0xb1, 0xb0, 0x22, 0x08, 0x46, 0x75, 0xc1, 0x80,
-	0xc4, 0x1f, 0xd5, 0x56, 0x5a, 0x09, 0x50, 0x16, 0x48, 0x24, 0xb0, 0x29, 0x0d, 0x8b, 0x48, 0x6c,
-	0x60, 0x11, 0x39, 0xce, 0x95, 0x63, 0x91, 0xce, 0x18, 0x7b, 0x82, 0x12, 0x1e, 0x02, 0x75, 0x0d,
-	0x1b, 0x9e, 0x81, 0x77, 0x40, 0xea, 0xb2, 0x4b, 0x56, 0x08, 0x25, 0x0f, 0x02, 0xea, 0x64, 0x92,
-	0x92, 0x76, 0x6c, 0x8f, 0x03, 0x8b, 0x4a, 0xec, 0x6c, 0xf9, 0xde, 0x33, 0xbf, 0x7b, 0xc6, 0x9e,
-	0x23, 0xc3, 0x46, 0x97, 0x0d, 0xfd, 0x9e, 0x17, 0x52, 0x37, 0xec, 0x46, 0xee, 0xbb, 0x6a, 0x07,
-	0xb9, 0x57, 0x75, 0xf9, 0xd0, 0x89, 0x62, 0xc6, 0x99, 0xb1, 0xd1, 0xc1, 0x1e, 0xc6, 0x0c, 0x13,
-	0x67, 0x56, 0xe7, 0x84, 0xdd, 0xc8, 0x91, 0x75, 0x66, 0x39, 0x60, 0x01, 0x13, 0x95, 0xee, 0xf1,
-	0xd5, 0xb4, 0xc9, 0xdc, 0x55, 0x6a, 0xfa, 0xfd, 0x10, 0x29, 0x6f, 0xc7, 0x18, 0x84, 0x09, 0x8f,
-	0x3d, 0x1e, 0x32, 0xda, 0x8e, 0xb1, 0x2f, 0x2e, 0x92, 0x5e, 0x18, 0xcd, 0x9e, 0x8c, 0xda, 0x48,
-	0x79, 0x3c, 0x92, 0x5a, 0x8e, 0xae, 0x96, 0xac, 0xbf, 0xa7, 0x51, 0x2f, 0xb5, 0xed, 0x3d, 0xa8,
-	0x34, 0x93, 0xe0, 0xc9, 0x80, 0xf7, 0x90, 0xf2, 0xd0, 0x17, 0x32, 0x2d, 0x7c, 0x3b, 0xc0, 0x84,
-	0x1b, 0x15, 0xb8, 0xe0, 0xc7, 0xe8, 0x71, 0x16, 0x57, 0xc8, 0x75, 0x72, 0xe7, 0x62, 0x6b, 0x76,
-	0x6b, 0x5c, 0x86, 0x35, 0x8e, 0xd4, 0xa3, 0xbc, 0xf2, 0x9f, 0x78, 0x20, 0xef, 0xec, 0x2a, 0x5c,
-	0x55, 0xa8, 0x25, 0x11, 0xa3, 0x09, 0x1a, 0x65, 0x58, 0xe5, 0xec, 0x0d, 0x52, 0x29, 0x36, 0xbd,
-	0xb1, 0x0f, 0x08, 0x5c, 0x69, 0x26, 0x41, 0xe3, 0x58, 0x19, 0x1b, 0x82, 0xb1, 0x25, 0x11, 0x33,
-	0x00, 0x5e, 0xc3, 0x25, 0x7f, 0xa1, 0x56, 0x80, 0xac, 0x6f, 0x6f, 0x39, 0x99, 0x9b, 0xe5, 0x2c,
-	0x2e, 0x50, 0x5f, 0x39, 0xfc, 0xbe, 0x59, 0x6a, 0x9d, 0x92, 0xb2, 0x6f, 0xc0, 0x66, 0x0a, 0xd1,
-	0x6c, 0x96, 0x19, 0xf5, 0xcb, 0xa8, 0x7b, 0xce, 0xa8, 0x55, 0x44, 0x73, 0xea, 0x1d, 0x01, 0xfd,
-	0x14, 0xfb, 0xa8, 0x0f, 0x2d, 0x75, 0x55, 0x4d, 0x73, 0xdd, 0xcf, 0x04, 0xae, 0xa9, 0x1d, 0x13,
-	0x6f, 0x40, 0x86, 0x23, 0x01, 0x18, 0xfe, 0x99, 0x7a, 0xe9, 0x4a, 0xb5, 0x88, 0x2b, 0xa2, 0x51,
-	0x3a, 0xa3, 0x90, 0xb4, 0x6f, 0xc3, 0xcd, 0x0c, 0xc2, 0xd3, 0x93, 0x28, 0x5c, 0x3c, 0x67, 0x93,
-	0xa4, 0x11, 0xce, 0x27, 0x79, 0x2e, 0x06, 0x51, 0x6c, 0x5b, 0xde, 0x20, 0x06, 0xac, 0x50, 0x6f,
-	0x1f, 0xe5, 0x97, 0x2d, 0xae, 0xe5, 0x9a, 0x69, 0x62, 0xf3, 0x35, 0x7f, 0x12, 0x70, 0x32, 0x5d,
-	0x3e, 0x39, 0xe9, 0xf2, 0xcf, 0x98, 0x2f, 0x04, 0xee, 0xfb, 0x39, 0x1a, 0xd3, 0xf7, 0xf0, 0x19,
-	0x3d, 0xf9, 0x94, 0x76, 0x0b, 0x5b, 0x9d, 0xaa, 0x28, 0xf7, 0xa0, 0x08, 0x84, 0x5d, 0x05, 0x57,
-	0xdb, 0x80, 0x45, 0xd3, 0xd2, 0xcd, 0xfd, 0x47, 0x4c, 0xd3, 0x33, 0x60, 0x6a, 0xda, 0xf6, 0xa7,
-	0x75, 0xf8, 0xbf, 0x99, 0x04, 0xc6, 0x7b, 0x58, 0xdd, 0x63, 0x41, 0x48, 0x8d, 0x87, 0x39, 0x23,
-	0xa4, 0x85, 0x9c, 0xf9, 0xa8, 0x78, 0xa3, 0xcc, 0xb3, 0x0f, 0x04, 0xca, 0xca, 0xd8, 0x7a, 0x90,
-	0x2f, 0xa9, 0xea, 0x33, 0x1f, 0x2f, 0xd7, 0xb7, 0x00, 0xa4, 0x4c, 0x24, 0x0d, 0x20, 0x55, 0x9f,
-	0x0e, 0x50, 0x56, 0xde, 0x08, 0x20, 0x65, 0xda, 0x68, 0x00, 0xa9, 0xfa, 0x74, 0x80, 0xb2, 0x82,
-	0xca, 0xf8, 0x48, 0xa0, 0x92, 0x9a, 0x52, 0xb5, 0xa5, 0xec, 0x17, 0xbd, 0x66, 0x7d, 0xf9, 0xde,
-	0x05, 0xb8, 0xd4, 0xe0, 0xa9, 0x2d, 0xb5, 0x15, 0xda, 0x70, 0x79, 0x71, 0x22, 0xe0, 0x52, 0xc3,
-	0xa4, 0xb6, 0xd4, 0xb6, 0x68, 0xc3, 0xe5, 0xe5, 0x8e, 0xf1, 0x95, 0xc0, 0x2d, 0x9d, 0x33, 0xd7,
-	0x68, 0xfe, 0xc9, 0x36, 0x9d, 0x39, 0x87, 0xcd, 0x17, 0x7f, 0x4b, 0xee, 0xb7, 0x39, 0x74, 0x8e,
-	0x41, 0x9d, 0x39, 0x0a, 0xe4, 0x89, 0xce, 0x1c, 0x45, 0x4e, 0xe7, 0x7a, 0xe3, 0x70, 0x6c, 0x91,
-	0xa3, 0xb1, 0x45, 0x7e, 0x8c, 0x2d, 0x72, 0x30, 0xb1, 0x4a, 0x47, 0x13, 0xab, 0xf4, 0x6d, 0x62,
-	0x95, 0x5e, 0xdd, 0x0d, 0x42, 0xde, 0x1b, 0x74, 0x1c, 0x9f, 0xed, 0xbb, 0x1d, 0xdc, 0x9a, 0x2e,
-	0xea, 0xce, 0xff, 0x57, 0x86, 0xe2, 0x8f, 0x85, 0x8f, 0x22, 0x4c, 0x3a, 0x6b, 0xe2, 0x07, 0x65,
-	0xe7, 0x57, 0x00, 0x00, 0x00, 0xff, 0xff, 0x78, 0xe5, 0x53, 0x0c, 0x9e, 0x0d, 0x00, 0x00,
+	// 653 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe4, 0x57, 0x31, 0x6f, 0xd3, 0x40,
+	0x14, 0xce, 0x41, 0x5b, 0xc4, 0xc1, 0x74, 0xaa, 0x50, 0xb0, 0x54, 0x53, 0x19, 0x90, 0x80, 0xaa,
+	0xb6, 0x52, 0x86, 0xc2, 0xd8, 0x16, 0x90, 0x88, 0x1a, 0x86, 0x48, 0x2c, 0x2c, 0x91, 0xe3, 0x3c,
+	0x39, 0x16, 0xe9, 0x9d, 0xb1, 0x2f, 0x28, 0x61, 0xe1, 0x2f, 0xf0, 0x17, 0x98, 0x98, 0x61, 0xe3,
+	0x07, 0x20, 0x3a, 0x76, 0x64, 0x42, 0x28, 0xf9, 0x21, 0xa0, 0x9e, 0x2f, 0x34, 0x55, 0x73, 0xb9,
+	0x67, 0xd2, 0x01, 0xc1, 0x76, 0xa7, 0xbc, 0xfb, 0xde, 0xf7, 0x7d, 0x2f, 0xbe, 0x4f, 0x47, 0xd7,
+	0x3a, 0x62, 0x10, 0x75, 0xc3, 0x84, 0x07, 0x49, 0x27, 0x0d, 0x5e, 0xd7, 0xda, 0x20, 0xc3, 0x5a,
+	0x20, 0x07, 0x7e, 0x9a, 0x09, 0x29, 0xd8, 0x5a, 0x1b, 0xba, 0x90, 0x09, 0xc8, 0xfd, 0x49, 0x9d,
+	0x9f, 0x74, 0x52, 0x5f, 0xd7, 0x39, 0xab, 0xb1, 0x88, 0x85, 0xaa, 0x0c, 0x8e, 0x57, 0xc5, 0x21,
+	0xa7, 0x3e, 0x13, 0x33, 0xea, 0x25, 0xc0, 0x65, 0x2b, 0x83, 0x38, 0xc9, 0x65, 0x16, 0xca, 0x44,
+	0xf0, 0x56, 0x06, 0x3d, 0xb5, 0xc8, 0xbb, 0x49, 0x3a, 0xf9, 0x65, 0xd8, 0x02, 0x2e, 0xb3, 0xa1,
+	0xc6, 0xf2, 0xb1, 0x58, 0xba, 0x7e, 0xbb, 0x44, 0xef, 0xa2, 0x5d, 0x71, 0xd0, 0xdb, 0xa7, 0xd5,
+	0x46, 0x1e, 0xef, 0xf4, 0x65, 0x17, 0xb8, 0x4c, 0x22, 0x55, 0xd3, 0x84, 0x57, 0x7d, 0xc8, 0x25,
+	0xab, 0xd2, 0x4b, 0x51, 0x06, 0xa1, 0x14, 0x59, 0x95, 0xac, 0x93, 0x3b, 0x97, 0x9b, 0x93, 0x2d,
+	0xbb, 0x46, 0x57, 0x24, 0xf0, 0x90, 0xcb, 0xea, 0x05, 0xf5, 0x83, 0xde, 0x79, 0x35, 0x7a, 0x7d,
+	0x06, 0x5a, 0x9e, 0x0a, 0x9e, 0x03, 0x5b, 0xa5, 0xcb, 0x52, 0xbc, 0x04, 0xae, 0xc1, 0x8a, 0x8d,
+	0xf7, 0x95, 0xd0, 0x7b, 0x8d, 0x3c, 0xde, 0x3b, 0x46, 0x86, 0x3d, 0x45, 0xb8, 0x39, 0xc5, 0x57,
+	0xaf, 0x87, 0x76, 0x4e, 0x6f, 0xa9, 0x13, 0x19, 0x8f, 0x2b, 0x9e, 0x57, 0xb6, 0x1e, 0xfa, 0x73,
+	0x07, 0xeb, 0x9b, 0xfb, 0xef, 0x2e, 0x1d, 0x7e, 0xbf, 0x51, 0x69, 0xce, 0x69, 0xe1, 0x6d, 0xd2,
+	0x0d, 0x94, 0x90, 0xc2, 0x8e, 0x89, 0xf0, 0xe7, 0x69, 0xe7, 0xdf, 0x10, 0x6e, 0x17, 0xa2, 0x85,
+	0x3f, 0x51, 0xba, 0x1f, 0x41, 0x0f, 0x16, 0xd2, 0xad, 0xdb, 0xda, 0x71, 0x74, 0xdb, 0x0f, 0x84,
+	0x7a, 0x73, 0xe7, 0x63, 0xf3, 0x39, 0xa6, 0xec, 0xac, 0x09, 0xda, 0xdf, 0x5a, 0x69, 0x7f, 0xb5,
+	0xaf, 0x33, 0x20, 0xbd, 0xdb, 0xf4, 0xe6, 0x5c, 0xa2, 0xa7, 0x05, 0x99, 0x7d, 0xff, 0xcb, 0x04,
+	0x99, 0x89, 0x6a, 0x41, 0x4d, 0xa5, 0xc7, 0x3c, 0x50, 0x9b, 0x1e, 0x46, 0x97, 0x78, 0x78, 0x00,
+	0xfa, 0x4e, 0x52, 0x6b, 0xdd, 0xda, 0x8c, 0xa9, 0x5b, 0xff, 0x24, 0xd4, 0x9f, 0xeb, 0xf9, 0xc9,
+	0x85, 0x6d, 0xe7, 0xf1, 0x89, 0xd0, 0x8d, 0xc8, 0x82, 0x51, 0xfc, 0x39, 0x1f, 0xf3, 0x93, 0x4f,
+	0xb4, 0xfe, 0x07, 0x9f, 0xa8, 0x01, 0x51, 0x8f, 0xa2, 0x0c, 0x09, 0xaf, 0x46, 0x03, 0xb4, 0x01,
+	0xa7, 0x4d, 0x33, 0x9b, 0xfb, 0x9f, 0x98, 0x86, 0x33, 0xa0, 0x30, 0x6d, 0xeb, 0xe3, 0x55, 0x7a,
+	0xb1, 0x91, 0xc7, 0xec, 0x0d, 0x5d, 0xde, 0x17, 0x71, 0xc2, 0xd9, 0xb6, 0x45, 0x82, 0x29, 0x9e,
+	0x9d, 0x07, 0xe5, 0x0f, 0xea, 0x24, 0xfe, 0x4c, 0xe8, 0xba, 0x2d, 0xa7, 0xd8, 0x53, 0x3b, 0x3c,
+	0x32, 0xb4, 0x9d, 0xfa, 0x79, 0x40, 0x4d, 0x71, 0xb7, 0x45, 0x0d, 0x86, 0x3b, 0x32, 0x77, 0x31,
+	0xdc, 0xb1, 0xc9, 0xa7, 0xb8, 0xdb, 0xf2, 0x0a, 0xc3, 0x1d, 0x99, 0x9d, 0x18, 0xee, 0xd8, 0xf8,
+	0x64, 0xef, 0x09, 0xad, 0x9a, 0x86, 0xc4, 0x76, 0x16, 0x19, 0x70, 0xc1, 0x75, 0x77, 0x11, 0x88,
+	0x29, 0x8e, 0xa6, 0x61, 0x60, 0x38, 0x5a, 0xa2, 0x14, 0xc3, 0xd1, 0x16, 0x72, 0x8a, 0xa3, 0xc9,
+	0x74, 0x0c, 0x47, 0x4b, 0x3c, 0x62, 0x38, 0xda, 0xd2, 0x90, 0x7d, 0x21, 0xf4, 0x16, 0x26, 0x09,
+	0x58, 0x63, 0x91, 0xa1, 0x9d, 0x49, 0x07, 0xe7, 0xd9, 0x79, 0xc1, 0x4d, 0xe9, 0xc0, 0x5c, 0xce,
+	0x18, 0x1d, 0x25, 0x52, 0x0e, 0xa3, 0xa3, 0x4c, 0x66, 0xec, 0xee, 0x1d, 0x8e, 0x5c, 0x72, 0x34,
+	0x72, 0xc9, 0x8f, 0x91, 0x4b, 0xde, 0x8d, 0xdd, 0xca, 0xd1, 0xd8, 0xad, 0x7c, 0x1b, 0xbb, 0x95,
+	0x17, 0x77, 0xe3, 0x44, 0x76, 0xfb, 0x6d, 0x3f, 0x12, 0x07, 0x41, 0x1b, 0x36, 0x8b, 0xa6, 0xc1,
+	0xef, 0xc7, 0xe0, 0x40, 0x3d, 0x07, 0xe5, 0x30, 0x85, 0xbc, 0xbd, 0xa2, 0x1e, 0x7c, 0xf7, 0x7f,
+	0x05, 0x00, 0x00, 0xff, 0xff, 0x07, 0xc4, 0x5a, 0x4b, 0xfb, 0x0e, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -917,12 +941,12 @@ const _ = grpc.SupportPackageIsVersion4
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type MsgClient interface {
 	Login(ctx context.Context, in *MsgAuthenticationRequest, opts ...grpc.CallOption) (*MsgAuthenticationResponse, error)
-	CreateClientRegistry(ctx context.Context, in *MsgCreateClientRegistry, opts ...grpc.CallOption) (*MsgCreateClientRegistryResponse, error)
-	UpdateClientRegistry(ctx context.Context, in *MsgUpdateClientRegistry, opts ...grpc.CallOption) (*MsgUpdateClientRegistryResponse, error)
-	DeleteClientRegistry(ctx context.Context, in *MsgDeleteClientRegistry, opts ...grpc.CallOption) (*MsgDeleteClientRegistryResponse, error)
-	CreateClientRegistration(ctx context.Context, in *MsgCreateClientRegistration, opts ...grpc.CallOption) (*MsgCreateClientRegistrationResponse, error)
-	UpdateClientRegistration(ctx context.Context, in *MsgUpdateClientRegistration, opts ...grpc.CallOption) (*MsgUpdateClientRegistrationResponse, error)
-	DeleteClientRegistration(ctx context.Context, in *MsgDeleteClientRegistration, opts ...grpc.CallOption) (*MsgDeleteClientRegistrationResponse, error)
+	CreateClientRegistrationRegistry(ctx context.Context, in *MsgCreateClientRegistrationRegistryRequest, opts ...grpc.CallOption) (*MsgCreateClientRegistrationRegistryResponse, error)
+	UpdateClientRegistrationRegistry(ctx context.Context, in *MsgUpdateClientRegistrationRegistryRequest, opts ...grpc.CallOption) (*MsgUpdateClientRegistrationRegistryResponse, error)
+	DeleteClientRegistrationRegistry(ctx context.Context, in *MsgDeleteClientRegistrationRegistryRequest, opts ...grpc.CallOption) (*MsgDeleteClientRegistrationRegistryResponse, error)
+	CreateClientRegistration(ctx context.Context, in *MsgCreateClientRegistrationRequest, opts ...grpc.CallOption) (*MsgCreateClientRegistrationResponse, error)
+	UpdateClientRegistration(ctx context.Context, in *MsgUpdateClientRegistrationRequest, opts ...grpc.CallOption) (*MsgUpdateClientRegistrationResponse, error)
+	DeleteClientRegistration(ctx context.Context, in *MsgDeleteClientRegistrationRequest, opts ...grpc.CallOption) (*MsgDeleteClientRegistrationResponse, error)
 	CreateClientRegistrationRelationship(ctx context.Context, in *MsgCreateClientRegistrationRelationshipRequest, opts ...grpc.CallOption) (*MsgCreateClientRegistrationRelationshipResponse, error)
 	DeleteClientRegistrationRelationship(ctx context.Context, in *MsgDeleteClientRegistrationRelationshipRequest, opts ...grpc.CallOption) (*MsgDeleteClientRegistrationRelationshipResponse, error)
 }
@@ -944,34 +968,34 @@ func (c *msgClient) Login(ctx context.Context, in *MsgAuthenticationRequest, opt
 	return out, nil
 }
 
-func (c *msgClient) CreateClientRegistry(ctx context.Context, in *MsgCreateClientRegistry, opts ...grpc.CallOption) (*MsgCreateClientRegistryResponse, error) {
-	out := new(MsgCreateClientRegistryResponse)
-	err := c.cc.Invoke(ctx, "/beheroes.doxchain.idp.v1beta1.Msg/CreateClientRegistry", in, out, opts...)
+func (c *msgClient) CreateClientRegistrationRegistry(ctx context.Context, in *MsgCreateClientRegistrationRegistryRequest, opts ...grpc.CallOption) (*MsgCreateClientRegistrationRegistryResponse, error) {
+	out := new(MsgCreateClientRegistrationRegistryResponse)
+	err := c.cc.Invoke(ctx, "/beheroes.doxchain.idp.v1beta1.Msg/CreateClientRegistrationRegistry", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *msgClient) UpdateClientRegistry(ctx context.Context, in *MsgUpdateClientRegistry, opts ...grpc.CallOption) (*MsgUpdateClientRegistryResponse, error) {
-	out := new(MsgUpdateClientRegistryResponse)
-	err := c.cc.Invoke(ctx, "/beheroes.doxchain.idp.v1beta1.Msg/UpdateClientRegistry", in, out, opts...)
+func (c *msgClient) UpdateClientRegistrationRegistry(ctx context.Context, in *MsgUpdateClientRegistrationRegistryRequest, opts ...grpc.CallOption) (*MsgUpdateClientRegistrationRegistryResponse, error) {
+	out := new(MsgUpdateClientRegistrationRegistryResponse)
+	err := c.cc.Invoke(ctx, "/beheroes.doxchain.idp.v1beta1.Msg/UpdateClientRegistrationRegistry", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *msgClient) DeleteClientRegistry(ctx context.Context, in *MsgDeleteClientRegistry, opts ...grpc.CallOption) (*MsgDeleteClientRegistryResponse, error) {
-	out := new(MsgDeleteClientRegistryResponse)
-	err := c.cc.Invoke(ctx, "/beheroes.doxchain.idp.v1beta1.Msg/DeleteClientRegistry", in, out, opts...)
+func (c *msgClient) DeleteClientRegistrationRegistry(ctx context.Context, in *MsgDeleteClientRegistrationRegistryRequest, opts ...grpc.CallOption) (*MsgDeleteClientRegistrationRegistryResponse, error) {
+	out := new(MsgDeleteClientRegistrationRegistryResponse)
+	err := c.cc.Invoke(ctx, "/beheroes.doxchain.idp.v1beta1.Msg/DeleteClientRegistrationRegistry", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *msgClient) CreateClientRegistration(ctx context.Context, in *MsgCreateClientRegistration, opts ...grpc.CallOption) (*MsgCreateClientRegistrationResponse, error) {
+func (c *msgClient) CreateClientRegistration(ctx context.Context, in *MsgCreateClientRegistrationRequest, opts ...grpc.CallOption) (*MsgCreateClientRegistrationResponse, error) {
 	out := new(MsgCreateClientRegistrationResponse)
 	err := c.cc.Invoke(ctx, "/beheroes.doxchain.idp.v1beta1.Msg/CreateClientRegistration", in, out, opts...)
 	if err != nil {
@@ -980,7 +1004,7 @@ func (c *msgClient) CreateClientRegistration(ctx context.Context, in *MsgCreateC
 	return out, nil
 }
 
-func (c *msgClient) UpdateClientRegistration(ctx context.Context, in *MsgUpdateClientRegistration, opts ...grpc.CallOption) (*MsgUpdateClientRegistrationResponse, error) {
+func (c *msgClient) UpdateClientRegistration(ctx context.Context, in *MsgUpdateClientRegistrationRequest, opts ...grpc.CallOption) (*MsgUpdateClientRegistrationResponse, error) {
 	out := new(MsgUpdateClientRegistrationResponse)
 	err := c.cc.Invoke(ctx, "/beheroes.doxchain.idp.v1beta1.Msg/UpdateClientRegistration", in, out, opts...)
 	if err != nil {
@@ -989,7 +1013,7 @@ func (c *msgClient) UpdateClientRegistration(ctx context.Context, in *MsgUpdateC
 	return out, nil
 }
 
-func (c *msgClient) DeleteClientRegistration(ctx context.Context, in *MsgDeleteClientRegistration, opts ...grpc.CallOption) (*MsgDeleteClientRegistrationResponse, error) {
+func (c *msgClient) DeleteClientRegistration(ctx context.Context, in *MsgDeleteClientRegistrationRequest, opts ...grpc.CallOption) (*MsgDeleteClientRegistrationResponse, error) {
 	out := new(MsgDeleteClientRegistrationResponse)
 	err := c.cc.Invoke(ctx, "/beheroes.doxchain.idp.v1beta1.Msg/DeleteClientRegistration", in, out, opts...)
 	if err != nil {
@@ -1019,12 +1043,12 @@ func (c *msgClient) DeleteClientRegistrationRelationship(ctx context.Context, in
 // MsgServer is the server API for Msg service.
 type MsgServer interface {
 	Login(context.Context, *MsgAuthenticationRequest) (*MsgAuthenticationResponse, error)
-	CreateClientRegistry(context.Context, *MsgCreateClientRegistry) (*MsgCreateClientRegistryResponse, error)
-	UpdateClientRegistry(context.Context, *MsgUpdateClientRegistry) (*MsgUpdateClientRegistryResponse, error)
-	DeleteClientRegistry(context.Context, *MsgDeleteClientRegistry) (*MsgDeleteClientRegistryResponse, error)
-	CreateClientRegistration(context.Context, *MsgCreateClientRegistration) (*MsgCreateClientRegistrationResponse, error)
-	UpdateClientRegistration(context.Context, *MsgUpdateClientRegistration) (*MsgUpdateClientRegistrationResponse, error)
-	DeleteClientRegistration(context.Context, *MsgDeleteClientRegistration) (*MsgDeleteClientRegistrationResponse, error)
+	CreateClientRegistrationRegistry(context.Context, *MsgCreateClientRegistrationRegistryRequest) (*MsgCreateClientRegistrationRegistryResponse, error)
+	UpdateClientRegistrationRegistry(context.Context, *MsgUpdateClientRegistrationRegistryRequest) (*MsgUpdateClientRegistrationRegistryResponse, error)
+	DeleteClientRegistrationRegistry(context.Context, *MsgDeleteClientRegistrationRegistryRequest) (*MsgDeleteClientRegistrationRegistryResponse, error)
+	CreateClientRegistration(context.Context, *MsgCreateClientRegistrationRequest) (*MsgCreateClientRegistrationResponse, error)
+	UpdateClientRegistration(context.Context, *MsgUpdateClientRegistrationRequest) (*MsgUpdateClientRegistrationResponse, error)
+	DeleteClientRegistration(context.Context, *MsgDeleteClientRegistrationRequest) (*MsgDeleteClientRegistrationResponse, error)
 	CreateClientRegistrationRelationship(context.Context, *MsgCreateClientRegistrationRelationshipRequest) (*MsgCreateClientRegistrationRelationshipResponse, error)
 	DeleteClientRegistrationRelationship(context.Context, *MsgDeleteClientRegistrationRelationshipRequest) (*MsgDeleteClientRegistrationRelationshipResponse, error)
 }
@@ -1036,22 +1060,22 @@ type UnimplementedMsgServer struct {
 func (*UnimplementedMsgServer) Login(ctx context.Context, req *MsgAuthenticationRequest) (*MsgAuthenticationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
 }
-func (*UnimplementedMsgServer) CreateClientRegistry(ctx context.Context, req *MsgCreateClientRegistry) (*MsgCreateClientRegistryResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateClientRegistry not implemented")
+func (*UnimplementedMsgServer) CreateClientRegistrationRegistry(ctx context.Context, req *MsgCreateClientRegistrationRegistryRequest) (*MsgCreateClientRegistrationRegistryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateClientRegistrationRegistry not implemented")
 }
-func (*UnimplementedMsgServer) UpdateClientRegistry(ctx context.Context, req *MsgUpdateClientRegistry) (*MsgUpdateClientRegistryResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateClientRegistry not implemented")
+func (*UnimplementedMsgServer) UpdateClientRegistrationRegistry(ctx context.Context, req *MsgUpdateClientRegistrationRegistryRequest) (*MsgUpdateClientRegistrationRegistryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateClientRegistrationRegistry not implemented")
 }
-func (*UnimplementedMsgServer) DeleteClientRegistry(ctx context.Context, req *MsgDeleteClientRegistry) (*MsgDeleteClientRegistryResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteClientRegistry not implemented")
+func (*UnimplementedMsgServer) DeleteClientRegistrationRegistry(ctx context.Context, req *MsgDeleteClientRegistrationRegistryRequest) (*MsgDeleteClientRegistrationRegistryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteClientRegistrationRegistry not implemented")
 }
-func (*UnimplementedMsgServer) CreateClientRegistration(ctx context.Context, req *MsgCreateClientRegistration) (*MsgCreateClientRegistrationResponse, error) {
+func (*UnimplementedMsgServer) CreateClientRegistration(ctx context.Context, req *MsgCreateClientRegistrationRequest) (*MsgCreateClientRegistrationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateClientRegistration not implemented")
 }
-func (*UnimplementedMsgServer) UpdateClientRegistration(ctx context.Context, req *MsgUpdateClientRegistration) (*MsgUpdateClientRegistrationResponse, error) {
+func (*UnimplementedMsgServer) UpdateClientRegistration(ctx context.Context, req *MsgUpdateClientRegistrationRequest) (*MsgUpdateClientRegistrationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateClientRegistration not implemented")
 }
-func (*UnimplementedMsgServer) DeleteClientRegistration(ctx context.Context, req *MsgDeleteClientRegistration) (*MsgDeleteClientRegistrationResponse, error) {
+func (*UnimplementedMsgServer) DeleteClientRegistration(ctx context.Context, req *MsgDeleteClientRegistrationRequest) (*MsgDeleteClientRegistrationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteClientRegistration not implemented")
 }
 func (*UnimplementedMsgServer) CreateClientRegistrationRelationship(ctx context.Context, req *MsgCreateClientRegistrationRelationshipRequest) (*MsgCreateClientRegistrationRelationshipResponse, error) {
@@ -1083,62 +1107,62 @@ func _Msg_Login_Handler(srv interface{}, ctx context.Context, dec func(interface
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Msg_CreateClientRegistry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgCreateClientRegistry)
+func _Msg_CreateClientRegistrationRegistry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgCreateClientRegistrationRegistryRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MsgServer).CreateClientRegistry(ctx, in)
+		return srv.(MsgServer).CreateClientRegistrationRegistry(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/beheroes.doxchain.idp.v1beta1.Msg/CreateClientRegistry",
+		FullMethod: "/beheroes.doxchain.idp.v1beta1.Msg/CreateClientRegistrationRegistry",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).CreateClientRegistry(ctx, req.(*MsgCreateClientRegistry))
+		return srv.(MsgServer).CreateClientRegistrationRegistry(ctx, req.(*MsgCreateClientRegistrationRegistryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Msg_UpdateClientRegistry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgUpdateClientRegistry)
+func _Msg_UpdateClientRegistrationRegistry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgUpdateClientRegistrationRegistryRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MsgServer).UpdateClientRegistry(ctx, in)
+		return srv.(MsgServer).UpdateClientRegistrationRegistry(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/beheroes.doxchain.idp.v1beta1.Msg/UpdateClientRegistry",
+		FullMethod: "/beheroes.doxchain.idp.v1beta1.Msg/UpdateClientRegistrationRegistry",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).UpdateClientRegistry(ctx, req.(*MsgUpdateClientRegistry))
+		return srv.(MsgServer).UpdateClientRegistrationRegistry(ctx, req.(*MsgUpdateClientRegistrationRegistryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Msg_DeleteClientRegistry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgDeleteClientRegistry)
+func _Msg_DeleteClientRegistrationRegistry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgDeleteClientRegistrationRegistryRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MsgServer).DeleteClientRegistry(ctx, in)
+		return srv.(MsgServer).DeleteClientRegistrationRegistry(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/beheroes.doxchain.idp.v1beta1.Msg/DeleteClientRegistry",
+		FullMethod: "/beheroes.doxchain.idp.v1beta1.Msg/DeleteClientRegistrationRegistry",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).DeleteClientRegistry(ctx, req.(*MsgDeleteClientRegistry))
+		return srv.(MsgServer).DeleteClientRegistrationRegistry(ctx, req.(*MsgDeleteClientRegistrationRegistryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _Msg_CreateClientRegistration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgCreateClientRegistration)
+	in := new(MsgCreateClientRegistrationRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1150,13 +1174,13 @@ func _Msg_CreateClientRegistration_Handler(srv interface{}, ctx context.Context,
 		FullMethod: "/beheroes.doxchain.idp.v1beta1.Msg/CreateClientRegistration",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).CreateClientRegistration(ctx, req.(*MsgCreateClientRegistration))
+		return srv.(MsgServer).CreateClientRegistration(ctx, req.(*MsgCreateClientRegistrationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _Msg_UpdateClientRegistration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgUpdateClientRegistration)
+	in := new(MsgUpdateClientRegistrationRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1168,13 +1192,13 @@ func _Msg_UpdateClientRegistration_Handler(srv interface{}, ctx context.Context,
 		FullMethod: "/beheroes.doxchain.idp.v1beta1.Msg/UpdateClientRegistration",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).UpdateClientRegistration(ctx, req.(*MsgUpdateClientRegistration))
+		return srv.(MsgServer).UpdateClientRegistration(ctx, req.(*MsgUpdateClientRegistrationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _Msg_DeleteClientRegistration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgDeleteClientRegistration)
+	in := new(MsgDeleteClientRegistrationRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1186,7 +1210,7 @@ func _Msg_DeleteClientRegistration_Handler(srv interface{}, ctx context.Context,
 		FullMethod: "/beheroes.doxchain.idp.v1beta1.Msg/DeleteClientRegistration",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).DeleteClientRegistration(ctx, req.(*MsgDeleteClientRegistration))
+		return srv.(MsgServer).DeleteClientRegistration(ctx, req.(*MsgDeleteClientRegistrationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1236,16 +1260,16 @@ var _Msg_serviceDesc = grpc.ServiceDesc{
 			Handler:    _Msg_Login_Handler,
 		},
 		{
-			MethodName: "CreateClientRegistry",
-			Handler:    _Msg_CreateClientRegistry_Handler,
+			MethodName: "CreateClientRegistrationRegistry",
+			Handler:    _Msg_CreateClientRegistrationRegistry_Handler,
 		},
 		{
-			MethodName: "UpdateClientRegistry",
-			Handler:    _Msg_UpdateClientRegistry_Handler,
+			MethodName: "UpdateClientRegistrationRegistry",
+			Handler:    _Msg_UpdateClientRegistrationRegistry_Handler,
 		},
 		{
-			MethodName: "DeleteClientRegistry",
-			Handler:    _Msg_DeleteClientRegistry_Handler,
+			MethodName: "DeleteClientRegistrationRegistry",
+			Handler:    _Msg_DeleteClientRegistrationRegistry_Handler,
 		},
 		{
 			MethodName: "CreateClientRegistration",
@@ -1339,7 +1363,7 @@ func (m *MsgAuthenticationResponse) MarshalToSizedBuffer(dAtA []byte) (int, erro
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgCreateClientRegistry) Marshal() (dAtA []byte, err error) {
+func (m *MsgCreateClientRegistrationRegistryRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1349,18 +1373,18 @@ func (m *MsgCreateClientRegistry) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgCreateClientRegistry) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgCreateClientRegistrationRegistryRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgCreateClientRegistry) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgCreateClientRegistrationRegistryRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
 	{
-		size, err := m.ClientRegistry.MarshalToSizedBuffer(dAtA[:i])
+		size, err := m.ClientRegistrationRegistry.MarshalToSizedBuffer(dAtA[:i])
 		if err != nil {
 			return 0, err
 		}
@@ -1379,7 +1403,7 @@ func (m *MsgCreateClientRegistry) MarshalToSizedBuffer(dAtA []byte) (int, error)
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgCreateClientRegistryResponse) Marshal() (dAtA []byte, err error) {
+func (m *MsgCreateClientRegistrationRegistryResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1389,12 +1413,12 @@ func (m *MsgCreateClientRegistryResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgCreateClientRegistryResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgCreateClientRegistrationRegistryResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgCreateClientRegistryResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgCreateClientRegistrationRegistryResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1402,7 +1426,7 @@ func (m *MsgCreateClientRegistryResponse) MarshalToSizedBuffer(dAtA []byte) (int
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgUpdateClientRegistry) Marshal() (dAtA []byte, err error) {
+func (m *MsgUpdateClientRegistrationRegistryRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1412,18 +1436,18 @@ func (m *MsgUpdateClientRegistry) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgUpdateClientRegistry) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgUpdateClientRegistrationRegistryRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgUpdateClientRegistry) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgUpdateClientRegistrationRegistryRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
 	{
-		size, err := m.ClientRegistry.MarshalToSizedBuffer(dAtA[:i])
+		size, err := m.ClientRegistrationRegistry.MarshalToSizedBuffer(dAtA[:i])
 		if err != nil {
 			return 0, err
 		}
@@ -1442,7 +1466,7 @@ func (m *MsgUpdateClientRegistry) MarshalToSizedBuffer(dAtA []byte) (int, error)
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgUpdateClientRegistryResponse) Marshal() (dAtA []byte, err error) {
+func (m *MsgUpdateClientRegistrationRegistryResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1452,12 +1476,12 @@ func (m *MsgUpdateClientRegistryResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgUpdateClientRegistryResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgUpdateClientRegistrationRegistryResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgUpdateClientRegistryResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgUpdateClientRegistrationRegistryResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1465,7 +1489,7 @@ func (m *MsgUpdateClientRegistryResponse) MarshalToSizedBuffer(dAtA []byte) (int
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgDeleteClientRegistry) Marshal() (dAtA []byte, err error) {
+func (m *MsgDeleteClientRegistrationRegistryRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1475,12 +1499,12 @@ func (m *MsgDeleteClientRegistry) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgDeleteClientRegistry) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgDeleteClientRegistrationRegistryRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgDeleteClientRegistry) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgDeleteClientRegistrationRegistryRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1495,7 +1519,7 @@ func (m *MsgDeleteClientRegistry) MarshalToSizedBuffer(dAtA []byte) (int, error)
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgDeleteClientRegistryResponse) Marshal() (dAtA []byte, err error) {
+func (m *MsgDeleteClientRegistrationRegistryResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1505,12 +1529,12 @@ func (m *MsgDeleteClientRegistryResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgDeleteClientRegistryResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgDeleteClientRegistrationRegistryResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgDeleteClientRegistryResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgDeleteClientRegistrationRegistryResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1518,7 +1542,7 @@ func (m *MsgDeleteClientRegistryResponse) MarshalToSizedBuffer(dAtA []byte) (int
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgCreateClientRegistration) Marshal() (dAtA []byte, err error) {
+func (m *MsgCreateClientRegistrationRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1528,12 +1552,12 @@ func (m *MsgCreateClientRegistration) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgCreateClientRegistration) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgCreateClientRegistrationRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgCreateClientRegistration) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgCreateClientRegistrationRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1581,7 +1605,7 @@ func (m *MsgCreateClientRegistrationResponse) MarshalToSizedBuffer(dAtA []byte) 
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgUpdateClientRegistration) Marshal() (dAtA []byte, err error) {
+func (m *MsgUpdateClientRegistrationRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1591,12 +1615,12 @@ func (m *MsgUpdateClientRegistration) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgUpdateClientRegistration) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgUpdateClientRegistrationRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgUpdateClientRegistration) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgUpdateClientRegistrationRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1644,7 +1668,7 @@ func (m *MsgUpdateClientRegistrationResponse) MarshalToSizedBuffer(dAtA []byte) 
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgDeleteClientRegistration) Marshal() (dAtA []byte, err error) {
+func (m *MsgDeleteClientRegistrationRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1654,12 +1678,12 @@ func (m *MsgDeleteClientRegistration) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgDeleteClientRegistration) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgDeleteClientRegistrationRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgDeleteClientRegistration) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgDeleteClientRegistrationRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1871,7 +1895,7 @@ func (m *MsgAuthenticationResponse) Size() (n int) {
 	return n
 }
 
-func (m *MsgCreateClientRegistry) Size() (n int) {
+func (m *MsgCreateClientRegistrationRegistryRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1881,12 +1905,12 @@ func (m *MsgCreateClientRegistry) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovTx(uint64(l))
 	}
-	l = m.ClientRegistry.Size()
+	l = m.ClientRegistrationRegistry.Size()
 	n += 1 + l + sovTx(uint64(l))
 	return n
 }
 
-func (m *MsgCreateClientRegistryResponse) Size() (n int) {
+func (m *MsgCreateClientRegistrationRegistryResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1895,7 +1919,7 @@ func (m *MsgCreateClientRegistryResponse) Size() (n int) {
 	return n
 }
 
-func (m *MsgUpdateClientRegistry) Size() (n int) {
+func (m *MsgUpdateClientRegistrationRegistryRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1905,12 +1929,12 @@ func (m *MsgUpdateClientRegistry) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovTx(uint64(l))
 	}
-	l = m.ClientRegistry.Size()
+	l = m.ClientRegistrationRegistry.Size()
 	n += 1 + l + sovTx(uint64(l))
 	return n
 }
 
-func (m *MsgUpdateClientRegistryResponse) Size() (n int) {
+func (m *MsgUpdateClientRegistrationRegistryResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1919,7 +1943,7 @@ func (m *MsgUpdateClientRegistryResponse) Size() (n int) {
 	return n
 }
 
-func (m *MsgDeleteClientRegistry) Size() (n int) {
+func (m *MsgDeleteClientRegistrationRegistryRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1932,7 +1956,7 @@ func (m *MsgDeleteClientRegistry) Size() (n int) {
 	return n
 }
 
-func (m *MsgDeleteClientRegistryResponse) Size() (n int) {
+func (m *MsgDeleteClientRegistrationRegistryResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1941,7 +1965,7 @@ func (m *MsgDeleteClientRegistryResponse) Size() (n int) {
 	return n
 }
 
-func (m *MsgCreateClientRegistration) Size() (n int) {
+func (m *MsgCreateClientRegistrationRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1965,7 +1989,7 @@ func (m *MsgCreateClientRegistrationResponse) Size() (n int) {
 	return n
 }
 
-func (m *MsgUpdateClientRegistration) Size() (n int) {
+func (m *MsgUpdateClientRegistrationRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1989,7 +2013,7 @@ func (m *MsgUpdateClientRegistrationResponse) Size() (n int) {
 	return n
 }
 
-func (m *MsgDeleteClientRegistration) Size() (n int) {
+func (m *MsgDeleteClientRegistrationRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -2265,7 +2289,7 @@ func (m *MsgAuthenticationResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgCreateClientRegistry) Unmarshal(dAtA []byte) error {
+func (m *MsgCreateClientRegistrationRegistryRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2288,10 +2312,10 @@ func (m *MsgCreateClientRegistry) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgCreateClientRegistry: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgCreateClientRegistrationRegistryRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgCreateClientRegistry: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgCreateClientRegistrationRegistryRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -2328,7 +2352,7 @@ func (m *MsgCreateClientRegistry) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ClientRegistry", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field ClientRegistrationRegistry", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -2355,7 +2379,7 @@ func (m *MsgCreateClientRegistry) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if err := m.ClientRegistry.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+			if err := m.ClientRegistrationRegistry.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -2380,7 +2404,7 @@ func (m *MsgCreateClientRegistry) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgCreateClientRegistryResponse) Unmarshal(dAtA []byte) error {
+func (m *MsgCreateClientRegistrationRegistryResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2403,10 +2427,10 @@ func (m *MsgCreateClientRegistryResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgCreateClientRegistryResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgCreateClientRegistrationRegistryResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgCreateClientRegistryResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgCreateClientRegistrationRegistryResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:
@@ -2430,7 +2454,7 @@ func (m *MsgCreateClientRegistryResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgUpdateClientRegistry) Unmarshal(dAtA []byte) error {
+func (m *MsgUpdateClientRegistrationRegistryRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2453,10 +2477,10 @@ func (m *MsgUpdateClientRegistry) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgUpdateClientRegistry: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgUpdateClientRegistrationRegistryRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgUpdateClientRegistry: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgUpdateClientRegistrationRegistryRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -2493,7 +2517,7 @@ func (m *MsgUpdateClientRegistry) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ClientRegistry", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field ClientRegistrationRegistry", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -2520,7 +2544,7 @@ func (m *MsgUpdateClientRegistry) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if err := m.ClientRegistry.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+			if err := m.ClientRegistrationRegistry.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -2545,7 +2569,7 @@ func (m *MsgUpdateClientRegistry) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgUpdateClientRegistryResponse) Unmarshal(dAtA []byte) error {
+func (m *MsgUpdateClientRegistrationRegistryResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2568,10 +2592,10 @@ func (m *MsgUpdateClientRegistryResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgUpdateClientRegistryResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgUpdateClientRegistrationRegistryResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgUpdateClientRegistryResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgUpdateClientRegistrationRegistryResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:
@@ -2595,7 +2619,7 @@ func (m *MsgUpdateClientRegistryResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgDeleteClientRegistry) Unmarshal(dAtA []byte) error {
+func (m *MsgDeleteClientRegistrationRegistryRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2618,10 +2642,10 @@ func (m *MsgDeleteClientRegistry) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgDeleteClientRegistry: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgDeleteClientRegistrationRegistryRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgDeleteClientRegistry: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgDeleteClientRegistrationRegistryRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -2677,7 +2701,7 @@ func (m *MsgDeleteClientRegistry) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgDeleteClientRegistryResponse) Unmarshal(dAtA []byte) error {
+func (m *MsgDeleteClientRegistrationRegistryResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2700,10 +2724,10 @@ func (m *MsgDeleteClientRegistryResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgDeleteClientRegistryResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgDeleteClientRegistrationRegistryResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgDeleteClientRegistryResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgDeleteClientRegistrationRegistryResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:
@@ -2727,7 +2751,7 @@ func (m *MsgDeleteClientRegistryResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgCreateClientRegistration) Unmarshal(dAtA []byte) error {
+func (m *MsgCreateClientRegistrationRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2750,10 +2774,10 @@ func (m *MsgCreateClientRegistration) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgCreateClientRegistration: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgCreateClientRegistrationRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgCreateClientRegistration: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgCreateClientRegistrationRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -2892,7 +2916,7 @@ func (m *MsgCreateClientRegistrationResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgUpdateClientRegistration) Unmarshal(dAtA []byte) error {
+func (m *MsgUpdateClientRegistrationRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2915,10 +2939,10 @@ func (m *MsgUpdateClientRegistration) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgUpdateClientRegistration: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgUpdateClientRegistrationRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgUpdateClientRegistration: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgUpdateClientRegistrationRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -3057,7 +3081,7 @@ func (m *MsgUpdateClientRegistrationResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgDeleteClientRegistration) Unmarshal(dAtA []byte) error {
+func (m *MsgDeleteClientRegistrationRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -3080,10 +3104,10 @@ func (m *MsgDeleteClientRegistration) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgDeleteClientRegistration: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgDeleteClientRegistrationRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgDeleteClientRegistration: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgDeleteClientRegistrationRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:

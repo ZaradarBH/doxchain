@@ -12,7 +12,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/simulation"
 )
 
-func SimulateMsgCreateAMLRequest(
+func SimulateMsgCreateAMLRegistration(
 	ak types.AccountKeeper,
 	bk types.BankKeeper,
 	k keeper.Keeper,
@@ -21,13 +21,13 @@ func SimulateMsgCreateAMLRequest(
 	) (simtypes.OperationMsg, []simtypes.FutureOperation, error) {
 		simAccount, _ := simtypes.RandomAcc(r, accs)
 
-		msg := &types.MsgCreateAMLRequest{
+		msg := &types.MsgCreateAMLRegistrationRequest{
 			Creator: simAccount.Address.String(),
 		}
 
-		_, found := k.GetAMLRequest(ctx, msg.Creator)
+		_, found := k.GetAMLRegistration(ctx, msg.Creator)
 		if found {
-			return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "AMLRequest already exist"), nil, nil
+			return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "AMLRegistration already exist"), nil, nil
 		}
 
 		txCtx := simulation.OperationInput{
@@ -48,7 +48,7 @@ func SimulateMsgCreateAMLRequest(
 	}
 }
 
-func SimulateMsgDeleteAMLRequest(
+func SimulateMsgDeleteAMLRegistration(
 	ak types.AccountKeeper,
 	bk types.BankKeeper,
 	k keeper.Keeper,
@@ -57,8 +57,8 @@ func SimulateMsgDeleteAMLRequest(
 	) (simtypes.OperationMsg, []simtypes.FutureOperation, error) {
 		var (
 			simAccount        = simtypes.Account{}
-			msg               = &types.MsgDeleteAMLRequest{}
-			aMLRequest, found = k.GetAMLRequest(ctx, msg.Creator)
+			msg               = &types.MsgDeleteAMLRegistrationRequest{}
+			aMLRequest, found = k.GetAMLRegistration(ctx, msg.Creator)
 		)
 		if !found {
 			return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "aMLRequest store is empty"), nil, nil

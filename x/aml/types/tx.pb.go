@@ -29,23 +29,23 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
-type MsgCreateAMLRequest struct {
+type MsgCreateAMLRegistrationRequest struct {
 	Creator string    `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 	Owner   types.Did `protobuf:"bytes,2,opt,name=owner,proto3" json:"owner"`
 }
 
-func (m *MsgCreateAMLRequest) Reset()         { *m = MsgCreateAMLRequest{} }
-func (m *MsgCreateAMLRequest) String() string { return proto.CompactTextString(m) }
-func (*MsgCreateAMLRequest) ProtoMessage()    {}
-func (*MsgCreateAMLRequest) Descriptor() ([]byte, []int) {
+func (m *MsgCreateAMLRegistrationRequest) Reset()         { *m = MsgCreateAMLRegistrationRequest{} }
+func (m *MsgCreateAMLRegistrationRequest) String() string { return proto.CompactTextString(m) }
+func (*MsgCreateAMLRegistrationRequest) ProtoMessage()    {}
+func (*MsgCreateAMLRegistrationRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_ca91eba74e161f52, []int{0}
 }
-func (m *MsgCreateAMLRequest) XXX_Unmarshal(b []byte) error {
+func (m *MsgCreateAMLRegistrationRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgCreateAMLRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgCreateAMLRegistrationRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgCreateAMLRequest.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgCreateAMLRegistrationRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -55,47 +55,47 @@ func (m *MsgCreateAMLRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte,
 		return b[:n], nil
 	}
 }
-func (m *MsgCreateAMLRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgCreateAMLRequest.Merge(m, src)
+func (m *MsgCreateAMLRegistrationRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgCreateAMLRegistrationRequest.Merge(m, src)
 }
-func (m *MsgCreateAMLRequest) XXX_Size() int {
+func (m *MsgCreateAMLRegistrationRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgCreateAMLRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgCreateAMLRequest.DiscardUnknown(m)
+func (m *MsgCreateAMLRegistrationRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgCreateAMLRegistrationRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgCreateAMLRequest proto.InternalMessageInfo
+var xxx_messageInfo_MsgCreateAMLRegistrationRequest proto.InternalMessageInfo
 
-func (m *MsgCreateAMLRequest) GetCreator() string {
+func (m *MsgCreateAMLRegistrationRequest) GetCreator() string {
 	if m != nil {
 		return m.Creator
 	}
 	return ""
 }
 
-func (m *MsgCreateAMLRequest) GetOwner() types.Did {
+func (m *MsgCreateAMLRegistrationRequest) GetOwner() types.Did {
 	if m != nil {
 		return m.Owner
 	}
 	return types.Did{}
 }
 
-type MsgCreateAMLRequestResponse struct {
+type MsgCreateAMLRegistrationResponse struct {
 }
 
-func (m *MsgCreateAMLRequestResponse) Reset()         { *m = MsgCreateAMLRequestResponse{} }
-func (m *MsgCreateAMLRequestResponse) String() string { return proto.CompactTextString(m) }
-func (*MsgCreateAMLRequestResponse) ProtoMessage()    {}
-func (*MsgCreateAMLRequestResponse) Descriptor() ([]byte, []int) {
+func (m *MsgCreateAMLRegistrationResponse) Reset()         { *m = MsgCreateAMLRegistrationResponse{} }
+func (m *MsgCreateAMLRegistrationResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgCreateAMLRegistrationResponse) ProtoMessage()    {}
+func (*MsgCreateAMLRegistrationResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_ca91eba74e161f52, []int{1}
 }
-func (m *MsgCreateAMLRequestResponse) XXX_Unmarshal(b []byte) error {
+func (m *MsgCreateAMLRegistrationResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgCreateAMLRequestResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgCreateAMLRegistrationResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgCreateAMLRequestResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgCreateAMLRegistrationResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -105,34 +105,34 @@ func (m *MsgCreateAMLRequestResponse) XXX_Marshal(b []byte, deterministic bool) 
 		return b[:n], nil
 	}
 }
-func (m *MsgCreateAMLRequestResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgCreateAMLRequestResponse.Merge(m, src)
+func (m *MsgCreateAMLRegistrationResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgCreateAMLRegistrationResponse.Merge(m, src)
 }
-func (m *MsgCreateAMLRequestResponse) XXX_Size() int {
+func (m *MsgCreateAMLRegistrationResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgCreateAMLRequestResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgCreateAMLRequestResponse.DiscardUnknown(m)
+func (m *MsgCreateAMLRegistrationResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgCreateAMLRegistrationResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgCreateAMLRequestResponse proto.InternalMessageInfo
+var xxx_messageInfo_MsgCreateAMLRegistrationResponse proto.InternalMessageInfo
 
-type MsgDeleteAMLRequest struct {
+type MsgDeleteAMLRegistrationRequest struct {
 	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 }
 
-func (m *MsgDeleteAMLRequest) Reset()         { *m = MsgDeleteAMLRequest{} }
-func (m *MsgDeleteAMLRequest) String() string { return proto.CompactTextString(m) }
-func (*MsgDeleteAMLRequest) ProtoMessage()    {}
-func (*MsgDeleteAMLRequest) Descriptor() ([]byte, []int) {
+func (m *MsgDeleteAMLRegistrationRequest) Reset()         { *m = MsgDeleteAMLRegistrationRequest{} }
+func (m *MsgDeleteAMLRegistrationRequest) String() string { return proto.CompactTextString(m) }
+func (*MsgDeleteAMLRegistrationRequest) ProtoMessage()    {}
+func (*MsgDeleteAMLRegistrationRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_ca91eba74e161f52, []int{2}
 }
-func (m *MsgDeleteAMLRequest) XXX_Unmarshal(b []byte) error {
+func (m *MsgDeleteAMLRegistrationRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgDeleteAMLRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgDeleteAMLRegistrationRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgDeleteAMLRequest.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgDeleteAMLRegistrationRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -142,40 +142,40 @@ func (m *MsgDeleteAMLRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte,
 		return b[:n], nil
 	}
 }
-func (m *MsgDeleteAMLRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgDeleteAMLRequest.Merge(m, src)
+func (m *MsgDeleteAMLRegistrationRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgDeleteAMLRegistrationRequest.Merge(m, src)
 }
-func (m *MsgDeleteAMLRequest) XXX_Size() int {
+func (m *MsgDeleteAMLRegistrationRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgDeleteAMLRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgDeleteAMLRequest.DiscardUnknown(m)
+func (m *MsgDeleteAMLRegistrationRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgDeleteAMLRegistrationRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgDeleteAMLRequest proto.InternalMessageInfo
+var xxx_messageInfo_MsgDeleteAMLRegistrationRequest proto.InternalMessageInfo
 
-func (m *MsgDeleteAMLRequest) GetCreator() string {
+func (m *MsgDeleteAMLRegistrationRequest) GetCreator() string {
 	if m != nil {
 		return m.Creator
 	}
 	return ""
 }
 
-type MsgDeleteAMLRequestResponse struct {
+type MsgDeleteAMLRegistrationResponse struct {
 }
 
-func (m *MsgDeleteAMLRequestResponse) Reset()         { *m = MsgDeleteAMLRequestResponse{} }
-func (m *MsgDeleteAMLRequestResponse) String() string { return proto.CompactTextString(m) }
-func (*MsgDeleteAMLRequestResponse) ProtoMessage()    {}
-func (*MsgDeleteAMLRequestResponse) Descriptor() ([]byte, []int) {
+func (m *MsgDeleteAMLRegistrationResponse) Reset()         { *m = MsgDeleteAMLRegistrationResponse{} }
+func (m *MsgDeleteAMLRegistrationResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgDeleteAMLRegistrationResponse) ProtoMessage()    {}
+func (*MsgDeleteAMLRegistrationResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_ca91eba74e161f52, []int{3}
 }
-func (m *MsgDeleteAMLRequestResponse) XXX_Unmarshal(b []byte) error {
+func (m *MsgDeleteAMLRegistrationResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgDeleteAMLRequestResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgDeleteAMLRegistrationResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgDeleteAMLRequestResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgDeleteAMLRegistrationResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -185,35 +185,35 @@ func (m *MsgDeleteAMLRequestResponse) XXX_Marshal(b []byte, deterministic bool) 
 		return b[:n], nil
 	}
 }
-func (m *MsgDeleteAMLRequestResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgDeleteAMLRequestResponse.Merge(m, src)
+func (m *MsgDeleteAMLRegistrationResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgDeleteAMLRegistrationResponse.Merge(m, src)
 }
-func (m *MsgDeleteAMLRequestResponse) XXX_Size() int {
+func (m *MsgDeleteAMLRegistrationResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgDeleteAMLRequestResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgDeleteAMLRequestResponse.DiscardUnknown(m)
+func (m *MsgDeleteAMLRegistrationResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgDeleteAMLRegistrationResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgDeleteAMLRequestResponse proto.InternalMessageInfo
+var xxx_messageInfo_MsgDeleteAMLRegistrationResponse proto.InternalMessageInfo
 
-type MsgApproveAMLRequest struct {
+type MsgApproveAMLRegistrationRequest struct {
 	Creator string    `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 	Target  types.Did `protobuf:"bytes,2,opt,name=target,proto3" json:"target"`
 }
 
-func (m *MsgApproveAMLRequest) Reset()         { *m = MsgApproveAMLRequest{} }
-func (m *MsgApproveAMLRequest) String() string { return proto.CompactTextString(m) }
-func (*MsgApproveAMLRequest) ProtoMessage()    {}
-func (*MsgApproveAMLRequest) Descriptor() ([]byte, []int) {
+func (m *MsgApproveAMLRegistrationRequest) Reset()         { *m = MsgApproveAMLRegistrationRequest{} }
+func (m *MsgApproveAMLRegistrationRequest) String() string { return proto.CompactTextString(m) }
+func (*MsgApproveAMLRegistrationRequest) ProtoMessage()    {}
+func (*MsgApproveAMLRegistrationRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_ca91eba74e161f52, []int{4}
 }
-func (m *MsgApproveAMLRequest) XXX_Unmarshal(b []byte) error {
+func (m *MsgApproveAMLRegistrationRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgApproveAMLRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgApproveAMLRegistrationRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgApproveAMLRequest.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgApproveAMLRegistrationRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -223,47 +223,47 @@ func (m *MsgApproveAMLRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte
 		return b[:n], nil
 	}
 }
-func (m *MsgApproveAMLRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgApproveAMLRequest.Merge(m, src)
+func (m *MsgApproveAMLRegistrationRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgApproveAMLRegistrationRequest.Merge(m, src)
 }
-func (m *MsgApproveAMLRequest) XXX_Size() int {
+func (m *MsgApproveAMLRegistrationRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgApproveAMLRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgApproveAMLRequest.DiscardUnknown(m)
+func (m *MsgApproveAMLRegistrationRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgApproveAMLRegistrationRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgApproveAMLRequest proto.InternalMessageInfo
+var xxx_messageInfo_MsgApproveAMLRegistrationRequest proto.InternalMessageInfo
 
-func (m *MsgApproveAMLRequest) GetCreator() string {
+func (m *MsgApproveAMLRegistrationRequest) GetCreator() string {
 	if m != nil {
 		return m.Creator
 	}
 	return ""
 }
 
-func (m *MsgApproveAMLRequest) GetTarget() types.Did {
+func (m *MsgApproveAMLRegistrationRequest) GetTarget() types.Did {
 	if m != nil {
 		return m.Target
 	}
 	return types.Did{}
 }
 
-type MsgApproveAMLRequestResponse struct {
+type MsgApproveAMLRegistrationResponse struct {
 }
 
-func (m *MsgApproveAMLRequestResponse) Reset()         { *m = MsgApproveAMLRequestResponse{} }
-func (m *MsgApproveAMLRequestResponse) String() string { return proto.CompactTextString(m) }
-func (*MsgApproveAMLRequestResponse) ProtoMessage()    {}
-func (*MsgApproveAMLRequestResponse) Descriptor() ([]byte, []int) {
+func (m *MsgApproveAMLRegistrationResponse) Reset()         { *m = MsgApproveAMLRegistrationResponse{} }
+func (m *MsgApproveAMLRegistrationResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgApproveAMLRegistrationResponse) ProtoMessage()    {}
+func (*MsgApproveAMLRegistrationResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_ca91eba74e161f52, []int{5}
 }
-func (m *MsgApproveAMLRequestResponse) XXX_Unmarshal(b []byte) error {
+func (m *MsgApproveAMLRegistrationResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *MsgApproveAMLRequestResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *MsgApproveAMLRegistrationResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_MsgApproveAMLRequestResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_MsgApproveAMLRegistrationResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -273,56 +273,56 @@ func (m *MsgApproveAMLRequestResponse) XXX_Marshal(b []byte, deterministic bool)
 		return b[:n], nil
 	}
 }
-func (m *MsgApproveAMLRequestResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgApproveAMLRequestResponse.Merge(m, src)
+func (m *MsgApproveAMLRegistrationResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgApproveAMLRegistrationResponse.Merge(m, src)
 }
-func (m *MsgApproveAMLRequestResponse) XXX_Size() int {
+func (m *MsgApproveAMLRegistrationResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *MsgApproveAMLRequestResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgApproveAMLRequestResponse.DiscardUnknown(m)
+func (m *MsgApproveAMLRegistrationResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgApproveAMLRegistrationResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_MsgApproveAMLRequestResponse proto.InternalMessageInfo
+var xxx_messageInfo_MsgApproveAMLRegistrationResponse proto.InternalMessageInfo
 
 func init() {
-	proto.RegisterType((*MsgCreateAMLRequest)(nil), "beheroes.doxchain.aml.v1beta1.MsgCreateAMLRequest")
-	proto.RegisterType((*MsgCreateAMLRequestResponse)(nil), "beheroes.doxchain.aml.v1beta1.MsgCreateAMLRequestResponse")
-	proto.RegisterType((*MsgDeleteAMLRequest)(nil), "beheroes.doxchain.aml.v1beta1.MsgDeleteAMLRequest")
-	proto.RegisterType((*MsgDeleteAMLRequestResponse)(nil), "beheroes.doxchain.aml.v1beta1.MsgDeleteAMLRequestResponse")
-	proto.RegisterType((*MsgApproveAMLRequest)(nil), "beheroes.doxchain.aml.v1beta1.MsgApproveAMLRequest")
-	proto.RegisterType((*MsgApproveAMLRequestResponse)(nil), "beheroes.doxchain.aml.v1beta1.MsgApproveAMLRequestResponse")
+	proto.RegisterType((*MsgCreateAMLRegistrationRequest)(nil), "beheroes.doxchain.aml.v1beta1.MsgCreateAMLRegistrationRequest")
+	proto.RegisterType((*MsgCreateAMLRegistrationResponse)(nil), "beheroes.doxchain.aml.v1beta1.MsgCreateAMLRegistrationResponse")
+	proto.RegisterType((*MsgDeleteAMLRegistrationRequest)(nil), "beheroes.doxchain.aml.v1beta1.MsgDeleteAMLRegistrationRequest")
+	proto.RegisterType((*MsgDeleteAMLRegistrationResponse)(nil), "beheroes.doxchain.aml.v1beta1.MsgDeleteAMLRegistrationResponse")
+	proto.RegisterType((*MsgApproveAMLRegistrationRequest)(nil), "beheroes.doxchain.aml.v1beta1.MsgApproveAMLRegistrationRequest")
+	proto.RegisterType((*MsgApproveAMLRegistrationResponse)(nil), "beheroes.doxchain.aml.v1beta1.MsgApproveAMLRegistrationResponse")
 }
 
 func init() { proto.RegisterFile("doxchain/aml/v1beta1/tx.proto", fileDescriptor_ca91eba74e161f52) }
 
 var fileDescriptor_ca91eba74e161f52 = []byte{
-	// 386 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x93, 0xbd, 0x6f, 0xda, 0x40,
-	0x18, 0xc6, 0x7d, 0xa5, 0xa5, 0xea, 0x75, 0x69, 0x5d, 0x06, 0xe4, 0x96, 0x2b, 0xf2, 0x50, 0xd1,
-	0x21, 0x67, 0x01, 0x5b, 0x22, 0x45, 0xe1, 0x63, 0x8c, 0x17, 0x8f, 0x59, 0x22, 0x1b, 0xbf, 0x32,
-	0x96, 0x6c, 0xce, 0xb9, 0x3b, 0x08, 0x59, 0x23, 0x65, 0xcf, 0x96, 0x7f, 0x89, 0x91, 0x31, 0x53,
-	0x14, 0xc1, 0x3f, 0x12, 0xe1, 0xaf, 0x01, 0x3b, 0x89, 0xc9, 0xe6, 0x8f, 0xe7, 0x79, 0xde, 0xdf,
-	0xbd, 0xef, 0xbd, 0xb8, 0xe5, 0xb2, 0xe5, 0x64, 0x6a, 0xfb, 0x33, 0xc3, 0x0e, 0x03, 0x63, 0xd1,
-	0x75, 0x40, 0xda, 0x5d, 0x43, 0x2e, 0x69, 0xc4, 0x99, 0x64, 0x6a, 0xcb, 0x81, 0x29, 0x70, 0x06,
-	0x82, 0x66, 0x3a, 0x6a, 0x87, 0x01, 0x4d, 0x75, 0x5a, 0xc3, 0x63, 0x1e, 0x8b, 0x95, 0xc6, 0xee,
-	0x29, 0x31, 0x69, 0xff, 0x4a, 0x33, 0xed, 0x30, 0xb8, 0xe4, 0x70, 0x35, 0x07, 0x21, 0x53, 0x1d,
-	0xc9, 0x75, 0xae, 0xef, 0xe6, 0x3a, 0xd7, 0x77, 0x93, 0xff, 0x3a, 0xc3, 0xbf, 0x4c, 0xe1, 0x8d,
-	0x38, 0xd8, 0x12, 0x06, 0xe6, 0xb9, 0x95, 0x98, 0xd5, 0x26, 0xfe, 0x3a, 0xd9, 0x7d, 0x63, 0xbc,
-	0x89, 0xda, 0xa8, 0xf3, 0xcd, 0xca, 0x5e, 0xd5, 0x53, 0xfc, 0x85, 0x5d, 0xcf, 0x80, 0x37, 0x3f,
-	0xb5, 0x51, 0xe7, 0x7b, 0x4f, 0xa7, 0x45, 0xfa, 0x5d, 0x7a, 0x5a, 0x89, 0x8e, 0x7d, 0x77, 0xf8,
-	0x79, 0xf5, 0xf4, 0x57, 0xb1, 0x12, 0x9b, 0xde, 0xc2, 0xbf, 0x4b, 0x0a, 0x5a, 0x20, 0x22, 0x36,
-	0x13, 0xa0, 0x1b, 0x31, 0xcf, 0x18, 0x02, 0xa8, 0xc6, 0x93, 0xe6, 0xed, 0x1b, 0xf2, 0x3c, 0x8e,
-	0x1b, 0xa6, 0xf0, 0x06, 0x51, 0xc4, 0xd9, 0xa2, 0xda, 0x01, 0xcf, 0x70, 0x5d, 0xda, 0xdc, 0x03,
-	0x79, 0xf0, 0x09, 0x53, 0x9f, 0x4e, 0xf0, 0x9f, 0xb2, 0x9a, 0x19, 0x53, 0xef, 0xa1, 0x86, 0x6b,
-	0xa6, 0xf0, 0xd4, 0x5b, 0x84, 0x7f, 0x14, 0x3a, 0xdf, 0xa3, 0x6f, 0x5e, 0x07, 0x5a, 0xd2, 0x3c,
-	0xed, 0xf8, 0x70, 0x4f, 0x06, 0x13, 0x43, 0x14, 0xda, 0x5d, 0x01, 0x62, 0xdf, 0x53, 0x05, 0xe2,
-	0xb5, 0x29, 0xa9, 0x77, 0x08, 0xff, 0x2c, 0xce, 0xa8, 0xff, 0x7e, 0x62, 0xc1, 0xa4, 0x9d, 0x7c,
-	0xc0, 0x94, 0x71, 0x0c, 0x47, 0xab, 0x0d, 0x41, 0xeb, 0x0d, 0x41, 0xcf, 0x1b, 0x82, 0xee, 0xb7,
-	0x44, 0x59, 0x6f, 0x89, 0xf2, 0xb8, 0x25, 0xca, 0xc5, 0x7f, 0xcf, 0x97, 0xd3, 0xb9, 0x43, 0x27,
-	0x2c, 0x34, 0x1c, 0x38, 0x4a, 0x2a, 0x18, 0xf9, 0x72, 0x2d, 0xe3, 0x35, 0x94, 0x37, 0x11, 0x08,
-	0xa7, 0x1e, 0x6f, 0x56, 0xff, 0x25, 0x00, 0x00, 0xff, 0xff, 0x9e, 0x40, 0xd7, 0x5a, 0xf7, 0x03,
-	0x00, 0x00,
+	// 393 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x53, 0x3d, 0x6f, 0xda, 0x40,
+	0x18, 0xf6, 0x95, 0x96, 0xaa, 0xd7, 0xcd, 0x6a, 0x2b, 0x64, 0x09, 0x43, 0x5d, 0xa9, 0xa2, 0x43,
+	0xcf, 0x82, 0x8c, 0x91, 0x08, 0x5f, 0x63, 0x58, 0x3c, 0x66, 0x89, 0xce, 0xf8, 0x95, 0xb1, 0x64,
+	0xfb, 0x9c, 0xbb, 0x83, 0x10, 0x45, 0xca, 0x6f, 0xc8, 0x18, 0x29, 0x7f, 0x88, 0x91, 0x31, 0x59,
+	0xa2, 0x08, 0xfe, 0x48, 0x84, 0xcf, 0xb0, 0xc4, 0x38, 0xc0, 0x66, 0xeb, 0x9e, 0xaf, 0x7b, 0xde,
+	0x7b, 0x71, 0xd5, 0x63, 0xb3, 0xd1, 0x98, 0x06, 0xb1, 0x4d, 0xa3, 0xd0, 0x9e, 0x36, 0x5d, 0x90,
+	0xb4, 0x69, 0xcb, 0x19, 0x49, 0x38, 0x93, 0x4c, 0xaf, 0xba, 0x30, 0x06, 0xce, 0x40, 0x90, 0x0d,
+	0x8e, 0xd0, 0x28, 0x24, 0x19, 0xce, 0xf8, 0xe1, 0x33, 0x9f, 0xa5, 0x48, 0x7b, 0xfd, 0xa5, 0x48,
+	0xc6, 0xdf, 0x5c, 0x4d, 0x1a, 0x85, 0x97, 0x1c, 0xae, 0x26, 0x20, 0x64, 0x86, 0x33, 0xb7, 0x38,
+	0x2f, 0xf0, 0xb6, 0x38, 0x2f, 0xf0, 0xd4, 0xb9, 0x75, 0x8b, 0x6b, 0x43, 0xe1, 0xf7, 0x39, 0x50,
+	0x09, 0xdd, 0xe1, 0xb9, 0x03, 0x7e, 0x20, 0x24, 0xa7, 0x32, 0x60, 0xb1, 0xa3, 0x84, 0xf4, 0x0a,
+	0xfe, 0x3a, 0x5a, 0x9f, 0x33, 0x5e, 0x41, 0x75, 0xd4, 0xf8, 0xe6, 0x6c, 0x7e, 0xf5, 0x36, 0xfe,
+	0xc2, 0xae, 0x63, 0xe0, 0x95, 0x4f, 0x75, 0xd4, 0xf8, 0xde, 0xb2, 0xc8, 0xfb, 0x9b, 0xac, 0x9d,
+	0x32, 0x57, 0x32, 0x08, 0xbc, 0xde, 0xe7, 0xf9, 0x4b, 0x4d, 0x73, 0x14, 0xcd, 0xb2, 0x70, 0x7d,
+	0xb7, 0xb9, 0x48, 0x58, 0x2c, 0xc0, 0x3a, 0x4d, 0x03, 0x0e, 0x20, 0x84, 0xc3, 0x03, 0x66, 0x06,
+	0x3b, 0xc8, 0x99, 0xc1, 0x5d, 0x8a, 0xe9, 0x26, 0x09, 0x67, 0xd3, 0xc3, 0x2b, 0xe8, 0xe0, 0xb2,
+	0xa4, 0xdc, 0x07, 0x79, 0x70, 0x07, 0x19, 0xcf, 0xfa, 0x83, 0x7f, 0x17, 0xf8, 0xab, 0x90, 0xad,
+	0xe7, 0x12, 0x2e, 0x0d, 0x85, 0xaf, 0x3f, 0x20, 0xfc, 0x33, 0xb7, 0x2f, 0xbd, 0x4d, 0x0a, 0x9f,
+	0x11, 0xf9, 0x60, 0xca, 0xc6, 0xd9, 0xd1, 0x7c, 0x15, 0x31, 0x8d, 0x96, 0xdb, 0xf4, 0x3e, 0xd1,
+	0x8a, 0xe6, 0xbb, 0x4f, 0xb4, 0xc2, 0x11, 0xeb, 0x8f, 0x08, 0xff, 0xca, 0x2f, 0x58, 0xdf, 0x43,
+	0xbb, 0xf0, 0x69, 0x18, 0x9d, 0xe3, 0x05, 0x54, 0xba, 0x5e, 0x7f, 0xbe, 0x34, 0xd1, 0x62, 0x69,
+	0xa2, 0xd7, 0xa5, 0x89, 0xee, 0x57, 0xa6, 0xb6, 0x58, 0x99, 0xda, 0xd3, 0xca, 0xd4, 0x2e, 0xfe,
+	0xf9, 0x81, 0x1c, 0x4f, 0x5c, 0x32, 0x62, 0x91, 0xed, 0xc2, 0x7f, 0x65, 0x63, 0x6f, 0x37, 0x7a,
+	0x96, 0xee, 0xbe, 0xbc, 0x49, 0x40, 0xb8, 0xe5, 0x74, 0x9d, 0x4f, 0xde, 0x02, 0x00, 0x00, 0xff,
+	0xff, 0x0e, 0x0f, 0x28, 0xa5, 0x6c, 0x04, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -337,9 +337,9 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type MsgClient interface {
-	CreateAMLRequest(ctx context.Context, in *MsgCreateAMLRequest, opts ...grpc.CallOption) (*MsgCreateAMLRequestResponse, error)
-	DeleteAMLRequest(ctx context.Context, in *MsgDeleteAMLRequest, opts ...grpc.CallOption) (*MsgDeleteAMLRequestResponse, error)
-	ApproveAMLRequest(ctx context.Context, in *MsgApproveAMLRequest, opts ...grpc.CallOption) (*MsgApproveAMLRequestResponse, error)
+	CreateAMLRegistration(ctx context.Context, in *MsgCreateAMLRegistrationRequest, opts ...grpc.CallOption) (*MsgCreateAMLRegistrationResponse, error)
+	DeleteAMLRegistration(ctx context.Context, in *MsgDeleteAMLRegistrationRequest, opts ...grpc.CallOption) (*MsgDeleteAMLRegistrationResponse, error)
+	ApproveAMLRegistration(ctx context.Context, in *MsgApproveAMLRegistrationRequest, opts ...grpc.CallOption) (*MsgApproveAMLRegistrationResponse, error)
 }
 
 type msgClient struct {
@@ -350,27 +350,27 @@ func NewMsgClient(cc grpc1.ClientConn) MsgClient {
 	return &msgClient{cc}
 }
 
-func (c *msgClient) CreateAMLRequest(ctx context.Context, in *MsgCreateAMLRequest, opts ...grpc.CallOption) (*MsgCreateAMLRequestResponse, error) {
-	out := new(MsgCreateAMLRequestResponse)
-	err := c.cc.Invoke(ctx, "/beheroes.doxchain.aml.v1beta1.Msg/CreateAMLRequest", in, out, opts...)
+func (c *msgClient) CreateAMLRegistration(ctx context.Context, in *MsgCreateAMLRegistrationRequest, opts ...grpc.CallOption) (*MsgCreateAMLRegistrationResponse, error) {
+	out := new(MsgCreateAMLRegistrationResponse)
+	err := c.cc.Invoke(ctx, "/beheroes.doxchain.aml.v1beta1.Msg/CreateAMLRegistration", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *msgClient) DeleteAMLRequest(ctx context.Context, in *MsgDeleteAMLRequest, opts ...grpc.CallOption) (*MsgDeleteAMLRequestResponse, error) {
-	out := new(MsgDeleteAMLRequestResponse)
-	err := c.cc.Invoke(ctx, "/beheroes.doxchain.aml.v1beta1.Msg/DeleteAMLRequest", in, out, opts...)
+func (c *msgClient) DeleteAMLRegistration(ctx context.Context, in *MsgDeleteAMLRegistrationRequest, opts ...grpc.CallOption) (*MsgDeleteAMLRegistrationResponse, error) {
+	out := new(MsgDeleteAMLRegistrationResponse)
+	err := c.cc.Invoke(ctx, "/beheroes.doxchain.aml.v1beta1.Msg/DeleteAMLRegistration", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *msgClient) ApproveAMLRequest(ctx context.Context, in *MsgApproveAMLRequest, opts ...grpc.CallOption) (*MsgApproveAMLRequestResponse, error) {
-	out := new(MsgApproveAMLRequestResponse)
-	err := c.cc.Invoke(ctx, "/beheroes.doxchain.aml.v1beta1.Msg/ApproveAMLRequest", in, out, opts...)
+func (c *msgClient) ApproveAMLRegistration(ctx context.Context, in *MsgApproveAMLRegistrationRequest, opts ...grpc.CallOption) (*MsgApproveAMLRegistrationResponse, error) {
+	out := new(MsgApproveAMLRegistrationResponse)
+	err := c.cc.Invoke(ctx, "/beheroes.doxchain.aml.v1beta1.Msg/ApproveAMLRegistration", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -379,79 +379,79 @@ func (c *msgClient) ApproveAMLRequest(ctx context.Context, in *MsgApproveAMLRequ
 
 // MsgServer is the server API for Msg service.
 type MsgServer interface {
-	CreateAMLRequest(context.Context, *MsgCreateAMLRequest) (*MsgCreateAMLRequestResponse, error)
-	DeleteAMLRequest(context.Context, *MsgDeleteAMLRequest) (*MsgDeleteAMLRequestResponse, error)
-	ApproveAMLRequest(context.Context, *MsgApproveAMLRequest) (*MsgApproveAMLRequestResponse, error)
+	CreateAMLRegistration(context.Context, *MsgCreateAMLRegistrationRequest) (*MsgCreateAMLRegistrationResponse, error)
+	DeleteAMLRegistration(context.Context, *MsgDeleteAMLRegistrationRequest) (*MsgDeleteAMLRegistrationResponse, error)
+	ApproveAMLRegistration(context.Context, *MsgApproveAMLRegistrationRequest) (*MsgApproveAMLRegistrationResponse, error)
 }
 
 // UnimplementedMsgServer can be embedded to have forward compatible implementations.
 type UnimplementedMsgServer struct {
 }
 
-func (*UnimplementedMsgServer) CreateAMLRequest(ctx context.Context, req *MsgCreateAMLRequest) (*MsgCreateAMLRequestResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateAMLRequest not implemented")
+func (*UnimplementedMsgServer) CreateAMLRegistration(ctx context.Context, req *MsgCreateAMLRegistrationRequest) (*MsgCreateAMLRegistrationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateAMLRegistration not implemented")
 }
-func (*UnimplementedMsgServer) DeleteAMLRequest(ctx context.Context, req *MsgDeleteAMLRequest) (*MsgDeleteAMLRequestResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteAMLRequest not implemented")
+func (*UnimplementedMsgServer) DeleteAMLRegistration(ctx context.Context, req *MsgDeleteAMLRegistrationRequest) (*MsgDeleteAMLRegistrationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteAMLRegistration not implemented")
 }
-func (*UnimplementedMsgServer) ApproveAMLRequest(ctx context.Context, req *MsgApproveAMLRequest) (*MsgApproveAMLRequestResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ApproveAMLRequest not implemented")
+func (*UnimplementedMsgServer) ApproveAMLRegistration(ctx context.Context, req *MsgApproveAMLRegistrationRequest) (*MsgApproveAMLRegistrationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ApproveAMLRegistration not implemented")
 }
 
 func RegisterMsgServer(s grpc1.Server, srv MsgServer) {
 	s.RegisterService(&_Msg_serviceDesc, srv)
 }
 
-func _Msg_CreateAMLRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgCreateAMLRequest)
+func _Msg_CreateAMLRegistration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgCreateAMLRegistrationRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MsgServer).CreateAMLRequest(ctx, in)
+		return srv.(MsgServer).CreateAMLRegistration(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/beheroes.doxchain.aml.v1beta1.Msg/CreateAMLRequest",
+		FullMethod: "/beheroes.doxchain.aml.v1beta1.Msg/CreateAMLRegistration",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).CreateAMLRequest(ctx, req.(*MsgCreateAMLRequest))
+		return srv.(MsgServer).CreateAMLRegistration(ctx, req.(*MsgCreateAMLRegistrationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Msg_DeleteAMLRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgDeleteAMLRequest)
+func _Msg_DeleteAMLRegistration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgDeleteAMLRegistrationRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MsgServer).DeleteAMLRequest(ctx, in)
+		return srv.(MsgServer).DeleteAMLRegistration(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/beheroes.doxchain.aml.v1beta1.Msg/DeleteAMLRequest",
+		FullMethod: "/beheroes.doxchain.aml.v1beta1.Msg/DeleteAMLRegistration",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).DeleteAMLRequest(ctx, req.(*MsgDeleteAMLRequest))
+		return srv.(MsgServer).DeleteAMLRegistration(ctx, req.(*MsgDeleteAMLRegistrationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Msg_ApproveAMLRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgApproveAMLRequest)
+func _Msg_ApproveAMLRegistration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgApproveAMLRegistrationRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(MsgServer).ApproveAMLRequest(ctx, in)
+		return srv.(MsgServer).ApproveAMLRegistration(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/beheroes.doxchain.aml.v1beta1.Msg/ApproveAMLRequest",
+		FullMethod: "/beheroes.doxchain.aml.v1beta1.Msg/ApproveAMLRegistration",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).ApproveAMLRequest(ctx, req.(*MsgApproveAMLRequest))
+		return srv.(MsgServer).ApproveAMLRegistration(ctx, req.(*MsgApproveAMLRegistrationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -461,23 +461,23 @@ var _Msg_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*MsgServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "CreateAMLRequest",
-			Handler:    _Msg_CreateAMLRequest_Handler,
+			MethodName: "CreateAMLRegistration",
+			Handler:    _Msg_CreateAMLRegistration_Handler,
 		},
 		{
-			MethodName: "DeleteAMLRequest",
-			Handler:    _Msg_DeleteAMLRequest_Handler,
+			MethodName: "DeleteAMLRegistration",
+			Handler:    _Msg_DeleteAMLRegistration_Handler,
 		},
 		{
-			MethodName: "ApproveAMLRequest",
-			Handler:    _Msg_ApproveAMLRequest_Handler,
+			MethodName: "ApproveAMLRegistration",
+			Handler:    _Msg_ApproveAMLRegistration_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "doxchain/aml/v1beta1/tx.proto",
 }
 
-func (m *MsgCreateAMLRequest) Marshal() (dAtA []byte, err error) {
+func (m *MsgCreateAMLRegistrationRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -487,12 +487,12 @@ func (m *MsgCreateAMLRequest) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgCreateAMLRequest) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgCreateAMLRegistrationRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgCreateAMLRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgCreateAMLRegistrationRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -517,7 +517,7 @@ func (m *MsgCreateAMLRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgCreateAMLRequestResponse) Marshal() (dAtA []byte, err error) {
+func (m *MsgCreateAMLRegistrationResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -527,12 +527,12 @@ func (m *MsgCreateAMLRequestResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgCreateAMLRequestResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgCreateAMLRegistrationResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgCreateAMLRequestResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgCreateAMLRegistrationResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -540,7 +540,7 @@ func (m *MsgCreateAMLRequestResponse) MarshalToSizedBuffer(dAtA []byte) (int, er
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgDeleteAMLRequest) Marshal() (dAtA []byte, err error) {
+func (m *MsgDeleteAMLRegistrationRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -550,12 +550,12 @@ func (m *MsgDeleteAMLRequest) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgDeleteAMLRequest) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgDeleteAMLRegistrationRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgDeleteAMLRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgDeleteAMLRegistrationRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -570,7 +570,7 @@ func (m *MsgDeleteAMLRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgDeleteAMLRequestResponse) Marshal() (dAtA []byte, err error) {
+func (m *MsgDeleteAMLRegistrationResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -580,12 +580,12 @@ func (m *MsgDeleteAMLRequestResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgDeleteAMLRequestResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgDeleteAMLRegistrationResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgDeleteAMLRequestResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgDeleteAMLRegistrationResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -593,7 +593,7 @@ func (m *MsgDeleteAMLRequestResponse) MarshalToSizedBuffer(dAtA []byte) (int, er
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgApproveAMLRequest) Marshal() (dAtA []byte, err error) {
+func (m *MsgApproveAMLRegistrationRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -603,12 +603,12 @@ func (m *MsgApproveAMLRequest) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgApproveAMLRequest) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgApproveAMLRegistrationRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgApproveAMLRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgApproveAMLRegistrationRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -633,7 +633,7 @@ func (m *MsgApproveAMLRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
-func (m *MsgApproveAMLRequestResponse) Marshal() (dAtA []byte, err error) {
+func (m *MsgApproveAMLRegistrationResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -643,12 +643,12 @@ func (m *MsgApproveAMLRequestResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *MsgApproveAMLRequestResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *MsgApproveAMLRegistrationResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *MsgApproveAMLRequestResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *MsgApproveAMLRegistrationResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -667,7 +667,7 @@ func encodeVarintTx(dAtA []byte, offset int, v uint64) int {
 	dAtA[offset] = uint8(v)
 	return base
 }
-func (m *MsgCreateAMLRequest) Size() (n int) {
+func (m *MsgCreateAMLRegistrationRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -682,7 +682,7 @@ func (m *MsgCreateAMLRequest) Size() (n int) {
 	return n
 }
 
-func (m *MsgCreateAMLRequestResponse) Size() (n int) {
+func (m *MsgCreateAMLRegistrationResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -691,7 +691,7 @@ func (m *MsgCreateAMLRequestResponse) Size() (n int) {
 	return n
 }
 
-func (m *MsgDeleteAMLRequest) Size() (n int) {
+func (m *MsgDeleteAMLRegistrationRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -704,7 +704,7 @@ func (m *MsgDeleteAMLRequest) Size() (n int) {
 	return n
 }
 
-func (m *MsgDeleteAMLRequestResponse) Size() (n int) {
+func (m *MsgDeleteAMLRegistrationResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -713,7 +713,7 @@ func (m *MsgDeleteAMLRequestResponse) Size() (n int) {
 	return n
 }
 
-func (m *MsgApproveAMLRequest) Size() (n int) {
+func (m *MsgApproveAMLRegistrationRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -728,7 +728,7 @@ func (m *MsgApproveAMLRequest) Size() (n int) {
 	return n
 }
 
-func (m *MsgApproveAMLRequestResponse) Size() (n int) {
+func (m *MsgApproveAMLRegistrationResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -743,7 +743,7 @@ func sovTx(x uint64) (n int) {
 func sozTx(x uint64) (n int) {
 	return sovTx(uint64((x << 1) ^ uint64((int64(x) >> 63))))
 }
-func (m *MsgCreateAMLRequest) Unmarshal(dAtA []byte) error {
+func (m *MsgCreateAMLRegistrationRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -766,10 +766,10 @@ func (m *MsgCreateAMLRequest) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgCreateAMLRequest: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgCreateAMLRegistrationRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgCreateAMLRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgCreateAMLRegistrationRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -858,7 +858,7 @@ func (m *MsgCreateAMLRequest) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgCreateAMLRequestResponse) Unmarshal(dAtA []byte) error {
+func (m *MsgCreateAMLRegistrationResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -881,10 +881,10 @@ func (m *MsgCreateAMLRequestResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgCreateAMLRequestResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgCreateAMLRegistrationResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgCreateAMLRequestResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgCreateAMLRegistrationResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:
@@ -908,7 +908,7 @@ func (m *MsgCreateAMLRequestResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgDeleteAMLRequest) Unmarshal(dAtA []byte) error {
+func (m *MsgDeleteAMLRegistrationRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -931,10 +931,10 @@ func (m *MsgDeleteAMLRequest) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgDeleteAMLRequest: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgDeleteAMLRegistrationRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgDeleteAMLRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgDeleteAMLRegistrationRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -990,7 +990,7 @@ func (m *MsgDeleteAMLRequest) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgDeleteAMLRequestResponse) Unmarshal(dAtA []byte) error {
+func (m *MsgDeleteAMLRegistrationResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1013,10 +1013,10 @@ func (m *MsgDeleteAMLRequestResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgDeleteAMLRequestResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgDeleteAMLRegistrationResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgDeleteAMLRequestResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgDeleteAMLRegistrationResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:
@@ -1040,7 +1040,7 @@ func (m *MsgDeleteAMLRequestResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgApproveAMLRequest) Unmarshal(dAtA []byte) error {
+func (m *MsgApproveAMLRegistrationRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1063,10 +1063,10 @@ func (m *MsgApproveAMLRequest) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgApproveAMLRequest: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgApproveAMLRegistrationRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgApproveAMLRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgApproveAMLRegistrationRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -1155,7 +1155,7 @@ func (m *MsgApproveAMLRequest) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *MsgApproveAMLRequestResponse) Unmarshal(dAtA []byte) error {
+func (m *MsgApproveAMLRegistrationResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1178,10 +1178,10 @@ func (m *MsgApproveAMLRequestResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: MsgApproveAMLRequestResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: MsgApproveAMLRegistrationResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgApproveAMLRequestResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: MsgApproveAMLRegistrationResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:

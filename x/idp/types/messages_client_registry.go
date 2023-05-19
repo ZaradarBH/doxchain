@@ -6,103 +6,103 @@ import (
 )
 
 const (
-	TypeMsgCreateClientRegistry = "create_client_registrations"
-	TypeMsgUpdateClientRegistry = "update_client_registrations"
-	TypeMsgDeleteClientRegistry = "delete_client_registrations"
+	TypeMsgCreateClientRegistrationRegistry = "create_client_registrations"
+	TypeMsgUpdateClientRegistrationRegistry = "update_client_registrations"
+	TypeMsgDeleteClientRegistrationRegistry = "delete_client_registrations"
 )
 
-var _ sdk.Msg = &MsgCreateClientRegistry{}
+var _ sdk.Msg = &MsgCreateClientRegistrationRegistryRequest{}
 
-func NewMsgCreateClientRegistry(clientRegistry ClientRegistry) *MsgCreateClientRegistry {
-	return &MsgCreateClientRegistry{
-		ClientRegistry: clientRegistry,
+func NewMsgCreateClientRegistrationRegistry(clientRegistry ClientRegistrationRegistry) *MsgCreateClientRegistrationRegistryRequest {
+	return &MsgCreateClientRegistrationRegistryRequest{
+		ClientRegistrationRegistry: clientRegistry,
 	}
 }
 
-func (msg *MsgCreateClientRegistry) Route() string {
+func (msg *MsgCreateClientRegistrationRegistryRequest) Route() string {
 	return RouterKey
 }
 
-func (msg *MsgCreateClientRegistry) Type() string {
-	return TypeMsgCreateClientRegistry
+func (msg *MsgCreateClientRegistrationRegistryRequest) Type() string {
+	return TypeMsgCreateClientRegistrationRegistry
 }
 
-func (msg *MsgCreateClientRegistry) GetSigners() []sdk.AccAddress {
-	creator, err := sdk.AccAddressFromBech32(msg.ClientRegistry.Owner.Creator)
+func (msg *MsgCreateClientRegistrationRegistryRequest) GetSigners() []sdk.AccAddress {
+	creator, err := sdk.AccAddressFromBech32(msg.ClientRegistrationRegistry.Owner.Creator)
 	if err != nil {
 		panic(err)
 	}
 	return []sdk.AccAddress{creator}
 }
 
-func (msg *MsgCreateClientRegistry) GetSignBytes() []byte {
+func (msg *MsgCreateClientRegistrationRegistryRequest) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(msg)
 	return sdk.MustSortJSON(bz)
 }
 
-func (msg *MsgCreateClientRegistry) ValidateBasic() error {
-	_, err := sdk.AccAddressFromBech32(msg.ClientRegistry.Owner.Creator)
+func (msg *MsgCreateClientRegistrationRegistryRequest) ValidateBasic() error {
+	_, err := sdk.AccAddressFromBech32(msg.ClientRegistrationRegistry.Owner.Creator)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
 	return nil
 }
 
-var _ sdk.Msg = &MsgUpdateClientRegistry{}
+var _ sdk.Msg = &MsgUpdateClientRegistrationRegistryRequest{}
 
-func NewMsgUpdateClientRegistry(clientRegistry ClientRegistry) *MsgUpdateClientRegistry {
-	return &MsgUpdateClientRegistry{
-		ClientRegistry: clientRegistry,
+func NewMsgUpdateClientRegistrationRegistry(clientRegistry ClientRegistrationRegistry) *MsgUpdateClientRegistrationRegistryRequest {
+	return &MsgUpdateClientRegistrationRegistryRequest{
+		ClientRegistrationRegistry: clientRegistry,
 	}
 }
 
-func (msg *MsgUpdateClientRegistry) Route() string {
+func (msg *MsgUpdateClientRegistrationRegistryRequest) Route() string {
 	return RouterKey
 }
 
-func (msg *MsgUpdateClientRegistry) Type() string {
-	return TypeMsgUpdateClientRegistry
+func (msg *MsgUpdateClientRegistrationRegistryRequest) Type() string {
+	return TypeMsgUpdateClientRegistrationRegistry
 }
 
-func (msg *MsgUpdateClientRegistry) GetSigners() []sdk.AccAddress {
-	creator, err := sdk.AccAddressFromBech32(msg.ClientRegistry.Owner.Creator)
+func (msg *MsgUpdateClientRegistrationRegistryRequest) GetSigners() []sdk.AccAddress {
+	creator, err := sdk.AccAddressFromBech32(msg.ClientRegistrationRegistry.Owner.Creator)
 	if err != nil {
 		panic(err)
 	}
 	return []sdk.AccAddress{creator}
 }
 
-func (msg *MsgUpdateClientRegistry) GetSignBytes() []byte {
+func (msg *MsgUpdateClientRegistrationRegistryRequest) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(msg)
 	return sdk.MustSortJSON(bz)
 }
 
-func (msg *MsgUpdateClientRegistry) ValidateBasic() error {
-	_, err := sdk.AccAddressFromBech32(msg.ClientRegistry.Owner.Creator)
+func (msg *MsgUpdateClientRegistrationRegistryRequest) ValidateBasic() error {
+	_, err := sdk.AccAddressFromBech32(msg.ClientRegistrationRegistry.Owner.Creator)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
 	return nil
 }
 
-var _ sdk.Msg = &MsgDeleteClientRegistry{}
+var _ sdk.Msg = &MsgDeleteClientRegistrationRegistryRequest{}
 
-func NewMsgDeleteClientRegistry(
+func NewMsgDeleteClientRegistrationRegistry(
 	creator string,
-) *MsgDeleteClientRegistry {
-	return &MsgDeleteClientRegistry{
+) *MsgDeleteClientRegistrationRegistryRequest {
+	return &MsgDeleteClientRegistrationRegistryRequest{
 		Creator: creator,
 	}
 }
-func (msg *MsgDeleteClientRegistry) Route() string {
+func (msg *MsgDeleteClientRegistrationRegistryRequest) Route() string {
 	return RouterKey
 }
 
-func (msg *MsgDeleteClientRegistry) Type() string {
-	return TypeMsgDeleteClientRegistry
+func (msg *MsgDeleteClientRegistrationRegistryRequest) Type() string {
+	return TypeMsgDeleteClientRegistrationRegistry
 }
 
-func (msg *MsgDeleteClientRegistry) GetSigners() []sdk.AccAddress {
+func (msg *MsgDeleteClientRegistrationRegistryRequest) GetSigners() []sdk.AccAddress {
 	creator, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		panic(err)
@@ -110,12 +110,12 @@ func (msg *MsgDeleteClientRegistry) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{creator}
 }
 
-func (msg *MsgDeleteClientRegistry) GetSignBytes() []byte {
+func (msg *MsgDeleteClientRegistrationRegistryRequest) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(msg)
 	return sdk.MustSortJSON(bz)
 }
 
-func (msg *MsgDeleteClientRegistry) ValidateBasic() error {
+func (msg *MsgDeleteClientRegistrationRegistryRequest) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)

@@ -11,18 +11,18 @@ import (
 func TestMsgApproveRequest_ValidateBasic(t *testing.T) {
 	tests := []struct {
 		name string
-		msg  MsgApproveAMLRequest
+		msg  MsgApproveAMLRegistration
 		err  error
 	}{
 		{
 			name: "invalid address",
-			msg: MsgApproveAMLRequest{
+			msg: MsgApproveAMLRegistration{
 				Creator: "invalid_address",
 			},
 			err: sdkerrors.ErrInvalidAddress,
 		}, {
 			name: "valid address",
-			msg: MsgApproveAMLRequest{
+			msg: MsgApproveAMLRegistration{
 				Creator: sample.AccAddress(),
 			},
 		},

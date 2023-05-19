@@ -12,7 +12,6 @@ type msgServer struct {
 	BaseKeeper
 }
 
-// NewMsgServerImpl returns an implementation of the bank MsgServer interface
 func NewMsgServerImpl(keeper BaseKeeper) banktypes.MsgServer {
 	return &msgServer{BaseKeeper: keeper}
 }

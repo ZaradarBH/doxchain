@@ -11,7 +11,7 @@ const DefaultIndex uint64 = 1
 func DefaultGenesis() *GenesisState {
 	return &GenesisState{
 		DeviceCodeRegistries: []DeviceCodeRegistry{},
-		ClientRegistries:     []ClientRegistry{},
+		ClientRegistrationRegistries:     []ClientRegistrationRegistry{},
 		// this line is used by starport scaffolding # genesis/types/default
 		Params: DefaultParams(),
 	}
@@ -31,15 +31,15 @@ func (gs GenesisState) Validate() error {
 		DeviceCodeRegistryIndexMap[creator] = struct{}{}
 	}
 
-	// Check for duplicated index in ClientRegistry
-	ClientRegistryIndexMap := make(map[string]struct{})
+	// Check for duplicated index in ClientRegistrationRegistry
+	ClientRegistrationRegistryIndexMap := make(map[string]struct{})
 
-	for _, elem := range gs.ClientRegistries {
-		creator := string(ClientRegistryKey(elem.Owner.Creator))
-		if _, ok := ClientRegistryIndexMap[creator]; ok {
-			return fmt.Errorf("duplicated creator for ClientRegistry")
+	for _, elem := range gs.ClientRegistrationRegistries {
+		creator := string(ClientRegistrationRegistryKey(elem.Owner.Creator))
+		if _, ok := ClientRegistrationRegistryIndexMap[creator]; ok {
+			return fmt.Errorf("duplicated creator for ClientRegistrationRegistry")
 		}
-		ClientRegistryIndexMap[creator] = struct{}{}
+		ClientRegistrationRegistryIndexMap[creator] = struct{}{}
 	}
 	// this line is used by starport scaffolding # genesis/types/validate
 

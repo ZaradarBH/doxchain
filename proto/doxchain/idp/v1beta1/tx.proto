@@ -5,18 +5,18 @@ package beheroes.doxchain.idp.v1beta1;
 import "gogoproto/gogo.proto";
 import "doxchain/idp/v1beta1/client_registration_relationship_registry_entry.proto";
 import "doxchain/idp/v1beta1/client_registration.proto";
-import "doxchain/idp/v1beta1/client_registry.proto";
+import "doxchain/idp/v1beta1/client_registration_registry.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/idp/types";
 
 service Msg {
-  rpc Login                                (MsgAuthenticationRequest               ) returns (MsgAuthenticationResponse                      );
-  rpc CreateClientRegistry                 (MsgCreateClientRegistry                ) returns (MsgCreateClientRegistryResponse                );
-  rpc UpdateClientRegistry                 (MsgUpdateClientRegistry                ) returns (MsgUpdateClientRegistryResponse                );
-  rpc DeleteClientRegistry                 (MsgDeleteClientRegistry                ) returns (MsgDeleteClientRegistryResponse                );
-  rpc CreateClientRegistration             (MsgCreateClientRegistration            ) returns (MsgCreateClientRegistrationResponse            );
-  rpc UpdateClientRegistration             (MsgUpdateClientRegistration            ) returns (MsgUpdateClientRegistrationResponse            );
-  rpc DeleteClientRegistration             (MsgDeleteClientRegistration            ) returns (MsgDeleteClientRegistrationResponse            );
+  rpc Login (MsgAuthenticationRequest) returns (MsgAuthenticationResponse);
+  rpc CreateClientRegistrationRegistry (MsgCreateClientRegistrationRegistryRequest) returns (MsgCreateClientRegistrationRegistryResponse);
+  rpc UpdateClientRegistrationRegistry (MsgUpdateClientRegistrationRegistryRequest) returns (MsgUpdateClientRegistrationRegistryResponse);
+  rpc DeleteClientRegistrationRegistry (MsgDeleteClientRegistrationRegistryRequest) returns (MsgDeleteClientRegistrationRegistryResponse);
+  rpc CreateClientRegistration (MsgCreateClientRegistrationRequest) returns (MsgCreateClientRegistrationResponse);
+  rpc UpdateClientRegistration (MsgUpdateClientRegistrationRequest) returns (MsgUpdateClientRegistrationResponse);
+  rpc DeleteClientRegistration (MsgDeleteClientRegistrationRequest) returns (MsgDeleteClientRegistrationResponse);
   rpc CreateClientRegistrationRelationship (MsgCreateClientRegistrationRelationshipRequest) returns (MsgCreateClientRegistrationRelationshipResponse);
   rpc DeleteClientRegistrationRelationship (MsgDeleteClientRegistrationRelationshipRequest) returns (MsgDeleteClientRegistrationRelationshipResponse);
 }
@@ -30,43 +30,43 @@ message MsgAuthenticationResponse {
   string token = 1;
 }
 
-message MsgCreateClientRegistry {
+message MsgCreateClientRegistrationRegistryRequest {
   string creator = 1;
-  ClientRegistry clientRegistry = 2 [(gogoproto.nullable) = false];
+  ClientRegistrationRegistry clientRegistrationRegistry = 2 [(gogoproto.nullable) = false];
 }
 
-message MsgCreateClientRegistryResponse {}
+message MsgCreateClientRegistrationRegistryResponse {}
 
-message MsgUpdateClientRegistry {
+message MsgUpdateClientRegistrationRegistryRequest {
   string creator = 1;
-  ClientRegistry clientRegistry = 2 [(gogoproto.nullable) = false];
+  ClientRegistrationRegistry clientRegistrationRegistry = 2 [(gogoproto.nullable) = false];
 }
 
-message MsgUpdateClientRegistryResponse {}
+message MsgUpdateClientRegistrationRegistryResponse {}
 
-message MsgDeleteClientRegistry {
+message MsgDeleteClientRegistrationRegistryRequest {
   string creator = 1;
 }
 
-message MsgDeleteClientRegistryResponse {}
+message MsgDeleteClientRegistrationRegistryResponse {}
 
-message MsgCreateClientRegistration {
+message MsgCreateClientRegistrationRequest {
   string creator = 1;
   ClientRegistration clientRegistration = 2 [(gogoproto.nullable) = false];
 }
 
 message MsgCreateClientRegistrationResponse {}
 
-message MsgUpdateClientRegistration {
+message MsgUpdateClientRegistrationRequest {
   string creator = 1;
   ClientRegistration clientRegistration = 2 [(gogoproto.nullable) = false];
 }
 
 message MsgUpdateClientRegistrationResponse {}
 
-message MsgDeleteClientRegistration {
+message MsgDeleteClientRegistrationRequest {
   string creator = 1;
-  string name    = 2;
+  string name = 2;
 }
 
 message MsgDeleteClientRegistrationResponse {}

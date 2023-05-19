@@ -9,8 +9,8 @@ import "doxchain/kyc/v1beta1/kyc_request.proto";
 option go_package = "github.com/be-heroes/doxchain/x/kyc/types";
 
 message GenesisState {
-             Params     params       = 1 [(gogoproto.nullable) = false];
-  repeated   KYCRequest requestList  = 2 [(gogoproto.nullable) = false];
-             uint64     requestCount = 3;
+  Params params = 1 [(gogoproto.nullable) = false];
+  repeated KYCRegistration requestList = 2 [(gogoproto.nullable) = false];
+  uint64 requestCount = 3;
 }
 

@@ -12,16 +12,16 @@ import (
 	"github.com/be-heroes/doxchain/x/aml/types"
 )
 
-func createTestAMLRequest(keeper *keeper.Keeper, ctx sdk.Context) types.AMLRequest {
-	item := types.AMLRequest{}
-	keeper.SetAMLRequest(ctx, item)
+func createTestAMLRegistration(keeper *keeper.Keeper, ctx sdk.Context) types.AMLRegistration {
+	item := types.AMLRegistration{}
+	keeper.SetAMLRegistration(ctx, item)
 	return item
 }
 
-func TestAMLRequestGet(t *testing.T) {
+func TestAMLRegistrationGet(t *testing.T) {
 	keeper, ctx := keepertest.AmlKeeper(t)
-	item := createTestAMLRequest(keeper, ctx)
-	rst, found := keeper.GetAMLRequest(ctx)
+	item := createTestAMLRegistration(keeper, ctx)
+	rst, found := keeper.GetAMLRegistration(ctx)
 	require.True(t, found)
 	require.Equal(t,
 		nullify.Fill(&item),
@@ -29,10 +29,10 @@ func TestAMLRequestGet(t *testing.T) {
 	)
 }
 
-func TestAMLRequestRemove(t *testing.T) {
+func TestAMLRegistrationRemove(t *testing.T) {
 	keeper, ctx := keepertest.AmlKeeper(t)
-	createTestAMLRequest(keeper, ctx)
-	keeper.RemoveAMLRequest(ctx)
-	_, found := keeper.GetAMLRequest(ctx)
+	createTestAMLRegistration(keeper, ctx)
+	keeper.RemoveAMLRegistration(ctx)
+	_, found := keeper.GetAMLRegistration(ctx)
 	require.False(t, found)
 }

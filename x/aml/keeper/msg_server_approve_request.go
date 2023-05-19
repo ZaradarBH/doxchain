@@ -9,7 +9,7 @@ import (
 )
 
 
-func (k msgServer) ApproveAMLRequest(goCtx context.Context,  msg *types.MsgApproveAMLRequest) (*types.MsgApproveAMLRequestResponse, error) {
+func (k msgServer) ApproveAMLRegistration(goCtx context.Context,  msg *types.MsgApproveAMLRegistrationRequest) (*types.MsgApproveAMLRegistrationResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 	
 	var approvers []didTypes.Did
@@ -18,11 +18,11 @@ func (k msgServer) ApproveAMLRequest(goCtx context.Context,  msg *types.MsgAppro
 
 	for _, approverId := range approvers {
 		if approverId.Creator == msg.Creator {
-			k.Keeper.ApproveAMLRequest(ctx, msg.Target.Creator)
+			k.Keeper.ApproveAMLRegistration(ctx, msg.Target.Creator)
 
 			break;
 		}
 	}
 
-	return &types.MsgApproveAMLRequestResponse{}, nil
+	return &types.MsgApproveAMLRegistrationResponse{}, nil
 }

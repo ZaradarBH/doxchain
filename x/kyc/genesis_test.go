@@ -14,7 +14,7 @@ func TestGenesis(t *testing.T) {
 	genesisState := types.GenesisState{
 		Params: types.DefaultParams(),
 
-		KYCRequest: &types.KYCRequest{
+		KYCRegistration: &types.KYCRegistration{
 			FirstName: "56",
 			LastName:  "3",
 			Approved:  true,
@@ -30,6 +30,6 @@ func TestGenesis(t *testing.T) {
 	nullify.Fill(&genesisState)
 	nullify.Fill(got)
 
-	require.Equal(t, genesisState.KYCRequest, got.KYCRequest)
+	require.Equal(t, genesisState.KYCRegistration, got.KYCRegistration)
 	// this line is used by starport scaffolding # genesis/test/assert
 }

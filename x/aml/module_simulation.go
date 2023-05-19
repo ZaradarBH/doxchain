@@ -24,17 +24,17 @@ var (
 )
 
 const (
-	opWeightMsgCreateAMLRequest = "op_weight_msg_aml_request"
+	opWeightMsgCreateAMLRegistration = "op_weight_msg_aml_request"
 	// TODO: Determine the simulation weight value
-	defaultWeightMsgCreateAMLRequest int = 100
+	defaultWeightMsgCreateAMLRegistration int = 100
 
-	opWeightMsgUpdateAMLRequest = "op_weight_msg_aml_request"
+	opWeightMsgUpdateAMLRegistration = "op_weight_msg_aml_request"
 	// TODO: Determine the simulation weight value
-	defaultWeightMsgUpdateAMLRequest int = 100
+	defaultWeightMsgUpdateAMLRegistration int = 100
 
-	opWeightMsgDeleteAMLRequest = "op_weight_msg_aml_request"
+	opWeightMsgDeleteAMLRegistration = "op_weight_msg_aml_request"
 	// TODO: Determine the simulation weight value
-	defaultWeightMsgDeleteAMLRequest int = 100
+	defaultWeightMsgDeleteAMLRegistration int = 100
 
 	opWeightMsgApproveRequest = "op_weight_msg_approve_request"
 	// TODO: Determine the simulation weight value
@@ -74,26 +74,26 @@ func (am AppModule) RegisterStoreDecoder(_ sdk.StoreDecoderRegistry) {}
 func (am AppModule) WeightedOperations(simState module.SimulationState) []simtypes.WeightedOperation {
 	operations := make([]simtypes.WeightedOperation, 0)
 
-	var weightMsgCreateAMLRequest int
-	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgCreateAMLRequest, &weightMsgCreateAMLRequest, nil,
+	var weightMsgCreateAMLRegistration int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgCreateAMLRegistration, &weightMsgCreateAMLRegistration, nil,
 		func(_ *rand.Rand) {
-			weightMsgCreateAMLRequest = defaultWeightMsgCreateAMLRequest
+			weightMsgCreateAMLRegistration = defaultWeightMsgCreateAMLRegistration
 		},
 	)
 	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgCreateAMLRequest,
-		amlsimulation.SimulateMsgCreateAMLRequest(am.accountKeeper, am.bankKeeper, am.keeper),
+		weightMsgCreateAMLRegistration,
+		amlsimulation.SimulateMsgCreateAMLRegistration(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
-	var weightMsgDeleteAMLRequest int
-	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgDeleteAMLRequest, &weightMsgDeleteAMLRequest, nil,
+	var weightMsgDeleteAMLRegistration int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgDeleteAMLRegistration, &weightMsgDeleteAMLRegistration, nil,
 		func(_ *rand.Rand) {
-			weightMsgDeleteAMLRequest = defaultWeightMsgDeleteAMLRequest
+			weightMsgDeleteAMLRegistration = defaultWeightMsgDeleteAMLRegistration
 		},
 	)
 	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgDeleteAMLRequest,
-		amlsimulation.SimulateMsgDeleteAMLRequest(am.accountKeeper, am.bankKeeper, am.keeper),
+		weightMsgDeleteAMLRegistration,
+		amlsimulation.SimulateMsgDeleteAMLRegistration(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
 	var weightMsgApproveRequest int

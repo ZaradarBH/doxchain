@@ -8,21 +8,21 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestMsgCreateClientRegistry_ValidateBasic(t *testing.T) {
+func TestMsgCreateClientRegistrationRegistry_ValidateBasic(t *testing.T) {
 	tests := []struct {
 		name string
-		msg  MsgCreateClientRegistry
+		msg  MsgCreateClientRegistrationRegistry
 		err  error
 	}{
 		{
 			name: "invalid address",
-			msg: MsgCreateClientRegistry{
+			msg: MsgCreateClientRegistrationRegistry{
 				Creator: "invalid_address",
 			},
 			err: sdkerrors.ErrInvalidAddress,
 		}, {
 			name: "valid address",
-			msg: MsgCreateClientRegistry{
+			msg: MsgCreateClientRegistrationRegistry{
 				Creator: sample.AccAddress(),
 			},
 		},
@@ -39,21 +39,21 @@ func TestMsgCreateClientRegistry_ValidateBasic(t *testing.T) {
 	}
 }
 
-func TestMsgUpdateClientRegistry_ValidateBasic(t *testing.T) {
+func TestMsgUpdateClientRegistrationRegistry_ValidateBasic(t *testing.T) {
 	tests := []struct {
 		name string
-		msg  MsgUpdateClientRegistry
+		msg  MsgUpdateClientRegistrationRegistry
 		err  error
 	}{
 		{
 			name: "invalid address",
-			msg: MsgUpdateClientRegistry{
+			msg: MsgUpdateClientRegistrationRegistry{
 				Creator: "invalid_address",
 			},
 			err: sdkerrors.ErrInvalidAddress,
 		}, {
 			name: "valid address",
-			msg: MsgUpdateClientRegistry{
+			msg: MsgUpdateClientRegistrationRegistry{
 				Creator: sample.AccAddress(),
 			},
 		},
@@ -70,21 +70,21 @@ func TestMsgUpdateClientRegistry_ValidateBasic(t *testing.T) {
 	}
 }
 
-func TestMsgDeleteClientRegistry_ValidateBasic(t *testing.T) {
+func TestMsgDeleteClientRegistrationRegistry_ValidateBasic(t *testing.T) {
 	tests := []struct {
 		name string
-		msg  MsgDeleteClientRegistry
+		msg  MsgDeleteClientRegistrationRegistry
 		err  error
 	}{
 		{
 			name: "invalid address",
-			msg: MsgDeleteClientRegistry{
+			msg: MsgDeleteClientRegistrationRegistry{
 				Creator: "invalid_address",
 			},
 			err: sdkerrors.ErrInvalidAddress,
 		}, {
 			name: "valid address",
-			msg: MsgDeleteClientRegistry{
+			msg: MsgDeleteClientRegistrationRegistry{
 				Creator: sample.AccAddress(),
 			},
 		},

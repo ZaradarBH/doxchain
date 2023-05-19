@@ -14,7 +14,7 @@ import (
 	"github.com/be-heroes/doxchain/x/aml/client/cli"
 )
 
-func TestCreateAMLRequest(t *testing.T) {
+func TestCreateAMLRegistration(t *testing.T) {
 	net := network.New(t)
 	val := net.Validators[0]
 	ctx := val.ClientCtx
@@ -40,7 +40,7 @@ func TestCreateAMLRequest(t *testing.T) {
 			var args []string
 			args = append(args, fields...)
 			args = append(args, tc.args...)
-			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdCreateAMLRequest(), args)
+			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdCreateAMLRegistration(), args)
 			if tc.err != nil {
 				require.ErrorIs(t, err, tc.err)
 			} else {
@@ -53,7 +53,7 @@ func TestCreateAMLRequest(t *testing.T) {
 	}
 }
 
-func TestUpdateAMLRequest(t *testing.T) {
+func TestUpdateAMLRegistration(t *testing.T) {
 	net := network.New(t)
 	val := net.Validators[0]
 	ctx := val.ClientCtx
@@ -68,7 +68,7 @@ func TestUpdateAMLRequest(t *testing.T) {
 	var args []string
 	args = append(args, fields...)
 	args = append(args, common...)
-	_, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdCreateAMLRequest(), args)
+	_, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdCreateAMLRegistration(), args)
 	require.NoError(t, err)
 
 	for _, tc := range []struct {
@@ -86,7 +86,7 @@ func TestUpdateAMLRequest(t *testing.T) {
 			var args []string
 			args = append(args, fields...)
 			args = append(args, tc.args...)
-			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdUpdateAMLRequest(), args)
+			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdUpdateAMLRegistration(), args)
 			if tc.err != nil {
 				require.ErrorIs(t, err, tc.err)
 			} else {
@@ -99,7 +99,7 @@ func TestUpdateAMLRequest(t *testing.T) {
 	}
 }
 
-func TestDeleteAMLRequest(t *testing.T) {
+func TestDeleteAMLRegistration(t *testing.T) {
 	net := network.New(t)
 
 	val := net.Validators[0]
@@ -115,7 +115,7 @@ func TestDeleteAMLRequest(t *testing.T) {
 	var args []string
 	args = append(args, fields...)
 	args = append(args, common...)
-	_, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdCreateAMLRequest(), args)
+	_, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdCreateAMLRegistration(), args)
 	require.NoError(t, err)
 
 	for _, tc := range []struct {
@@ -130,7 +130,7 @@ func TestDeleteAMLRequest(t *testing.T) {
 		},
 	} {
 		t.Run(tc.desc, func(t *testing.T) {
-			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdDeleteAMLRequest(), append([]string{}, tc.args...))
+			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdDeleteAMLRegistration(), append([]string{}, tc.args...))
 			if tc.err != nil {
 				require.ErrorIs(t, err, tc.err)
 			} else {

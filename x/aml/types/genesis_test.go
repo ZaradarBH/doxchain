@@ -22,7 +22,7 @@ func TestGenesisState_Validate(t *testing.T) {
 			desc: "valid genesis state",
 			genState: &types.GenesisState{
 
-				AMLRequest: &types.AMLRequest{
+				AMLRegistration: &types.AMLRegistration{
 					FirstName: "60",
 					LastName:  "33",
 					Approved:  true,

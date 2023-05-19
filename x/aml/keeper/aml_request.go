@@ -7,10 +7,10 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
-// GetAMLRequestCount get the total number of requests
-func (k Keeper) GetAMLRequestCount(ctx sdk.Context) uint64 {
+// GetAMLRegistrationCount get the total number of requests
+func (k Keeper) GetAMLRegistrationCount(ctx sdk.Context) uint64 {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), []byte{})
-	byteKey := types.KeyPrefix(types.AMLRequestCountKey)
+	byteKey := types.KeyPrefix(types.AMLRegistrationCountKey)
 	bz := store.Get(byteKey)
 
 	// Count doesn't exist: no element
@@ -22,44 +22,44 @@ func (k Keeper) GetAMLRequestCount(ctx sdk.Context) uint64 {
 	return binary.BigEndian.Uint64(bz)
 }
 
-// SetAMLRequestCount set the total number of requests
-func (k Keeper) SetAMLRequestCount(ctx sdk.Context, count uint64) {
+// SetAMLRegistrationCount set the total number of requests
+func (k Keeper) SetAMLRegistrationCount(ctx sdk.Context, count uint64) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), []byte{})
-	byteKey := types.KeyPrefix(types.AMLRequestCountKey)
+	byteKey := types.KeyPrefix(types.AMLRegistrationCountKey)
 	bz := make([]byte, 8)
 	binary.BigEndian.PutUint64(bz, count)
 	store.Set(byteKey, bz)
 }
 
-// AppendAMLRequest appends a AMLRequest to store with a new id and update the count
-func (k Keeper) AppendAMLRequest(
+// AppendAMLRegistration appends a AMLRegistration to store with a new id and update the count
+func (k Keeper) AppendAMLRegistration(
 	ctx sdk.Context,
-	request types.AMLRequest,
+	request types.AMLRegistration,
 ) string {
 	// Get the request count
-	count := k.GetAMLRequestCount(ctx)
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AMLRequestKey))
+	count := k.GetAMLRegistrationCount(ctx)
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AMLRegistrationKey))
 	appendedValue := k.cdc.MustMarshal(&request)
 
-	store.Set(GetAMLRequestIDBytes(request.Owner.Creator), appendedValue)
+	store.Set(GetAMLRegistrationIDBytes(request.Owner.Creator), appendedValue)
 
-	// Update AMLRequest count
-	k.SetAMLRequestCount(ctx, count+1)
+	// Update AMLRegistration count
+	k.SetAMLRegistrationCount(ctx, count+1)
 
 	return request.Owner.Creator
 }
 
-// SetAMLRequest set a specific AMLRequest in the store
-func (k Keeper) SetAMLRequest(ctx sdk.Context, request types.AMLRequest) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AMLRequestKey))
+// SetAMLRegistration set a specific AMLRegistration in the store
+func (k Keeper) SetAMLRegistration(ctx sdk.Context, request types.AMLRegistration) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AMLRegistrationKey))
 	b := k.cdc.MustMarshal(&request)
-	store.Set(GetAMLRequestIDBytes(request.Owner.Creator), b)
+	store.Set(GetAMLRegistrationIDBytes(request.Owner.Creator), b)
 }
 
-// GetAMLRequest returns a AMLRequest object from its creator
-func (k Keeper) GetAMLRequest(ctx sdk.Context, creator string) (val types.AMLRequest, found bool) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AMLRequestKey))
-	b := store.Get(GetAMLRequestIDBytes(creator))
+// GetAMLRegistration returns a AMLRegistration object from its creator
+func (k Keeper) GetAMLRegistration(ctx sdk.Context, creator string) (val types.AMLRegistration, found bool) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AMLRegistrationKey))
+	b := store.Get(GetAMLRegistrationIDBytes(creator))
 	if b == nil {
 		return val, false
 	}
@@ -68,20 +68,20 @@ func (k Keeper) GetAMLRequest(ctx sdk.Context, creator string) (val types.AMLReq
 }
 
 // RemoveDid removes a did from the store
-func (k Keeper) RemoveAMLRequest(ctx sdk.Context, creator string) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AMLRequestKey))
-	store.Delete(GetAMLRequestIDBytes(creator))
+func (k Keeper) RemoveAMLRegistration(ctx sdk.Context, creator string) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AMLRegistrationKey))
+	store.Delete(GetAMLRegistrationIDBytes(creator))
 }
 
-// GetAllAMLRequest returns all requests
-func (k Keeper) GetAllAMLRequest(ctx sdk.Context) (list []types.AMLRequest) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AMLRequestKey))
+// GetAllAMLRegistration returns all requests
+func (k Keeper) GetAllAMLRegistration(ctx sdk.Context) (list []types.AMLRegistration) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AMLRegistrationKey))
 	iterator := sdk.KVStorePrefixIterator(store, []byte{})
 
 	defer iterator.Close()
 
 	for ; iterator.Valid(); iterator.Next() {
-		var val types.AMLRequest
+		var val types.AMLRegistration
 		k.cdc.MustUnmarshal(iterator.Value(), &val)
 		list = append(list, val)
 	}
@@ -89,23 +89,23 @@ func (k Keeper) GetAllAMLRequest(ctx sdk.Context) (list []types.AMLRequest) {
 	return
 }
 
-// Approves an AMLRequest in the store
-func (k Keeper) ApproveAMLRequest(ctx sdk.Context, creator string) {
-	request, found := k.GetAMLRequest(ctx, creator)
+// Approves an AMLRegistration in the store
+func (k Keeper) ApproveAMLRegistration(ctx sdk.Context, creator string) {
+	request, found := k.GetAMLRegistration(ctx, creator)
 
 	if found && creator == request.Owner.Creator {
 		request.Approved = true
 
-		k.SetAMLRequest(ctx, request)
+		k.SetAMLRegistration(ctx, request)
 	}
 }
 
-// GetAMLRequestIDBytes returns the byte representation of the Did
-func GetAMLRequestIDBytes(did string) []byte {
+// GetAMLRegistrationIDBytes returns the byte representation of the Did
+func GetAMLRegistrationIDBytes(did string) []byte {
 	return []byte(did)
 }
 
-// GetAMLRequestIDFromBytes returns ID in uint64 format from a byte array
-func GetAMLRequestIDFromBytes(bz []byte) string {
+// GetAMLRegistrationIDFromBytes returns ID in uint64 format from a byte array
+func GetAMLRegistrationIDFromBytes(bz []byte) string {
 	return string(bz)
 }

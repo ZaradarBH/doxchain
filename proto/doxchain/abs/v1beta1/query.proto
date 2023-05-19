@@ -64,6 +64,6 @@ message QueryAllPartitionedPoolRegistriesRequest {
 }
 
 message QueryAllPartitionedPoolRegistriesResponse {
-  repeated PartitionedPoolRegistry                partitionedPoolRegistryList = 1 [(gogoproto.nullable) = false];
-           cosmos.base.query.v1beta1.PageResponse pagination       = 2;
+  repeated PartitionedPoolRegistry partitionedPoolRegistryList = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }

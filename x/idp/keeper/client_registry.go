@@ -7,24 +7,24 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-// SetClientRegistry set a specific ClientRegistry in the store from its index
-func (k Keeper) SetClientRegistry(ctx sdk.Context, ClientRegistry types.ClientRegistry) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ClientRegistryKeyPrefix))
-	b := k.cdc.MustMarshal(&ClientRegistry)
-	store.Set(types.ClientRegistryKey(
-		ClientRegistry.Owner.Creator,
+// SetClientRegistrationRegistry set a specific ClientRegistrationRegistry in the store from its index
+func (k Keeper) SetClientRegistrationRegistry(ctx sdk.Context, ClientRegistrationRegistry types.ClientRegistrationRegistry) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ClientRegistrationRegistryKeyPrefix))
+	b := k.cdc.MustMarshal(&ClientRegistrationRegistry)
+	store.Set(types.ClientRegistrationRegistryKey(
+		ClientRegistrationRegistry.Owner.Creator,
 	), b)
 }
 
-// GetClientRegistry returns a ClientRegistry from its index
-func (k Keeper) GetClientRegistry(
+// GetClientRegistrationRegistry returns a ClientRegistrationRegistry from its index
+func (k Keeper) GetClientRegistrationRegistry(
 	ctx sdk.Context,
 	creator string,
 
-) (val types.ClientRegistry, found bool) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ClientRegistryKeyPrefix))
+) (val types.ClientRegistrationRegistry, found bool) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ClientRegistrationRegistryKeyPrefix))
 
-	b := store.Get(types.ClientRegistryKey(
+	b := store.Get(types.ClientRegistrationRegistryKey(
 		creator,
 	))
 	
@@ -36,27 +36,27 @@ func (k Keeper) GetClientRegistry(
 	return val, true
 }
 
-// RemoveClientRegistry removes a ClientRegistry from the store
-func (k Keeper) RemoveClientRegistry(
+// RemoveClientRegistrationRegistry removes a ClientRegistrationRegistry from the store
+func (k Keeper) RemoveClientRegistrationRegistry(
 	ctx sdk.Context,
 	creator string,
 
 ) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ClientRegistryKeyPrefix))
-	store.Delete(types.ClientRegistryKey(
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ClientRegistrationRegistryKeyPrefix))
+	store.Delete(types.ClientRegistrationRegistryKey(
 		creator,
 	))
 }
 
-// GetAllClientRegistry returns all ClientRegistry
-func (k Keeper) GetAllClientRegistry(ctx sdk.Context) (list []types.ClientRegistry) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ClientRegistryKeyPrefix))
+// GetAllClientRegistrationRegistry returns all ClientRegistrationRegistry
+func (k Keeper) GetAllClientRegistrationRegistry(ctx sdk.Context) (list []types.ClientRegistrationRegistry) {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ClientRegistrationRegistryKeyPrefix))
 	iterator := sdk.KVStorePrefixIterator(store, []byte{})
 
 	defer iterator.Close()
 
 	for ; iterator.Valid(); iterator.Next() {
-		var val types.ClientRegistry
+		var val types.ClientRegistrationRegistry
 		k.cdc.MustUnmarshal(iterator.Value(), &val)
 		list = append(list, val)
 	}
@@ -65,7 +65,7 @@ func (k Keeper) GetAllClientRegistry(ctx sdk.Context) (list []types.ClientRegist
 }
 
 func (k Keeper) SetClientRegistration(ctx sdk.Context, clientRegistration types.ClientRegistration) {
-	clientRegistry, found := k.GetClientRegistry(ctx, clientRegistration.Id.Creator)
+	clientRegistry, found := k.GetClientRegistrationRegistry(ctx, clientRegistration.Id.Creator)
 
 	if found {
 		for index, existingClientRegistration := range clientRegistry.Registrations {
@@ -78,19 +78,19 @@ func (k Keeper) SetClientRegistration(ctx sdk.Context, clientRegistration types.
 
 		clientRegistry.Registrations = append(clientRegistry.Registrations, clientRegistration)
 
-		k.SetClientRegistry(ctx, clientRegistry)
+		k.SetClientRegistrationRegistry(ctx, clientRegistry)
 	}
 }
 
 func (k Keeper) RemoveClientRegistration(ctx sdk.Context, creator string, name string) {
-	clientRegistry, found := k.GetClientRegistry(ctx, creator)
+	clientRegistry, found := k.GetClientRegistrationRegistry(ctx, creator)
 
 	if found {
 		for index, existingClientRegistration := range clientRegistry.Registrations {
 			if existingClientRegistration.Name == name {
 				clientRegistry.Registrations = append(clientRegistry.Registrations[:index], clientRegistry.Registrations[index+1:]...)
 
-				k.SetClientRegistry(ctx, clientRegistry)
+				k.SetClientRegistrationRegistry(ctx, clientRegistry)
 
 				break
 			}
@@ -99,7 +99,7 @@ func (k Keeper) RemoveClientRegistration(ctx sdk.Context, creator string, name s
 }
 
 func (k Keeper) GetClientRegistration(ctx sdk.Context, creator string, fullyQualifiedW3CIdentifier string) types.ClientRegistration {
-	clientRegistry, found := k.GetClientRegistry(ctx, creator)
+	clientRegistry, found := k.GetClientRegistrationRegistry(ctx, creator)
 
 	if found {
 		for _, existingClientRegistration := range clientRegistry.Registrations {

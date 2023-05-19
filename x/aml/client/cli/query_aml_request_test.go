@@ -15,23 +15,23 @@ import (
 	"github.com/be-heroes/doxchain/x/aml/types"
 )
 
-func networkWithAMLRequestObjects(t *testing.T) (*network.Network, types.AMLRequest) {
+func networkWithAMLRegistrationObjects(t *testing.T) (*network.Network, types.AMLRegistration) {
 	t.Helper()
 	cfg := network.DefaultConfig()
 	state := types.GenesisState{}
 	require.NoError(t, cfg.Codec.UnmarshalJSON(cfg.GenesisState[types.ModuleName], &state))
 
-	aMLRequest := &types.AMLRequest{}
+	aMLRequest := &types.AMLRegistration{}
 	nullify.Fill(&aMLRequest)
-	state.AMLRequest = aMLRequest
+	state.AMLRegistration = aMLRequest
 	buf, err := cfg.Codec.MarshalJSON(&state)
 	require.NoError(t, err)
 	cfg.GenesisState[types.ModuleName] = buf
-	return network.New(t, cfg), *state.AMLRequest
+	return network.New(t, cfg), *state.AMLRegistration
 }
 
-func TestShowAMLRequest(t *testing.T) {
-	net, obj := networkWithAMLRequestObjects(t)
+func TestShowAMLRegistration(t *testing.T) {
+	net, obj := networkWithAMLRegistrationObjects(t)
 
 	ctx := net.Validators[0].ClientCtx
 	common := []string{
@@ -41,7 +41,7 @@ func TestShowAMLRequest(t *testing.T) {
 		desc string
 		args []string
 		err  error
-		obj  types.AMLRequest
+		obj  types.AMLRegistration
 	}{
 		{
 			desc: "get",
@@ -52,19 +52,19 @@ func TestShowAMLRequest(t *testing.T) {
 		t.Run(tc.desc, func(t *testing.T) {
 			var args []string
 			args = append(args, tc.args...)
-			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdShowAMLRequest(), args)
+			out, err := clitestutil.ExecTestCLICmd(ctx, cli.CmdShowAMLRegistration(), args)
 			if tc.err != nil {
 				stat, ok := status.FromError(tc.err)
 				require.True(t, ok)
 				require.ErrorIs(t, stat.Err(), tc.err)
 			} else {
 				require.NoError(t, err)
-				var resp types.QueryGetAMLRequestResponse
+				var resp types.QueryGetAMLRegistrationResponse
 				require.NoError(t, net.Config.Codec.UnmarshalJSON(out.Bytes(), &resp))
-				require.NotNil(t, resp.AMLRequest)
+				require.NotNil(t, resp.AMLRegistration)
 				require.Equal(t,
 					nullify.Fill(&tc.obj),
-					nullify.Fill(&resp.AMLRequest),
+					nullify.Fill(&resp.AMLRegistration),
 				)
 			}
 		})

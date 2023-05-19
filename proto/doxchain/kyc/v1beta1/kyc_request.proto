@@ -6,7 +6,7 @@ import "doxchain/did/v1beta1/did.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/kyc/types";
 
-message KYCRequest {    
+message KYCRegistration {    
   beheroes.doxchain.did.v1beta1.Did owner = 1 [(gogoproto.nullable) = false];
   bool approved = 2; 
 }

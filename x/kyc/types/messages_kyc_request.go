@@ -7,28 +7,28 @@ import (
 )
 
 const (
-	TypeMsgCreateKYCRequest = "create_kyc_request"
-	TypeMsgDeleteKYCRequest = "delete_kyc_request"
+	TypeMsgCreateKYCRegistration = "create_kyc_request"
+	TypeMsgDeleteKYCRegistration = "delete_kyc_request"
 )
 
-var _ sdk.Msg = &MsgCreateKYCRequest{}
+var _ sdk.Msg = &MsgCreateKYCRegistrationRequest{}
 
-func NewMsgCreateKYCRequest(creator string, owner didTypes.Did) *MsgCreateKYCRequest {
-	return &MsgCreateKYCRequest{
+func NewMsgCreateKYCRegistration(creator string, owner didTypes.Did) *MsgCreateKYCRegistrationRequest {
+	return &MsgCreateKYCRegistrationRequest{
 		Creator: creator,
 		Owner: owner,
 	}
 }
 
-func (msg *MsgCreateKYCRequest) Route() string {
+func (msg *MsgCreateKYCRegistrationRequest) Route() string {
 	return RouterKey
 }
 
-func (msg *MsgCreateKYCRequest) Type() string {
-	return TypeMsgCreateKYCRequest
+func (msg *MsgCreateKYCRegistrationRequest) Type() string {
+	return TypeMsgCreateKYCRegistration
 }
 
-func (msg *MsgCreateKYCRequest) GetSigners() []sdk.AccAddress {
+func (msg *MsgCreateKYCRegistrationRequest) GetSigners() []sdk.AccAddress {
 	creator, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		panic(err)
@@ -36,12 +36,12 @@ func (msg *MsgCreateKYCRequest) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{creator}
 }
 
-func (msg *MsgCreateKYCRequest) GetSignBytes() []byte {
+func (msg *MsgCreateKYCRegistrationRequest) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(msg)
 	return sdk.MustSortJSON(bz)
 }
 
-func (msg *MsgCreateKYCRequest) ValidateBasic() error {
+func (msg *MsgCreateKYCRegistrationRequest) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
@@ -49,22 +49,22 @@ func (msg *MsgCreateKYCRequest) ValidateBasic() error {
 	return nil
 }
 
-var _ sdk.Msg = &MsgDeleteKYCRequest{}
+var _ sdk.Msg = &MsgDeleteKYCRegistrationRequest{}
 
-func NewMsgDeleteKYCRequest(creator string) *MsgDeleteKYCRequest {
-	return &MsgDeleteKYCRequest{
+func NewMsgDeleteKYCRegistration(creator string) *MsgDeleteKYCRegistrationRequest {
+	return &MsgDeleteKYCRegistrationRequest{
 		Creator: creator,
 	}
 }
-func (msg *MsgDeleteKYCRequest) Route() string {
+func (msg *MsgDeleteKYCRegistrationRequest) Route() string {
 	return RouterKey
 }
 
-func (msg *MsgDeleteKYCRequest) Type() string {
-	return TypeMsgDeleteKYCRequest
+func (msg *MsgDeleteKYCRegistrationRequest) Type() string {
+	return TypeMsgDeleteKYCRegistration
 }
 
-func (msg *MsgDeleteKYCRequest) GetSigners() []sdk.AccAddress {
+func (msg *MsgDeleteKYCRegistrationRequest) GetSigners() []sdk.AccAddress {
 	creator, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		panic(err)
@@ -72,12 +72,12 @@ func (msg *MsgDeleteKYCRequest) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{creator}
 }
 
-func (msg *MsgDeleteKYCRequest) GetSignBytes() []byte {
+func (msg *MsgDeleteKYCRegistrationRequest) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(msg)
 	return sdk.MustSortJSON(bz)
 }
 
-func (msg *MsgDeleteKYCRequest) ValidateBasic() error {
+func (msg *MsgDeleteKYCRegistrationRequest) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)

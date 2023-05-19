@@ -11,24 +11,24 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-func (k Keeper) ClientRegistryAll(goCtx context.Context, req *types.QueryAllClientRegistryRequest) (*types.QueryAllClientRegistryResponse, error) {
+func (k Keeper) ClientRegistrationRegistryAll(goCtx context.Context, req *types.QueryAllClientRegistrationRegistryRequest) (*types.QueryAllClientRegistrationRegistryResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
 
-	var ClientRegistrys []types.ClientRegistry
+	var ClientRegistrationRegistrys []types.ClientRegistrationRegistry
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	store := ctx.KVStore(k.storeKey)
-	ClientRegistryStore := prefix.NewStore(store, types.KeyPrefix(types.ClientRegistryKeyPrefix))
+	ClientRegistrationRegistryStore := prefix.NewStore(store, types.KeyPrefix(types.ClientRegistrationRegistryKeyPrefix))
 
-	pageRes, err := query.Paginate(ClientRegistryStore, req.Pagination, func(key []byte, value []byte) error {
-		var ClientRegistry types.ClientRegistry
-		if err := k.cdc.Unmarshal(value, &ClientRegistry); err != nil {
+	pageRes, err := query.Paginate(ClientRegistrationRegistryStore, req.Pagination, func(key []byte, value []byte) error {
+		var ClientRegistrationRegistry types.ClientRegistrationRegistry
+		if err := k.cdc.Unmarshal(value, &ClientRegistrationRegistry); err != nil {
 			return err
 		}
 
-		ClientRegistrys = append(ClientRegistrys, ClientRegistry)
+		ClientRegistrationRegistrys = append(ClientRegistrationRegistrys, ClientRegistrationRegistry)
 		return nil
 	})
 
@@ -36,16 +36,16 @@ func (k Keeper) ClientRegistryAll(goCtx context.Context, req *types.QueryAllClie
 		return nil, status.Error(codes.Internal, err.Error())
 	}
 
-	return &types.QueryAllClientRegistryResponse{ClientRegistry: ClientRegistrys, Pagination: pageRes}, nil
+	return &types.QueryAllClientRegistrationRegistryResponse{ClientRegistrationRegistry: ClientRegistrationRegistrys, Pagination: pageRes}, nil
 }
 
-func (k Keeper) ClientRegistry(goCtx context.Context, req *types.QueryGetClientRegistryRequest) (*types.QueryGetClientRegistryResponse, error) {
+func (k Keeper) ClientRegistrationRegistry(goCtx context.Context, req *types.QueryGetClientRegistrationRegistryRequest) (*types.QueryGetClientRegistrationRegistryResponse, error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	val, found := k.GetClientRegistry(
+	val, found := k.GetClientRegistrationRegistry(
 		ctx,
 		req.Creator,
 	)
@@ -53,5 +53,5 @@ func (k Keeper) ClientRegistry(goCtx context.Context, req *types.QueryGetClientR
 		return nil, status.Error(codes.NotFound, "not found")
 	}
 
-	return &types.QueryGetClientRegistryResponse{ClientRegistry: val}, nil
+	return &types.QueryGetClientRegistrationRegistryResponse{ClientRegistrationRegistry: val}, nil
 }

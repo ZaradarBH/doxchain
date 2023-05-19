@@ -12,34 +12,34 @@ import (
 	"github.com/be-heroes/doxchain/x/kyc/types"
 )
 
-func TestKYCRequestMsgServerCreate(t *testing.T) {
+func TestKYCRegistrationMsgServerCreate(t *testing.T) {
 	k, ctx := keepertest.KycKeeper(t)
 	srv := keeper.NewMsgServerImpl(*k)
 	wctx := sdk.WrapSDKContext(ctx)
 	creator := "A"
-	expected := &types.MsgCreateKYCRequest{Creator: creator}
-	_, err := srv.CreateKYCRequest(wctx, expected)
+	expected := &types.MsgCreateKYCRegistration{Creator: creator}
+	_, err := srv.CreateKYCRegistration(wctx, expected)
 	require.NoError(t, err)
-	rst, found := k.GetKYCRequest(ctx)
+	rst, found := k.GetKYCRegistration(ctx)
 	require.True(t, found)
 	require.Equal(t, expected.Creator, rst.Creator)
 }
 
-func TestKYCRequestMsgServerDelete(t *testing.T) {
+func TestKYCRegistrationMsgServerDelete(t *testing.T) {
 	creator := "A"
 
 	for _, tc := range []struct {
 		desc    string
-		request *types.MsgDeleteKYCRequest
+		request *types.MsgDeleteKYCRegistration
 		err     error
 	}{
 		{
 			desc:    "Completed",
-			request: &types.MsgDeleteKYCRequest{Creator: creator},
+			request: &types.MsgDeleteKYCRegistration{Creator: creator},
 		},
 		{
 			desc:    "Unauthorized",
-			request: &types.MsgDeleteKYCRequest{Creator: "B"},
+			request: &types.MsgDeleteKYCRegistration{Creator: "B"},
 			err:     sdkerrors.ErrUnauthorized,
 		},
 	} {
@@ -48,14 +48,14 @@ func TestKYCRequestMsgServerDelete(t *testing.T) {
 			srv := keeper.NewMsgServerImpl(*k)
 			wctx := sdk.WrapSDKContext(ctx)
 
-			_, err := srv.CreateKYCRequest(wctx, &types.MsgCreateKYCRequest{Creator: creator})
+			_, err := srv.CreateKYCRegistration(wctx, &types.MsgCreateKYCRegistration{Creator: creator})
 			require.NoError(t, err)
-			_, err = srv.DeleteKYCRequest(wctx, tc.request)
+			_, err = srv.DeleteKYCRegistration(wctx, tc.request)
 			if tc.err != nil {
 				require.ErrorIs(t, err, tc.err)
 			} else {
 				require.NoError(t, err)
-				_, found := k.GetKYCRequest(ctx)
+				_, found := k.GetKYCRegistration(ctx)
 				require.False(t, found)
 			}
 		})

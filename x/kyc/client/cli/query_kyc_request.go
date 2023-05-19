@@ -9,19 +9,19 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func CmdShowKYCRequest() *cobra.Command {
+func CmdShowKYCRegistration() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "show-kyc-request",
-		Short: "shows KYCRequest",
+		Short: "shows KYCRegistration",
 		Args:  cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx := client.GetClientContextFromCmd(cmd)
 
 			queryClient := types.NewQueryClient(clientCtx)
 
-			params := &types.QueryGetKYCRequestRequest{}
+			params := &types.QueryGetKYCRegistrationRequest{}
 
-			res, err := queryClient.KYCRequest(context.Background(), params)
+			res, err := queryClient.KYCRegistration(context.Background(), params)
 			if err != nil {
 				return err
 			}

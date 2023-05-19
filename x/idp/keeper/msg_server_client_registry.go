@@ -8,54 +8,54 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-func (k msgServer) CreateClientRegistry(goCtx context.Context, msg *types.MsgCreateClientRegistry) (*types.MsgCreateClientRegistryResponse, error) {
+func (k msgServer) CreateClientRegistrationRegistry(goCtx context.Context, msg *types.MsgCreateClientRegistrationRegistryRequest) (*types.MsgCreateClientRegistrationRegistryResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	// Check if the value already exists
-	_, isFound := k.GetClientRegistry(
+	_, isFound := k.GetClientRegistrationRegistry(
 		ctx,
-		msg.ClientRegistry.Owner.Creator,
+		msg.ClientRegistrationRegistry.Owner.Creator,
 	)
 
 	if isFound {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "index already set")
 	}
 
-	k.SetClientRegistry(
+	k.SetClientRegistrationRegistry(
 		ctx,
-		msg.ClientRegistry,
+		msg.ClientRegistrationRegistry,
 	)
 
-	return &types.MsgCreateClientRegistryResponse{}, nil
+	return &types.MsgCreateClientRegistrationRegistryResponse{}, nil
 }
 
-func (k msgServer) UpdateClientRegistry(goCtx context.Context, msg *types.MsgUpdateClientRegistry) (*types.MsgUpdateClientRegistryResponse, error) {
+func (k msgServer) UpdateClientRegistrationRegistry(goCtx context.Context, msg *types.MsgUpdateClientRegistrationRegistryRequest) (*types.MsgUpdateClientRegistrationRegistryResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	// Check if the value exists
-	valFound, isFound := k.GetClientRegistry(
+	valFound, isFound := k.GetClientRegistrationRegistry(
 		ctx,
-		msg.ClientRegistry.Owner.Creator,
+		msg.ClientRegistrationRegistry.Owner.Creator,
 	)
 	if !isFound {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "creator not set")
 	}
 
 	// Checks if the the msg creator is the same as the current owner
-	if msg.ClientRegistry.Owner.Creator != valFound.Owner.Creator {
+	if msg.ClientRegistrationRegistry.Owner.Creator != valFound.Owner.Creator {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "incorrect owner")
 	}
 
-	k.SetClientRegistry(ctx, msg.ClientRegistry)
+	k.SetClientRegistrationRegistry(ctx, msg.ClientRegistrationRegistry)
 
-	return &types.MsgUpdateClientRegistryResponse{}, nil
+	return &types.MsgUpdateClientRegistrationRegistryResponse{}, nil
 }
 
-func (k msgServer) DeleteClientRegistry(goCtx context.Context, msg *types.MsgDeleteClientRegistry) (*types.MsgDeleteClientRegistryResponse, error) {
+func (k msgServer) DeleteClientRegistrationRegistry(goCtx context.Context, msg *types.MsgDeleteClientRegistrationRegistryRequest) (*types.MsgDeleteClientRegistrationRegistryResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	// Check if the value exists
-	valFound, isFound := k.GetClientRegistry(
+	valFound, isFound := k.GetClientRegistrationRegistry(
 		ctx,
 		msg.Creator,
 	)
@@ -68,10 +68,10 @@ func (k msgServer) DeleteClientRegistry(goCtx context.Context, msg *types.MsgDel
 		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "incorrect owner")
 	}
 
-	k.RemoveClientRegistry(
+	k.RemoveClientRegistrationRegistry(
 		ctx,
 		msg.Creator,
 	)
 
-	return &types.MsgDeleteClientRegistryResponse{}, nil
+	return &types.MsgDeleteClientRegistrationRegistryResponse{}, nil
 }

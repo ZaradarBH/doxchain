@@ -15,7 +15,7 @@ service Query {
     option (google.api.http).get = "/be-heroes/doxchain/aml/params";  
   }
 
-  rpc AMLRequest (QueryGetAMLRequestRequest) returns (QueryGetAMLRequestResponse) {
+  rpc AMLRegistration (QueryGetAMLRegistrationRequest) returns (QueryGetAMLRegistrationResponse) {
     option (google.api.http).get = "/be-heroes/doxchain/aml/aml_request";  
   }
 }
@@ -26,10 +26,10 @@ message QueryParamsResponse {
   Params params = 1 [(gogoproto.nullable) = false];
 }
 
-message QueryGetAMLRequestRequest {
+message QueryGetAMLRegistrationRequest {
   string creator = 1;
 }
 
-message QueryGetAMLRequestResponse {
-  AMLRequest Request = 1 [(gogoproto.nullable) = false];
+message QueryGetAMLRegistrationResponse {
+  AMLRegistration Request = 1 [(gogoproto.nullable) = false];
 }

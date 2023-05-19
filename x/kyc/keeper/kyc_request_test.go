@@ -11,8 +11,8 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func createNDid(keeper *keeper.Keeper, ctx sdk.Context, n int) []types.KYCRequest {
-	items := make([]types.KYCRequest, n)
+func createNDid(keeper *keeper.Keeper, ctx sdk.Context, n int) []types.KYCRegistration {
+	items := make([]types.KYCRegistration, n)
 	for i := range items {
 		items[i].Did = keeper.AppendDid(ctx, items[i])
 	}

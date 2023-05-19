@@ -9,7 +9,7 @@ import (
 )
 
 
-func (k msgServer) ApproveKYCRequest(goCtx context.Context,  msg *types.MsgApproveKYCRequest) (*types.MsgApproveKYCRequestResponse, error) {
+func (k msgServer) ApproveKYCRegistration(goCtx context.Context,  msg *types.MsgApproveKYCRegistrationRequest) (*types.MsgApproveKYCRegistrationResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 	
 	var approvers []didTypes.Did
@@ -18,11 +18,11 @@ func (k msgServer) ApproveKYCRequest(goCtx context.Context,  msg *types.MsgAppro
 
 	for _, approverId := range approvers {
 		if approverId.Creator == msg.Creator {
-			k.Keeper.ApproveKYCRequest(ctx, msg.Target.Creator)
+			k.Keeper.ApproveKYCRegistration(ctx, msg.Target.Creator)
 
 			break;
 		}
 	}
 
-	return &types.MsgApproveKYCRequestResponse{}, nil
+	return &types.MsgApproveKYCRegistrationResponse{}, nil
 }

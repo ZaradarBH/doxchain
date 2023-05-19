@@ -9,7 +9,6 @@ import (
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 )
 
-// BaseKeeper manages transfers between accounts. It implements the Keeper interface.
 type BaseKeeper struct {
 	bankkeeper.BaseKeeper
 

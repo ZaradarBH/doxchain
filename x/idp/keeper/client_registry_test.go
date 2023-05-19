@@ -15,21 +15,21 @@ import (
 // Prevent strconv unused error
 var _ = strconv.IntSize
 
-func createNClientRegistry(keeper *keeper.Keeper, ctx sdk.Context, n int) []types.ClientRegistry {
-	items := make([]types.ClientRegistry, n)
+func createNClientRegistrationRegistry(keeper *keeper.Keeper, ctx sdk.Context, n int) []types.ClientRegistrationRegistry {
+	items := make([]types.ClientRegistrationRegistry, n)
 	for i := range items {
 		items[i].Index = strconv.Itoa(i)
 
-		keeper.SetClientRegistry(ctx, items[i])
+		keeper.SetClientRegistrationRegistry(ctx, items[i])
 	}
 	return items
 }
 
-func TestClientRegistryGet(t *testing.T) {
+func TestClientRegistrationRegistryGet(t *testing.T) {
 	keeper, ctx := keepertest.IdpKeeper(t)
-	items := createNClientRegistry(keeper, ctx, 10)
+	items := createNClientRegistrationRegistry(keeper, ctx, 10)
 	for _, item := range items {
-		rst, found := keeper.GetClientRegistry(ctx,
+		rst, found := keeper.GetClientRegistrationRegistry(ctx,
 			item.Index,
 		)
 		require.True(t, found)
@@ -39,25 +39,25 @@ func TestClientRegistryGet(t *testing.T) {
 		)
 	}
 }
-func TestClientRegistryRemove(t *testing.T) {
+func TestClientRegistrationRegistryRemove(t *testing.T) {
 	keeper, ctx := keepertest.IdpKeeper(t)
-	items := createNClientRegistry(keeper, ctx, 10)
+	items := createNClientRegistrationRegistry(keeper, ctx, 10)
 	for _, item := range items {
-		keeper.RemoveClientRegistry(ctx,
+		keeper.RemoveClientRegistrationRegistry(ctx,
 			item.Index,
 		)
-		_, found := keeper.GetClientRegistry(ctx,
+		_, found := keeper.GetClientRegistrationRegistry(ctx,
 			item.Index,
 		)
 		require.False(t, found)
 	}
 }
 
-func TestClientRegistryGetAll(t *testing.T) {
+func TestClientRegistrationRegistryGetAll(t *testing.T) {
 	keeper, ctx := keepertest.IdpKeeper(t)
-	items := createNClientRegistry(keeper, ctx, 10)
+	items := createNClientRegistrationRegistry(keeper, ctx, 10)
 	require.ElementsMatch(t,
 		nullify.Fill(items),
-		nullify.Fill(keeper.GetAllClientRegistry(ctx)),
+		nullify.Fill(keeper.GetAllClientRegistrationRegistry(ctx)),
 	)
 }

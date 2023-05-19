@@ -5,25 +5,25 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-const TypeMsgApproveKYCRequest = "approve_kyc_request"
+const TypeMsgApproveKYCRegistration = "approve_kyc_request"
 
-var _ sdk.Msg = &MsgApproveKYCRequest{}
+var _ sdk.Msg = &MsgApproveKYCRegistrationRequest{}
 
-func NewMsgApproveKYCRequest(creator string) *MsgApproveKYCRequest {
-  return &MsgApproveKYCRequest{
+func NewMsgApproveKYCRegistration(creator string) *MsgApproveKYCRegistrationRequest {
+  return &MsgApproveKYCRegistrationRequest{
 		Creator: creator,
 	}
 }
 
-func (msg *MsgApproveKYCRequest) Route() string {
+func (msg *MsgApproveKYCRegistrationRequest) Route() string {
   return RouterKey
 }
 
-func (msg *MsgApproveKYCRequest) Type() string {
-  return TypeMsgApproveKYCRequest
+func (msg *MsgApproveKYCRegistrationRequest) Type() string {
+  return TypeMsgApproveKYCRegistration
 }
 
-func (msg *MsgApproveKYCRequest) GetSigners() []sdk.AccAddress {
+func (msg *MsgApproveKYCRegistrationRequest) GetSigners() []sdk.AccAddress {
   creator, err := sdk.AccAddressFromBech32(msg.Creator)
   if err != nil {
     panic(err)
@@ -31,12 +31,12 @@ func (msg *MsgApproveKYCRequest) GetSigners() []sdk.AccAddress {
   return []sdk.AccAddress{creator}
 }
 
-func (msg *MsgApproveKYCRequest) GetSignBytes() []byte {
+func (msg *MsgApproveKYCRegistrationRequest) GetSignBytes() []byte {
   bz := ModuleCdc.MustMarshalJSON(msg)
   return sdk.MustSortJSON(bz)
 }
 
-func (msg *MsgApproveKYCRequest) ValidateBasic() error {
+func (msg *MsgApproveKYCRegistrationRequest) ValidateBasic() error {
   _, err := sdk.AccAddressFromBech32(msg.Creator)
   	if err != nil {
   		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)

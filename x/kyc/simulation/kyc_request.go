@@ -12,7 +12,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/simulation"
 )
 
-func SimulateMsgCreateKYCRequest(
+func SimulateMsgCreateKYCRegistration(
 	ak types.AccountKeeper,
 	bk types.BankKeeper,
 	k keeper.Keeper,
@@ -21,13 +21,13 @@ func SimulateMsgCreateKYCRequest(
 	) (simtypes.OperationMsg, []simtypes.FutureOperation, error) {
 		simAccount, _ := simtypes.RandomAcc(r, accs)
 
-		msg := &types.MsgCreateKYCRequest{
+		msg := &types.MsgCreateKYCRegistrationRequest{
 			Creator: simAccount.Address.String(),
 		}
 
-		_, found := k.GetKYCRequest(ctx, msg.Creator)
+		_, found := k.GetKYCRegistration(ctx, msg.Creator)
 		if found {
-			return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "KYCRequest already exist"), nil, nil
+			return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "KYCRegistration already exist"), nil, nil
 		}
 
 		txCtx := simulation.OperationInput{
@@ -48,7 +48,7 @@ func SimulateMsgCreateKYCRequest(
 	}
 }
 
-func SimulateMsgDeleteKYCRequest(
+func SimulateMsgDeleteKYCRegistration(
 	ak types.AccountKeeper,
 	bk types.BankKeeper,
 	k keeper.Keeper,
@@ -57,8 +57,8 @@ func SimulateMsgDeleteKYCRequest(
 	) (simtypes.OperationMsg, []simtypes.FutureOperation, error) {
 		var (
 			simAccount        = simtypes.Account{}
-			msg               = &types.MsgDeleteKYCRequest{}
-			kYCRequest, found = k.GetKYCRequest(ctx, msg.Creator)
+			msg               = &types.MsgDeleteKYCRegistrationRequest{}
+			kYCRequest, found = k.GetKYCRegistration(ctx, msg.Creator)
 		)
 		if !found {
 			return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "kYCRequest store is empty"), nil, nil

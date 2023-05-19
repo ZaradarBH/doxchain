@@ -589,7 +589,7 @@ paths:
         - Query
   /be-heroes/doxchain/aml/aml_request:
     get:
-      operationId: BeheroesDoxchainAmlV1Beta1AMLRequest
+      operationId: BeheroesDoxchainAmlV1Beta1AMLRegistration
       responses:
         '200':
           description: A successful response.
@@ -947,14 +947,14 @@ paths:
         - Query
   /be-heroes/doxchain/idp/client_registry:
     get:
-      operationId: BeheroesDoxchainIdpV1Beta1ClientRegistryAll
+      operationId: BeheroesDoxchainIdpV1Beta1ClientRegistrationRegistryAll
       responses:
         '200':
           description: A successful response.
           schema:
             type: object
             properties:
-              ClientRegistry:
+              clientRegistrationRegistry:
                 type: array
                 items:
                   type: object
@@ -1235,14 +1235,14 @@ paths:
         - Query
   /be-heroes/doxchain/idp/client_registry/{creator}:
     get:
-      operationId: BeheroesDoxchainIdpV1Beta1ClientRegistry
+      operationId: BeheroesDoxchainIdpV1Beta1ClientRegistrationRegistry
       responses:
         '200':
           description: A successful response.
           schema:
             type: object
             properties:
-              ClientRegistry:
+              clientRegistrationRegistry:
                 type: object
                 properties:
                   owner:
@@ -1534,7 +1534,7 @@ paths:
         - Query
   /be-heroes/doxchain/kyc/kyc_request:
     get:
-      operationId: BeheroesDoxchainKycV1Beta1KYCRequest
+      operationId: BeheroesDoxchainKycV1Beta1KYCRegistration
       responses:
         '200':
           description: A successful response.
@@ -46979,7 +46979,7 @@ definitions:
                   "@type": "type.googleapis.com/google.protobuf.Duration",
                   "value": "1.212s"
                 }
-  beheroes.doxchain.aml.v1beta1.AMLRequest:
+  beheroes.doxchain.aml.v1beta1.AMLRegistration:
     type: object
     properties:
       owner:
@@ -47010,11 +47010,11 @@ definitions:
                   type: string
       approved:
         type: boolean
-  beheroes.doxchain.aml.v1beta1.MsgApproveAMLRequestResponse:
+  beheroes.doxchain.aml.v1beta1.MsgApproveAMLRegistrationResponse:
     type: object
-  beheroes.doxchain.aml.v1beta1.MsgCreateAMLRequestResponse:
+  beheroes.doxchain.aml.v1beta1.MsgCreateAMLRegistrationResponse:
     type: object
-  beheroes.doxchain.aml.v1beta1.MsgDeleteAMLRequestResponse:
+  beheroes.doxchain.aml.v1beta1.MsgDeleteAMLRegistrationResponse:
     type: object
   beheroes.doxchain.aml.v1beta1.Params:
     type: object
@@ -47047,7 +47047,7 @@ definitions:
                     type: string
                   value:
                     type: string
-  beheroes.doxchain.aml.v1beta1.QueryGetAMLRequestResponse:
+  beheroes.doxchain.aml.v1beta1.QueryGetAMLRegistrationResponse:
     type: object
     properties:
       Request:
@@ -48220,128 +48220,7 @@ definitions:
                   type: boolean
                 canExecute:
                   type: boolean
-  beheroes.doxchain.idp.v1beta1.ClientRegistrationRelationshipRegistryEntry:
-    type: object
-    properties:
-      owner:
-        type: object
-        properties:
-          creator:
-            type: string
-          url:
-            type: string
-          methodName:
-            type: string
-          methodId:
-            type: string
-          path:
-            type: string
-          fragment:
-            type: string
-          query:
-            type: string
-          parameters:
-            type: array
-            items:
-              type: object
-              properties:
-                name:
-                  type: string
-                value:
-                  type: string
-      destination:
-        type: object
-        properties:
-          creator:
-            type: string
-          url:
-            type: string
-          methodName:
-            type: string
-          methodId:
-            type: string
-          path:
-            type: string
-          fragment:
-            type: string
-          query:
-            type: string
-          parameters:
-            type: array
-            items:
-              type: object
-              properties:
-                name:
-                  type: string
-                value:
-                  type: string
-      accessClientList:
-        type: object
-        properties:
-          owner:
-            type: object
-            properties:
-              creator:
-                type: string
-              url:
-                type: string
-              methodName:
-                type: string
-              methodId:
-                type: string
-              path:
-                type: string
-              fragment:
-                type: string
-              query:
-                type: string
-              parameters:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                    value:
-                      type: string
-          entries:
-            type: array
-            items:
-              type: object
-              properties:
-                user:
-                  type: object
-                  properties:
-                    creator:
-                      type: string
-                    url:
-                      type: string
-                    methodName:
-                      type: string
-                    methodId:
-                      type: string
-                    path:
-                      type: string
-                    fragment:
-                      type: string
-                    query:
-                      type: string
-                    parameters:
-                      type: array
-                      items:
-                        type: object
-                        properties:
-                          name:
-                            type: string
-                          value:
-                            type: string
-                canRead:
-                  type: boolean
-                canWrite:
-                  type: boolean
-                canExecute:
-                  type: boolean
-  beheroes.doxchain.idp.v1beta1.ClientRegistry:
+  beheroes.doxchain.idp.v1beta1.ClientRegistrationRegistry:
     type: object
     properties:
       owner:
@@ -48513,33 +48392,154 @@ definitions:
                         type: boolean
                       canExecute:
                         type: boolean
+  beheroes.doxchain.idp.v1beta1.ClientRegistrationRelationshipRegistryEntry:
+    type: object
+    properties:
+      owner:
+        type: object
+        properties:
+          creator:
+            type: string
+          url:
+            type: string
+          methodName:
+            type: string
+          methodId:
+            type: string
+          path:
+            type: string
+          fragment:
+            type: string
+          query:
+            type: string
+          parameters:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
+      destination:
+        type: object
+        properties:
+          creator:
+            type: string
+          url:
+            type: string
+          methodName:
+            type: string
+          methodId:
+            type: string
+          path:
+            type: string
+          fragment:
+            type: string
+          query:
+            type: string
+          parameters:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
+      accessClientList:
+        type: object
+        properties:
+          owner:
+            type: object
+            properties:
+              creator:
+                type: string
+              url:
+                type: string
+              methodName:
+                type: string
+              methodId:
+                type: string
+              path:
+                type: string
+              fragment:
+                type: string
+              query:
+                type: string
+              parameters:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    value:
+                      type: string
+          entries:
+            type: array
+            items:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    creator:
+                      type: string
+                    url:
+                      type: string
+                    methodName:
+                      type: string
+                    methodId:
+                      type: string
+                    path:
+                      type: string
+                    fragment:
+                      type: string
+                    query:
+                      type: string
+                    parameters:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                          value:
+                            type: string
+                canRead:
+                  type: boolean
+                canWrite:
+                  type: boolean
+                canExecute:
+                  type: boolean
   beheroes.doxchain.idp.v1beta1.MsgAuthenticationResponse:
     type: object
     properties:
       token:
         type: string
+  beheroes.doxchain.idp.v1beta1.MsgCreateClientRegistrationRegistryResponse:
+    type: object
   beheroes.doxchain.idp.v1beta1.MsgCreateClientRegistrationRelationshipResponse:
     type: object
   beheroes.doxchain.idp.v1beta1.MsgCreateClientRegistrationResponse:
     type: object
-  beheroes.doxchain.idp.v1beta1.MsgCreateClientRegistryResponse:
+  beheroes.doxchain.idp.v1beta1.MsgDeleteClientRegistrationRegistryResponse:
     type: object
   beheroes.doxchain.idp.v1beta1.MsgDeleteClientRegistrationRelationshipResponse:
     type: object
   beheroes.doxchain.idp.v1beta1.MsgDeleteClientRegistrationResponse:
     type: object
-  beheroes.doxchain.idp.v1beta1.MsgDeleteClientRegistryResponse:
+  beheroes.doxchain.idp.v1beta1.MsgUpdateClientRegistrationRegistryResponse:
     type: object
   beheroes.doxchain.idp.v1beta1.MsgUpdateClientRegistrationResponse:
     type: object
-  beheroes.doxchain.idp.v1beta1.MsgUpdateClientRegistryResponse:
-    type: object
   beheroes.doxchain.idp.v1beta1.Params:
     type: object
-  beheroes.doxchain.idp.v1beta1.QueryAllClientRegistryResponse:
+  beheroes.doxchain.idp.v1beta1.QueryAllClientRegistrationRegistryResponse:
     type: object
     properties:
-      ClientRegistry:
+      clientRegistrationRegistry:
         type: array
         items:
           type: object
@@ -48739,10 +48739,10 @@ definitions:
                    repeated Bar results = 1;
                    PageResponse page = 2;
            }
-  beheroes.doxchain.idp.v1beta1.QueryGetClientRegistryResponse:
+  beheroes.doxchain.idp.v1beta1.QueryGetClientRegistrationRegistryResponse:
     type: object
     properties:
-      ClientRegistry:
+      clientRegistrationRegistry:
         type: object
         properties:
           owner:
@@ -48950,7 +48950,7 @@ definitions:
     properties:
       params:
         type: object
-  beheroes.doxchain.kyc.v1beta1.KYCRequest:
+  beheroes.doxchain.kyc.v1beta1.KYCRegistration:
     type: object
     properties:
       owner:
@@ -48981,11 +48981,11 @@ definitions:
                   type: string
       approved:
         type: boolean
-  beheroes.doxchain.kyc.v1beta1.MsgApproveKYCRequestResponse:
+  beheroes.doxchain.kyc.v1beta1.MsgApproveKYCRegistrationResponse:
     type: object
-  beheroes.doxchain.kyc.v1beta1.MsgCreateKYCRequestResponse:
+  beheroes.doxchain.kyc.v1beta1.MsgCreateKYCRegistrationResponse:
     type: object
-  beheroes.doxchain.kyc.v1beta1.MsgDeleteKYCRequestResponse:
+  beheroes.doxchain.kyc.v1beta1.MsgDeleteKYCRegistrationResponse:
     type: object
   beheroes.doxchain.kyc.v1beta1.Params:
     type: object
@@ -49018,7 +49018,7 @@ definitions:
                     type: string
                   value:
                     type: string
-  beheroes.doxchain.kyc.v1beta1.QueryGetKYCRequestResponse:
+  beheroes.doxchain.kyc.v1beta1.QueryGetKYCRegistrationResponse:
     type: object
     properties:
       Request:

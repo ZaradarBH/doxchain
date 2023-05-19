@@ -286,22 +286,26 @@ func (m *QueryGetDotWellKnownResponse) GetUiLocalesSupported() string {
 	return ""
 }
 
-type QueryGetClientRegistryRequest struct {
+type QueryGetClientRegistrationRegistryRequest struct {
 	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 }
 
-func (m *QueryGetClientRegistryRequest) Reset()         { *m = QueryGetClientRegistryRequest{} }
-func (m *QueryGetClientRegistryRequest) String() string { return proto.CompactTextString(m) }
-func (*QueryGetClientRegistryRequest) ProtoMessage()    {}
-func (*QueryGetClientRegistryRequest) Descriptor() ([]byte, []int) {
+func (m *QueryGetClientRegistrationRegistryRequest) Reset() {
+	*m = QueryGetClientRegistrationRegistryRequest{}
+}
+func (m *QueryGetClientRegistrationRegistryRequest) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QueryGetClientRegistrationRegistryRequest) ProtoMessage() {}
+func (*QueryGetClientRegistrationRegistryRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_d99966fcdbdb4a7b, []int{4}
 }
-func (m *QueryGetClientRegistryRequest) XXX_Unmarshal(b []byte) error {
+func (m *QueryGetClientRegistrationRegistryRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *QueryGetClientRegistryRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *QueryGetClientRegistrationRegistryRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_QueryGetClientRegistryRequest.Marshal(b, m, deterministic)
+		return xxx_messageInfo_QueryGetClientRegistrationRegistryRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -311,41 +315,45 @@ func (m *QueryGetClientRegistryRequest) XXX_Marshal(b []byte, deterministic bool
 		return b[:n], nil
 	}
 }
-func (m *QueryGetClientRegistryRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryGetClientRegistryRequest.Merge(m, src)
+func (m *QueryGetClientRegistrationRegistryRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGetClientRegistrationRegistryRequest.Merge(m, src)
 }
-func (m *QueryGetClientRegistryRequest) XXX_Size() int {
+func (m *QueryGetClientRegistrationRegistryRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *QueryGetClientRegistryRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryGetClientRegistryRequest.DiscardUnknown(m)
+func (m *QueryGetClientRegistrationRegistryRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGetClientRegistrationRegistryRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_QueryGetClientRegistryRequest proto.InternalMessageInfo
+var xxx_messageInfo_QueryGetClientRegistrationRegistryRequest proto.InternalMessageInfo
 
-func (m *QueryGetClientRegistryRequest) GetCreator() string {
+func (m *QueryGetClientRegistrationRegistryRequest) GetCreator() string {
 	if m != nil {
 		return m.Creator
 	}
 	return ""
 }
 
-type QueryGetClientRegistryResponse struct {
-	ClientRegistry ClientRegistry `protobuf:"bytes,1,opt,name=ClientRegistry,proto3" json:"ClientRegistry"`
+type QueryGetClientRegistrationRegistryResponse struct {
+	ClientRegistrationRegistry ClientRegistrationRegistry `protobuf:"bytes,1,opt,name=clientRegistrationRegistry,proto3" json:"clientRegistrationRegistry"`
 }
 
-func (m *QueryGetClientRegistryResponse) Reset()         { *m = QueryGetClientRegistryResponse{} }
-func (m *QueryGetClientRegistryResponse) String() string { return proto.CompactTextString(m) }
-func (*QueryGetClientRegistryResponse) ProtoMessage()    {}
-func (*QueryGetClientRegistryResponse) Descriptor() ([]byte, []int) {
+func (m *QueryGetClientRegistrationRegistryResponse) Reset() {
+	*m = QueryGetClientRegistrationRegistryResponse{}
+}
+func (m *QueryGetClientRegistrationRegistryResponse) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QueryGetClientRegistrationRegistryResponse) ProtoMessage() {}
+func (*QueryGetClientRegistrationRegistryResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_d99966fcdbdb4a7b, []int{5}
 }
-func (m *QueryGetClientRegistryResponse) XXX_Unmarshal(b []byte) error {
+func (m *QueryGetClientRegistrationRegistryResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *QueryGetClientRegistryResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *QueryGetClientRegistrationRegistryResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_QueryGetClientRegistryResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_QueryGetClientRegistrationRegistryResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -355,41 +363,45 @@ func (m *QueryGetClientRegistryResponse) XXX_Marshal(b []byte, deterministic boo
 		return b[:n], nil
 	}
 }
-func (m *QueryGetClientRegistryResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryGetClientRegistryResponse.Merge(m, src)
+func (m *QueryGetClientRegistrationRegistryResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGetClientRegistrationRegistryResponse.Merge(m, src)
 }
-func (m *QueryGetClientRegistryResponse) XXX_Size() int {
+func (m *QueryGetClientRegistrationRegistryResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *QueryGetClientRegistryResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryGetClientRegistryResponse.DiscardUnknown(m)
+func (m *QueryGetClientRegistrationRegistryResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGetClientRegistrationRegistryResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_QueryGetClientRegistryResponse proto.InternalMessageInfo
+var xxx_messageInfo_QueryGetClientRegistrationRegistryResponse proto.InternalMessageInfo
 
-func (m *QueryGetClientRegistryResponse) GetClientRegistry() ClientRegistry {
+func (m *QueryGetClientRegistrationRegistryResponse) GetClientRegistrationRegistry() ClientRegistrationRegistry {
 	if m != nil {
-		return m.ClientRegistry
+		return m.ClientRegistrationRegistry
 	}
-	return ClientRegistry{}
+	return ClientRegistrationRegistry{}
 }
 
-type QueryAllClientRegistryRequest struct {
+type QueryAllClientRegistrationRegistryRequest struct {
 	Pagination *query.PageRequest `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
 }
 
-func (m *QueryAllClientRegistryRequest) Reset()         { *m = QueryAllClientRegistryRequest{} }
-func (m *QueryAllClientRegistryRequest) String() string { return proto.CompactTextString(m) }
-func (*QueryAllClientRegistryRequest) ProtoMessage()    {}
-func (*QueryAllClientRegistryRequest) Descriptor() ([]byte, []int) {
+func (m *QueryAllClientRegistrationRegistryRequest) Reset() {
+	*m = QueryAllClientRegistrationRegistryRequest{}
+}
+func (m *QueryAllClientRegistrationRegistryRequest) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QueryAllClientRegistrationRegistryRequest) ProtoMessage() {}
+func (*QueryAllClientRegistrationRegistryRequest) Descriptor() ([]byte, []int) {
 	return fileDescriptor_d99966fcdbdb4a7b, []int{6}
 }
-func (m *QueryAllClientRegistryRequest) XXX_Unmarshal(b []byte) error {
+func (m *QueryAllClientRegistrationRegistryRequest) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *QueryAllClientRegistryRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *QueryAllClientRegistrationRegistryRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_QueryAllClientRegistryRequest.Marshal(b, m, deterministic)
+		return xxx_messageInfo_QueryAllClientRegistrationRegistryRequest.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -399,42 +411,46 @@ func (m *QueryAllClientRegistryRequest) XXX_Marshal(b []byte, deterministic bool
 		return b[:n], nil
 	}
 }
-func (m *QueryAllClientRegistryRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryAllClientRegistryRequest.Merge(m, src)
+func (m *QueryAllClientRegistrationRegistryRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryAllClientRegistrationRegistryRequest.Merge(m, src)
 }
-func (m *QueryAllClientRegistryRequest) XXX_Size() int {
+func (m *QueryAllClientRegistrationRegistryRequest) XXX_Size() int {
 	return m.Size()
 }
-func (m *QueryAllClientRegistryRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryAllClientRegistryRequest.DiscardUnknown(m)
+func (m *QueryAllClientRegistrationRegistryRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryAllClientRegistrationRegistryRequest.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_QueryAllClientRegistryRequest proto.InternalMessageInfo
+var xxx_messageInfo_QueryAllClientRegistrationRegistryRequest proto.InternalMessageInfo
 
-func (m *QueryAllClientRegistryRequest) GetPagination() *query.PageRequest {
+func (m *QueryAllClientRegistrationRegistryRequest) GetPagination() *query.PageRequest {
 	if m != nil {
 		return m.Pagination
 	}
 	return nil
 }
 
-type QueryAllClientRegistryResponse struct {
-	ClientRegistry []ClientRegistry    `protobuf:"bytes,1,rep,name=ClientRegistry,proto3" json:"ClientRegistry"`
-	Pagination     *query.PageResponse `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
+type QueryAllClientRegistrationRegistryResponse struct {
+	ClientRegistrationRegistry []ClientRegistrationRegistry `protobuf:"bytes,1,rep,name=clientRegistrationRegistry,proto3" json:"clientRegistrationRegistry"`
+	Pagination                 *query.PageResponse          `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
 }
 
-func (m *QueryAllClientRegistryResponse) Reset()         { *m = QueryAllClientRegistryResponse{} }
-func (m *QueryAllClientRegistryResponse) String() string { return proto.CompactTextString(m) }
-func (*QueryAllClientRegistryResponse) ProtoMessage()    {}
-func (*QueryAllClientRegistryResponse) Descriptor() ([]byte, []int) {
+func (m *QueryAllClientRegistrationRegistryResponse) Reset() {
+	*m = QueryAllClientRegistrationRegistryResponse{}
+}
+func (m *QueryAllClientRegistrationRegistryResponse) String() string {
+	return proto.CompactTextString(m)
+}
+func (*QueryAllClientRegistrationRegistryResponse) ProtoMessage() {}
+func (*QueryAllClientRegistrationRegistryResponse) Descriptor() ([]byte, []int) {
 	return fileDescriptor_d99966fcdbdb4a7b, []int{7}
 }
-func (m *QueryAllClientRegistryResponse) XXX_Unmarshal(b []byte) error {
+func (m *QueryAllClientRegistrationRegistryResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
 }
-func (m *QueryAllClientRegistryResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+func (m *QueryAllClientRegistrationRegistryResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
 	if deterministic {
-		return xxx_messageInfo_QueryAllClientRegistryResponse.Marshal(b, m, deterministic)
+		return xxx_messageInfo_QueryAllClientRegistrationRegistryResponse.Marshal(b, m, deterministic)
 	} else {
 		b = b[:cap(b)]
 		n, err := m.MarshalToSizedBuffer(b)
@@ -444,26 +460,26 @@ func (m *QueryAllClientRegistryResponse) XXX_Marshal(b []byte, deterministic boo
 		return b[:n], nil
 	}
 }
-func (m *QueryAllClientRegistryResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_QueryAllClientRegistryResponse.Merge(m, src)
+func (m *QueryAllClientRegistrationRegistryResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryAllClientRegistrationRegistryResponse.Merge(m, src)
 }
-func (m *QueryAllClientRegistryResponse) XXX_Size() int {
+func (m *QueryAllClientRegistrationRegistryResponse) XXX_Size() int {
 	return m.Size()
 }
-func (m *QueryAllClientRegistryResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_QueryAllClientRegistryResponse.DiscardUnknown(m)
+func (m *QueryAllClientRegistrationRegistryResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryAllClientRegistrationRegistryResponse.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_QueryAllClientRegistryResponse proto.InternalMessageInfo
+var xxx_messageInfo_QueryAllClientRegistrationRegistryResponse proto.InternalMessageInfo
 
-func (m *QueryAllClientRegistryResponse) GetClientRegistry() []ClientRegistry {
+func (m *QueryAllClientRegistrationRegistryResponse) GetClientRegistrationRegistry() []ClientRegistrationRegistry {
 	if m != nil {
-		return m.ClientRegistry
+		return m.ClientRegistrationRegistry
 	}
 	return nil
 }
 
-func (m *QueryAllClientRegistryResponse) GetPagination() *query.PageResponse {
+func (m *QueryAllClientRegistrationRegistryResponse) GetPagination() *query.PageResponse {
 	if m != nil {
 		return m.Pagination
 	}
@@ -475,72 +491,73 @@ func init() {
 	proto.RegisterType((*QueryParamsResponse)(nil), "beheroes.doxchain.idp.v1beta1.QueryParamsResponse")
 	proto.RegisterType((*QueryGetDotWellKnownRequest)(nil), "beheroes.doxchain.idp.v1beta1.QueryGetDotWellKnownRequest")
 	proto.RegisterType((*QueryGetDotWellKnownResponse)(nil), "beheroes.doxchain.idp.v1beta1.QueryGetDotWellKnownResponse")
-	proto.RegisterType((*QueryGetClientRegistryRequest)(nil), "beheroes.doxchain.idp.v1beta1.QueryGetClientRegistryRequest")
-	proto.RegisterType((*QueryGetClientRegistryResponse)(nil), "beheroes.doxchain.idp.v1beta1.QueryGetClientRegistryResponse")
-	proto.RegisterType((*QueryAllClientRegistryRequest)(nil), "beheroes.doxchain.idp.v1beta1.QueryAllClientRegistryRequest")
-	proto.RegisterType((*QueryAllClientRegistryResponse)(nil), "beheroes.doxchain.idp.v1beta1.QueryAllClientRegistryResponse")
+	proto.RegisterType((*QueryGetClientRegistrationRegistryRequest)(nil), "beheroes.doxchain.idp.v1beta1.QueryGetClientRegistrationRegistryRequest")
+	proto.RegisterType((*QueryGetClientRegistrationRegistryResponse)(nil), "beheroes.doxchain.idp.v1beta1.QueryGetClientRegistrationRegistryResponse")
+	proto.RegisterType((*QueryAllClientRegistrationRegistryRequest)(nil), "beheroes.doxchain.idp.v1beta1.QueryAllClientRegistrationRegistryRequest")
+	proto.RegisterType((*QueryAllClientRegistrationRegistryResponse)(nil), "beheroes.doxchain.idp.v1beta1.QueryAllClientRegistrationRegistryResponse")
 }
 
 func init() { proto.RegisterFile("doxchain/idp/v1beta1/query.proto", fileDescriptor_d99966fcdbdb4a7b) }
 
 var fileDescriptor_d99966fcdbdb4a7b = []byte{
-	// 887 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x56, 0xcf, 0x6f, 0x1b, 0x45,
-	0x14, 0xf6, 0x26, 0x8d, 0xd3, 0x4c, 0xa1, 0x3f, 0x06, 0x37, 0x32, 0x6e, 0xbb, 0xb8, 0x2b, 0x25,
-	0x6d, 0x40, 0xd9, 0xad, 0x63, 0x21, 0x51, 0x7e, 0x48, 0xb8, 0x2e, 0x54, 0x11, 0x20, 0xb5, 0x2e,
-	0xa8, 0x52, 0x39, 0x2c, 0xeb, 0xdd, 0xf1, 0x7a, 0xc8, 0x78, 0x66, 0xbb, 0x33, 0x9b, 0xd4, 0x54,
-	0xb9, 0x70, 0xe2, 0x08, 0xe2, 0xc0, 0xdf, 0xc3, 0x05, 0xe5, 0x58, 0x09, 0x21, 0x71, 0x42, 0x28,
-	0xe1, 0x0f, 0x41, 0x9e, 0x99, 0xb5, 0x77, 0xdd, 0xb5, 0x63, 0x22, 0x6e, 0x99, 0x79, 0xdf, 0xf7,
-	0xbe, 0xf7, 0x4d, 0xde, 0x7b, 0x6b, 0x50, 0x0f, 0xd8, 0x73, 0xbf, 0xef, 0x61, 0xea, 0xe0, 0x20,
-	0x72, 0xf6, 0x1b, 0x5d, 0x24, 0xbc, 0x86, 0xf3, 0x2c, 0x41, 0xf1, 0xd0, 0x8e, 0x62, 0x26, 0x18,
-	0xbc, 0xd1, 0x45, 0x7d, 0x14, 0x33, 0xc4, 0xed, 0x14, 0x6a, 0xe3, 0x20, 0xb2, 0x35, 0xb4, 0x56,
-	0x09, 0x59, 0xc8, 0x24, 0xd2, 0x19, 0xfd, 0xa5, 0x48, 0xb5, 0xeb, 0x21, 0x63, 0x21, 0x41, 0x8e,
-	0x17, 0x61, 0xc7, 0xa3, 0x94, 0x09, 0x4f, 0x60, 0x46, 0xb9, 0x8e, 0xbe, 0xed, 0x33, 0x3e, 0x60,
-	0xdc, 0xe9, 0x7a, 0x1c, 0x29, 0xad, 0xb1, 0x72, 0xe4, 0x85, 0x98, 0x4a, 0xb0, 0xc6, 0xde, 0x2c,
-	0x2c, 0x30, 0xf2, 0x62, 0x6f, 0x30, 0x4e, 0x57, 0x08, 0xf1, 0x09, 0x46, 0x54, 0xb8, 0x31, 0x0a,
-	0x31, 0x17, 0xa9, 0x1b, 0xab, 0x02, 0xe0, 0xa3, 0x91, 0xe0, 0x43, 0x99, 0xa0, 0x83, 0x9e, 0x25,
-	0x88, 0x0b, 0xeb, 0x29, 0x78, 0x23, 0x77, 0xcb, 0x23, 0x46, 0x39, 0x82, 0x6d, 0x50, 0x56, 0x42,
-	0x55, 0xa3, 0x6e, 0xdc, 0xbe, 0xb0, 0xb3, 0x61, 0xcf, 0x7d, 0x0b, 0x5b, 0xd1, 0xef, 0x9d, 0x3b,
-	0xfa, 0xeb, 0xad, 0x52, 0x47, 0x53, 0x2d, 0x17, 0x5c, 0x93, 0xb9, 0x1f, 0x20, 0x71, 0x9f, 0x89,
-	0x27, 0x88, 0x90, 0xcf, 0x28, 0x3b, 0xa0, 0x5a, 0x1a, 0x7e, 0x0c, 0xae, 0xf5, 0x12, 0x42, 0x86,
-	0x8f, 0x12, 0x8f, 0xe0, 0x1e, 0x46, 0xc1, 0x93, 0x66, 0x7b, 0x37, 0x40, 0x54, 0x8c, 0x0e, 0xb1,
-	0x14, 0x5e, 0xeb, 0xcc, 0x83, 0x58, 0x3f, 0xad, 0x80, 0xeb, 0xc5, 0x0a, 0xda, 0xc6, 0x3a, 0x28,
-	0x63, 0xce, 0x93, 0x71, 0x36, 0x7d, 0x82, 0xef, 0x82, 0xab, 0x5e, 0x22, 0xfa, 0x2c, 0xc6, 0xdf,
-	0xc9, 0x17, 0xff, 0x84, 0x06, 0x11, 0xc3, 0x54, 0x54, 0x97, 0x24, 0x6c, 0x3d, 0x17, 0x74, 0x91,
-	0x8e, 0xc2, 0x0d, 0xf0, 0xba, 0x60, 0x7b, 0x68, 0x02, 0x5f, 0x96, 0xf0, 0x8b, 0xf2, 0x72, 0x02,
-	0x7b, 0x08, 0x6e, 0xe6, 0x60, 0xad, 0x44, 0xf4, 0xbf, 0x40, 0xa2, 0xcf, 0x02, 0xfe, 0x38, 0x89,
-	0x22, 0x16, 0x0b, 0x14, 0x54, 0xcf, 0xd5, 0x97, 0x6f, 0xaf, 0x75, 0x36, 0xf2, 0x54, 0x77, 0x24,
-	0xec, 0x0e, 0x14, 0xd6, 0xe5, 0x29, 0x18, 0x7e, 0x03, 0x36, 0x5f, 0xc9, 0xf8, 0x18, 0x87, 0x14,
-	0xd3, 0xb0, 0x45, 0x42, 0x96, 0x49, 0xbb, 0x22, 0xd3, 0xde, 0x29, 0x4a, 0xcb, 0x15, 0xc1, 0xf5,
-	0x48, 0xe8, 0xee, 0x7b, 0x24, 0x41, 0x59, 0x85, 0x77, 0xc0, 0xe5, 0x84, 0xa3, 0x78, 0x97, 0xf6,
-	0xd8, 0xd8, 0x5d, 0x59, 0xba, 0xbb, 0x32, 0xba, 0xc7, 0xb4, 0xc7, 0x26, 0x06, 0xdf, 0x04, 0xab,
-	0xdf, 0x1e, 0xec, 0xf1, 0xaf, 0x62, 0x5c, 0x5d, 0x95, 0x98, 0xf3, 0xa3, 0xa3, 0x9b, 0xc4, 0x18,
-	0x36, 0x41, 0x45, 0xf7, 0x5d, 0xfe, 0x61, 0xcf, 0x4b, 0xdc, 0xd5, 0x6c, 0x6c, 0x92, 0x6f, 0x0b,
-	0x5c, 0xe2, 0x3e, 0x8b, 0x50, 0xc6, 0xc7, 0x9a, 0xc4, 0x5f, 0x56, 0xd7, 0x99, 0x3a, 0xdf, 0x03,
-	0xeb, 0xb1, 0xfe, 0xef, 0x7e, 0x39, 0xcc, 0x31, 0x80, 0x64, 0x54, 0xd3, 0xa8, 0x2b, 0x86, 0x79,
-	0x66, 0x13, 0x54, 0x38, 0x8a, 0xf7, 0xb1, 0x8f, 0xee, 0x33, 0x3f, 0x19, 0x20, 0xaa, 0x26, 0xb3,
-	0x7a, 0x41, 0x55, 0xa6, 0x63, 0x6e, 0x90, 0x0d, 0xc2, 0x3b, 0x00, 0x26, 0xf8, 0x73, 0xe6, 0x7b,
-	0x24, 0x2b, 0xf5, 0x9a, 0xa4, 0x54, 0x12, 0xec, 0x12, 0x15, 0x9a, 0xc8, 0x58, 0x77, 0xc1, 0x8d,
-	0xb4, 0x25, 0xdb, 0x72, 0x0e, 0x3b, 0x7a, 0x0c, 0xd3, 0xb6, 0xaf, 0x82, 0x55, 0x3f, 0x46, 0x9e,
-	0x60, 0x69, 0x53, 0xa6, 0x47, 0xeb, 0x10, 0x98, 0xb3, 0xa8, 0xba, 0x9f, 0xbf, 0x06, 0x17, 0xf3,
-	0x11, 0x3d, 0x9e, 0xdb, 0xa7, 0x8c, 0x67, 0x9e, 0xa4, 0xc7, 0x74, 0x2a, 0x95, 0x15, 0xea, 0xca,
-	0x5b, 0x84, 0x14, 0x57, 0xfe, 0x29, 0x00, 0x93, 0x25, 0xa5, 0x95, 0x37, 0x6d, 0xb5, 0xd1, 0xec,
-	0xd1, 0x46, 0xb3, 0xd5, 0xf6, 0x9c, 0x2c, 0x85, 0x10, 0x69, 0x6e, 0x27, 0xc3, 0xb4, 0x7e, 0x33,
-	0xb4, 0xd1, 0x02, 0xa5, 0x39, 0x46, 0x97, 0xff, 0x27, 0xa3, 0xf0, 0x41, 0xce, 0xc7, 0x92, 0xf4,
-	0x71, 0xeb, 0x54, 0x1f, 0xaa, 0xb2, 0xac, 0x91, 0x9d, 0x1f, 0xca, 0x60, 0x45, 0x1a, 0x81, 0xbf,
-	0x18, 0xa0, 0xac, 0x76, 0x20, 0x6c, 0x9c, 0x52, 0xe2, 0xab, 0x4b, 0xb8, 0xb6, 0xf3, 0x5f, 0x28,
-	0xaa, 0x0e, 0x6b, 0xf3, 0xfb, 0xdf, 0xff, 0xf9, 0x79, 0xa9, 0x0e, 0x4d, 0xa7, 0x8b, 0xb6, 0x15,
-	0xd9, 0xc9, 0x7d, 0x0d, 0xd4, 0x12, 0x86, 0x7f, 0x18, 0xe0, 0xd2, 0xd4, 0x7a, 0x84, 0xef, 0x2f,
-	0xa2, 0x57, 0xbc, 0xb5, 0x6b, 0x1f, 0x9c, 0x89, 0xab, 0x8b, 0xde, 0x95, 0x45, 0xb7, 0x61, 0x6b,
-	0x56, 0xd1, 0x2f, 0xe6, 0xac, 0xfb, 0x43, 0xc7, 0x3e, 0x40, 0x84, 0x6c, 0xef, 0x49, 0x0f, 0x47,
-	0xc6, 0x74, 0x8b, 0xc0, 0x0f, 0x17, 0x2c, 0xad, 0xb0, 0xbb, 0x6b, 0x1f, 0x9d, 0x91, 0xad, 0xad,
-	0xdd, 0x95, 0xd6, 0x9a, 0xb0, 0x31, 0xcb, 0xda, 0xd4, 0x57, 0xd9, 0x79, 0xa1, 0xc7, 0xfe, 0x10,
-	0xfe, 0x6a, 0x80, 0x2b, 0xf9, 0xac, 0x2d, 0x42, 0x16, 0x73, 0x33, 0x6b, 0x56, 0x17, 0x73, 0x33,
-	0x73, 0xfe, 0x2c, 0x47, 0xba, 0xd9, 0x82, 0xb7, 0x16, 0x74, 0x73, 0xaf, 0x7d, 0x74, 0x6c, 0x1a,
-	0x2f, 0x8f, 0x4d, 0xe3, 0xef, 0x63, 0xd3, 0xf8, 0xf1, 0xc4, 0x2c, 0xbd, 0x3c, 0x31, 0x4b, 0x7f,
-	0x9e, 0x98, 0xa5, 0xa7, 0x5b, 0x21, 0x16, 0xfd, 0xa4, 0x6b, 0xfb, 0x6c, 0x50, 0x94, 0xec, 0xb9,
-	0x4c, 0x27, 0x97, 0x75, 0xb7, 0x2c, 0x7f, 0xa9, 0x34, 0xff, 0x0d, 0x00, 0x00, 0xff, 0xff, 0x8c,
-	0x2c, 0xf6, 0xeb, 0x9b, 0x09, 0x00, 0x00,
+	// 903 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xb4, 0x56, 0xcf, 0x6f, 0x1b, 0x45,
+	0x14, 0xf6, 0x26, 0x8d, 0xd3, 0x4c, 0x81, 0x96, 0xc1, 0x8d, 0x8c, 0xdb, 0x1a, 0x77, 0xa5, 0xa4,
+	0x75, 0x51, 0x77, 0xeb, 0x58, 0x08, 0x0a, 0x17, 0x5c, 0xb7, 0x14, 0x0b, 0x90, 0x5a, 0x17, 0x54,
+	0xa9, 0x97, 0x65, 0xbd, 0x3b, 0x5e, 0x0f, 0x19, 0xcf, 0x6c, 0x77, 0x66, 0x93, 0x9a, 0x28, 0x42,
+	0xe2, 0x2f, 0x00, 0x71, 0xe0, 0xaf, 0xe0, 0xff, 0xc8, 0x31, 0x12, 0x42, 0xe2, 0x84, 0x50, 0x02,
+	0x37, 0xce, 0x9c, 0x91, 0x67, 0x66, 0xed, 0x5d, 0xe2, 0x1f, 0x0b, 0x82, 0x9b, 0x67, 0xde, 0xf7,
+	0xbe, 0xef, 0x7d, 0xe3, 0x79, 0x6f, 0x16, 0xd4, 0x7c, 0xf6, 0xc2, 0x1b, 0xb8, 0x98, 0xda, 0xd8,
+	0x0f, 0xed, 0xbd, 0x46, 0x0f, 0x09, 0xb7, 0x61, 0x3f, 0x8f, 0x51, 0x34, 0xb2, 0xc2, 0x88, 0x09,
+	0x06, 0xaf, 0xf5, 0xd0, 0x00, 0x45, 0x0c, 0x71, 0x2b, 0x81, 0x5a, 0xd8, 0x0f, 0x2d, 0x0d, 0xad,
+	0x94, 0x02, 0x16, 0x30, 0x89, 0xb4, 0xc7, 0xbf, 0x54, 0x52, 0xe5, 0x6a, 0xc0, 0x58, 0x40, 0x90,
+	0xed, 0x86, 0xd8, 0x76, 0x29, 0x65, 0xc2, 0x15, 0x98, 0x51, 0xae, 0xa3, 0xb7, 0x3c, 0xc6, 0x87,
+	0x8c, 0xdb, 0x3d, 0x97, 0x23, 0xa5, 0x35, 0x51, 0x0e, 0xdd, 0x00, 0x53, 0x09, 0xd6, 0xd8, 0xeb,
+	0x33, 0x0b, 0x0c, 0xdd, 0xc8, 0x1d, 0x26, 0x74, 0x6f, 0xcf, 0x84, 0x78, 0x04, 0x23, 0x2a, 0x9c,
+	0x08, 0x05, 0x98, 0x8b, 0x48, 0x52, 0x26, 0x0b, 0x6d, 0xcd, 0x2c, 0x01, 0xf8, 0x78, 0xac, 0xfe,
+	0x48, 0xb2, 0x75, 0xd1, 0xf3, 0x18, 0x71, 0x61, 0x3e, 0x03, 0xaf, 0x65, 0x76, 0x79, 0xc8, 0x28,
+	0x47, 0xb0, 0x0d, 0x8a, 0x4a, 0xb5, 0x6c, 0xd4, 0x8c, 0x9b, 0x17, 0x76, 0xb6, 0xac, 0x85, 0x07,
+	0x63, 0xa9, 0xf4, 0x7b, 0xe7, 0x8e, 0x7e, 0x79, 0xa3, 0xd0, 0xd5, 0xa9, 0xa6, 0x03, 0xae, 0x48,
+	0xee, 0x87, 0x48, 0xdc, 0x67, 0xe2, 0x29, 0x22, 0xe4, 0x23, 0xca, 0xf6, 0xa9, 0x96, 0x86, 0xef,
+	0x83, 0x2b, 0xfd, 0x98, 0x90, 0xd1, 0xe3, 0xd8, 0x25, 0xb8, 0x8f, 0x91, 0xff, 0xb4, 0xd9, 0xee,
+	0xf8, 0x88, 0x8a, 0xf1, 0x22, 0x92, 0xc2, 0x1b, 0xdd, 0x45, 0x10, 0xf3, 0xdb, 0x35, 0x70, 0x75,
+	0xb6, 0x82, 0xb6, 0xb1, 0x09, 0x8a, 0x98, 0xf3, 0x78, 0xc2, 0xa6, 0x57, 0xf0, 0x2d, 0x70, 0xd9,
+	0x8d, 0xc5, 0x80, 0x45, 0xf8, 0x4b, 0x79, 0x56, 0x0f, 0xa8, 0x1f, 0x32, 0x4c, 0x45, 0x79, 0x45,
+	0xc2, 0x36, 0x33, 0x41, 0x07, 0xe9, 0x28, 0xdc, 0x02, 0x2f, 0x0b, 0xb6, 0x8b, 0xa6, 0xf0, 0x55,
+	0x09, 0x7f, 0x45, 0x6e, 0x4e, 0x61, 0x8f, 0xc0, 0xf5, 0x0c, 0xac, 0x15, 0x8b, 0xc1, 0x27, 0x48,
+	0x0c, 0x98, 0xcf, 0x9f, 0xc4, 0x61, 0xc8, 0x22, 0x81, 0xfc, 0xf2, 0xb9, 0xda, 0xea, 0xcd, 0x8d,
+	0xee, 0x56, 0x36, 0xd5, 0x19, 0x0b, 0x3b, 0x43, 0x85, 0x75, 0x78, 0x02, 0x86, 0x9f, 0x83, 0xed,
+	0x33, 0x8c, 0x4f, 0x70, 0x40, 0x31, 0x0d, 0x5a, 0x24, 0x60, 0x29, 0xda, 0x35, 0x49, 0x7b, 0x67,
+	0x16, 0x2d, 0x57, 0x09, 0x8e, 0x4b, 0x02, 0x67, 0xcf, 0x25, 0x31, 0x4a, 0x2b, 0xbc, 0x09, 0x2e,
+	0xc5, 0x1c, 0x45, 0x1d, 0xda, 0x67, 0x13, 0x77, 0x45, 0xe9, 0xee, 0xd5, 0xf1, 0x3e, 0xa6, 0x7d,
+	0x36, 0x35, 0xf8, 0x3a, 0x58, 0xff, 0x62, 0x7f, 0x97, 0x7f, 0x16, 0xe1, 0xf2, 0xba, 0xc4, 0x9c,
+	0x1f, 0x2f, 0x9d, 0x38, 0xc2, 0xb0, 0x09, 0x4a, 0xe9, 0x4b, 0x38, 0xe1, 0x3a, 0x2f, 0x71, 0x97,
+	0x33, 0x17, 0x74, 0xc2, 0x57, 0x07, 0x17, 0xb9, 0xc7, 0x42, 0x94, 0xf2, 0xb1, 0x21, 0xf1, 0x97,
+	0xd4, 0x76, 0xaa, 0xce, 0x77, 0xc0, 0x66, 0xa4, 0xff, 0xdd, 0x4f, 0x47, 0x99, 0x0c, 0x20, 0x33,
+	0xca, 0x49, 0xd4, 0x11, 0xa3, 0x6c, 0x66, 0x13, 0x94, 0x38, 0x8a, 0xf6, 0xb0, 0x87, 0xee, 0x33,
+	0x2f, 0x1e, 0x22, 0xaa, 0xda, 0xb4, 0x7c, 0x41, 0x55, 0xa6, 0x63, 0x8e, 0x9f, 0x0e, 0xc2, 0x3b,
+	0x00, 0xc6, 0xf8, 0x63, 0xe6, 0xb9, 0x24, 0x2d, 0xf5, 0x92, 0x4c, 0x29, 0xc5, 0xd8, 0x21, 0x2a,
+	0x34, 0x95, 0x31, 0x1f, 0x80, 0x7a, 0x72, 0x25, 0xdb, 0xb2, 0x29, 0xbb, 0x29, 0xcb, 0xfa, 0xf7,
+	0x28, 0x69, 0x81, 0x32, 0x58, 0xf7, 0x22, 0xe4, 0x0a, 0x96, 0x5c, 0xd0, 0x64, 0x69, 0xfe, 0x60,
+	0x80, 0x5b, 0x79, 0x78, 0xf4, 0x45, 0xff, 0x0a, 0x54, 0xbc, 0xb9, 0x28, 0xdd, 0xc3, 0x77, 0x97,
+	0xf4, 0xf0, 0x7c, 0x19, 0xdd, 0xd7, 0x0b, 0x24, 0x4c, 0xae, 0x6d, 0xb7, 0x08, 0x59, 0x6e, 0xfb,
+	0x03, 0x00, 0xa6, 0xa3, 0x4f, 0x57, 0xb7, 0x6d, 0xa9, 0x39, 0x69, 0x8d, 0xe7, 0xa4, 0xa5, 0x66,
+	0xf2, 0x74, 0xba, 0x04, 0x48, 0xe7, 0x76, 0x53, 0x99, 0xe6, 0x9f, 0xc9, 0x21, 0x2d, 0x51, 0xcd,
+	0x79, 0x48, 0xab, 0xff, 0xf3, 0x21, 0xc1, 0x87, 0x19, 0xdf, 0x2b, 0xd2, 0xf7, 0x8d, 0xa5, 0xbe,
+	0x55, 0xf5, 0x69, 0xe3, 0x3b, 0xc7, 0x45, 0xb0, 0x26, 0x8d, 0xc3, 0xef, 0x0d, 0x50, 0x54, 0xc3,
+	0x17, 0x36, 0x96, 0x94, 0x7e, 0x76, 0xfa, 0x57, 0x76, 0xfe, 0x49, 0x8a, 0xaa, 0xc3, 0xdc, 0xfe,
+	0xfa, 0xc7, 0xdf, 0xbe, 0x5b, 0xa9, 0xc1, 0xaa, 0xdd, 0x43, 0xb7, 0x55, 0xb2, 0x9d, 0x79, 0x93,
+	0xd4, 0xf4, 0x87, 0x3f, 0x19, 0xe0, 0xe2, 0xdf, 0xe6, 0x32, 0x7c, 0x37, 0x8f, 0xde, 0xec, 0xe7,
+	0xa2, 0xf2, 0xde, 0xbf, 0xca, 0xd5, 0x45, 0x77, 0x64, 0xd1, 0x6d, 0xd8, 0x9a, 0x57, 0xf4, 0xc1,
+	0x82, 0x77, 0xe6, 0xd0, 0xb6, 0xf6, 0x11, 0x21, 0xb7, 0x77, 0xa5, 0x87, 0x3f, 0x0c, 0x50, 0x99,
+	0x7f, 0x0b, 0xe0, 0x87, 0x39, 0xcb, 0x5c, 0xda, 0x25, 0x95, 0xce, 0x7f, 0xc0, 0xa4, 0xed, 0xdf,
+	0x95, 0xf6, 0x9b, 0xb0, 0x31, 0xcf, 0x7e, 0xf6, 0xfb, 0x61, 0x64, 0x1f, 0xe8, 0x39, 0x74, 0x08,
+	0x7f, 0x37, 0xc0, 0xb5, 0xf9, 0x0a, 0x2d, 0x42, 0xf2, 0x39, 0xce, 0x33, 0x17, 0xf2, 0x39, 0xce,
+	0xd5, 0xeb, 0xa6, 0x2d, 0x1d, 0xd7, 0xe1, 0x8d, 0x9c, 0x8e, 0xef, 0xb5, 0x8f, 0x4e, 0xaa, 0xc6,
+	0xf1, 0x49, 0xd5, 0xf8, 0xf5, 0xa4, 0x6a, 0x7c, 0x73, 0x5a, 0x2d, 0x1c, 0x9f, 0x56, 0x0b, 0x3f,
+	0x9f, 0x56, 0x0b, 0xcf, 0xea, 0x01, 0x16, 0x83, 0xb8, 0x67, 0x79, 0x6c, 0x38, 0x8b, 0xec, 0x85,
+	0xa4, 0x93, 0xaf, 0x4d, 0xaf, 0x28, 0x3f, 0xb5, 0x9a, 0x7f, 0x05, 0x00, 0x00, 0xff, 0xff, 0xaf,
+	0x12, 0x4c, 0x46, 0x69, 0x0a, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -557,8 +574,8 @@ const _ = grpc.SupportPackageIsVersion4
 type QueryClient interface {
 	Params(ctx context.Context, in *QueryParamsRequest, opts ...grpc.CallOption) (*QueryParamsResponse, error)
 	GetDotWellKnown(ctx context.Context, in *QueryGetDotWellKnownRequest, opts ...grpc.CallOption) (*QueryGetDotWellKnownResponse, error)
-	ClientRegistry(ctx context.Context, in *QueryGetClientRegistryRequest, opts ...grpc.CallOption) (*QueryGetClientRegistryResponse, error)
-	ClientRegistryAll(ctx context.Context, in *QueryAllClientRegistryRequest, opts ...grpc.CallOption) (*QueryAllClientRegistryResponse, error)
+	ClientRegistrationRegistry(ctx context.Context, in *QueryGetClientRegistrationRegistryRequest, opts ...grpc.CallOption) (*QueryGetClientRegistrationRegistryResponse, error)
+	ClientRegistrationRegistryAll(ctx context.Context, in *QueryAllClientRegistrationRegistryRequest, opts ...grpc.CallOption) (*QueryAllClientRegistrationRegistryResponse, error)
 }
 
 type queryClient struct {
@@ -587,18 +604,18 @@ func (c *queryClient) GetDotWellKnown(ctx context.Context, in *QueryGetDotWellKn
 	return out, nil
 }
 
-func (c *queryClient) ClientRegistry(ctx context.Context, in *QueryGetClientRegistryRequest, opts ...grpc.CallOption) (*QueryGetClientRegistryResponse, error) {
-	out := new(QueryGetClientRegistryResponse)
-	err := c.cc.Invoke(ctx, "/beheroes.doxchain.idp.v1beta1.Query/ClientRegistry", in, out, opts...)
+func (c *queryClient) ClientRegistrationRegistry(ctx context.Context, in *QueryGetClientRegistrationRegistryRequest, opts ...grpc.CallOption) (*QueryGetClientRegistrationRegistryResponse, error) {
+	out := new(QueryGetClientRegistrationRegistryResponse)
+	err := c.cc.Invoke(ctx, "/beheroes.doxchain.idp.v1beta1.Query/ClientRegistrationRegistry", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *queryClient) ClientRegistryAll(ctx context.Context, in *QueryAllClientRegistryRequest, opts ...grpc.CallOption) (*QueryAllClientRegistryResponse, error) {
-	out := new(QueryAllClientRegistryResponse)
-	err := c.cc.Invoke(ctx, "/beheroes.doxchain.idp.v1beta1.Query/ClientRegistryAll", in, out, opts...)
+func (c *queryClient) ClientRegistrationRegistryAll(ctx context.Context, in *QueryAllClientRegistrationRegistryRequest, opts ...grpc.CallOption) (*QueryAllClientRegistrationRegistryResponse, error) {
+	out := new(QueryAllClientRegistrationRegistryResponse)
+	err := c.cc.Invoke(ctx, "/beheroes.doxchain.idp.v1beta1.Query/ClientRegistrationRegistryAll", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -609,8 +626,8 @@ func (c *queryClient) ClientRegistryAll(ctx context.Context, in *QueryAllClientR
 type QueryServer interface {
 	Params(context.Context, *QueryParamsRequest) (*QueryParamsResponse, error)
 	GetDotWellKnown(context.Context, *QueryGetDotWellKnownRequest) (*QueryGetDotWellKnownResponse, error)
-	ClientRegistry(context.Context, *QueryGetClientRegistryRequest) (*QueryGetClientRegistryResponse, error)
-	ClientRegistryAll(context.Context, *QueryAllClientRegistryRequest) (*QueryAllClientRegistryResponse, error)
+	ClientRegistrationRegistry(context.Context, *QueryGetClientRegistrationRegistryRequest) (*QueryGetClientRegistrationRegistryResponse, error)
+	ClientRegistrationRegistryAll(context.Context, *QueryAllClientRegistrationRegistryRequest) (*QueryAllClientRegistrationRegistryResponse, error)
 }
 
 // UnimplementedQueryServer can be embedded to have forward compatible implementations.
@@ -623,11 +640,11 @@ func (*UnimplementedQueryServer) Params(ctx context.Context, req *QueryParamsReq
 func (*UnimplementedQueryServer) GetDotWellKnown(ctx context.Context, req *QueryGetDotWellKnownRequest) (*QueryGetDotWellKnownResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDotWellKnown not implemented")
 }
-func (*UnimplementedQueryServer) ClientRegistry(ctx context.Context, req *QueryGetClientRegistryRequest) (*QueryGetClientRegistryResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ClientRegistry not implemented")
+func (*UnimplementedQueryServer) ClientRegistrationRegistry(ctx context.Context, req *QueryGetClientRegistrationRegistryRequest) (*QueryGetClientRegistrationRegistryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ClientRegistrationRegistry not implemented")
 }
-func (*UnimplementedQueryServer) ClientRegistryAll(ctx context.Context, req *QueryAllClientRegistryRequest) (*QueryAllClientRegistryResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ClientRegistryAll not implemented")
+func (*UnimplementedQueryServer) ClientRegistrationRegistryAll(ctx context.Context, req *QueryAllClientRegistrationRegistryRequest) (*QueryAllClientRegistrationRegistryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ClientRegistrationRegistryAll not implemented")
 }
 
 func RegisterQueryServer(s grpc1.Server, srv QueryServer) {
@@ -670,38 +687,38 @@ func _Query_GetDotWellKnown_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Query_ClientRegistry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryGetClientRegistryRequest)
+func _Query_ClientRegistrationRegistry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryGetClientRegistrationRegistryRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(QueryServer).ClientRegistry(ctx, in)
+		return srv.(QueryServer).ClientRegistrationRegistry(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/beheroes.doxchain.idp.v1beta1.Query/ClientRegistry",
+		FullMethod: "/beheroes.doxchain.idp.v1beta1.Query/ClientRegistrationRegistry",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).ClientRegistry(ctx, req.(*QueryGetClientRegistryRequest))
+		return srv.(QueryServer).ClientRegistrationRegistry(ctx, req.(*QueryGetClientRegistrationRegistryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Query_ClientRegistryAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(QueryAllClientRegistryRequest)
+func _Query_ClientRegistrationRegistryAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryAllClientRegistrationRegistryRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(QueryServer).ClientRegistryAll(ctx, in)
+		return srv.(QueryServer).ClientRegistrationRegistryAll(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/beheroes.doxchain.idp.v1beta1.Query/ClientRegistryAll",
+		FullMethod: "/beheroes.doxchain.idp.v1beta1.Query/ClientRegistrationRegistryAll",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(QueryServer).ClientRegistryAll(ctx, req.(*QueryAllClientRegistryRequest))
+		return srv.(QueryServer).ClientRegistrationRegistryAll(ctx, req.(*QueryAllClientRegistrationRegistryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -719,12 +736,12 @@ var _Query_serviceDesc = grpc.ServiceDesc{
 			Handler:    _Query_GetDotWellKnown_Handler,
 		},
 		{
-			MethodName: "ClientRegistry",
-			Handler:    _Query_ClientRegistry_Handler,
+			MethodName: "ClientRegistrationRegistry",
+			Handler:    _Query_ClientRegistrationRegistry_Handler,
 		},
 		{
-			MethodName: "ClientRegistryAll",
-			Handler:    _Query_ClientRegistryAll_Handler,
+			MethodName: "ClientRegistrationRegistryAll",
+			Handler:    _Query_ClientRegistrationRegistryAll_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -928,7 +945,7 @@ func (m *QueryGetDotWellKnownResponse) MarshalToSizedBuffer(dAtA []byte) (int, e
 	return len(dAtA) - i, nil
 }
 
-func (m *QueryGetClientRegistryRequest) Marshal() (dAtA []byte, err error) {
+func (m *QueryGetClientRegistrationRegistryRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -938,12 +955,12 @@ func (m *QueryGetClientRegistryRequest) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *QueryGetClientRegistryRequest) MarshalTo(dAtA []byte) (int, error) {
+func (m *QueryGetClientRegistrationRegistryRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *QueryGetClientRegistryRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *QueryGetClientRegistrationRegistryRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -958,7 +975,7 @@ func (m *QueryGetClientRegistryRequest) MarshalToSizedBuffer(dAtA []byte) (int, 
 	return len(dAtA) - i, nil
 }
 
-func (m *QueryGetClientRegistryResponse) Marshal() (dAtA []byte, err error) {
+func (m *QueryGetClientRegistrationRegistryResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -968,18 +985,18 @@ func (m *QueryGetClientRegistryResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *QueryGetClientRegistryResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *QueryGetClientRegistrationRegistryResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *QueryGetClientRegistryResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *QueryGetClientRegistrationRegistryResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
 	_ = l
 	{
-		size, err := m.ClientRegistry.MarshalToSizedBuffer(dAtA[:i])
+		size, err := m.ClientRegistrationRegistry.MarshalToSizedBuffer(dAtA[:i])
 		if err != nil {
 			return 0, err
 		}
@@ -991,7 +1008,7 @@ func (m *QueryGetClientRegistryResponse) MarshalToSizedBuffer(dAtA []byte) (int,
 	return len(dAtA) - i, nil
 }
 
-func (m *QueryAllClientRegistryRequest) Marshal() (dAtA []byte, err error) {
+func (m *QueryAllClientRegistrationRegistryRequest) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1001,12 +1018,12 @@ func (m *QueryAllClientRegistryRequest) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *QueryAllClientRegistryRequest) MarshalTo(dAtA []byte) (int, error) {
+func (m *QueryAllClientRegistrationRegistryRequest) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *QueryAllClientRegistryRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *QueryAllClientRegistrationRegistryRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1026,7 +1043,7 @@ func (m *QueryAllClientRegistryRequest) MarshalToSizedBuffer(dAtA []byte) (int, 
 	return len(dAtA) - i, nil
 }
 
-func (m *QueryAllClientRegistryResponse) Marshal() (dAtA []byte, err error) {
+func (m *QueryAllClientRegistrationRegistryResponse) Marshal() (dAtA []byte, err error) {
 	size := m.Size()
 	dAtA = make([]byte, size)
 	n, err := m.MarshalToSizedBuffer(dAtA[:size])
@@ -1036,12 +1053,12 @@ func (m *QueryAllClientRegistryResponse) Marshal() (dAtA []byte, err error) {
 	return dAtA[:n], nil
 }
 
-func (m *QueryAllClientRegistryResponse) MarshalTo(dAtA []byte) (int, error) {
+func (m *QueryAllClientRegistrationRegistryResponse) MarshalTo(dAtA []byte) (int, error) {
 	size := m.Size()
 	return m.MarshalToSizedBuffer(dAtA[:size])
 }
 
-func (m *QueryAllClientRegistryResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+func (m *QueryAllClientRegistrationRegistryResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1058,10 +1075,10 @@ func (m *QueryAllClientRegistryResponse) MarshalToSizedBuffer(dAtA []byte) (int,
 		i--
 		dAtA[i] = 0x12
 	}
-	if len(m.ClientRegistry) > 0 {
-		for iNdEx := len(m.ClientRegistry) - 1; iNdEx >= 0; iNdEx-- {
+	if len(m.ClientRegistrationRegistry) > 0 {
+		for iNdEx := len(m.ClientRegistrationRegistry) - 1; iNdEx >= 0; iNdEx-- {
 			{
-				size, err := m.ClientRegistry[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				size, err := m.ClientRegistrationRegistry[iNdEx].MarshalToSizedBuffer(dAtA[:i])
 				if err != nil {
 					return 0, err
 				}
@@ -1180,7 +1197,7 @@ func (m *QueryGetDotWellKnownResponse) Size() (n int) {
 	return n
 }
 
-func (m *QueryGetClientRegistryRequest) Size() (n int) {
+func (m *QueryGetClientRegistrationRegistryRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1193,18 +1210,18 @@ func (m *QueryGetClientRegistryRequest) Size() (n int) {
 	return n
 }
 
-func (m *QueryGetClientRegistryResponse) Size() (n int) {
+func (m *QueryGetClientRegistrationRegistryResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	l = m.ClientRegistry.Size()
+	l = m.ClientRegistrationRegistry.Size()
 	n += 1 + l + sovQuery(uint64(l))
 	return n
 }
 
-func (m *QueryAllClientRegistryRequest) Size() (n int) {
+func (m *QueryAllClientRegistrationRegistryRequest) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -1217,14 +1234,14 @@ func (m *QueryAllClientRegistryRequest) Size() (n int) {
 	return n
 }
 
-func (m *QueryAllClientRegistryResponse) Size() (n int) {
+func (m *QueryAllClientRegistrationRegistryResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
 	var l int
 	_ = l
-	if len(m.ClientRegistry) > 0 {
-		for _, e := range m.ClientRegistry {
+	if len(m.ClientRegistrationRegistry) > 0 {
+		for _, e := range m.ClientRegistrationRegistry {
 			l = e.Size()
 			n += 1 + l + sovQuery(uint64(l))
 		}
@@ -1891,7 +1908,7 @@ func (m *QueryGetDotWellKnownResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *QueryGetClientRegistryRequest) Unmarshal(dAtA []byte) error {
+func (m *QueryGetClientRegistrationRegistryRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1914,10 +1931,10 @@ func (m *QueryGetClientRegistryRequest) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: QueryGetClientRegistryRequest: wiretype end group for non-group")
+			return fmt.Errorf("proto: QueryGetClientRegistrationRegistryRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryGetClientRegistryRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: QueryGetClientRegistrationRegistryRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -1973,7 +1990,7 @@ func (m *QueryGetClientRegistryRequest) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *QueryGetClientRegistryResponse) Unmarshal(dAtA []byte) error {
+func (m *QueryGetClientRegistrationRegistryResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -1996,15 +2013,15 @@ func (m *QueryGetClientRegistryResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: QueryGetClientRegistryResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: QueryGetClientRegistrationRegistryResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryGetClientRegistryResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: QueryGetClientRegistrationRegistryResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ClientRegistry", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field ClientRegistrationRegistry", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -2031,7 +2048,7 @@ func (m *QueryGetClientRegistryResponse) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if err := m.ClientRegistry.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+			if err := m.ClientRegistrationRegistry.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
@@ -2056,7 +2073,7 @@ func (m *QueryGetClientRegistryResponse) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *QueryAllClientRegistryRequest) Unmarshal(dAtA []byte) error {
+func (m *QueryAllClientRegistrationRegistryRequest) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2079,10 +2096,10 @@ func (m *QueryAllClientRegistryRequest) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: QueryAllClientRegistryRequest: wiretype end group for non-group")
+			return fmt.Errorf("proto: QueryAllClientRegistrationRegistryRequest: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryAllClientRegistryRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: QueryAllClientRegistrationRegistryRequest: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
@@ -2142,7 +2159,7 @@ func (m *QueryAllClientRegistryRequest) Unmarshal(dAtA []byte) error {
 	}
 	return nil
 }
-func (m *QueryAllClientRegistryResponse) Unmarshal(dAtA []byte) error {
+func (m *QueryAllClientRegistrationRegistryResponse) Unmarshal(dAtA []byte) error {
 	l := len(dAtA)
 	iNdEx := 0
 	for iNdEx < l {
@@ -2165,15 +2182,15 @@ func (m *QueryAllClientRegistryResponse) Unmarshal(dAtA []byte) error {
 		fieldNum := int32(wire >> 3)
 		wireType := int(wire & 0x7)
 		if wireType == 4 {
-			return fmt.Errorf("proto: QueryAllClientRegistryResponse: wiretype end group for non-group")
+			return fmt.Errorf("proto: QueryAllClientRegistrationRegistryResponse: wiretype end group for non-group")
 		}
 		if fieldNum <= 0 {
-			return fmt.Errorf("proto: QueryAllClientRegistryResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+			return fmt.Errorf("proto: QueryAllClientRegistrationRegistryResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ClientRegistry", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field ClientRegistrationRegistry", wireType)
 			}
 			var msglen int
 			for shift := uint(0); ; shift += 7 {
@@ -2200,8 +2217,8 @@ func (m *QueryAllClientRegistryResponse) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.ClientRegistry = append(m.ClientRegistry, ClientRegistry{})
-			if err := m.ClientRegistry[len(m.ClientRegistry)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+			m.ClientRegistrationRegistry = append(m.ClientRegistrationRegistry, ClientRegistrationRegistry{})
+			if err := m.ClientRegistrationRegistry[len(m.ClientRegistrationRegistry)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex

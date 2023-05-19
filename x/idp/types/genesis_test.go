@@ -22,7 +22,7 @@ func TestGenesisState_Validate(t *testing.T) {
 			desc: "valid genesis state",
 			genState: &types.GenesisState{
 
-				ClientRegistryList: []types.ClientRegistry{
+				ClientRegistrationRegistryList: []types.ClientRegistrationRegistry{
 					{
 						Index: "0",
 					},
@@ -35,9 +35,9 @@ func TestGenesisState_Validate(t *testing.T) {
 			valid: true,
 		},
 		{
-			desc: "duplicated ClientRegistry",
+			desc: "duplicated ClientRegistrationRegistry",
 			genState: &types.GenesisState{
-				ClientRegistryList: []types.ClientRegistry{
+				ClientRegistrationRegistryList: []types.ClientRegistrationRegistry{
 					{
 						Index: "0",
 					},

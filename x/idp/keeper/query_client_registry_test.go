@@ -18,33 +18,33 @@ import (
 // Prevent strconv unused error
 var _ = strconv.IntSize
 
-func TestClientRegistryQuerySingle(t *testing.T) {
+func TestClientRegistrationRegistryQuerySingle(t *testing.T) {
 	keeper, ctx := keepertest.IdpKeeper(t)
 	wctx := sdk.WrapSDKContext(ctx)
-	msgs := createNClientRegistry(keeper, ctx, 2)
+	msgs := createNClientRegistrationRegistry(keeper, ctx, 2)
 	for _, tc := range []struct {
 		desc     string
-		request  *types.QueryGetClientRegistryRequest
-		response *types.QueryGetClientRegistryResponse
+		request  *types.QueryGetClientRegistrationRegistryRequest
+		response *types.QueryGetClientRegistrationRegistryResponse
 		err      error
 	}{
 		{
 			desc: "First",
-			request: &types.QueryGetClientRegistryRequest{
+			request: &types.QueryGetClientRegistrationRegistryRequest{
 				Index: msgs[0].Index,
 			},
-			response: &types.QueryGetClientRegistryResponse{ClientRegistry: msgs[0]},
+			response: &types.QueryGetClientRegistrationRegistryResponse{ClientRegistrationRegistry: msgs[0]},
 		},
 		{
 			desc: "Second",
-			request: &types.QueryGetClientRegistryRequest{
+			request: &types.QueryGetClientRegistrationRegistryRequest{
 				Index: msgs[1].Index,
 			},
-			response: &types.QueryGetClientRegistryResponse{ClientRegistry: msgs[1]},
+			response: &types.QueryGetClientRegistrationRegistryResponse{ClientRegistrationRegistry: msgs[1]},
 		},
 		{
 			desc: "KeyNotFound",
-			request: &types.QueryGetClientRegistryRequest{
+			request: &types.QueryGetClientRegistrationRegistryRequest{
 				Index: strconv.Itoa(100000),
 			},
 			err: status.Error(codes.NotFound, "not found"),
@@ -55,7 +55,7 @@ func TestClientRegistryQuerySingle(t *testing.T) {
 		},
 	} {
 		t.Run(tc.desc, func(t *testing.T) {
-			response, err := keeper.ClientRegistry(wctx, tc.request)
+			response, err := keeper.ClientRegistrationRegistry(wctx, tc.request)
 			if tc.err != nil {
 				require.ErrorIs(t, err, tc.err)
 			} else {
@@ -69,13 +69,13 @@ func TestClientRegistryQuerySingle(t *testing.T) {
 	}
 }
 
-func TestClientRegistryQueryPaginated(t *testing.T) {
+func TestClientRegistrationRegistryQueryPaginated(t *testing.T) {
 	keeper, ctx := keepertest.IdpKeeper(t)
 	wctx := sdk.WrapSDKContext(ctx)
-	msgs := createNClientRegistry(keeper, ctx, 5)
+	msgs := createNClientRegistrationRegistry(keeper, ctx, 5)
 
-	request := func(next []byte, offset, limit uint64, total bool) *types.QueryAllClientRegistryRequest {
-		return &types.QueryAllClientRegistryRequest{
+	request := func(next []byte, offset, limit uint64, total bool) *types.QueryAllClientRegistrationRegistryRequest {
+		return &types.QueryAllClientRegistrationRegistryRequest{
 			Pagination: &query.PageRequest{
 				Key:        next,
 				Offset:     offset,
@@ -87,12 +87,12 @@ func TestClientRegistryQueryPaginated(t *testing.T) {
 	t.Run("ByOffset", func(t *testing.T) {
 		step := 2
 		for i := 0; i < len(msgs); i += step {
-			resp, err := keeper.ClientRegistryAll(wctx, request(nil, uint64(i), uint64(step), false))
+			resp, err := keeper.ClientRegistrationRegistryAll(wctx, request(nil, uint64(i), uint64(step), false))
 			require.NoError(t, err)
-			require.LessOrEqual(t, len(resp.ClientRegistry), step)
+			require.LessOrEqual(t, len(resp.ClientRegistrationRegistry), step)
 			require.Subset(t,
 				nullify.Fill(msgs),
-				nullify.Fill(resp.ClientRegistry),
+				nullify.Fill(resp.ClientRegistrationRegistry),
 			)
 		}
 	})
@@ -100,27 +100,27 @@ func TestClientRegistryQueryPaginated(t *testing.T) {
 		step := 2
 		var next []byte
 		for i := 0; i < len(msgs); i += step {
-			resp, err := keeper.ClientRegistryAll(wctx, request(next, 0, uint64(step), false))
+			resp, err := keeper.ClientRegistrationRegistryAll(wctx, request(next, 0, uint64(step), false))
 			require.NoError(t, err)
-			require.LessOrEqual(t, len(resp.ClientRegistry), step)
+			require.LessOrEqual(t, len(resp.ClientRegistrationRegistry), step)
 			require.Subset(t,
 				nullify.Fill(msgs),
-				nullify.Fill(resp.ClientRegistry),
+				nullify.Fill(resp.ClientRegistrationRegistry),
 			)
 			next = resp.Pagination.NextKey
 		}
 	})
 	t.Run("Total", func(t *testing.T) {
-		resp, err := keeper.ClientRegistryAll(wctx, request(nil, 0, 0, true))
+		resp, err := keeper.ClientRegistrationRegistryAll(wctx, request(nil, 0, 0, true))
 		require.NoError(t, err)
 		require.Equal(t, len(msgs), int(resp.Pagination.Total))
 		require.ElementsMatch(t,
 			nullify.Fill(msgs),
-			nullify.Fill(resp.ClientRegistry),
+			nullify.Fill(resp.ClientRegistrationRegistry),
 		)
 	})
 	t.Run("InvalidRequest", func(t *testing.T) {
-		_, err := keeper.ClientRegistryAll(wctx, nil)
+		_, err := keeper.ClientRegistrationRegistryAll(wctx, nil)
 		require.ErrorIs(t, err, status.Error(codes.InvalidArgument, "invalid request"))
 	})
 }

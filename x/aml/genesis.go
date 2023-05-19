@@ -11,7 +11,7 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 	// Set if defined
 	if genState.RequestList != nil {
 		for _, elem := range genState.RequestList {
-			k.SetAMLRequest(ctx, elem)
+			k.SetAMLRegistration(ctx, elem)
 		}
 	}
 	// this line is used by starport scaffolding # genesis/module/init
@@ -24,7 +24,7 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 	genesis.Params = k.GetParams(ctx)
 
 	// Get all requests
-	requests := k.GetAllAMLRequest(ctx)
+	requests := k.GetAllAMLRegistration(ctx)
 	if requests != nil {
 		genesis.RequestList = requests
 	}

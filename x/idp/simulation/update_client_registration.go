@@ -17,10 +17,10 @@ func SimulateMsgUpdateClientRegistration(
 ) simtypes.Operation {
 	return func(r *rand.Rand, app *baseapp.BaseApp, ctx sdk.Context, accs []simtypes.Account, chainID string,
 	) (simtypes.OperationMsg, []simtypes.FutureOperation, error) {
-		msg := &types.MsgUpdateClientRegistration{}
+		msg := &types.MsgUpdateClientRegistrationRequest{}
 
 		// TODO: Handling the UpdateClientRegistration simulation
 
-		return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "UpdateClientRegistration simulation not implemented"), nil, nil
+		return simtypes.NoOpMsg(types.ModuleName, msg.Type(), "UpdateClientRegistrationRequest simulation not implemented"), nil, nil
 	}
 }

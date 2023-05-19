@@ -5,25 +5,25 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-const TypeMsgApproveAMLRequest = "approve_aml_request"
+const TypeMsgApproveAMLRegistration = "approve_aml_request"
 
-var _ sdk.Msg = &MsgApproveAMLRequest{}
+var _ sdk.Msg = &MsgApproveAMLRegistrationRequest{}
 
-func NewMsgApproveAMLRequest(creator string) *MsgApproveAMLRequest {
-  return &MsgApproveAMLRequest{
+func NewMsgApproveAMLRegistration(creator string) *MsgApproveAMLRegistrationRequest {
+  return &MsgApproveAMLRegistrationRequest{
 		Creator: creator,
 	}
 }
 
-func (msg *MsgApproveAMLRequest) Route() string {
+func (msg *MsgApproveAMLRegistrationRequest) Route() string {
   return RouterKey
 }
 
-func (msg *MsgApproveAMLRequest) Type() string {
-  return TypeMsgApproveAMLRequest
+func (msg *MsgApproveAMLRegistrationRequest) Type() string {
+  return TypeMsgApproveAMLRegistration
 }
 
-func (msg *MsgApproveAMLRequest) GetSigners() []sdk.AccAddress {
+func (msg *MsgApproveAMLRegistrationRequest) GetSigners() []sdk.AccAddress {
   creator, err := sdk.AccAddressFromBech32(msg.Creator)
   if err != nil {
     panic(err)
@@ -31,12 +31,12 @@ func (msg *MsgApproveAMLRequest) GetSigners() []sdk.AccAddress {
   return []sdk.AccAddress{creator}
 }
 
-func (msg *MsgApproveAMLRequest) GetSignBytes() []byte {
+func (msg *MsgApproveAMLRegistrationRequest) GetSignBytes() []byte {
   bz := ModuleCdc.MustMarshalJSON(msg)
   return sdk.MustSortJSON(bz)
 }
 
-func (msg *MsgApproveAMLRequest) ValidateBasic() error {
+func (msg *MsgApproveAMLRegistrationRequest) ValidateBasic() error {
   _, err := sdk.AccAddressFromBech32(msg.Creator)
   	if err != nil {
   		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)

@@ -19,6 +19,6 @@ func KeyPrefix(p string) []byte {
 }
 
 const (
-	AMLRequestKey      = "AMLRequest/value/"
-	AMLRequestCountKey = "AMLRequest/count/"
+	AMLRegistrationKey      = "AMLRegistration/value/"
+	AMLRegistrationCountKey = "AMLRegistration/count/"
 )

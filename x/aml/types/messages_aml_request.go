@@ -7,28 +7,28 @@ import (
 )
 
 const (
-	TypeMsgCreateAMLRequest = "create_aml_request"
-	TypeMsgDeleteAMLRequest = "delete_aml_request"
+	TypeMsgCreateAMLRegistration = "create_aml_request"
+	TypeMsgDeleteAMLRegistration = "delete_aml_request"
 )
 
-var _ sdk.Msg = &MsgCreateAMLRequest{}
+var _ sdk.Msg = &MsgCreateAMLRegistrationRequest{}
 
-func NewMsgCreateAMLRequest(creator string, owner didTypes.Did) *MsgCreateAMLRequest {
-	return &MsgCreateAMLRequest{
+func NewMsgCreateAMLRegistration(creator string, owner didTypes.Did) *MsgCreateAMLRegistrationRequest {
+	return &MsgCreateAMLRegistrationRequest{
 		Creator: creator,
 		Owner:     owner,
 	}
 }
 
-func (msg *MsgCreateAMLRequest) Route() string {
+func (msg *MsgCreateAMLRegistrationRequest) Route() string {
 	return RouterKey
 }
 
-func (msg *MsgCreateAMLRequest) Type() string {
-	return TypeMsgCreateAMLRequest
+func (msg *MsgCreateAMLRegistrationRequest) Type() string {
+	return TypeMsgCreateAMLRegistration
 }
 
-func (msg *MsgCreateAMLRequest) GetSigners() []sdk.AccAddress {
+func (msg *MsgCreateAMLRegistrationRequest) GetSigners() []sdk.AccAddress {
 	creator, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		panic(err)
@@ -36,12 +36,12 @@ func (msg *MsgCreateAMLRequest) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{creator}
 }
 
-func (msg *MsgCreateAMLRequest) GetSignBytes() []byte {
+func (msg *MsgCreateAMLRegistrationRequest) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(msg)
 	return sdk.MustSortJSON(bz)
 }
 
-func (msg *MsgCreateAMLRequest) ValidateBasic() error {
+func (msg *MsgCreateAMLRegistrationRequest) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
@@ -49,22 +49,22 @@ func (msg *MsgCreateAMLRequest) ValidateBasic() error {
 	return nil
 }
 
-var _ sdk.Msg = &MsgDeleteAMLRequest{}
+var _ sdk.Msg = &MsgDeleteAMLRegistrationRequest{}
 
-func NewMsgDeleteAMLRequest(creator string) *MsgDeleteAMLRequest {
-	return &MsgDeleteAMLRequest{
+func NewMsgDeleteAMLRegistration(creator string) *MsgDeleteAMLRegistrationRequest {
+	return &MsgDeleteAMLRegistrationRequest{
 		Creator: creator,
 	}
 }
-func (msg *MsgDeleteAMLRequest) Route() string {
+func (msg *MsgDeleteAMLRegistrationRequest) Route() string {
 	return RouterKey
 }
 
-func (msg *MsgDeleteAMLRequest) Type() string {
-	return TypeMsgDeleteAMLRequest
+func (msg *MsgDeleteAMLRegistrationRequest) Type() string {
+	return TypeMsgDeleteAMLRegistration
 }
 
-func (msg *MsgDeleteAMLRequest) GetSigners() []sdk.AccAddress {
+func (msg *MsgDeleteAMLRegistrationRequest) GetSigners() []sdk.AccAddress {
 	creator, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		panic(err)
@@ -72,12 +72,12 @@ func (msg *MsgDeleteAMLRequest) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{creator}
 }
 
-func (msg *MsgDeleteAMLRequest) GetSignBytes() []byte {
+func (msg *MsgDeleteAMLRegistrationRequest) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(msg)
 	return sdk.MustSortJSON(bz)
 }
 
-func (msg *MsgDeleteAMLRequest) ValidateBasic() error {
+func (msg *MsgDeleteAMLRegistrationRequest) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)

@@ -9,8 +9,8 @@ import "doxchain/aml/v1beta1/aml_request.proto";
 option go_package = "github.com/be-heroes/doxchain/x/aml/types";
 
 message GenesisState {
-             Params     params       = 1 [(gogoproto.nullable) = false];
-  repeated   AMLRequest requestList  = 2 [(gogoproto.nullable) = false];
-             uint64     requestCount = 3;
+  Params params = 1 [(gogoproto.nullable) = false];
+  repeated AMLRegistration requestList = 2 [(gogoproto.nullable) = false];
+  uint64 requestCount = 3;
 }
 

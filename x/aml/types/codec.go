@@ -8,17 +8,17 @@ import (
 )
 
 func RegisterCodec(cdc *codec.LegacyAmino) {
-	cdc.RegisterConcrete(&MsgCreateAMLRequest{}, "aml/CreateAMLRequest", nil)
-	cdc.RegisterConcrete(&MsgDeleteAMLRequest{}, "aml/DeleteAMLRequest", nil)
-	cdc.RegisterConcrete(&MsgApproveAMLRequest{}, "aml/ApproveAMLRequest", nil)
+	cdc.RegisterConcrete(&MsgCreateAMLRegistrationRequest{}, "aml/CreateAMLRegistrationRequest", nil)
+	cdc.RegisterConcrete(&MsgDeleteAMLRegistrationRequest{}, "aml/DeleteAMLRegistrationRequest", nil)
+	cdc.RegisterConcrete(&MsgApproveAMLRegistrationRequest{}, "aml/ApproveAMLRegistrationRequest", nil)
 // this line is used by starport scaffolding # 2
 }
 
 func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 	registry.RegisterImplementations((*sdk.Msg)(nil),
-		&MsgCreateAMLRequest{},
-		&MsgDeleteAMLRequest{},
-		&MsgApproveAMLRequest{},
+		&MsgCreateAMLRegistrationRequest{},
+		&MsgDeleteAMLRegistrationRequest{},
+		&MsgApproveAMLRegistrationRequest{},
 	)
 
 	msgservice.RegisterMsgServiceDesc(registry, &_Msg_serviceDesc)

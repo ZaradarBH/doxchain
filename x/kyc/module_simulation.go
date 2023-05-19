@@ -24,17 +24,17 @@ var (
 )
 
 const (
-	opWeightMsgCreateKYCRequest = "op_weight_msg_kyc_request"
+	opWeightMsgCreateKYCRegistration = "op_weight_msg_kyc_request"
 	// TODO: Determine the simulation weight value
-	defaultWeightMsgCreateKYCRequest int = 100
+	defaultWeightMsgCreateKYCRegistration int = 100
 
-	opWeightMsgUpdateKYCRequest = "op_weight_msg_kyc_request"
+	opWeightMsgUpdateKYCRegistration = "op_weight_msg_kyc_request"
 	// TODO: Determine the simulation weight value
-	defaultWeightMsgUpdateKYCRequest int = 100
+	defaultWeightMsgUpdateKYCRegistration int = 100
 
-	opWeightMsgDeleteKYCRequest = "op_weight_msg_kyc_request"
+	opWeightMsgDeleteKYCRegistration = "op_weight_msg_kyc_request"
 	// TODO: Determine the simulation weight value
-	defaultWeightMsgDeleteKYCRequest int = 100
+	defaultWeightMsgDeleteKYCRegistration int = 100
 
 	// this line is used by starport scaffolding # simapp/module/const
 )
@@ -70,26 +70,26 @@ func (am AppModule) RegisterStoreDecoder(_ sdk.StoreDecoderRegistry) {}
 func (am AppModule) WeightedOperations(simState module.SimulationState) []simtypes.WeightedOperation {
 	operations := make([]simtypes.WeightedOperation, 0)
 
-	var weightMsgCreateKYCRequest int
-	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgCreateKYCRequest, &weightMsgCreateKYCRequest, nil,
+	var weightMsgCreateKYCRegistration int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgCreateKYCRegistration, &weightMsgCreateKYCRegistration, nil,
 		func(_ *rand.Rand) {
-			weightMsgCreateKYCRequest = defaultWeightMsgCreateKYCRequest
+			weightMsgCreateKYCRegistration = defaultWeightMsgCreateKYCRegistration
 		},
 	)
 	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgCreateKYCRequest,
-		kycsimulation.SimulateMsgCreateKYCRequest(am.accountKeeper, am.bankKeeper, am.keeper),
+		weightMsgCreateKYCRegistration,
+		kycsimulation.SimulateMsgCreateKYCRegistration(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
-	var weightMsgDeleteKYCRequest int
-	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgDeleteKYCRequest, &weightMsgDeleteKYCRequest, nil,
+	var weightMsgDeleteKYCRegistration int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgDeleteKYCRegistration, &weightMsgDeleteKYCRegistration, nil,
 		func(_ *rand.Rand) {
-			weightMsgDeleteKYCRequest = defaultWeightMsgDeleteKYCRequest
+			weightMsgDeleteKYCRegistration = defaultWeightMsgDeleteKYCRegistration
 		},
 	)
 	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgDeleteKYCRequest,
-		kycsimulation.SimulateMsgDeleteKYCRequest(am.accountKeeper, am.bankKeeper, am.keeper),
+		weightMsgDeleteKYCRegistration,
+		kycsimulation.SimulateMsgDeleteKYCRegistration(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
 	// this line is used by starport scaffolding # simapp/module/operation
