@@ -19,7 +19,6 @@ func TestGenesis(t *testing.T) {
 			LastName:  "3",
 			Approved:  true,
 		},
-		// this line is used by starport scaffolding # genesis/test/state
 	}
 
 	k, ctx := keepertest.KycKeeper(t)
@@ -31,5 +30,4 @@ func TestGenesis(t *testing.T) {
 	nullify.Fill(got)
 
 	require.Equal(t, genesisState.KYCRegistration, got.KYCRegistration)
-	// this line is used by starport scaffolding # genesis/test/assert
 }

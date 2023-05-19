@@ -5,9 +5,7 @@ import (
 	"time"
 
 	"github.com/spf13/cobra"
-
 	"github.com/cosmos/cosmos-sdk/client"
-	// "github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/be-heroes/doxchain/x/kyc/types"
 )
 
@@ -20,7 +18,6 @@ const (
 	listSeparator              = ","
 )
 
-// GetTxCmd returns the transaction commands for this module
 func GetTxCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:                        types.ModuleName,
@@ -33,7 +30,6 @@ func GetTxCmd() *cobra.Command {
 	cmd.AddCommand(CmdCreateKYCRegistration())
 	cmd.AddCommand(CmdDeleteKYCRegistration())
 	cmd.AddCommand(CmdApproveKYCRegistration())
-	// this line is used by starport scaffolding # 1
 
 	return cmd
 }

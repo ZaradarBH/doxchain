@@ -587,7 +587,7 @@ paths:
                   additionalProperties: {}
       tags:
         - Query
-  /be-heroes/doxchain/aml/aml_request:
+  /be-heroes/doxchain/aml/aml_registration:
     get:
       operationId: BeheroesDoxchainAmlV1Beta1AMLRegistration
       responses:
@@ -1532,7 +1532,7 @@ paths:
           type: string
       tags:
         - Query
-  /be-heroes/doxchain/kyc/kyc_request:
+  /be-heroes/doxchain/kyc/kyc_registration:
     get:
       operationId: BeheroesDoxchainKycV1Beta1KYCRegistration
       responses:

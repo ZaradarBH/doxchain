@@ -16,12 +16,10 @@ func CmdShowAMLRegistration() *cobra.Command {
 		Args:  cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx := client.GetClientContextFromCmd(cmd)
-
 			queryClient := types.NewQueryClient(clientCtx)
-
 			params := &types.QueryGetAMLRegistrationRequest{}
-
 			res, err := queryClient.AMLRegistration(context.Background(), params)
+			
 			if err != nil {
 				return err
 			}

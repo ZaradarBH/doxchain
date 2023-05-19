@@ -5,19 +5,15 @@ import (
 	"github.com/cosmos/cosmos-sdk/x/auth/types"
 )
 
-// DidKeeper defines the expected did keeper used for simulations (noalias)
+//TODO: Remove keeper dependency
 type DidKeeper interface {
 	// Methods imported from did should be defined here
 }
 
-// AccountKeeper defines the expected account keeper used for simulations (noalias)
 type AccountKeeper interface {
 	GetAccount(ctx sdk.Context, addr sdk.AccAddress) types.AccountI
-	// Methods imported from account should be defined here
 }
 
-// BankKeeper defines the expected interface needed to retrieve account balances.
 type BankKeeper interface {
 	SpendableCoins(ctx sdk.Context, addr sdk.AccAddress) sdk.Coins
-	// Methods imported from bank should be defined here
 }

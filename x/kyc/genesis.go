@@ -9,8 +9,8 @@ import (
 // InitGenesis initializes the module's state from a provided genesis state.
 func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) {
 	// Set if defined
-	if genState.RequestList != nil {
-		for _, elem := range genState.RequestList {
+	if genState.RegistrationList != nil {
+		for _, elem := range genState.RegistrationList {
 			k.SetKYCRegistration(ctx, elem)
 		}
 	}
@@ -22,13 +22,11 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 	genesis := types.DefaultGenesis()
 	genesis.Params = k.GetParams(ctx)
+	registrations := k.GetAllKYCRegistration(ctx)
 
-	// Get all requests
-	requests := k.GetAllKYCRegistration(ctx)
-	if requests != nil {
-		genesis.RequestList = requests
+	if registrations != nil {
+		genesis.RegistrationList = registrations
 	}
-	// this line is used by starport scaffolding # genesis/module/export
 
 	return genesis
 }

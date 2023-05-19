@@ -15,11 +15,8 @@ func TestGenesis(t *testing.T) {
 		Params: types.DefaultParams(),
 
 		AMLRegistration: &types.AMLRegistration{
-			FirstName: "91",
-			LastName:  "47",
 			Approved:  true,
 		},
-		// this line is used by starport scaffolding # genesis/test/state
 	}
 
 	k, ctx := keepertest.AmlKeeper(t)
@@ -31,5 +28,4 @@ func TestGenesis(t *testing.T) {
 	nullify.Fill(got)
 
 	require.Equal(t, genesisState.AMLRegistration, got.AMLRegistration)
-	// this line is used by starport scaffolding # genesis/test/assert
 }

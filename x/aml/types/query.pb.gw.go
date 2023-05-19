@@ -226,7 +226,7 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 var (
 	pattern_Query_Params_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"be-heroes", "doxchain", "aml", "params"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_AMLRegistration_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"be-heroes", "doxchain", "aml", "aml_request"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_AMLRegistration_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"be-heroes", "doxchain", "aml", "aml_registration"}, "", runtime.AssumeColonVerbOpt(true)))
 )
 
 var (

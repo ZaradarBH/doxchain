@@ -6,7 +6,7 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "doxchain/kyc/v1beta1/params.proto";
-import "doxchain/kyc/v1beta1/kyc_request.proto";
+import "doxchain/kyc/v1beta1/kyc_registration.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/kyc/types";
 service Query {
@@ -15,7 +15,7 @@ service Query {
   }
   
   rpc KYCRegistration (QueryGetKYCRegistrationRequest) returns (QueryGetKYCRegistrationResponse) {
-    option (google.api.http).get = "/be-heroes/doxchain/kyc/kyc_request";  
+    option (google.api.http).get = "/be-heroes/doxchain/kyc/kyc_registration";  
   }
 }
 
