@@ -12,6 +12,6 @@ docker buildx build \
     --load \
     -f Dockerfile .
 
-DOCKER_BUILDKIT=0 docker build -t doxchain:arch -f tools/env/Dockerfile.arch --platform linux/amd64 tools/env
+DOCKER_BUILDKIT=0 docker build -t ghcr.io/be-heroes/doxchain:arch -f tools/env/Dockerfile.arch --platform linux/amd64 tools/env
 
 docker compose -f tools/env/docker-compose.yml up -d
