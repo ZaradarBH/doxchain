@@ -90,6 +90,17 @@ func (k Keeper) GetAllKYCRequest(ctx sdk.Context) (list []types.KYCRequest) {
 	return
 }
 
+// Approves an KYCRequest in the store
+func (k Keeper) ApproveKYCRequest(ctx sdk.Context, creator string) {
+	request, found := k.GetKYCRequest(ctx, creator)
+
+	if found && creator == request.Owner.Creator {
+		request.Approved = true
+
+		k.SetKYCRequest(ctx, request)
+	}
+}
+
 // GetKYCRequestIDBytes returns the byte representation of the Did
 func GetKYCRequestIDBytes(did string) []byte {
 	return []byte(did)

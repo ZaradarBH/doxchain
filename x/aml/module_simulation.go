@@ -36,6 +36,10 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgDeleteAMLRequest int = 100
 
+	opWeightMsgApproveRequest = "op_weight_msg_approve_request"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgApproveRequest int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -90,6 +94,17 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgDeleteAMLRequest,
 		amlsimulation.SimulateMsgDeleteAMLRequest(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgApproveRequest int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgApproveRequest, &weightMsgApproveRequest, nil,
+		func(_ *rand.Rand) {
+			weightMsgApproveRequest = defaultWeightMsgApproveRequest
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgApproveRequest,
+		amlsimulation.SimulateMsgApproveRequest(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
 	// this line is used by starport scaffolding # simapp/module/operation

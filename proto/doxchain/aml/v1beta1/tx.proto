@@ -11,6 +11,7 @@ option go_package = "github.com/be-heroes/doxchain/x/aml/types";
 service Msg {
   rpc CreateAMLRequest (MsgCreateAMLRequest) returns (MsgCreateAMLRequestResponse);
   rpc DeleteAMLRequest (MsgDeleteAMLRequest) returns (MsgDeleteAMLRequestResponse);
+  rpc ApproveAMLRequest (MsgApproveAMLRequest) returns (MsgApproveAMLRequestResponse);
 }
 
 message MsgCreateAMLRequest {
@@ -25,3 +26,10 @@ message MsgDeleteAMLRequest {
 }
 
 message MsgDeleteAMLRequestResponse {}
+
+message MsgApproveAMLRequest {  
+  string creator = 1;
+  beheroes.doxchain.did.v1beta1.Did target = 2 [(gogoproto.nullable) = false];
+}
+
+message MsgApproveAMLRequestResponse {}

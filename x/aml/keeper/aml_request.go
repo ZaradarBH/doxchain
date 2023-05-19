@@ -89,6 +89,17 @@ func (k Keeper) GetAllAMLRequest(ctx sdk.Context) (list []types.AMLRequest) {
 	return
 }
 
+// Approves an AMLRequest in the store
+func (k Keeper) ApproveAMLRequest(ctx sdk.Context, creator string) {
+	request, found := k.GetAMLRequest(ctx, creator)
+
+	if found && creator == request.Owner.Creator {
+		request.Approved = true
+
+		k.SetAMLRequest(ctx, request)
+	}
+}
+
 // GetAMLRequestIDBytes returns the byte representation of the Did
 func GetAMLRequestIDBytes(did string) []byte {
 	return []byte(did)

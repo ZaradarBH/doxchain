@@ -24,7 +24,6 @@ type (
 	}
 )
 
-//TODO: Implement Approve message + keeper logic
 func NewKeeper(
 	cdc codec.BinaryCodec,
 	storeKey,

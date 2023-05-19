@@ -11,6 +11,7 @@ option go_package = "github.com/be-heroes/doxchain/x/kyc/types";
 service Msg {
   rpc CreateKYCRequest (MsgCreateKYCRequest) returns (MsgCreateKYCRequestResponse);
   rpc DeleteKYCRequest (MsgDeleteKYCRequest) returns (MsgDeleteKYCRequestResponse);
+  rpc ApproveKYCRequest (MsgApproveKYCRequest) returns (MsgApproveKYCRequestResponse);
 }
 
 message MsgCreateKYCRequest {
@@ -25,4 +26,11 @@ message MsgDeleteKYCRequest {
 }
 
 message MsgDeleteKYCRequestResponse {}
+
+message MsgApproveKYCRequest {  
+  string creator = 1;
+  beheroes.doxchain.did.v1beta1.Did target = 2 [(gogoproto.nullable) = false];
+}
+
+message MsgApproveKYCRequestResponse {}
 

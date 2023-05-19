@@ -197,38 +197,132 @@ func (m *MsgDeleteKYCRequestResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_MsgDeleteKYCRequestResponse proto.InternalMessageInfo
 
+type MsgApproveKYCRequest struct {
+	Creator string    `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	Target  types.Did `protobuf:"bytes,2,opt,name=target,proto3" json:"target"`
+}
+
+func (m *MsgApproveKYCRequest) Reset()         { *m = MsgApproveKYCRequest{} }
+func (m *MsgApproveKYCRequest) String() string { return proto.CompactTextString(m) }
+func (*MsgApproveKYCRequest) ProtoMessage()    {}
+func (*MsgApproveKYCRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_4c40e758cc5e4d17, []int{4}
+}
+func (m *MsgApproveKYCRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgApproveKYCRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgApproveKYCRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgApproveKYCRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgApproveKYCRequest.Merge(m, src)
+}
+func (m *MsgApproveKYCRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgApproveKYCRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgApproveKYCRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgApproveKYCRequest proto.InternalMessageInfo
+
+func (m *MsgApproveKYCRequest) GetCreator() string {
+	if m != nil {
+		return m.Creator
+	}
+	return ""
+}
+
+func (m *MsgApproveKYCRequest) GetTarget() types.Did {
+	if m != nil {
+		return m.Target
+	}
+	return types.Did{}
+}
+
+type MsgApproveKYCRequestResponse struct {
+}
+
+func (m *MsgApproveKYCRequestResponse) Reset()         { *m = MsgApproveKYCRequestResponse{} }
+func (m *MsgApproveKYCRequestResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgApproveKYCRequestResponse) ProtoMessage()    {}
+func (*MsgApproveKYCRequestResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_4c40e758cc5e4d17, []int{5}
+}
+func (m *MsgApproveKYCRequestResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgApproveKYCRequestResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgApproveKYCRequestResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgApproveKYCRequestResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgApproveKYCRequestResponse.Merge(m, src)
+}
+func (m *MsgApproveKYCRequestResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgApproveKYCRequestResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgApproveKYCRequestResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgApproveKYCRequestResponse proto.InternalMessageInfo
+
 func init() {
 	proto.RegisterType((*MsgCreateKYCRequest)(nil), "beheroes.doxchain.kyc.v1beta1.MsgCreateKYCRequest")
 	proto.RegisterType((*MsgCreateKYCRequestResponse)(nil), "beheroes.doxchain.kyc.v1beta1.MsgCreateKYCRequestResponse")
 	proto.RegisterType((*MsgDeleteKYCRequest)(nil), "beheroes.doxchain.kyc.v1beta1.MsgDeleteKYCRequest")
 	proto.RegisterType((*MsgDeleteKYCRequestResponse)(nil), "beheroes.doxchain.kyc.v1beta1.MsgDeleteKYCRequestResponse")
+	proto.RegisterType((*MsgApproveKYCRequest)(nil), "beheroes.doxchain.kyc.v1beta1.MsgApproveKYCRequest")
+	proto.RegisterType((*MsgApproveKYCRequestResponse)(nil), "beheroes.doxchain.kyc.v1beta1.MsgApproveKYCRequestResponse")
 }
 
 func init() { proto.RegisterFile("doxchain/kyc/v1beta1/tx.proto", fileDescriptor_4c40e758cc5e4d17) }
 
 var fileDescriptor_4c40e758cc5e4d17 = []byte{
-	// 332 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x92, 0xbb, 0x4e, 0xf3, 0x30,
-	0x14, 0xc7, 0xe3, 0x7e, 0x1f, 0x20, 0xcc, 0x82, 0x02, 0x43, 0x55, 0x54, 0x53, 0x65, 0x40, 0x65,
-	0xc0, 0x56, 0xcb, 0xc6, 0xc0, 0xd0, 0x76, 0x43, 0x5d, 0xb2, 0xc1, 0x82, 0x1a, 0xfb, 0x28, 0x8d,
-	0x0a, 0x75, 0xb1, 0x5d, 0x68, 0x56, 0x5e, 0x00, 0x1e, 0xab, 0x63, 0x47, 0x26, 0x84, 0xda, 0x17,
-	0x41, 0xb9, 0x0e, 0x4d, 0x40, 0x61, 0x4b, 0xec, 0xff, 0xe5, 0xe7, 0xa3, 0x83, 0x9b, 0x42, 0x2e,
-	0xf8, 0x78, 0x14, 0x4c, 0xd9, 0x24, 0xe4, 0xec, 0xb9, 0xe3, 0x81, 0x19, 0x75, 0x98, 0x59, 0xd0,
-	0x99, 0x92, 0x46, 0xda, 0x4d, 0x0f, 0xc6, 0xa0, 0x24, 0x68, 0x9a, 0xe9, 0xe8, 0x24, 0xe4, 0x34,
-	0xd5, 0x35, 0x8e, 0x7d, 0xe9, 0xcb, 0x58, 0xc9, 0xa2, 0xaf, 0xc4, 0xd4, 0x20, 0x79, 0xa6, 0x08,
-	0x44, 0x9e, 0x29, 0x02, 0x91, 0xde, 0x9f, 0x95, 0x76, 0x4e, 0x42, 0x7e, 0xaf, 0xe0, 0x69, 0x0e,
-	0xda, 0x24, 0x3a, 0x47, 0xe2, 0xa3, 0xa1, 0xf6, 0xfb, 0x0a, 0x46, 0x06, 0x6e, 0x6e, 0xfb, 0x6e,
-	0x72, 0x69, 0xd7, 0xf1, 0x1e, 0x8f, 0xce, 0xa4, 0xaa, 0xa3, 0x16, 0x6a, 0xef, 0xbb, 0xd9, 0xaf,
-	0x7d, 0x8d, 0x77, 0xe4, 0xcb, 0x14, 0x54, 0xbd, 0xd6, 0x42, 0xed, 0x83, 0xae, 0x43, 0x8b, 0xf4,
-	0x11, 0x45, 0xda, 0x48, 0x07, 0x81, 0xe8, 0xfd, 0x5f, 0x7e, 0x9e, 0x5a, 0x6e, 0x62, 0x73, 0x9a,
-	0xf8, 0xa4, 0xa4, 0xd0, 0x05, 0x3d, 0x93, 0x53, 0x0d, 0x0e, 0x8b, 0x79, 0x06, 0xf0, 0x00, 0xd5,
-	0x78, 0xd2, 0xbc, 0x6d, 0x43, 0x96, 0xd7, 0x7d, 0xab, 0xe1, 0x7f, 0x43, 0xed, 0xdb, 0xaf, 0x08,
-	0x1f, 0x16, 0x5e, 0xd9, 0xa5, 0xbf, 0x8e, 0x9e, 0x96, 0x80, 0x36, 0xae, 0xfe, 0xee, 0xc9, 0x60,
-	0x62, 0x88, 0xc2, 0xd3, 0x2a, 0x40, 0x6c, 0x7b, 0xaa, 0x40, 0xfc, 0x34, 0x91, 0x5e, 0x7f, 0xb9,
-	0x26, 0x68, 0xb5, 0x26, 0xe8, 0x6b, 0x4d, 0xd0, 0xfb, 0x86, 0x58, 0xab, 0x0d, 0xb1, 0x3e, 0x36,
-	0xc4, 0xba, 0x3b, 0xf7, 0x03, 0x33, 0x9e, 0x7b, 0x94, 0xcb, 0x47, 0xe6, 0xc1, 0x45, 0x52, 0xc0,
-	0xf2, 0x45, 0x5a, 0xc4, 0xab, 0x64, 0xc2, 0x19, 0x68, 0x6f, 0x37, 0xde, 0x9e, 0xcb, 0xef, 0x00,
-	0x00, 0x00, 0xff, 0xff, 0x4e, 0xb9, 0xfb, 0x07, 0xdb, 0x02, 0x00, 0x00,
+	// 388 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x93, 0x3f, 0x4f, 0xe3, 0x40,
+	0x10, 0xc5, 0xbd, 0x97, 0xbb, 0x9c, 0x6e, 0xaf, 0xb9, 0xf3, 0xa5, 0x88, 0x7c, 0x97, 0xbd, 0xc8,
+	0x05, 0x0a, 0x05, 0x6b, 0x25, 0xe9, 0x40, 0x42, 0x90, 0xa4, 0x43, 0x69, 0xdc, 0x41, 0x83, 0xfc,
+	0x67, 0xe4, 0x58, 0x81, 0xac, 0xd9, 0xdd, 0x84, 0xb8, 0x45, 0xa2, 0xa7, 0xe3, 0x2b, 0xa5, 0x4c,
+	0x49, 0x85, 0x50, 0xf2, 0x45, 0x50, 0xfc, 0xaf, 0x88, 0x0d, 0x38, 0x74, 0xb6, 0x77, 0xde, 0x7b,
+	0xbf, 0x9d, 0xf1, 0xe0, 0x86, 0xcb, 0xe6, 0xce, 0xc8, 0xf2, 0x27, 0xc6, 0x38, 0x74, 0x8c, 0x59,
+	0xdb, 0x06, 0x69, 0xb5, 0x0d, 0x39, 0xa7, 0x01, 0x67, 0x92, 0xa9, 0x0d, 0x1b, 0x46, 0xc0, 0x19,
+	0x08, 0x9a, 0xd6, 0xd1, 0x71, 0xe8, 0xd0, 0xa4, 0x4e, 0xab, 0x79, 0xcc, 0x63, 0x51, 0xa5, 0xb1,
+	0x79, 0x8a, 0x45, 0x1a, 0xc9, 0x3c, 0x5d, 0xdf, 0xcd, 0x3c, 0x5d, 0xdf, 0x4d, 0xce, 0xf7, 0x0a,
+	0x33, 0xc7, 0xa1, 0x73, 0xc9, 0xe1, 0x66, 0x0a, 0x42, 0xc6, 0x75, 0x3a, 0xc3, 0x7f, 0x86, 0xc2,
+	0xeb, 0x73, 0xb0, 0x24, 0x9c, 0x9d, 0xf7, 0xcd, 0xf8, 0x50, 0xad, 0xe3, 0xef, 0xce, 0xe6, 0x1b,
+	0xe3, 0x75, 0xd4, 0x44, 0xad, 0x1f, 0x66, 0xfa, 0xaa, 0x1e, 0xe3, 0x6f, 0xec, 0x76, 0x02, 0xbc,
+	0xfe, 0xa5, 0x89, 0x5a, 0x3f, 0x3b, 0x3a, 0xcd, 0xd3, 0x6f, 0x28, 0x92, 0x44, 0x3a, 0xf0, 0xdd,
+	0xde, 0xd7, 0xc5, 0xf3, 0x7f, 0xc5, 0x8c, 0x65, 0x7a, 0x03, 0xff, 0x2d, 0x08, 0x34, 0x41, 0x04,
+	0x6c, 0x22, 0x40, 0x37, 0x22, 0x9e, 0x01, 0x5c, 0x41, 0x39, 0x9e, 0xc4, 0x6f, 0x5b, 0x90, 0xf9,
+	0x71, 0x5c, 0x1b, 0x0a, 0xef, 0x34, 0x08, 0x38, 0x9b, 0x95, 0xbb, 0xe0, 0x09, 0xae, 0x4a, 0x8b,
+	0x7b, 0x20, 0x77, 0xbe, 0x61, 0xa2, 0xd3, 0x09, 0xfe, 0x57, 0x94, 0x99, 0x32, 0x75, 0x1e, 0x2b,
+	0xb8, 0x32, 0x14, 0x9e, 0x7a, 0x87, 0xf0, 0xaf, 0x5c, 0xe7, 0x3b, 0xf4, 0xdd, 0xdf, 0x81, 0x16,
+	0x34, 0x4f, 0x3b, 0xdc, 0x5d, 0x93, 0xc2, 0x44, 0x10, 0xb9, 0x76, 0x97, 0x80, 0xd8, 0xd6, 0x94,
+	0x81, 0x78, 0x6b, 0x4a, 0xea, 0x3d, 0xc2, 0xbf, 0xf3, 0x33, 0xea, 0x7e, 0xec, 0x98, 0x13, 0x69,
+	0x47, 0x9f, 0x10, 0xa5, 0x1c, 0xbd, 0xfe, 0x62, 0x45, 0xd0, 0x72, 0x45, 0xd0, 0xcb, 0x8a, 0xa0,
+	0x87, 0x35, 0x51, 0x96, 0x6b, 0xa2, 0x3c, 0xad, 0x89, 0x72, 0xb1, 0xef, 0xf9, 0x72, 0x34, 0xb5,
+	0xa9, 0xc3, 0xae, 0x0d, 0x1b, 0x0e, 0xe2, 0x04, 0x23, 0x5b, 0xb2, 0x79, 0xb4, 0x66, 0x32, 0x0c,
+	0x40, 0xd8, 0xd5, 0x68, 0xb3, 0xba, 0xaf, 0x01, 0x00, 0x00, 0xff, 0xff, 0x23, 0x3c, 0x1b, 0x01,
+	0xf7, 0x03, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -245,6 +339,7 @@ const _ = grpc.SupportPackageIsVersion4
 type MsgClient interface {
 	CreateKYCRequest(ctx context.Context, in *MsgCreateKYCRequest, opts ...grpc.CallOption) (*MsgCreateKYCRequestResponse, error)
 	DeleteKYCRequest(ctx context.Context, in *MsgDeleteKYCRequest, opts ...grpc.CallOption) (*MsgDeleteKYCRequestResponse, error)
+	ApproveKYCRequest(ctx context.Context, in *MsgApproveKYCRequest, opts ...grpc.CallOption) (*MsgApproveKYCRequestResponse, error)
 }
 
 type msgClient struct {
@@ -273,10 +368,20 @@ func (c *msgClient) DeleteKYCRequest(ctx context.Context, in *MsgDeleteKYCReques
 	return out, nil
 }
 
+func (c *msgClient) ApproveKYCRequest(ctx context.Context, in *MsgApproveKYCRequest, opts ...grpc.CallOption) (*MsgApproveKYCRequestResponse, error) {
+	out := new(MsgApproveKYCRequestResponse)
+	err := c.cc.Invoke(ctx, "/beheroes.doxchain.kyc.v1beta1.Msg/ApproveKYCRequest", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 type MsgServer interface {
 	CreateKYCRequest(context.Context, *MsgCreateKYCRequest) (*MsgCreateKYCRequestResponse, error)
 	DeleteKYCRequest(context.Context, *MsgDeleteKYCRequest) (*MsgDeleteKYCRequestResponse, error)
+	ApproveKYCRequest(context.Context, *MsgApproveKYCRequest) (*MsgApproveKYCRequestResponse, error)
 }
 
 // UnimplementedMsgServer can be embedded to have forward compatible implementations.
@@ -288,6 +393,9 @@ func (*UnimplementedMsgServer) CreateKYCRequest(ctx context.Context, req *MsgCre
 }
 func (*UnimplementedMsgServer) DeleteKYCRequest(ctx context.Context, req *MsgDeleteKYCRequest) (*MsgDeleteKYCRequestResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteKYCRequest not implemented")
+}
+func (*UnimplementedMsgServer) ApproveKYCRequest(ctx context.Context, req *MsgApproveKYCRequest) (*MsgApproveKYCRequestResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ApproveKYCRequest not implemented")
 }
 
 func RegisterMsgServer(s grpc1.Server, srv MsgServer) {
@@ -330,6 +438,24 @@ func _Msg_DeleteKYCRequest_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_ApproveKYCRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgApproveKYCRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).ApproveKYCRequest(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/beheroes.doxchain.kyc.v1beta1.Msg/ApproveKYCRequest",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).ApproveKYCRequest(ctx, req.(*MsgApproveKYCRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Msg_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "beheroes.doxchain.kyc.v1beta1.Msg",
 	HandlerType: (*MsgServer)(nil),
@@ -341,6 +467,10 @@ var _Msg_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteKYCRequest",
 			Handler:    _Msg_DeleteKYCRequest_Handler,
+		},
+		{
+			MethodName: "ApproveKYCRequest",
+			Handler:    _Msg_ApproveKYCRequest_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -463,6 +593,69 @@ func (m *MsgDeleteKYCRequestResponse) MarshalToSizedBuffer(dAtA []byte) (int, er
 	return len(dAtA) - i, nil
 }
 
+func (m *MsgApproveKYCRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgApproveKYCRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgApproveKYCRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	{
+		size, err := m.Target.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarintTx(dAtA, i, uint64(size))
+	}
+	i--
+	dAtA[i] = 0x12
+	if len(m.Creator) > 0 {
+		i -= len(m.Creator)
+		copy(dAtA[i:], m.Creator)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Creator)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgApproveKYCRequestResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgApproveKYCRequestResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgApproveKYCRequestResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintTx(dAtA []byte, offset int, v uint64) int {
 	offset -= sovTx(v)
 	base := offset
@@ -512,6 +705,30 @@ func (m *MsgDeleteKYCRequest) Size() (n int) {
 }
 
 func (m *MsgDeleteKYCRequestResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	return n
+}
+
+func (m *MsgApproveKYCRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Creator)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = m.Target.Size()
+	n += 1 + l + sovTx(uint64(l))
+	return n
+}
+
+func (m *MsgApproveKYCRequestResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -800,6 +1017,171 @@ func (m *MsgDeleteKYCRequestResponse) Unmarshal(dAtA []byte) error {
 		}
 		if fieldNum <= 0 {
 			return fmt.Errorf("proto: MsgDeleteKYCRequestResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgApproveKYCRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgApproveKYCRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgApproveKYCRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Creator = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Target", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.Target.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgApproveKYCRequestResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgApproveKYCRequestResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgApproveKYCRequestResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:

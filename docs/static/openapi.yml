@@ -1544,7 +1544,7 @@ paths:
               Request:
                 type: object
                 properties:
-                  Owner:
+                  owner:
                     type: object
                     properties:
                       creator:
@@ -47010,6 +47010,8 @@ definitions:
                   type: string
       approved:
         type: boolean
+  beheroes.doxchain.aml.v1beta1.MsgApproveAMLRequestResponse:
+    type: object
   beheroes.doxchain.aml.v1beta1.MsgCreateAMLRequestResponse:
     type: object
   beheroes.doxchain.aml.v1beta1.MsgDeleteAMLRequestResponse:
@@ -48951,7 +48953,7 @@ definitions:
   beheroes.doxchain.kyc.v1beta1.KYCRequest:
     type: object
     properties:
-      Owner:
+      owner:
         type: object
         properties:
           creator:
@@ -48979,6 +48981,8 @@ definitions:
                   type: string
       approved:
         type: boolean
+  beheroes.doxchain.kyc.v1beta1.MsgApproveKYCRequestResponse:
+    type: object
   beheroes.doxchain.kyc.v1beta1.MsgCreateKYCRequestResponse:
     type: object
   beheroes.doxchain.kyc.v1beta1.MsgDeleteKYCRequestResponse:
@@ -49020,7 +49024,7 @@ definitions:
       Request:
         type: object
         properties:
-          Owner:
+          owner:
             type: object
             properties:
               creator:
