@@ -38,7 +38,6 @@ type DidTokenFactory struct {
 
 type DidTokenFactoryOption func(didf *DidTokenFactory)
 
-// NewDidTokenFactory initializes a new did factory.
 func NewDidTokenFactory(opts ...DidTokenFactoryOption) *DidTokenFactory {
 	didf := &DidTokenFactory{}
 
@@ -49,7 +48,6 @@ func NewDidTokenFactory(opts ...DidTokenFactoryOption) *DidTokenFactory {
 	return didf
 }
 
-// Create returns a new did
 func (didf DidTokenFactory) Create(creator string, url string) *didTypes.Did {
 	did := &didTypes.Did{
 		Creator: creator,

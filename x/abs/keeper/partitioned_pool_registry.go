@@ -6,7 +6,6 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
-// SetPartitionedPoolRegistry set a specific PartitionedPoolRegistry in the store from its index
 func (k Keeper) SetPartitionedPoolRegistry(ctx sdk.Context, partitionedPoolRegistry types.PartitionedPoolRegistry) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.PartitionedPoolRegistryKeyPrefix))
 	b := k.cdc.MustMarshal(&partitionedPoolRegistry)
@@ -15,7 +14,6 @@ func (k Keeper) SetPartitionedPoolRegistry(ctx sdk.Context, partitionedPoolRegis
 	), b)
 }
 
-// GetPartitionedPoolRegistry returns a PartitionedPoolRegistry from its creator
 func (k Keeper) GetPartitionedPoolRegistry(
 	ctx sdk.Context,
 	creator string,
@@ -34,7 +32,6 @@ func (k Keeper) GetPartitionedPoolRegistry(
 	return val, true
 }
 
-// RemovePartitionedPoolRegistry removes a PartitionedPoolRegistry from the store
 func (k Keeper) RemovePartitionedPoolRegistry(
 	ctx sdk.Context,
 	creator string,
@@ -45,7 +42,6 @@ func (k Keeper) RemovePartitionedPoolRegistry(
 	))
 }
 
-// GetAllPartitionedPools returns all partitionedPools
 func (k Keeper) GetAllPartitionedPoolRegistries(ctx sdk.Context) (list []types.PartitionedPoolRegistry) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.PartitionedPoolRegistryKeyPrefix))
 	iterator := sdk.KVStorePrefixIterator(store, []byte{})

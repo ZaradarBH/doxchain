@@ -10,7 +10,6 @@ import (
 
 var _ paramtypes.ParamSet = (*Params)(nil)
 
-// Parameter store key
 var (
 	DefaultOperators = []didTypes.Did(nil) // none allowed
 	DefaultBlockExpireOffset = sdk.NewInt(100000)
@@ -19,12 +18,10 @@ var (
 	ParamStoreKeyBlockExpireOffset = []byte("BlockExpireOffset")
 )
 
-// ParamKeyTable the param key table for launch module
 func ParamKeyTable() paramtypes.KeyTable {
 	return paramtypes.NewKeyTable().RegisterParamSet(&Params{})
 }
 
-// NewParams creates a new Params instance
 func NewParams(operators []didTypes.Did, blockExpireOffset sdk.Int) Params {
 	return Params{
 		Operators: operators,
@@ -32,12 +29,10 @@ func NewParams(operators []didTypes.Did, blockExpireOffset sdk.Int) Params {
 	}
 }
 
-// DefaultParams returns a default set of parameters
 func DefaultParams() Params {
 	return NewParams(DefaultOperators, DefaultBlockExpireOffset)
 }
 
-// ParamSetPairs get the params.ParamSet
 func (p *Params) ParamSetPairs() paramtypes.ParamSetPairs {
 	return paramtypes.ParamSetPairs{		
 		paramtypes.NewParamSetPair(ParamStoreKeyOperators, &p.Operators, validateOperators),
@@ -65,7 +60,6 @@ func validateOperators(i interface{}) error {
 	return nil
 }
 
-// Validate validates the set of params
 func (p Params) Validate() error {
 	if err := validateBlockExpireOffset(p.BlockExpireOffset); err != nil {
 		return err
@@ -78,7 +72,6 @@ func (p Params) Validate() error {
 	return nil
 }
 
-// String implements the Stringer interface.
 func (p Params) String() string {
 	out, _ := yaml.Marshal(p)
 	return string(out)

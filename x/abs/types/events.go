@@ -1,6 +1,5 @@
 package types
 
-// ABS module event types
 const (
 	EventBreakFactor = "breakfactor"
 	EventWatchlist   = "watchlist"

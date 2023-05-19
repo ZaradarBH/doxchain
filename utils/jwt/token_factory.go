@@ -29,7 +29,6 @@ func WithSigningMethod(method jwt.SigningMethod) JwtTokenFactoryOption {
 	}
 }
 
-// NewJwtTokenFactory initializes a new token factory.
 func NewJwtTokenFactory(opts ...JwtTokenFactoryOption) *JwtTokenFactory {
 	jtf := &JwtTokenFactory{}
 
@@ -44,7 +43,6 @@ func NewJwtTokenFactory(opts ...JwtTokenFactoryOption) *JwtTokenFactory {
 	return jtf
 }
 
-// Create returns a new jwt token with the configured signing method. Defaults to HS256
 func (jtf JwtTokenFactory) Create(tenant string, creator string, clientId string, expireOffSet time.Duration) *jwt.Token {
 	jwtToken := jwt.New(jtf.SigningMethod)
 	claims := jwtToken.Claims.(jwt.MapClaims)

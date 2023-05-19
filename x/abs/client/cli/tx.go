@@ -19,7 +19,6 @@ const (
 	listSeparator              = ","
 )
 
-// GetTxCmd returns the transaction commands for this module
 func GetTxCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:                        types.ModuleName,
@@ -31,7 +30,6 @@ func GetTxCmd() *cobra.Command {
 
 	cmd.AddCommand(CmdUpdateBreakFactor())
 	cmd.AddCommand(CmdCreatePartitionedPoolRegistry())
-	// this line is used by starport scaffolding # 1
 
 	return cmd
 }
