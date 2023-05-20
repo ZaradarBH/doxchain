@@ -77,7 +77,7 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	)
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgCreateKYCRegistration,
-		kycsimulation.SimulateMsgCreateKYCRegistration(am.accountKeeper, am.bankKeeper, am.keeper),
+		kycsimulation.SimulateMsgCreateKYCRegistration(am.keeper),
 	))
 
 	var weightMsgDeleteKYCRegistration int
@@ -88,7 +88,7 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	)
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgDeleteKYCRegistration,
-		kycsimulation.SimulateMsgDeleteKYCRegistration(am.accountKeeper, am.bankKeeper, am.keeper),
+		kycsimulation.SimulateMsgDeleteKYCRegistration(am.keeper),
 	))
 
 	return operations

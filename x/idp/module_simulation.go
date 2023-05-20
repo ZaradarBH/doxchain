@@ -111,7 +111,7 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	)
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgCreateClientRegistration,
-		idpsimulation.SimulateMsgCreateClientRegistration(am.accountKeeper, am.bankKeeper, am.keeper),
+		idpsimulation.SimulateMsgCreateClientRegistration(am.keeper),
 	))
 
 	var weightMsgUpdateClientRegistration int
@@ -122,7 +122,7 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	)
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgUpdateClientRegistration,
-		idpsimulation.SimulateMsgUpdateClientRegistration(am.accountKeeper, am.bankKeeper, am.keeper),
+		idpsimulation.SimulateMsgUpdateClientRegistration(am.keeper),
 	))
 
 	var weightMsgDeleteClientRegistration int
@@ -133,7 +133,7 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	)
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgDeleteClientRegistration,
-		idpsimulation.SimulateMsgDeleteClientRegistration(am.accountKeeper, am.bankKeeper, am.keeper),
+		idpsimulation.SimulateMsgDeleteClientRegistration(am.keeper),
 	))
 
 	var weightMsgCreateClientRegistrationRelationship int
@@ -144,7 +144,7 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	)
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgCreateClientRegistrationRelationship,
-		idpsimulation.SimulateMsgCreateClientRegistrationRelationship(am.accountKeeper, am.bankKeeper, am.keeper),
+		idpsimulation.SimulateMsgCreateClientRegistrationRelationship(am.keeper),
 	))
 
 	return operations

@@ -263,23 +263,14 @@ type App struct {
 	ScopedIBCKeeper      capabilitykeeper.ScopedKeeper
 	ScopedTransferKeeper capabilitykeeper.ScopedKeeper
 	ScopedICAHostKeeper  capabilitykeeper.ScopedKeeper
-
 	DoxchainKeeper doxchainmodulekeeper.Keeper
-
 	DidKeeper didmodulekeeper.Keeper
-
 	AbsKeeper absmodulekeeper.Keeper
-
 	OAuthTwoKeeper oauthtwomodulekeeper.Keeper
-
 	IdpKeeper idpmodulekeeper.Keeper
-
 	OracleKeeper oraclemodulekeeper.Keeper
-
 	SamlTwoKeeper samltwomodulekeeper.Keeper
-
 	KycKeeper kycmodulekeeper.Keeper
-
 	AmlKeeper amlmodulekeeper.Keeper
 
 	// mm is the module manager
@@ -541,7 +532,7 @@ func New(
 		app.GetSubspace(doxchainmoduletypes.ModuleName),
 	)
 
-	doxchainModule := doxchainmodule.NewAppModule(appCodec, app.DoxchainKeeper, app.AccountKeeper, app.BankKeeper)
+	doxchainModule := doxchainmodule.NewAppModule(appCodec, app.DoxchainKeeper)
 
 	app.DidKeeper = *didmodulekeeper.NewKeeper(
 		appCodec,
@@ -550,10 +541,9 @@ func New(
 		app.GetSubspace(didmoduletypes.ModuleName),
 
 		app.AccountKeeper,
-		app.AuthzKeeper,
 	)
 
-	didModule := didmodule.NewAppModule(appCodec, app.DidKeeper, app.AccountKeeper, app.BankKeeper)
+	didModule := didmodule.NewAppModule(appCodec, app.DidKeeper, app.AccountKeeper)
 
 	app.AbsKeeper = *absmodulekeeper.NewKeeper(
 		appCodec,
@@ -573,24 +563,19 @@ func New(
 		keys[oauthtwomoduletypes.MemStoreKey],
 		app.GetSubspace(oauthtwomoduletypes.ModuleName),
 
-		app.AuthzKeeper,
-		app.EvidenceKeeper,
 		app.IdpKeeper,
 	)
 	
-	oauthtwomodule := oauthtwomodule.NewAppModule(appCodec, app.OAuthTwoKeeper, app.AccountKeeper, app.BankKeeper)
+	oauthtwomodule := oauthtwomodule.NewAppModule(appCodec, app.OAuthTwoKeeper, app.IdpKeeper)
 
 	app.IdpKeeper = *idpmodulekeeper.NewKeeper(
 		appCodec,
 		keys[idpmoduletypes.StoreKey],
 		keys[idpmoduletypes.MemStoreKey],
 		app.GetSubspace(idpmoduletypes.ModuleName),
-
-		app.AuthzKeeper,
-		app.EvidenceKeeper,
 	)
 
-	idpModule := idpmodule.NewAppModule(appCodec, app.IdpKeeper, app.AccountKeeper, app.BankKeeper)
+	idpModule := idpmodule.NewAppModule(appCodec, app.IdpKeeper)
 
 	app.OracleKeeper = *oraclemodulekeeper.NewKeeper(
 		appCodec,
@@ -599,39 +584,36 @@ func New(
 		app.GetSubspace(oraclemoduletypes.ModuleName),
 	)
 
-	oracleModule := oraclemodule.NewAppModule(appCodec, app.OracleKeeper, app.AccountKeeper, app.BankKeeper)
+	oracleModule := oraclemodule.NewAppModule(appCodec, app.OracleKeeper)
 
 	app.SamlTwoKeeper = *samltwomodulekeeper.NewKeeper(
 		appCodec,
 		keys[samltwomoduletypes.StoreKey],
 		keys[samltwomoduletypes.MemStoreKey],
 		app.GetSubspace(samltwomoduletypes.ModuleName),
+
+		app.IdpKeeper,
 	)
 
-	samltwomodule := samltwomodule.NewAppModule(appCodec, app.SamlTwoKeeper, app.AccountKeeper, app.BankKeeper)
+	samltwomodule := samltwomodule.NewAppModule(appCodec, app.SamlTwoKeeper, app.IdpKeeper)
 
 	app.KycKeeper = *kycmodulekeeper.NewKeeper(
 		appCodec,
 		keys[kycmoduletypes.StoreKey],
 		keys[kycmoduletypes.MemStoreKey],
 		app.GetSubspace(kycmoduletypes.ModuleName),
-
-		app.AccountKeeper,
-		app.DidKeeper,
 	)
 
-	kycModule := kycmodule.NewAppModule(appCodec, app.KycKeeper, app.AccountKeeper, app.BankKeeper)
+	kycModule := kycmodule.NewAppModule(appCodec, app.KycKeeper)
 
 	app.AmlKeeper = *amlmodulekeeper.NewKeeper(
 		appCodec,
 		keys[amlmoduletypes.StoreKey],
 		keys[amlmoduletypes.MemStoreKey],
 		app.GetSubspace(amlmoduletypes.ModuleName),
-
-		app.AccountKeeper,
 	)
 
-	amlModule := amlmodule.NewAppModule(appCodec, app.AmlKeeper, app.AccountKeeper, app.BankKeeper)
+	amlModule := amlmodule.NewAppModule(appCodec, app.AmlKeeper)
 
 	/**** IBC Routing ****/
 	// Sealing prevents other modules from creating scoped sub-keepers

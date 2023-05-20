@@ -18,6 +18,8 @@ type (
 		storeKey   storetypes.StoreKey
 		memKey     storetypes.StoreKey
 		paramstore paramtypes.Subspace
+
+		idpKeeper      types.IdpKeeper
 	}
 )
 
@@ -27,6 +29,7 @@ func NewKeeper(
 	storeKey,
 	memKey storetypes.StoreKey,
 	ps paramtypes.Subspace,
+	idpKeeper types.IdpKeeper,
 
 ) *Keeper {
 	if !ps.HasKeyTable() {
@@ -38,6 +41,7 @@ func NewKeeper(
 		storeKey:   storeKey,
 		memKey:     memKey,
 		paramstore: ps,
+		idpKeeper: idpKeeper,
 	}
 }
 

@@ -20,7 +20,6 @@ type (
 		paramstore paramtypes.Subspace
 
 		accountKeeper types.AccountKeeper
-		authzKeeper   types.AuthzKeeper
 	}
 )
 
@@ -32,7 +31,6 @@ func NewKeeper(
 	ps paramtypes.Subspace,
 
 	accountKeeper types.AccountKeeper,
-	authzKeeper types.AuthzKeeper,
 ) *Keeper {
 	if !ps.HasKeyTable() {
 		ps = ps.WithKeyTable(types.ParamKeyTable())
@@ -45,7 +43,6 @@ func NewKeeper(
 		paramstore: ps,
 
 		accountKeeper: accountKeeper,
-		authzKeeper:   authzKeeper,
 	}
 }
 

@@ -18,9 +18,6 @@ type (
 		storeKey   storetypes.StoreKey
 		memKey     storetypes.StoreKey
 		paramstore paramtypes.Subspace
-
-		authzKeeper    types.AuthzKeeper
-		evidenceKeeper types.EvidenceKeeper
 	}
 )
 
@@ -29,9 +26,6 @@ func NewKeeper(
 	storeKey,
 	memKey storetypes.StoreKey,
 	ps paramtypes.Subspace,
-
-	authzKeeper types.AuthzKeeper,
-	evidenceKeeper types.EvidenceKeeper,
 ) *Keeper {
 	if !ps.HasKeyTable() {
 		ps = ps.WithKeyTable(types.ParamKeyTable())
@@ -42,9 +36,6 @@ func NewKeeper(
 		storeKey:   storeKey,
 		memKey:     memKey,
 		paramstore: ps,
-
-		authzKeeper:    authzKeeper,
-		evidenceKeeper: evidenceKeeper,
 	}
 }
 

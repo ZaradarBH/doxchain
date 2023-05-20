@@ -99,7 +99,7 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	)
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgCreateDid,
-		didsimulation.SimulateMsgCreateDid(am.accountKeeper, am.bankKeeper, am.keeper),
+		didsimulation.SimulateMsgCreateDid(am.accountKeeper, am.keeper),
 	))
 
 	var weightMsgUpdateDid int
@@ -110,7 +110,7 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	)
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgUpdateDid,
-		didsimulation.SimulateMsgUpdateDid(am.accountKeeper, am.bankKeeper, am.keeper),
+		didsimulation.SimulateMsgUpdateDid(am.accountKeeper, am.keeper),
 	))
 
 	var weightMsgDeleteDid int
@@ -121,7 +121,7 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	)
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgDeleteDid,
-		didsimulation.SimulateMsgDeleteDid(am.accountKeeper, am.bankKeeper, am.keeper),
+		didsimulation.SimulateMsgDeleteDid(am.accountKeeper, am.keeper),
 	))
 
 	return operations

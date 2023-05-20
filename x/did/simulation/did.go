@@ -14,7 +14,6 @@ import (
 
 func SimulateMsgCreateDid(
 	ak types.AccountKeeper,
-	bk types.BankKeeper,
 	k keeper.Keeper,
 ) simtypes.Operation {
 	return func(r *rand.Rand, app *baseapp.BaseApp, ctx sdk.Context, accs []simtypes.Account, chainID string,
@@ -47,7 +46,6 @@ func SimulateMsgCreateDid(
 			ModuleName:      types.ModuleName,
 			CoinsSpentInMsg: sdk.NewCoins(),
 			AccountKeeper:   ak,
-			Bankkeeper:      bk,
 		}
 		
 		return simulation.GenAndDeliverTxWithRandFees(txCtx)
@@ -56,7 +54,6 @@ func SimulateMsgCreateDid(
 
 func SimulateMsgUpdateDid(
 	ak types.AccountKeeper,
-	bk types.BankKeeper,
 	k keeper.Keeper,
 ) simtypes.Operation {
 	return func(r *rand.Rand, app *baseapp.BaseApp, ctx sdk.Context, accs []simtypes.Account, chainID string,
@@ -93,7 +90,6 @@ func SimulateMsgUpdateDid(
 			ModuleName:      types.ModuleName,
 			CoinsSpentInMsg: sdk.NewCoins(),
 			AccountKeeper:   ak,
-			Bankkeeper:      bk,
 		}
 		return simulation.GenAndDeliverTxWithRandFees(txCtx)
 	}
@@ -101,7 +97,6 @@ func SimulateMsgUpdateDid(
 
 func SimulateMsgDeleteDid(
 	ak types.AccountKeeper,
-	bk types.BankKeeper,
 	k keeper.Keeper,
 ) simtypes.Operation {
 	return func(r *rand.Rand, app *baseapp.BaseApp, ctx sdk.Context, accs []simtypes.Account, chainID string,
@@ -136,7 +131,6 @@ func SimulateMsgDeleteDid(
 			ModuleName:      types.ModuleName,
 			CoinsSpentInMsg: sdk.NewCoins(),
 			AccountKeeper:   ak,
-			Bankkeeper:      bk,
 		}
 
 		_ = did

@@ -79,7 +79,7 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	)
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgCreateAMLRegistration,
-		amlsimulation.SimulateMsgCreateAMLRegistration(am.accountKeeper, am.bankKeeper, am.keeper),
+		amlsimulation.SimulateMsgCreateAMLRegistration(am.keeper),
 	))
 
 	var weightMsgDeleteAMLRegistration int
@@ -90,7 +90,7 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	)
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgDeleteAMLRegistration,
-		amlsimulation.SimulateMsgDeleteAMLRegistration(am.accountKeeper, am.bankKeeper, am.keeper),
+		amlsimulation.SimulateMsgDeleteAMLRegistration(am.keeper),
 	))
 
 	var weightMsgApproveRequest int
@@ -101,7 +101,7 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	)
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgApproveRequest,
-		amlsimulation.SimulateMsgApproveRequest(am.accountKeeper, am.bankKeeper, am.keeper),
+		amlsimulation.SimulateMsgApproveRequest(am.keeper),
 	))
 
 	return operations
