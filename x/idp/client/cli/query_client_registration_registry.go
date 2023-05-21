@@ -51,7 +51,7 @@ func CmdShowClientRegistrationRegistry() *cobra.Command {
 			clientCtx := client.GetClientContextFromCmd(cmd)
 			queryClient := types.NewQueryClient(clientCtx)
 			res, err := queryClient.ClientRegistrationRegistry(context.Background(), &types.QueryGetClientRegistrationRegistryRequest{
-				Creator: args[0],
+				ClientRegistrationRegistryW3CIdentifier: args[0],
 			})
 
 			if err != nil {

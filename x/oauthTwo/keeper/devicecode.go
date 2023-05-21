@@ -1,9 +1,11 @@
 package keeper
 
 import (
+	"fmt"
+	"time"
+
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	"time"
 
 	"github.com/be-heroes/doxchain/utils"
 	didUtils "github.com/be-heroes/doxchain/utils/did"
@@ -11,26 +13,46 @@ import (
 	"github.com/be-heroes/doxchain/x/oauthtwo/types"
 )
 
-func (k Keeper) DeviceCode(ctx sdk.Context, msg types.MsgDeviceCodeRequest) (types.MsgDeviceCodeResponse, error) {
-	response := types.MsgDeviceCodeResponse{}
-	isAuthorized, err := k.idpKeeper.AuthorizeCreator(ctx, msg.Tenant, msg.Creator)
+func (k Keeper) DeviceCode(ctx sdk.Context, msg types.MsgDeviceCodeRequest) (response types.MsgDeviceCodeResponse, err error) {
+	creatorAddress, err := sdk.AccAddressFromBech32(msg.Creator)
+	
+	if err != nil {
+		return response, err
+	}
+	
+	isAuthorized, err := k.idpKeeper.AuthorizeUser(ctx, creatorAddress, msg.TenantW3CIdentifier)
 
 	if !isAuthorized {
 		return response, err
 	}
 
-	tenantConfiguration, err := k.idpKeeper.GetTenantConfiguration(ctx, msg.Tenant)
+	tenantConfiguration, err := k.idpKeeper.GetTenantConfiguration(ctx, msg.TenantW3CIdentifier)
 
 	if err != nil {
 		return response, err
 	}
 
-	//TODO: Validate ClientId and Scope
+	var validScopes []string
+
+	for _, requestedScope := range msg.Scope {
+		validScope, err := k.idpKeeper.AuthorizeScope(ctx, msg.TenantW3CIdentifier, fmt.Sprintf("did:%s:%s", msg.ClientId, msg.ClientId), requestedScope)
+
+		if err != nil {
+			return response, err
+		}
+
+		validScopes = append(validScopes, validScope)
+	}
+
+	if len(validScopes) == 0 {
+		return response, sdkerrors.Wrap(types.TokenServiceError, "No valid scopes in request")
+	}	
+
 	response.DeviceCode, _ = utils.GenerateRandomString(32)
 	response.UserCode, _ = utils.GenerateRandomString(8)
 	response.VerificationUri = tenantConfiguration.LoginEndpoint
 
-	tenantDeviceCodeRegistry, found := k.idpKeeper.GetDeviceCodeRegistry(ctx, msg.Tenant)
+	tenantDeviceCodeRegistry, found := k.idpKeeper.GetDeviceCodeRegistry(ctx, msg.TenantW3CIdentifier)
 
 	if !found {
 		return response, sdkerrors.Wrap(types.TokenServiceError, "DeviceCodeRegistry cache could not be found for tenant")

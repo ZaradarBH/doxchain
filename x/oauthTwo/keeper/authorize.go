@@ -3,6 +3,7 @@ package keeper
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
+	"fmt"
 	"time"
 
 	"github.com/be-heroes/doxchain/utils"
@@ -10,16 +11,37 @@ import (
 	didUtils "github.com/be-heroes/doxchain/utils/did"
 )
 
-func (k Keeper) Authorize(ctx sdk.Context, msg types.MsgAuthorizeRequest) (types.MsgAuthorizeResponse, error) {
-	response := types.MsgAuthorizeResponse{}
-	isAuthorized, err := k.idpKeeper.AuthorizeCreator(ctx, msg.Tenant, msg.Creator)
+func (k Keeper) Authorize(ctx sdk.Context, msg types.MsgAuthorizeRequest) (response types.MsgAuthorizeResponse, err error) {
+	creatorAddress, err := sdk.AccAddressFromBech32(msg.Creator)
+	
+	if err != nil {
+		return response, err
+	}
+
+	isAuthorized, err := k.idpKeeper.AuthorizeUser(ctx, creatorAddress, msg.TenantW3CIdentifier)
 
 	if !isAuthorized {
 		return response, err
 	}
 
+	var validScopes []string
+
+	for _, requestedScope := range msg.Scope {
+		validScope, err := k.idpKeeper.AuthorizeScope(ctx, msg.TenantW3CIdentifier, fmt.Sprintf("did:%s:%s", msg.ClientId, msg.ClientId), requestedScope)
+
+		if err != nil {
+			return response, err
+		}
+
+		validScopes = append(validScopes, validScope)
+	}
+
+	if len(validScopes) == 0 {
+		return response, sdkerrors.Wrap(types.TokenServiceError, "No valid scopes in request")
+	}
+
 	if len(msg.UserCode) > 0 {
-		tenantDeviceCodeRegistry, found := k.idpKeeper.GetDeviceCodeRegistry(ctx, msg.Tenant)
+		tenantDeviceCodeRegistry, found := k.idpKeeper.GetDeviceCodeRegistry(ctx, msg.TenantW3CIdentifier)
 
 		if !found {
 			return response, sdkerrors.Wrap(types.TokenServiceError, "DeviceCodeRegistry cache could not be found for tenant")
@@ -39,7 +61,7 @@ func (k Keeper) Authorize(ctx sdk.Context, msg types.MsgAuthorizeRequest) (types
 	}
 
 	response.AuthorizationCode, _ = utils.GenerateRandomString(32)
-	tenantAuthorizationCodeRegistry, found := k.GetAuthorizationCodeRegistry(ctx, msg.Tenant)
+	tenantAuthorizationCodeRegistry, found := k.GetAuthorizationCodeRegistry(ctx, msg.TenantW3CIdentifier)
 
 	if !found {
 		return response, sdkerrors.Wrap(types.TokenServiceError, "AuthorizationCodeRegistry cache could not be found for tenant")

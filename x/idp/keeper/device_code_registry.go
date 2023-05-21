@@ -11,17 +11,15 @@ func (k Keeper) SetDeviceCodeRegistry(ctx sdk.Context, deviceCodeRegistry types.
 	b := k.cdc.MustMarshal(&deviceCodeRegistry)
 
 	store.Set(types.DeviceCodeRegistryKey(
-		deviceCodeRegistry.Owner.Creator,
+		deviceCodeRegistry.Owner.GetW3CIdentifier(),
 	), b)
 }
 
-func (k Keeper) GetDeviceCodeRegistry(
-	ctx sdk.Context,
-	fullyQualifiedW3CIdentifier string,
-) (val types.DeviceCodeRegistry, found bool) {
+func (k Keeper) GetDeviceCodeRegistry(ctx sdk.Context, deviceCodeRegistryW3CIdentifier string) (val types.DeviceCodeRegistry, found bool) {
+	//TODO: Validate did string. Should be => did:sdk.AccAddress:sdk.AccAddress
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DeviceCodeRegistryKeyPrefix))
 	b := store.Get(types.DeviceCodeRegistryKey(
-		fullyQualifiedW3CIdentifier,
+		deviceCodeRegistryW3CIdentifier,
 	))
 
 	if b == nil {
@@ -33,15 +31,12 @@ func (k Keeper) GetDeviceCodeRegistry(
 	return val, true
 }
 
-func (k Keeper) RemoveDeviceCodeRegistry(
-	ctx sdk.Context,
-	fullyQualifiedW3CIdentifier string,
-
-) {
+func (k Keeper) RemoveDeviceCodeRegistry(ctx sdk.Context, deviceCodeRegistryW3CIdentifier string) {
+	//TODO: Validate did string. Should be => did:sdk.AccAddress:sdk.AccAddress
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DeviceCodeRegistryKeyPrefix))
 	
 	store.Delete(types.DeviceCodeRegistryKey(
-		fullyQualifiedW3CIdentifier,
+		deviceCodeRegistryW3CIdentifier,
 	))
 }
 

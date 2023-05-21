@@ -9,7 +9,7 @@ const TypeMsgDeviceCode = "device_code"
 
 var _ sdk.Msg = &MsgDeviceCodeRequest{}
 
-func NewMsgDeviceCodeRequest(creator string, clientId string, scope string) *MsgDeviceCodeRequest {
+func NewMsgDeviceCodeRequest(creator string, clientId string, scope []string) *MsgDeviceCodeRequest {
 	return &MsgDeviceCodeRequest{
 		Creator:  creator,
 		ClientId: clientId,

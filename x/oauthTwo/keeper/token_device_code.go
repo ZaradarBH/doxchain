@@ -12,15 +12,8 @@ import (
 	"github.com/golang-jwt/jwt"
 )
 
-func (k Keeper) GenerateDeviceCodeToken(ctx sdk.Context, msg types.MsgTokenRequest) (types.MsgTokenResponse, error) {
-	response := types.MsgTokenResponse{}
-	isAuthorized, err := k.idpKeeper.AuthorizeCreator(ctx, msg.Tenant, msg.Creator)
-
-	if !isAuthorized {
-		return response, err
-	}
-
-	tenantDeviceCodeRegistry, found := k.idpKeeper.GetDeviceCodeRegistry(ctx, msg.Tenant)
+func (k Keeper) GenerateDeviceCodeToken(ctx sdk.Context, msg types.MsgTokenRequest) (response types.MsgTokenResponse, err error) {
+	tenantDeviceCodeRegistry, found := k.idpKeeper.GetDeviceCodeRegistry(ctx, msg.TenantW3CIdentifier)
 
 	if !found {
 		return response, sdkerrors.Wrap(types.TokenServiceError, "DeviceCodeRegistry cache could not be found for tenant")
@@ -28,7 +21,7 @@ func (k Keeper) GenerateDeviceCodeToken(ctx sdk.Context, msg types.MsgTokenReque
 
 	for index, deviceCodeInfo := range tenantDeviceCodeRegistry.Codes {
 		if deviceCodeInfo.DeviceCode == msg.DeviceCode && deviceCodeInfo.Owner.Creator == msg.Creator {
-			jwtToken := utils.NewJwtTokenFactory(utils.WithContext(&ctx)).Create(msg.Tenant, msg.Creator, msg.ClientId, time.Minute*3)
+			jwtToken := utils.NewJwtTokenFactory(utils.WithContext(&ctx)).Create(msg.TenantW3CIdentifier, msg.Creator, msg.ClientId, time.Minute*3)
 			claims := jwtToken.Claims.(jwt.MapClaims)
 			signedToken, err := jwtToken.SignedString([]byte(msg.DeviceCode))
 
@@ -40,7 +33,7 @@ func (k Keeper) GenerateDeviceCodeToken(ctx sdk.Context, msg types.MsgTokenReque
 			response.TokenType = types.Bearer.String()
 			response.ExpiresIn = claims["exp"].(int64)
 
-			tenantAccessTokenRegistry, found := k.GetAccessTokenRegistry(ctx, msg.Tenant)
+			tenantAccessTokenRegistry, found := k.GetAccessTokenRegistry(ctx, msg.TenantW3CIdentifier)
 
 			if !found {
 				return response, sdkerrors.Wrap(types.TokenServiceError, "Failed to fetch access tokens cache for tenant")

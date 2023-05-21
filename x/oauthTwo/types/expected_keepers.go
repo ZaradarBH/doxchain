@@ -6,8 +6,9 @@ import (
 )
 
 type IdpKeeper interface {
-	AuthorizeCreator(ctx sdk.Context, fullyQualifiedW3CIdentifier string, creator string) (bool, error)
-	GetTenantConfiguration(ctx sdk.Context, identifier string) (configuration idpTypes.TenantConfiguration, err error)
+	AuthorizeUser(ctx sdk.Context, user sdk.AccAddress, tenantW3CIdentifier string) (bool, error)
+	AuthorizeScope(ctx sdk.Context, clientRegistrationRegistryW3CIdentitifer string, clientRegistrationW3CIdentitifer string, scope string) (string, error)
+	GetTenantConfiguration(ctx sdk.Context, tenantW3CIdentifier string) (configuration idpTypes.TenantConfiguration, err error)
 	SetDeviceCodeRegistry(ctx sdk.Context, deviceCodeRegistry idpTypes.DeviceCodeRegistry)
-	GetDeviceCodeRegistry(ctx sdk.Context, fullyQualifiedW3CIdentifier string) (val idpTypes.DeviceCodeRegistry, found bool)
+	GetDeviceCodeRegistry(ctx sdk.Context, deviceCodeRegistryW3CIdentifier string) (val idpTypes.DeviceCodeRegistry, found bool)
 }

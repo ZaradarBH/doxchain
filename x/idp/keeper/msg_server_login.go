@@ -7,12 +7,20 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
-func (k msgServer) Login(goCtx context.Context, msg *types.MsgAuthenticationRequest) (*types.MsgAuthenticationResponse, error) {
-	authToken, err := k.Keeper.Login(sdk.UnwrapSDKContext(goCtx), *msg)
-
+func (k msgServer) Login(goCtx context.Context, msg *types.MsgAuthenticationRequest) (response *types.MsgAuthenticationResponse, err error) {
+	creatorAddress, err := sdk.AccAddressFromBech32(msg.Creator)
+	
 	if err != nil {
-		return nil, err
+		return response, err
 	}
 
-	return &authToken, nil
+	tokenString, err := k.Keeper.Login(sdk.UnwrapSDKContext(goCtx), creatorAddress, msg.TenantW3CIdentifier)
+
+	if err != nil {
+		return response, err
+	}
+
+	return &types.MsgAuthenticationResponse{
+		Token: tokenString,
+	}, nil
 }

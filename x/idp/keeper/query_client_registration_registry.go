@@ -47,7 +47,7 @@ func (k Keeper) ClientRegistrationRegistry(goCtx context.Context, req *types.Que
 	ctx := sdk.UnwrapSDKContext(goCtx)
 	val, found := k.GetClientRegistrationRegistry(
 		ctx,
-		req.Creator,
+		req.ClientRegistrationRegistryW3CIdentifier,
 	)
 	
 	if !found {

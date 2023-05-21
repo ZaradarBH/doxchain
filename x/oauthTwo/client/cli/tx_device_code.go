@@ -27,7 +27,7 @@ func CmdDeviceCode() *cobra.Command {
 			msg := types.NewMsgDeviceCodeRequest(
 				clientCtx.GetFromAddress().String(),
 				args[0],
-				args[1],
+				[]string{args[1]},
 			)
 
 			if err := msg.ValidateBasic(); err != nil {

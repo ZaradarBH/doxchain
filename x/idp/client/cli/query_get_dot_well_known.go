@@ -13,7 +13,7 @@ var _ = strconv.Itoa(0)
 
 func CmdGetDotWellKnown() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "get-dot-well-known [tenant]",
+		Use:   "get-dot-well-known [tenant-w3c-identifier]",
 		Short: "Query GetDotWellKnown",
 		Args:  cobra.ExactArgs(0),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
@@ -25,7 +25,7 @@ func CmdGetDotWellKnown() *cobra.Command {
 
 			queryClient := types.NewQueryClient(clientCtx)
 			res, err := queryClient.GetDotWellKnown(cmd.Context(), &types.QueryGetDotWellKnownRequest{
-				FullyQualifiedW3CIdentifier: args[0],
+				TenantW3CIdentifier: args[0],
 			})
 
 			if err != nil {

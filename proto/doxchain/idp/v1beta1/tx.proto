@@ -23,7 +23,7 @@ service Msg {
 
 message MsgAuthenticationRequest {
   string creator = 1;
-  string tenant  = 2;
+  string tenantW3CIdentifier  = 2;
 }
 
 message MsgAuthenticationResponse {
@@ -46,41 +46,47 @@ message MsgUpdateClientRegistrationRegistryResponse {}
 
 message MsgDeleteClientRegistrationRegistryRequest {
   string creator = 1;
+  string clientRegistrationRegistryW3CIdentifier = 2;
 }
 
 message MsgDeleteClientRegistrationRegistryResponse {}
 
 message MsgCreateClientRegistrationRequest {
   string creator = 1;
-  ClientRegistration clientRegistration = 2 [(gogoproto.nullable) = false];
+  string clientRegistrationRegistryW3CIdentifier = 2;
+  ClientRegistration clientRegistration = 3 [(gogoproto.nullable) = false];
 }
 
 message MsgCreateClientRegistrationResponse {}
 
 message MsgUpdateClientRegistrationRequest {
   string creator = 1;
-  ClientRegistration clientRegistration = 2 [(gogoproto.nullable) = false];
+  string clientRegistrationRegistryW3CIdentifier = 2;
+  ClientRegistration clientRegistration = 3 [(gogoproto.nullable) = false];
 }
 
 message MsgUpdateClientRegistrationResponse {}
 
 message MsgDeleteClientRegistrationRequest {
   string creator = 1;
-  string name = 2;
+  string clientRegistrationRegistryW3CIdentifier = 2;
+  ClientRegistration clientRegistration = 3 [(gogoproto.nullable) = false];
 }
 
 message MsgDeleteClientRegistrationResponse {}
 
 message MsgCreateClientRegistrationRelationshipRequest {
   string creator = 1;
-  ClientRegistrationRelationshipRegistryEntry clientRegistrationRelationshipRegistryEntry = 2 [(gogoproto.nullable) = false];
+  string clientRegistrationRegistryW3CIdentifier = 2;
+  ClientRegistrationRelationshipRegistryEntry clientRegistrationRelationshipRegistryEntry = 3 [(gogoproto.nullable) = false];
 }
 
 message MsgCreateClientRegistrationRelationshipResponse {}
 
 message MsgDeleteClientRegistrationRelationshipRequest {
   string creator = 1;
-  ClientRegistrationRelationshipRegistryEntry clientRegistrationRelationshipRegistryEntry = 2 [(gogoproto.nullable) = false];
+  string clientRegistrationRegistryW3CIdentifier = 2;
+  ClientRegistrationRelationshipRegistryEntry clientRegistrationRelationshipRegistryEntry = 3 [(gogoproto.nullable) = false];
 }
 
 message MsgDeleteClientRegistrationRelationshipResponse {}

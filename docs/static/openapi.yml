@@ -1044,7 +1044,13 @@ paths:
                                       type: string
                           name:
                             type: string
+                          clientId:
+                            type: string
                           appRoles:
+                            type: array
+                            items:
+                              type: string
+                          appScopes:
                             type: array
                             items:
                               type: string
@@ -1233,7 +1239,7 @@ paths:
           type: boolean
       tags:
         - Query
-  /be-heroes/doxchain/idp/client_registry/{creator}:
+  /be-heroes/doxchain/idp/client_registry/{clientRegistrationRegistryW3CIdentifier}:
     get:
       operationId: BeheroesDoxchainIdpV1Beta1ClientRegistrationRegistry
       responses:
@@ -1330,7 +1336,13 @@ paths:
                                     type: string
                         name:
                           type: string
+                        clientId:
+                          type: string
                         appRoles:
+                          type: array
+                          items:
+                            type: string
+                        appScopes:
                           type: array
                           items:
                             type: string
@@ -1433,7 +1445,7 @@ paths:
                       type: string
                   additionalProperties: {}
       parameters:
-        - name: creator
+        - name: clientRegistrationRegistryW3CIdentifier
           in: path
           required: true
           type: string
@@ -1470,7 +1482,7 @@ paths:
                   additionalProperties: {}
       tags:
         - Query
-  /be-heroes/doxchain/idp/{fullyQualifiedW3CIdentifier}/.well-known:
+  /be-heroes/doxchain/idp/{tenantW3CIdentifier}/.well-known:
     get:
       operationId: BeheroesDoxchainIdpV1Beta1GetDotWellKnown
       responses:
@@ -1526,7 +1538,7 @@ paths:
                       type: string
                   additionalProperties: {}
       parameters:
-        - name: fullyQualifiedW3CIdentifier
+        - name: tenantW3CIdentifier
           in: path
           required: true
           type: string
@@ -48136,7 +48148,13 @@ definitions:
                   type: string
       name:
         type: string
+      clientId:
+        type: string
       appRoles:
+        type: array
+        items:
+          type: string
+      appScopes:
         type: array
         items:
           type: string
@@ -48308,7 +48326,13 @@ definitions:
                         type: string
             name:
               type: string
+            clientId:
+              type: string
             appRoles:
+              type: array
+              items:
+                type: string
+            appScopes:
               type: array
               items:
                 type: string
@@ -48629,7 +48653,13 @@ definitions:
                               type: string
                   name:
                     type: string
+                  clientId:
+                    type: string
                   appRoles:
+                    type: array
+                    items:
+                      type: string
+                  appScopes:
                     type: array
                     items:
                       type: string
@@ -48830,7 +48860,13 @@ definitions:
                             type: string
                 name:
                   type: string
+                clientId:
+                  type: string
                 appRoles:
+                  type: array
+                  items:
+                    type: string
+                appScopes:
                   type: array
                   items:
                     type: string

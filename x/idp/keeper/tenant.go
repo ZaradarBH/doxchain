@@ -8,18 +8,15 @@ import (
 	"github.com/be-heroes/doxchain/x/idp/types"
 )
 
-func (k Keeper) SetTenantRegistry(ctx sdk.Context, TenantRegistry types.TenantRegistry) {
+func (k Keeper) SetTenantRegistry(ctx sdk.Context, tenantRegistry types.TenantRegistry) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.TenantRegistryKeyPrefix))
 
-	store.Set(types.TenantRegistryKey(TenantRegistry.Owner.Creator), k.cdc.MustMarshal(&TenantRegistry))
+	store.Set(types.TenantRegistryKey(tenantRegistry.Owner.Creator), k.cdc.MustMarshal(&tenantRegistry))
 }
 
-func (k Keeper) GetTenantRegistry(
-	ctx sdk.Context,
-	creator string,
-) (val types.TenantRegistry, found bool) {
+func (k Keeper) GetTenantRegistry(ctx sdk.Context, owner sdk.AccAddress) (val types.TenantRegistry, found bool) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.TenantRegistryKeyPrefix))
-	b := store.Get(types.TenantRegistryKey(creator))
+	b := store.Get(types.TenantRegistryKey(owner.String()))
 
 	if b == nil {
 		return val, false
@@ -30,13 +27,10 @@ func (k Keeper) GetTenantRegistry(
 	return val, true
 }
 
-func (k Keeper) RemoveTenantRegistry(
-	ctx sdk.Context,
-	creator string,
-) {
+func (k Keeper) RemoveTenantRegistry(ctx sdk.Context, owner sdk.AccAddress) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.TenantRegistryKeyPrefix))
 
-	store.Delete(types.TenantRegistryKey(creator))
+	store.Delete(types.TenantRegistryKey(owner.String()))
 }
 
 func (k Keeper) GetAllTenantRegistry(ctx sdk.Context) (list []types.TenantRegistry) {
@@ -54,13 +48,13 @@ func (k Keeper) GetAllTenantRegistry(ctx sdk.Context) (list []types.TenantRegist
 	return
 }
 
-func (k Keeper) GetTenant(ctx sdk.Context, fullyQualifiedW3CIdentifier string) (tenant types.TenantRegistryEntry, err error) {
+func (k Keeper) GetTenant(ctx sdk.Context, tenantW3CIdentifier string) (tenant types.TenantRegistryEntry, err error) {
 	matched := false
 
 	//TODO: We need to benchmark how well it performs. If its a big deal it might be worth having a "graph" of tenant fullyqualifieddididentifiers (ids) to speed up this lookup
 	for _, registry := range k.GetAllTenantRegistry(ctx) {
 		for _, tenantRegistryEntry := range registry.Tenants {
-			if tenantRegistryEntry.Id.GetW3CIdentifier() == fullyQualifiedW3CIdentifier {
+			if tenantRegistryEntry.Id.GetW3CIdentifier() == tenantW3CIdentifier {
 				tenant = tenantRegistryEntry
 				matched = true
 
@@ -76,8 +70,8 @@ func (k Keeper) GetTenant(ctx sdk.Context, fullyQualifiedW3CIdentifier string) (
 	return tenant, err
 }
 
-func (k Keeper) GetAccessClientList(ctx sdk.Context, fullyQualifiedW3CIdentifier string) (acl types.AccessClientList, err error) {
-	tenant, err := k.GetTenant(ctx, fullyQualifiedW3CIdentifier)
+func (k Keeper) GetAccessClientList(ctx sdk.Context, tenantW3CIdentifier string) (acl types.AccessClientList, err error) {
+	tenant, err := k.GetTenant(ctx, tenantW3CIdentifier)
 
 	if err != nil {
 		return acl, err
@@ -86,8 +80,8 @@ func (k Keeper) GetAccessClientList(ctx sdk.Context, fullyQualifiedW3CIdentifier
 	return tenant.AccessClientList, nil
 }
 
-func (k Keeper) GetTenantConfiguration(ctx sdk.Context, fullyQualifiedW3CIdentifier string) (configuration types.TenantConfiguration, err error) {
-	tenant, err := k.GetTenant(ctx, fullyQualifiedW3CIdentifier)
+func (k Keeper) GetTenantConfiguration(ctx sdk.Context, tenantW3CIdentifier string) (configuration types.TenantConfiguration, err error) {
+	tenant, err := k.GetTenant(ctx, tenantW3CIdentifier)
 
 	if err != nil {
 		return configuration, err

@@ -8,7 +8,7 @@ import (
 )
 
 func (k msgServer) DeleteClientRegistrationRelationship(goCtx context.Context, msg *types.MsgDeleteClientRegistrationRelationshipRequest) (*types.MsgDeleteClientRegistrationRelationshipResponse, error) {
-	err := k.Keeper.RemoveClientRegistrationRelationship(sdk.UnwrapSDKContext(goCtx), msg.ClientRegistrationRelationshipRegistryEntry)
+	err := k.Keeper.RemoveClientRegistrationRelationship(sdk.UnwrapSDKContext(goCtx), msg.ClientRegistrationRegistryW3CIdentifier, msg.ClientRegistrationRelationshipRegistryEntry)
 
 	if err != nil {
 		return nil, err

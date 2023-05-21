@@ -12,20 +12,13 @@ import (
 	"github.com/golang-jwt/jwt"
 )
 
-func (k Keeper) GenerateClientCredentialToken(ctx sdk.Context, msg types.MsgTokenRequest) (types.MsgTokenResponse, error) {
-	response := types.MsgTokenResponse{}
-	isAuthorized, err := k.idpKeeper.AuthorizeCreator(ctx, msg.Tenant, msg.Creator)
-
-	if !isAuthorized {
-		return response, err
-	}
-
+func (k Keeper) GenerateClientCredentialToken(ctx sdk.Context, msg types.MsgTokenRequest) (response types.MsgTokenResponse, err error) {
 	switch msg.ClientAssertionType {
 	case "urn:ietf:params:oauth:client-assertion-type:jwt-bearer":
 		//TODO: Implement support for https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-client-creds-grant-flow#second-case-access-token-request-with-a-certificate
 		return response, sdkerrors.Wrap(types.TokenServiceError, "Assertion is not supported: urn:ietf:params:oauth:client-assertion-type:jwt-bearer")
 	default:
-		jwtToken := utils.NewJwtTokenFactory(utils.WithContext(&ctx)).Create(msg.Tenant, msg.Creator, msg.ClientId, time.Minute*3)
+		jwtToken := utils.NewJwtTokenFactory(utils.WithContext(&ctx)).Create(msg.TenantW3CIdentifier, msg.Creator, msg.ClientId, time.Minute*3)
 		claims := jwtToken.Claims.(jwt.MapClaims)
 		signedToken, err := jwtToken.SignedString([]byte(msg.ClientSecret))
 
@@ -37,7 +30,7 @@ func (k Keeper) GenerateClientCredentialToken(ctx sdk.Context, msg types.MsgToke
 		response.TokenType = types.Bearer.String()
 		response.ExpiresIn = claims["exp"].(int64)
 
-		tenantAccessTokenRegistry, found := k.GetAccessTokenRegistry(ctx, msg.Tenant)
+		tenantAccessTokenRegistry, found := k.GetAccessTokenRegistry(ctx, msg.TenantW3CIdentifier)
 
 		if !found {
 			return response, sdkerrors.Wrap(types.TokenServiceError, "Failed to fetch access tokens cache for tenant")
