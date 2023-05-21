@@ -17,12 +17,12 @@ func (k Keeper) SetAccessTokenRegistry(ctx sdk.Context, AccessTokenRegistry type
 
 func (k Keeper) GetAccessTokenRegistry(
 	ctx sdk.Context,
-	fullyQualifiedW3CIdentifier string,
+	accessTokenRegistryW3CIdentifier string,
 ) (val types.AccessTokenRegistry, found bool) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AccessTokenRegistryKeyPrefix))
 
 	b := store.Get(types.AccessTokenRegistryKey(
-		fullyQualifiedW3CIdentifier,
+		accessTokenRegistryW3CIdentifier,
 	))
 
 	if b == nil {
@@ -36,13 +36,12 @@ func (k Keeper) GetAccessTokenRegistry(
 
 func (k Keeper) RemoveAccessTokenRegistry(
 	ctx sdk.Context,
-	fullyQualifiedW3CIdentifier string,
-
+	accessTokenRegistryW3CIdentifier string,
 ) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AccessTokenRegistryKeyPrefix))
 	
 	store.Delete(types.AccessTokenRegistryKey(
-		fullyQualifiedW3CIdentifier,
+		accessTokenRegistryW3CIdentifier,
 	))
 }
 

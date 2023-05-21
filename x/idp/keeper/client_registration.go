@@ -26,7 +26,6 @@ func (k Keeper) SetClientRegistration(ctx sdk.Context, clientRegistrationRegistr
 }
 
 func (k Keeper) RemoveClientRegistration(ctx sdk.Context, clientRegistrationRegistryW3CIdentitifer string, clientRegistrationW3CIdentitifer string) {
-	//TODO: Check if clientRegistrationW3CIdentitifer is a well-formed did string.
 	clientRegistry, found := k.GetClientRegistrationRegistry(ctx, clientRegistrationRegistryW3CIdentitifer)
 
 	if found {
@@ -43,7 +42,6 @@ func (k Keeper) RemoveClientRegistration(ctx sdk.Context, clientRegistrationRegi
 }
 
 func (k Keeper) GetClientRegistration(ctx sdk.Context, clientRegistrationRegistryW3CIdentitifer string, clientRegistrationW3CIdentitifer string) (val types.ClientRegistration, found bool) {	
-	//TODO: Check if clientRegistrationW3CIdentitifer is a well-formed did string.
 	clientRegistry, found := k.GetClientRegistrationRegistry(ctx, clientRegistrationRegistryW3CIdentitifer)
 
 	if found {

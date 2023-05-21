@@ -17,13 +17,12 @@ func (k Keeper) SetAuthorizationCodeRegistry(ctx sdk.Context, authorizationCodeR
 
 func (k Keeper) GetAuthorizationCodeRegistry(
 	ctx sdk.Context,
-	fullyQualifiedW3CIdentifier string,
-
+	authorizationCodeRegistryW3CIdentifier string,
 ) (val types.AuthorizationCodeRegistry, found bool) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AuthorizationCodeRegistryKeyPrefix))
 
 	b := store.Get(types.AuthorizationCodeRegistryKey(
-		fullyQualifiedW3CIdentifier,
+		authorizationCodeRegistryW3CIdentifier,
 	))
 
 	if b == nil {
@@ -37,13 +36,12 @@ func (k Keeper) GetAuthorizationCodeRegistry(
 
 func (k Keeper) RemoveAuthorizationCodeRegistry(
 	ctx sdk.Context,
-	fullyQualifiedW3CIdentifier string,
-
+	authorizationCodeRegistryW3CIdentifier string,
 ) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AuthorizationCodeRegistryKeyPrefix))
 	
 	store.Delete(types.AuthorizationCodeRegistryKey(
-		fullyQualifiedW3CIdentifier,
+		authorizationCodeRegistryW3CIdentifier,
 	))
 }
 

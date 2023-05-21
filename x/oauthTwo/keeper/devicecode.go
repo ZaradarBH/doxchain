@@ -13,6 +13,7 @@ import (
 	"github.com/be-heroes/doxchain/x/oauthtwo/types"
 )
 
+//TODO: Dont consume message types in keeper
 func (k Keeper) DeviceCode(ctx sdk.Context, msg types.MsgDeviceCodeRequest) (response types.MsgDeviceCodeResponse, err error) {
 	creatorAddress, err := sdk.AccAddressFromBech32(msg.Creator)
 	

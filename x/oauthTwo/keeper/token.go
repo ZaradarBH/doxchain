@@ -7,6 +7,7 @@ import (
 	"github.com/be-heroes/doxchain/x/oauthtwo/types"
 )
 
+//TODO: Dont consume message types in keeper
 func (k Keeper) Token(ctx sdk.Context, msg types.MsgTokenRequest) (response types.MsgTokenResponse, err error) {
 	creatorAddress, err := sdk.AccAddressFromBech32(msg.Creator)
 	

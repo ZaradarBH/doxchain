@@ -11,6 +11,7 @@ import (
 	didUtils "github.com/be-heroes/doxchain/utils/did"
 )
 
+//TODO: Dont consume message types in keeper
 func (k Keeper) Authorize(ctx sdk.Context, msg types.MsgAuthorizeRequest) (response types.MsgAuthorizeResponse, err error) {
 	creatorAddress, err := sdk.AccAddressFromBech32(msg.Creator)
 	

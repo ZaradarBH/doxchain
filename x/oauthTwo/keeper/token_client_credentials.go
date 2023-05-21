@@ -13,6 +13,7 @@ import (
 	"github.com/golang-jwt/jwt"
 )
 
+//TODO: Dont consume message types in keeper
 func (k Keeper) GenerateClientCredentialToken(ctx sdk.Context, msg types.MsgTokenRequest) (response types.MsgTokenResponse, err error) {
 	didUrl, err := didUtils.CreateModuleDidUrl(types.ModuleName, fmt.Sprintf("%T", msg), msg.Creator)
 
