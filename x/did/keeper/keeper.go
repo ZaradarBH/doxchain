@@ -23,7 +23,7 @@ type (
 	}
 )
 
-//TODO: Concept for validating ValidationMethods & ValidationRelationships in accordancee with the W3C spec
+//TODO: Concept for validating ValidationMethods & ValidationRelationships in accordance with the W3C spec
 func NewKeeper(
 	cdc codec.BinaryCodec,
 	storeKey,

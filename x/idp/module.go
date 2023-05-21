@@ -172,5 +172,7 @@ func (am AppModule) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.Val
 		}
 	}
 
+	//TODO: Clean up client registration relationship tombstones
+
 	return []abci.ValidatorUpdate{}
 }
