@@ -23,33 +23,17 @@ var (
 	_ = baseapp.Paramspace
 )
 
-const (
-	opWeightMsgCreateAMLRegistration = "op_weight_msg_aml_request"
-	// TODO: Determine the simulation weight value
-	defaultWeightMsgCreateAMLRegistration int = 100
-
-	opWeightMsgUpdateAMLRegistration = "op_weight_msg_aml_request"
-	// TODO: Determine the simulation weight value
-	defaultWeightMsgUpdateAMLRegistration int = 100
-
-	opWeightMsgDeleteAMLRegistration = "op_weight_msg_aml_request"
-	// TODO: Determine the simulation weight value
-	defaultWeightMsgDeleteAMLRegistration int = 100
-
-	opWeightMsgApproveRequest = "op_weight_msg_approve_request"
-	// TODO: Determine the simulation weight value
-	defaultWeightMsgApproveRequest int = 100
-)
-
-// GenerateGenesisState creates a randomized GenState of the module
 func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 	accs := make([]string, len(simState.Accounts))
+
 	for i, acc := range simState.Accounts {
 		accs[i] = acc.Address.String()
 	}
+
 	amlGenesis := types.GenesisState{
 		Params: types.DefaultParams(),
 	}
+	
 	simState.GenState[types.ModuleName] = simState.Cdc.MustMarshalJSON(&amlGenesis)
 }
 
