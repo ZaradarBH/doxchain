@@ -1,6 +1,7 @@
 package keeper
 
 import (
+	"fmt"
 	"context"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -13,7 +14,7 @@ import (
 func (k msgServer) CreatePartitionedPoolRegistry(goCtx context.Context, msg *types.MsgCreatePartitionedPoolRegistryRequest) (*types.MsgCreatePartitionedPoolRegistryResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 	partitionedPoolRegistry, isFound := k.GetPartitionedPoolRegistry(ctx, msg.Creator)
-	ownerDid := utils.NewDidTokenFactory().Create(msg.Creator, "")
+	ownerDid := utils.NewDidTokenFactory().Create(msg.Creator, utils.GetWellFormedDidUrl(types.ModuleName, fmt.Sprintf("%T", msg), msg.Creator))
 
 	if !isFound {
 		partitionedPoolRegistry = types.PartitionedPoolRegistry{

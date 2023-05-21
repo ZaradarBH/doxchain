@@ -1,6 +1,7 @@
 package keeper
 
 import (
+	"fmt"
 	"time"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -40,7 +41,7 @@ func (k Keeper) GenerateDeviceCodeToken(ctx sdk.Context, msg types.MsgTokenReque
 			}
 
 			tenantAccessTokenRegistry.Issued = append(tenantAccessTokenRegistry.Issued, types.AccessTokenRegistryEntry{
-				Owner: *didUtils.NewDidTokenFactory().Create(msg.Creator, ""),
+				Owner: *didUtils.NewDidTokenFactory().Create(msg.Creator, didUtils.GetWellFormedDidUrl(types.ModuleName, fmt.Sprintf("%T", msg), msg.Creator)),
 				Jti: claims["jti"].(string),
 				ExpiresAt: response.ExpiresIn,
 			})

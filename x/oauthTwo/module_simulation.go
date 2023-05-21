@@ -85,18 +85,18 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 		Params: types.DefaultParams(),
 		AccessTokenRegistries: []types.AccessTokenRegistry{
 			{
-				Owner: *didUtils.NewDidTokenFactory().Create("1", ""),
+				Owner: *didUtils.NewDidTokenFactory().Create("1", "did:methodname:methodid"),
 			},
 			{
-				Owner: *didUtils.NewDidTokenFactory().Create("2", ""),
+				Owner: *didUtils.NewDidTokenFactory().Create("2", "did:methodname:methodid"),
 			},
 		},
 		AuthorizationCodeRegistries: []types.AuthorizationCodeRegistry{
 			{
-				Owner: *didUtils.NewDidTokenFactory().Create("1", ""),
+				Owner: *didUtils.NewDidTokenFactory().Create("1", "did:methodname:methodid"),
 			},
 			{
-				Owner: *didUtils.NewDidTokenFactory().Create("2", ""),
+				Owner: *didUtils.NewDidTokenFactory().Create("2", "did:methodname:methodid"),
 			},
 		},
 	}

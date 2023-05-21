@@ -1,6 +1,7 @@
 package keeper
 
 import (
+	"fmt"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"time"
@@ -67,7 +68,7 @@ func (k Keeper) Authorize(ctx sdk.Context, msg types.MsgAuthorizeRequest) (respo
 	}
 
 	authorizationCodeRegistryEntry := types.AuthorizationCodeRegistryEntry{
-		Owner: *didUtils.NewDidTokenFactory().Create(msg.Creator, ""),
+		Owner: *didUtils.NewDidTokenFactory().Create(msg.Creator, didUtils.GetWellFormedDidUrl(types.ModuleName, fmt.Sprintf("%T", msg), msg.Creator)),
 		AuthorizationCode: response.AuthorizationCode,
 		ExpiresAt: ctx.BlockTime().Add(time.Minute * 3).Unix(),
 	}

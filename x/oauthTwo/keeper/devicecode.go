@@ -1,6 +1,7 @@
 package keeper
 
 import (
+	"fmt"
 	"time"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -57,7 +58,7 @@ func (k Keeper) DeviceCode(ctx sdk.Context, msg types.MsgDeviceCodeRequest) (res
 		return response, sdkerrors.Wrap(types.TokenServiceError, "DeviceCodeRegistry cache could not be found for tenant")
 	}
 	
-	ownerDid := didUtils.NewDidTokenFactory().Create(msg.Creator, "")
+	ownerDid := didUtils.NewDidTokenFactory().Create(msg.Creator, didUtils.GetWellFormedDidUrl(types.ModuleName, fmt.Sprintf("%T", msg), msg.Creator))
 	deviceCodeRegistryEntry := idpTypes.DeviceCodeRegistryEntry{
 		Owner: *ownerDid,
 		DeviceCode: response.DeviceCode,

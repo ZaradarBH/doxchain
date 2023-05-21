@@ -5,7 +5,7 @@ import "encoding/binary"
 var _ binary.ByteOrder
 
 const (
-	AccessTokenRegistryKeyPrefix = "AccessTokenRegistry/value/"
+	AccessTokenRegistryKeyPrefix = "accesstokenregistry/value/"
 )
 
 func AccessTokenRegistryKey(

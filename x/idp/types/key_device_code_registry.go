@@ -5,7 +5,7 @@ import "encoding/binary"
 var _ binary.ByteOrder
 
 const (
-	DeviceCodeRegistryKeyPrefix = "DeviceCodeRegistry/value/"
+	DeviceCodeRegistryKeyPrefix = "devicecoderegistry/value/"
 )
 
 func DeviceCodeRegistryKey(

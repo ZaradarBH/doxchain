@@ -71,38 +71,5 @@ func (am AppModule) RegisterStoreDecoder(_ sdk.StoreDecoderRegistry) {}
 func (am AppModule) WeightedOperations(simState module.SimulationState) []simtypes.WeightedOperation {
 	operations := make([]simtypes.WeightedOperation, 0)
 
-	var weightMsgCreateAMLRegistration int
-	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgCreateAMLRegistration, &weightMsgCreateAMLRegistration, nil,
-		func(_ *rand.Rand) {
-			weightMsgCreateAMLRegistration = defaultWeightMsgCreateAMLRegistration
-		},
-	)
-	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgCreateAMLRegistration,
-		amlsimulation.SimulateMsgCreateAMLRegistration(am.keeper),
-	))
-
-	var weightMsgDeleteAMLRegistration int
-	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgDeleteAMLRegistration, &weightMsgDeleteAMLRegistration, nil,
-		func(_ *rand.Rand) {
-			weightMsgDeleteAMLRegistration = defaultWeightMsgDeleteAMLRegistration
-		},
-	)
-	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgDeleteAMLRegistration,
-		amlsimulation.SimulateMsgDeleteAMLRegistration(am.keeper),
-	))
-
-	var weightMsgApproveRequest int
-	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgApproveRequest, &weightMsgApproveRequest, nil,
-		func(_ *rand.Rand) {
-			weightMsgApproveRequest = defaultWeightMsgApproveRequest
-		},
-	)
-	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgApproveRequest,
-		amlsimulation.SimulateMsgApproveRequest(am.keeper),
-	))
-
 	return operations
 }

@@ -24,41 +24,25 @@ var (
 	_ = baseapp.Paramspace
 )
 
-const (
-	opWeightMsgUpdateBreakFactor = "op_weight_msg_update_break_factor"
-	// TODO: Determine the simulation weight value
-	defaultWeightMsgUpdateBreakFactor int = 100
-
-	opWeightMsgCreatePartitionedPools = "op_weight_msg_partitioned_pools"
-	// TODO: Determine the simulation weight value
-	defaultWeightMsgCreatePartitionedPools int = 100
-
-	opWeightMsgUpdatePartitionedPools = "op_weight_msg_partitioned_pools"
-	// TODO: Determine the simulation weight value
-	defaultWeightMsgUpdatePartitionedPools int = 100
-
-	opWeightMsgDeletePartitionedPools = "op_weight_msg_partitioned_pools"
-	// TODO: Determine the simulation weight value
-	defaultWeightMsgDeletePartitionedPools int = 100
-)
-
-// GenerateGenesisState creates a randomized GenState of the module
 func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 	accs := make([]string, len(simState.Accounts))
+
 	for i, acc := range simState.Accounts {
 		accs[i] = acc.Address.String()
 	}
+
 	absGenesis := types.GenesisState{
 		Params: types.DefaultParams(),
 		PartitionedPoolRegistries: []types.PartitionedPoolRegistry{
 			{
-				Owner: *utils.NewDidTokenFactory().Create(sample.AccAddress(), ""),
+				Owner: *utils.NewDidTokenFactory().Create(sample.AccAddress(), "did:methodname:methodid"),
 			},
 			{
-				Owner: *utils.NewDidTokenFactory().Create(sample.AccAddress(), ""),
+				Owner: *utils.NewDidTokenFactory().Create(sample.AccAddress(), "did:methodname:methodid"),
 			},
 		},
 	}
+	
 	simState.GenState[types.ModuleName] = simState.Cdc.MustMarshalJSON(&absGenesis)
 }
 
@@ -79,17 +63,6 @@ func (am AppModule) RegisterStoreDecoder(_ sdk.StoreDecoderRegistry) {}
 // WeightedOperations returns the all the gov module operations with their respective weights.
 func (am AppModule) WeightedOperations(simState module.SimulationState) []simtypes.WeightedOperation {
 	operations := make([]simtypes.WeightedOperation, 0)
-
-	var weightMsgUpdateBreakFactor int
-	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgUpdateBreakFactor, &weightMsgUpdateBreakFactor, nil,
-		func(_ *rand.Rand) {
-			weightMsgUpdateBreakFactor = defaultWeightMsgUpdateBreakFactor
-		},
-	)
-	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgUpdateBreakFactor,
-		abssimulation.SimulateMsgUpdateBreakFactor(am.accountKeeper, am.bankKeeper, am.keeper),
-	))
 
 	return operations
 }

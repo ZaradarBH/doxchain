@@ -17,11 +17,11 @@ func TestDidMsgServerCreate(t *testing.T) {
 		resp, err := srv.CreateDid(ctx, &types.MsgCreateDid{
 			Did: &types.Did{
 				Creator:    creator,
-				MethodName: "method",
+				MethodName: "methodname",
 				MethodId:   string(i),
 			}})
 		require.NoError(t, err)
-		require.Equal(t, fmt.Sprintf("did:method:%d", i), resp.FullyQualifiedW3CIdentifier)
+		require.Equal(t, fmt.Sprintf("did:methodname:%d", i), resp.DidW3CIdentifier)
 	}
 }
 
@@ -37,7 +37,7 @@ func TestDidMsgServerUpdate(t *testing.T) {
 			desc: "Completed",
 			request: &types.MsgUpdateDid{Did: &types.Did{
 				Creator:    creator,
-				MethodName: "method",
+				MethodName: "methodname",
 				MethodId:   "id",
 			}},
 		},
@@ -45,7 +45,7 @@ func TestDidMsgServerUpdate(t *testing.T) {
 			desc: "Unauthorized",
 			request: &types.MsgUpdateDid{Did: &types.Did{
 				Creator:    "B",
-				MethodName: "method",
+				MethodName: "methodname",
 				MethodId:   "id",
 			}},
 			err: sdkerrors.ErrUnauthorized,
@@ -54,7 +54,7 @@ func TestDidMsgServerUpdate(t *testing.T) {
 			desc: "Unauthorized",
 			request: &types.MsgUpdateDid{Did: &types.Did{
 				Creator:    creator,
-				MethodName: "method",
+				MethodName: "methodname",
 				MethodId:   "id",
 			}},
 			err: sdkerrors.ErrKeyNotFound,
@@ -64,7 +64,7 @@ func TestDidMsgServerUpdate(t *testing.T) {
 			srv, ctx := setupMsgServer(t)
 			_, err := srv.CreateDid(ctx, &types.MsgCreateDid{Did: &types.Did{
 				Creator:    creator,
-				MethodName: "method",
+				MethodName: "methodname",
 				MethodId:   "id",
 			}})
 			require.NoError(t, err)
@@ -98,7 +98,7 @@ func TestDidMsgServerDelete(t *testing.T) {
 		},
 		{
 			desc:    "KeyNotFound",
-			request: &types.MsgDeleteDid{Creator: creator, FullyQualifiedW3CIdentifier: "did:method:id"},
+			request: &types.MsgDeleteDid{Creator: creator, DidW3CIdentifier: "did:methodname:id"},
 			err:     sdkerrors.ErrKeyNotFound,
 		},
 	} {
@@ -108,7 +108,7 @@ func TestDidMsgServerDelete(t *testing.T) {
 			_, err := srv.CreateDid(ctx, &types.MsgCreateDid{
 				Did: &types.Did{
 					Creator:    creator,
-					MethodName: "method",
+					MethodName: "methodname",
 					MethodId:   "id",
 				},
 			})

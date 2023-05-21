@@ -93,12 +93,12 @@ func (k Keeper) GetAllDid(ctx sdk.Context) (list []types.Did) {
 }
 
 func (k Keeper) CanOverrideDid(ctx sdk.Context, did types.Did, override bool) error {
-	fullyQualifiedW3CIdentifier := did.GetW3CIdentifier()
-	match, found := k.GetDid(ctx, fullyQualifiedW3CIdentifier)
+	didW3CIdentifier := did.GetW3CIdentifier()
+	match, found := k.GetDid(ctx, didW3CIdentifier)
 
 	if found {
 		if !override {
-			return sdkerrors.Wrap(types.DidIdentifierCollisionError, fmt.Sprintf("Did with identifier: %s already exists in KVStore", fullyQualifiedW3CIdentifier))
+			return sdkerrors.Wrap(types.DidIdentifierCollisionError, fmt.Sprintf("Did with identifier: %s already exists in KVStore", didW3CIdentifier))
 		}
 
 		if did.Creator != match.Creator {
@@ -107,6 +107,11 @@ func (k Keeper) CanOverrideDid(ctx sdk.Context, did types.Did, override bool) er
 	}
 
 	return nil
+}
+
+func (k Keeper) IsValidDidUrl(ctx sdk.Context, url string) bool {
+	
+	return false
 }
 
 func GetDidIDBytes(did string) []byte {

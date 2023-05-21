@@ -5,7 +5,7 @@ import "encoding/binary"
 var _ binary.ByteOrder
 
 const (
-	PartitionedPoolRegistryKeyPrefix = "PartitionedPoolRegistry/value/"
+	PartitionedPoolRegistryKeyPrefix = "partitionedpoolregistry/value/"
 )
 
 func PartitionedPoolRegistryKey(
