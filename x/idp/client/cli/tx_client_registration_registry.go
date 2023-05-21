@@ -27,7 +27,7 @@ func CmdCreateClientRegistrationRegistry() *cobra.Command {
 				return err
 			}
 
-			msg := types.NewMsgCreateClientRegistrationRegistry(clientRegistry)
+			msg := types.NewMsgCreateClientRegistrationRegistry(clientCtx.GetFromAddress().String(), clientRegistry)
 
 			if err := msg.ValidateBasic(); err != nil {
 				return err
@@ -61,7 +61,7 @@ func CmdUpdateClientRegistrationRegistry() *cobra.Command {
 				return err
 			}
 
-			msg := types.NewMsgUpdateClientRegistrationRegistry(clientRegistry)
+			msg := types.NewMsgUpdateClientRegistrationRegistry(clientCtx.GetFromAddress().String(), clientRegistry)
 
 			if err := msg.ValidateBasic(); err != nil {
 				return err

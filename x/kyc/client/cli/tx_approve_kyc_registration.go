@@ -25,8 +25,7 @@ func CmdApproveKYCRegistration() *cobra.Command {
 			}
 
 			msg := types.NewMsgApproveKYCRegistration(
-				clientCtx.GetFromAddress().String(),
-				
+				clientCtx.GetFromAddress().String(),				
 			)
 
 			if err := msg.ValidateBasic(); err != nil {

@@ -21,8 +21,9 @@ func CmdCreateAMLRegistration() *cobra.Command {
 				return err
 			}
 
-			did := utils.NewDidTokenFactory().Create(clientCtx.GetFromAddress().String(), args[0])
-			msg := types.NewMsgCreateAMLRegistration(clientCtx.GetFromAddress().String(), *did)
+			creator := clientCtx.GetFromAddress().String()
+			did := utils.NewDidTokenFactory().Create(creator, args[0])
+			msg := types.NewMsgCreateAMLRegistration(creator, *did)
 
 			if err := msg.ValidateBasic(); err != nil {
 				return err
@@ -44,14 +45,17 @@ func CmdDeleteAMLRegistration() *cobra.Command {
 		Args:  cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientTxContext(cmd)
+			
 			if err != nil {
 				return err
 			}
 
 			msg := types.NewMsgDeleteAMLRegistration(clientCtx.GetFromAddress().String())
+
 			if err := msg.ValidateBasic(); err != nil {
 				return err
 			}
+
 			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msg)
 		},
 	}

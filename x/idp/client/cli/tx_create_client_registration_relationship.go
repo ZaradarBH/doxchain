@@ -33,6 +33,7 @@ func CmdCreateClientRegistrationRelationship() *cobra.Command {
 			}
 
 			msg := types.NewMsgCreateClientRegistrationRelationshipRequest(
+				clientCtx.GetFromAddress().String(),
 				crr,
 			)
 

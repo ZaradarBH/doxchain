@@ -35,5 +35,7 @@ func (k msgServer) CreatePartitionedPoolRegistry(goCtx context.Context, msg *typ
 		partitionedPoolRegistry,
 	)
 
-	return &types.MsgCreatePartitionedPoolRegistryResponse{}, nil
+	return &types.MsgCreatePartitionedPoolRegistryResponse{
+		PartitionedPoolW3CIdentifier: partitionedPoolRegistry.Owner.GetW3CIdentifier(),
+	}, nil
 }

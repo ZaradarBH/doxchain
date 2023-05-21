@@ -9,8 +9,9 @@ const TypeMsgCreateClientRegistrationRelationshipRequest = "create_client_regist
 
 var _ sdk.Msg = &MsgCreateClientRegistrationRelationshipRequest{}
 
-func NewMsgCreateClientRegistrationRelationshipRequest(clientRegistrationRelationshipRegistryEntry ClientRegistrationRelationshipRegistryEntry) *MsgCreateClientRegistrationRelationshipRequest {
+func NewMsgCreateClientRegistrationRelationshipRequest(creator string, clientRegistrationRelationshipRegistryEntry ClientRegistrationRelationshipRegistryEntry) *MsgCreateClientRegistrationRelationshipRequest {
 	return &MsgCreateClientRegistrationRelationshipRequest{
+		Creator: creator,
 		ClientRegistrationRelationshipRegistryEntry: clientRegistrationRelationshipRegistryEntry,
 	}
 }

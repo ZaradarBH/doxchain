@@ -9,9 +9,10 @@ const TypeMsgAuthenticationRequest = "basic_authentication_request"
 
 var _ sdk.Msg = &MsgAuthenticationRequest{}
 
-func NewMsgAuthenticationRequest(creator string) *MsgAuthenticationRequest {
+func NewMsgAuthenticationRequest(creator string, tenantW3CIdentifier string) *MsgAuthenticationRequest {
 	return &MsgAuthenticationRequest{
 		Creator: creator,
+		TenantW3CIdentifier: tenantW3CIdentifier,
 	}
 }
 

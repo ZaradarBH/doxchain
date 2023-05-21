@@ -14,7 +14,7 @@ var _ = strconv.Itoa(0)
 
 func CmdAuthenticationRequest() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "authentication-request",
+		Use:   "authentication-request [tenant-w3c-identifier]",
 		Short: "Broadcast message AuthenticationRequest",
 		Args:  cobra.ExactArgs(0),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
@@ -26,6 +26,7 @@ func CmdAuthenticationRequest() *cobra.Command {
 
 			msg := types.NewMsgAuthenticationRequest(
 				clientCtx.GetFromAddress().String(),
+				args[0],
 			)
 
 			if err := msg.ValidateBasic(); err != nil {

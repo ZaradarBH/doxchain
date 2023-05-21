@@ -45648,6 +45648,9 @@ paths:
 definitions:
   beheroes.doxchain.abs.v1beta1.MsgCreatePartitionedPoolRegistryResponse:
     type: object
+    properties:
+      partitionedPoolW3CIdentifier:
+        type: string
   beheroes.doxchain.abs.v1beta1.MsgUpdateBreakFactorResponse:
     type: object
   beheroes.doxchain.abs.v1beta1.Params:
