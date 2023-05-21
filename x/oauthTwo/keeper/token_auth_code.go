@@ -15,6 +15,7 @@ import (
 
 //TODO: Dont consume message types in keeper
 func (k Keeper) GenerateAuthorizationCodeToken(ctx sdk.Context, msg types.MsgTokenRequest) (response types.MsgTokenResponse, err error) {
+	//TODO: Move DidUrl generation to message handler or hardcode based on function name?
 	didUrl, err := didUtils.CreateModuleDidUrl(types.ModuleName, fmt.Sprintf("%T", msg), msg.Creator)
 
 	if err != nil {

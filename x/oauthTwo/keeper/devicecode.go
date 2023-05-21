@@ -21,6 +21,7 @@ func (k Keeper) DeviceCode(ctx sdk.Context, msg types.MsgDeviceCodeRequest) (res
 		return response, err
 	}
 
+	//TODO: Move DidUrl generation to message handler or hardcode based on function name?
 	didUrl, err := didUtils.CreateModuleDidUrl(types.ModuleName, fmt.Sprintf("%T", msg), msg.Creator)
 
 	if err != nil {
