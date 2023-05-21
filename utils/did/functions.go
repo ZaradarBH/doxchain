@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"regexp"
 	"strings"
+
+	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
 const (
@@ -35,9 +37,14 @@ func IsValidDid(didUrl string) bool {
 	return REGEX_DID_URL.MatchString(didUrl)
 }
 
-func GetWellFormedDidUrl(moduleName string, typeName string, creator string) string {
-	//Clean up typeName to ensure it adheres to the did standard
-	cleanTypeName := strings.Replace(strings.Replace(typeName, "*", "", -1), ".", "_", -1)
+func CreateModuleDidUrl(moduleName string, moduleTypeName string, creator string) (result string, err error) {
+	//Clean up moduleTypeName to ensure it adheres to the did standard
+	cleanTypeName := strings.Replace(strings.Replace(moduleTypeName, "*", "", -1), ".", "_", -1)
+	result = fmt.Sprintf("%s_%s%s%s", moduleName, cleanTypeName, REGEX_DID_SEPERATOR_CHAR, creator)
 
-	return fmt.Sprintf("%s_%s:%s", moduleName, cleanTypeName, creator)
+	if !IsValidDid(result) {
+		return result, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "Could not generate valid Did based on input params")
+	}
+	
+	return result, nil
 }

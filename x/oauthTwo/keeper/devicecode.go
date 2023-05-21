@@ -19,7 +19,13 @@ func (k Keeper) DeviceCode(ctx sdk.Context, msg types.MsgDeviceCodeRequest) (res
 	if err != nil {
 		return response, err
 	}
-	
+
+	didUrl, err := didUtils.CreateModuleDidUrl(types.ModuleName, fmt.Sprintf("%T", msg), msg.Creator)
+
+	if err != nil {
+		return response, err
+	}
+
 	isAuthorized, err := k.idpKeeper.AuthorizeUser(ctx, creatorAddress, msg.TenantW3CIdentifier)
 
 	if !isAuthorized {
@@ -58,7 +64,7 @@ func (k Keeper) DeviceCode(ctx sdk.Context, msg types.MsgDeviceCodeRequest) (res
 		return response, sdkerrors.Wrap(types.TokenServiceError, "DeviceCodeRegistry cache could not be found for tenant")
 	}
 	
-	ownerDid := didUtils.NewDidTokenFactory().Create(msg.Creator, didUtils.GetWellFormedDidUrl(types.ModuleName, fmt.Sprintf("%T", msg), msg.Creator))
+	ownerDid := didUtils.NewDidTokenFactory().Create(msg.Creator, didUrl)
 	deviceCodeRegistryEntry := idpTypes.DeviceCodeRegistryEntry{
 		Owner: *ownerDid,
 		DeviceCode: response.DeviceCode,

@@ -8,13 +8,19 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	
 	"github.com/be-heroes/doxchain/x/abs/types"
-	utils "github.com/be-heroes/doxchain/utils/did"
+	didUtils "github.com/be-heroes/doxchain/utils/did"
 )
 
 func (k msgServer) CreatePartitionedPoolRegistry(goCtx context.Context, msg *types.MsgCreatePartitionedPoolRegistryRequest) (*types.MsgCreatePartitionedPoolRegistryResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 	partitionedPoolRegistry, isFound := k.GetPartitionedPoolRegistry(ctx, msg.Creator)
-	ownerDid := utils.NewDidTokenFactory().Create(msg.Creator, utils.GetWellFormedDidUrl(types.ModuleName, fmt.Sprintf("%T", msg), msg.Creator))
+	didUrl, err := didUtils.CreateModuleDidUrl(types.ModuleName, fmt.Sprintf("%T", msg), msg.Creator)
+
+	if err != nil {
+		return nil, err
+	}
+
+	ownerDid := didUtils.NewDidTokenFactory().Create(msg.Creator, didUrl)
 
 	if !isFound {
 		partitionedPoolRegistry = types.PartitionedPoolRegistry{

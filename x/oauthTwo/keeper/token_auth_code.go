@@ -14,6 +14,12 @@ import (
 )
 
 func (k Keeper) GenerateAuthorizationCodeToken(ctx sdk.Context, msg types.MsgTokenRequest) (response types.MsgTokenResponse, err error) {
+	didUrl, err := didUtils.CreateModuleDidUrl(types.ModuleName, fmt.Sprintf("%T", msg), msg.Creator)
+
+	if err != nil {
+		return response, err
+	}
+	
 	tenantAuthorizationCodeRegistry, found := k.GetAuthorizationCodeRegistry(ctx, msg.TenantW3CIdentifier)
 
 	if !found {
@@ -41,7 +47,7 @@ func (k Keeper) GenerateAuthorizationCodeToken(ctx sdk.Context, msg types.MsgTok
 			}
 
 			tenantAccessTokenRegistry.Issued = append(tenantAccessTokenRegistry.Issued, types.AccessTokenRegistryEntry{
-				Owner: *didUtils.NewDidTokenFactory().Create(msg.Creator, didUtils.GetWellFormedDidUrl(types.ModuleName, fmt.Sprintf("%T", msg), msg.Creator)),
+				Owner: *didUtils.NewDidTokenFactory().Create(msg.Creator, didUrl),
 				Jti: claims["jti"].(string),
 				ExpiresAt: response.ExpiresIn,
 			})

@@ -18,6 +18,12 @@ func (k Keeper) Authorize(ctx sdk.Context, msg types.MsgAuthorizeRequest) (respo
 		return response, err
 	}
 
+	didUrl, err := didUtils.CreateModuleDidUrl(types.ModuleName, fmt.Sprintf("%T", msg), msg.Creator)
+
+	if err != nil {
+		return response, err
+	}
+
 	isAuthorized, err := k.idpKeeper.AuthorizeUser(ctx, creatorAddress, msg.TenantW3CIdentifier)
 
 	if !isAuthorized {
@@ -68,7 +74,7 @@ func (k Keeper) Authorize(ctx sdk.Context, msg types.MsgAuthorizeRequest) (respo
 	}
 
 	authorizationCodeRegistryEntry := types.AuthorizationCodeRegistryEntry{
-		Owner: *didUtils.NewDidTokenFactory().Create(msg.Creator, didUtils.GetWellFormedDidUrl(types.ModuleName, fmt.Sprintf("%T", msg), msg.Creator)),
+		Owner: *didUtils.NewDidTokenFactory().Create(msg.Creator, didUrl),
 		AuthorizationCode: response.AuthorizationCode,
 		ExpiresAt: ctx.BlockTime().Add(time.Minute * 3).Unix(),
 	}
