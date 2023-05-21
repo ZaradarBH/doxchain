@@ -148,9 +148,7 @@ func (am AppModule) BeginBlock(_ sdk.Context, _ abci.RequestBeginBlock) {}
 
 // EndBlock contains the logic that is automatically triggered at the end of each block
 func (am AppModule) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.ValidatorUpdate {
-	deviceCodeRegistries := am.keeper.GetAllDeviceCodeRegistry(ctx)
-
-	for _, deviceCodeRegistry := range deviceCodeRegistries {
+	for _, deviceCodeRegistry := range am.keeper.GetAllDeviceCodeRegistry(ctx) {
 		registryUpdated := false
 
 		for index, deviceCodeInfo := range deviceCodeRegistry.Codes {
@@ -172,7 +170,21 @@ func (am AppModule) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.Val
 		}
 	}
 
-	//TODO: Clean up client registration relationship tombstones
+	//TODO: Benchmark this. In general we could just do this type of clean up once per blockCleanupInterval, it does not have to happen on every block.
+	for _, relationshipRegistry := range am.keeper.GetAllClientRegistrationRelationshipRegistry(ctx) {
+		registryId := relationshipRegistry.Owner.GetW3CIdentifier()
+
+		for _, relationship := range relationshipRegistry.Relationships {
+			ownerId := relationship.Owner.GetW3CIdentifier()
+			destinationId := relationship.Destination.GetW3CIdentifier()
+			_, foundOwner := am.keeper.GetClientRegistration(ctx, registryId, ownerId)
+			_, foundDestination := am.keeper.GetClientRegistration(ctx, registryId, destinationId)
+
+			if !foundOwner || !foundDestination {
+				am.keeper.RemoveClientRegistrationRelationship(ctx, registryId, ownerId, destinationId)
+			}
+		}
+	}
 
 	return []abci.ValidatorUpdate{}
 }

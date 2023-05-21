@@ -8,6 +8,16 @@ import (
 )
 
 func (k Keeper) GetClientRegistrationRelationship(ctx sdk.Context, clientRegistrationRegistryW3CIdentitifer string, ownerClientRegistrationW3CIdentitifer string, destinationClientRegistrationW3CIdentitifer string) (result types.ClientRegistrationRelationshipRegistryEntry, found bool) {
+	for _, relationship := range k.GetClientRegistrationRelationships(ctx, clientRegistrationRegistryW3CIdentitifer, ownerClientRegistrationW3CIdentitifer) {
+		if relationship.Destination.GetW3CIdentifier() == destinationClientRegistrationW3CIdentitifer {
+			return relationship, true
+		}
+	}
+
+	return result, false
+}
+
+func (k Keeper) GetClientRegistrationRelationships(ctx sdk.Context, clientRegistrationRegistryW3CIdentitifer string, ownerClientRegistrationW3CIdentitifer string) (result []types.ClientRegistrationRelationshipRegistryEntry) {
 	var clientRegistrationRelationshipRegistry types.ClientRegistrationRelationshipRegistry
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ClientRegistrationRelationshipRegistryKeyPrefix))
 	
@@ -18,15 +28,13 @@ func (k Keeper) GetClientRegistrationRelationship(ctx sdk.Context, clientRegistr
 	k.cdc.MustUnmarshal(b, &clientRegistrationRelationshipRegistry)
 	
 	for _, existingEntry := range clientRegistrationRelationshipRegistry.Relationships {
-		if existingEntry.Owner.GetW3CIdentifier() == ownerClientRegistrationW3CIdentitifer && existingEntry.Destination.GetW3CIdentifier() == destinationClientRegistrationW3CIdentitifer {
-			return existingEntry, true
+		if existingEntry.Owner.GetW3CIdentifier() == ownerClientRegistrationW3CIdentitifer {
+			result = append(result, existingEntry)
 		}
 	}
 
-	return result, false
+	return result
 }
-
-
 
 func (k Keeper) SetClientRegistrationRelationship(ctx sdk.Context, clientRegistrationRegistryW3CIdentitifer string, clientRegistrationRelationshipRegistryEntry types.ClientRegistrationRelationshipRegistryEntry) error {
 	ownerRegistration, found := k.GetClientRegistration(ctx, clientRegistrationRegistryW3CIdentitifer, clientRegistrationRelationshipRegistryEntry.Owner.GetW3CIdentifier())
@@ -89,18 +97,6 @@ func (k Keeper) SetClientRegistrationRelationship(ctx sdk.Context, clientRegistr
 }
 
 func (k Keeper) RemoveClientRegistrationRelationship(ctx sdk.Context, clientRegistrationRegistryW3CIdentitifer string, ownerClientRegistrationW3CIdentitifer string, destinationClientRegistrationW3CIdentitifer string) error {
-	_, found := k.GetClientRegistration(ctx, clientRegistrationRegistryW3CIdentitifer, ownerClientRegistrationW3CIdentitifer)
-
-	if !found {
-		return sdkerrors.Wrap(types.AccessClientListError, "Invalid owner")
-	}
-
-	_, found = k.GetClientRegistration(ctx, clientRegistrationRegistryW3CIdentitifer, destinationClientRegistrationW3CIdentitifer)
-
-	if !found {
-		return sdkerrors.Wrap(types.AccessClientListError, "Invalid destination")
-	}
-	
 	var clientRegistrationRelationshipRegistry types.ClientRegistrationRelationshipRegistry
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ClientRegistrationRelationshipRegistryKeyPrefix))
 	
