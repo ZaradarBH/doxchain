@@ -16,7 +16,7 @@ func (k Keeper) AMLRegistration(goCtx context.Context, req *types.QueryGetAMLReg
 	
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	val, found := k.GetAMLRegistration(ctx, req.Creator)
+	val, found := k.GetAMLRegistration(ctx, req.AmlRegistrationW3CIdentifier)
 
 	if !found {
 		return nil, status.Error(codes.NotFound, "not found")

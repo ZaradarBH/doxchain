@@ -21,7 +21,7 @@ func (k Keeper) GenerateDeviceCodeToken(ctx sdk.Context, msg types.MsgTokenReque
 
 	for index, deviceCodeInfo := range tenantDeviceCodeRegistry.Codes {
 		if deviceCodeInfo.DeviceCode == msg.DeviceCode && deviceCodeInfo.Owner.Creator == msg.Creator {
-			jwtToken := utils.NewJwtTokenFactory(utils.WithContext(&ctx)).Create(msg.TenantW3CIdentifier, msg.Creator, msg.ClientId, time.Minute*3)
+			jwtToken := utils.NewJwtTokenFactory(utils.WithContext(&ctx)).Create(msg.TenantW3CIdentifier, msg.Creator, msg.ClientRegistrationAppIdW3CIdentifier, time.Minute*3)
 			claims := jwtToken.Claims.(jwt.MapClaims)
 			signedToken, err := jwtToken.SignedString([]byte(msg.DeviceCode))
 
@@ -41,7 +41,7 @@ func (k Keeper) GenerateDeviceCodeToken(ctx sdk.Context, msg types.MsgTokenReque
 
 			tenantAccessTokenRegistry.Issued = append(tenantAccessTokenRegistry.Issued, types.AccessTokenRegistryEntry{
 				Owner: *didUtils.NewDidTokenFactory().Create(msg.Creator, ""),
-				Identifier: claims["jti"].(string),
+				Jti: claims["jti"].(string),
 				ExpiresAt: response.ExpiresIn,
 			})
 

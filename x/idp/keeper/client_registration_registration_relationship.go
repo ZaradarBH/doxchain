@@ -1,6 +1,7 @@
 package keeper
 
 import (
+	"fmt"
 	types "github.com/be-heroes/doxchain/x/idp/types"
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -45,7 +46,8 @@ func (k Keeper) SetClientRegistrationRelationship(ctx sdk.Context, clientRegistr
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ClientRegistrationRelationshipRegistryKeyPrefix))
 	
 	b := store.Get(types.ClientRegistrationRelationshipRegistryKey(
-		clientRegistrationRelationshipRegistryEntry.Owner.GetW3CIdentifier(),
+		//TODO: Put the @ seperator in a constant somewhere
+		fmt.Sprintf("%s@%s", clientRegistrationRelationshipRegistryEntry.Owner.GetW3CIdentifier(), clientRegistrationRelationshipRegistryEntry.Destination.GetW3CIdentifier()),
 	))
 		
 	if b == nil {
@@ -65,49 +67,27 @@ func (k Keeper) SetClientRegistrationRelationship(ctx sdk.Context, clientRegistr
 	b = k.cdc.MustMarshal(&clientRegistrationRelationshipRegistry)
 
 	store.Set(types.ClientRegistrationRelationshipRegistryKey(
-		clientRegistrationRelationshipRegistryEntry.Owner.GetW3CIdentifier(),
+		//TODO: Put the @ seperator in a constant somewhere
+		fmt.Sprintf("%s@%s", clientRegistrationRelationshipRegistryEntry.Owner.GetW3CIdentifier(), clientRegistrationRelationshipRegistryEntry.Destination.GetW3CIdentifier()),
 	), b)
 
 	return nil
 }
 
-func (k Keeper) RemoveClientRegistrationRelationship(ctx sdk.Context, clientRegistrationRegistryW3CIdentitifer string, clientRegistrationRelationshipRegistryEntry types.ClientRegistrationRelationshipRegistryEntry) error {
-	_, found := k.GetClientRegistration(ctx, clientRegistrationRegistryW3CIdentitifer, clientRegistrationRelationshipRegistryEntry.Owner.GetW3CIdentifier())
+func (k Keeper) RemoveClientRegistrationRelationship(ctx sdk.Context, clientRegistrationRegistryW3CIdentitifer string, ownerClientRegistrationW3CIdentitifer string, destinationClientRegistrationW3CIdentitifer string) error {
+	_, found := k.GetClientRegistration(ctx, clientRegistrationRegistryW3CIdentitifer, ownerClientRegistrationW3CIdentitifer)
 
 	if !found {
 		return sdkerrors.Wrap(types.AccessClientListError, "Invalid owner")
 	}
 
-	_, found = k.GetClientRegistration(ctx, clientRegistrationRegistryW3CIdentitifer, clientRegistrationRelationshipRegistryEntry.Destination.GetW3CIdentifier())
+	_, found = k.GetClientRegistration(ctx, clientRegistrationRegistryW3CIdentitifer, destinationClientRegistrationW3CIdentitifer)
 
 	if !found {
 		return sdkerrors.Wrap(types.AccessClientListError, "Invalid destination")
 	}
-
-	var clientRegistrationRelationshipRegistry types.ClientRegistrationRelationshipRegistry
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ClientRegistrationRelationshipRegistryKeyPrefix))
 	
-	b := store.Get(types.ClientRegistrationRelationshipRegistryKey(
-		clientRegistrationRelationshipRegistryEntry.Owner.GetW3CIdentifier(),
-	))
-		
-	if b == nil {
-		clientRegistrationRelationshipRegistry = types.ClientRegistrationRelationshipRegistry{}
-	} else {
-		k.cdc.MustUnmarshal(b, &clientRegistrationRelationshipRegistry)	
-	}
-	
-	for index, existingEntry := range clientRegistrationRelationshipRegistry.Relationships {
-		if clientRegistrationRelationshipRegistryEntry.Owner.GetW3CIdentifier() == existingEntry.Owner.GetW3CIdentifier() && clientRegistrationRelationshipRegistryEntry.Destination.GetW3CIdentifier() == existingEntry.Destination.GetW3CIdentifier() {
-			clientRegistrationRelationshipRegistry.Relationships = append(clientRegistrationRelationshipRegistry.Relationships[:index], clientRegistrationRelationshipRegistry.Relationships[index+1:]...)
-		}
-	}
-
-	b = k.cdc.MustMarshal(&clientRegistrationRelationshipRegistry)
-
-	store.Set(types.ClientRegistrationRelationshipRegistryKey(
-		clientRegistrationRelationshipRegistryEntry.Owner.GetW3CIdentifier(),
-	), b)
+	//TODO: Finish this method
 
 	return nil
 }

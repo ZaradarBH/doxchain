@@ -16,7 +16,7 @@ func (k Keeper) SetClientRegistrationRegistry(ctx sdk.Context, clientRegistratio
 }
 
 func (k Keeper) GetClientRegistrationRegistry(ctx sdk.Context, clientRegistryW3CIdentifier string) (val types.ClientRegistrationRegistry, found bool) {
-	//TODO: Validate did string. Should be => did:sdk.AccAddress:sdk.AccAddress
+	//TODO: Check if its a well-formed did string. Should be => did:clientregistrationregistry:{TenantRegistry.Owner.Creator}
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ClientRegistrationRegistryKeyPrefix))
 	b := store.Get(types.ClientRegistrationRegistryKey(
 		clientRegistryW3CIdentifier,
@@ -31,12 +31,12 @@ func (k Keeper) GetClientRegistrationRegistry(ctx sdk.Context, clientRegistryW3C
 	return val, true
 }
 
-func (k Keeper) RemoveClientRegistrationRegistry(ctx sdk.Context, clientRegistryW3CIdentifier string) {
-	//TODO: Validate did string. Should be => did:sdk.AccAddress:sdk.AccAddress
+func (k Keeper) RemoveClientRegistrationRegistry(ctx sdk.Context, clientRegistrationRegistryW3CIdentifier string) {
+	//TODO: Check if its a well-formed did string. Should be => did:clientregistrationregistry:{TenantRegistry.Owner.Creator}
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ClientRegistrationRegistryKeyPrefix))
 	
 	store.Delete(types.ClientRegistrationRegistryKey(
-		clientRegistryW3CIdentifier,
+		clientRegistrationRegistryW3CIdentifier,
 	))
 }
 

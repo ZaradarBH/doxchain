@@ -42,14 +42,14 @@ func CmdListPartitionedPoolRegistries() *cobra.Command {
 
 func CmdShowPartitionedPoolRegistry() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "show-partitioned-pool-registry [creator]",
-		Short: "shows a partitionedPoolRegistry",
+		Use:   "show-partitioned-pool-registry [partitioned-pool-registry-w3c-identifier]",
+		Short: "shows a PartitionedPoolRegistry",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 			clientCtx := client.GetClientContextFromCmd(cmd)
 			queryClient := types.NewQueryClient(clientCtx)
 			res, err := queryClient.PartitionedPoolRegistry(context.Background(), &types.QueryGetPartitionedPoolRegistryRequest{
-				Creator: args[0],
+				PartitionedPoolRegistryW3CIdentifier: args[0],
 			})
 
 			if err != nil {

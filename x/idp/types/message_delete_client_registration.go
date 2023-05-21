@@ -9,10 +9,11 @@ const TypeMsgDeleteClientRegistration = "delete_client_registration"
 
 var _ sdk.Msg = &MsgDeleteClientRegistrationRequest{}
 
-func NewMsgDeleteClientRegistration(creator string, clientRegistration ClientRegistration) *MsgDeleteClientRegistrationRequest {
+func NewMsgDeleteClientRegistration(creator string, clientRegistrationRegistryW3CIdentifier string, clientRegistrationW3CIdentifier string) *MsgDeleteClientRegistrationRequest {
 	return &MsgDeleteClientRegistrationRequest{
 		Creator: creator,
-		ClientRegistration: clientRegistration,
+		ClientRegistrationRegistryW3CIdentifier: clientRegistrationRegistryW3CIdentifier,
+		ClientRegistrationW3CIdentifier: clientRegistrationW3CIdentifier,
 	}
 }
 

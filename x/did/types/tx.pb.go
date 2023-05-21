@@ -81,7 +81,7 @@ func (m *MsgCreateDidRequest) GetDid() Did {
 }
 
 type MsgCreateDidResponse struct {
-	FullyQualifiedW3CIdentifier string `protobuf:"bytes,1,opt,name=fullyQualifiedW3CIdentifier,proto3" json:"fullyQualifiedW3CIdentifier,omitempty"`
+	DidW3CIdentifier string `protobuf:"bytes,1,opt,name=didW3CIdentifier,proto3" json:"didW3CIdentifier,omitempty"`
 }
 
 func (m *MsgCreateDidResponse) Reset()         { *m = MsgCreateDidResponse{} }
@@ -117,9 +117,9 @@ func (m *MsgCreateDidResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_MsgCreateDidResponse proto.InternalMessageInfo
 
-func (m *MsgCreateDidResponse) GetFullyQualifiedW3CIdentifier() string {
+func (m *MsgCreateDidResponse) GetDidW3CIdentifier() string {
 	if m != nil {
-		return m.FullyQualifiedW3CIdentifier
+		return m.DidW3CIdentifier
 	}
 	return ""
 }
@@ -177,6 +177,7 @@ func (m *MsgUpdateDidRequest) GetDid() Did {
 }
 
 type MsgUpdateDidResponse struct {
+	DidW3CIdentifier string `protobuf:"bytes,1,opt,name=didW3CIdentifier,proto3" json:"didW3CIdentifier,omitempty"`
 }
 
 func (m *MsgUpdateDidResponse) Reset()         { *m = MsgUpdateDidResponse{} }
@@ -212,9 +213,16 @@ func (m *MsgUpdateDidResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_MsgUpdateDidResponse proto.InternalMessageInfo
 
+func (m *MsgUpdateDidResponse) GetDidW3CIdentifier() string {
+	if m != nil {
+		return m.DidW3CIdentifier
+	}
+	return ""
+}
+
 type MsgDeleteDidRequest struct {
-	Creator                     string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
-	FullyQualifiedW3CIdentifier string `protobuf:"bytes,2,opt,name=fullyQualifiedW3CIdentifier,proto3" json:"fullyQualifiedW3CIdentifier,omitempty"`
+	Creator          string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	DidW3CIdentifier string `protobuf:"bytes,2,opt,name=didW3CIdentifier,proto3" json:"didW3CIdentifier,omitempty"`
 }
 
 func (m *MsgDeleteDidRequest) Reset()         { *m = MsgDeleteDidRequest{} }
@@ -257,9 +265,9 @@ func (m *MsgDeleteDidRequest) GetCreator() string {
 	return ""
 }
 
-func (m *MsgDeleteDidRequest) GetFullyQualifiedW3CIdentifier() string {
+func (m *MsgDeleteDidRequest) GetDidW3CIdentifier() string {
 	if m != nil {
-		return m.FullyQualifiedW3CIdentifier
+		return m.DidW3CIdentifier
 	}
 	return ""
 }
@@ -353,7 +361,7 @@ func (m *MsgCreateDidDocumentRequest) GetDidDocument() DidDocument {
 }
 
 type MsgCreateDidDocumentResponse struct {
-	FullyQualifiedW3CIdentifier string `protobuf:"bytes,1,opt,name=fullyQualifiedW3CIdentifier,proto3" json:"fullyQualifiedW3CIdentifier,omitempty"`
+	DidDocumentW3CIdentifier string `protobuf:"bytes,1,opt,name=didDocumentW3CIdentifier,proto3" json:"didDocumentW3CIdentifier,omitempty"`
 }
 
 func (m *MsgCreateDidDocumentResponse) Reset()         { *m = MsgCreateDidDocumentResponse{} }
@@ -389,9 +397,9 @@ func (m *MsgCreateDidDocumentResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_MsgCreateDidDocumentResponse proto.InternalMessageInfo
 
-func (m *MsgCreateDidDocumentResponse) GetFullyQualifiedW3CIdentifier() string {
+func (m *MsgCreateDidDocumentResponse) GetDidDocumentW3CIdentifier() string {
 	if m != nil {
-		return m.FullyQualifiedW3CIdentifier
+		return m.DidDocumentW3CIdentifier
 	}
 	return ""
 }
@@ -449,6 +457,7 @@ func (m *MsgUpdateDidDocumentRequest) GetDidDocument() DidDocument {
 }
 
 type MsgUpdateDidDocumentResponse struct {
+	DidDocumentW3CIdentifier string `protobuf:"bytes,1,opt,name=didDocumentW3CIdentifier,proto3" json:"didDocumentW3CIdentifier,omitempty"`
 }
 
 func (m *MsgUpdateDidDocumentResponse) Reset()         { *m = MsgUpdateDidDocumentResponse{} }
@@ -484,9 +493,16 @@ func (m *MsgUpdateDidDocumentResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_MsgUpdateDidDocumentResponse proto.InternalMessageInfo
 
+func (m *MsgUpdateDidDocumentResponse) GetDidDocumentW3CIdentifier() string {
+	if m != nil {
+		return m.DidDocumentW3CIdentifier
+	}
+	return ""
+}
+
 type MsgDeleteDidDocumentRequest struct {
-	Creator                     string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
-	FullyQualifiedW3CIdentifier string `protobuf:"bytes,2,opt,name=fullyQualifiedW3CIdentifier,proto3" json:"fullyQualifiedW3CIdentifier,omitempty"`
+	Creator                  string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	DidDocumentW3CIdentifier string `protobuf:"bytes,2,opt,name=didDocumentW3CIdentifier,proto3" json:"didDocumentW3CIdentifier,omitempty"`
 }
 
 func (m *MsgDeleteDidDocumentRequest) Reset()         { *m = MsgDeleteDidDocumentRequest{} }
@@ -529,9 +545,9 @@ func (m *MsgDeleteDidDocumentRequest) GetCreator() string {
 	return ""
 }
 
-func (m *MsgDeleteDidDocumentRequest) GetFullyQualifiedW3CIdentifier() string {
+func (m *MsgDeleteDidDocumentRequest) GetDidDocumentW3CIdentifier() string {
 	if m != nil {
-		return m.FullyQualifiedW3CIdentifier
+		return m.DidDocumentW3CIdentifier
 	}
 	return ""
 }
@@ -590,39 +606,39 @@ func init() {
 func init() { proto.RegisterFile("doxchain/did/v1beta1/tx.proto", fileDescriptor_14efaa77e3d06d34) }
 
 var fileDescriptor_14efaa77e3d06d34 = []byte{
-	// 507 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xc4, 0x95, 0x3f, 0x6f, 0xd3, 0x40,
-	0x18, 0xc6, 0x73, 0x2d, 0x2a, 0xca, 0x75, 0xe2, 0xa8, 0x50, 0x94, 0xd2, 0xa3, 0xf2, 0x42, 0x41,
-	0xc2, 0x56, 0x93, 0xad, 0x2c, 0xa8, 0xc9, 0xc2, 0xd0, 0x81, 0x48, 0x08, 0xc4, 0x02, 0x71, 0xee,
-	0xad, 0x73, 0x22, 0xcd, 0xa5, 0xf6, 0x19, 0x25, 0x9f, 0x01, 0x06, 0x06, 0x3e, 0x54, 0xc7, 0x8e,
-	0x4c, 0x08, 0x25, 0x5f, 0x04, 0xf9, 0xee, 0x6c, 0x4c, 0x6c, 0xd7, 0x17, 0x40, 0xb0, 0xc5, 0xf1,
-	0xfb, 0xde, 0xf3, 0x7b, 0xff, 0x3c, 0x3e, 0x7c, 0xc0, 0xc4, 0x7c, 0x34, 0x1e, 0xf2, 0xa9, 0xc7,
-	0x38, 0xf3, 0x3e, 0x1c, 0xfb, 0x20, 0x87, 0xc7, 0x9e, 0x9c, 0xbb, 0xb3, 0x50, 0x48, 0x41, 0x0e,
-	0x7c, 0x18, 0x43, 0x28, 0x20, 0x72, 0xd3, 0x38, 0x97, 0x71, 0xe6, 0x9a, 0xb8, 0xf6, 0x5e, 0x20,
-	0x02, 0xa1, 0x22, 0xbd, 0xe4, 0x97, 0x4e, 0x6a, 0xd3, 0xd2, 0x33, 0x93, 0x3c, 0xfd, 0xfe, 0x61,
-	0xd5, 0xfb, 0xb7, 0x4c, 0x8c, 0xe2, 0x0b, 0x98, 0x4a, 0x1d, 0xe8, 0xbc, 0xc7, 0x77, 0xcf, 0xa2,
-	0xa0, 0x17, 0xc2, 0x50, 0x42, 0x9f, 0xb3, 0x01, 0x5c, 0xc6, 0x10, 0x49, 0xd2, 0xc2, 0xb7, 0x47,
-	0xc9, 0x7f, 0x22, 0x6c, 0xa1, 0x43, 0x74, 0xd4, 0x1c, 0xa4, 0x8f, 0xe4, 0x04, 0x6f, 0x33, 0xce,
-	0x5a, 0x5b, 0x87, 0xe8, 0x68, 0xb7, 0xe3, 0xb8, 0x37, 0xc2, 0xbb, 0x7d, 0xce, 0x4e, 0x6f, 0x5d,
-	0x7d, 0x7b, 0xd0, 0x18, 0x24, 0x49, 0xce, 0x6b, 0xbc, 0xf7, 0xab, 0x58, 0x34, 0x13, 0xd3, 0x08,
-	0xc8, 0x33, 0xbc, 0x7f, 0x1e, 0x4f, 0x26, 0x8b, 0x17, 0xf1, 0x70, 0xc2, 0xcf, 0x39, 0xb0, 0x57,
-	0xdd, 0xde, 0x73, 0x06, 0x53, 0x99, 0x3c, 0xa4, 0x04, 0x37, 0x85, 0x98, 0x32, 0x5e, 0xce, 0xd8,
-	0xbf, 0x28, 0xe3, 0x9e, 0x2a, 0x23, 0x27, 0xa6, 0xcb, 0x70, 0x2e, 0x15, 0x44, 0x1f, 0x26, 0x60,
-	0x09, 0x51, 0x53, 0xf7, 0x56, 0x7d, 0xdd, 0x1a, 0x25, 0x27, 0x69, 0x50, 0x3e, 0x22, 0xbc, 0x9f,
-	0x6f, 0x75, 0xdf, 0x4c, 0xbd, 0x9e, 0x69, 0x80, 0x77, 0xd9, 0xcf, 0x78, 0xd3, 0xa0, 0xc7, 0xf5,
-	0x0d, 0x4a, 0x33, 0x4c, 0xa3, 0xf2, 0x87, 0x38, 0xef, 0xf0, 0xfd, 0x72, 0x98, 0xbf, 0x36, 0x7f,
-	0x53, 0x6f, 0x36, 0x93, 0xff, 0x5b, 0x2f, 0x55, 0xf5, 0x96, 0xc0, 0x98, 0xe9, 0x2c, 0x14, 0x6c,
-	0x36, 0x35, 0x7b, 0xd8, 0x3f, 0x5f, 0x18, 0x8d, 0x56, 0x22, 0xad, 0xd1, 0x3a, 0x5f, 0x76, 0xf0,
-	0xf6, 0x59, 0x14, 0x10, 0x89, 0x9b, 0xd9, 0xbc, 0x48, 0xa7, 0xa6, 0x1d, 0x25, 0x5f, 0x90, 0x76,
-	0x77, 0xa3, 0x1c, 0xb3, 0x08, 0x12, 0x37, 0xb3, 0xae, 0xd9, 0xa8, 0xae, 0x1b, 0xde, 0x46, 0xb5,
-	0xe0, 0xdb, 0x44, 0x35, 0x6b, 0x88, 0x8d, 0xea, 0xba, 0xc3, 0x6d, 0x54, 0x0b, 0x16, 0x25, 0x9f,
-	0x10, 0xbe, 0x53, 0xb0, 0x04, 0x39, 0xd9, 0xa0, 0x6d, 0x6b, 0x7b, 0xd3, 0x7e, 0xfa, 0x5b, 0xb9,
-	0x39, 0x9c, 0xc2, 0xc6, 0xda, 0xe0, 0x54, 0x79, 0xce, 0x06, 0xa7, 0xd2, 0x22, 0x0a, 0xa7, 0xb0,
-	0xa5, 0x36, 0x38, 0x55, 0xae, 0xb2, 0xc1, 0xa9, 0xb4, 0xc5, 0x69, 0xef, 0x6a, 0x49, 0xd1, 0xf5,
-	0x92, 0xa2, 0xef, 0x4b, 0x8a, 0x3e, 0xaf, 0x68, 0xe3, 0x7a, 0x45, 0x1b, 0x5f, 0x57, 0xb4, 0xf1,
-	0xe6, 0x51, 0xc0, 0xe5, 0x38, 0xf6, 0xdd, 0x91, 0xb8, 0xf0, 0x7c, 0x78, 0xa2, 0x15, 0xbc, 0xec,
-	0xfa, 0x9d, 0xab, 0x0b, 0x58, 0x2e, 0x66, 0x10, 0xf9, 0x3b, 0xea, 0xca, 0xed, 0xfe, 0x08, 0x00,
-	0x00, 0xff, 0xff, 0x4c, 0xfb, 0xa3, 0x2e, 0x11, 0x08, 0x00, 0x00,
+	// 506 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xcc, 0x95, 0xcf, 0x6f, 0xd3, 0x30,
+	0x14, 0xc7, 0xeb, 0x0e, 0x0d, 0xd5, 0xbb, 0x80, 0x99, 0x50, 0x15, 0x98, 0x99, 0x72, 0x61, 0x4c,
+	0x22, 0xd1, 0xda, 0x5b, 0xb9, 0xb5, 0xb9, 0x70, 0xd8, 0x25, 0x12, 0x42, 0x1a, 0x07, 0xd4, 0xc4,
+	0x8f, 0xd4, 0x82, 0xc5, 0x21, 0x76, 0x51, 0xf9, 0x1b, 0xe0, 0xc0, 0x81, 0x3f, 0x6a, 0xc7, 0x1d,
+	0x39, 0x21, 0xd4, 0xfe, 0x23, 0x28, 0x3f, 0x09, 0x4d, 0xb2, 0x78, 0x13, 0x42, 0xbb, 0xb5, 0xf1,
+	0x7b, 0xef, 0xfb, 0x79, 0x5f, 0xfb, 0xd9, 0xf8, 0x80, 0x89, 0x95, 0xbf, 0x98, 0xf3, 0xd0, 0x66,
+	0x9c, 0xd9, 0x9f, 0x4e, 0x3c, 0x50, 0xf3, 0x13, 0x5b, 0xad, 0xac, 0x28, 0x16, 0x4a, 0x90, 0x03,
+	0x0f, 0x16, 0x10, 0x0b, 0x90, 0x56, 0x11, 0x67, 0x31, 0xce, 0xac, 0x3c, 0xce, 0xd8, 0x0f, 0x44,
+	0x20, 0xd2, 0x48, 0x3b, 0xf9, 0x95, 0x25, 0x19, 0xb4, 0xb1, 0x66, 0x92, 0x97, 0xad, 0x3f, 0x6d,
+	0x5b, 0x7f, 0xcb, 0x84, 0xbf, 0x3c, 0x87, 0x50, 0x65, 0x81, 0xe6, 0x7b, 0xfc, 0xe0, 0x54, 0x06,
+	0xb3, 0x18, 0xe6, 0x0a, 0x1c, 0xce, 0x5c, 0xf8, 0xb8, 0x04, 0xa9, 0xc8, 0x10, 0xdf, 0xf5, 0x93,
+	0x6f, 0x22, 0x1e, 0xa2, 0x43, 0x74, 0x34, 0x70, 0x8b, 0xbf, 0x64, 0x82, 0x77, 0x18, 0x67, 0xc3,
+	0xfe, 0x21, 0x3a, 0xda, 0x1b, 0x99, 0xd6, 0x95, 0xf0, 0x96, 0xc3, 0xd9, 0xf4, 0xce, 0xc5, 0xcf,
+	0x27, 0x3d, 0x37, 0x49, 0x32, 0xa7, 0x78, 0xff, 0x6f, 0x31, 0x19, 0x89, 0x50, 0x02, 0x39, 0xc6,
+	0xf7, 0x18, 0x67, 0xaf, 0xc7, 0xb3, 0x97, 0x0c, 0x42, 0xc5, 0xdf, 0x71, 0x28, 0x64, 0x6b, 0xdf,
+	0x73, 0xe0, 0x57, 0x11, 0xfb, 0x7f, 0xc0, 0x15, 0xb1, 0x1b, 0x00, 0xbf, 0x49, 0x81, 0x1d, 0xf8,
+	0x00, 0x9a, 0xc0, 0x4d, 0xc5, 0xfb, 0x2d, 0xc5, 0x1f, 0xa6, 0x80, 0x95, 0xe2, 0x19, 0xa0, 0xf9,
+	0x05, 0xe1, 0x47, 0x55, 0xab, 0x9d, 0x7c, 0xd7, 0xbb, 0xd5, 0x5d, 0xbc, 0xc7, 0xfe, 0xc4, 0xe7,
+	0xb6, 0x1d, 0x77, 0xdb, 0x56, 0x64, 0xe4, 0xf6, 0x55, 0x8b, 0x98, 0x67, 0xf8, 0x71, 0x33, 0x4c,
+	0x6e, 0xe7, 0x04, 0x0f, 0x2b, 0xe1, 0x4d, 0xb6, 0xb6, 0xae, 0x17, 0x9d, 0x96, 0x7b, 0x74, 0x1b,
+	0x3a, 0x6d, 0x80, 0xf9, 0x07, 0x9d, 0xca, 0xb4, 0xd1, 0x72, 0xaf, 0xf5, 0x1b, 0xbd, 0x4a, 0xb4,
+	0xdf, 0x21, 0x4a, 0xd3, 0x86, 0x1a, 0x44, 0xb3, 0x86, 0x46, 0xdf, 0x77, 0xf1, 0xce, 0xa9, 0x0c,
+	0x88, 0xc2, 0x83, 0x72, 0x7f, 0xc9, 0xa8, 0xc3, 0xc4, 0x86, 0x1b, 0xc7, 0x18, 0x5f, 0x2b, 0x27,
+	0xb7, 0x53, 0xe1, 0x41, 0xe9, 0xb5, 0x8e, 0xea, 0xf6, 0xb5, 0xa1, 0xa3, 0x5a, 0x9f, 0x7e, 0x85,
+	0x07, 0xa5, 0x21, 0x3a, 0xaa, 0xdb, 0xb3, 0xaf, 0xa3, 0x5a, 0x1b, 0x69, 0xf2, 0x15, 0xe1, 0xfb,
+	0xb5, 0x11, 0x22, 0x93, 0x6b, 0xd8, 0xb6, 0x75, 0x62, 0x8c, 0x17, 0x37, 0xca, 0xad, 0xe0, 0xd4,
+	0xce, 0xb9, 0x0e, 0x4e, 0xdb, 0xa4, 0xea, 0xe0, 0xb4, 0x0f, 0x56, 0x82, 0x53, 0x3b, 0xa5, 0x3a,
+	0x38, 0x6d, 0xf3, 0xa4, 0x83, 0xd3, 0x3a, 0x16, 0xd3, 0xd9, 0xc5, 0x9a, 0xa2, 0xcb, 0x35, 0x45,
+	0xbf, 0xd6, 0x14, 0x7d, 0xdb, 0xd0, 0xde, 0xe5, 0x86, 0xf6, 0x7e, 0x6c, 0x68, 0xef, 0xec, 0x59,
+	0xc0, 0xd5, 0x62, 0xe9, 0x59, 0xbe, 0x38, 0xb7, 0x3d, 0x78, 0x9e, 0x29, 0xd8, 0xe5, 0x73, 0xbd,
+	0x4a, 0x1f, 0x6c, 0xf5, 0x39, 0x02, 0xe9, 0xed, 0xa6, 0x4f, 0xf4, 0xf8, 0x77, 0x00, 0x00, 0x00,
+	0xff, 0xff, 0xa1, 0x2e, 0x0b, 0xf2, 0x41, 0x08, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -945,10 +961,10 @@ func (m *MsgCreateDidResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
-	if len(m.FullyQualifiedW3CIdentifier) > 0 {
-		i -= len(m.FullyQualifiedW3CIdentifier)
-		copy(dAtA[i:], m.FullyQualifiedW3CIdentifier)
-		i = encodeVarintTx(dAtA, i, uint64(len(m.FullyQualifiedW3CIdentifier)))
+	if len(m.DidW3CIdentifier) > 0 {
+		i -= len(m.DidW3CIdentifier)
+		copy(dAtA[i:], m.DidW3CIdentifier)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.DidW3CIdentifier)))
 		i--
 		dAtA[i] = 0xa
 	}
@@ -1015,6 +1031,13 @@ func (m *MsgUpdateDidResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
+	if len(m.DidW3CIdentifier) > 0 {
+		i -= len(m.DidW3CIdentifier)
+		copy(dAtA[i:], m.DidW3CIdentifier)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.DidW3CIdentifier)))
+		i--
+		dAtA[i] = 0xa
+	}
 	return len(dAtA) - i, nil
 }
 
@@ -1038,10 +1061,10 @@ func (m *MsgDeleteDidRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
-	if len(m.FullyQualifiedW3CIdentifier) > 0 {
-		i -= len(m.FullyQualifiedW3CIdentifier)
-		copy(dAtA[i:], m.FullyQualifiedW3CIdentifier)
-		i = encodeVarintTx(dAtA, i, uint64(len(m.FullyQualifiedW3CIdentifier)))
+	if len(m.DidW3CIdentifier) > 0 {
+		i -= len(m.DidW3CIdentifier)
+		copy(dAtA[i:], m.DidW3CIdentifier)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.DidW3CIdentifier)))
 		i--
 		dAtA[i] = 0x12
 	}
@@ -1138,10 +1161,10 @@ func (m *MsgCreateDidDocumentResponse) MarshalToSizedBuffer(dAtA []byte) (int, e
 	_ = i
 	var l int
 	_ = l
-	if len(m.FullyQualifiedW3CIdentifier) > 0 {
-		i -= len(m.FullyQualifiedW3CIdentifier)
-		copy(dAtA[i:], m.FullyQualifiedW3CIdentifier)
-		i = encodeVarintTx(dAtA, i, uint64(len(m.FullyQualifiedW3CIdentifier)))
+	if len(m.DidDocumentW3CIdentifier) > 0 {
+		i -= len(m.DidDocumentW3CIdentifier)
+		copy(dAtA[i:], m.DidDocumentW3CIdentifier)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.DidDocumentW3CIdentifier)))
 		i--
 		dAtA[i] = 0xa
 	}
@@ -1208,6 +1231,13 @@ func (m *MsgUpdateDidDocumentResponse) MarshalToSizedBuffer(dAtA []byte) (int, e
 	_ = i
 	var l int
 	_ = l
+	if len(m.DidDocumentW3CIdentifier) > 0 {
+		i -= len(m.DidDocumentW3CIdentifier)
+		copy(dAtA[i:], m.DidDocumentW3CIdentifier)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.DidDocumentW3CIdentifier)))
+		i--
+		dAtA[i] = 0xa
+	}
 	return len(dAtA) - i, nil
 }
 
@@ -1231,10 +1261,10 @@ func (m *MsgDeleteDidDocumentRequest) MarshalToSizedBuffer(dAtA []byte) (int, er
 	_ = i
 	var l int
 	_ = l
-	if len(m.FullyQualifiedW3CIdentifier) > 0 {
-		i -= len(m.FullyQualifiedW3CIdentifier)
-		copy(dAtA[i:], m.FullyQualifiedW3CIdentifier)
-		i = encodeVarintTx(dAtA, i, uint64(len(m.FullyQualifiedW3CIdentifier)))
+	if len(m.DidDocumentW3CIdentifier) > 0 {
+		i -= len(m.DidDocumentW3CIdentifier)
+		copy(dAtA[i:], m.DidDocumentW3CIdentifier)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.DidDocumentW3CIdentifier)))
 		i--
 		dAtA[i] = 0x12
 	}
@@ -1303,7 +1333,7 @@ func (m *MsgCreateDidResponse) Size() (n int) {
 	}
 	var l int
 	_ = l
-	l = len(m.FullyQualifiedW3CIdentifier)
+	l = len(m.DidW3CIdentifier)
 	if l > 0 {
 		n += 1 + l + sovTx(uint64(l))
 	}
@@ -1331,6 +1361,10 @@ func (m *MsgUpdateDidResponse) Size() (n int) {
 	}
 	var l int
 	_ = l
+	l = len(m.DidW3CIdentifier)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
 	return n
 }
 
@@ -1344,7 +1378,7 @@ func (m *MsgDeleteDidRequest) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovTx(uint64(l))
 	}
-	l = len(m.FullyQualifiedW3CIdentifier)
+	l = len(m.DidW3CIdentifier)
 	if l > 0 {
 		n += 1 + l + sovTx(uint64(l))
 	}
@@ -1381,7 +1415,7 @@ func (m *MsgCreateDidDocumentResponse) Size() (n int) {
 	}
 	var l int
 	_ = l
-	l = len(m.FullyQualifiedW3CIdentifier)
+	l = len(m.DidDocumentW3CIdentifier)
 	if l > 0 {
 		n += 1 + l + sovTx(uint64(l))
 	}
@@ -1409,6 +1443,10 @@ func (m *MsgUpdateDidDocumentResponse) Size() (n int) {
 	}
 	var l int
 	_ = l
+	l = len(m.DidDocumentW3CIdentifier)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
 	return n
 }
 
@@ -1422,7 +1460,7 @@ func (m *MsgDeleteDidDocumentRequest) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovTx(uint64(l))
 	}
-	l = len(m.FullyQualifiedW3CIdentifier)
+	l = len(m.DidDocumentW3CIdentifier)
 	if l > 0 {
 		n += 1 + l + sovTx(uint64(l))
 	}
@@ -1590,7 +1628,7 @@ func (m *MsgCreateDidResponse) Unmarshal(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field FullyQualifiedW3CIdentifier", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field DidW3CIdentifier", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -1618,7 +1656,7 @@ func (m *MsgCreateDidResponse) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FullyQualifiedW3CIdentifier = string(dAtA[iNdEx:postIndex])
+			m.DidW3CIdentifier = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -1785,6 +1823,38 @@ func (m *MsgUpdateDidResponse) Unmarshal(dAtA []byte) error {
 			return fmt.Errorf("proto: MsgUpdateDidResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DidW3CIdentifier", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.DidW3CIdentifier = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipTx(dAtA[iNdEx:])
@@ -1869,7 +1939,7 @@ func (m *MsgDeleteDidRequest) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field FullyQualifiedW3CIdentifier", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field DidW3CIdentifier", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -1897,7 +1967,7 @@ func (m *MsgDeleteDidRequest) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FullyQualifiedW3CIdentifier = string(dAtA[iNdEx:postIndex])
+			m.DidW3CIdentifier = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -2116,7 +2186,7 @@ func (m *MsgCreateDidDocumentResponse) Unmarshal(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field FullyQualifiedW3CIdentifier", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field DidDocumentW3CIdentifier", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -2144,7 +2214,7 @@ func (m *MsgCreateDidDocumentResponse) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FullyQualifiedW3CIdentifier = string(dAtA[iNdEx:postIndex])
+			m.DidDocumentW3CIdentifier = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -2311,6 +2381,38 @@ func (m *MsgUpdateDidDocumentResponse) Unmarshal(dAtA []byte) error {
 			return fmt.Errorf("proto: MsgUpdateDidDocumentResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DidDocumentW3CIdentifier", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.DidDocumentW3CIdentifier = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipTx(dAtA[iNdEx:])
@@ -2395,7 +2497,7 @@ func (m *MsgDeleteDidDocumentRequest) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field FullyQualifiedW3CIdentifier", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field DidDocumentW3CIdentifier", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -2423,7 +2525,7 @@ func (m *MsgDeleteDidDocumentRequest) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.FullyQualifiedW3CIdentifier = string(dAtA[iNdEx:postIndex])
+			m.DidDocumentW3CIdentifier = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex

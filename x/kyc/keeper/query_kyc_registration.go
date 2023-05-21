@@ -15,7 +15,7 @@ func (k Keeper) KYCRegistration(goCtx context.Context, req *types.QueryGetKYCReg
 	}
 	
 	ctx := sdk.UnwrapSDKContext(goCtx)
-	val, found := k.GetKYCRegistration(ctx, req.Creator)
+	val, found := k.GetKYCRegistration(ctx, req.KycRegistrationW3CIdentifier)
 	
 	if !found {
 		return nil, status.Error(codes.NotFound, "not found")

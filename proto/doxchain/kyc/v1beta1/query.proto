@@ -15,7 +15,7 @@ service Query {
   }
   
   rpc KYCRegistration (QueryGetKYCRegistrationRequest) returns (QueryGetKYCRegistrationResponse) {
-    option (google.api.http).get = "/be-heroes/doxchain/kyc/kyc_registration";  
+    option (google.api.http).get = "/be-heroes/doxchain/kyc/kyc_registration/{kycRegistrationW3CIdentifier}";  
   }
 }
 
@@ -26,7 +26,7 @@ message QueryParamsResponse {
 }
 
 message QueryGetKYCRegistrationRequest {
-  string creator = 1;
+  string kycRegistrationW3CIdentifier = 1;
 }
 
 message QueryGetKYCRegistrationResponse {

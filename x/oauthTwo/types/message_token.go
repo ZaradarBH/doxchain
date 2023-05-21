@@ -9,17 +9,17 @@ const TypeMsgTokenRequest = "token"
 
 var _ sdk.Msg = &MsgTokenRequest{}
 
-func NewMsgTokenRequest(creator string, tenantW3CIdentifier string, clientId string, clientSecret string, scope []string, grantType string, deviceCode string, authorizationCode string, clientAssertion string, clientAssertionType string) *MsgTokenRequest {
+func NewMsgTokenRequest(creator string, tenantW3CIdentifier string, clientRegistrationAppIdW3CIdentifier string, clientSecret string, scope []string, grantType string, deviceCode string, authorizationCode string, clientAssertion string, clientAssertionType string) *MsgTokenRequest {
 	return &MsgTokenRequest{
-		Creator:             creator,
+		Creator: creator,
 		TenantW3CIdentifier: tenantW3CIdentifier,
-		ClientId:            clientId,
-		ClientSecret:        clientSecret,
-		Scope:               scope,
-		GrantType:           grantType,
-		DeviceCode:          deviceCode,
-		AuthorizationCode:   authorizationCode,
-		ClientAssertion:     clientAssertion,
+		ClientRegistrationAppIdW3CIdentifier: clientRegistrationAppIdW3CIdentifier,
+		ClientSecret: clientSecret,
+		Scope: scope,
+		GrantType: grantType,
+		DeviceCode: deviceCode,
+		AuthorizationCode: authorizationCode,
+		ClientAssertion: clientAssertion,
 		ClientAssertionType: clientAssertionType,
 	}
 }

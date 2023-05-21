@@ -20,7 +20,7 @@ func (k msgServer) CreateDid(goCtx context.Context, msg *types.MsgCreateDidReque
 	}
 
 	return &types.MsgCreateDidResponse{
-		FullyQualifiedW3CIdentifier: msg.Did.GetW3CIdentifier(),
+		DidW3CIdentifier: msg.Did.GetW3CIdentifier(),
 	}, nil
 }
 
@@ -35,12 +35,14 @@ func (k msgServer) UpdateDid(goCtx context.Context, msg *types.MsgUpdateDidReque
 		return nil, err
 	}
 
-	return &types.MsgUpdateDidResponse{}, nil
+	return &types.MsgUpdateDidResponse{
+		DidW3CIdentifier: msg.Did.GetW3CIdentifier(),
+	}, nil
 }
 
 func (k msgServer) DeleteDid(goCtx context.Context, msg *types.MsgDeleteDidRequest) (*types.MsgDeleteDidResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
-	valFound, isFound := k.GetDid(ctx, msg.FullyQualifiedW3CIdentifier)
+	valFound, isFound := k.GetDid(ctx, msg.DidW3CIdentifier)
 
 	if !isFound {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "not set")
@@ -50,7 +52,7 @@ func (k msgServer) DeleteDid(goCtx context.Context, msg *types.MsgDeleteDidReque
 		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "incorrect owner")
 	}
 
-	err := k.RemoveDid(ctx, msg.FullyQualifiedW3CIdentifier)
+	err := k.RemoveDid(ctx, msg.DidW3CIdentifier)
 
 	if err != nil {
 		return nil, err

@@ -98,15 +98,15 @@ func request_Query_PartitionedPoolRegistry_0(ctx context.Context, marshaler runt
 		_   = err
 	)
 
-	val, ok = pathParams["creator"]
+	val, ok = pathParams["partitionedPoolRegistryW3CIdentifier"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "creator")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "partitionedPoolRegistryW3CIdentifier")
 	}
 
-	protoReq.Creator, err = runtime.String(val)
+	protoReq.PartitionedPoolRegistryW3CIdentifier, err = runtime.String(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "creator", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "partitionedPoolRegistryW3CIdentifier", err)
 	}
 
 	msg, err := client.PartitionedPoolRegistry(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -125,15 +125,15 @@ func local_request_Query_PartitionedPoolRegistry_0(ctx context.Context, marshale
 		_   = err
 	)
 
-	val, ok = pathParams["creator"]
+	val, ok = pathParams["partitionedPoolRegistryW3CIdentifier"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "creator")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "partitionedPoolRegistryW3CIdentifier")
 	}
 
-	protoReq.Creator, err = runtime.String(val)
+	protoReq.PartitionedPoolRegistryW3CIdentifier, err = runtime.String(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "creator", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "partitionedPoolRegistryW3CIdentifier", err)
 	}
 
 	msg, err := server.PartitionedPoolRegistry(ctx, &protoReq)
@@ -449,7 +449,7 @@ var (
 
 	pattern_Query_QueryWatchlist_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"doxchain", "abs", "query_watchlist"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_PartitionedPoolRegistry_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"be-heroes", "doxchain", "abs", "partitioned_pool_registries", "creator"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_PartitionedPoolRegistry_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"be-heroes", "doxchain", "abs", "partitioned_pool_registries", "partitionedPoolRegistryW3CIdentifier"}, "", runtime.AssumeColonVerbOpt(true)))
 
 	pattern_Query_PartitionedPoolRegistryAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"be-heroes", "doxchain", "abs", "partitioned_pool_registries"}, "", runtime.AssumeColonVerbOpt(true)))
 )

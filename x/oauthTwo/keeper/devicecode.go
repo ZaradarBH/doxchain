@@ -1,7 +1,6 @@
 package keeper
 
 import (
-	"fmt"
 	"time"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -35,7 +34,7 @@ func (k Keeper) DeviceCode(ctx sdk.Context, msg types.MsgDeviceCodeRequest) (res
 	var validScopes []string
 
 	for _, requestedScope := range msg.Scope {
-		validScope, err := k.idpKeeper.AuthorizeScope(ctx, msg.TenantW3CIdentifier, fmt.Sprintf("did:%s:%s", msg.ClientId, msg.ClientId), requestedScope)
+		validScope, err := k.idpKeeper.AuthorizeScope(ctx, msg.TenantW3CIdentifier, msg.ClientRegistrationAppIdW3CIdentifier, requestedScope)
 
 		if err != nil {
 			return response, err

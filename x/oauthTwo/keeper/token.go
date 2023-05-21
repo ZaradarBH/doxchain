@@ -1,7 +1,6 @@
 package keeper
 
 import (
-	"fmt"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
@@ -24,7 +23,7 @@ func (k Keeper) Token(ctx sdk.Context, msg types.MsgTokenRequest) (response type
 	var validScopes []string
 
 	for _, requestedScope := range msg.Scope {
-		validScope, err := k.idpKeeper.AuthorizeScope(ctx, msg.TenantW3CIdentifier, fmt.Sprintf("did:%s:%s", msg.ClientId, msg.ClientId), requestedScope)
+		validScope, err := k.idpKeeper.AuthorizeScope(ctx, msg.TenantW3CIdentifier, msg.ClientRegistrationAppIdW3CIdentifier, requestedScope)
 
 		if err != nil {
 			return response, err

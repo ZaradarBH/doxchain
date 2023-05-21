@@ -14,7 +14,7 @@ var _ = strconv.Itoa(0)
 
 func CmdDeleteClientRegistration() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "delete-client-registration [client-registration-json]",
+		Use:   "delete-client-registration [client-registration-registry-w3c-identifier] [client-registration-w3c-identifier]",
 		Short: "Broadcast message DeleteClientRegistration",
 		Args:  cobra.ExactArgs(0),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
@@ -24,16 +24,10 @@ func CmdDeleteClientRegistration() *cobra.Command {
 				return err
 			}
 
-			var clientRegistration types.ClientRegistration
-			err = clientCtx.Codec.UnmarshalJSON([]byte(args[0]), &clientRegistration)
-
-			if err != nil {
-				return err
-			}
-
 			msg := types.NewMsgDeleteClientRegistration(
 				clientCtx.GetFromAddress().String(),
-				clientRegistration,
+				args[0],
+				args[1],
 			)
 
 			if err := msg.ValidateBasic(); err != nil {

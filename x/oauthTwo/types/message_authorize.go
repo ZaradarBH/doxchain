@@ -9,10 +9,10 @@ const TypeMsgAuthorize = "authorize"
 
 var _ sdk.Msg = &MsgAuthorizeRequest{}
 
-func NewMsgAuthorizeRequest(creator string, clientId string, scope []string) *MsgAuthorizeRequest {
+func NewMsgAuthorizeRequest(creator string, clientRegistrationAppIdW3CIdentifier string, scope []string) *MsgAuthorizeRequest {
 	return &MsgAuthorizeRequest{
 		Creator:  creator,
-		ClientId: clientId,
+		ClientRegistrationAppIdW3CIdentifier: clientRegistrationAppIdW3CIdentifier,
 		Scope:    scope,
 	}
 }

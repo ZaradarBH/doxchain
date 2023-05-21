@@ -23,7 +23,7 @@ message MsgCreateDidRequest {
 }
 
 message MsgCreateDidResponse {
-  string fullyQualifiedW3CIdentifier = 1;
+  string didW3CIdentifier = 1;
 }
 
 message MsgUpdateDidRequest {
@@ -31,11 +31,13 @@ message MsgUpdateDidRequest {
   Did did = 2 [(gogoproto.nullable) = false];
 }
 
-message MsgUpdateDidResponse {}
+message MsgUpdateDidResponse {
+  string didW3CIdentifier = 1;
+}
 
 message MsgDeleteDidRequest {
-  string creator                     = 1;
-  string fullyQualifiedW3CIdentifier = 2;
+  string creator = 1;
+  string didW3CIdentifier = 2;
 }
 
 message MsgDeleteDidResponse {}
@@ -46,7 +48,7 @@ message MsgCreateDidDocumentRequest {
 }
 
 message MsgCreateDidDocumentResponse {
-  string fullyQualifiedW3CIdentifier = 1;
+  string didDocumentW3CIdentifier = 1;
 }
 
 message MsgUpdateDidDocumentRequest {
@@ -54,11 +56,13 @@ message MsgUpdateDidDocumentRequest {
   DidDocument didDocument = 2 [(gogoproto.nullable) = false];
 }
 
-message MsgUpdateDidDocumentResponse {}
+message MsgUpdateDidDocumentResponse {
+  string didDocumentW3CIdentifier = 1;
+}
 
 message MsgDeleteDidDocumentRequest {
   string creator = 1;
-  string fullyQualifiedW3CIdentifier = 2;
+  string didDocumentW3CIdentifier = 2;
 }
 
 message MsgDeleteDidDocumentResponse {}

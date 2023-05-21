@@ -21,7 +21,7 @@ func (k Keeper) GenerateAuthorizationCodeToken(ctx sdk.Context, msg types.MsgTok
 
 	for index, authorizationCodeRegistryEntry := range tenantAuthorizationCodeRegistry.Codes {
 		if authorizationCodeRegistryEntry.AuthorizationCode == msg.AuthorizationCode && authorizationCodeRegistryEntry.Owner.Creator == msg.Creator {
-			jwtToken := utils.NewJwtTokenFactory(utils.WithContext(&ctx)).Create(msg.TenantW3CIdentifier, msg.Creator, msg.ClientId, time.Minute*3)
+			jwtToken := utils.NewJwtTokenFactory(utils.WithContext(&ctx)).Create(msg.TenantW3CIdentifier, msg.Creator, msg.ClientRegistrationAppIdW3CIdentifier, time.Minute*3)
 			claims := jwtToken.Claims.(jwt.MapClaims)
 			signedToken, err := jwtToken.SignedString([]byte(msg.AuthorizationCode))
 
@@ -41,7 +41,7 @@ func (k Keeper) GenerateAuthorizationCodeToken(ctx sdk.Context, msg types.MsgTok
 
 			tenantAccessTokenRegistry.Issued = append(tenantAccessTokenRegistry.Issued, types.AccessTokenRegistryEntry{
 				Owner: *didUtils.NewDidTokenFactory().Create(msg.Creator, ""),
-				Identifier: claims["jti"].(string),
+				Jti: claims["jti"].(string),
 				ExpiresAt: response.ExpiresIn,
 			})
 

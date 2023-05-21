@@ -162,7 +162,7 @@ func (am AppModule) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.Val
 
 				ctx.EventManager().EmitEvent(
 					sdk.NewEvent(types.EventTypeTokenExpired,
-						sdk.NewAttribute(types.AttributeKeyIdentifier, accessTokenInfo.Identifier),
+						sdk.NewAttribute(types.AttributeKeyIdentifier, accessTokenInfo.Jti),
 					),
 				)
 

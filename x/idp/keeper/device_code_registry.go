@@ -16,7 +16,7 @@ func (k Keeper) SetDeviceCodeRegistry(ctx sdk.Context, deviceCodeRegistry types.
 }
 
 func (k Keeper) GetDeviceCodeRegistry(ctx sdk.Context, deviceCodeRegistryW3CIdentifier string) (val types.DeviceCodeRegistry, found bool) {
-	//TODO: Validate did string. Should be => did:sdk.AccAddress:sdk.AccAddress
+	//TODO: Check if its a well-formed did string. Should be => did:devicecoderegistry:{TenantRegistry.Owner.Creator}
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DeviceCodeRegistryKeyPrefix))
 	b := store.Get(types.DeviceCodeRegistryKey(
 		deviceCodeRegistryW3CIdentifier,
@@ -32,7 +32,7 @@ func (k Keeper) GetDeviceCodeRegistry(ctx sdk.Context, deviceCodeRegistryW3CIden
 }
 
 func (k Keeper) RemoveDeviceCodeRegistry(ctx sdk.Context, deviceCodeRegistryW3CIdentifier string) {
-	//TODO: Validate did string. Should be => did:sdk.AccAddress:sdk.AccAddress
+	//TODO: Check if its a well-formed did string. Should be => did:devicecoderegistry:{TenantRegistry.Owner.Creator}
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DeviceCodeRegistryKeyPrefix))
 	
 	store.Delete(types.DeviceCodeRegistryKey(

@@ -18,7 +18,7 @@ func (k Keeper) GenerateClientCredentialToken(ctx sdk.Context, msg types.MsgToke
 		//TODO: Implement support for https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-client-creds-grant-flow#second-case-access-token-request-with-a-certificate
 		return response, sdkerrors.Wrap(types.TokenServiceError, "Assertion is not supported: urn:ietf:params:oauth:client-assertion-type:jwt-bearer")
 	default:
-		jwtToken := utils.NewJwtTokenFactory(utils.WithContext(&ctx)).Create(msg.TenantW3CIdentifier, msg.Creator, msg.ClientId, time.Minute*3)
+		jwtToken := utils.NewJwtTokenFactory(utils.WithContext(&ctx)).Create(msg.TenantW3CIdentifier, msg.Creator, msg.ClientRegistrationAppIdW3CIdentifier, time.Minute*3)
 		claims := jwtToken.Claims.(jwt.MapClaims)
 		signedToken, err := jwtToken.SignedString([]byte(msg.ClientSecret))
 
@@ -38,7 +38,7 @@ func (k Keeper) GenerateClientCredentialToken(ctx sdk.Context, msg types.MsgToke
 
 		tenantAccessTokenRegistry.Issued = append(tenantAccessTokenRegistry.Issued, types.AccessTokenRegistryEntry{
 			Owner: *didUtils.NewDidTokenFactory().Create(msg.Creator, ""),
-			Identifier: claims["jti"].(string),
+			Jti: claims["jti"].(string),
 			ExpiresAt: response.ExpiresIn,
 		})
 

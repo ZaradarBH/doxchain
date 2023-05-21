@@ -46,7 +46,7 @@ func (k Keeper) Did(goCtx context.Context, req *types.QueryGetDidRequest) (*type
 	}
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
-	did, found := k.GetDid(ctx, req.FullyQualifiedW3CIdentifier)
+	did, found := k.GetDid(ctx, req.DidW3CIdentifier)
 	
 	if !found {
 		return nil, sdkerrors.ErrKeyNotFound

@@ -8,5 +8,5 @@ option go_package = "github.com/be-heroes/doxchain/x/abs/types";
 
 message ParitionedPoolConfiguration {
   ParitionedPoolThreshold threshold = 1 [(gogoproto.nullable) = false];
-  repeated ParitionedPoolCorridor Corridors = 2 [(gogoproto.nullable) = false];
+  repeated ParitionedPoolCorridor corridors = 2 [(gogoproto.nullable) = false];
 }

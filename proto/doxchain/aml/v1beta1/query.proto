@@ -16,7 +16,7 @@ service Query {
   }
 
   rpc AMLRegistration (QueryGetAMLRegistrationRequest) returns (QueryGetAMLRegistrationResponse) {
-    option (google.api.http).get = "/be-heroes/doxchain/aml/aml_registration";  
+    option (google.api.http).get = "/be-heroes/doxchain/aml/aml_registration/{amlRegistrationW3CIdentifier}";  
   }
 }
 
@@ -27,7 +27,7 @@ message QueryParamsResponse {
 }
 
 message QueryGetAMLRegistrationRequest {
-  string creator = 1;
+  string amlRegistrationW3CIdentifier = 1;
 }
 
 message QueryGetAMLRegistrationResponse {

@@ -3,7 +3,6 @@ package keeper
 import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	"fmt"
 	"time"
 
 	"github.com/be-heroes/doxchain/utils"
@@ -27,7 +26,7 @@ func (k Keeper) Authorize(ctx sdk.Context, msg types.MsgAuthorizeRequest) (respo
 	var validScopes []string
 
 	for _, requestedScope := range msg.Scope {
-		validScope, err := k.idpKeeper.AuthorizeScope(ctx, msg.TenantW3CIdentifier, fmt.Sprintf("did:%s:%s", msg.ClientId, msg.ClientId), requestedScope)
+		validScope, err := k.idpKeeper.AuthorizeScope(ctx, msg.TenantW3CIdentifier, msg.ClientRegistrationAppIdW3CIdentifier, requestedScope)
 
 		if err != nil {
 			return response, err

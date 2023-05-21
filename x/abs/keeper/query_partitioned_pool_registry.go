@@ -48,7 +48,7 @@ func (k Keeper) PartitionedPoolRegistry(goCtx context.Context, req *types.QueryG
 
 	val, found := k.GetPartitionedPoolRegistry(
 		ctx,
-		req.Creator,
+		req.PartitionedPoolRegistryW3CIdentifier,
 	)
 
 	if !found {
