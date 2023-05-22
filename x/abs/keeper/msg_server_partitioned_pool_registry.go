@@ -23,7 +23,8 @@ func (k msgServer) CreatePartitionedPoolRegistry(goCtx context.Context, msg *typ
 
 	if !isFound {
 		partitionedPoolRegistry = types.PartitionedPoolRegistry{
-			Pools: make([]types.PartitionedPool{}, 0),
+			Owner: *ownerDid,
+			Pools: make([]types.PartitionedPool, 0),
 		}
 	}
 

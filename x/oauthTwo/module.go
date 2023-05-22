@@ -151,6 +151,7 @@ func (am AppModule) BeginBlock(_ sdk.Context, _ abci.RequestBeginBlock) {}
 
 // EndBlock contains the logic that is automatically triggered at the end of each block
 func (am AppModule) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.ValidatorUpdate {
+	//TODO: Benchmark this clean up logic. In general we could just do this type of EndBlock GC'ing once per blockCleanupInterval, it does not have to happen on every block.
 	accessTokenRegistries := am.keeper.GetAllAccessTokenRegistry(ctx)
 
 	for _, accessTokenRegistry := range accessTokenRegistries {

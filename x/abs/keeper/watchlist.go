@@ -72,7 +72,7 @@ func (k Keeper) AddToWatchlist(ctx sdk.Context, addr sdk.AccAddress, coins sdk.C
 	watchlistEntry.Coins = watchlistEntry.Coins.Add(coins...)
 
 	for _, watchlistEntryCoinPtr := range watchlistEntry.Coins {
-		//TODO: Finish TRA (throttled rolling average) concept
+		//TODO: Finish TRA (throttled rolling average) logic once oracle is done.
 		throttledRollingAverage := sdk.ZeroInt()
 
 		if throttledRollingAverage.GT(watchlistEntryCoinPtr.Amount) {

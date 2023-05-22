@@ -148,6 +148,7 @@ func (am AppModule) BeginBlock(_ sdk.Context, _ abci.RequestBeginBlock) {}
 
 // EndBlock contains the logic that is automatically triggered at the end of each block
 func (am AppModule) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.ValidatorUpdate {
+	//TODO: Benchmark this clean up logic. In general we could just do this type of EndBlock GC'ing once per blockCleanupInterval, it does not have to happen on every block.
 	for _, deviceCodeRegistry := range am.keeper.GetAllDeviceCodeRegistry(ctx) {
 		registryUpdated := false
 
@@ -170,7 +171,6 @@ func (am AppModule) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.Val
 		}
 	}
 
-	//TODO: Benchmark this. In general we could just do this type of clean up once per blockCleanupInterval, it does not have to happen on every block.
 	for _, relationshipRegistry := range am.keeper.GetAllClientRegistrationRelationshipRegistry(ctx) {
 		registryId := relationshipRegistry.Owner.GetW3CIdentifier()
 
