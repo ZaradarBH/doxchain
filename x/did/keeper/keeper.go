@@ -23,6 +23,7 @@ type (
 	}
 )
 
+//TODO: Implement logic to check for reserved did namespaces.
 //TODO: Implement method to validate "AccAddress components" of a did url. Regex black magic to identify pattern of "did:{bech32}:{bech32}" and a call to account keeper to verify "AccAddress components" exists.
 //TODO: Concept for validating ValidationMethods & ValidationRelationships in accordance with the W3C spec
 func NewKeeper(
