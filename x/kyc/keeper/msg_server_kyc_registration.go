@@ -6,7 +6,6 @@ import (
 	"github.com/be-heroes/doxchain/x/kyc/types"
 	didUtils "github.com/be-heroes/doxchain/utils/did"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
 func (k msgServer) CreateKYCRegistration(goCtx context.Context, msg *types.MsgCreateKYCRegistrationRequest) (result *types.MsgCreateKYCRegistrationResponse, err error) {
@@ -14,11 +13,11 @@ func (k msgServer) CreateKYCRegistration(goCtx context.Context, msg *types.MsgCr
 	_, found := k.GetKYCRegistration(ctx, msg.Owner.GetW3CIdentifier())
 
 	if found {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "already set")
+		return nil, types.ErrKYCRegistrationExists
 	}
 
 	if msg.Owner.Creator != msg.Creator {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "impersonation is not supported")
+		return nil, types.ErrKYCRegistrationImpersonation
 	}
 
 	k.SetKYCRegistration(
@@ -38,11 +37,11 @@ func (k msgServer) DeleteKYCRegistration(goCtx context.Context, msg *types.MsgDe
 	match, found := k.GetKYCRegistration(ctx, userDid.GetW3CIdentifier())
 
 	if !found {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "not set")
+		return nil, types.ErrKYCRegistrationExists
 	}
 
 	if msg.Creator != match.Owner.Creator {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "impersonation not supported")
+		return nil, types.ErrKYCRegistrationImpersonation
 	}
 
 	k.RemoveKYCRegistration(ctx, userDid.GetW3CIdentifier())

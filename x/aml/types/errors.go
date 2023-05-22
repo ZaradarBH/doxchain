@@ -7,5 +7,6 @@ import (
 )
 
 var (
-	ErrSample = sdkerrors.Register(ModuleName, 1100, "sample error")
+	ErrAMLRegistrationImpersonation = sdkerrors.Register(ModuleName, 2000, "impersonation is not allowed")
+	ErrAMLRegistrationExists = sdkerrors.Register(ModuleName, 2001, "registration already exists")
 )

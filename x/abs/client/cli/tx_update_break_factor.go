@@ -25,7 +25,7 @@ func CmdUpdateBreakFactor() *cobra.Command {
 				return err
 			}
 
-			decValue, err := sdk.NewDecFromStr(args[0])
+			breakFactor, err := sdk.NewDecFromStr(args[0])
 
 			if err != nil {
 				return err
@@ -33,7 +33,7 @@ func CmdUpdateBreakFactor() *cobra.Command {
 
 			msg := types.NewMsgUpdateBreakFactorRequest(
 				clientCtx.GetFromAddress().String(),
-				decValue,
+				breakFactor,
 			)
 
 			if err := msg.ValidateBasic(); err != nil {
