@@ -7,10 +7,9 @@ import (
 )
 
 var (
-	ErrDidImpersonation         = sdkerrors.Register(ModuleName, 3001, "Did impersonation is not allowed")
-	ErrDidExists                = sdkerrors.Register(ModuleName, 3002, "Did already exists")
-	ErrDidNotFound              = sdkerrors.Register(ModuleName, 3003, "Did could not be found")
-	ErrDidDocumentImpersonation = sdkerrors.Register(ModuleName, 3004, "DidDocument impersonation is not allowed")
-	ErrDidDocumentExists        = sdkerrors.Register(ModuleName, 3005, "DidDocument already exists")
-	ErrDidDocumentNotFound      = sdkerrors.Register(ModuleName, 3006, "Did could not be found")
+	ErrImpersonation            = sdkerrors.Register(ModuleName, 3000, "Impersonation is not allowed")
+	ErrDidExists                = sdkerrors.Register(ModuleName, 3001, "Did already exists")
+	ErrDidNotFound              = sdkerrors.Register(ModuleName, 3002, "Did could not be found")
+	ErrDidDocumentExists        = sdkerrors.Register(ModuleName, 3003, "DidDocument already exists")
+	ErrDidDocumentNotFound      = sdkerrors.Register(ModuleName, 3004, "DidDocument could not be found")
 )

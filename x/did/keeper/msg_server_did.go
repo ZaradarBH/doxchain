@@ -9,7 +9,11 @@ import (
 
 func (k msgServer) CreateDid(goCtx context.Context, msg *types.MsgCreateDidRequest) (result *types.MsgCreateDidResponse, err error) {
 	if msg.Creator != msg.Did.Creator {
-		return nil, types.ErrDidImpersonation
+		return nil, types.ErrImpersonation
+	}
+
+	if msg.Did.IsModuleIdentifier() {
+		return nil, types.ErrImpersonation
 	}
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
@@ -28,14 +32,18 @@ func (k msgServer) CreateDid(goCtx context.Context, msg *types.MsgCreateDidReque
 
 func (k msgServer) UpdateDid(goCtx context.Context, msg *types.MsgUpdateDidRequest) (result *types.MsgUpdateDidResponse, err error) {
 	if msg.Creator != msg.Did.Creator {
-		return nil, types.ErrDidImpersonation
+		return nil, types.ErrImpersonation
+	}
+
+	if msg.Did.IsModuleIdentifier() {
+		return nil, types.ErrImpersonation
 	}
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
 	match, found := k.Keeper.GetDid(ctx, msg.Did.GetW3CIdentifier())
 
 	if found && msg.Creator != match.Creator {		
-		return nil, types.ErrDidImpersonation
+		return nil, types.ErrImpersonation
 	}
 
 	k.Keeper.SetDid(sdk.UnwrapSDKContext(goCtx), msg.Did)
@@ -54,7 +62,7 @@ func (k msgServer) DeleteDid(goCtx context.Context, msg *types.MsgDeleteDidReque
 	}
 
 	if msg.Creator != match.Creator {
-		return nil, types.ErrDidImpersonation
+		return nil, types.ErrImpersonation
 	}
 
 	k.Keeper.RemoveDid(ctx, msg.DidW3CIdentifier)

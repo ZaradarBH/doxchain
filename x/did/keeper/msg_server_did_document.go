@@ -9,7 +9,11 @@ import (
 
 func (k msgServer) CreateDidDocument(goCtx context.Context, msg *types.MsgCreateDidDocumentRequest) (result *types.MsgCreateDidDocumentResponse, err error) {
 	if msg.Creator != msg.DidDocument.Id.Creator {
-		return nil, types.ErrDidDocumentImpersonation
+		return nil, types.ErrImpersonation
+	}
+
+	if msg.DidDocument.Id.IsModuleIdentifier() {
+		return nil, types.ErrImpersonation
 	}
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
@@ -28,14 +32,18 @@ func (k msgServer) CreateDidDocument(goCtx context.Context, msg *types.MsgCreate
 
 func (k msgServer) UpdateDidDocument(goCtx context.Context, msg *types.MsgUpdateDidDocumentRequest) (result *types.MsgUpdateDidDocumentResponse, err error) {
 	if msg.Creator != msg.DidDocument.Id.Creator {
-		return nil, types.ErrDidDocumentImpersonation
+		return nil, types.ErrImpersonation
+	}
+
+	if msg.DidDocument.Id.IsModuleIdentifier() {
+		return nil, types.ErrImpersonation
 	}
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
 	match, found := k.Keeper.GetDidDocument(ctx, msg.DidDocument.Id.GetW3CIdentifier())
 
 	if found && msg.Creator != match.Id.Creator {
-		return nil, types.ErrDidDocumentImpersonation
+		return nil, types.ErrImpersonation
 	}
 
 	k.Keeper.SetDidDocument(ctx, msg.DidDocument)
@@ -54,7 +62,7 @@ func (k msgServer) DeleteDidDocument(goCtx context.Context, msg *types.MsgDelete
 	}
 
 	if msg.Creator != match.Id.Creator {
-		return nil, types.ErrDidDocumentImpersonation
+		return nil, types.ErrImpersonation
 	}
 
 	k.Keeper.RemoveDidDocument(ctx, msg.DidDocumentW3CIdentifier)
