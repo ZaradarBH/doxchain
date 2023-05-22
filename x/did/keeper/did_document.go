@@ -71,7 +71,7 @@ func (k Keeper) RemoveDidDocument(ctx sdk.Context, didDocumentW3CIdentifier stri
 
 		store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DidDocumentKey))
 
-		store.Delete(GetDidDocumentIDBytes(fullyQualifdidDocumentW3CIdentifieriedW3CIdentifier))
+		store.Delete(GetDidDocumentIDBytes(didDocumentW3CIdentifier))
 	}
 
 	return nil
