@@ -9,31 +9,25 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-func (k Keeper) GetDotWellKnown(goCtx context.Context, req *types.QueryGetDotWellKnownRequest) (*types.QueryGetDotWellKnownResponse, error) {
+func (k Keeper) GetDotWellKnown(goCtx context.Context, req *types.QueryGetDotWellKnownRequest) (result *types.QueryGetDotWellKnownResponse, err error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
 
-	configuration, err := k.GetTenantConfiguration(sdk.UnwrapSDKContext(goCtx), req.TenantW3CIdentifier)
+	configuration := k.GetTenantConfiguration(sdk.UnwrapSDKContext(goCtx), req.TenantW3CIdentifier)
 
-	if err != nil {
-		return nil, err
-	}
+	result.Issuer = configuration.Issuer
+	result.AuthorizationEndpoint = configuration.AuthorizationEndpoint
+	result.TokenEndpoint = configuration.TokenEndpoint
+	result.TokenEndpointAuthMethodsSupported = configuration.TokenEndpointAuthMethodsSupported
+	result.TokenEndpointAuthSigningAlgosSupported = configuration.TokenEndpointAuthSigningAlgosSupported
+	result.UserInfoEndpoint = configuration.UserInfoEndpoint
+	result.JwksUri = configuration.JwksUri
+	result.RegistrationEndpoint = configuration.RegistrationEndpoint
+	result.ScopesSupported = configuration.ScopesSupported
+	result.ResponseTypesSupported = configuration.ResponseTypesSupported
+	result.ServiceDocumentation = configuration.ServiceDocumentation
+	result.UiLocalesSupported = configuration.UiLocalesSupported
 
-	response := &types.QueryGetDotWellKnownResponse{
-		Issuer:                                 configuration.Issuer,
-		AuthorizationEndpoint:                  configuration.AuthorizationEndpoint,
-		TokenEndpoint:                          configuration.TokenEndpoint,
-		TokenEndpointAuthMethodsSupported:      configuration.TokenEndpointAuthMethodsSupported,
-		TokenEndpointAuthSigningAlgosSupported: configuration.TokenEndpointAuthSigningAlgosSupported,
-		UserInfoEndpoint:                       configuration.UserInfoEndpoint,
-		JwksUri:                                configuration.JwksUri,
-		RegistrationEndpoint:                   configuration.RegistrationEndpoint,
-		ScopesSupported:                        configuration.ScopesSupported,
-		ResponseTypesSupported:                 configuration.ResponseTypesSupported,
-		ServiceDocumentation:                   configuration.ServiceDocumentation,
-		UiLocalesSupported:                     configuration.UiLocalesSupported,
-	}
-
-	return response, nil
+	return result, nil
 }

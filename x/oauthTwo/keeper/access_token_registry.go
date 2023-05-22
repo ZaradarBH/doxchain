@@ -15,34 +15,23 @@ func (k Keeper) SetAccessTokenRegistry(ctx sdk.Context, AccessTokenRegistry type
 	), b)
 }
 
-func (k Keeper) GetAccessTokenRegistry(
-	ctx sdk.Context,
-	accessTokenRegistryW3CIdentifier string,
-) (val types.AccessTokenRegistry, found bool) {
+func (k Keeper) GetAccessTokenRegistry(ctx sdk.Context, accessTokenRegistryW3CIdentifier string) (result types.AccessTokenRegistry, found bool) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AccessTokenRegistryKeyPrefix))
-
-	b := store.Get(types.AccessTokenRegistryKey(
-		accessTokenRegistryW3CIdentifier,
-	))
+	b := store.Get(types.AccessTokenRegistryKey(accessTokenRegistryW3CIdentifier))
 
 	if b == nil {
-		return val, false
+		return result, false
 	}
 
-	k.cdc.MustUnmarshal(b, &val)
+	k.cdc.MustUnmarshal(b, &result)
 
-	return val, true
+	return result, true
 }
 
-func (k Keeper) RemoveAccessTokenRegistry(
-	ctx sdk.Context,
-	accessTokenRegistryW3CIdentifier string,
-) {
+func (k Keeper) RemoveAccessTokenRegistry(ctx sdk.Context, accessTokenRegistryW3CIdentifier string) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AccessTokenRegistryKeyPrefix))
 
-	store.Delete(types.AccessTokenRegistryKey(
-		accessTokenRegistryW3CIdentifier,
-	))
+	store.Delete(types.AccessTokenRegistryKey(accessTokenRegistryW3CIdentifier))
 }
 
 func (k Keeper) GetAllAccessTokenRegistry(ctx sdk.Context) (list []types.AccessTokenRegistry) {

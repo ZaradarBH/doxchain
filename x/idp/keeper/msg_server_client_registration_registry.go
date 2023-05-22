@@ -5,52 +5,51 @@ import (
 
 	"github.com/be-heroes/doxchain/x/idp/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-func (k msgServer) CreateClientRegistrationRegistry(goCtx context.Context, msg *types.MsgCreateClientRegistrationRegistryRequest) (*types.MsgCreateClientRegistrationRegistryResponse, error) {
+func (k msgServer) CreateClientRegistrationRegistry(goCtx context.Context, msg *types.MsgCreateClientRegistrationRegistryRequest) (result *types.MsgCreateClientRegistrationRegistryResponse, err error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
-	_, isFound := k.GetClientRegistrationRegistry(ctx, msg.ClientRegistrationRegistry.Owner.GetW3CIdentifier())
+	_, found := k.GetClientRegistrationRegistry(ctx, msg.ClientRegistrationRegistry.Owner.GetW3CIdentifier())
 
-	if isFound {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "registry already exists")
+	if found {
+		return nil, types.ErrClientRegistrationRegistryExists
 	}
 
 	k.SetClientRegistrationRegistry(ctx, msg.ClientRegistrationRegistry)
 
-	return &types.MsgCreateClientRegistrationRegistryResponse{}, nil
+	return result, nil
 }
 
-func (k msgServer) UpdateClientRegistrationRegistry(goCtx context.Context, msg *types.MsgUpdateClientRegistrationRegistryRequest) (*types.MsgUpdateClientRegistrationRegistryResponse, error) {
+func (k msgServer) UpdateClientRegistrationRegistry(goCtx context.Context, msg *types.MsgUpdateClientRegistrationRegistryRequest) (result *types.MsgUpdateClientRegistrationRegistryResponse, err error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
-	valFound, isFound := k.GetClientRegistrationRegistry(ctx, msg.ClientRegistrationRegistry.Owner.GetW3CIdentifier())
+	match, found := k.GetClientRegistrationRegistry(ctx, msg.ClientRegistrationRegistry.Owner.GetW3CIdentifier())
 
-	if !isFound {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "registry not found")
+	if !found {
+		return nil, types.ErrClientRegistrationRegistryNotFound
 	}
 
-	if msg.ClientRegistrationRegistry.Owner.Creator != valFound.Owner.Creator {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "only the owner of a registry can update it")
+	if msg.ClientRegistrationRegistry.Owner.Creator != match.Owner.Creator {
+		return nil, types.ErrImpersonation
 	}
 
 	k.SetClientRegistrationRegistry(ctx, msg.ClientRegistrationRegistry)
 
-	return &types.MsgUpdateClientRegistrationRegistryResponse{}, nil
+	return result, nil
 }
 
-func (k msgServer) DeleteClientRegistrationRegistry(goCtx context.Context, msg *types.MsgDeleteClientRegistrationRegistryRequest) (*types.MsgDeleteClientRegistrationRegistryResponse, error) {
+func (k msgServer) DeleteClientRegistrationRegistry(goCtx context.Context, msg *types.MsgDeleteClientRegistrationRegistryRequest) (result *types.MsgDeleteClientRegistrationRegistryResponse, err error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
-	valFound, isFound := k.GetClientRegistrationRegistry(ctx, msg.ClientRegistrationRegistryW3CIdentifier)
+	match, found := k.GetClientRegistrationRegistry(ctx, msg.ClientRegistrationRegistryW3CIdentifier)
 
-	if !isFound {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "regitry not found")
+	if !found {
+		return nil, types.ErrClientRegistrationRegistryNotFound
 	}
 
-	if msg.Creator != valFound.Owner.Creator {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "only the owner of a registry can delete it")
+	if msg.Creator != match.Owner.Creator {
+		return nil, types.ErrImpersonation
 	}
 
 	k.RemoveClientRegistrationRegistry(ctx, msg.ClientRegistrationRegistryW3CIdentifier)
 
-	return &types.MsgDeleteClientRegistrationRegistryResponse{}, nil
+	return result, nil
 }

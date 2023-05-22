@@ -23,7 +23,7 @@ type (
 	}
 )
 
-//TODO: Implement logic to check for reserved did namespaces.
+//TODO: Implement logic to check for reserved did namespaces in message handlers.
 //TODO: Concept for validating ValidationMethods & ValidationRelationships in accordance with the W3C spec
 func NewKeeper(
 	cdc codec.BinaryCodec,

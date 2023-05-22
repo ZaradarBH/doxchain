@@ -15,34 +15,23 @@ func (k Keeper) SetAuthorizationCodeRegistry(ctx sdk.Context, authorizationCodeR
 	), b)
 }
 
-func (k Keeper) GetAuthorizationCodeRegistry(
-	ctx sdk.Context,
-	authorizationCodeRegistryW3CIdentifier string,
-) (val types.AuthorizationCodeRegistry, found bool) {
+func (k Keeper) GetAuthorizationCodeRegistry(ctx sdk.Context, authorizationCodeRegistryW3CIdentifier string) (result types.AuthorizationCodeRegistry, found bool) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AuthorizationCodeRegistryKeyPrefix))
-
-	b := store.Get(types.AuthorizationCodeRegistryKey(
-		authorizationCodeRegistryW3CIdentifier,
-	))
+	b := store.Get(types.AuthorizationCodeRegistryKey(authorizationCodeRegistryW3CIdentifier))
 
 	if b == nil {
-		return val, false
+		return result, false
 	}
 
-	k.cdc.MustUnmarshal(b, &val)
+	k.cdc.MustUnmarshal(b, &result)
 
-	return val, true
+	return result, true
 }
 
-func (k Keeper) RemoveAuthorizationCodeRegistry(
-	ctx sdk.Context,
-	authorizationCodeRegistryW3CIdentifier string,
-) {
+func (k Keeper) RemoveAuthorizationCodeRegistry(ctx sdk.Context, authorizationCodeRegistryW3CIdentifier string) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AuthorizationCodeRegistryKeyPrefix))
 
-	store.Delete(types.AuthorizationCodeRegistryKey(
-		authorizationCodeRegistryW3CIdentifier,
-	))
+	store.Delete(types.AuthorizationCodeRegistryKey(authorizationCodeRegistryW3CIdentifier))
 }
 
 func (k Keeper) GetAllAuthorizationCodeRegistry(ctx sdk.Context) (list []types.AuthorizationCodeRegistry) {

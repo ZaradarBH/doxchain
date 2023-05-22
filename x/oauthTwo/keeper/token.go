@@ -14,7 +14,7 @@ func (k Keeper) Token(ctx sdk.Context, creator string, tenantW3CIdentifier strin
 		return accessToken, tokenType, expiresIn, err
 	}
 
-	isAuthorized, err := k.idpKeeper.AuthorizeUser(ctx, creatorAddress, tenantW3CIdentifier)
+	isAuthorized := k.idpKeeper.AuthorizeUser(ctx, creatorAddress, tenantW3CIdentifier)
 
 	if !isAuthorized {
 		return accessToken, tokenType, expiresIn, err
@@ -23,13 +23,7 @@ func (k Keeper) Token(ctx sdk.Context, creator string, tenantW3CIdentifier strin
 	var validScopes []string
 
 	for _, requestedScope := range scope {
-		validScope, err := k.idpKeeper.AuthorizeScope(ctx, tenantW3CIdentifier, clientRegistrationAppIdW3CIdentifier, requestedScope)
-
-		if err != nil {
-			return accessToken, tokenType, expiresIn, err
-		}
-
-		validScopes = append(validScopes, validScope)
+		validScopes = append(validScopes, k.idpKeeper.AuthorizeScope(ctx, tenantW3CIdentifier, clientRegistrationAppIdW3CIdentifier, requestedScope))
 	}
 
 	if len(validScopes) == 0 {

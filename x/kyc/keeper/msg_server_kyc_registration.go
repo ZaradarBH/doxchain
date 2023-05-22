@@ -17,7 +17,7 @@ func (k msgServer) CreateKYCRegistration(goCtx context.Context, msg *types.MsgCr
 	}
 
 	if msg.Owner.Creator != msg.Creator {
-		return nil, types.ErrKYCRegistrationImpersonation
+		return nil, types.ErrImpersonation
 	}
 
 	k.SetKYCRegistration(
@@ -41,7 +41,7 @@ func (k msgServer) DeleteKYCRegistration(goCtx context.Context, msg *types.MsgDe
 	}
 
 	if msg.Creator != match.Owner.Creator {
-		return nil, types.ErrKYCRegistrationImpersonation
+		return nil, types.ErrImpersonation
 	}
 
 	k.RemoveKYCRegistration(ctx, userDid.GetW3CIdentifier())

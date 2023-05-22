@@ -23,7 +23,7 @@ func (k Keeper) Authorize(ctx sdk.Context, creator string, tenantW3CIdentifier s
 		return authorizationCode, err
 	}
 
-	isAuthorized, err := k.idpKeeper.AuthorizeUser(ctx, creatorAddress, tenantW3CIdentifier)
+	isAuthorized := k.idpKeeper.AuthorizeUser(ctx, creatorAddress, tenantW3CIdentifier)
 
 	if !isAuthorized {
 		return authorizationCode, err
@@ -32,13 +32,7 @@ func (k Keeper) Authorize(ctx sdk.Context, creator string, tenantW3CIdentifier s
 	var validScopes []string
 
 	for _, requestedScope := range scope {
-		validScope, err := k.idpKeeper.AuthorizeScope(ctx, tenantW3CIdentifier, clientRegistrationAppIdW3CIdentifier, requestedScope)
-
-		if err != nil {
-			return authorizationCode, err
-		}
-
-		validScopes = append(validScopes, validScope)
+		validScopes = append(validScopes, k.idpKeeper.AuthorizeScope(ctx, tenantW3CIdentifier, clientRegistrationAppIdW3CIdentifier, requestedScope))
 	}
 
 	if len(validScopes) == 0 {

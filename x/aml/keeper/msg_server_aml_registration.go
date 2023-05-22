@@ -17,7 +17,7 @@ func (k msgServer) CreateAMLRegistration(goCtx context.Context, msg *types.MsgCr
 	}
 
 	if msg.Creator != msg.Owner.Creator {
-		return nil, types.ErrAMLRegistrationImpersonation
+		return nil, types.ErrImpersonation
 	}
 
 	k.Keeper.SetAMLRegistration(
@@ -41,7 +41,7 @@ func (k msgServer) DeleteAMLRegistration(goCtx context.Context, msg *types.MsgDe
 	}
 
 	if msg.Creator != match.Owner.Creator {
-		return nil, types.ErrAMLRegistrationImpersonation
+		return nil, types.ErrImpersonation
 	}
 
 	k.Keeper.RemoveAMLRegistration(ctx, userDid.GetW3CIdentifier())

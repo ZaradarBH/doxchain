@@ -4,7 +4,6 @@ import (
 	types "github.com/be-heroes/doxchain/x/idp/types"
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
 func (k Keeper) GetClientRegistrationRelationship(ctx sdk.Context, clientRegistrationRegistryW3CIdentitifer string, ownerClientRegistrationW3CIdentitifer string, destinationClientRegistrationW3CIdentitifer string) (result types.ClientRegistrationRelationshipRegistryEntry, found bool) {
@@ -36,17 +35,17 @@ func (k Keeper) GetClientRegistrationRelationships(ctx sdk.Context, clientRegist
 	return result
 }
 
-func (k Keeper) SetClientRegistrationRelationship(ctx sdk.Context, clientRegistrationRegistryW3CIdentitifer string, clientRegistrationRelationshipRegistryEntry types.ClientRegistrationRelationshipRegistryEntry) error {
+func (k Keeper) SetClientRegistrationRelationship(ctx sdk.Context, clientRegistrationRegistryW3CIdentitifer string, clientRegistrationRelationshipRegistryEntry types.ClientRegistrationRelationshipRegistryEntry) {
 	ownerRegistration, found := k.GetClientRegistration(ctx, clientRegistrationRegistryW3CIdentitifer, clientRegistrationRelationshipRegistryEntry.Owner.GetW3CIdentifier())
 
 	if !found {
-		return sdkerrors.Wrap(types.AccessClientListError, "Invalid owner")
+		return
 	}
 
 	destinationRegistration, found := k.GetClientRegistration(ctx, clientRegistrationRegistryW3CIdentitifer, clientRegistrationRelationshipRegistryEntry.Destination.GetW3CIdentifier())
 
 	if !found {
-		return sdkerrors.Wrap(types.AccessClientListError, "Invalid destination")
+		return
 	}
 
 	for _, aclEntry := range clientRegistrationRelationshipRegistryEntry.AccessClientList.Entries {
@@ -66,16 +65,13 @@ func (k Keeper) SetClientRegistrationRelationship(ctx sdk.Context, clientRegistr
 		}
 
 		if !matchOwner || !matchDestination {
-			return sdkerrors.Wrap(types.AccessClientListError, "Illigal relationship. Acl must match both owner and destination acls")
+			return
 		}
 	}
 
 	var clientRegistrationRelationshipRegistry types.ClientRegistrationRelationshipRegistry
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ClientRegistrationRelationshipRegistryKeyPrefix))
-
-	b := store.Get(types.ClientRegistrationRelationshipRegistryKey(
-		clientRegistrationRegistryW3CIdentitifer,
-	))
+	b := store.Get(types.ClientRegistrationRelationshipRegistryKey(clientRegistrationRegistryW3CIdentitifer))
 
 	k.cdc.MustUnmarshal(b, &clientRegistrationRelationshipRegistry)
 
@@ -89,20 +85,13 @@ func (k Keeper) SetClientRegistrationRelationship(ctx sdk.Context, clientRegistr
 
 	b = k.cdc.MustMarshal(&clientRegistrationRelationshipRegistry)
 
-	store.Set(types.ClientRegistrationRelationshipRegistryKey(
-		clientRegistrationRegistryW3CIdentitifer,
-	), b)
-
-	return nil
+	store.Set(types.ClientRegistrationRelationshipRegistryKey(clientRegistrationRegistryW3CIdentitifer), b)
 }
 
-func (k Keeper) RemoveClientRegistrationRelationship(ctx sdk.Context, clientRegistrationRegistryW3CIdentitifer string, ownerClientRegistrationW3CIdentitifer string, destinationClientRegistrationW3CIdentitifer string) error {
+func (k Keeper) RemoveClientRegistrationRelationship(ctx sdk.Context, clientRegistrationRegistryW3CIdentitifer string, ownerClientRegistrationW3CIdentitifer string, destinationClientRegistrationW3CIdentitifer string) {
 	var clientRegistrationRelationshipRegistry types.ClientRegistrationRelationshipRegistry
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ClientRegistrationRelationshipRegistryKeyPrefix))
-
-	b := store.Get(types.ClientRegistrationRelationshipRegistryKey(
-		clientRegistrationRegistryW3CIdentitifer,
-	))
+	b := store.Get(types.ClientRegistrationRelationshipRegistryKey(clientRegistrationRegistryW3CIdentitifer))
 
 	k.cdc.MustUnmarshal(b, &clientRegistrationRelationshipRegistry)
 
@@ -114,13 +103,9 @@ func (k Keeper) RemoveClientRegistrationRelationship(ctx sdk.Context, clientRegi
 
 	b = k.cdc.MustMarshal(&clientRegistrationRelationshipRegistry)
 
-	store.Set(types.ClientRegistrationRelationshipRegistryKey(
-		clientRegistrationRegistryW3CIdentitifer,
-	), b)
-
-	return nil
-
+	store.Set(types.ClientRegistrationRelationshipRegistryKey(clientRegistrationRegistryW3CIdentitifer), b)
 }
+
 func (k Keeper) GetAllClientRegistrationRelationshipRegistry(ctx sdk.Context) (list []types.ClientRegistrationRelationshipRegistry) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ClientRegistrationRelationshipRegistryKeyPrefix))
 	iterator := sdk.KVStorePrefixIterator(store, []byte{})

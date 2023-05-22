@@ -25,13 +25,13 @@ func (k Keeper) DeviceCode(ctx sdk.Context, creator string, tenantW3CIdentifier 
 		return deviceCode, userCode, verificationUri, err
 	}
 
-	isAuthorized, err := k.idpKeeper.AuthorizeUser(ctx, creatorAddress, tenantW3CIdentifier)
+	isAuthorized := k.idpKeeper.AuthorizeUser(ctx, creatorAddress, tenantW3CIdentifier)
 
 	if !isAuthorized {
 		return deviceCode, userCode, verificationUri, err
 	}
 
-	tenantConfiguration, err := k.idpKeeper.GetTenantConfiguration(ctx, tenantW3CIdentifier)
+	tenantConfiguration := k.idpKeeper.GetTenantConfiguration(ctx, tenantW3CIdentifier)
 
 	if err != nil {
 		return deviceCode, userCode, verificationUri, err
@@ -40,13 +40,7 @@ func (k Keeper) DeviceCode(ctx sdk.Context, creator string, tenantW3CIdentifier 
 	var validScopes []string
 
 	for _, requestedScope := range scope {
-		validScope, err := k.idpKeeper.AuthorizeScope(ctx, tenantW3CIdentifier, clientRegistrationAppIdW3CIdentifier, requestedScope)
-
-		if err != nil {
-			return deviceCode, userCode, verificationUri, err
-		}
-
-		validScopes = append(validScopes, validScope)
+		validScopes = append(validScopes, k.idpKeeper.AuthorizeScope(ctx, tenantW3CIdentifier, clientRegistrationAppIdW3CIdentifier, requestedScope))
 	}
 
 	if len(validScopes) == 0 {
