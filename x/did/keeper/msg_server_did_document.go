@@ -5,19 +5,18 @@ import (
 
 	"github.com/be-heroes/doxchain/x/did/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
 func (k msgServer) CreateDidDocument(goCtx context.Context, msg *types.MsgCreateDidDocumentRequest) (result *types.MsgCreateDidDocumentResponse, err error) {
 	if msg.Creator != msg.DidDocument.Id.Creator {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "impersonation is not allowed")
+		return nil, types.ErrDidDocumentImpersonation
 	}
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
 	_, found := k.Keeper.GetDidDocument(ctx, msg.DidDocument.Id.GetW3CIdentifier())
 
 	if found {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "DidDocument already exists in store")
+		return nil, types.ErrDidDocumentExists
 	}
 
 	k.Keeper.SetDidDocument(ctx, msg.DidDocument)
@@ -29,14 +28,14 @@ func (k msgServer) CreateDidDocument(goCtx context.Context, msg *types.MsgCreate
 
 func (k msgServer) UpdateDidDocument(goCtx context.Context, msg *types.MsgUpdateDidDocumentRequest) (result *types.MsgUpdateDidDocumentResponse, err error) {
 	if msg.Creator != msg.DidDocument.Id.Creator {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "impersonation is not allowed")
+		return nil, types.ErrDidDocumentImpersonation
 	}
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
 	match, found := k.Keeper.GetDidDocument(ctx, msg.DidDocument.Id.GetW3CIdentifier())
 
 	if found && msg.Creator != match.Id.Creator {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "illigal update attempt")
+		return nil, types.ErrDidDocumentImpersonation
 	}
 
 	k.Keeper.SetDidDocument(ctx, msg.DidDocument)
@@ -51,11 +50,11 @@ func (k msgServer) DeleteDidDocument(goCtx context.Context, msg *types.MsgDelete
 	match, found := k.Keeper.GetDidDocument(ctx, msg.DidDocumentW3CIdentifier)
 
 	if !found {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "DidDocument does not exist in store")
+		return nil, types.ErrDidDocumentNotFound
 	}
 
 	if msg.Creator != match.Id.Creator {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "illigal delete attempt")
+		return nil, types.ErrDidDocumentImpersonation
 	}
 
 	k.Keeper.RemoveDidDocument(ctx, msg.DidDocumentW3CIdentifier)

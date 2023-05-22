@@ -7,7 +7,10 @@ import (
 )
 
 var (
-	DidKeeperError              = sdkerrors.Register(ModuleName, 1100, "Generic error in the Did keeper")
-	DidIdentifierCollisionError = sdkerrors.Register(ModuleName, 1101, "Errors related to DID identifier collisions")
-	DidOwnershipError           = sdkerrors.Register(ModuleName, 1102, "Errors related to DID ownership")
+	ErrDidImpersonation         = sdkerrors.Register(ModuleName, 3001, "Did impersonation is not allowed")
+	ErrDidExists                = sdkerrors.Register(ModuleName, 3002, "Did already exists")
+	ErrDidNotFound              = sdkerrors.Register(ModuleName, 3003, "Did could not be found")
+	ErrDidDocumentImpersonation = sdkerrors.Register(ModuleName, 3004, "DidDocument impersonation is not allowed")
+	ErrDidDocumentExists        = sdkerrors.Register(ModuleName, 3005, "DidDocument already exists")
+	ErrDidDocumentNotFound      = sdkerrors.Register(ModuleName, 3006, "Did could not be found")
 )

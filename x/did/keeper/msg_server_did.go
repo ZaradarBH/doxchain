@@ -5,19 +5,18 @@ import (
 
 	"github.com/be-heroes/doxchain/x/did/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
 func (k msgServer) CreateDid(goCtx context.Context, msg *types.MsgCreateDidRequest) (result *types.MsgCreateDidResponse, err error) {
 	if msg.Creator != msg.Did.Creator {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "impersonation is not allowed")
+		return nil, types.ErrDidImpersonation
 	}
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
 	_, found := k.Keeper.GetDid(ctx, msg.Did.GetW3CIdentifier())
 
 	if found {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "Did already exists in store")
+		return nil, types.ErrDidExists
 	}
 
 	k.Keeper.SetDid(sdk.UnwrapSDKContext(goCtx), msg.Did)
@@ -29,14 +28,14 @@ func (k msgServer) CreateDid(goCtx context.Context, msg *types.MsgCreateDidReque
 
 func (k msgServer) UpdateDid(goCtx context.Context, msg *types.MsgUpdateDidRequest) (result *types.MsgUpdateDidResponse, err error) {
 	if msg.Creator != msg.Did.Creator {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "impersonation is not allowed")
+		return nil, types.ErrDidImpersonation
 	}
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
 	match, found := k.Keeper.GetDid(ctx, msg.Did.GetW3CIdentifier())
 
 	if found && msg.Creator != match.Creator {		
-		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "illigal update attempt")
+		return nil, types.ErrDidImpersonation
 	}
 
 	k.Keeper.SetDid(sdk.UnwrapSDKContext(goCtx), msg.Did)
@@ -51,11 +50,11 @@ func (k msgServer) DeleteDid(goCtx context.Context, msg *types.MsgDeleteDidReque
 	match, found := k.Keeper.GetDid(ctx, msg.DidW3CIdentifier)
 
 	if !found {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "Did does not exist in store")
+		return nil, types.ErrDidNotFound
 	}
 
 	if msg.Creator != match.Creator {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "illigal delete attempt")
+		return nil, types.ErrDidImpersonation
 	}
 
 	k.Keeper.RemoveDid(ctx, msg.DidW3CIdentifier)
