@@ -8,7 +8,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
-func (k msgServer) ApproveAMLRegistration(goCtx context.Context, msg *types.MsgApproveAMLRegistrationRequest) (*types.MsgApproveAMLRegistrationResponse, error) {
+func (k msgServer) ApproveAMLRegistration(goCtx context.Context, msg *types.MsgApproveAMLRegistrationRequest) (result *types.MsgApproveAMLRegistrationResponse, err error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	var approvers []didTypes.Did
@@ -23,5 +23,5 @@ func (k msgServer) ApproveAMLRegistration(goCtx context.Context, msg *types.MsgA
 		}
 	}
 
-	return &types.MsgApproveAMLRegistrationResponse{}, nil
+	return result, nil
 }

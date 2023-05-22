@@ -11,13 +11,15 @@ import (
 
 func CmdShowAMLRegistration() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "show-aml-request",
+		Use:   "show-aml-request [did-url]",
 		Short: "shows AMLRegistration",
-		Args:  cobra.NoArgs,
+		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx := client.GetClientContextFromCmd(cmd)
 			queryClient := types.NewQueryClient(clientCtx)
-			params := &types.QueryGetAMLRegistrationRequest{}
+			params := &types.QueryGetAMLRegistrationRequest{
+				AmlRegistrationW3CIdentifier: args[0],
+			}
 			res, err := queryClient.AMLRegistration(context.Background(), params)
 
 			if err != nil {

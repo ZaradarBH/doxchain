@@ -13,7 +13,7 @@ var _ = strconv.Itoa(0)
 
 func CmdGetDotWellKnown() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "get-dot-well-known [tenant-w3c-identifier]",
+		Use:   "get-dot-well-known [did-url]",
 		Short: "Query GetDotWellKnown",
 		Args:  cobra.ExactArgs(0),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {

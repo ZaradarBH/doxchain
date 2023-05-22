@@ -14,7 +14,7 @@ var _ = strconv.Itoa(0)
 
 func CmdDeleteClientRegistrationRelationship() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "delete-client-registration-relationship [client-registration-registry-w3c-identifier] [owner-client-registration-w3c-identifier] [destination-client-registration-w3c-identifier]",
+		Use:   "delete-client-registration-relationship [client-registration-registry-did-url] [owner-client-registration-did-url] [destination-client-registration-did-url]",
 		Short: "Broadcast message DeleteClientRegistrationRelationshipRequest",
 		Args:  cobra.ExactArgs(0),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {

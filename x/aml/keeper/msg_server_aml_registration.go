@@ -8,11 +8,11 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-func (k msgServer) CreateAMLRegistration(goCtx context.Context, msg *types.MsgCreateAMLRegistrationRequest) (*types.MsgCreateAMLRegistrationResponse, error) {
+func (k msgServer) CreateAMLRegistration(goCtx context.Context, msg *types.MsgCreateAMLRegistrationRequest) (result *types.MsgCreateAMLRegistrationResponse, err error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
-	_, isFound := k.GetAMLRegistration(ctx, msg.Creator)
+	_, found := k.Keeper.GetAMLRegistration(ctx, msg.Creator)
 
-	if isFound {
+	if found {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "already set")
 	}
 
@@ -20,7 +20,7 @@ func (k msgServer) CreateAMLRegistration(goCtx context.Context, msg *types.MsgCr
 		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "impersonation is not supported")
 	}
 
-	k.SetAMLRegistration(
+	k.Keeper.SetAMLRegistration(
 		ctx,
 		types.AMLRegistration{
 			Owner:    msg.Owner,
@@ -28,22 +28,22 @@ func (k msgServer) CreateAMLRegistration(goCtx context.Context, msg *types.MsgCr
 		},
 	)
 
-	return &types.MsgCreateAMLRegistrationResponse{}, nil
+	return result, nil
 }
 
-func (k msgServer) DeleteAMLRegistration(goCtx context.Context, msg *types.MsgDeleteAMLRegistrationRequest) (*types.MsgDeleteAMLRegistrationResponse, error) {
+func (k msgServer) DeleteAMLRegistration(goCtx context.Context, msg *types.MsgDeleteAMLRegistrationRequest) (result *types.MsgDeleteAMLRegistrationResponse, err error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
-	valFound, isFound := k.GetAMLRegistration(ctx, msg.Creator)
+	match, found := k.Keeper.GetAMLRegistration(ctx, msg.Creator)
 
-	if !isFound {
+	if !found {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "not set")
 	}
 
-	if msg.Creator != valFound.Owner.Creator {
+	if msg.Creator != match.Owner.Creator {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "impersonation is not supported")
 	}
 
-	k.RemoveAMLRegistration(ctx, msg.Creator)
+	k.Keeper.RemoveAMLRegistration(ctx, msg.Creator)
 
-	return &types.MsgDeleteAMLRegistrationResponse{}, nil
+	return result, nil
 }

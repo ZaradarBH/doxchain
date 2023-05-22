@@ -44,7 +44,7 @@ func CmdListClientRegistrationRegistry() *cobra.Command {
 
 func CmdShowClientRegistrationRegistry() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "show-client-registry [creator]",
+		Use:   "show-client-registry [did-url]",
 		Short: "shows a ClientRegistrationRegistry",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
