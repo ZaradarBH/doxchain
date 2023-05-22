@@ -46,9 +46,9 @@ func (k Keeper) SetDid(ctx sdk.Context, did types.Did, override bool) error {
 	return nil
 }
 
-func (k Keeper) GetDid(ctx sdk.Context, fullyQualifiedW3CIdentifier string) (val types.Did, found bool) {
+func (k Keeper) GetDid(ctx sdk.Context, didW3CIdentifier string) (val types.Did, found bool) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DidKey))
-	b := store.Get(GetDidIDBytes(fullyQualifiedW3CIdentifier))
+	b := store.Get(GetDidIDBytes(didW3CIdentifier))
 
 	if b == nil {
 		return val, false
@@ -59,8 +59,8 @@ func (k Keeper) GetDid(ctx sdk.Context, fullyQualifiedW3CIdentifier string) (val
 	return val, true
 }
 
-func (k Keeper) RemoveDid(ctx sdk.Context, fullyQualifiedW3CIdentifier string) error {
-	match, exists := k.GetDid(ctx, fullyQualifiedW3CIdentifier)
+func (k Keeper) RemoveDid(ctx sdk.Context, didW3CIdentifier string) error {
+	match, exists := k.GetDid(ctx, didW3CIdentifier)
 
 	if exists {
 		err := k.CanOverrideDid(ctx, match, true)
@@ -71,7 +71,7 @@ func (k Keeper) RemoveDid(ctx sdk.Context, fullyQualifiedW3CIdentifier string) e
 
 		store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DidKey))
 
-		store.Delete(GetDidIDBytes(fullyQualifiedW3CIdentifier))
+		store.Delete(GetDidIDBytes(didW3CIdentifier))
 	}
 
 	return nil
