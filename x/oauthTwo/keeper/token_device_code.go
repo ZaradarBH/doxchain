@@ -1,7 +1,6 @@
 package keeper
 
 import (
-	"fmt"
 	"time"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -13,45 +12,42 @@ import (
 	"github.com/golang-jwt/jwt"
 )
 
-//TODO: Dont consume message types in keeper
-func (k Keeper) GenerateDeviceCodeToken(ctx sdk.Context, msg types.MsgTokenRequest) (response types.MsgTokenResponse, err error) {
-	//TODO: Move DidUrl generation to message handler or hardcode based on function name?
-	didUrl, err := didUtils.CreateModuleDidUrl(types.ModuleName, fmt.Sprintf("%T", msg), msg.Creator)
+func (k Keeper) GenerateDeviceCodeToken(ctx sdk.Context, creator string, tenantW3CIdentifier string, scope []string, clientRegistrationAppIdW3CIdentifier string, deviceCode string) (accessToken string, tokenType string, expiresIn int64, err error) {
+	didUrl, err := didUtils.CreateModuleDidUrl(types.ModuleName, "Token", creator)
 
 	if err != nil {
-		return response, err
+		return accessToken, tokenType, expiresIn, err
 	}
 
-	tenantDeviceCodeRegistry, found := k.idpKeeper.GetDeviceCodeRegistry(ctx, msg.TenantW3CIdentifier)
+	tenantDeviceCodeRegistry, found := k.idpKeeper.GetDeviceCodeRegistry(ctx, tenantW3CIdentifier)
 
 	if !found {
-		return response, sdkerrors.Wrap(types.TokenServiceError, "DeviceCodeRegistry cache could not be found for tenant")
+		return accessToken, tokenType, expiresIn, sdkerrors.Wrap(types.TokenServiceError, "DeviceCodeRegistry cache could not be found for tenant")
 	}
 
 	for index, deviceCodeInfo := range tenantDeviceCodeRegistry.Codes {
-		if deviceCodeInfo.DeviceCode == msg.DeviceCode && deviceCodeInfo.Owner.Creator == msg.Creator {
-			jwtToken := utils.NewJwtTokenFactory(utils.WithContext(&ctx)).Create(msg.TenantW3CIdentifier, msg.Creator, msg.ClientRegistrationAppIdW3CIdentifier, time.Minute*3)
+		if deviceCodeInfo.DeviceCode == deviceCode && deviceCodeInfo.Owner.Creator == creator {
+			jwtToken := utils.NewJwtTokenFactory(utils.WithContext(&ctx)).Create(tenantW3CIdentifier, creator, clientRegistrationAppIdW3CIdentifier, time.Minute*3)
 			claims := jwtToken.Claims.(jwt.MapClaims)
-			signedToken, err := jwtToken.SignedString([]byte(msg.DeviceCode))
+			accessToken, err := jwtToken.SignedString([]byte(deviceCode))
 
 			if err != nil {
-				return response, sdkerrors.Wrap(types.TokenServiceError, "Failed to create access token")
+				return accessToken, tokenType, expiresIn, sdkerrors.Wrap(types.TokenServiceError, "Failed to create access token")
 			}
 
-			response.AccessToken = signedToken
-			response.TokenType = types.Bearer.String()
-			response.ExpiresIn = claims["exp"].(int64)
+			tokenType = types.Bearer.String()
+			expiresIn = claims["exp"].(int64)
 
-			tenantAccessTokenRegistry, found := k.GetAccessTokenRegistry(ctx, msg.TenantW3CIdentifier)
+			tenantAccessTokenRegistry, found := k.GetAccessTokenRegistry(ctx, tenantW3CIdentifier)
 
 			if !found {
-				return response, sdkerrors.Wrap(types.TokenServiceError, "Failed to fetch access tokens cache for tenant")
+				return accessToken, tokenType, expiresIn, sdkerrors.Wrap(types.TokenServiceError, "Failed to fetch access tokens cache for tenant")
 			}
 
 			tenantAccessTokenRegistry.Issued = append(tenantAccessTokenRegistry.Issued, types.AccessTokenRegistryEntry{
-				Owner: *didUtils.NewDidTokenFactory().Create(msg.Creator, didUrl),
+				Owner: *didUtils.NewDidTokenFactory().Create(creator, didUrl),
 				Jti: claims["jti"].(string),
-				ExpiresAt: response.ExpiresIn,
+				ExpiresAt: expiresIn,
 			})
 
 			k.SetAccessTokenRegistry(ctx, tenantAccessTokenRegistry)
@@ -64,5 +60,5 @@ func (k Keeper) GenerateDeviceCodeToken(ctx sdk.Context, msg types.MsgTokenReque
 		}
 	}
 
-	return response, sdkerrors.Wrap(types.TokenServiceError, "DeviceCode TokenResponse could not be issued")
+	return accessToken, tokenType, expiresIn, sdkerrors.Wrap(types.TokenServiceError, "DeviceCode TokenResponse could not be issued")
 }

@@ -1,7 +1,6 @@
 package keeper
 
 import (
-	"fmt"
 	"time"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -13,64 +12,62 @@ import (
 	"github.com/be-heroes/doxchain/x/oauthtwo/types"
 )
 
-//TODO: Dont consume message types in keeper
-func (k Keeper) DeviceCode(ctx sdk.Context, msg types.MsgDeviceCodeRequest) (response types.MsgDeviceCodeResponse, err error) {
-	creatorAddress, err := sdk.AccAddressFromBech32(msg.Creator)
+func (k Keeper) DeviceCode(ctx sdk.Context, creator string, tenantW3CIdentifier string, clientRegistrationAppIdW3CIdentifier string, scope []string) (deviceCode string, userCode string, verificationUri string, err error) {
+	creatorAddress, err := sdk.AccAddressFromBech32(creator)
 	
 	if err != nil {
-		return response, err
+		return deviceCode, userCode, verificationUri, err
 	}
 
-	//TODO: Move DidUrl generation to message handler or hardcode based on function name?
-	didUrl, err := didUtils.CreateModuleDidUrl(types.ModuleName, fmt.Sprintf("%T", msg), msg.Creator)
+	didUrl, err := didUtils.CreateModuleDidUrl(types.ModuleName, "DeviceCode", creator)
 
 	if err != nil {
-		return response, err
+		return deviceCode, userCode, verificationUri, err
 	}
 
-	isAuthorized, err := k.idpKeeper.AuthorizeUser(ctx, creatorAddress, msg.TenantW3CIdentifier)
+	isAuthorized, err := k.idpKeeper.AuthorizeUser(ctx, creatorAddress, tenantW3CIdentifier)
 
 	if !isAuthorized {
-		return response, err
+		return deviceCode, userCode, verificationUri, err
 	}
 
-	tenantConfiguration, err := k.idpKeeper.GetTenantConfiguration(ctx, msg.TenantW3CIdentifier)
+	tenantConfiguration, err := k.idpKeeper.GetTenantConfiguration(ctx, tenantW3CIdentifier)
 
 	if err != nil {
-		return response, err
+		return deviceCode, userCode, verificationUri, err
 	}
 
 	var validScopes []string
 
-	for _, requestedScope := range msg.Scope {
-		validScope, err := k.idpKeeper.AuthorizeScope(ctx, msg.TenantW3CIdentifier, msg.ClientRegistrationAppIdW3CIdentifier, requestedScope)
+	for _, requestedScope := range scope {
+		validScope, err := k.idpKeeper.AuthorizeScope(ctx, tenantW3CIdentifier, clientRegistrationAppIdW3CIdentifier, requestedScope)
 
 		if err != nil {
-			return response, err
+			return deviceCode, userCode, verificationUri, err
 		}
 
 		validScopes = append(validScopes, validScope)
 	}
 
 	if len(validScopes) == 0 {
-		return response, sdkerrors.Wrap(types.TokenServiceError, "No valid scopes in request")
+		return deviceCode, userCode, verificationUri, sdkerrors.Wrap(types.TokenServiceError, "No valid scopes in request")
 	}	
 
-	response.DeviceCode, _ = utils.GenerateRandomString(32)
-	response.UserCode, _ = utils.GenerateRandomString(8)
-	response.VerificationUri = tenantConfiguration.LoginEndpoint
+	deviceCode, _ = utils.GenerateRandomString(32)
+	userCode, _ = utils.GenerateRandomString(8)
+	verificationUri = tenantConfiguration.LoginEndpoint
 
-	tenantDeviceCodeRegistry, found := k.idpKeeper.GetDeviceCodeRegistry(ctx, msg.TenantW3CIdentifier)
+	tenantDeviceCodeRegistry, found := k.idpKeeper.GetDeviceCodeRegistry(ctx, tenantW3CIdentifier)
 
 	if !found {
-		return response, sdkerrors.Wrap(types.TokenServiceError, "DeviceCodeRegistry cache could not be found for tenant")
+		return deviceCode, userCode, verificationUri, sdkerrors.Wrap(types.TokenServiceError, "DeviceCodeRegistry cache could not be found for tenant")
 	}
 	
-	ownerDid := didUtils.NewDidTokenFactory().Create(msg.Creator, didUrl)
+	ownerDid := didUtils.NewDidTokenFactory().Create(creator, didUrl)
 	deviceCodeRegistryEntry := idpTypes.DeviceCodeRegistryEntry{
 		Owner: *ownerDid,
-		DeviceCode: response.DeviceCode,
-		UserCode:   response.UserCode,
+		DeviceCode: deviceCode,
+		UserCode:   userCode,
 		ExpiresAt:  ctx.BlockTime().Add(time.Minute * 15).Unix(),
 	}
 
@@ -78,5 +75,5 @@ func (k Keeper) DeviceCode(ctx sdk.Context, msg types.MsgDeviceCodeRequest) (res
 
 	k.idpKeeper.SetDeviceCodeRegistry(ctx, tenantDeviceCodeRegistry)
 
-	return response, nil
+	return deviceCode, userCode, verificationUri, nil
 }

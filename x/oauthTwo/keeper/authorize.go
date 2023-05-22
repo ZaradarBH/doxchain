@@ -1,7 +1,6 @@
 package keeper
 
 import (
-	"fmt"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"time"
@@ -11,73 +10,71 @@ import (
 	didUtils "github.com/be-heroes/doxchain/utils/did"
 )
 
-//TODO: Dont consume message types in keeper
-func (k Keeper) Authorize(ctx sdk.Context, msg types.MsgAuthorizeRequest) (response types.MsgAuthorizeResponse, err error) {
-	creatorAddress, err := sdk.AccAddressFromBech32(msg.Creator)
+func (k Keeper) Authorize(ctx sdk.Context, creator string, tenantW3CIdentifier string, clientRegistrationAppIdW3CIdentifier string, scope []string, userCode string) (authorizationCode string, err error) {
+	creatorAddress, err := sdk.AccAddressFromBech32(creator)
 	
 	if err != nil {
-		return response, err
+		return authorizationCode, err
 	}
 
-	//TODO: Move DidUrl generation to message handler or hardcode based on function name?
-	didUrl, err := didUtils.CreateModuleDidUrl(types.ModuleName, fmt.Sprintf("%T", msg), msg.Creator)
+	didUrl, err := didUtils.CreateModuleDidUrl(types.ModuleName, "Authorize", creator)
 
 	if err != nil {
-		return response, err
+		return authorizationCode, err
 	}
 
-	isAuthorized, err := k.idpKeeper.AuthorizeUser(ctx, creatorAddress, msg.TenantW3CIdentifier)
+	isAuthorized, err := k.idpKeeper.AuthorizeUser(ctx, creatorAddress, tenantW3CIdentifier)
 
 	if !isAuthorized {
-		return response, err
+		return authorizationCode, err
 	}
 
 	var validScopes []string
 
-	for _, requestedScope := range msg.Scope {
-		validScope, err := k.idpKeeper.AuthorizeScope(ctx, msg.TenantW3CIdentifier, msg.ClientRegistrationAppIdW3CIdentifier, requestedScope)
+	for _, requestedScope := range scope {
+		validScope, err := k.idpKeeper.AuthorizeScope(ctx, tenantW3CIdentifier, clientRegistrationAppIdW3CIdentifier, requestedScope)
 
 		if err != nil {
-			return response, err
+			return authorizationCode, err
 		}
 
 		validScopes = append(validScopes, validScope)
 	}
 
 	if len(validScopes) == 0 {
-		return response, sdkerrors.Wrap(types.TokenServiceError, "No valid scopes in request")
+		return authorizationCode, sdkerrors.Wrap(types.TokenServiceError, "No valid scopes in request")
 	}
 
-	if len(msg.UserCode) > 0 {
-		tenantDeviceCodeRegistry, found := k.idpKeeper.GetDeviceCodeRegistry(ctx, msg.TenantW3CIdentifier)
+	if len(userCode) > 0 {
+		tenantDeviceCodeRegistry, found := k.idpKeeper.GetDeviceCodeRegistry(ctx, tenantW3CIdentifier)
 
 		if !found {
-			return response, sdkerrors.Wrap(types.TokenServiceError, "DeviceCodeRegistry cache could not be found for tenant")
+			return authorizationCode, sdkerrors.Wrap(types.TokenServiceError, "DeviceCodeRegistry cache could not be found for tenant")
 		}
 
 		userCodeFound := false
 
 		for _, deviceCodeRegistryEntry := range tenantDeviceCodeRegistry.Codes {
-			if deviceCodeRegistryEntry.UserCode == msg.UserCode && deviceCodeRegistryEntry.Owner.Creator == msg.Creator {
+			if deviceCodeRegistryEntry.UserCode == userCode && deviceCodeRegistryEntry.Owner.Creator == creator {
 				userCodeFound = true
 			}
 		}
 
 		if !userCodeFound {
-			return response, sdkerrors.Wrap(types.TokenServiceError, "UserCode not usable")
+			return authorizationCode, sdkerrors.Wrap(types.TokenServiceError, "UserCode not usable")
 		}
 	}
 
-	response.AuthorizationCode, _ = utils.GenerateRandomString(32)
-	tenantAuthorizationCodeRegistry, found := k.GetAuthorizationCodeRegistry(ctx, msg.TenantW3CIdentifier)
+	authorizationCode, _ = utils.GenerateRandomString(32)
+	tenantAuthorizationCodeRegistry, found := k.GetAuthorizationCodeRegistry(ctx, tenantW3CIdentifier)
 
 	if !found {
-		return response, sdkerrors.Wrap(types.TokenServiceError, "AuthorizationCodeRegistry cache could not be found for tenant")
+		return authorizationCode, sdkerrors.Wrap(types.TokenServiceError, "AuthorizationCodeRegistry cache could not be found for tenant")
 	}
 
 	authorizationCodeRegistryEntry := types.AuthorizationCodeRegistryEntry{
-		Owner: *didUtils.NewDidTokenFactory().Create(msg.Creator, didUrl),
-		AuthorizationCode: response.AuthorizationCode,
+		Owner: *didUtils.NewDidTokenFactory().Create(creator, didUrl),
+		AuthorizationCode: authorizationCode,
 		ExpiresAt: ctx.BlockTime().Add(time.Minute * 3).Unix(),
 	}
 
@@ -85,5 +82,5 @@ func (k Keeper) Authorize(ctx sdk.Context, msg types.MsgAuthorizeRequest) (respo
 
 	k.SetAuthorizationCodeRegistry(ctx, tenantAuthorizationCodeRegistry)
 
-	return response, nil
+	return authorizationCode, nil
 }
