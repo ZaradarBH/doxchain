@@ -20,7 +20,7 @@ func (k Keeper) GetClientRegistrationRegistry(ctx sdk.Context, clientRegistryW3C
 	b := store.Get(types.ClientRegistrationRegistryKey(
 		clientRegistryW3CIdentifier,
 	))
-	
+
 	if b == nil {
 		return val, false
 	}
@@ -32,7 +32,7 @@ func (k Keeper) GetClientRegistrationRegistry(ctx sdk.Context, clientRegistryW3C
 
 func (k Keeper) RemoveClientRegistrationRegistry(ctx sdk.Context, clientRegistrationRegistryW3CIdentifier string) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ClientRegistrationRegistryKeyPrefix))
-	
+
 	store.Delete(types.ClientRegistrationRegistryKey(
 		clientRegistrationRegistryW3CIdentifier,
 	))

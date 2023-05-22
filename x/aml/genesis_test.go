@@ -15,7 +15,7 @@ func TestGenesis(t *testing.T) {
 		Params: types.DefaultParams(),
 
 		AMLRegistration: &types.AMLRegistration{
-			Approved:  true,
+			Approved: true,
 		},
 	}
 

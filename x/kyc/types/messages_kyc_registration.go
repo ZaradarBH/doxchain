@@ -16,7 +16,7 @@ var _ sdk.Msg = &MsgCreateKYCRegistrationRequest{}
 func NewMsgCreateKYCRegistration(creator string, owner didTypes.Did) *MsgCreateKYCRegistrationRequest {
 	return &MsgCreateKYCRegistrationRequest{
 		Creator: creator,
-		Owner: owner,
+		Owner:   owner,
 	}
 }
 
@@ -87,10 +87,10 @@ func (msg *MsgDeleteKYCRegistrationRequest) GetSignBytes() []byte {
 
 func (msg *MsgDeleteKYCRegistrationRequest) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
-	
+
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
-	
+
 	return nil
 }

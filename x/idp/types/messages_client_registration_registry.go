@@ -15,7 +15,7 @@ var _ sdk.Msg = &MsgCreateClientRegistrationRegistryRequest{}
 
 func NewMsgCreateClientRegistrationRegistry(creator string, clientRegistry ClientRegistrationRegistry) *MsgCreateClientRegistrationRegistryRequest {
 	return &MsgCreateClientRegistrationRegistryRequest{
-		Creator: creator,
+		Creator:                    creator,
 		ClientRegistrationRegistry: clientRegistry,
 	}
 }
@@ -58,7 +58,7 @@ var _ sdk.Msg = &MsgUpdateClientRegistrationRegistryRequest{}
 
 func NewMsgUpdateClientRegistrationRegistry(creator string, clientRegistry ClientRegistrationRegistry) *MsgUpdateClientRegistrationRegistryRequest {
 	return &MsgUpdateClientRegistrationRegistryRequest{
-		Creator: creator,
+		Creator:                    creator,
 		ClientRegistrationRegistry: clientRegistry,
 	}
 }
@@ -136,6 +136,6 @@ func (msg *MsgDeleteClientRegistrationRegistryRequest) ValidateBasic() error {
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
-	
+
 	return nil
 }

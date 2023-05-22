@@ -53,7 +53,7 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 		},
 		DidCount: 2,
 	}
-	
+
 	simState.GenState[types.ModuleName] = simState.Cdc.MustMarshalJSON(&didGenesis)
 }
 

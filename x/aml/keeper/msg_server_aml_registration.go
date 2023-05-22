@@ -15,7 +15,7 @@ func (k msgServer) CreateAMLRegistration(goCtx context.Context, msg *types.MsgCr
 	if isFound {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "already set")
 	}
-	
+
 	if msg.Creator != msg.Owner.Creator {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "impersonation is not supported")
 	}
@@ -23,7 +23,7 @@ func (k msgServer) CreateAMLRegistration(goCtx context.Context, msg *types.MsgCr
 	k.SetAMLRegistration(
 		ctx,
 		types.AMLRegistration{
-			Owner:      msg.Owner,
+			Owner:    msg.Owner,
 			Approved: false,
 		},
 	)

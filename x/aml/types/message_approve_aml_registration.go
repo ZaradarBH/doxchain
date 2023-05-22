@@ -10,42 +10,41 @@ const TypeMsgApproveAMLRegistration = "approve_aml_request"
 var _ sdk.Msg = &MsgApproveAMLRegistrationRequest{}
 
 func NewMsgApproveAMLRegistration(creator string) *MsgApproveAMLRegistrationRequest {
-  return &MsgApproveAMLRegistrationRequest{
+	return &MsgApproveAMLRegistrationRequest{
 		Creator: creator,
 	}
 }
 
 func (msg *MsgApproveAMLRegistrationRequest) Route() string {
-  return RouterKey
+	return RouterKey
 }
 
 func (msg *MsgApproveAMLRegistrationRequest) Type() string {
-  return TypeMsgApproveAMLRegistration
+	return TypeMsgApproveAMLRegistration
 }
 
 func (msg *MsgApproveAMLRegistrationRequest) GetSigners() []sdk.AccAddress {
-  creator, err := sdk.AccAddressFromBech32(msg.Creator)
-  
-  if err != nil {
-    panic(err)
-  }
+	creator, err := sdk.AccAddressFromBech32(msg.Creator)
 
-  return []sdk.AccAddress{creator}
+	if err != nil {
+		panic(err)
+	}
+
+	return []sdk.AccAddress{creator}
 }
 
 func (msg *MsgApproveAMLRegistrationRequest) GetSignBytes() []byte {
-  bz := ModuleCdc.MustMarshalJSON(msg)
+	bz := ModuleCdc.MustMarshalJSON(msg)
 
-  return sdk.MustSortJSON(bz)
+	return sdk.MustSortJSON(bz)
 }
 
 func (msg *MsgApproveAMLRegistrationRequest) ValidateBasic() error {
-  _, err := sdk.AccAddressFromBech32(msg.Creator)
-  	
-  if err != nil {
-  	return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)	
-  }
+	_, err := sdk.AccAddressFromBech32(msg.Creator)
 
-  return nil
+	if err != nil {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
+	}
+
+	return nil
 }
-

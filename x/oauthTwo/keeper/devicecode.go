@@ -14,7 +14,7 @@ import (
 
 func (k Keeper) DeviceCode(ctx sdk.Context, creator string, tenantW3CIdentifier string, clientRegistrationAppIdW3CIdentifier string, scope []string) (deviceCode string, userCode string, verificationUri string, err error) {
 	creatorAddress, err := sdk.AccAddressFromBech32(creator)
-	
+
 	if err != nil {
 		return deviceCode, userCode, verificationUri, err
 	}
@@ -51,7 +51,7 @@ func (k Keeper) DeviceCode(ctx sdk.Context, creator string, tenantW3CIdentifier 
 
 	if len(validScopes) == 0 {
 		return deviceCode, userCode, verificationUri, sdkerrors.Wrap(types.TokenServiceError, "No valid scopes in request")
-	}	
+	}
 
 	deviceCode, _ = utils.GenerateRandomString(32)
 	userCode, _ = utils.GenerateRandomString(8)
@@ -62,10 +62,10 @@ func (k Keeper) DeviceCode(ctx sdk.Context, creator string, tenantW3CIdentifier 
 	if !found {
 		return deviceCode, userCode, verificationUri, sdkerrors.Wrap(types.TokenServiceError, "DeviceCodeRegistry cache could not be found for tenant")
 	}
-	
+
 	ownerDid := didUtils.NewDidTokenFactory().Create(creator, didUrl)
 	deviceCodeRegistryEntry := idpTypes.DeviceCodeRegistryEntry{
-		Owner: *ownerDid,
+		Owner:      *ownerDid,
 		DeviceCode: deviceCode,
 		UserCode:   userCode,
 		ExpiresAt:  ctx.BlockTime().Add(time.Minute * 15).Unix(),

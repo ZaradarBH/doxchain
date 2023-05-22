@@ -19,7 +19,7 @@ func CmdShowKYCRegistration() *cobra.Command {
 			queryClient := types.NewQueryClient(clientCtx)
 			params := &types.QueryGetKYCRegistrationRequest{}
 			res, err := queryClient.KYCRegistration(context.Background(), params)
-			
+
 			if err != nil {
 				return err
 			}

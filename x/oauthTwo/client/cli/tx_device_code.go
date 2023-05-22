@@ -33,7 +33,7 @@ func CmdDeviceCode() *cobra.Command {
 			if err := msg.ValidateBasic(); err != nil {
 				return err
 			}
-			
+
 			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msg)
 		},
 	}

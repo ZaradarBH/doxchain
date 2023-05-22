@@ -11,9 +11,9 @@ var _ sdk.Msg = &MsgDeleteClientRegistrationRelationshipRequest{}
 
 func NewMsgDeleteClientRegistrationRelationshipRequest(creator string, clientRegistrationRegistryW3CIdentifier string, ownerClientRegistrationW3CIdentifier string, destinationClientRegistrationW3CIdentifier string) *MsgDeleteClientRegistrationRelationshipRequest {
 	return &MsgDeleteClientRegistrationRelationshipRequest{
-		Creator: creator,
-		ClientRegistrationRegistryW3CIdentifier: clientRegistrationRegistryW3CIdentifier,
-		OwnerClientRegistrationW3CIdentifier: ownerClientRegistrationW3CIdentifier,
+		Creator:                                    creator,
+		ClientRegistrationRegistryW3CIdentifier:    clientRegistrationRegistryW3CIdentifier,
+		OwnerClientRegistrationW3CIdentifier:       ownerClientRegistrationW3CIdentifier,
 		DestinationClientRegistrationW3CIdentifier: destinationClientRegistrationW3CIdentifier,
 	}
 }
@@ -48,6 +48,6 @@ func (msg *MsgDeleteClientRegistrationRelationshipRequest) ValidateBasic() error
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
-	
+
 	return nil
 }

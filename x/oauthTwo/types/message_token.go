@@ -11,16 +11,16 @@ var _ sdk.Msg = &MsgTokenRequest{}
 
 func NewMsgTokenRequest(creator string, tenantW3CIdentifier string, clientRegistrationAppIdW3CIdentifier string, clientSecret string, scope []string, grantType string, deviceCode string, authorizationCode string, clientAssertion string, clientAssertionType string) *MsgTokenRequest {
 	return &MsgTokenRequest{
-		Creator: creator,
-		TenantW3CIdentifier: tenantW3CIdentifier,
+		Creator:                              creator,
+		TenantW3CIdentifier:                  tenantW3CIdentifier,
 		ClientRegistrationAppIdW3CIdentifier: clientRegistrationAppIdW3CIdentifier,
-		ClientSecret: clientSecret,
-		Scope: scope,
-		GrantType: grantType,
-		DeviceCode: deviceCode,
-		AuthorizationCode: authorizationCode,
-		ClientAssertion: clientAssertion,
-		ClientAssertionType: clientAssertionType,
+		ClientSecret:                         clientSecret,
+		Scope:                                scope,
+		GrantType:                            grantType,
+		DeviceCode:                           deviceCode,
+		AuthorizationCode:                    authorizationCode,
+		ClientAssertion:                      clientAssertion,
+		ClientAssertionType:                  clientAssertionType,
 	}
 }
 
@@ -54,6 +54,6 @@ func (msg *MsgTokenRequest) ValidateBasic() error {
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
-	
+
 	return nil
 }

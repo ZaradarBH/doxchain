@@ -90,8 +90,8 @@ func (AppModuleBasic) GetQueryCmd() *cobra.Command {
 type AppModule struct {
 	AppModuleBasic
 
-	keeper        keeper.Keeper
-	idpKeeper     types.IdpKeeper
+	keeper    keeper.Keeper
+	idpKeeper types.IdpKeeper
 }
 
 func NewAppModule(
@@ -102,7 +102,7 @@ func NewAppModule(
 	return AppModule{
 		AppModuleBasic: NewAppModuleBasic(cdc),
 		keeper:         keeper,
-		idpKeeper: idpKeeper,
+		idpKeeper:      idpKeeper,
 	}
 }
 

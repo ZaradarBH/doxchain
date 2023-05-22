@@ -66,7 +66,7 @@ func (k Keeper) GetKYCRegistration(ctx sdk.Context, creator string) (val types.K
 
 func (k Keeper) RemoveKYCRegistration(ctx sdk.Context, creator string) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.KYCRegistrationKey))
-	
+
 	store.Delete(GetKYCRegistrationIDBytes(creator))
 }
 

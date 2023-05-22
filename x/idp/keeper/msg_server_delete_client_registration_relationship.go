@@ -11,8 +11,8 @@ import (
 func (k msgServer) DeleteClientRegistrationRelationship(goCtx context.Context, msg *types.MsgDeleteClientRegistrationRelationshipRequest) (*types.MsgDeleteClientRegistrationRelationshipResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 	result, found := k.Keeper.GetClientRegistrationRelationship(ctx, msg.ClientRegistrationRegistryW3CIdentifier, msg.OwnerClientRegistrationW3CIdentifier, msg.DestinationClientRegistrationW3CIdentifier)
-	
-	if found {		
+
+	if found {
 		if result.Owner.Creator != msg.Creator {
 			return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "invalid creator")
 		}
@@ -23,6 +23,6 @@ func (k msgServer) DeleteClientRegistrationRelationship(goCtx context.Context, m
 			return nil, err
 		}
 	}
-	
+
 	return &types.MsgDeleteClientRegistrationRelationshipResponse{}, nil
 }

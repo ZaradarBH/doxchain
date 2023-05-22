@@ -41,7 +41,7 @@ func (k Keeper) RemoveClientRegistration(ctx sdk.Context, clientRegistrationRegi
 	}
 }
 
-func (k Keeper) GetClientRegistration(ctx sdk.Context, clientRegistrationRegistryW3CIdentitifer string, clientRegistrationW3CIdentitifer string) (val types.ClientRegistration, found bool) {	
+func (k Keeper) GetClientRegistration(ctx sdk.Context, clientRegistrationRegistryW3CIdentitifer string, clientRegistrationW3CIdentitifer string) (val types.ClientRegistration, found bool) {
 	clientRegistry, found := k.GetClientRegistrationRegistry(ctx, clientRegistrationRegistryW3CIdentitifer)
 
 	if found {
@@ -51,6 +51,6 @@ func (k Keeper) GetClientRegistration(ctx sdk.Context, clientRegistrationRegistr
 			}
 		}
 	}
-	
+
 	return val, found
 }

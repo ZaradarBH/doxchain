@@ -34,7 +34,7 @@ func (k Keeper) GetAddressWatchlist(ctx sdk.Context, addr sdk.AccAddress) types.
 	}
 
 	var entry types.WatchlistEntry
-	
+
 	k.cdc.MustUnmarshal(b, &entry)
 
 	return entry
@@ -43,7 +43,7 @@ func (k Keeper) GetAddressWatchlist(ctx sdk.Context, addr sdk.AccAddress) types.
 func (k Keeper) IterateWatchList(ctx sdk.Context, cb func(entry types.WatchlistEntry) bool) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.WatchlistKey)
 	iter := store.Iterator(nil, nil)
-	
+
 	defer iter.Close()
 
 	for ; iter.Valid(); iter.Next() {

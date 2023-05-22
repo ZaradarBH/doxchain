@@ -11,9 +11,9 @@ var _ sdk.Msg = &MsgAuthorizeRequest{}
 
 func NewMsgAuthorizeRequest(creator string, clientRegistrationAppIdW3CIdentifier string, scope []string) *MsgAuthorizeRequest {
 	return &MsgAuthorizeRequest{
-		Creator:  creator,
+		Creator:                              creator,
 		ClientRegistrationAppIdW3CIdentifier: clientRegistrationAppIdW3CIdentifier,
-		Scope:    scope,
+		Scope:                                scope,
 	}
 }
 
@@ -47,6 +47,6 @@ func (msg *MsgAuthorizeRequest) ValidateBasic() error {
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
-	
+
 	return nil
 }

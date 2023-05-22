@@ -6,13 +6,13 @@ import (
 	"time"
 
 	"github.com/be-heroes/doxchain/utils"
-	"github.com/be-heroes/doxchain/x/oauthtwo/types"
 	didUtils "github.com/be-heroes/doxchain/utils/did"
+	"github.com/be-heroes/doxchain/x/oauthtwo/types"
 )
 
 func (k Keeper) Authorize(ctx sdk.Context, creator string, tenantW3CIdentifier string, clientRegistrationAppIdW3CIdentifier string, scope []string, userCode string) (authorizationCode string, err error) {
 	creatorAddress, err := sdk.AccAddressFromBech32(creator)
-	
+
 	if err != nil {
 		return authorizationCode, err
 	}
@@ -73,9 +73,9 @@ func (k Keeper) Authorize(ctx sdk.Context, creator string, tenantW3CIdentifier s
 	}
 
 	authorizationCodeRegistryEntry := types.AuthorizationCodeRegistryEntry{
-		Owner: *didUtils.NewDidTokenFactory().Create(creator, didUrl),
+		Owner:             *didUtils.NewDidTokenFactory().Create(creator, didUrl),
 		AuthorizationCode: authorizationCode,
-		ExpiresAt: ctx.BlockTime().Add(time.Minute * 3).Unix(),
+		ExpiresAt:         ctx.BlockTime().Add(time.Minute * 3).Unix(),
 	}
 
 	tenantAuthorizationCodeRegistry.Codes = append(tenantAuthorizationCodeRegistry.Codes, authorizationCodeRegistryEntry)

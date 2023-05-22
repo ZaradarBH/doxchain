@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/spf13/cobra"
-	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/be-heroes/doxchain/x/idp/types"
+	"github.com/cosmos/cosmos-sdk/client"
+	"github.com/spf13/cobra"
 )
 
 var (
@@ -35,7 +35,7 @@ func GetTxCmd() *cobra.Command {
 	cmd.AddCommand(CmdUpdateClientRegistration())
 	cmd.AddCommand(CmdDeleteClientRegistration())
 	cmd.AddCommand(CmdCreateClientRegistrationRelationship())
-	cmd.AddCommand(CmdDeleteClientRegistrationRelationship())	
+	cmd.AddCommand(CmdDeleteClientRegistrationRelationship())
 
 	return cmd
 }

@@ -33,7 +33,7 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 	amlGenesis := types.GenesisState{
 		Params: types.DefaultParams(),
 	}
-	
+
 	simState.GenState[types.ModuleName] = simState.Cdc.MustMarshalJSON(&amlGenesis)
 }
 

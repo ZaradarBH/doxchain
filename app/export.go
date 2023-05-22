@@ -38,7 +38,7 @@ func (app *App) ExportAppStateAndValidators(
 	if err != nil {
 		return servertypes.ExportedApp{}, err
 	}
-	
+
 	return servertypes.ExportedApp{
 		AppState:        appState,
 		Validators:      validators,
@@ -61,7 +61,7 @@ func (app *App) prepForZeroHeightGenesis(ctx sdk.Context, jailAllowedAddrs []str
 
 	for _, addr := range jailAllowedAddrs {
 		_, err := sdk.ValAddressFromBech32(addr)
-		
+
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -182,7 +182,7 @@ func (app *App) prepForZeroHeightGenesis(ctx sdk.Context, jailAllowedAddrs []str
 			info.StartHeight = 0
 
 			app.SlashingKeeper.SetValidatorSigningInfo(ctx, addr, info)
-			
+
 			return false
 		},
 	)

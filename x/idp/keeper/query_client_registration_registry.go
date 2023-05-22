@@ -49,7 +49,7 @@ func (k Keeper) ClientRegistrationRegistry(goCtx context.Context, req *types.Que
 		ctx,
 		req.ClientRegistrationRegistryW3CIdentifier,
 	)
-	
+
 	if !found {
 		return nil, status.Error(codes.NotFound, "not found")
 	}

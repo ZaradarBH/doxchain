@@ -263,15 +263,15 @@ type App struct {
 	ScopedIBCKeeper      capabilitykeeper.ScopedKeeper
 	ScopedTransferKeeper capabilitykeeper.ScopedKeeper
 	ScopedICAHostKeeper  capabilitykeeper.ScopedKeeper
-	DoxchainKeeper doxchainmodulekeeper.Keeper
-	DidKeeper didmodulekeeper.Keeper
-	AbsKeeper absmodulekeeper.Keeper
-	OAuthTwoKeeper oauthtwomodulekeeper.Keeper
-	IdpKeeper idpmodulekeeper.Keeper
-	OracleKeeper oraclemodulekeeper.Keeper
-	SamlTwoKeeper samltwomodulekeeper.Keeper
-	KycKeeper kycmodulekeeper.Keeper
-	AmlKeeper amlmodulekeeper.Keeper
+	DoxchainKeeper       doxchainmodulekeeper.Keeper
+	DidKeeper            didmodulekeeper.Keeper
+	AbsKeeper            absmodulekeeper.Keeper
+	OAuthTwoKeeper       oauthtwomodulekeeper.Keeper
+	IdpKeeper            idpmodulekeeper.Keeper
+	OracleKeeper         oraclemodulekeeper.Keeper
+	SamlTwoKeeper        samltwomodulekeeper.Keeper
+	KycKeeper            kycmodulekeeper.Keeper
+	AmlKeeper            amlmodulekeeper.Keeper
 
 	// mm is the module manager
 	mm *module.Manager
@@ -500,7 +500,7 @@ func New(
 		&app.StakingKeeper,
 		app.SlashingKeeper,
 	)
-	
+
 	app.EvidenceKeeper = *evidenceKeeper
 
 	govRouter := govv1beta1.NewRouter()
@@ -565,7 +565,7 @@ func New(
 
 		app.IdpKeeper,
 	)
-	
+
 	oauthtwomodule := oauthtwomodule.NewAppModule(appCodec, app.OAuthTwoKeeper, app.IdpKeeper)
 
 	app.IdpKeeper = *idpmodulekeeper.NewKeeper(
@@ -622,8 +622,8 @@ func New(
 	// Create static IBC router, add transfer route, then set and seal it
 	ibcRouter := ibcporttypes.NewRouter()
 	ibcRouter.
-			AddRoute(icahosttypes.SubModuleName, icaHostIBCModule).
-			AddRoute(ibctransfertypes.ModuleName, transferIBCModule)
+		AddRoute(icahosttypes.SubModuleName, icaHostIBCModule).
+		AddRoute(ibctransfertypes.ModuleName, transferIBCModule)
 
 	app.IBCKeeper.SetRouter(ibcRouter)
 
@@ -975,7 +975,7 @@ func (app *App) RegisterNodeService(clientCtx client.Context) {
 
 func GetMaccPerms() map[string][]string {
 	dupMaccPerms := make(map[string][]string)
-	
+
 	for k, v := range maccPerms {
 		dupMaccPerms[k] = v
 	}

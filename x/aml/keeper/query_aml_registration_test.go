@@ -17,7 +17,7 @@ func TestAMLRegistrationQuery(t *testing.T) {
 	keeper, ctx := keepertest.AmlKeeper(t)
 	wctx := sdk.WrapSDKContext(ctx)
 	item := createTestAMLRegistration(keeper, ctx)
-	
+
 	for _, tc := range []struct {
 		desc     string
 		request  *types.QueryGetAMLRegistrationRequest

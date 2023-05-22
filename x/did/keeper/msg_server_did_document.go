@@ -12,7 +12,7 @@ func (k msgServer) CreateDidDocument(goCtx context.Context, msg *types.MsgCreate
 	if msg.Creator != msg.DidDocument.Id.Creator {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "impersonation is not allowed")
 	}
-	
+
 	err := k.Keeper.SetDidDocument(sdk.UnwrapSDKContext(goCtx), msg.DidDocument, false)
 
 	if err != nil {
@@ -28,7 +28,7 @@ func (k msgServer) UpdateDidDocument(goCtx context.Context, msg *types.MsgUpdate
 	if msg.Creator != msg.DidDocument.Id.Creator {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "impersonation is not allowed")
 	}
-	
+
 	err := k.SetDidDocument(sdk.UnwrapSDKContext(goCtx), msg.DidDocument, true)
 
 	if err != nil {
@@ -42,7 +42,7 @@ func (k msgServer) UpdateDidDocument(goCtx context.Context, msg *types.MsgUpdate
 
 func (k msgServer) DeleteDidDocument(goCtx context.Context, msg *types.MsgDeleteDidDocumentRequest) (*types.MsgDeleteDidDocumentResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
-	
+
 	valFound, isFound := k.GetDidDocument(ctx, msg.DidDocumentW3CIdentifier)
 
 	if !isFound {
@@ -52,7 +52,7 @@ func (k msgServer) DeleteDidDocument(goCtx context.Context, msg *types.MsgDelete
 	if msg.Creator != valFound.Id.Creator {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "incorrect owner")
 	}
-	
+
 	err := k.Keeper.RemoveDidDocument(ctx, msg.DidDocumentW3CIdentifier)
 
 	if err != nil {

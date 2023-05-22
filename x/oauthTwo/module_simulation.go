@@ -4,6 +4,7 @@ import (
 	"math/rand"
 
 	"github.com/be-heroes/doxchain/testutil/sample"
+	didUtils "github.com/be-heroes/doxchain/utils/did"
 	oauthtwosimulation "github.com/be-heroes/doxchain/x/oauthtwo/simulation"
 	"github.com/be-heroes/doxchain/x/oauthtwo/types"
 	"github.com/cosmos/cosmos-sdk/baseapp"
@@ -12,7 +13,6 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/module"
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
-	didUtils "github.com/be-heroes/doxchain/utils/did"
 )
 
 // avoid unused import issue
@@ -30,7 +30,7 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 	for i, acc := range simState.Accounts {
 		accs[i] = acc.Address.String()
 	}
-	
+
 	oauthGenesis := types.GenesisState{
 		Params: types.DefaultParams(),
 		AccessTokenRegistries: []types.AccessTokenRegistry{

@@ -2,10 +2,10 @@ package cli
 
 import (
 	"fmt"
-	"time"
-	"github.com/spf13/cobra"
-	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/be-heroes/doxchain/x/aml/types"
+	"github.com/cosmos/cosmos-sdk/client"
+	"github.com/spf13/cobra"
+	"time"
 )
 
 var (

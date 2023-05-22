@@ -10,7 +10,7 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 	for _, elem := range genState.DeviceCodeRegistries {
 		k.SetDeviceCodeRegistry(ctx, elem)
 	}
-	
+
 	for _, elem := range genState.ClientRegistrationRegistries {
 		k.SetClientRegistrationRegistry(ctx, elem)
 	}

@@ -39,7 +39,7 @@ func (k Keeper) RemoveAccessTokenRegistry(
 	accessTokenRegistryW3CIdentifier string,
 ) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AccessTokenRegistryKeyPrefix))
-	
+
 	store.Delete(types.AccessTokenRegistryKey(
 		accessTokenRegistryW3CIdentifier,
 	))

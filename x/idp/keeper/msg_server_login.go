@@ -9,7 +9,7 @@ import (
 
 func (k msgServer) Login(goCtx context.Context, msg *types.MsgAuthenticationRequest) (response *types.MsgAuthenticationResponse, err error) {
 	creatorAddress, err := sdk.AccAddressFromBech32(msg.Creator)
-	
+
 	if err != nil {
 		return response, err
 	}

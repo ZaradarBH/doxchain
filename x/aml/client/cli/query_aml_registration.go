@@ -19,7 +19,7 @@ func CmdShowAMLRegistration() *cobra.Command {
 			queryClient := types.NewQueryClient(clientCtx)
 			params := &types.QueryGetAMLRegistrationRequest{}
 			res, err := queryClient.AMLRegistration(context.Background(), params)
-			
+
 			if err != nil {
 				return err
 			}

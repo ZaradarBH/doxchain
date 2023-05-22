@@ -23,7 +23,7 @@ func (k msgServer) CreateKYCRegistration(goCtx context.Context, msg *types.MsgCr
 	k.SetKYCRegistration(
 		ctx,
 		types.KYCRegistration{
-			Owner: msg.Owner,
+			Owner:    msg.Owner,
 			Approved: false,
 		},
 	)
@@ -34,7 +34,7 @@ func (k msgServer) CreateKYCRegistration(goCtx context.Context, msg *types.MsgCr
 func (k msgServer) DeleteKYCRegistration(goCtx context.Context, msg *types.MsgDeleteKYCRegistrationRequest) (*types.MsgDeleteKYCRegistrationResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 	valFound, isFound := k.GetKYCRegistration(ctx, msg.Creator)
-	
+
 	if !isFound {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "not set")
 	}

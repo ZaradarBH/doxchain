@@ -4,6 +4,7 @@ import (
 	"math/rand"
 
 	"github.com/be-heroes/doxchain/testutil/sample"
+	utils "github.com/be-heroes/doxchain/utils/did"
 	idpsimulation "github.com/be-heroes/doxchain/x/idp/simulation"
 	"github.com/be-heroes/doxchain/x/idp/types"
 	"github.com/cosmos/cosmos-sdk/baseapp"
@@ -12,7 +13,6 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/module"
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
-	utils "github.com/be-heroes/doxchain/utils/did"
 )
 
 // avoid unused import issue
@@ -42,7 +42,7 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 			},
 		},
 	}
-	
+
 	simState.GenState[types.ModuleName] = simState.Cdc.MustMarshalJSON(&idpGenesis)
 }
 

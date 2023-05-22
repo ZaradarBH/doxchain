@@ -38,7 +38,7 @@ func (k Keeper) RemovePartitionedPoolRegistry(
 	creator string,
 ) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.PartitionedPoolRegistryKeyPrefix))
-	
+
 	store.Delete(types.PartitionedPoolRegistryKey(
 		creator,
 	))

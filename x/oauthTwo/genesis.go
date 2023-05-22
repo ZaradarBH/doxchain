@@ -10,11 +10,11 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 	for _, elem := range genState.AccessTokenRegistries {
 		k.SetAccessTokenRegistry(ctx, elem)
 	}
-	
+
 	for _, elem := range genState.AuthorizationCodeRegistries {
 		k.SetAuthorizationCodeRegistry(ctx, elem)
 	}
-	
+
 	k.SetParams(ctx, genState.Params)
 }
 

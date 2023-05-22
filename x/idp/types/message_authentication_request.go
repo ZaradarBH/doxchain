@@ -11,7 +11,7 @@ var _ sdk.Msg = &MsgAuthenticationRequest{}
 
 func NewMsgAuthenticationRequest(creator string, tenantW3CIdentifier string) *MsgAuthenticationRequest {
 	return &MsgAuthenticationRequest{
-		Creator: creator,
+		Creator:             creator,
 		TenantW3CIdentifier: tenantW3CIdentifier,
 	}
 }
@@ -46,6 +46,6 @@ func (msg *MsgAuthenticationRequest) ValidateBasic() error {
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
-	
+
 	return nil
 }

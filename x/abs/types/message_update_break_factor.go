@@ -11,7 +11,7 @@ var _ sdk.Msg = &MsgUpdateBreakFactorRequest{}
 
 func NewMsgUpdateBreakFactorRequest(creator string, breakFactor sdk.Dec) *MsgUpdateBreakFactorRequest {
 	return &MsgUpdateBreakFactorRequest{
-		Creator: creator,
+		Creator:     creator,
 		BreakFactor: breakFactor,
 	}
 }
@@ -46,6 +46,6 @@ func (msg *MsgUpdateBreakFactorRequest) ValidateBasic() error {
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
-	
+
 	return nil
 }

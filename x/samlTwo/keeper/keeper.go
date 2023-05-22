@@ -19,7 +19,7 @@ type (
 		memKey     storetypes.StoreKey
 		paramstore paramtypes.Subspace
 
-		idpKeeper      types.IdpKeeper
+		idpKeeper types.IdpKeeper
 	}
 )
 
@@ -41,7 +41,7 @@ func NewKeeper(
 		storeKey:   storeKey,
 		memKey:     memKey,
 		paramstore: ps,
-		idpKeeper: idpKeeper,
+		idpKeeper:  idpKeeper,
 	}
 }
 

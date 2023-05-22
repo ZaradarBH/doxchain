@@ -8,9 +8,9 @@ const DefaultIndex uint64 = 1
 
 func DefaultGenesis() *GenesisState {
 	return &GenesisState{
-		DeviceCodeRegistries: []DeviceCodeRegistry{},
-		ClientRegistrationRegistries:     []ClientRegistrationRegistry{},
-		Params: DefaultParams(),
+		DeviceCodeRegistries:         []DeviceCodeRegistry{},
+		ClientRegistrationRegistries: []ClientRegistrationRegistry{},
+		Params:                       DefaultParams(),
 	}
 }
 
@@ -31,11 +31,11 @@ func (gs GenesisState) Validate() error {
 
 	for _, elem := range gs.ClientRegistrationRegistries {
 		creator := string(ClientRegistrationRegistryKey(elem.Owner.Creator))
-		
+
 		if _, ok := ClientRegistrationRegistryIndexMap[creator]; ok {
 			return fmt.Errorf("duplicated creator for ClientRegistrationRegistry")
 		}
-		
+
 		ClientRegistrationRegistryIndexMap[creator] = struct{}{}
 	}
 

@@ -110,7 +110,7 @@ func (k Keeper) CanOverrideDid(ctx sdk.Context, did types.Did, override bool) er
 }
 
 func (k Keeper) IsValidDidUrl(ctx sdk.Context, url string) bool {
-	
+
 	return false
 }
 

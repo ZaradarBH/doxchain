@@ -6,8 +6,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
-	utils "github.com/be-heroes/doxchain/utils/jwt"
 	didUtils "github.com/be-heroes/doxchain/utils/did"
+	utils "github.com/be-heroes/doxchain/utils/jwt"
 	"github.com/be-heroes/doxchain/x/oauthtwo/types"
 	"github.com/golang-jwt/jwt"
 )
@@ -18,7 +18,7 @@ func (k Keeper) GenerateAuthorizationCodeToken(ctx sdk.Context, creator string, 
 	if err != nil {
 		return accessToken, tokenType, expiresIn, err
 	}
-	
+
 	tenantAuthorizationCodeRegistry, found := k.GetAuthorizationCodeRegistry(ctx, tenantW3CIdentifier)
 
 	if !found {
@@ -45,8 +45,8 @@ func (k Keeper) GenerateAuthorizationCodeToken(ctx sdk.Context, creator string, 
 			}
 
 			tenantAccessTokenRegistry.Issued = append(tenantAccessTokenRegistry.Issued, types.AccessTokenRegistryEntry{
-				Owner: *didUtils.NewDidTokenFactory().Create(creator, didUrl),
-				Jti: claims["jti"].(string),
+				Owner:     *didUtils.NewDidTokenFactory().Create(creator, didUrl),
+				Jti:       claims["jti"].(string),
 				ExpiresAt: expiresIn,
 			})
 

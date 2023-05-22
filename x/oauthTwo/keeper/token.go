@@ -9,7 +9,7 @@ import (
 
 func (k Keeper) Token(ctx sdk.Context, creator string, tenantW3CIdentifier string, clientRegistrationAppIdW3CIdentifier string, scope []string, clientSecret string, authorizationCode string, deviceCode string, clientAssertion string, clientAssertionType string, grantType string) (accessToken string, tokenType string, expiresIn int64, err error) {
 	creatorAddress, err := sdk.AccAddressFromBech32(creator)
-	
+
 	if err != nil {
 		return accessToken, tokenType, expiresIn, err
 	}
@@ -19,7 +19,7 @@ func (k Keeper) Token(ctx sdk.Context, creator string, tenantW3CIdentifier strin
 	if !isAuthorized {
 		return accessToken, tokenType, expiresIn, err
 	}
-	
+
 	var validScopes []string
 
 	for _, requestedScope := range scope {

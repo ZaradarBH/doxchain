@@ -5,9 +5,9 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	
-	"github.com/be-heroes/doxchain/x/abs/types"
+
 	didUtils "github.com/be-heroes/doxchain/utils/did"
+	"github.com/be-heroes/doxchain/x/abs/types"
 )
 
 func (k msgServer) CreatePartitionedPoolRegistry(goCtx context.Context, msg *types.MsgCreatePartitionedPoolRegistryRequest) (*types.MsgCreatePartitionedPoolRegistryResponse, error) {

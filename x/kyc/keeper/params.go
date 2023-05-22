@@ -7,7 +7,7 @@ import (
 
 func (k Keeper) GetParams(ctx sdk.Context) (params types.Params) {
 	k.paramstore.GetParamSet(ctx, &params)
-	
+
 	return params
 }
 

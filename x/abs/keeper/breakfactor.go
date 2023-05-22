@@ -29,9 +29,8 @@ func (k Keeper) SetBreakFactor(ctx sdk.Context, breakFactor sdk.Dec) error {
 
 	store := ctx.KVStore(k.storeKey)
 	b := k.cdc.MustMarshal(&sdk.DecProto{Dec: breakFactor})
-	
+
 	store.Set([]byte(types.BreakFactorKey), b)
 
 	return nil
 }
-

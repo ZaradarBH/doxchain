@@ -16,7 +16,7 @@ func (k msgServer) Token(goCtx context.Context, msg *types.MsgTokenRequest) (*ty
 
 	return &types.MsgTokenResponse{
 		AccessToken: accessToken,
-		TokenType: tokenType,
-		ExpiresIn: expiresIn,
+		TokenType:   tokenType,
+		ExpiresIn:   expiresIn,
 	}, nil
 }

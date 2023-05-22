@@ -10,7 +10,7 @@ import (
 
 func (k msgServer) UpdateBreakFactor(goCtx context.Context, msg *types.MsgUpdateBreakFactorRequest) (*types.MsgUpdateBreakFactorResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
-	
+
 	var operators []didTypes.Did
 
 	k.Keeper.paramstore.Get(ctx, types.ParamStoreKeyOperators, &operators)
@@ -19,7 +19,7 @@ func (k msgServer) UpdateBreakFactor(goCtx context.Context, msg *types.MsgUpdate
 		if operatorId.Creator == msg.Creator {
 			k.Keeper.SetBreakFactor(ctx, msg.BreakFactor)
 
-			break;
+			break
 		}
 	}
 

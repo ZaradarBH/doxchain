@@ -16,7 +16,7 @@ var _ sdk.Msg = &MsgCreateDidRequest{}
 func NewMsgCreateDidRequest(creator string, did Did) *MsgCreateDidRequest {
 	return &MsgCreateDidRequest{
 		Creator: creator,
-		Did: did,
+		Did:     did,
 	}
 }
 
@@ -59,7 +59,7 @@ var _ sdk.Msg = &MsgUpdateDidRequest{}
 func NewMsgUpdateDidRequest(creator string, did Did) *MsgUpdateDidRequest {
 	return &MsgUpdateDidRequest{
 		Creator: creator,
-		Did: did,
+		Did:     did,
 	}
 }
 
@@ -101,7 +101,7 @@ var _ sdk.Msg = &MsgDeleteDidRequest{}
 
 func NewMsgDeleteDidRequest(creator string, didW3CIdentifier string) *MsgDeleteDidRequest {
 	return &MsgDeleteDidRequest{
-		Creator: creator,
+		Creator:          creator,
 		DidW3CIdentifier: didW3CIdentifier,
 	}
 }
@@ -135,6 +135,6 @@ func (msg *MsgDeleteDidRequest) ValidateBasic() error {
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
-	
+
 	return nil
 }

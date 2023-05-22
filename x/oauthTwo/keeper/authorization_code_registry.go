@@ -39,7 +39,7 @@ func (k Keeper) RemoveAuthorizationCodeRegistry(
 	authorizationCodeRegistryW3CIdentifier string,
 ) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AuthorizationCodeRegistryKeyPrefix))
-	
+
 	store.Delete(types.AuthorizationCodeRegistryKey(
 		authorizationCodeRegistryW3CIdentifier,
 	))

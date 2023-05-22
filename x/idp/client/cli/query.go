@@ -2,10 +2,10 @@ package cli
 
 import (
 	"fmt"
-	
-	"github.com/spf13/cobra"
-	"github.com/cosmos/cosmos-sdk/client"
+
 	"github.com/be-heroes/doxchain/x/idp/types"
+	"github.com/cosmos/cosmos-sdk/client"
+	"github.com/spf13/cobra"
 )
 
 func GetQueryCmd(queryRoute string) *cobra.Command {

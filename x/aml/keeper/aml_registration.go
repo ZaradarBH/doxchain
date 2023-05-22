@@ -65,7 +65,7 @@ func (k Keeper) GetAMLRegistration(ctx sdk.Context, creator string) (val types.A
 
 func (k Keeper) RemoveAMLRegistration(ctx sdk.Context, creator string) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AMLRegistrationKey))
-	
+
 	store.Delete(GetAMLRegistrationIDBytes(creator))
 }
 

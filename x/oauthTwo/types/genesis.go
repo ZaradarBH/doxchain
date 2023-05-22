@@ -10,7 +10,7 @@ func DefaultGenesis() *GenesisState {
 	return &GenesisState{
 		AccessTokenRegistries:       []AccessTokenRegistry{},
 		AuthorizationCodeRegistries: []AuthorizationCodeRegistry{},
-		Params: DefaultParams(),
+		Params:                      DefaultParams(),
 	}
 }
 
@@ -23,10 +23,10 @@ func (gs GenesisState) Validate() error {
 		if _, ok := AccessTokenRegistryIndexMap[tenant]; ok {
 			return fmt.Errorf("duplicated tenant for AccessTokenRegistry")
 		}
-		
+
 		AccessTokenRegistryIndexMap[tenant] = struct{}{}
 	}
-	
+
 	authorizationCodeRegistryIndexMap := make(map[string]struct{})
 
 	for _, elem := range gs.AuthorizationCodeRegistries {

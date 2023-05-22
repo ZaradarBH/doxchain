@@ -36,7 +36,7 @@ func CmdToken() *cobra.Command {
 				args[7],
 				args[8],
 			)
-			
+
 			if err := msg.ValidateBasic(); err != nil {
 				return err
 			}

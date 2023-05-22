@@ -1,8 +1,8 @@
 package types
 
 import (
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	idpTypes "github.com/be-heroes/doxchain/x/idp/types"
+	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
 type IdpKeeper interface {

@@ -11,8 +11,8 @@ import (
 func (k msgServer) DeleteClientRegistration(goCtx context.Context, msg *types.MsgDeleteClientRegistrationRequest) (*types.MsgDeleteClientRegistrationResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 	result, found := k.Keeper.GetClientRegistration(ctx, msg.ClientRegistrationRegistryW3CIdentifier, msg.ClientRegistrationW3CIdentifier)
-	
-	if found {		
+
+	if found {
 		if result.Id.Creator != msg.Creator {
 			return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "invalid creator")
 		}

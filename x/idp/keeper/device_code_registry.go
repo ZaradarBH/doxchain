@@ -32,7 +32,7 @@ func (k Keeper) GetDeviceCodeRegistry(ctx sdk.Context, deviceCodeRegistryW3CIden
 
 func (k Keeper) RemoveDeviceCodeRegistry(ctx sdk.Context, deviceCodeRegistryW3CIdentifier string) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DeviceCodeRegistryKeyPrefix))
-	
+
 	store.Delete(types.DeviceCodeRegistryKey(
 		deviceCodeRegistryW3CIdentifier,
 	))

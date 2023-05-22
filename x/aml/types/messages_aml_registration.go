@@ -16,7 +16,7 @@ var _ sdk.Msg = &MsgCreateAMLRegistrationRequest{}
 func NewMsgCreateAMLRegistration(creator string, owner didTypes.Did) *MsgCreateAMLRegistrationRequest {
 	return &MsgCreateAMLRegistrationRequest{
 		Creator: creator,
-		Owner:     owner,
+		Owner:   owner,
 	}
 }
 
@@ -91,6 +91,6 @@ func (msg *MsgDeleteAMLRegistrationRequest) ValidateBasic() error {
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
-	
+
 	return nil
 }

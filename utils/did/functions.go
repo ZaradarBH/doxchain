@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	REGEX_DID_SEPERATOR_CHAR				 = ":"
+	REGEX_DID_SEPERATOR_CHAR                 = ":"
 	REGEX_DID_ID_CHAR                        = "[a-zA-Z0-9_.-]"
 	REGEX_DID_PARAM_CHAR                     = "[a-zA-Z0-9_.:%-]"
 	REGEX_DID_METHOD_NAME_CAPTURE_IDENTIFIER = "MethodName"
@@ -45,6 +45,6 @@ func CreateModuleDidUrl(moduleName string, moduleTypeName string, creator string
 	if !IsValidDid(result) {
 		return result, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "Could not generate valid Did based on input params")
 	}
-	
+
 	return result, nil
 }
