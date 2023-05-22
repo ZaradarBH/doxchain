@@ -13,6 +13,7 @@ func CmdListPartitionedPoolRegistries() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "list-partitioned-pool-registries",
 		Short: "list all PartitionedPoolRegistries",
+		Args:  cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx := client.GetClientContextFromCmd(cmd)
 			pageReq, err := client.ReadPageRequest(cmd.Flags())
@@ -42,7 +43,7 @@ func CmdListPartitionedPoolRegistries() *cobra.Command {
 
 func CmdShowPartitionedPoolRegistry() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "show-partitioned-pool-registry [partitioned-pool-registry-w3c-identifier]",
+		Use:   "show-partitioned-pool-registry [did-url]",
 		Short: "shows a PartitionedPoolRegistry",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {

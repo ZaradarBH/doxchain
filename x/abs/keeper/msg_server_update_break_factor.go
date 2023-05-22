@@ -8,7 +8,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
-func (k msgServer) UpdateBreakFactor(goCtx context.Context, msg *types.MsgUpdateBreakFactorRequest) (*types.MsgUpdateBreakFactorResponse, error) {
+func (k msgServer) UpdateBreakFactor(goCtx context.Context, msg *types.MsgUpdateBreakFactorRequest) (result *types.MsgUpdateBreakFactorResponse, err error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	var operators []didTypes.Did
@@ -23,5 +23,5 @@ func (k msgServer) UpdateBreakFactor(goCtx context.Context, msg *types.MsgUpdate
 		}
 	}
 
-	return &types.MsgUpdateBreakFactorResponse{}, nil
+	return result, nil
 }

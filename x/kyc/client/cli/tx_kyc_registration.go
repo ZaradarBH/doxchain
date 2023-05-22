@@ -1,6 +1,7 @@
 package cli
 
 import (
+	"fmt"
 	utils "github.com/be-heroes/doxchain/utils/did"
 	"github.com/be-heroes/doxchain/x/kyc/types"
 	"github.com/cosmos/cosmos-sdk/client"
@@ -23,13 +24,18 @@ func CmdCreateKYCRegistration() *cobra.Command {
 
 			creator := clientCtx.GetFromAddress().String()
 			did := utils.NewDidTokenFactory().Create(creator, args[0])
-			msg := types.NewMsgCreateKYCRegistration(creator, *did)
 
-			if err := msg.ValidateBasic(); err != nil {
-				return err
+			if did.IsUserIdentifier() {
+				msg := types.NewMsgCreateKYCRegistration(creator, *did)
+
+				if err := msg.ValidateBasic(); err != nil {
+					return err
+				}
+
+				return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msg)
 			}
 
-			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msg)
+			return fmt.Errorf("Invalid did-url")
 		},
 	}
 

@@ -4,15 +4,16 @@ import (
 	"context"
 
 	"github.com/be-heroes/doxchain/x/kyc/types"
+	didUtils "github.com/be-heroes/doxchain/utils/did"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-func (k msgServer) CreateKYCRegistration(goCtx context.Context, msg *types.MsgCreateKYCRegistrationRequest) (*types.MsgCreateKYCRegistrationResponse, error) {
+func (k msgServer) CreateKYCRegistration(goCtx context.Context, msg *types.MsgCreateKYCRegistrationRequest) (result *types.MsgCreateKYCRegistrationResponse, err error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
-	_, isFound := k.GetKYCRegistration(ctx, msg.Creator)
+	_, found := k.GetKYCRegistration(ctx, msg.Owner.GetW3CIdentifier())
 
-	if isFound {
+	if found {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "already set")
 	}
 
@@ -28,22 +29,23 @@ func (k msgServer) CreateKYCRegistration(goCtx context.Context, msg *types.MsgCr
 		},
 	)
 
-	return &types.MsgCreateKYCRegistrationResponse{}, nil
+	return result, nil
 }
 
-func (k msgServer) DeleteKYCRegistration(goCtx context.Context, msg *types.MsgDeleteKYCRegistrationRequest) (*types.MsgDeleteKYCRegistrationResponse, error) {
+func (k msgServer) DeleteKYCRegistration(goCtx context.Context, msg *types.MsgDeleteKYCRegistrationRequest) (result *types.MsgDeleteKYCRegistrationResponse, err error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
-	valFound, isFound := k.GetKYCRegistration(ctx, msg.Creator)
+	userDid := didUtils.NewDidTokenFactory().Create(msg.Creator, "")
+	match, found := k.GetKYCRegistration(ctx, userDid.GetW3CIdentifier())
 
-	if !isFound {
+	if !found {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "not set")
 	}
 
-	if msg.Creator != valFound.Owner.Creator {
+	if msg.Creator != match.Owner.Creator {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "impersonation not supported")
 	}
 
-	k.RemoveKYCRegistration(ctx, msg.Creator)
+	k.RemoveKYCRegistration(ctx, userDid.GetW3CIdentifier())
 
-	return &types.MsgDeleteKYCRegistrationResponse{}, nil
+	return result, nil
 }

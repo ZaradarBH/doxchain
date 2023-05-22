@@ -4,13 +4,14 @@ import (
 	"context"
 
 	"github.com/be-heroes/doxchain/x/aml/types"
+	didUtils "github.com/be-heroes/doxchain/utils/did"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
 func (k msgServer) CreateAMLRegistration(goCtx context.Context, msg *types.MsgCreateAMLRegistrationRequest) (result *types.MsgCreateAMLRegistrationResponse, err error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
-	_, found := k.Keeper.GetAMLRegistration(ctx, msg.Creator)
+	_, found := k.Keeper.GetAMLRegistration(ctx, msg.Owner.GetW3CIdentifier())
 
 	if found {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "already set")
@@ -33,7 +34,8 @@ func (k msgServer) CreateAMLRegistration(goCtx context.Context, msg *types.MsgCr
 
 func (k msgServer) DeleteAMLRegistration(goCtx context.Context, msg *types.MsgDeleteAMLRegistrationRequest) (result *types.MsgDeleteAMLRegistrationResponse, err error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
-	match, found := k.Keeper.GetAMLRegistration(ctx, msg.Creator)
+	userDid := didUtils.NewDidTokenFactory().Create(msg.Creator, "")
+	match, found := k.Keeper.GetAMLRegistration(ctx, userDid.GetW3CIdentifier())
 
 	if !found {
 		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "not set")
@@ -43,7 +45,7 @@ func (k msgServer) DeleteAMLRegistration(goCtx context.Context, msg *types.MsgDe
 		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "impersonation is not supported")
 	}
 
-	k.Keeper.RemoveAMLRegistration(ctx, msg.Creator)
+	k.Keeper.RemoveAMLRegistration(ctx, userDid.GetW3CIdentifier())
 
 	return result, nil
 }

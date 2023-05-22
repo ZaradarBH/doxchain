@@ -22,8 +22,9 @@ func NewDidTokenFactory(opts ...DidTokenFactoryOption) *DidTokenFactory {
 }
 
 func (didf DidTokenFactory) Create(creator string, url string) (did *didTypes.Did) {
+	did.Creator = creator
+	
 	if IsValidDid(url) {
-		did.Creator = creator
 		did.Url = url
 		did.MethodName = REGEX_DID_METHOD_NAME.FindStringSubmatch(url)[0]
 		did.MethodId = REGEX_DID_METHOD_ID.FindStringSubmatch(url)[0]
@@ -46,6 +47,9 @@ func (didf DidTokenFactory) Create(creator string, url string) (did *didTypes.Di
 					did.Parameters = append(did.Parameters, &didParam)
 				}
 			}
+		} else {
+			did.MethodName = creator
+			did.MethodId = creator
 		}
 	}
 

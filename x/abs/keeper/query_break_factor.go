@@ -9,12 +9,12 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-func (k Keeper) QueryBreakFactor(goCtx context.Context, req *types.QueryBreakFactorRequest) (*types.QueryBreakFactorResponse, error) {
+func (k Keeper) QueryBreakFactor(goCtx context.Context, req *types.QueryBreakFactorRequest) (result *types.QueryBreakFactorResponse, err error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
 
-	return &types.QueryBreakFactorResponse{
-		BreakFactor: k.GetBreakFactor(sdk.UnwrapSDKContext(goCtx)).String(),
-	}, nil
+	result.BreakFactor = k.GetBreakFactor(sdk.UnwrapSDKContext(goCtx)).String()
+
+	return result, nil
 }

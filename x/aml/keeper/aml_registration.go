@@ -28,45 +28,43 @@ func (k Keeper) SetAMLRegistrationCount(ctx sdk.Context, count uint64) {
 	store.Set(byteKey, bz)
 }
 
-func (k Keeper) AppendAMLRegistration(
-	ctx sdk.Context,
-	request types.AMLRegistration,
-) string {
+func (k Keeper) AppendAMLRegistration(ctx sdk.Context, request types.AMLRegistration) string {
 	count := k.GetAMLRegistrationCount(ctx)
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AMLRegistrationKey))
 	appendedValue := k.cdc.MustMarshal(&request)
+	w3cIdentifier := request.Owner.GetW3CIdentifier()
 
-	store.Set(GetAMLRegistrationIDBytes(request.Owner.Creator), appendedValue)
+	store.Set(GetAMLRegistrationIDBytes(w3cIdentifier), appendedValue)
 
 	k.SetAMLRegistrationCount(ctx, count+1)
 
-	return request.Owner.Creator
+	return w3cIdentifier
 }
 
 func (k Keeper) SetAMLRegistration(ctx sdk.Context, request types.AMLRegistration) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AMLRegistrationKey))
 	b := k.cdc.MustMarshal(&request)
 
-	store.Set(GetAMLRegistrationIDBytes(request.Owner.Creator), b)
+	store.Set(GetAMLRegistrationIDBytes(request.Owner.GetW3CIdentifier()), b)
 }
 
-func (k Keeper) GetAMLRegistration(ctx sdk.Context, creator string) (val types.AMLRegistration, found bool) {
+func (k Keeper) GetAMLRegistration(ctx sdk.Context, registrationW3CIdentifier string) (result types.AMLRegistration, found bool) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AMLRegistrationKey))
-	b := store.Get(GetAMLRegistrationIDBytes(creator))
+	b := store.Get(GetAMLRegistrationIDBytes(registrationW3CIdentifier))
 
 	if b == nil {
-		return val, false
+		return result, false
 	}
 
-	k.cdc.MustUnmarshal(b, &val)
+	k.cdc.MustUnmarshal(b, &result)
 
-	return val, true
+	return result, true
 }
 
-func (k Keeper) RemoveAMLRegistration(ctx sdk.Context, creator string) {
+func (k Keeper) RemoveAMLRegistration(ctx sdk.Context, registrationW3CIdentifier string) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AMLRegistrationKey))
 
-	store.Delete(GetAMLRegistrationIDBytes(creator))
+	store.Delete(GetAMLRegistrationIDBytes(registrationW3CIdentifier))
 }
 
 func (k Keeper) GetAllAMLRegistration(ctx sdk.Context) (list []types.AMLRegistration) {
@@ -84,10 +82,10 @@ func (k Keeper) GetAllAMLRegistration(ctx sdk.Context) (list []types.AMLRegistra
 	return
 }
 
-func (k Keeper) ApproveAMLRegistration(ctx sdk.Context, creator string) {
-	request, found := k.GetAMLRegistration(ctx, creator)
+func (k Keeper) ApproveAMLRegistration(ctx sdk.Context, registrationW3CIdentifier string) {
+	request, found := k.GetAMLRegistration(ctx, registrationW3CIdentifier)
 
-	if found && creator == request.Owner.Creator {
+	if found {
 		request.Approved = true
 
 		k.SetAMLRegistration(ctx, request)

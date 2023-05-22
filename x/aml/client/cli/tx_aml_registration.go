@@ -1,7 +1,8 @@
 package cli
 
 import (
-	utils "github.com/be-heroes/doxchain/utils/did"
+    "fmt"
+	didUtils "github.com/be-heroes/doxchain/utils/did"
 	"github.com/be-heroes/doxchain/x/aml/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
@@ -22,14 +23,19 @@ func CmdCreateAMLRegistration() *cobra.Command {
 			}
 
 			creator := clientCtx.GetFromAddress().String()
-			did := utils.NewDidTokenFactory().Create(creator, args[0])
-			msg := types.NewMsgCreateAMLRegistration(creator, *did)
+			did := didUtils.NewDidTokenFactory().Create(creator, args[0])
 
-			if err := msg.ValidateBasic(); err != nil {
-				return err
+			if did.IsUserIdentifier() {
+				msg := types.NewMsgCreateAMLRegistration(creator, *did)
+
+				if err := msg.ValidateBasic(); err != nil {
+					return err
+				}
+
+				return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msg)
 			}
 
-			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msg)
+			return fmt.Errorf("Invalid did-url")
 		},
 	}
 

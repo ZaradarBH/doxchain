@@ -15,7 +15,7 @@ var _ = strconv.Itoa(0)
 
 func CmdUpdateBreakFactor() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "update-break-factor [breakFactor]",
+		Use:   "update-break-factor [break-factor]",
 		Short: "Broadcast message UpdateBreakFactor",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {

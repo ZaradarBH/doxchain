@@ -9,7 +9,7 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-func (k Keeper) QueryWatchlist(goCtx context.Context, req *types.QueryWatchlistRequest) (*types.QueryWatchlistResponse, error) {
+func (k Keeper) QueryWatchlist(goCtx context.Context, req *types.QueryWatchlistRequest) (result *types.QueryWatchlistResponse, err error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
@@ -22,7 +22,7 @@ func (k Keeper) QueryWatchlist(goCtx context.Context, req *types.QueryWatchlistR
 		return false
 	})
 
-	return &types.QueryWatchlistResponse{
-		Watchlist: watchlist,
-	}, nil
+	result.Watchlist = watchlist
+
+	return result, nil
 }

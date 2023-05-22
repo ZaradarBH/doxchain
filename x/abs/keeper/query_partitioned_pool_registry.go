@@ -11,7 +11,7 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-func (k Keeper) PartitionedPoolRegistryAll(goCtx context.Context, req *types.QueryAllPartitionedPoolRegistriesRequest) (*types.QueryAllPartitionedPoolRegistriesResponse, error) {
+func (k Keeper) PartitionedPoolRegistryAll(goCtx context.Context, req *types.QueryAllPartitionedPoolRegistriesRequest) (result *types.QueryAllPartitionedPoolRegistriesResponse, err error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
@@ -24,11 +24,13 @@ func (k Keeper) PartitionedPoolRegistryAll(goCtx context.Context, req *types.Que
 
 	pageRes, err := query.Paginate(partitionedPoolRegistryStore, req.Pagination, func(key []byte, value []byte) error {
 		var partitionedPoolRegistry types.PartitionedPoolRegistry
+
 		if err := k.cdc.Unmarshal(value, &partitionedPoolRegistry); err != nil {
 			return err
 		}
 
 		partitionedPoolRegistryList = append(partitionedPoolRegistryList, partitionedPoolRegistry)
+		
 		return nil
 	})
 
@@ -36,17 +38,20 @@ func (k Keeper) PartitionedPoolRegistryAll(goCtx context.Context, req *types.Que
 		return nil, status.Error(codes.Internal, err.Error())
 	}
 
-	return &types.QueryAllPartitionedPoolRegistriesResponse{PartitionedPoolRegistryList: partitionedPoolRegistryList, Pagination: pageRes}, nil
+	result.PartitionedPoolRegistryList = partitionedPoolRegistryList
+	result.Pagination = pageRes
+
+	return result, nil
 }
 
-func (k Keeper) PartitionedPoolRegistry(goCtx context.Context, req *types.QueryGetPartitionedPoolRegistryRequest) (*types.QueryGetPartitionedPoolRegistryResponse, error) {
+func (k Keeper) PartitionedPoolRegistry(goCtx context.Context, req *types.QueryGetPartitionedPoolRegistryRequest) (result *types.QueryGetPartitionedPoolRegistryResponse, err error) {
 	if req == nil {
 		return nil, status.Error(codes.InvalidArgument, "invalid request")
 	}
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	val, found := k.GetPartitionedPoolRegistry(
+	match, found := k.GetPartitionedPoolRegistry(
 		ctx,
 		req.PartitionedPoolRegistryW3CIdentifier,
 	)
@@ -55,5 +60,7 @@ func (k Keeper) PartitionedPoolRegistry(goCtx context.Context, req *types.QueryG
 		return nil, status.Error(codes.NotFound, "not found")
 	}
 
-	return &types.QueryGetPartitionedPoolRegistryResponse{PartitionedPoolRegistry: val}, nil
+	result.PartitionedPoolRegistry = match
+
+	return result, nil
 }
