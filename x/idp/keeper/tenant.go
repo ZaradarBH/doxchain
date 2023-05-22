@@ -51,7 +51,7 @@ func (k Keeper) GetAllTenantRegistry(ctx sdk.Context) (list []types.TenantRegist
 func (k Keeper) GetTenant(ctx sdk.Context, tenantW3CIdentifier string) (tenant types.TenantRegistryEntry, err error) {
 	matched := false
 
-	//TODO: We need to benchmark how well it performs. If its a big deal it might be worth having a "graph" of tenant dids to speed up this logic
+	//TODO: Benchmark how well it performs. If its a big deal it might be worth having a "graph" of tenant dids to speed up this logic
 	for _, registry := range k.GetAllTenantRegistry(ctx) {
 		for _, tenantRegistryEntry := range registry.Tenants {
 			if tenantRegistryEntry.Id.GetW3CIdentifier() == tenantW3CIdentifier {

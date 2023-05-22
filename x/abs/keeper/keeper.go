@@ -24,7 +24,7 @@ type (
 	}
 )
 
-//TODO: Finish PartitionedPool concept
+//TODO: Finish PartitionedPool concept once oracle is done.
 func NewKeeper(
 	cdc codec.BinaryCodec,
 	storeKey,
