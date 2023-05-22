@@ -1,7 +1,6 @@
 package keeper
 
 import (
-	"fmt"
 	"context"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -14,8 +13,7 @@ import (
 func (k msgServer) CreatePartitionedPoolRegistry(goCtx context.Context, msg *types.MsgCreatePartitionedPoolRegistryRequest) (*types.MsgCreatePartitionedPoolRegistryResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 	partitionedPoolRegistry, isFound := k.GetPartitionedPoolRegistry(ctx, msg.Creator)
-	//TODO: Leave DidUrl generation in message handler or use hardcoded typename in keeper derived from function name?
-	didUrl, err := didUtils.CreateModuleDidUrl(types.ModuleName, fmt.Sprintf("%T", msg), msg.Creator)
+	didUrl, err := didUtils.CreateModuleDidUrl(types.ModuleName, "PartitionedPoolRegistry", msg.Creator)
 
 	if err != nil {
 		return nil, err
@@ -25,8 +23,7 @@ func (k msgServer) CreatePartitionedPoolRegistry(goCtx context.Context, msg *typ
 
 	if !isFound {
 		partitionedPoolRegistry = types.PartitionedPoolRegistry{
-			Owner: *ownerDid,
-			Pools: []types.PartitionedPool{},
+			Pools: make([]types.PartitionedPool{}, 0),
 		}
 	}
 

@@ -11,7 +11,7 @@ func (k Keeper) SetAccessTokenRegistry(ctx sdk.Context, AccessTokenRegistry type
 	b := k.cdc.MustMarshal(&AccessTokenRegistry)
 
 	store.Set(types.AccessTokenRegistryKey(
-		AccessTokenRegistry.Owner.Creator,
+		AccessTokenRegistry.Owner.GetW3CIdentifier(),
 	), b)
 }
 
