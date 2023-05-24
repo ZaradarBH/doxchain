@@ -5,12 +5,12 @@ type Graph[T interface{}, W interface{}] struct {
 }
 
 type Vertex[T interface{}, W interface{}] struct {
-	Value T `json:"value"`
+	Value T                      `json:"value"`
 	Edges map[uint64]*Edge[T, W] `json:"edges"`
 }
 
 type Edge[T interface{}, W interface{}] struct {
-	Weight W `json:"weight"`
+	Weight W             `json:"weight"`
 	Vertex *Vertex[T, W] `json:"vertex"`
 }
 

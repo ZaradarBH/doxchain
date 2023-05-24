@@ -7,6 +7,6 @@ import (
 )
 
 var (
-	ErrBreakFactorOutOfBounds          = sdkerrors.Register(ModuleName, 2, "abs breakfactor out-of-bounds error")
-	ErrWatchlistSpendingWindowOverflow = sdkerrors.Register(ModuleName, 3, "abs watchlist spending window overflow")
+	ErrBreakFactorOutOfBounds          = sdkerrors.Register(ModuleName, 1000, "abs breakfactor out-of-bounds error")
+	ErrWatchlistSpendingWindowOverflow = sdkerrors.Register(ModuleName, 1001, "abs watchlist spending window overflow")
 )

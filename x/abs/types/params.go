@@ -2,19 +2,19 @@ package types
 
 import (
 	"fmt"
-	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 	didTypes "github.com/be-heroes/doxchain/x/did/types"
-	"gopkg.in/yaml.v2"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
+	"gopkg.in/yaml.v2"
 )
 
 var _ paramtypes.ParamSet = (*Params)(nil)
 
 var (
-	DefaultOperators = []didTypes.Did(nil) // none allowed
+	DefaultOperators         = []didTypes.Did(nil) // none allowed
 	DefaultBlockExpireOffset = sdk.NewInt(100000)
 
-	ParamStoreKeyOperators = []byte("Operators")
+	ParamStoreKeyOperators         = []byte("Operators")
 	ParamStoreKeyBlockExpireOffset = []byte("BlockExpireOffset")
 )
 
@@ -24,7 +24,7 @@ func ParamKeyTable() paramtypes.KeyTable {
 
 func NewParams(operators []didTypes.Did, blockExpireOffset sdk.Int) Params {
 	return Params{
-		Operators: operators,
+		Operators:         operators,
 		BlockExpireOffset: blockExpireOffset,
 	}
 }
@@ -34,7 +34,7 @@ func DefaultParams() Params {
 }
 
 func (p *Params) ParamSetPairs() paramtypes.ParamSetPairs {
-	return paramtypes.ParamSetPairs{		
+	return paramtypes.ParamSetPairs{
 		paramtypes.NewParamSetPair(ParamStoreKeyOperators, &p.Operators, validateOperators),
 		paramtypes.NewParamSetPair(ParamStoreKeyBlockExpireOffset, &p.BlockExpireOffset, validateBlockExpireOffset),
 	}

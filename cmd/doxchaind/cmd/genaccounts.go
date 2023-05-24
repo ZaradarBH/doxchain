@@ -25,7 +25,6 @@ const (
 	flagVestingAmt   = "vesting-amount"
 )
 
-// AddGenesisAccountCmd returns add-genesis-account cobra Command.
 func AddGenesisAccountCmd(defaultNodeHome string) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "add-genesis-account [address_or_key_name] [coin][,[coin]]",
@@ -54,11 +53,11 @@ contain valid denominations. Accounts may optionally be supplied with vesting pa
 			if err != nil {
 				inBuf := bufio.NewReader(cmd.InOrStdin())
 				keyringBackend, err := cmd.Flags().GetString(flags.FlagKeyringBackend)
+
 				if err != nil {
 					return err
 				}
 
-				// attempt to lookup address from Keybase if no address was provided
 				kb, err := keyring.New(sdk.KeyringServiceName(), keyringBackend, clientCtx.HomeDir, inBuf, cdc)
 				if err != nil {
 					return err
@@ -93,7 +92,6 @@ contain valid denominations. Accounts may optionally be supplied with vesting pa
 				return fmt.Errorf("failed to parse vesting amount: %w", err)
 			}
 
-			// create concrete account type based on input parameters
 			var genAccount authtypes.GenesisAccount
 
 			balances := banktypes.Balance{Address: addr.String(), Coins: coins.Sort()}
@@ -142,8 +140,6 @@ contain valid denominations. Accounts may optionally be supplied with vesting pa
 				return fmt.Errorf("cannot add account at existing address %s", addr)
 			}
 
-			// Add the new account to the set of genesis accounts and sanitize the
-			// accounts afterwards.
 			accs = append(accs, genAccount)
 			accs = authtypes.SanitizeGenesisAccounts(accs)
 

@@ -15,7 +15,7 @@ var _ = strconv.Itoa(0)
 func CmdCreateDidDocument() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "did-document [did-document-json]",
-		Short: "Broadcast message DidDocument",
+		Short: "Create a DidDocument",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 			didDocument := types.DidDocument{}
@@ -31,10 +31,7 @@ func CmdCreateDidDocument() *cobra.Command {
 				return err
 			}
 
-			msg := types.NewMsgCreateDidDocumentRequest(
-				clientCtx.GetFromAddress().String(),
-				didDocument,
-			)
+			msg := types.NewMsgCreateDidDocumentRequest(clientCtx.GetFromAddress().String(), didDocument)
 
 			if err := msg.ValidateBasic(); err != nil {
 				return err
@@ -85,8 +82,8 @@ func CmdUpdateDidDocument() *cobra.Command {
 
 func CmdDeleteDidDocument() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "delete-did-document [fullyQualifiedW3CIdentifier]",
-		Short: "Delete a DidDocument by fullyQualifiedW3CIdentifier",
+		Use:   "delete-did-document [did-url]",
+		Short: "Delete a DidDocument",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			clientCtx, err := client.GetClientTxContext(cmd)

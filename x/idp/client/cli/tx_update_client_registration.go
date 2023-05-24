@@ -32,6 +32,7 @@ func CmdUpdateClientRegistration() *cobra.Command {
 			}
 
 			msg := types.NewMsgUpdateClientRegistration(
+				clientCtx.GetFromAddress().String(),
 				clientRegistration,
 			)
 

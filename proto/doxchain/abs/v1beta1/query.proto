@@ -25,7 +25,7 @@ service Query {
   }
   
   rpc PartitionedPoolRegistry (QueryGetPartitionedPoolRegistryRequest) returns (QueryGetPartitionedPoolRegistryResponse) {
-    option (google.api.http).get = "/be-heroes/doxchain/abs/partitioned_pool_registries/{creator}";  
+    option (google.api.http).get = "/be-heroes/doxchain/abs/partitioned_pool_registries/{partitionedPoolRegistryW3CIdentifier}";  
   }
 
   rpc PartitionedPoolRegistryAll (QueryAllPartitionedPoolRegistriesRequest) returns (QueryAllPartitionedPoolRegistriesResponse) {
@@ -52,7 +52,7 @@ message QueryWatchlistResponse {
 }
 
 message QueryGetPartitionedPoolRegistryRequest {
-  string creator = 1;
+  string partitionedPoolRegistryW3CIdentifier = 1;
 }
 
 message QueryGetPartitionedPoolRegistryResponse {

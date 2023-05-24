@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	// this line is used by starport scaffolding # 1
 
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"github.com/spf13/cobra"
@@ -91,22 +90,19 @@ func (AppModuleBasic) GetQueryCmd() *cobra.Command {
 type AppModule struct {
 	AppModuleBasic
 
-	keeper        keeper.Keeper
-	accountKeeper types.AccountKeeper
-	bankKeeper    types.BankKeeper
+	keeper    keeper.Keeper
+	idpKeeper types.IdpKeeper
 }
 
 func NewAppModule(
 	cdc codec.Codec,
 	keeper keeper.Keeper,
-	accountKeeper types.AccountKeeper,
-	bankKeeper types.BankKeeper,
+	idpKeeper types.IdpKeeper,
 ) AppModule {
 	return AppModule{
 		AppModuleBasic: NewAppModuleBasic(cdc),
 		keeper:         keeper,
-		accountKeeper:  accountKeeper,
-		bankKeeper:     bankKeeper,
+		idpKeeper:      idpKeeper,
 	}
 }
 
@@ -155,6 +151,7 @@ func (am AppModule) BeginBlock(_ sdk.Context, _ abci.RequestBeginBlock) {}
 
 // EndBlock contains the logic that is automatically triggered at the end of each block
 func (am AppModule) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.ValidatorUpdate {
+	//TODO: Benchmark this clean up logic. In general we could just do this type of EndBlock GC'ing once per blockCleanupInterval, it does not have to happen on every block.
 	accessTokenRegistries := am.keeper.GetAllAccessTokenRegistry(ctx)
 
 	for _, accessTokenRegistry := range accessTokenRegistries {
@@ -166,7 +163,7 @@ func (am AppModule) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.Val
 
 				ctx.EventManager().EmitEvent(
 					sdk.NewEvent(types.EventTypeTokenExpired,
-						sdk.NewAttribute(types.AttributeKeyIdentifier, accessTokenInfo.Identifier),
+						sdk.NewAttribute(types.AttributeKeyIdentifier, accessTokenInfo.Jti),
 					),
 				)
 

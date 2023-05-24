@@ -7,8 +7,17 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
-func (k msgServer) DeleteClientRegistration(goCtx context.Context, msg *types.MsgDeleteClientRegistrationRequest) (*types.MsgDeleteClientRegistrationResponse, error) {
-	k.Keeper.RemoveClientRegistration(sdk.UnwrapSDKContext(goCtx), msg.Creator, msg.Name)
+func (k msgServer) DeleteClientRegistration(goCtx context.Context, msg *types.MsgDeleteClientRegistrationRequest) (result *types.MsgDeleteClientRegistrationResponse, err error) {
+	ctx := sdk.UnwrapSDKContext(goCtx)
+	registration, found := k.Keeper.GetClientRegistration(ctx, msg.ClientRegistrationRegistryW3CIdentifier, msg.ClientRegistrationW3CIdentifier)
 
-	return &types.MsgDeleteClientRegistrationResponse{}, nil
+	if found {
+		if registration.Id.Creator != msg.Creator {
+			return nil, types.ErrImpersonation
+		}
+
+		k.Keeper.RemoveClientRegistration(sdk.UnwrapSDKContext(goCtx), msg.ClientRegistrationRegistryW3CIdentifier, msg.ClientRegistrationW3CIdentifier)
+	}
+
+	return result, nil
 }

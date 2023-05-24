@@ -7,8 +7,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
-func (k msgServer) UpdateClientRegistration(goCtx context.Context, msg *types.MsgUpdateClientRegistrationRequest) (*types.MsgUpdateClientRegistrationResponse, error) {
-	k.Keeper.SetClientRegistration(sdk.UnwrapSDKContext(goCtx), msg.ClientRegistration)
+func (k msgServer) UpdateClientRegistration(goCtx context.Context, msg *types.MsgUpdateClientRegistrationRequest) (result *types.MsgUpdateClientRegistrationResponse, err error) {
+	k.Keeper.SetClientRegistration(sdk.UnwrapSDKContext(goCtx), msg.ClientRegistrationRegistryW3CIdentifier, msg.ClientRegistration)
 
-	return &types.MsgUpdateClientRegistrationResponse{}, nil
+	return result, nil
 }

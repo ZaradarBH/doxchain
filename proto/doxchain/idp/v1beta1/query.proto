@@ -16,11 +16,11 @@ service Query {
   }
   
   rpc GetDotWellKnown (QueryGetDotWellKnownRequest) returns (QueryGetDotWellKnownResponse) {
-    option (google.api.http).get = "/be-heroes/doxchain/idp/{fullyQualifiedW3CIdentifier}/.well-known";  
+    option (google.api.http).get = "/be-heroes/doxchain/idp/{tenantW3CIdentifier}/.well-known";  
   }
   
   rpc ClientRegistrationRegistry (QueryGetClientRegistrationRegistryRequest) returns (QueryGetClientRegistrationRegistryResponse) {
-    option (google.api.http).get = "/be-heroes/doxchain/idp/client_registry/{creator}";
+    option (google.api.http).get = "/be-heroes/doxchain/idp/client_registry/{clientRegistrationRegistryW3CIdentifier}";
   }
 
   rpc ClientRegistrationRegistryAll (QueryAllClientRegistrationRegistryRequest) returns (QueryAllClientRegistrationRegistryResponse) {
@@ -35,7 +35,7 @@ message QueryParamsResponse {
 }
 
 message QueryGetDotWellKnownRequest {
-  string fullyQualifiedW3CIdentifier = 1;
+  string tenantW3CIdentifier = 1;
 }
 
 message QueryGetDotWellKnownResponse {
@@ -54,7 +54,7 @@ message QueryGetDotWellKnownResponse {
 }
 
 message QueryGetClientRegistrationRegistryRequest {
-  string creator = 1;
+  string clientRegistrationRegistryW3CIdentifier = 1;
 }
 
 message QueryGetClientRegistrationRegistryResponse {

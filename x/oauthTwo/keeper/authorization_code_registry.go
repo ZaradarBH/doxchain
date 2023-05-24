@@ -6,47 +6,34 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
-// SetAuthorizationCodeRegistry set a specific authorizationCodeRegistry in the store from its index
 func (k Keeper) SetAuthorizationCodeRegistry(ctx sdk.Context, authorizationCodeRegistry types.AuthorizationCodeRegistry) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AuthorizationCodeRegistryKeyPrefix))
 	b := k.cdc.MustMarshal(&authorizationCodeRegistry)
+
 	store.Set(types.AuthorizationCodeRegistryKey(
-		authorizationCodeRegistry.Owner.Creator,
+		authorizationCodeRegistry.Owner.GetW3CIdentifier(),
 	), b)
 }
 
-// GetAuthorizationCodeRegistry returns a authorizationCodeRegistry from its tenant
-func (k Keeper) GetAuthorizationCodeRegistry(
-	ctx sdk.Context,
-	fullyQualifiedW3CIdentifier string,
-
-) (val types.AuthorizationCodeRegistry, found bool) {
+func (k Keeper) GetAuthorizationCodeRegistry(ctx sdk.Context, authorizationCodeRegistryW3CIdentifier string) (result types.AuthorizationCodeRegistry, found bool) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AuthorizationCodeRegistryKeyPrefix))
+	b := store.Get(types.AuthorizationCodeRegistryKey(authorizationCodeRegistryW3CIdentifier))
 
-	b := store.Get(types.AuthorizationCodeRegistryKey(
-		fullyQualifiedW3CIdentifier,
-	))
 	if b == nil {
-		return val, false
+		return result, false
 	}
 
-	k.cdc.MustUnmarshal(b, &val)
-	return val, true
+	k.cdc.MustUnmarshal(b, &result)
+
+	return result, true
 }
 
-// RemoveAuthorizationCodeRegistry removes a authorizationCodeRegistry from the store
-func (k Keeper) RemoveAuthorizationCodeRegistry(
-	ctx sdk.Context,
-	fullyQualifiedW3CIdentifier string,
-
-) {
+func (k Keeper) RemoveAuthorizationCodeRegistry(ctx sdk.Context, authorizationCodeRegistryW3CIdentifier string) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AuthorizationCodeRegistryKeyPrefix))
-	store.Delete(types.AuthorizationCodeRegistryKey(
-		fullyQualifiedW3CIdentifier,
-	))
+
+	store.Delete(types.AuthorizationCodeRegistryKey(authorizationCodeRegistryW3CIdentifier))
 }
 
-// GetAllAuthorizationCodeRegistry returns all authorizationCodeRegistry
 func (k Keeper) GetAllAuthorizationCodeRegistry(ctx sdk.Context) (list []types.AuthorizationCodeRegistry) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AuthorizationCodeRegistryKeyPrefix))
 	iterator := sdk.KVStorePrefixIterator(store, []byte{})

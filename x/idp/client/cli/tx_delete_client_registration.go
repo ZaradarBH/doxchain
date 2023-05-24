@@ -14,7 +14,7 @@ var _ = strconv.Itoa(0)
 
 func CmdDeleteClientRegistration() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "delete-client-registration [name]",
+		Use:   "delete-client-registration [client-registration-registry-did-url] [client-registration-did-url]",
 		Short: "Broadcast message DeleteClientRegistration",
 		Args:  cobra.ExactArgs(0),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
@@ -27,6 +27,7 @@ func CmdDeleteClientRegistration() *cobra.Command {
 			msg := types.NewMsgDeleteClientRegistration(
 				clientCtx.GetFromAddress().String(),
 				args[0],
+				args[1],
 			)
 
 			if err := msg.ValidateBasic(); err != nil {

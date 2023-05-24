@@ -7,15 +7,37 @@ import (
 	"github.com/be-heroes/doxchain/x/oauthtwo/types"
 )
 
-// Token method for simple oauth keeper
-func (k Keeper) Token(ctx sdk.Context, msg types.MsgTokenRequest) (types.MsgTokenResponse, error) {
-	//TODO: Validate ClientId and Scope
-	switch msg.GrantType {
-	case types.ClientCredentialsGrant.String():
-		return k.GenerateClientCredentialToken(ctx, msg)
-	case types.DeviceCodeGrant.String():
-		return k.GenerateDeviceCodeToken(ctx, msg)
+func (k Keeper) Token(ctx sdk.Context, creator string, tenantW3CIdentifier string, clientRegistrationAppIdW3CIdentifier string, scope []string, clientSecret string, authorizationCode string, deviceCode string, clientAssertion string, clientAssertionType string, grantType string) (accessToken string, tokenType string, expiresIn int64, err error) {
+	creatorAddress, err := sdk.AccAddressFromBech32(creator)
+
+	if err != nil {
+		return accessToken, tokenType, expiresIn, err
 	}
 
-	return types.MsgTokenResponse{}, sdkerrors.Wrap(types.TokenServiceError, "Unsupported grant_type")
+	isAuthorized := k.idpKeeper.AuthorizeUser(ctx, creatorAddress, tenantW3CIdentifier)
+
+	if !isAuthorized {
+		return accessToken, tokenType, expiresIn, err
+	}
+
+	var validScopes []string
+
+	for _, requestedScope := range scope {
+		validScopes = append(validScopes, k.idpKeeper.AuthorizeScope(ctx, tenantW3CIdentifier, clientRegistrationAppIdW3CIdentifier, requestedScope))
+	}
+
+	if len(validScopes) == 0 {
+		return accessToken, tokenType, expiresIn, sdkerrors.Wrap(types.TokenServiceError, "No valid scopes in request")
+	}
+
+	switch grantType {
+	case types.ClientCredentialsGrant.String():
+		return k.GenerateClientCredentialToken(ctx, creator, tenantW3CIdentifier, scope, clientRegistrationAppIdW3CIdentifier, clientSecret, clientAssertion, clientAssertionType)
+	case types.DeviceCodeGrant.String():
+		return k.GenerateDeviceCodeToken(ctx, creator, tenantW3CIdentifier, scope, clientRegistrationAppIdW3CIdentifier, deviceCode)
+	case types.AuthorizationCodeGrant.String():
+		return k.GenerateAuthorizationCodeToken(ctx, creator, tenantW3CIdentifier, scope, clientRegistrationAppIdW3CIdentifier, authorizationCode)
+	}
+
+	return accessToken, tokenType, expiresIn, sdkerrors.Wrap(types.TokenServiceError, "Unsupported grant_type")
 }

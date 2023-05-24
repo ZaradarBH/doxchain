@@ -14,7 +14,7 @@ var _ = strconv.Itoa(0)
 
 func CmdDeleteClientRegistrationRelationship() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "delete-client-registration-relationship [client-registration-relationship-registry-entry-json]",
+		Use:   "delete-client-registration-relationship [client-registration-registry-did-url] [owner-client-registration-did-url] [destination-client-registration-did-url]",
 		Short: "Broadcast message DeleteClientRegistrationRelationshipRequest",
 		Args:  cobra.ExactArgs(0),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
@@ -24,16 +24,11 @@ func CmdDeleteClientRegistrationRelationship() *cobra.Command {
 				return err
 			}
 
-			var crr types.ClientRegistrationRelationshipRegistryEntry
-
-			err = clientCtx.Codec.UnmarshalJSON([]byte(args[0]), &crr)
-
-			if err != nil {
-				return err
-			}
-
 			msg := types.NewMsgDeleteClientRegistrationRelationshipRequest(
-				crr,
+				clientCtx.GetFromAddress().String(),
+				args[0],
+				args[1],
+				args[2],
 			)
 
 			if err := msg.ValidateBasic(); err != nil {

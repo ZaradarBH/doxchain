@@ -29,8 +29,8 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 type MsgAuthenticationRequest struct {
-	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
-	Tenant  string `protobuf:"bytes,2,opt,name=tenant,proto3" json:"tenant,omitempty"`
+	Creator             string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	TenantW3CIdentifier string `protobuf:"bytes,2,opt,name=tenantW3CIdentifier,proto3" json:"tenantW3CIdentifier,omitempty"`
 }
 
 func (m *MsgAuthenticationRequest) Reset()         { *m = MsgAuthenticationRequest{} }
@@ -73,9 +73,9 @@ func (m *MsgAuthenticationRequest) GetCreator() string {
 	return ""
 }
 
-func (m *MsgAuthenticationRequest) GetTenant() string {
+func (m *MsgAuthenticationRequest) GetTenantW3CIdentifier() string {
 	if m != nil {
-		return m.Tenant
+		return m.TenantW3CIdentifier
 	}
 	return ""
 }
@@ -181,6 +181,7 @@ func (m *MsgCreateClientRegistrationRegistryRequest) GetClientRegistrationRegist
 }
 
 type MsgCreateClientRegistrationRegistryResponse struct {
+	ClientRegistrationRegistryW3CIdentifier string `protobuf:"bytes,1,opt,name=clientRegistrationRegistryW3CIdentifier,proto3" json:"clientRegistrationRegistryW3CIdentifier,omitempty"`
 }
 
 func (m *MsgCreateClientRegistrationRegistryResponse) Reset() {
@@ -219,6 +220,13 @@ func (m *MsgCreateClientRegistrationRegistryResponse) XXX_DiscardUnknown() {
 }
 
 var xxx_messageInfo_MsgCreateClientRegistrationRegistryResponse proto.InternalMessageInfo
+
+func (m *MsgCreateClientRegistrationRegistryResponse) GetClientRegistrationRegistryW3CIdentifier() string {
+	if m != nil {
+		return m.ClientRegistrationRegistryW3CIdentifier
+	}
+	return ""
+}
 
 type MsgUpdateClientRegistrationRegistryRequest struct {
 	Creator                    string                     `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
@@ -277,6 +285,7 @@ func (m *MsgUpdateClientRegistrationRegistryRequest) GetClientRegistrationRegist
 }
 
 type MsgUpdateClientRegistrationRegistryResponse struct {
+	ClientRegistrationRegistryW3CIdentifier string `protobuf:"bytes,1,opt,name=clientRegistrationRegistryW3CIdentifier,proto3" json:"clientRegistrationRegistryW3CIdentifier,omitempty"`
 }
 
 func (m *MsgUpdateClientRegistrationRegistryResponse) Reset() {
@@ -316,8 +325,16 @@ func (m *MsgUpdateClientRegistrationRegistryResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_MsgUpdateClientRegistrationRegistryResponse proto.InternalMessageInfo
 
+func (m *MsgUpdateClientRegistrationRegistryResponse) GetClientRegistrationRegistryW3CIdentifier() string {
+	if m != nil {
+		return m.ClientRegistrationRegistryW3CIdentifier
+	}
+	return ""
+}
+
 type MsgDeleteClientRegistrationRegistryRequest struct {
-	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	Creator                                 string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	ClientRegistrationRegistryW3CIdentifier string `protobuf:"bytes,2,opt,name=clientRegistrationRegistryW3CIdentifier,proto3" json:"clientRegistrationRegistryW3CIdentifier,omitempty"`
 }
 
 func (m *MsgDeleteClientRegistrationRegistryRequest) Reset() {
@@ -364,6 +381,13 @@ func (m *MsgDeleteClientRegistrationRegistryRequest) GetCreator() string {
 	return ""
 }
 
+func (m *MsgDeleteClientRegistrationRegistryRequest) GetClientRegistrationRegistryW3CIdentifier() string {
+	if m != nil {
+		return m.ClientRegistrationRegistryW3CIdentifier
+	}
+	return ""
+}
+
 type MsgDeleteClientRegistrationRegistryResponse struct {
 }
 
@@ -405,8 +429,9 @@ func (m *MsgDeleteClientRegistrationRegistryResponse) XXX_DiscardUnknown() {
 var xxx_messageInfo_MsgDeleteClientRegistrationRegistryResponse proto.InternalMessageInfo
 
 type MsgCreateClientRegistrationRequest struct {
-	Creator            string             `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
-	ClientRegistration ClientRegistration `protobuf:"bytes,2,opt,name=clientRegistration,proto3" json:"clientRegistration"`
+	Creator                                 string             `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	ClientRegistrationRegistryW3CIdentifier string             `protobuf:"bytes,2,opt,name=clientRegistrationRegistryW3CIdentifier,proto3" json:"clientRegistrationRegistryW3CIdentifier,omitempty"`
+	ClientRegistration                      ClientRegistration `protobuf:"bytes,3,opt,name=clientRegistration,proto3" json:"clientRegistration"`
 }
 
 func (m *MsgCreateClientRegistrationRequest) Reset()         { *m = MsgCreateClientRegistrationRequest{} }
@@ -449,6 +474,13 @@ func (m *MsgCreateClientRegistrationRequest) GetCreator() string {
 	return ""
 }
 
+func (m *MsgCreateClientRegistrationRequest) GetClientRegistrationRegistryW3CIdentifier() string {
+	if m != nil {
+		return m.ClientRegistrationRegistryW3CIdentifier
+	}
+	return ""
+}
+
 func (m *MsgCreateClientRegistrationRequest) GetClientRegistration() ClientRegistration {
 	if m != nil {
 		return m.ClientRegistration
@@ -457,6 +489,7 @@ func (m *MsgCreateClientRegistrationRequest) GetClientRegistration() ClientRegis
 }
 
 type MsgCreateClientRegistrationResponse struct {
+	ClientRegistrationW3CIdentifier string `protobuf:"bytes,1,opt,name=clientRegistrationW3CIdentifier,proto3" json:"clientRegistrationW3CIdentifier,omitempty"`
 }
 
 func (m *MsgCreateClientRegistrationResponse) Reset()         { *m = MsgCreateClientRegistrationResponse{} }
@@ -492,9 +525,17 @@ func (m *MsgCreateClientRegistrationResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_MsgCreateClientRegistrationResponse proto.InternalMessageInfo
 
+func (m *MsgCreateClientRegistrationResponse) GetClientRegistrationW3CIdentifier() string {
+	if m != nil {
+		return m.ClientRegistrationW3CIdentifier
+	}
+	return ""
+}
+
 type MsgUpdateClientRegistrationRequest struct {
-	Creator            string             `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
-	ClientRegistration ClientRegistration `protobuf:"bytes,2,opt,name=clientRegistration,proto3" json:"clientRegistration"`
+	Creator                                 string             `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	ClientRegistrationRegistryW3CIdentifier string             `protobuf:"bytes,2,opt,name=clientRegistrationRegistryW3CIdentifier,proto3" json:"clientRegistrationRegistryW3CIdentifier,omitempty"`
+	ClientRegistration                      ClientRegistration `protobuf:"bytes,3,opt,name=clientRegistration,proto3" json:"clientRegistration"`
 }
 
 func (m *MsgUpdateClientRegistrationRequest) Reset()         { *m = MsgUpdateClientRegistrationRequest{} }
@@ -537,6 +578,13 @@ func (m *MsgUpdateClientRegistrationRequest) GetCreator() string {
 	return ""
 }
 
+func (m *MsgUpdateClientRegistrationRequest) GetClientRegistrationRegistryW3CIdentifier() string {
+	if m != nil {
+		return m.ClientRegistrationRegistryW3CIdentifier
+	}
+	return ""
+}
+
 func (m *MsgUpdateClientRegistrationRequest) GetClientRegistration() ClientRegistration {
 	if m != nil {
 		return m.ClientRegistration
@@ -545,6 +593,7 @@ func (m *MsgUpdateClientRegistrationRequest) GetClientRegistration() ClientRegis
 }
 
 type MsgUpdateClientRegistrationResponse struct {
+	ClientRegistrationW3CIdentifier string `protobuf:"bytes,1,opt,name=clientRegistrationW3CIdentifier,proto3" json:"clientRegistrationW3CIdentifier,omitempty"`
 }
 
 func (m *MsgUpdateClientRegistrationResponse) Reset()         { *m = MsgUpdateClientRegistrationResponse{} }
@@ -580,9 +629,17 @@ func (m *MsgUpdateClientRegistrationResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_MsgUpdateClientRegistrationResponse proto.InternalMessageInfo
 
+func (m *MsgUpdateClientRegistrationResponse) GetClientRegistrationW3CIdentifier() string {
+	if m != nil {
+		return m.ClientRegistrationW3CIdentifier
+	}
+	return ""
+}
+
 type MsgDeleteClientRegistrationRequest struct {
-	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
-	Name    string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Creator                                 string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	ClientRegistrationRegistryW3CIdentifier string `protobuf:"bytes,2,opt,name=clientRegistrationRegistryW3CIdentifier,proto3" json:"clientRegistrationRegistryW3CIdentifier,omitempty"`
+	ClientRegistrationW3CIdentifier         string `protobuf:"bytes,3,opt,name=clientRegistrationW3CIdentifier,proto3" json:"clientRegistrationW3CIdentifier,omitempty"`
 }
 
 func (m *MsgDeleteClientRegistrationRequest) Reset()         { *m = MsgDeleteClientRegistrationRequest{} }
@@ -625,9 +682,16 @@ func (m *MsgDeleteClientRegistrationRequest) GetCreator() string {
 	return ""
 }
 
-func (m *MsgDeleteClientRegistrationRequest) GetName() string {
+func (m *MsgDeleteClientRegistrationRequest) GetClientRegistrationRegistryW3CIdentifier() string {
 	if m != nil {
-		return m.Name
+		return m.ClientRegistrationRegistryW3CIdentifier
+	}
+	return ""
+}
+
+func (m *MsgDeleteClientRegistrationRequest) GetClientRegistrationW3CIdentifier() string {
+	if m != nil {
+		return m.ClientRegistrationW3CIdentifier
 	}
 	return ""
 }
@@ -670,7 +734,8 @@ var xxx_messageInfo_MsgDeleteClientRegistrationResponse proto.InternalMessageInf
 
 type MsgCreateClientRegistrationRelationshipRequest struct {
 	Creator                                     string                                      `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
-	ClientRegistrationRelationshipRegistryEntry ClientRegistrationRelationshipRegistryEntry `protobuf:"bytes,2,opt,name=clientRegistrationRelationshipRegistryEntry,proto3" json:"clientRegistrationRelationshipRegistryEntry"`
+	ClientRegistrationRegistryW3CIdentifier     string                                      `protobuf:"bytes,2,opt,name=clientRegistrationRegistryW3CIdentifier,proto3" json:"clientRegistrationRegistryW3CIdentifier,omitempty"`
+	ClientRegistrationRelationshipRegistryEntry ClientRegistrationRelationshipRegistryEntry `protobuf:"bytes,3,opt,name=clientRegistrationRelationshipRegistryEntry,proto3" json:"clientRegistrationRelationshipRegistryEntry"`
 }
 
 func (m *MsgCreateClientRegistrationRelationshipRequest) Reset() {
@@ -717,6 +782,13 @@ func (m *MsgCreateClientRegistrationRelationshipRequest) GetCreator() string {
 	return ""
 }
 
+func (m *MsgCreateClientRegistrationRelationshipRequest) GetClientRegistrationRegistryW3CIdentifier() string {
+	if m != nil {
+		return m.ClientRegistrationRegistryW3CIdentifier
+	}
+	return ""
+}
+
 func (m *MsgCreateClientRegistrationRelationshipRequest) GetClientRegistrationRelationshipRegistryEntry() ClientRegistrationRelationshipRegistryEntry {
 	if m != nil {
 		return m.ClientRegistrationRelationshipRegistryEntry
@@ -725,6 +797,8 @@ func (m *MsgCreateClientRegistrationRelationshipRequest) GetClientRegistrationRe
 }
 
 type MsgCreateClientRegistrationRelationshipResponse struct {
+	OwnerClientRegistrationW3CIdentifier       string `protobuf:"bytes,1,opt,name=ownerClientRegistrationW3CIdentifier,proto3" json:"ownerClientRegistrationW3CIdentifier,omitempty"`
+	DestinationClientRegistrationW3CIdentifier string `protobuf:"bytes,2,opt,name=destinationClientRegistrationW3CIdentifier,proto3" json:"destinationClientRegistrationW3CIdentifier,omitempty"`
 }
 
 func (m *MsgCreateClientRegistrationRelationshipResponse) Reset() {
@@ -764,9 +838,25 @@ func (m *MsgCreateClientRegistrationRelationshipResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_MsgCreateClientRegistrationRelationshipResponse proto.InternalMessageInfo
 
+func (m *MsgCreateClientRegistrationRelationshipResponse) GetOwnerClientRegistrationW3CIdentifier() string {
+	if m != nil {
+		return m.OwnerClientRegistrationW3CIdentifier
+	}
+	return ""
+}
+
+func (m *MsgCreateClientRegistrationRelationshipResponse) GetDestinationClientRegistrationW3CIdentifier() string {
+	if m != nil {
+		return m.DestinationClientRegistrationW3CIdentifier
+	}
+	return ""
+}
+
 type MsgDeleteClientRegistrationRelationshipRequest struct {
-	Creator                                     string                                      `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
-	ClientRegistrationRelationshipRegistryEntry ClientRegistrationRelationshipRegistryEntry `protobuf:"bytes,2,opt,name=clientRegistrationRelationshipRegistryEntry,proto3" json:"clientRegistrationRelationshipRegistryEntry"`
+	Creator                                    string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
+	ClientRegistrationRegistryW3CIdentifier    string `protobuf:"bytes,2,opt,name=clientRegistrationRegistryW3CIdentifier,proto3" json:"clientRegistrationRegistryW3CIdentifier,omitempty"`
+	OwnerClientRegistrationW3CIdentifier       string `protobuf:"bytes,3,opt,name=ownerClientRegistrationW3CIdentifier,proto3" json:"ownerClientRegistrationW3CIdentifier,omitempty"`
+	DestinationClientRegistrationW3CIdentifier string `protobuf:"bytes,4,opt,name=destinationClientRegistrationW3CIdentifier,proto3" json:"destinationClientRegistrationW3CIdentifier,omitempty"`
 }
 
 func (m *MsgDeleteClientRegistrationRelationshipRequest) Reset() {
@@ -813,11 +903,25 @@ func (m *MsgDeleteClientRegistrationRelationshipRequest) GetCreator() string {
 	return ""
 }
 
-func (m *MsgDeleteClientRegistrationRelationshipRequest) GetClientRegistrationRelationshipRegistryEntry() ClientRegistrationRelationshipRegistryEntry {
+func (m *MsgDeleteClientRegistrationRelationshipRequest) GetClientRegistrationRegistryW3CIdentifier() string {
 	if m != nil {
-		return m.ClientRegistrationRelationshipRegistryEntry
+		return m.ClientRegistrationRegistryW3CIdentifier
 	}
-	return ClientRegistrationRelationshipRegistryEntry{}
+	return ""
+}
+
+func (m *MsgDeleteClientRegistrationRelationshipRequest) GetOwnerClientRegistrationW3CIdentifier() string {
+	if m != nil {
+		return m.OwnerClientRegistrationW3CIdentifier
+	}
+	return ""
+}
+
+func (m *MsgDeleteClientRegistrationRelationshipRequest) GetDestinationClientRegistrationW3CIdentifier() string {
+	if m != nil {
+		return m.DestinationClientRegistrationW3CIdentifier
+	}
+	return ""
 }
 
 type MsgDeleteClientRegistrationRelationshipResponse struct {
@@ -884,48 +988,55 @@ func init() {
 func init() { proto.RegisterFile("doxchain/idp/v1beta1/tx.proto", fileDescriptor_62b7b5f173be8e44) }
 
 var fileDescriptor_62b7b5f173be8e44 = []byte{
-	// 653 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe4, 0x57, 0x31, 0x6f, 0xd3, 0x40,
-	0x14, 0xce, 0x41, 0x5b, 0xc4, 0xc1, 0x74, 0xaa, 0x50, 0xb0, 0x54, 0x53, 0x19, 0x90, 0x80, 0xaa,
-	0xb6, 0x52, 0x86, 0xc2, 0xd8, 0x16, 0x90, 0x88, 0x1a, 0x86, 0x48, 0x2c, 0x2c, 0x91, 0xe3, 0x3c,
-	0x39, 0x16, 0xe9, 0x9d, 0xb1, 0x2f, 0x28, 0x61, 0xe1, 0x2f, 0xf0, 0x17, 0x98, 0x98, 0x61, 0xe3,
-	0x07, 0x20, 0x3a, 0x76, 0x64, 0x42, 0x28, 0xf9, 0x21, 0xa0, 0x9e, 0x2f, 0x34, 0x55, 0x73, 0xb9,
-	0x67, 0xd2, 0x01, 0xc1, 0x76, 0xa7, 0xbc, 0xfb, 0xde, 0xf7, 0x7d, 0x2f, 0xbe, 0x4f, 0x47, 0xd7,
-	0x3a, 0x62, 0x10, 0x75, 0xc3, 0x84, 0x07, 0x49, 0x27, 0x0d, 0x5e, 0xd7, 0xda, 0x20, 0xc3, 0x5a,
-	0x20, 0x07, 0x7e, 0x9a, 0x09, 0x29, 0xd8, 0x5a, 0x1b, 0xba, 0x90, 0x09, 0xc8, 0xfd, 0x49, 0x9d,
-	0x9f, 0x74, 0x52, 0x5f, 0xd7, 0x39, 0xab, 0xb1, 0x88, 0x85, 0xaa, 0x0c, 0x8e, 0x57, 0xc5, 0x21,
-	0xa7, 0x3e, 0x13, 0x33, 0xea, 0x25, 0xc0, 0x65, 0x2b, 0x83, 0x38, 0xc9, 0x65, 0x16, 0xca, 0x44,
-	0xf0, 0x56, 0x06, 0x3d, 0xb5, 0xc8, 0xbb, 0x49, 0x3a, 0xf9, 0x65, 0xd8, 0x02, 0x2e, 0xb3, 0xa1,
-	0xc6, 0xf2, 0xb1, 0x58, 0xba, 0x7e, 0xbb, 0x44, 0xef, 0xa2, 0x5d, 0x71, 0xd0, 0xdb, 0xa7, 0xd5,
-	0x46, 0x1e, 0xef, 0xf4, 0x65, 0x17, 0xb8, 0x4c, 0x22, 0x55, 0xd3, 0x84, 0x57, 0x7d, 0xc8, 0x25,
-	0xab, 0xd2, 0x4b, 0x51, 0x06, 0xa1, 0x14, 0x59, 0x95, 0xac, 0x93, 0x3b, 0x97, 0x9b, 0x93, 0x2d,
-	0xbb, 0x46, 0x57, 0x24, 0xf0, 0x90, 0xcb, 0xea, 0x05, 0xf5, 0x83, 0xde, 0x79, 0x35, 0x7a, 0x7d,
-	0x06, 0x5a, 0x9e, 0x0a, 0x9e, 0x03, 0x5b, 0xa5, 0xcb, 0x52, 0xbc, 0x04, 0xae, 0xc1, 0x8a, 0x8d,
-	0xf7, 0x95, 0xd0, 0x7b, 0x8d, 0x3c, 0xde, 0x3b, 0x46, 0x86, 0x3d, 0x45, 0xb8, 0x39, 0xc5, 0x57,
-	0xaf, 0x87, 0x76, 0x4e, 0x6f, 0xa9, 0x13, 0x19, 0x8f, 0x2b, 0x9e, 0x57, 0xb6, 0x1e, 0xfa, 0x73,
-	0x07, 0xeb, 0x9b, 0xfb, 0xef, 0x2e, 0x1d, 0x7e, 0xbf, 0x51, 0x69, 0xce, 0x69, 0xe1, 0x6d, 0xd2,
-	0x0d, 0x94, 0x90, 0xc2, 0x8e, 0x89, 0xf0, 0xe7, 0x69, 0xe7, 0xdf, 0x10, 0x6e, 0x17, 0xa2, 0x85,
-	0x3f, 0x51, 0xba, 0x1f, 0x41, 0x0f, 0x16, 0xd2, 0xad, 0xdb, 0xda, 0x71, 0x74, 0xdb, 0x0f, 0x84,
-	0x7a, 0x73, 0xe7, 0x63, 0xf3, 0x39, 0xa6, 0xec, 0xac, 0x09, 0xda, 0xdf, 0x5a, 0x69, 0x7f, 0xb5,
-	0xaf, 0x33, 0x20, 0xbd, 0xdb, 0xf4, 0xe6, 0x5c, 0xa2, 0xa7, 0x05, 0x99, 0x7d, 0xff, 0xcb, 0x04,
-	0x99, 0x89, 0x6a, 0x41, 0x4d, 0xa5, 0xc7, 0x3c, 0x50, 0x9b, 0x1e, 0x46, 0x97, 0x78, 0x78, 0x00,
-	0xfa, 0x4e, 0x52, 0x6b, 0xdd, 0xda, 0x8c, 0xa9, 0x5b, 0xff, 0x24, 0xd4, 0x9f, 0xeb, 0xf9, 0xc9,
-	0x85, 0x6d, 0xe7, 0xf1, 0x89, 0xd0, 0x8d, 0xc8, 0x82, 0x51, 0xfc, 0x39, 0x1f, 0xf3, 0x93, 0x4f,
-	0xb4, 0xfe, 0x07, 0x9f, 0xa8, 0x01, 0x51, 0x8f, 0xa2, 0x0c, 0x09, 0xaf, 0x46, 0x03, 0xb4, 0x01,
-	0xa7, 0x4d, 0x33, 0x9b, 0xfb, 0x9f, 0x98, 0x86, 0x33, 0xa0, 0x30, 0x6d, 0xeb, 0xe3, 0x55, 0x7a,
-	0xb1, 0x91, 0xc7, 0xec, 0x0d, 0x5d, 0xde, 0x17, 0x71, 0xc2, 0xd9, 0xb6, 0x45, 0x82, 0x29, 0x9e,
-	0x9d, 0x07, 0xe5, 0x0f, 0xea, 0x24, 0xfe, 0x4c, 0xe8, 0xba, 0x2d, 0xa7, 0xd8, 0x53, 0x3b, 0x3c,
-	0x32, 0xb4, 0x9d, 0xfa, 0x79, 0x40, 0x4d, 0x71, 0xb7, 0x45, 0x0d, 0x86, 0x3b, 0x32, 0x77, 0x31,
-	0xdc, 0xb1, 0xc9, 0xa7, 0xb8, 0xdb, 0xf2, 0x0a, 0xc3, 0x1d, 0x99, 0x9d, 0x18, 0xee, 0xd8, 0xf8,
-	0x64, 0xef, 0x09, 0xad, 0x9a, 0x86, 0xc4, 0x76, 0x16, 0x19, 0x70, 0xc1, 0x75, 0x77, 0x11, 0x88,
-	0x29, 0x8e, 0xa6, 0x61, 0x60, 0x38, 0x5a, 0xa2, 0x14, 0xc3, 0xd1, 0x16, 0x72, 0x8a, 0xa3, 0xc9,
-	0x74, 0x0c, 0x47, 0x4b, 0x3c, 0x62, 0x38, 0xda, 0xd2, 0x90, 0x7d, 0x21, 0xf4, 0x16, 0x26, 0x09,
-	0x58, 0x63, 0x91, 0xa1, 0x9d, 0x49, 0x07, 0xe7, 0xd9, 0x79, 0xc1, 0x4d, 0xe9, 0xc0, 0x5c, 0xce,
-	0x18, 0x1d, 0x25, 0x52, 0x0e, 0xa3, 0xa3, 0x4c, 0x66, 0xec, 0xee, 0x1d, 0x8e, 0x5c, 0x72, 0x34,
-	0x72, 0xc9, 0x8f, 0x91, 0x4b, 0xde, 0x8d, 0xdd, 0xca, 0xd1, 0xd8, 0xad, 0x7c, 0x1b, 0xbb, 0x95,
-	0x17, 0x77, 0xe3, 0x44, 0x76, 0xfb, 0x6d, 0x3f, 0x12, 0x07, 0x41, 0x1b, 0x36, 0x8b, 0xa6, 0xc1,
-	0xef, 0xc7, 0xe0, 0x40, 0x3d, 0x07, 0xe5, 0x30, 0x85, 0xbc, 0xbd, 0xa2, 0x1e, 0x7c, 0xf7, 0x7f,
-	0x05, 0x00, 0x00, 0xff, 0xff, 0x07, 0xc4, 0x5a, 0x4b, 0xfb, 0x0e, 0x00, 0x00,
+	// 758 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe4, 0x58, 0x3d, 0x6f, 0xd3, 0x40,
+	0x18, 0xce, 0x25, 0x2d, 0x88, 0x83, 0xe9, 0xe8, 0x10, 0x22, 0x35, 0xad, 0x4c, 0x11, 0xd0, 0xaa,
+	0x36, 0x69, 0x87, 0xc2, 0xd8, 0x06, 0x24, 0x5a, 0x11, 0x86, 0x48, 0x08, 0xc4, 0x40, 0x95, 0x38,
+	0x57, 0xc7, 0xa2, 0xdc, 0x19, 0xfb, 0x0a, 0x0d, 0x0b, 0x62, 0x62, 0xe5, 0x27, 0xc0, 0x4f, 0x80,
+	0x8d, 0x1f, 0x80, 0xe8, 0xd8, 0xb1, 0x2c, 0x08, 0xa5, 0xe2, 0x7f, 0x20, 0xdf, 0x5d, 0x20, 0xa8,
+	0xb9, 0xdc, 0x6b, 0xd2, 0x2a, 0x08, 0x36, 0x47, 0x7e, 0x3f, 0x9e, 0xf7, 0x79, 0x1f, 0xe7, 0x1e,
+	0x1b, 0x4f, 0xb7, 0xf8, 0xae, 0xdf, 0x6e, 0x84, 0xcc, 0x0b, 0x5b, 0x91, 0xf7, 0xac, 0xd2, 0xa4,
+	0xa2, 0x51, 0xf1, 0xc4, 0xae, 0x1b, 0xc5, 0x5c, 0x70, 0x32, 0xdd, 0xa4, 0x6d, 0x1a, 0x73, 0x9a,
+	0xb8, 0xbd, 0x38, 0x37, 0x6c, 0x45, 0xae, 0x8e, 0x2b, 0x4d, 0x05, 0x3c, 0xe0, 0x32, 0xd2, 0x4b,
+	0xaf, 0x54, 0x52, 0x69, 0x63, 0x60, 0x4d, 0x7f, 0x3b, 0xa4, 0x4c, 0x6c, 0xc6, 0x34, 0x08, 0x13,
+	0x11, 0x37, 0x44, 0xc8, 0xd9, 0x66, 0x4c, 0xb7, 0xe5, 0x45, 0xd2, 0x0e, 0xa3, 0xde, 0x9d, 0xce,
+	0x26, 0x65, 0x22, 0xee, 0xe8, 0x5a, 0x2e, 0xb4, 0x96, 0x8e, 0x5f, 0xc9, 0xd0, 0x5b, 0xb5, 0x53,
+	0x89, 0xce, 0x16, 0x2e, 0xd6, 0x92, 0x60, 0x75, 0x47, 0xb4, 0x29, 0x13, 0xa1, 0x2f, 0x63, 0xea,
+	0xf4, 0xe9, 0x0e, 0x4d, 0x04, 0x29, 0xe2, 0xd3, 0x7e, 0x4c, 0x1b, 0x82, 0xc7, 0x45, 0x34, 0x8b,
+	0xae, 0x9c, 0xa9, 0xf7, 0x7e, 0x92, 0x6b, 0xf8, 0xbc, 0xa0, 0xac, 0xc1, 0xc4, 0xfd, 0xe5, 0xea,
+	0x7a, 0x2b, 0xcd, 0xdc, 0x0a, 0x69, 0x5c, 0xcc, 0xcb, 0xa8, 0x41, 0xb7, 0x9c, 0x0a, 0xbe, 0x30,
+	0xa0, 0x4f, 0x12, 0x71, 0x96, 0x50, 0x32, 0x85, 0x27, 0x05, 0x7f, 0x4c, 0x99, 0x6e, 0xa3, 0x7e,
+	0x38, 0x9f, 0x11, 0x9e, 0xaf, 0x25, 0x41, 0x35, 0xed, 0x49, 0xab, 0x72, 0x94, 0x7a, 0xdf, 0x24,
+	0xfa, 0xba, 0x63, 0x47, 0xfb, 0x12, 0x97, 0x7c, 0x63, 0xba, 0x04, 0x7d, 0x76, 0xe9, 0x86, 0x3b,
+	0x74, 0xe5, 0xae, 0xb9, 0xff, 0xda, 0xc4, 0xde, 0xd7, 0x99, 0x5c, 0x7d, 0x48, 0x0b, 0xe7, 0x35,
+	0xc2, 0x0b, 0xa0, 0x49, 0x34, 0x1f, 0x0f, 0xf0, 0x65, 0x73, 0xb5, 0xdf, 0x29, 0x57, 0xa3, 0x42,
+	0xc3, 0x7b, 0x9c, 0xde, 0x8b, 0x5a, 0xff, 0x08, 0xa7, 0xf6, 0x49, 0x4e, 0x9c, 0xd3, 0xb7, 0x8a,
+	0xd3, 0x9b, 0x74, 0x9b, 0x8e, 0xc6, 0x69, 0x06, 0x88, 0xf9, 0x6c, 0x10, 0x17, 0x25, 0x57, 0x76,
+	0x84, 0x8a, 0x2b, 0xe7, 0x55, 0x1e, 0x3b, 0x43, 0xf5, 0x3a, 0xb6, 0x49, 0x48, 0x80, 0xc9, 0xd1,
+	0xd0, 0x62, 0x41, 0xea, 0xad, 0x92, 0x59, 0x6f, 0x5a, 0x67, 0x03, 0x4a, 0x3a, 0x1c, 0x5f, 0x1c,
+	0x4a, 0x81, 0x96, 0xd5, 0x6d, 0x3c, 0x73, 0x34, 0x79, 0x90, 0x9c, 0x6c, 0x61, 0x3d, 0xd2, 0xcd,
+	0x82, 0xfe, 0x6f, 0x48, 0x37, 0x53, 0x70, 0xec, 0xa4, 0x77, 0x91, 0x24, 0xdd, 0xfc, 0x64, 0x8c,
+	0x8f, 0x74, 0xc0, 0x90, 0x05, 0xd8, 0x90, 0x97, 0x24, 0xab, 0xe6, 0x19, 0xf5, 0x53, 0xff, 0x25,
+	0x8f, 0xdd, 0xa1, 0x92, 0xff, 0x65, 0x5a, 0xc6, 0xc9, 0xcb, 0x07, 0x84, 0x17, 0x7c, 0x0b, 0x3a,
+	0x95, 0x77, 0x2b, 0x35, 0x54, 0x5a, 0xa6, 0x1b, 0x7f, 0x70, 0x16, 0x19, 0x2a, 0x6a, 0xfd, 0x66,
+	0x01, 0xe1, 0x7c, 0x47, 0xd8, 0x03, 0x73, 0xab, 0x55, 0x5e, 0xc7, 0x73, 0xfc, 0x39, 0xa3, 0x71,
+	0x15, 0x24, 0x75, 0x50, 0x2c, 0x79, 0x84, 0xe7, 0x5b, 0x34, 0x11, 0x21, 0x93, 0xf7, 0x6c, 0x95,
+	0xd5, 0x66, 0x32, 0x64, 0x38, 0x07, 0x4a, 0x43, 0x66, 0xad, 0xfd, 0x1d, 0x1a, 0x82, 0x52, 0x5b,
+	0x38, 0x31, 0x6a, 0x27, 0x32, 0x53, 0x5b, 0x91, 0x0a, 0x82, 0x31, 0xab, 0x14, 0xb4, 0xf4, 0xfe,
+	0x1c, 0x2e, 0xd4, 0x92, 0x80, 0xbc, 0xc0, 0x93, 0x77, 0x78, 0x10, 0x32, 0xb2, 0x62, 0x79, 0x0a,
+	0x4c, 0xaf, 0x02, 0xa5, 0xeb, 0xd9, 0x13, 0xb5, 0x8a, 0x3f, 0x22, 0x3c, 0x6b, 0x33, 0xbe, 0x64,
+	0xdd, 0x5e, 0x1e, 0xf8, 0x1a, 0x50, 0xda, 0x38, 0x8e, 0x52, 0x7d, 0xd8, 0x6d, 0x06, 0x13, 0x82,
+	0x1d, 0x68, 0xb7, 0x21, 0xd8, 0xc1, 0x7e, 0x37, 0xc5, 0x6e, 0x33, 0x7c, 0x10, 0xec, 0x40, 0x5b,
+	0x0b, 0xc1, 0x0e, 0xf5, 0x9f, 0xe4, 0x1d, 0xc2, 0x45, 0xd3, 0x92, 0xc8, 0xea, 0x28, 0x0b, 0x56,
+	0x58, 0xd7, 0x46, 0x29, 0xd1, 0x87, 0xd1, 0xb4, 0x0c, 0x08, 0x46, 0x8b, 0xcf, 0x83, 0x60, 0xb4,
+	0xfa, 0xa4, 0x14, 0xa3, 0x89, 0x74, 0x08, 0x46, 0x8b, 0x2d, 0x82, 0x60, 0xb4, 0xb9, 0x0e, 0xf2,
+	0x09, 0xe1, 0x39, 0xc8, 0xb1, 0x48, 0x6a, 0xa3, 0x2c, 0xed, 0xc8, 0xb1, 0x53, 0xba, 0x7b, 0x5c,
+	0xe5, 0xfa, 0xe6, 0x80, 0xfc, 0x39, 0x43, 0xe6, 0xc8, 0x70, 0x7c, 0x42, 0xe6, 0xc8, 0x72, 0x66,
+	0xac, 0x55, 0xf7, 0xba, 0x65, 0xb4, 0xdf, 0x2d, 0xa3, 0x6f, 0xdd, 0x32, 0x7a, 0x73, 0x58, 0xce,
+	0xed, 0x1f, 0x96, 0x73, 0x07, 0x87, 0xe5, 0xdc, 0xc3, 0xab, 0x41, 0x28, 0xda, 0x3b, 0x4d, 0xd7,
+	0xe7, 0x4f, 0xbc, 0x26, 0x5d, 0x54, 0x4d, 0xbd, 0x9f, 0x1f, 0x9e, 0x76, 0xe5, 0xa7, 0x27, 0xd1,
+	0x89, 0x68, 0xd2, 0x3c, 0x25, 0x3f, 0x2e, 0x2d, 0xff, 0x08, 0x00, 0x00, 0xff, 0xff, 0x56, 0x02,
+	0x9d, 0xba, 0x67, 0x13, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -1316,10 +1427,10 @@ func (m *MsgAuthenticationRequest) MarshalToSizedBuffer(dAtA []byte) (int, error
 	_ = i
 	var l int
 	_ = l
-	if len(m.Tenant) > 0 {
-		i -= len(m.Tenant)
-		copy(dAtA[i:], m.Tenant)
-		i = encodeVarintTx(dAtA, i, uint64(len(m.Tenant)))
+	if len(m.TenantW3CIdentifier) > 0 {
+		i -= len(m.TenantW3CIdentifier)
+		copy(dAtA[i:], m.TenantW3CIdentifier)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.TenantW3CIdentifier)))
 		i--
 		dAtA[i] = 0x12
 	}
@@ -1423,6 +1534,13 @@ func (m *MsgCreateClientRegistrationRegistryResponse) MarshalToSizedBuffer(dAtA 
 	_ = i
 	var l int
 	_ = l
+	if len(m.ClientRegistrationRegistryW3CIdentifier) > 0 {
+		i -= len(m.ClientRegistrationRegistryW3CIdentifier)
+		copy(dAtA[i:], m.ClientRegistrationRegistryW3CIdentifier)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.ClientRegistrationRegistryW3CIdentifier)))
+		i--
+		dAtA[i] = 0xa
+	}
 	return len(dAtA) - i, nil
 }
 
@@ -1486,6 +1604,13 @@ func (m *MsgUpdateClientRegistrationRegistryResponse) MarshalToSizedBuffer(dAtA 
 	_ = i
 	var l int
 	_ = l
+	if len(m.ClientRegistrationRegistryW3CIdentifier) > 0 {
+		i -= len(m.ClientRegistrationRegistryW3CIdentifier)
+		copy(dAtA[i:], m.ClientRegistrationRegistryW3CIdentifier)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.ClientRegistrationRegistryW3CIdentifier)))
+		i--
+		dAtA[i] = 0xa
+	}
 	return len(dAtA) - i, nil
 }
 
@@ -1509,6 +1634,13 @@ func (m *MsgDeleteClientRegistrationRegistryRequest) MarshalToSizedBuffer(dAtA [
 	_ = i
 	var l int
 	_ = l
+	if len(m.ClientRegistrationRegistryW3CIdentifier) > 0 {
+		i -= len(m.ClientRegistrationRegistryW3CIdentifier)
+		copy(dAtA[i:], m.ClientRegistrationRegistryW3CIdentifier)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.ClientRegistrationRegistryW3CIdentifier)))
+		i--
+		dAtA[i] = 0x12
+	}
 	if len(m.Creator) > 0 {
 		i -= len(m.Creator)
 		copy(dAtA[i:], m.Creator)
@@ -1571,7 +1703,14 @@ func (m *MsgCreateClientRegistrationRequest) MarshalToSizedBuffer(dAtA []byte) (
 		i = encodeVarintTx(dAtA, i, uint64(size))
 	}
 	i--
-	dAtA[i] = 0x12
+	dAtA[i] = 0x1a
+	if len(m.ClientRegistrationRegistryW3CIdentifier) > 0 {
+		i -= len(m.ClientRegistrationRegistryW3CIdentifier)
+		copy(dAtA[i:], m.ClientRegistrationRegistryW3CIdentifier)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.ClientRegistrationRegistryW3CIdentifier)))
+		i--
+		dAtA[i] = 0x12
+	}
 	if len(m.Creator) > 0 {
 		i -= len(m.Creator)
 		copy(dAtA[i:], m.Creator)
@@ -1602,6 +1741,13 @@ func (m *MsgCreateClientRegistrationResponse) MarshalToSizedBuffer(dAtA []byte) 
 	_ = i
 	var l int
 	_ = l
+	if len(m.ClientRegistrationW3CIdentifier) > 0 {
+		i -= len(m.ClientRegistrationW3CIdentifier)
+		copy(dAtA[i:], m.ClientRegistrationW3CIdentifier)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.ClientRegistrationW3CIdentifier)))
+		i--
+		dAtA[i] = 0xa
+	}
 	return len(dAtA) - i, nil
 }
 
@@ -1634,7 +1780,14 @@ func (m *MsgUpdateClientRegistrationRequest) MarshalToSizedBuffer(dAtA []byte) (
 		i = encodeVarintTx(dAtA, i, uint64(size))
 	}
 	i--
-	dAtA[i] = 0x12
+	dAtA[i] = 0x1a
+	if len(m.ClientRegistrationRegistryW3CIdentifier) > 0 {
+		i -= len(m.ClientRegistrationRegistryW3CIdentifier)
+		copy(dAtA[i:], m.ClientRegistrationRegistryW3CIdentifier)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.ClientRegistrationRegistryW3CIdentifier)))
+		i--
+		dAtA[i] = 0x12
+	}
 	if len(m.Creator) > 0 {
 		i -= len(m.Creator)
 		copy(dAtA[i:], m.Creator)
@@ -1665,6 +1818,13 @@ func (m *MsgUpdateClientRegistrationResponse) MarshalToSizedBuffer(dAtA []byte) 
 	_ = i
 	var l int
 	_ = l
+	if len(m.ClientRegistrationW3CIdentifier) > 0 {
+		i -= len(m.ClientRegistrationW3CIdentifier)
+		copy(dAtA[i:], m.ClientRegistrationW3CIdentifier)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.ClientRegistrationW3CIdentifier)))
+		i--
+		dAtA[i] = 0xa
+	}
 	return len(dAtA) - i, nil
 }
 
@@ -1688,10 +1848,17 @@ func (m *MsgDeleteClientRegistrationRequest) MarshalToSizedBuffer(dAtA []byte) (
 	_ = i
 	var l int
 	_ = l
-	if len(m.Name) > 0 {
-		i -= len(m.Name)
-		copy(dAtA[i:], m.Name)
-		i = encodeVarintTx(dAtA, i, uint64(len(m.Name)))
+	if len(m.ClientRegistrationW3CIdentifier) > 0 {
+		i -= len(m.ClientRegistrationW3CIdentifier)
+		copy(dAtA[i:], m.ClientRegistrationW3CIdentifier)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.ClientRegistrationW3CIdentifier)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.ClientRegistrationRegistryW3CIdentifier) > 0 {
+		i -= len(m.ClientRegistrationRegistryW3CIdentifier)
+		copy(dAtA[i:], m.ClientRegistrationRegistryW3CIdentifier)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.ClientRegistrationRegistryW3CIdentifier)))
 		i--
 		dAtA[i] = 0x12
 	}
@@ -1757,7 +1924,14 @@ func (m *MsgCreateClientRegistrationRelationshipRequest) MarshalToSizedBuffer(dA
 		i = encodeVarintTx(dAtA, i, uint64(size))
 	}
 	i--
-	dAtA[i] = 0x12
+	dAtA[i] = 0x1a
+	if len(m.ClientRegistrationRegistryW3CIdentifier) > 0 {
+		i -= len(m.ClientRegistrationRegistryW3CIdentifier)
+		copy(dAtA[i:], m.ClientRegistrationRegistryW3CIdentifier)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.ClientRegistrationRegistryW3CIdentifier)))
+		i--
+		dAtA[i] = 0x12
+	}
 	if len(m.Creator) > 0 {
 		i -= len(m.Creator)
 		copy(dAtA[i:], m.Creator)
@@ -1788,6 +1962,20 @@ func (m *MsgCreateClientRegistrationRelationshipResponse) MarshalToSizedBuffer(d
 	_ = i
 	var l int
 	_ = l
+	if len(m.DestinationClientRegistrationW3CIdentifier) > 0 {
+		i -= len(m.DestinationClientRegistrationW3CIdentifier)
+		copy(dAtA[i:], m.DestinationClientRegistrationW3CIdentifier)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.DestinationClientRegistrationW3CIdentifier)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.OwnerClientRegistrationW3CIdentifier) > 0 {
+		i -= len(m.OwnerClientRegistrationW3CIdentifier)
+		copy(dAtA[i:], m.OwnerClientRegistrationW3CIdentifier)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.OwnerClientRegistrationW3CIdentifier)))
+		i--
+		dAtA[i] = 0xa
+	}
 	return len(dAtA) - i, nil
 }
 
@@ -1811,16 +1999,27 @@ func (m *MsgDeleteClientRegistrationRelationshipRequest) MarshalToSizedBuffer(dA
 	_ = i
 	var l int
 	_ = l
-	{
-		size, err := m.ClientRegistrationRelationshipRegistryEntry.MarshalToSizedBuffer(dAtA[:i])
-		if err != nil {
-			return 0, err
-		}
-		i -= size
-		i = encodeVarintTx(dAtA, i, uint64(size))
+	if len(m.DestinationClientRegistrationW3CIdentifier) > 0 {
+		i -= len(m.DestinationClientRegistrationW3CIdentifier)
+		copy(dAtA[i:], m.DestinationClientRegistrationW3CIdentifier)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.DestinationClientRegistrationW3CIdentifier)))
+		i--
+		dAtA[i] = 0x22
 	}
-	i--
-	dAtA[i] = 0x12
+	if len(m.OwnerClientRegistrationW3CIdentifier) > 0 {
+		i -= len(m.OwnerClientRegistrationW3CIdentifier)
+		copy(dAtA[i:], m.OwnerClientRegistrationW3CIdentifier)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.OwnerClientRegistrationW3CIdentifier)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.ClientRegistrationRegistryW3CIdentifier) > 0 {
+		i -= len(m.ClientRegistrationRegistryW3CIdentifier)
+		copy(dAtA[i:], m.ClientRegistrationRegistryW3CIdentifier)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.ClientRegistrationRegistryW3CIdentifier)))
+		i--
+		dAtA[i] = 0x12
+	}
 	if len(m.Creator) > 0 {
 		i -= len(m.Creator)
 		copy(dAtA[i:], m.Creator)
@@ -1875,7 +2074,7 @@ func (m *MsgAuthenticationRequest) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovTx(uint64(l))
 	}
-	l = len(m.Tenant)
+	l = len(m.TenantW3CIdentifier)
 	if l > 0 {
 		n += 1 + l + sovTx(uint64(l))
 	}
@@ -1916,6 +2115,10 @@ func (m *MsgCreateClientRegistrationRegistryResponse) Size() (n int) {
 	}
 	var l int
 	_ = l
+	l = len(m.ClientRegistrationRegistryW3CIdentifier)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
 	return n
 }
 
@@ -1940,6 +2143,10 @@ func (m *MsgUpdateClientRegistrationRegistryResponse) Size() (n int) {
 	}
 	var l int
 	_ = l
+	l = len(m.ClientRegistrationRegistryW3CIdentifier)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
 	return n
 }
 
@@ -1950,6 +2157,10 @@ func (m *MsgDeleteClientRegistrationRegistryRequest) Size() (n int) {
 	var l int
 	_ = l
 	l = len(m.Creator)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.ClientRegistrationRegistryW3CIdentifier)
 	if l > 0 {
 		n += 1 + l + sovTx(uint64(l))
 	}
@@ -1975,6 +2186,10 @@ func (m *MsgCreateClientRegistrationRequest) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovTx(uint64(l))
 	}
+	l = len(m.ClientRegistrationRegistryW3CIdentifier)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
 	l = m.ClientRegistration.Size()
 	n += 1 + l + sovTx(uint64(l))
 	return n
@@ -1986,6 +2201,10 @@ func (m *MsgCreateClientRegistrationResponse) Size() (n int) {
 	}
 	var l int
 	_ = l
+	l = len(m.ClientRegistrationW3CIdentifier)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
 	return n
 }
 
@@ -1996,6 +2215,10 @@ func (m *MsgUpdateClientRegistrationRequest) Size() (n int) {
 	var l int
 	_ = l
 	l = len(m.Creator)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.ClientRegistrationRegistryW3CIdentifier)
 	if l > 0 {
 		n += 1 + l + sovTx(uint64(l))
 	}
@@ -2010,6 +2233,10 @@ func (m *MsgUpdateClientRegistrationResponse) Size() (n int) {
 	}
 	var l int
 	_ = l
+	l = len(m.ClientRegistrationW3CIdentifier)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
 	return n
 }
 
@@ -2023,7 +2250,11 @@ func (m *MsgDeleteClientRegistrationRequest) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovTx(uint64(l))
 	}
-	l = len(m.Name)
+	l = len(m.ClientRegistrationRegistryW3CIdentifier)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.ClientRegistrationW3CIdentifier)
 	if l > 0 {
 		n += 1 + l + sovTx(uint64(l))
 	}
@@ -2049,6 +2280,10 @@ func (m *MsgCreateClientRegistrationRelationshipRequest) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovTx(uint64(l))
 	}
+	l = len(m.ClientRegistrationRegistryW3CIdentifier)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
 	l = m.ClientRegistrationRelationshipRegistryEntry.Size()
 	n += 1 + l + sovTx(uint64(l))
 	return n
@@ -2060,6 +2295,14 @@ func (m *MsgCreateClientRegistrationRelationshipResponse) Size() (n int) {
 	}
 	var l int
 	_ = l
+	l = len(m.OwnerClientRegistrationW3CIdentifier)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.DestinationClientRegistrationW3CIdentifier)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
 	return n
 }
 
@@ -2073,8 +2316,18 @@ func (m *MsgDeleteClientRegistrationRelationshipRequest) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovTx(uint64(l))
 	}
-	l = m.ClientRegistrationRelationshipRegistryEntry.Size()
-	n += 1 + l + sovTx(uint64(l))
+	l = len(m.ClientRegistrationRegistryW3CIdentifier)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.OwnerClientRegistrationW3CIdentifier)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.DestinationClientRegistrationW3CIdentifier)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
 	return n
 }
 
@@ -2156,7 +2409,7 @@ func (m *MsgAuthenticationRequest) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Tenant", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field TenantW3CIdentifier", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -2184,7 +2437,7 @@ func (m *MsgAuthenticationRequest) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Tenant = string(dAtA[iNdEx:postIndex])
+			m.TenantW3CIdentifier = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -2433,6 +2686,38 @@ func (m *MsgCreateClientRegistrationRegistryResponse) Unmarshal(dAtA []byte) err
 			return fmt.Errorf("proto: MsgCreateClientRegistrationRegistryResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ClientRegistrationRegistryW3CIdentifier", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ClientRegistrationRegistryW3CIdentifier = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipTx(dAtA[iNdEx:])
@@ -2598,6 +2883,38 @@ func (m *MsgUpdateClientRegistrationRegistryResponse) Unmarshal(dAtA []byte) err
 			return fmt.Errorf("proto: MsgUpdateClientRegistrationRegistryResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ClientRegistrationRegistryW3CIdentifier", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ClientRegistrationRegistryW3CIdentifier = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipTx(dAtA[iNdEx:])
@@ -2679,6 +2996,38 @@ func (m *MsgDeleteClientRegistrationRegistryRequest) Unmarshal(dAtA []byte) erro
 				return io.ErrUnexpectedEOF
 			}
 			m.Creator = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ClientRegistrationRegistryW3CIdentifier", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ClientRegistrationRegistryW3CIdentifier = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -2814,6 +3163,38 @@ func (m *MsgCreateClientRegistrationRequest) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ClientRegistrationRegistryW3CIdentifier", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ClientRegistrationRegistryW3CIdentifier = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field ClientRegistration", wireType)
 			}
 			var msglen int
@@ -2895,6 +3276,38 @@ func (m *MsgCreateClientRegistrationResponse) Unmarshal(dAtA []byte) error {
 			return fmt.Errorf("proto: MsgCreateClientRegistrationResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ClientRegistrationW3CIdentifier", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ClientRegistrationW3CIdentifier = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipTx(dAtA[iNdEx:])
@@ -2979,6 +3392,38 @@ func (m *MsgUpdateClientRegistrationRequest) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ClientRegistrationRegistryW3CIdentifier", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ClientRegistrationRegistryW3CIdentifier = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field ClientRegistration", wireType)
 			}
 			var msglen int
@@ -3060,6 +3505,38 @@ func (m *MsgUpdateClientRegistrationResponse) Unmarshal(dAtA []byte) error {
 			return fmt.Errorf("proto: MsgUpdateClientRegistrationResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ClientRegistrationW3CIdentifier", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ClientRegistrationW3CIdentifier = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipTx(dAtA[iNdEx:])
@@ -3144,7 +3621,7 @@ func (m *MsgDeleteClientRegistrationRequest) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Name", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field ClientRegistrationRegistryW3CIdentifier", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -3172,7 +3649,39 @@ func (m *MsgDeleteClientRegistrationRequest) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			m.Name = string(dAtA[iNdEx:postIndex])
+			m.ClientRegistrationRegistryW3CIdentifier = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ClientRegistrationW3CIdentifier", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ClientRegistrationW3CIdentifier = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
@@ -3308,6 +3817,38 @@ func (m *MsgCreateClientRegistrationRelationshipRequest) Unmarshal(dAtA []byte) 
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ClientRegistrationRegistryW3CIdentifier", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ClientRegistrationRegistryW3CIdentifier = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field ClientRegistrationRelationshipRegistryEntry", wireType)
 			}
 			var msglen int
@@ -3389,6 +3930,70 @@ func (m *MsgCreateClientRegistrationRelationshipResponse) Unmarshal(dAtA []byte)
 			return fmt.Errorf("proto: MsgCreateClientRegistrationRelationshipResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field OwnerClientRegistrationW3CIdentifier", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.OwnerClientRegistrationW3CIdentifier = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DestinationClientRegistrationW3CIdentifier", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.DestinationClientRegistrationW3CIdentifier = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipTx(dAtA[iNdEx:])
@@ -3473,9 +4078,9 @@ func (m *MsgDeleteClientRegistrationRelationshipRequest) Unmarshal(dAtA []byte) 
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field ClientRegistrationRelationshipRegistryEntry", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field ClientRegistrationRegistryW3CIdentifier", wireType)
 			}
-			var msglen int
+			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowTx
@@ -3485,24 +4090,87 @@ func (m *MsgDeleteClientRegistrationRelationshipRequest) Unmarshal(dAtA []byte) 
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				msglen |= int(b&0x7F) << shift
+				stringLen |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			if msglen < 0 {
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
 				return ErrInvalidLengthTx
 			}
-			postIndex := iNdEx + msglen
+			postIndex := iNdEx + intStringLen
 			if postIndex < 0 {
 				return ErrInvalidLengthTx
 			}
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if err := m.ClientRegistrationRelationshipRegistryEntry.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
-				return err
+			m.ClientRegistrationRegistryW3CIdentifier = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field OwnerClientRegistrationW3CIdentifier", wireType)
 			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.OwnerClientRegistrationW3CIdentifier = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field DestinationClientRegistrationW3CIdentifier", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.DestinationClientRegistrationW3CIdentifier = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex

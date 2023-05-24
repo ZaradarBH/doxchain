@@ -8,6 +8,6 @@ option go_package = "github.com/be-heroes/doxchain/x/oauthtwo/types";
 
 message AccessTokenRegistryEntry {
   beheroes.doxchain.did.v1beta1.Did owner = 1 [(gogoproto.nullable) = false];
-  string identifier = 2;
+  string jti = 2;
   int64 expiresAt = 3;
 }

@@ -54,7 +54,6 @@ func NewRootCmd() (*cobra.Command, appparams.EncodingConfig) {
 		Use:   app.Name + "d",
 		Short: "Start doxchain node",
 		PersistentPreRunE: func(cmd *cobra.Command, _ []string) error {
-			// set the default command outputs
 			cmd.SetOut(cmd.OutOrStdout())
 			cmd.SetErr(cmd.ErrOrStderr())
 			initClientCtx, err := client.ReadPersistentCommandFlags(initClientCtx, cmd.Flags())
@@ -87,8 +86,6 @@ func NewRootCmd() (*cobra.Command, appparams.EncodingConfig) {
 	return rootCmd, encodingConfig
 }
 
-// initTendermintConfig helps to override default Tendermint Config values.
-// return tmcfg.DefaultConfig if no custom configuration is required for the application.
 func initTendermintConfig() *tmcfg.Config {
 	cfg := tmcfg.DefaultConfig()
 	return cfg
@@ -98,7 +95,6 @@ func initRootCmd(
 	rootCmd *cobra.Command,
 	encodingConfig appparams.EncodingConfig,
 ) {
-	// Set config
 	initSDKConfig()
 
 	rootCmd.AddCommand(
@@ -116,14 +112,12 @@ func initRootCmd(
 		tmcli.NewCompletionCmd(rootCmd, true),
 		debug.Cmd(),
 		config.Cmd(),
-		// this line is used by starport scaffolding # root/commands
 	)
 
 	a := appCreator{
 		encodingConfig,
 	}
 
-	// add server commands
 	server.AddCommands(
 		rootCmd,
 		app.DefaultNodeHome,
@@ -132,7 +126,6 @@ func initRootCmd(
 		addModuleInitFlags,
 	)
 
-	// add keybase, auxiliary RPC, query, and tx child commands
 	rootCmd.AddCommand(
 		rpc.StatusCommand(),
 		queryCommand(),
@@ -276,7 +269,6 @@ func (a appCreator) newApp(
 	)
 }
 
-// appExport creates a new simapp (optionally at a given height)
 func (a appCreator) appExport(
 	logger log.Logger,
 	db dbm.DB,
@@ -315,8 +307,6 @@ func (a appCreator) appExport(
 // initAppConfig helps to override default appConfig template and configs.
 // return "", nil if no custom configuration is required for the application.
 func initAppConfig() (string, interface{}) {
-	// The following code snippet is just for reference.
-
 	type CustomAppConfig struct {
 		serverconfig.Config
 	}
@@ -341,6 +331,7 @@ func initAppConfig() (string, interface{}) {
 	customAppConfig := CustomAppConfig{
 		Config: *srvCfg,
 	}
+
 	customAppTemplate := serverconfig.DefaultConfigTemplate
 
 	return customAppTemplate, customAppConfig

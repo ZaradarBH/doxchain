@@ -20,11 +20,11 @@ type (
 		paramstore paramtypes.Subspace
 
 		accountKeeper types.AccountKeeper
-		authzKeeper   types.AuthzKeeper
 	}
 )
 
-//TODO: Concept for validating ValidationMethods & ValidationRelationships in accordancee with the W3C spec
+//TODO: Implement logic to check for reserved did namespaces in message handlers.
+//TODO: Concept for validating ValidationMethods & ValidationRelationships in accordance with the W3C spec
 func NewKeeper(
 	cdc codec.BinaryCodec,
 	storeKey,
@@ -32,9 +32,7 @@ func NewKeeper(
 	ps paramtypes.Subspace,
 
 	accountKeeper types.AccountKeeper,
-	authzKeeper types.AuthzKeeper,
 ) *Keeper {
-	// set KeyTable if it has not already been set
 	if !ps.HasKeyTable() {
 		ps = ps.WithKeyTable(types.ParamKeyTable())
 	}
@@ -46,7 +44,6 @@ func NewKeeper(
 		paramstore: ps,
 
 		accountKeeper: accountKeeper,
-		authzKeeper:   authzKeeper,
 	}
 }
 

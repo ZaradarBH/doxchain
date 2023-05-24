@@ -9,11 +9,11 @@ const TypeMsgAuthorize = "authorize"
 
 var _ sdk.Msg = &MsgAuthorizeRequest{}
 
-func NewMsgAuthorizeRequest(creator string, clientId string, scope string) *MsgAuthorizeRequest {
+func NewMsgAuthorizeRequest(creator string, clientRegistrationAppIdW3CIdentifier string, scope []string) *MsgAuthorizeRequest {
 	return &MsgAuthorizeRequest{
-		Creator:  creator,
-		ClientId: clientId,
-		Scope:    scope,
+		Creator:                              creator,
+		ClientRegistrationAppIdW3CIdentifier: clientRegistrationAppIdW3CIdentifier,
+		Scope:                                scope,
 	}
 }
 
@@ -27,21 +27,26 @@ func (msg *MsgAuthorizeRequest) Type() string {
 
 func (msg *MsgAuthorizeRequest) GetSigners() []sdk.AccAddress {
 	creator, err := sdk.AccAddressFromBech32(msg.Creator)
+
 	if err != nil {
 		panic(err)
 	}
+
 	return []sdk.AccAddress{creator}
 }
 
 func (msg *MsgAuthorizeRequest) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(msg)
+
 	return sdk.MustSortJSON(bz)
 }
 
 func (msg *MsgAuthorizeRequest) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
+
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
+
 	return nil
 }

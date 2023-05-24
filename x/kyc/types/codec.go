@@ -8,10 +8,9 @@ import (
 )
 
 func RegisterCodec(cdc *codec.LegacyAmino) {
-	cdc.RegisterConcrete(&MsgCreateKYCRegistrationRequest{}, "kyc/CreateKYCRegistrationRequest", nil)
-	cdc.RegisterConcrete(&MsgDeleteKYCRegistrationRequest{}, "kyc/DeleteKYCRegistrationRequest", nil)
-	cdc.RegisterConcrete(&MsgApproveKYCRegistrationRequest{}, "kyc/ApproveKYCRegistrationRequest", nil)
-	// this line is used by starport scaffolding # 2
+	cdc.RegisterConcrete(&MsgCreateKYCRegistrationRequest{}, "kyc/CreateKYCRegistration", nil)
+	cdc.RegisterConcrete(&MsgDeleteKYCRegistrationRequest{}, "kyc/DeleteKYCRegistration", nil)
+	cdc.RegisterConcrete(&MsgApproveKYCRegistrationRequest{}, "kyc/ApproveKYCRegistration", nil)
 }
 
 func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
@@ -20,7 +19,6 @@ func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 		&MsgDeleteKYCRegistrationRequest{},
 		&MsgApproveKYCRegistrationRequest{},
 	)
-	// this line is used by starport scaffolding # 3
 
 	msgservice.RegisterMsgServiceDesc(registry, &_Msg_serviceDesc)
 }

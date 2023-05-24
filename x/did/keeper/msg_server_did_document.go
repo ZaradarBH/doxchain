@@ -5,59 +5,59 @@ import (
 
 	"github.com/be-heroes/doxchain/x/did/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-func (k msgServer) CreateDidDocument(goCtx context.Context, msg *types.MsgCreateDidDocumentRequest) (*types.MsgCreateDidDocumentResponse, error) {
+func (k msgServer) CreateDidDocument(goCtx context.Context, msg *types.MsgCreateDidDocumentRequest) (result *types.MsgCreateDidDocumentResponse, err error) {
 	if msg.Creator != msg.DidDocument.Id.Creator {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "impersonation is not allowed")
-	}
-	
-	err := k.Keeper.SetDidDocument(sdk.UnwrapSDKContext(goCtx), msg.DidDocument, false)
-
-	if err != nil {
-		return nil, err
+		return nil, types.ErrDidDocumentImpersonation
 	}
 
-	return &types.MsgCreateDidDocumentResponse{
-		FullyQualifiedW3CIdentifier: msg.DidDocument.Id.GetW3CIdentifier(),
-	}, nil
-}
-
-func (k msgServer) UpdateDidDocument(goCtx context.Context, msg *types.MsgUpdateDidDocumentRequest) (*types.MsgUpdateDidDocumentResponse, error) {
-	if msg.Creator != msg.DidDocument.Id.Creator {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "impersonation is not allowed")
-	}
-	
-	err := k.SetDidDocument(sdk.UnwrapSDKContext(goCtx), msg.DidDocument, true)
-
-	if err != nil {
-		return nil, err
-	}
-
-	return &types.MsgUpdateDidDocumentResponse{}, nil
-}
-
-func (k msgServer) DeleteDidDocument(goCtx context.Context, msg *types.MsgDeleteDidDocumentRequest) (*types.MsgDeleteDidDocumentResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
+	_, found := k.Keeper.GetDidDocument(ctx, msg.DidDocument.Id.GetW3CIdentifier())
+
+	if found {
+		return nil, types.ErrDidDocumentExists
+	}
+
+	k.Keeper.SetDidDocument(ctx, msg.DidDocument)
+
+	result.DidDocumentW3CIdentifier = msg.DidDocument.Id.GetW3CIdentifier()
 	
-	// Check if the value exists
-	valFound, isFound := k.GetDidDocument(ctx, msg.FullyQualifiedW3CIdentifier)
+	return result, nil
+}
 
-	if !isFound {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "not set")
+func (k msgServer) UpdateDidDocument(goCtx context.Context, msg *types.MsgUpdateDidDocumentRequest) (result *types.MsgUpdateDidDocumentResponse, err error) {
+	if msg.Creator != msg.DidDocument.Id.Creator {
+		return nil, types.ErrDidDocumentImpersonation
 	}
 
-	// Checks if the the msg creator is the same as the current owner
-	if msg.Creator != valFound.Id.Creator {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "incorrect owner")
+	ctx := sdk.UnwrapSDKContext(goCtx)
+	match, found := k.Keeper.GetDidDocument(ctx, msg.DidDocument.Id.GetW3CIdentifier())
+
+	if found && msg.Creator != match.Id.Creator {
+		return nil, types.ErrDidDocumentImpersonation
 	}
+
+	k.Keeper.SetDidDocument(ctx, msg.DidDocument)
+
+	result.DidDocumentW3CIdentifier = msg.DidDocument.Id.GetW3CIdentifier()
 	
-	err := k.Keeper.RemoveDidDocument(ctx, msg.FullyQualifiedW3CIdentifier)
+	return result, nil
+}
 
-	if err != nil {
-		return nil, err
+func (k msgServer) DeleteDidDocument(goCtx context.Context, msg *types.MsgDeleteDidDocumentRequest) (result *types.MsgDeleteDidDocumentResponse, err error) {
+	ctx := sdk.UnwrapSDKContext(goCtx)
+	match, found := k.Keeper.GetDidDocument(ctx, msg.DidDocumentW3CIdentifier)
+
+	if !found {
+		return nil, types.ErrDidDocumentNotFound
 	}
 
-	return &types.MsgDeleteDidDocumentResponse{}, nil
+	if msg.Creator != match.Id.Creator {
+		return nil, types.ErrDidDocumentImpersonation
+	}
+
+	k.Keeper.RemoveDidDocument(ctx, msg.DidDocumentW3CIdentifier)
+
+	return result, nil
 }

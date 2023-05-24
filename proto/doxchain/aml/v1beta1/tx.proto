@@ -3,7 +3,7 @@ syntax = "proto3";
 package beheroes.doxchain.aml.v1beta1;
 
 import "gogoproto/gogo.proto";
-import "doxchain/aml/v1beta1/aml_request.proto";
+import "doxchain/aml/v1beta1/aml_registration.proto";
 import "doxchain/did/v1beta1/did.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/aml/types";

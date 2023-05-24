@@ -16,7 +16,7 @@ service Query {
   }
   
   rpc Did (QueryGetDidRequest) returns (QueryGetDidResponse) {
-    option (google.api.http).get = "/doxchain/did/did/{fullyQualifiedW3CIdentifier}";  
+    option (google.api.http).get = "/doxchain/did/did/{didW3CIdentifier}";  
   }
 
   rpc DidAll (QueryAllDidRequest) returns (QueryAllDidResponse) {
@@ -31,7 +31,7 @@ message QueryParamsResponse {
 }
 
 message QueryGetDidRequest {
-  string fullyQualifiedW3CIdentifier = 1;
+  string didW3CIdentifier = 1;
 }
 
 message QueryGetDidResponse {

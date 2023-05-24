@@ -8,11 +8,15 @@ import (
 )
 
 func (k msgServer) DeviceCode(goCtx context.Context, msg *types.MsgDeviceCodeRequest) (*types.MsgDeviceCodeResponse, error) {
-	deviceCode, err := k.Keeper.DeviceCode(sdk.UnwrapSDKContext(goCtx), *msg)
+	deviceCode, userCode, verificationUri, err := k.Keeper.DeviceCode(sdk.UnwrapSDKContext(goCtx), msg.Creator, msg.TenantW3CIdentifier, msg.ClientRegistrationAppIdW3CIdentifier, msg.Scope)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return &deviceCode, nil
+	return &types.MsgDeviceCodeResponse{
+		DeviceCode:      deviceCode,
+		UserCode:        userCode,
+		VerificationUri: verificationUri,
+	}, nil
 }

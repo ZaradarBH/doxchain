@@ -5,20 +5,26 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	
+
+	didUtils "github.com/be-heroes/doxchain/utils/did"
 	"github.com/be-heroes/doxchain/x/abs/types"
-	utils "github.com/be-heroes/doxchain/utils/did"
 )
 
-func (k msgServer) CreatePartitionedPoolRegistry(goCtx context.Context, msg *types.MsgCreatePartitionedPoolRegistryRequest) (*types.MsgCreatePartitionedPoolRegistryResponse, error) {
+func (k msgServer) CreatePartitionedPoolRegistry(goCtx context.Context, msg *types.MsgCreatePartitionedPoolRegistryRequest) (result *types.MsgCreatePartitionedPoolRegistryResponse, err error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
-	partitionedPoolRegistry, isFound := k.GetPartitionedPoolRegistry(ctx, msg.Creator)
-	ownerDid := utils.NewDidTokenFactory().Create(msg.Creator, "")
+	partitionedPoolRegistry, found := k.Keeper.GetPartitionedPoolRegistry(ctx, msg.Creator)
+	didUrl, err := didUtils.CreateModuleDidUrl(types.ModuleName, "PartitionedPoolRegistry", msg.Creator)
 
-	if !isFound {
+	if err != nil {
+		return nil, err
+	}
+
+	ownerDid := didUtils.NewDidTokenFactory().Create(msg.Creator, didUrl)
+
+	if !found {
 		partitionedPoolRegistry = types.PartitionedPoolRegistry{
 			Owner: *ownerDid,
-			Pools: []types.PartitionedPool{},
+			Pools: make([]types.PartitionedPool, 0),
 		}
 	}
 
@@ -30,10 +36,12 @@ func (k msgServer) CreatePartitionedPoolRegistry(goCtx context.Context, msg *typ
 
 	partitionedPoolRegistry.Pools = append(partitionedPoolRegistry.Pools, types.PartitionedPool{Denom: msg.Denom})
 
-	k.SetPartitionedPoolRegistry(
+	k.Keeper.SetPartitionedPoolRegistry(
 		ctx,
 		partitionedPoolRegistry,
 	)
 
-	return &types.MsgCreatePartitionedPoolRegistryResponse{}, nil
+	result.PartitionedPoolW3CIdentifier = partitionedPoolRegistry.Owner.GetW3CIdentifier()
+
+	return result, nil
 }

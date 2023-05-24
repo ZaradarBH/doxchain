@@ -2,13 +2,10 @@ package cli
 
 import (
 	"fmt"
-	"time"
-
-	"github.com/spf13/cobra"
-
-	"github.com/cosmos/cosmos-sdk/client"
-	// "github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/be-heroes/doxchain/x/aml/types"
+	"github.com/cosmos/cosmos-sdk/client"
+	"github.com/spf13/cobra"
+	"time"
 )
 
 var (
@@ -20,7 +17,6 @@ const (
 	listSeparator              = ","
 )
 
-// GetTxCmd returns the transaction commands for this module
 func GetTxCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:                        types.ModuleName,
@@ -33,7 +29,6 @@ func GetTxCmd() *cobra.Command {
 	cmd.AddCommand(CmdCreateAMLRegistration())
 	cmd.AddCommand(CmdDeleteAMLRegistration())
 	cmd.AddCommand(CmdApproveAMLRegistration())
-// this line is used by starport scaffolding # 1
 
 	return cmd
 }

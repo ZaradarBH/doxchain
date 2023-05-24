@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package beheroes.doxchain.oauthtwo.v1beta1;
 
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
 import "doxchain/oauthtwo/v1beta1/authorization_code_registry.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/oauthtwo/types";
@@ -14,10 +16,10 @@ service Msg {
 
 message MsgTokenRequest {
   string creator = 1;
-  string tenant = 2;
-  string scope = 3;
+  string tenantW3CIdentifier = 2 [json_name = "tenant"];
+  repeated string scope = 3;
   string grantType = 4;
-  string clientId = 5;
+  string clientRegistrationAppIdW3CIdentifier = 5 [json_name = "clientId"];
   string clientSecret = 6;
   string deviceCode = 7;  
   string authorizationCode = 8;  
@@ -39,9 +41,9 @@ message MsgTokenResponse {
 
 message MsgDeviceCodeRequest {
   string creator = 1;
-  string tenant = 2;
-  string clientId = 3;
-  string scope = 4;
+  string tenantW3CIdentifier = 2;
+  string clientRegistrationAppIdW3CIdentifier = 3 [json_name = "clientId"];
+  repeated string scope = 4;
 }
 
 message MsgDeviceCodeResponse {
@@ -52,9 +54,9 @@ message MsgDeviceCodeResponse {
 
 message MsgAuthorizeRequest {
   string creator = 1;
-  string tenant = 2;
-  string clientId = 3;
-  string scope = 4;
+  string tenantW3CIdentifier = 2;
+  string clientRegistrationAppIdW3CIdentifier = 3 [json_name = "clientId"];
+  repeated string scope = 4;
   string userCode = 5;
 }
 

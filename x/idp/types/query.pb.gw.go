@@ -62,15 +62,15 @@ func request_Query_GetDotWellKnown_0(ctx context.Context, marshaler runtime.Mars
 		_   = err
 	)
 
-	val, ok = pathParams["fullyQualifiedW3CIdentifier"]
+	val, ok = pathParams["tenantW3CIdentifier"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "fullyQualifiedW3CIdentifier")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "tenantW3CIdentifier")
 	}
 
-	protoReq.FullyQualifiedW3CIdentifier, err = runtime.String(val)
+	protoReq.TenantW3CIdentifier, err = runtime.String(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "fullyQualifiedW3CIdentifier", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "tenantW3CIdentifier", err)
 	}
 
 	msg, err := client.GetDotWellKnown(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -89,15 +89,15 @@ func local_request_Query_GetDotWellKnown_0(ctx context.Context, marshaler runtim
 		_   = err
 	)
 
-	val, ok = pathParams["fullyQualifiedW3CIdentifier"]
+	val, ok = pathParams["tenantW3CIdentifier"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "fullyQualifiedW3CIdentifier")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "tenantW3CIdentifier")
 	}
 
-	protoReq.FullyQualifiedW3CIdentifier, err = runtime.String(val)
+	protoReq.TenantW3CIdentifier, err = runtime.String(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "fullyQualifiedW3CIdentifier", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "tenantW3CIdentifier", err)
 	}
 
 	msg, err := server.GetDotWellKnown(ctx, &protoReq)
@@ -116,15 +116,15 @@ func request_Query_ClientRegistrationRegistry_0(ctx context.Context, marshaler r
 		_   = err
 	)
 
-	val, ok = pathParams["creator"]
+	val, ok = pathParams["clientRegistrationRegistryW3CIdentifier"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "creator")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "clientRegistrationRegistryW3CIdentifier")
 	}
 
-	protoReq.Creator, err = runtime.String(val)
+	protoReq.ClientRegistrationRegistryW3CIdentifier, err = runtime.String(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "creator", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "clientRegistrationRegistryW3CIdentifier", err)
 	}
 
 	msg, err := client.ClientRegistrationRegistry(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -143,15 +143,15 @@ func local_request_Query_ClientRegistrationRegistry_0(ctx context.Context, marsh
 		_   = err
 	)
 
-	val, ok = pathParams["creator"]
+	val, ok = pathParams["clientRegistrationRegistryW3CIdentifier"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "creator")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "clientRegistrationRegistryW3CIdentifier")
 	}
 
-	protoReq.Creator, err = runtime.String(val)
+	protoReq.ClientRegistrationRegistryW3CIdentifier, err = runtime.String(val)
 
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "creator", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "clientRegistrationRegistryW3CIdentifier", err)
 	}
 
 	msg, err := server.ClientRegistrationRegistry(ctx, &protoReq)
@@ -420,9 +420,9 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 var (
 	pattern_Query_Params_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"be-heroes", "doxchain", "idp", "params"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_GetDotWellKnown_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4}, []string{"be-heroes", "doxchain", "idp", "fullyQualifiedW3CIdentifier", ".well-known"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_GetDotWellKnown_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4}, []string{"be-heroes", "doxchain", "idp", "tenantW3CIdentifier", ".well-known"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_ClientRegistrationRegistry_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"be-heroes", "doxchain", "idp", "client_registry", "creator"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_ClientRegistrationRegistry_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"be-heroes", "doxchain", "idp", "client_registry", "clientRegistrationRegistryW3CIdentifier"}, "", runtime.AssumeColonVerbOpt(true)))
 
 	pattern_Query_ClientRegistrationRegistryAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"be-heroes", "doxchain", "idp", "client_registry"}, "", runtime.AssumeColonVerbOpt(true)))
 )

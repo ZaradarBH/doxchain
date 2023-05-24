@@ -24,8 +24,7 @@ type (
 	}
 )
 
-//TODO: Finish PartitionedPool concept
-//TODO: Finish Watchlist concept
+//TODO: Finish PartitionedPool concept once oracle is done.
 func NewKeeper(
 	cdc codec.BinaryCodec,
 	storeKey,
@@ -35,7 +34,6 @@ func NewKeeper(
 	accountKeeper types.AccountKeeper,
 	bankKeeper types.BankKeeper,
 ) *Keeper {
-	// set KeyTable if it has not already been set
 	if !ps.HasKeyTable() {
 		ps = ps.WithKeyTable(types.ParamKeyTable())
 	}

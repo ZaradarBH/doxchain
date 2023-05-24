@@ -16,7 +16,7 @@ var _ sdk.Msg = &MsgCreateDidRequest{}
 func NewMsgCreateDidRequest(creator string, did Did) *MsgCreateDidRequest {
 	return &MsgCreateDidRequest{
 		Creator: creator,
-		Did: did,
+		Did:     did,
 	}
 }
 
@@ -30,22 +30,27 @@ func (msg *MsgCreateDidRequest) Type() string {
 
 func (msg *MsgCreateDidRequest) GetSigners() []sdk.AccAddress {
 	creator, err := sdk.AccAddressFromBech32(msg.Creator)
+
 	if err != nil {
 		panic(err)
 	}
+
 	return []sdk.AccAddress{creator}
 }
 
 func (msg *MsgCreateDidRequest) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(msg)
+
 	return sdk.MustSortJSON(bz)
 }
 
 func (msg *MsgCreateDidRequest) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
+
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
+
 	return nil
 }
 
@@ -54,7 +59,7 @@ var _ sdk.Msg = &MsgUpdateDidRequest{}
 func NewMsgUpdateDidRequest(creator string, did Did) *MsgUpdateDidRequest {
 	return &MsgUpdateDidRequest{
 		Creator: creator,
-		Did: did,
+		Did:     did,
 	}
 }
 
@@ -68,31 +73,36 @@ func (msg *MsgUpdateDidRequest) Type() string {
 
 func (msg *MsgUpdateDidRequest) GetSigners() []sdk.AccAddress {
 	creator, err := sdk.AccAddressFromBech32(msg.Creator)
+
 	if err != nil {
 		panic(err)
 	}
+
 	return []sdk.AccAddress{creator}
 }
 
 func (msg *MsgUpdateDidRequest) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(msg)
+
 	return sdk.MustSortJSON(bz)
 }
 
 func (msg *MsgUpdateDidRequest) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
+
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
+
 	return nil
 }
 
 var _ sdk.Msg = &MsgDeleteDidRequest{}
 
-func NewMsgDeleteDidRequest(creator string, fullyQualifiedW3CIdentifier string) *MsgDeleteDidRequest {
+func NewMsgDeleteDidRequest(creator string, didW3CIdentifier string) *MsgDeleteDidRequest {
 	return &MsgDeleteDidRequest{
-		Creator:                     creator,
-		FullyQualifiedW3CIdentifier: fullyQualifiedW3CIdentifier,
+		Creator:          creator,
+		DidW3CIdentifier: didW3CIdentifier,
 	}
 }
 func (msg *MsgDeleteDidRequest) Route() string {
@@ -105,21 +115,26 @@ func (msg *MsgDeleteDidRequest) Type() string {
 
 func (msg *MsgDeleteDidRequest) GetSigners() []sdk.AccAddress {
 	creator, err := sdk.AccAddressFromBech32(msg.Creator)
+
 	if err != nil {
 		panic(err)
 	}
+
 	return []sdk.AccAddress{creator}
 }
 
 func (msg *MsgDeleteDidRequest) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(msg)
+
 	return sdk.MustSortJSON(bz)
 }
 
 func (msg *MsgDeleteDidRequest) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
+
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
+
 	return nil
 }

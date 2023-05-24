@@ -13,7 +13,7 @@ var _ sdk.Msg = &MsgCreateDidDocumentRequest{}
 
 func NewMsgCreateDidDocumentRequest(creator string, didDocument DidDocument) *MsgCreateDidDocumentRequest {
 	return &MsgCreateDidDocumentRequest{
-		Creator: creator,
+		Creator:     creator,
 		DidDocument: didDocument,
 	}
 }
@@ -51,7 +51,7 @@ var _ sdk.Msg = &MsgUpdateDidDocumentRequest{}
 
 func NewMsgUpdateDidDocumentRequest(creator string, didDocument DidDocument) *MsgUpdateDidDocumentRequest {
 	return &MsgUpdateDidDocumentRequest{
-		Creator: creator,
+		Creator:     creator,
 		DidDocument: didDocument,
 	}
 }
@@ -87,10 +87,10 @@ func (msg *MsgUpdateDidDocumentRequest) ValidateBasic() error {
 
 var _ sdk.Msg = &MsgDeleteDidDocumentRequest{}
 
-func NewMsgDeleteDidDocumentRequest(creator string, fullyQualifiedW3CIdentifier string) *MsgDeleteDidDocumentRequest {
+func NewMsgDeleteDidDocumentRequest(creator string, didDocumentW3CIdentifier string) *MsgDeleteDidDocumentRequest {
 	return &MsgDeleteDidDocumentRequest{
-		Creator:                     creator,
-		FullyQualifiedW3CIdentifier: fullyQualifiedW3CIdentifier,
+		Creator:                  creator,
+		DidDocumentW3CIdentifier: didDocumentW3CIdentifier,
 	}
 }
 
@@ -104,21 +104,26 @@ func (msg *MsgDeleteDidDocumentRequest) Type() string {
 
 func (msg *MsgDeleteDidDocumentRequest) GetSigners() []sdk.AccAddress {
 	creator, err := sdk.AccAddressFromBech32(msg.Creator)
+
 	if err != nil {
 		panic(err)
 	}
+
 	return []sdk.AccAddress{creator}
 }
 
 func (msg *MsgDeleteDidDocumentRequest) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(msg)
+
 	return sdk.MustSortJSON(bz)
 }
 
 func (msg *MsgDeleteDidDocumentRequest) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
+
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
+
 	return nil
 }

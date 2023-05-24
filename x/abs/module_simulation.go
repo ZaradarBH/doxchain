@@ -4,6 +4,7 @@ import (
 	"math/rand"
 
 	"github.com/be-heroes/doxchain/testutil/sample"
+	utils "github.com/be-heroes/doxchain/utils/did"
 	abssimulation "github.com/be-heroes/doxchain/x/abs/simulation"
 	"github.com/be-heroes/doxchain/x/abs/types"
 	"github.com/cosmos/cosmos-sdk/baseapp"
@@ -12,7 +13,6 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/module"
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
-	utils "github.com/be-heroes/doxchain/utils/did"
 )
 
 // avoid unused import issue
@@ -24,44 +24,25 @@ var (
 	_ = baseapp.Paramspace
 )
 
-const (
-	opWeightMsgUpdateBreakFactor = "op_weight_msg_update_break_factor"
-	// TODO: Determine the simulation weight value
-	defaultWeightMsgUpdateBreakFactor int = 100
-
-	opWeightMsgCreatePartitionedPools = "op_weight_msg_partitioned_pools"
-	// TODO: Determine the simulation weight value
-	defaultWeightMsgCreatePartitionedPools int = 100
-
-	opWeightMsgUpdatePartitionedPools = "op_weight_msg_partitioned_pools"
-	// TODO: Determine the simulation weight value
-	defaultWeightMsgUpdatePartitionedPools int = 100
-
-	opWeightMsgDeletePartitionedPools = "op_weight_msg_partitioned_pools"
-	// TODO: Determine the simulation weight value
-	defaultWeightMsgDeletePartitionedPools int = 100
-
-	// this line is used by starport scaffolding # simapp/module/const
-)
-
-// GenerateGenesisState creates a randomized GenState of the module
 func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 	accs := make([]string, len(simState.Accounts))
+
 	for i, acc := range simState.Accounts {
 		accs[i] = acc.Address.String()
 	}
+
 	absGenesis := types.GenesisState{
 		Params: types.DefaultParams(),
 		PartitionedPoolRegistries: []types.PartitionedPoolRegistry{
 			{
-				Owner: *utils.NewDidTokenFactory().Create(sample.AccAddress(), ""),
+				Owner: *utils.NewDidTokenFactory().Create(sample.AccAddress(), "did:methodname:methodid"),
 			},
 			{
-				Owner: *utils.NewDidTokenFactory().Create(sample.AccAddress(), ""),
+				Owner: *utils.NewDidTokenFactory().Create(sample.AccAddress(), "did:methodname:methodid"),
 			},
 		},
-		// this line is used by starport scaffolding # simapp/module/genesisState
 	}
+
 	simState.GenState[types.ModuleName] = simState.Cdc.MustMarshalJSON(&absGenesis)
 }
 
@@ -82,19 +63,6 @@ func (am AppModule) RegisterStoreDecoder(_ sdk.StoreDecoderRegistry) {}
 // WeightedOperations returns the all the gov module operations with their respective weights.
 func (am AppModule) WeightedOperations(simState module.SimulationState) []simtypes.WeightedOperation {
 	operations := make([]simtypes.WeightedOperation, 0)
-
-	var weightMsgUpdateBreakFactor int
-	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgUpdateBreakFactor, &weightMsgUpdateBreakFactor, nil,
-		func(_ *rand.Rand) {
-			weightMsgUpdateBreakFactor = defaultWeightMsgUpdateBreakFactor
-		},
-	)
-	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgUpdateBreakFactor,
-		abssimulation.SimulateMsgUpdateBreakFactor(am.accountKeeper, am.bankKeeper, am.keeper),
-	))
-
-	// this line is used by starport scaffolding # simapp/module/operation
 
 	return operations
 }

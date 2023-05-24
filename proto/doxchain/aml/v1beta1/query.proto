@@ -6,7 +6,7 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "doxchain/aml/v1beta1/params.proto";
-import "doxchain/aml/v1beta1/aml_request.proto";
+import "doxchain/aml/v1beta1/aml_registration.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/aml/types";
 
@@ -16,7 +16,7 @@ service Query {
   }
 
   rpc AMLRegistration (QueryGetAMLRegistrationRequest) returns (QueryGetAMLRegistrationResponse) {
-    option (google.api.http).get = "/be-heroes/doxchain/aml/aml_request";  
+    option (google.api.http).get = "/be-heroes/doxchain/aml/aml_registration/{amlRegistrationW3CIdentifier}";  
   }
 }
 
@@ -27,7 +27,7 @@ message QueryParamsResponse {
 }
 
 message QueryGetAMLRegistrationRequest {
-  string creator = 1;
+  string amlRegistrationW3CIdentifier = 1;
 }
 
 message QueryGetAMLRegistrationResponse {

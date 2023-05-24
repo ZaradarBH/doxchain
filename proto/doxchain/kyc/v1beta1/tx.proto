@@ -4,7 +4,7 @@ package beheroes.doxchain.kyc.v1beta1;
 
 import "gogoproto/gogo.proto";
 import "doxchain/did/v1beta1/did.proto";
-import "doxchain/kyc/v1beta1/kyc_request.proto";
+import "doxchain/kyc/v1beta1/kyc_registration.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/kyc/types";
 

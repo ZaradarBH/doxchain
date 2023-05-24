@@ -9,37 +9,31 @@ import (
 func (k Keeper) SetPartitionedPoolRegistry(ctx sdk.Context, partitionedPoolRegistry types.PartitionedPoolRegistry) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.PartitionedPoolRegistryKeyPrefix))
 	b := k.cdc.MustMarshal(&partitionedPoolRegistry)
+
 	store.Set(types.PartitionedPoolRegistryKey(
-		partitionedPoolRegistry.Owner.Creator,
+		partitionedPoolRegistry.Owner.GetW3CIdentifier(),
 	), b)
 }
 
-func (k Keeper) GetPartitionedPoolRegistry(
-	ctx sdk.Context,
-	creator string,
-) (val types.PartitionedPoolRegistry, found bool) {
+func (k Keeper) GetPartitionedPoolRegistry(ctx sdk.Context, partitionedPoolRegistryW3CIdentifier string) (result types.PartitionedPoolRegistry, found bool) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.PartitionedPoolRegistryKeyPrefix))
 	b := store.Get(types.PartitionedPoolRegistryKey(
-		creator,
+		partitionedPoolRegistryW3CIdentifier,
 	))
 
 	if b == nil {
-		return val, false
+		return result, false
 	}
 
-	k.cdc.MustUnmarshal(b, &val)
+	k.cdc.MustUnmarshal(b, &result)
 
-	return val, true
+	return result, true
 }
 
-func (k Keeper) RemovePartitionedPoolRegistry(
-	ctx sdk.Context,
-	creator string,
-) {
+func (k Keeper) RemovePartitionedPoolRegistry(ctx sdk.Context, partitionedPoolRegistryW3CIdentifier string) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.PartitionedPoolRegistryKeyPrefix))
-	store.Delete(types.PartitionedPoolRegistryKey(
-		creator,
-	))
+
+	store.Delete(types.PartitionedPoolRegistryKey(partitionedPoolRegistryW3CIdentifier))
 }
 
 func (k Keeper) GetAllPartitionedPoolRegistries(ctx sdk.Context) (list []types.PartitionedPoolRegistry) {

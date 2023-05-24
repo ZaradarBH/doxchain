@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	// this line is used by starport scaffolding # 1
 
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"github.com/spf13/cobra"
@@ -91,22 +90,16 @@ func (AppModuleBasic) GetQueryCmd() *cobra.Command {
 type AppModule struct {
 	AppModuleBasic
 
-	keeper        keeper.Keeper
-	accountKeeper types.AccountKeeper
-	bankKeeper    types.BankKeeper
+	keeper keeper.Keeper
 }
 
 func NewAppModule(
 	cdc codec.Codec,
 	keeper keeper.Keeper,
-	accountKeeper types.AccountKeeper,
-	bankKeeper types.BankKeeper,
 ) AppModule {
 	return AppModule{
 		AppModuleBasic: NewAppModuleBasic(cdc),
 		keeper:         keeper,
-		accountKeeper:  accountKeeper,
-		bankKeeper:     bankKeeper,
 	}
 }
 
@@ -155,9 +148,8 @@ func (am AppModule) BeginBlock(_ sdk.Context, _ abci.RequestBeginBlock) {}
 
 // EndBlock contains the logic that is automatically triggered at the end of each block
 func (am AppModule) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.ValidatorUpdate {
-	deviceCodeRegistries := am.keeper.GetAllDeviceCodeRegistry(ctx)
-
-	for _, deviceCodeRegistry := range deviceCodeRegistries {
+	//TODO: Benchmark this clean up logic. In general we could just do this type of EndBlock GC'ing once per blockCleanupInterval, it does not have to happen on every block.
+	for _, deviceCodeRegistry := range am.keeper.GetAllDeviceCodeRegistry(ctx) {
 		registryUpdated := false
 
 		for index, deviceCodeInfo := range deviceCodeRegistry.Codes {
@@ -176,6 +168,21 @@ func (am AppModule) EndBlock(ctx sdk.Context, _ abci.RequestEndBlock) []abci.Val
 
 		if registryUpdated {
 			am.keeper.SetDeviceCodeRegistry(ctx, deviceCodeRegistry)
+		}
+	}
+
+	for _, relationshipRegistry := range am.keeper.GetAllClientRegistrationRelationshipRegistry(ctx) {
+		registryId := relationshipRegistry.Owner.GetW3CIdentifier()
+
+		for _, relationship := range relationshipRegistry.Relationships {
+			ownerId := relationship.Owner.GetW3CIdentifier()
+			destinationId := relationship.Destination.GetW3CIdentifier()
+			_, foundOwner := am.keeper.GetClientRegistration(ctx, registryId, ownerId)
+			_, foundDestination := am.keeper.GetClientRegistration(ctx, registryId, destinationId)
+
+			if !foundOwner || !foundDestination {
+				am.keeper.RemoveClientRegistrationRelationship(ctx, registryId, ownerId, destinationId)
+			}
 		}
 	}
 

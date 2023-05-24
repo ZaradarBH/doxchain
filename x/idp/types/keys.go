@@ -15,11 +15,9 @@ const (
 )
 
 const (
-	// TenantRegistryKeyPrefix is the prefix to retrieve all TenantRegistry
 	TenantRegistryKeyPrefix = "TenantRegistry/value/"
 )
 
-// TenantRegistryKey returns the store key to retrieve a TenantRegistryKey from the identifier fields
 func TenantRegistryKey(
 	identifier string,
 ) []byte {

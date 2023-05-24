@@ -10,7 +10,7 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 	for _, elem := range genState.PartitionedPoolRegistries {
 		k.SetPartitionedPoolRegistry(ctx, elem)
 	}
-	
+
 	k.SetParams(ctx, genState.Params)
 }
 

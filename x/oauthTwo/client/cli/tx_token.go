@@ -18,36 +18,29 @@ func CmdToken() *cobra.Command {
 		Short: "Broadcast message token",
 		Args:  cobra.ExactArgs(8),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
-			argTenant := args[0]
-			argClientId := args[1]
-			argClientSecret := args[2]
-			argScope := args[3]
-			argGrantType := args[4]
-			argDeviceCode := args[5]
-			argAuthorizationCode := args[6]
-			argClientAssertion := args[7]
-			argClientAssertionType := args[8]
-
 			clientCtx, err := client.GetClientTxContext(cmd)
+
 			if err != nil {
 				return err
 			}
 
 			msg := types.NewMsgTokenRequest(
 				clientCtx.GetFromAddress().String(),
-				argTenant,
-				argClientId,
-				argClientSecret,
-				argScope,
-				argGrantType,
-				argDeviceCode,
-				argAuthorizationCode,
-				argClientAssertion,
-				argClientAssertionType,
+				args[0],
+				args[1],
+				args[2],
+				[]string{args[3]},
+				args[4],
+				args[5],
+				args[6],
+				args[7],
+				args[8],
 			)
+
 			if err := msg.ValidateBasic(); err != nil {
 				return err
 			}
+
 			return tx.GenerateOrBroadcastTxCLI(clientCtx, cmd.Flags(), msg)
 		},
 	}

@@ -5,59 +5,59 @@ import (
 
 	"github.com/be-heroes/doxchain/x/did/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-func (k msgServer) CreateDid(goCtx context.Context, msg *types.MsgCreateDidRequest) (*types.MsgCreateDidResponse, error) {
+func (k msgServer) CreateDid(goCtx context.Context, msg *types.MsgCreateDidRequest) (result *types.MsgCreateDidResponse, err error) {
 	if msg.Creator != msg.Did.Creator {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "impersonation is not allowed")
+		return nil, types.ErrDidImpersonation
 	}
 
-	err := k.SetDid(sdk.UnwrapSDKContext(goCtx), msg.Did, false)
-
-	if err != nil {
-		return nil, err
-	}
-
-	return &types.MsgCreateDidResponse{
-		FullyQualifiedW3CIdentifier: msg.Did.GetW3CIdentifier(),
-	}, nil
-}
-
-func (k msgServer) UpdateDid(goCtx context.Context, msg *types.MsgUpdateDidRequest) (*types.MsgUpdateDidResponse, error) {
-	if msg.Creator != msg.Did.Creator {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrInvalidRequest, "impersonation is not allowed")
-	}
-
-	err := k.SetDid(sdk.UnwrapSDKContext(goCtx), msg.Did, true)
-
-	if err != nil {
-		return nil, err
-	}
-
-	return &types.MsgUpdateDidResponse{}, nil
-}
-
-func (k msgServer) DeleteDid(goCtx context.Context, msg *types.MsgDeleteDidRequest) (*types.MsgDeleteDidResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
+	_, found := k.Keeper.GetDid(ctx, msg.Did.GetW3CIdentifier())
+
+	if found {
+		return nil, types.ErrDidExists
+	}
+
+	k.Keeper.SetDid(sdk.UnwrapSDKContext(goCtx), msg.Did)
+
+	result.DidW3CIdentifier = msg.Did.GetW3CIdentifier()
 	
-	// Check if the value exists
-	valFound, isFound := k.GetDid(ctx, msg.FullyQualifiedW3CIdentifier)
+	return result, nil
+}
 
-	if !isFound {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrKeyNotFound, "not set")
+func (k msgServer) UpdateDid(goCtx context.Context, msg *types.MsgUpdateDidRequest) (result *types.MsgUpdateDidResponse, err error) {
+	if msg.Creator != msg.Did.Creator {
+		return nil, types.ErrDidImpersonation
 	}
 
-	// Checks if the the msg creator is the same as the current owner
-	if msg.Creator != valFound.Creator {
-		return nil, sdkerrors.Wrap(sdkerrors.ErrUnauthorized, "incorrect owner")
+	ctx := sdk.UnwrapSDKContext(goCtx)
+	match, found := k.Keeper.GetDid(ctx, msg.Did.GetW3CIdentifier())
+
+	if found && msg.Creator != match.Creator {		
+		return nil, types.ErrDidImpersonation
 	}
 
-	err := k.RemoveDid(ctx, msg.FullyQualifiedW3CIdentifier)
+	k.Keeper.SetDid(sdk.UnwrapSDKContext(goCtx), msg.Did)
 
-	if err != nil {
-		return nil, err
+	result.DidW3CIdentifier = msg.Did.GetW3CIdentifier()
+	
+	return result, nil
+}
+
+func (k msgServer) DeleteDid(goCtx context.Context, msg *types.MsgDeleteDidRequest) (result *types.MsgDeleteDidResponse, err error) {
+	ctx := sdk.UnwrapSDKContext(goCtx)
+	match, found := k.Keeper.GetDid(ctx, msg.DidW3CIdentifier)
+
+	if !found {
+		return nil, types.ErrDidNotFound
 	}
 
-	return &types.MsgDeleteDidResponse{}, nil
+	if msg.Creator != match.Creator {
+		return nil, types.ErrDidImpersonation
+	}
+
+	k.Keeper.RemoveDid(ctx, msg.DidW3CIdentifier)
+
+	return result, nil
 }

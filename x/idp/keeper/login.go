@@ -4,46 +4,50 @@ import (
 	"time"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-
-	utils "github.com/be-heroes/doxchain/utils/jwt"
-	"github.com/be-heroes/doxchain/x/idp/types"
+	jwtUtils "github.com/be-heroes/doxchain/utils/jwt"
 )
 
-// Login method for simple idp keeper
-func (k Keeper) Login(ctx sdk.Context, msg types.MsgAuthenticationRequest) (types.MsgAuthenticationResponse, error) {
-	response := types.MsgAuthenticationResponse{}
-	isAuthorized, err := k.AuthorizeCreator(ctx, msg.Tenant, msg.Creator)
+func (k Keeper) Login(ctx sdk.Context, user sdk.AccAddress, tenantW3CIdentifier string) string {
+	isAuthorized := k.AuthorizeUser(ctx, user, tenantW3CIdentifier)
 
 	if !isAuthorized {
-		return response, err
+		return ""
 	}
 
-	jwtToken := utils.NewJwtTokenFactory(utils.WithContext(&ctx)).Create(msg.Tenant, msg.Creator, msg.Creator, time.Minute*60)
-	tokenString, err := jwtToken.SignedString([]byte(msg.Creator))
+	jwtToken := jwtUtils.NewJwtTokenFactory(jwtUtils.WithContext(&ctx)).Create(tenantW3CIdentifier, user.String(), user.String(), time.Minute*60)
+	tokenString, err := jwtToken.SignedString([]byte(user.String()))
 
 	if err != nil {
-		return response, sdkerrors.Wrap(types.LoginError, "Could not issue refresh token")
+		return ""
 	}
 
-	response.Token = tokenString
-
-	return response, nil
+	return tokenString
 }
 
-// AuthorizeCreator checks if a creator belongs to a given tenant
-func (k Keeper) AuthorizeCreator(ctx sdk.Context, fullyQualifiedW3CIdentifier string, creator string) (bool, error) {
-	acl, err := k.GetAccessClientList(ctx, fullyQualifiedW3CIdentifier)
-
-	if err != nil {
-		return false, err
-	}
+func (k Keeper) AuthorizeUser(ctx sdk.Context, user sdk.AccAddress, tenantW3CIdentifier string) bool {
+	acl := k.GetAccessClientList(ctx, tenantW3CIdentifier)
 
 	for _, aclEntry := range acl.Entries {
-		if aclEntry.User.Creator == creator {
-			return true, nil
+		if aclEntry.User.Creator == user.String() {
+			return true
 		}
 	}
 
-	return false, nil
+	return false
+}
+
+func (k Keeper) AuthorizeScope(ctx sdk.Context, clientRegistrationRegistryW3CIdentitifer string, clientRegistrationW3CIdentitifer string, scope string) string {
+	registration, found := k.GetClientRegistration(ctx, clientRegistrationRegistryW3CIdentitifer, clientRegistrationW3CIdentitifer)
+
+	if !found {
+		return ""
+	}
+
+	for _, appScope := range registration.AppScopes {
+		if appScope == scope {
+			return appScope
+		}
+	}
+
+	return ""
 }

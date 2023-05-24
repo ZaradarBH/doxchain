@@ -26,4 +26,6 @@ message MsgCreatePartitionedPoolRegistryRequest {
   string denom   = 2;
 }
 
-message MsgCreatePartitionedPoolRegistryResponse {}
+message MsgCreatePartitionedPoolRegistryResponse {
+  string partitionedPoolW3CIdentifier = 1;
+}
