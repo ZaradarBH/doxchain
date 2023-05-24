@@ -5,6 +5,7 @@ package beheroes.doxchain.oauthtwo.v1beta1;
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "doxchain/oauthtwo/v1beta1/authorization_code_registry.proto";
+import "doxchain/oauthtwo/v1beta1/types.proto";
 
 option go_package = "github.com/be-heroes/doxchain/x/oauthtwo/types";
 
@@ -18,7 +19,7 @@ message MsgTokenRequest {
   string creator = 1;
   string tenantW3CIdentifier = 2 [json_name = "tenant"];
   repeated string scope = 3;
-  string grantType = 4;
+  GrantType grantType = 4;
   string clientRegistrationAppIdW3CIdentifier = 5 [json_name = "clientId"];
   string clientSecret = 6;
   string deviceCode = 7;  

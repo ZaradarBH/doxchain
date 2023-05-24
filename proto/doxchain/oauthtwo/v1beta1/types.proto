@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package beheroes.doxchain.oauthtwo.v1beta1;
+
+option go_package = "github.com/be-heroes/doxchain/x/oauthtwo/types";
+
+enum GrantType {
+    GRANT_TYPE_UNSPECIFIED = 0;
+    GRANT_TYPE_CLIENT_CREDENTIALS_GRANT = 1;
+    GRANT_TYPE_DEVICE_CODE_GRANT = 2;
+    GRANT_TYPE_AUTHORIZATION_CODE_GRANT = 3;
+}
