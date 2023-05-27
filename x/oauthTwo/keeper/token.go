@@ -7,7 +7,7 @@ import (
 	"github.com/be-heroes/doxchain/x/oauthtwo/types"
 )
 
-func (k Keeper) Token(ctx sdk.Context, creator string, tenantW3CIdentifier string, clientRegistrationAppIdW3CIdentifier string, scope []string, clientSecret string, authorizationCode string, deviceCode string, clientAssertion string, clientAssertionType string, grantType string) (accessToken string, tokenType string, expiresIn int64, err error) {
+func (k Keeper) Token(ctx sdk.Context, creator string, tenantW3CIdentifier string, clientRegistrationAppIdW3CIdentifier string, scope []string, clientSecret string, authorizationCode string, deviceCode string, clientAssertion string, clientAssertionType string, grantType types.GrantType) (accessToken string, tokenType string, expiresIn int64, err error) {
 	creatorAddress, err := sdk.AccAddressFromBech32(creator)
 
 	if err != nil {
@@ -31,11 +31,11 @@ func (k Keeper) Token(ctx sdk.Context, creator string, tenantW3CIdentifier strin
 	}
 
 	switch grantType {
-	case types.ClientCredentialsGrant.String():
+	case types.GrantType_GRANT_TYPE_CLIENT_CREDENTIALS_GRANT:
 		return k.GenerateClientCredentialToken(ctx, creator, tenantW3CIdentifier, scope, clientRegistrationAppIdW3CIdentifier, clientSecret, clientAssertion, clientAssertionType)
-	case types.DeviceCodeGrant.String():
+	case types.GrantType_GRANT_TYPE_DEVICE_CODE_GRANT:
 		return k.GenerateDeviceCodeToken(ctx, creator, tenantW3CIdentifier, scope, clientRegistrationAppIdW3CIdentifier, deviceCode)
-	case types.AuthorizationCodeGrant.String():
+	case types.GrantType_GRANT_TYPE_AUTHORIZATION_CODE_GRANT:
 		return k.GenerateAuthorizationCodeToken(ctx, creator, tenantW3CIdentifier, scope, clientRegistrationAppIdW3CIdentifier, authorizationCode)
 	}
 

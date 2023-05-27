@@ -11,7 +11,7 @@ BINARY=${BINARY:-doxchaind}
 # check DENOM is set. If not, set to uluna
 DENOM=${DENOM:-udox}
 
-CHAIN_ID="test"
+CHAIN_ID=${CHAIN_ID:-.test}
 HOME_DIR=${HOME_DIR:-.doxchaind}
 KEYRING="test"
 KEY="test"
