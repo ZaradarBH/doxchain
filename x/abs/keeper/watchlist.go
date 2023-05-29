@@ -61,12 +61,6 @@ func (k Keeper) AddToWatchlist(ctx sdk.Context, addr sdk.AccAddress, coins sdk.C
 		return nil
 	}
 
-	err := k.bankKeeper.IsSendEnabledCoins(ctx, coins...)
-
-	if err != nil {
-		return err
-	}
-
 	blockHeight := uint64(ctx.BlockHeight())
 	watchlistEntry := k.GetAddressWatchlist(ctx, addr)
 	watchlistEntry.Coins = watchlistEntry.Coins.Add(coins...)

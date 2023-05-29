@@ -20,9 +20,12 @@ var _ banktypes.MsgServer = msgServer{}
 
 func (k msgServer) Send(goCtx context.Context, msg *banktypes.MsgSend) (*banktypes.MsgSendResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
-	err := k.abs.AddToWatchlist(ctx, sdk.AccAddress(msg.FromAddress), msg.Amount)
 
-	if err != nil {
+	if err := k.BaseSendKeeper.IsSendEnabledCoins(ctx, msg.Amount...); err != nil {
+		return nil, err
+	}
+
+	if err := k.abs.AddToWatchlist(ctx, sdk.AccAddress(msg.FromAddress), msg.Amount); err != nil {
 		return nil, err
 	}
 
@@ -33,9 +36,13 @@ func (k msgServer) MultiSend(goCtx context.Context, msg *banktypes.MsgMultiSend)
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	for _, input := range msg.Inputs {
-		err := k.abs.AddToWatchlist(ctx, sdk.AccAddress(input.Address), input.Coins)
+		if err := k.BaseSendKeeper.IsSendEnabledCoins(ctx, input.Coins...); err != nil {
+			return nil, err
+		}
+	}
 
-		if err != nil {
+	for _, input := range msg.Inputs {
+		if err := k.abs.AddToWatchlist(ctx, sdk.AccAddress(input.Address), input.Coins); err != nil {
 			return nil, err
 		}
 	}

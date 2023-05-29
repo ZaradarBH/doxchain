@@ -20,11 +20,10 @@ type (
 		paramstore paramtypes.Subspace
 
 		accountKeeper types.AccountKeeper
-		bankKeeper    types.BankKeeper
 	}
 )
 
-//TODO: Finish PartitionedPool concept once oracle is done.
+// TODO: Finish PartitionedPool concept once oracle is done.
 func NewKeeper(
 	cdc codec.BinaryCodec,
 	storeKey,
@@ -32,7 +31,6 @@ func NewKeeper(
 	ps paramtypes.Subspace,
 
 	accountKeeper types.AccountKeeper,
-	bankKeeper types.BankKeeper,
 ) *Keeper {
 	if !ps.HasKeyTable() {
 		ps = ps.WithKeyTable(types.ParamKeyTable())
@@ -45,7 +43,6 @@ func NewKeeper(
 		paramstore: ps,
 
 		accountKeeper: accountKeeper,
-		bankKeeper:    bankKeeper,
 	}
 }
 

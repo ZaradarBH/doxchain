@@ -6,6 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
+	custombankkeeper "github.com/be-heroes/doxchain/custom/bank/keeper"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	"github.com/cosmos/cosmos-sdk/client"
 	nodeservice "github.com/cosmos/cosmos-sdk/client/grpc/node"
@@ -375,12 +376,21 @@ func New(
 		app.AccountKeeper,
 	)
 
-	app.BankKeeper = bankkeeper.NewBaseKeeper(
+	app.AbsKeeper = *absmodulekeeper.NewKeeper(
+		appCodec,
+		keys[absmoduletypes.StoreKey],
+		keys[absmoduletypes.MemStoreKey],
+		app.GetSubspace(absmoduletypes.ModuleName),
+		app.AccountKeeper,
+	)
+
+	app.BankKeeper = custombankkeeper.NewBaseKeeper(
 		appCodec,
 		keys[banktypes.StoreKey],
 		app.AccountKeeper,
 		app.GetSubspace(banktypes.ModuleName),
 		app.BlockedModuleAccountAddrs(),
+		app.AbsKeeper,
 	)
 
 	app.StakingKeeper = stakingkeeper.NewKeeper(
@@ -545,17 +555,7 @@ func New(
 
 	didModule := didmodule.NewAppModule(appCodec, app.DidKeeper, app.AccountKeeper)
 
-	app.AbsKeeper = *absmodulekeeper.NewKeeper(
-		appCodec,
-		keys[absmoduletypes.StoreKey],
-		keys[absmoduletypes.MemStoreKey],
-		app.GetSubspace(absmoduletypes.ModuleName),
-
-		app.AccountKeeper,
-		app.BankKeeper,
-	)
-
-	absModule := absmodule.NewAppModule(appCodec, app.AbsKeeper, app.AccountKeeper, app.BankKeeper)
+	absModule := absmodule.NewAppModule(appCodec, app.AbsKeeper, app.AccountKeeper)
 
 	app.OAuthTwoKeeper = *oauthtwomodulekeeper.NewKeeper(
 		appCodec,
