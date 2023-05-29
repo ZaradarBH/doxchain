@@ -6,6 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
+	custombank "github.com/be-heroes/doxchain/custom/bank"
 	custombankkeeper "github.com/be-heroes/doxchain/custom/bank/keeper"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	"github.com/cosmos/cosmos-sdk/client"
@@ -33,7 +34,6 @@ import (
 	authzkeeper "github.com/cosmos/cosmos-sdk/x/authz/keeper"
 	authzmodule "github.com/cosmos/cosmos-sdk/x/authz/module"
 	"github.com/cosmos/cosmos-sdk/x/bank"
-	bankkeeper "github.com/cosmos/cosmos-sdk/x/bank/keeper"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 	"github.com/cosmos/cosmos-sdk/x/capability"
 	capabilitykeeper "github.com/cosmos/cosmos-sdk/x/capability/keeper"
@@ -140,6 +140,7 @@ import (
 const (
 	AccountAddressPrefix = "doxc"
 	Name                 = "doxchain"
+	DefaultDenomUnit     = "udox"
 )
 
 func getGovProposalHandlers() []govclient.ProposalHandler {
@@ -243,7 +244,7 @@ type App struct {
 	// keepers
 	AccountKeeper    authkeeper.AccountKeeper
 	AuthzKeeper      authzkeeper.Keeper
-	BankKeeper       bankkeeper.Keeper
+	BankKeeper       custombankkeeper.BaseKeeper
 	CapabilityKeeper *capabilitykeeper.Keeper
 	StakingKeeper    stakingkeeper.Keeper
 	SlashingKeeper   slashingkeeper.Keeper
@@ -660,7 +661,7 @@ func New(
 		auth.NewAppModule(appCodec, app.AccountKeeper, nil),
 		authzmodule.NewAppModule(appCodec, app.AuthzKeeper, app.AccountKeeper, app.BankKeeper, app.interfaceRegistry),
 		vesting.NewAppModule(app.AccountKeeper, app.BankKeeper),
-		bank.NewAppModule(appCodec, app.BankKeeper, app.AccountKeeper),
+		custombank.NewAppModule(appCodec, app.BankKeeper, app.AccountKeeper),
 		capability.NewAppModule(appCodec, *app.CapabilityKeeper),
 		feegrantmodule.NewAppModule(appCodec, app.AccountKeeper, app.BankKeeper, app.FeeGrantKeeper, app.interfaceRegistry),
 		groupmodule.NewAppModule(appCodec, app.GroupKeeper, app.AccountKeeper, app.BankKeeper, app.interfaceRegistry),

@@ -6,6 +6,7 @@ import (
 	"github.com/be-heroes/doxchain/app"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	banktestutil "github.com/cosmos/cosmos-sdk/x/bank/testutil"
 	"github.com/stretchr/testify/suite"
 	"github.com/tendermint/tendermint/crypto/ed25519"
 	tmtypes "github.com/tendermint/tendermint/proto/tendermint/types"
@@ -22,7 +23,7 @@ type KeeperTestHelper struct {
 
 // Setup sets up basic environment for suite (App, Ctx, and test accounts)
 func (s *KeeperTestHelper) Setup() {
-	s.App = app.Setup(false)
+	s.App = app.Setup()
 	s.Ctx = s.App.BaseApp.NewContext(false, tmtypes.Header{Height: 1, ChainID: "doxchain-1", Time: time.Now().UTC()})
 	s.QueryHelper = &baseapp.QueryServiceTestHelper{
 		GRPCQueryRouter: s.App.GRPCQueryRouter(),
@@ -41,4 +42,10 @@ func CreateRandomAccounts(numAccts int) []sdk.AccAddress {
 	}
 
 	return testAddrs
+}
+
+// FundAcc funds target address with specified amount.
+func (s *KeeperTestHelper) FundAcc(acc sdk.AccAddress, amounts sdk.Coins) {
+	err := banktestutil.FundAccount(s.App.BankKeeper, s.Ctx, acc, amounts)
+	s.Require().NoError(err)
 }
