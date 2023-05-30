@@ -8,18 +8,8 @@ import "doxchain/abs/v1beta1/partitioned_pool_registry.proto";
 option go_package = "github.com/be-heroes/doxchain/x/abs/types";
 
 service Msg {
-  rpc UpdateBreakFactor (MsgUpdateBreakFactorRequest) returns (MsgUpdateBreakFactorResponse);
   rpc CreatePartitionedPoolRegistry (MsgCreatePartitionedPoolRegistryRequest) returns (MsgCreatePartitionedPoolRegistryResponse);
 }
-
-message MsgUpdateBreakFactorRequest {
-  option (gogoproto.equal) = false;
-  option (gogoproto.goproto_getters) = false;
-  string creator = 1 [(gogoproto.moretags) = "yaml:\"creator\""];
-  string breakFactor = 2 [(gogoproto.moretags) = "yaml:\"breakFactor\"", (gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", (gogoproto.nullable) = false];
-}
-
-message MsgUpdateBreakFactorResponse {}
 
 message MsgCreatePartitionedPoolRegistryRequest {
   string creator = 1;

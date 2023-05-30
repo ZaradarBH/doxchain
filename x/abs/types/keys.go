@@ -21,10 +21,8 @@ func KeyPrefix(p string) []byte {
 // Keys for abs store
 // Items are stored with the following key: values
 //
-// - 0x01: sdk.Dec
 // - 0x02: []WatchlistEntry
 var (
 	// Keys for store prefixed
-	BreakFactorKey = []byte{0x01}
-	WatchlistKey   = []byte{0x02}
+	WatchlistKey = []byte{0x01}
 )

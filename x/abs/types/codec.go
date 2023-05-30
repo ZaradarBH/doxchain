@@ -8,13 +8,11 @@ import (
 )
 
 func RegisterCodec(cdc *codec.LegacyAmino) {
-	cdc.RegisterConcrete(&MsgUpdateBreakFactorRequest{}, "abs/UpdateBreakFactor", nil)
 	cdc.RegisterConcrete(&MsgCreatePartitionedPoolRegistryRequest{}, "abs/CreatePartitionedPoolRegistry", nil)
 }
 
 func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 	registry.RegisterImplementations((*sdk.Msg)(nil),
-		&MsgUpdateBreakFactorRequest{},
 		&MsgCreatePartitionedPoolRegistryRequest{},
 	)
 
