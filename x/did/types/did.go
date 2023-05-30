@@ -2,25 +2,20 @@ package types
 
 import (
 	"fmt"
-	"regexp"
-)
-
-var (
-	//TODO: This regex is most likely wrong. Verify that it will match an actual bech32 address
-	REGEX_BECH32 = regexp.MustCompile("[13][a-km-zA-HJ-NP-Z1-9]{25,34}")
+	
+	regexpUtils "github.com/be-heroes/doxchain/utils/regexp"
 )
 
 func (did *Did) GetW3CIdentifier() string {
-	return fmt.Sprintf("did:%s:%s", did.MethodName, did.MethodId)
+	return fmt.Sprintf("%s%s%s%s%s", regexpUtils.REGEX_DID_PREFIX, regexpUtils.REGEX_DID_SEPERATOR_CHAR, did.MethodName, regexpUtils.REGEX_DID_SEPERATOR_CHAR, did.MethodId)
 }
 
 func (did *Did) IsUserIdentifier() bool {	
-	w3cIdentifier := did.GetW3CIdentifier()
+	matchIndexes := regexpUtils.REGEX_DOXC_ADDRESS.FindAllStringIndex(did.GetW3CIdentifier(), -1)	
 
-	return len(REGEX_BECH32.FindStringSubmatch(w3cIdentifier)) == 2
+	return len(matchIndexes) == 2 && matchIndexes[0][1]+len(regexpUtils.REGEX_DID_SEPERATOR_CHAR) == matchIndexes[1][0]
 }
 
 func (did *Did) IsModuleIdentifier() bool {
-	//TODO: Implement this logic. Name syntax for module DIDs is {MODULE_NAME}_{MODULETYPENAME}{REGEX_DID_SEPERATOR_CHAR}{CREATOR}
-	return false
+	return len(regexpUtils.REGEX_DOXC_MODULE.FindAllStringSubmatch(did.GetW3CIdentifier(), -1)) == 1
 }

@@ -446,67 +446,10 @@ paths:
               params:
                 type: object
                 properties:
-                  operators:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        creator:
-                          type: string
-                        url:
-                          type: string
-                        methodName:
-                          type: string
-                        methodId:
-                          type: string
-                        path:
-                          type: string
-                        fragment:
-                          type: string
-                        query:
-                          type: string
-                        parameters:
-                          type: array
-                          items:
-                            type: object
-                            properties:
-                              name:
-                                type: string
-                              value:
-                                type: string
-                  blockExpireOffset:
+                  block_expire_offset:
                     type: string
-        default:
-          description: An unexpected error response.
-          schema:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int32
-              message:
-                type: string
-              details:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    '@type':
-                      type: string
-                  additionalProperties: {}
-      tags:
-        - Query
-  /doxchain/abs/query_break_factor:
-    get:
-      operationId: BeheroesDoxchainAbsV1Beta1QueryBreakFactor
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            type: object
-            properties:
-              breakFactor:
-                type: string
+                  break_factor:
+                    type: string
         default:
           description: An unexpected error response.
           schema:
@@ -45651,40 +45594,12 @@ definitions:
     properties:
       partitionedPoolW3CIdentifier:
         type: string
-  beheroes.doxchain.abs.v1beta1.MsgUpdateBreakFactorResponse:
-    type: object
   beheroes.doxchain.abs.v1beta1.Params:
     type: object
     properties:
-      operators:
-        type: array
-        items:
-          type: object
-          properties:
-            creator:
-              type: string
-            url:
-              type: string
-            methodName:
-              type: string
-            methodId:
-              type: string
-            path:
-              type: string
-            fragment:
-              type: string
-            query:
-              type: string
-            parameters:
-              type: array
-              items:
-                type: object
-                properties:
-                  name:
-                    type: string
-                  value:
-                    type: string
-      blockExpireOffset:
+      block_expire_offset:
+        type: string
+      break_factor:
         type: string
   beheroes.doxchain.abs.v1beta1.ParitionedPoolConfiguration:
     type: object
@@ -46171,11 +46086,6 @@ definitions:
                    repeated Bar results = 1;
                    PageResponse page = 2;
            }
-  beheroes.doxchain.abs.v1beta1.QueryBreakFactorResponse:
-    type: object
-    properties:
-      breakFactor:
-        type: string
   beheroes.doxchain.abs.v1beta1.QueryGetPartitionedPoolRegistryResponse:
     type: object
     properties:
@@ -46325,35 +46235,9 @@ definitions:
       params:
         type: object
         properties:
-          operators:
-            type: array
-            items:
-              type: object
-              properties:
-                creator:
-                  type: string
-                url:
-                  type: string
-                methodName:
-                  type: string
-                methodId:
-                  type: string
-                path:
-                  type: string
-                fragment:
-                  type: string
-                query:
-                  type: string
-                parameters:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                      value:
-                        type: string
-          blockExpireOffset:
+          block_expire_offset:
+            type: string
+          break_factor:
             type: string
   beheroes.doxchain.abs.v1beta1.QueryWatchlistResponse:
     type: object
@@ -49124,6 +49008,14 @@ definitions:
                         type: string
                       value:
                         type: string
+  beheroes.doxchain.oauthtwo.v1beta1.GrantType:
+    type: string
+    enum:
+      - GRANT_TYPE_UNSPECIFIED
+      - GRANT_TYPE_CLIENT_CREDENTIALS_GRANT
+      - GRANT_TYPE_DEVICE_CODE_GRANT
+      - GRANT_TYPE_AUTHORIZATION_CODE_GRANT
+    default: GRANT_TYPE_UNSPECIFIED
   beheroes.doxchain.oauthtwo.v1beta1.MsgAuthorizeResponse:
     type: object
     properties:

@@ -23,7 +23,7 @@ func (k msgServer) CreateDid(goCtx context.Context, msg *types.MsgCreateDidReque
 		return nil, types.ErrDidExists
 	}
 
-	k.Keeper.SetDid(sdk.UnwrapSDKContext(goCtx), msg.Did)
+	k.Keeper.SetDid(sdk.UnwrapSDKContext(goCtx), msg.Did, false)
 
 	result.DidW3CIdentifier = msg.Did.GetW3CIdentifier()
 	
@@ -46,7 +46,7 @@ func (k msgServer) UpdateDid(goCtx context.Context, msg *types.MsgUpdateDidReque
 		return nil, types.ErrImpersonation
 	}
 
-	k.Keeper.SetDid(sdk.UnwrapSDKContext(goCtx), msg.Did)
+	k.Keeper.SetDid(sdk.UnwrapSDKContext(goCtx), msg.Did, true)
 
 	result.DidW3CIdentifier = msg.Did.GetW3CIdentifier()
 	

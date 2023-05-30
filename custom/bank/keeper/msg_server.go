@@ -39,9 +39,7 @@ func (k msgServer) MultiSend(goCtx context.Context, msg *banktypes.MsgMultiSend)
 		if err := k.BaseSendKeeper.IsSendEnabledCoins(ctx, input.Coins...); err != nil {
 			return nil, err
 		}
-	}
 
-	for _, input := range msg.Inputs {
 		if err := k.abs.AddToWatchlist(ctx, sdk.AccAddress(input.Address), input.Coins); err != nil {
 			return nil, err
 		}
