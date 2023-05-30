@@ -16,10 +16,6 @@ service Query {
     option (google.api.http).get = "/doxchain/abs/params";  
   }
   
-  rpc QueryBreakFactor (QueryBreakFactorRequest) returns (QueryBreakFactorResponse) {
-    option (google.api.http).get = "/doxchain/abs/query_break_factor";  
-  }
-  
   rpc QueryWatchlist (QueryWatchlistRequest) returns (QueryWatchlistResponse) {
     option (google.api.http).get = "/doxchain/abs/query_watchlist";  
   }
@@ -37,12 +33,6 @@ message QueryParamsRequest {}
 
 message QueryParamsResponse {  
   Params params = 1 [(gogoproto.nullable) = false];
-}
-
-message QueryBreakFactorRequest {}
-
-message QueryBreakFactorResponse {
-  string breakFactor = 1;
 }
 
 message QueryWatchlistRequest {}

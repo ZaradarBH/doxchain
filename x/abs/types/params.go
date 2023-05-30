@@ -2,7 +2,9 @@ package types
 
 import (
 	"fmt"
-	didTypes "github.com/be-heroes/doxchain/x/did/types"
+
+	sdkerrors "cosmossdk.io/errors"
+	"cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
 	"gopkg.in/yaml.v2"
@@ -11,37 +13,37 @@ import (
 var _ paramtypes.ParamSet = (*Params)(nil)
 
 var (
-	DefaultOperators         = []didTypes.Did(nil) // none allowed
 	DefaultBlockExpireOffset = sdk.NewInt(100000)
+	DefaultBreakFactor       = sdk.MustNewDecFromStr("0.5")
 
-	ParamStoreKeyOperators         = []byte("Operators")
 	ParamStoreKeyBlockExpireOffset = []byte("BlockExpireOffset")
+	ParamStoreKeyBreakFactor       = []byte("BreakFactor")
 )
 
 func ParamKeyTable() paramtypes.KeyTable {
 	return paramtypes.NewKeyTable().RegisterParamSet(&Params{})
 }
 
-func NewParams(operators []didTypes.Did, blockExpireOffset sdk.Int) Params {
+func NewParams(breakFactor sdk.Dec, blockExpireOffset math.Int) Params {
 	return Params{
-		Operators:         operators,
 		BlockExpireOffset: blockExpireOffset,
+		BreakFactor:       breakFactor,
 	}
 }
 
 func DefaultParams() Params {
-	return NewParams(DefaultOperators, DefaultBlockExpireOffset)
+	return NewParams(DefaultBreakFactor, DefaultBlockExpireOffset)
 }
 
 func (p *Params) ParamSetPairs() paramtypes.ParamSetPairs {
 	return paramtypes.ParamSetPairs{
-		paramtypes.NewParamSetPair(ParamStoreKeyOperators, &p.Operators, validateOperators),
 		paramtypes.NewParamSetPair(ParamStoreKeyBlockExpireOffset, &p.BlockExpireOffset, validateBlockExpireOffset),
+		paramtypes.NewParamSetPair(ParamStoreKeyBreakFactor, &p.BreakFactor, validateBreakFactor),
 	}
 }
 
 func validateBlockExpireOffset(i interface{}) error {
-	_, ok := i.(sdk.Int)
+	_, ok := i.(math.Int)
 
 	if !ok {
 		return fmt.Errorf("invalid parameter type: %T", i)
@@ -50,11 +52,16 @@ func validateBlockExpireOffset(i interface{}) error {
 	return nil
 }
 
-func validateOperators(i interface{}) error {
-	_, ok := i.([]didTypes.Did)
+func validateBreakFactor(i interface{}) error {
+	p, ok := i.(sdk.Dec)
 
 	if !ok {
 		return fmt.Errorf("invalid parameter type: %T", i)
+	}
+
+	// break factor must be between 0 and 1
+	if p.IsNegative() || p.GT(sdk.OneDec()) {
+		return sdkerrors.Wrap(ErrBreakFactorOutOfBounds, p.String())
 	}
 
 	return nil
@@ -65,7 +72,7 @@ func (p Params) Validate() error {
 		return err
 	}
 
-	if err := validateOperators(p.Operators); err != nil {
+	if err := validateBreakFactor(p.BreakFactor); err != nil {
 		return err
 	}
 
