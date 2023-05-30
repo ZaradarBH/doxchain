@@ -18,4 +18,9 @@ message Params {
     (gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec", 
     (gogoproto.nullable) = false
   ];
+  string throttled_rolling_average = 3 [
+    (gogoproto.moretags) = "yaml:\"throttled_rolling_average\"", 
+    (gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Int", 
+    (gogoproto.nullable) = false
+  ];
 }

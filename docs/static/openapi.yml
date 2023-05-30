@@ -450,6 +450,8 @@ paths:
                     type: string
                   break_factor:
                     type: string
+                  throttled_rolling_average:
+                    type: string
         default:
           description: An unexpected error response.
           schema:
@@ -45601,6 +45603,8 @@ definitions:
         type: string
       break_factor:
         type: string
+      throttled_rolling_average:
+        type: string
   beheroes.doxchain.abs.v1beta1.ParitionedPoolConfiguration:
     type: object
     properties:
@@ -46238,6 +46242,8 @@ definitions:
           block_expire_offset:
             type: string
           break_factor:
+            type: string
+          throttled_rolling_average:
             type: string
   beheroes.doxchain.abs.v1beta1.QueryWatchlistResponse:
     type: object
