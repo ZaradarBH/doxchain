@@ -13,30 +13,34 @@ import (
 var _ paramtypes.ParamSet = (*Params)(nil)
 
 var (
-	DefaultBlockExpireOffset = sdk.NewInt(100000)
-	DefaultBreakFactor       = sdk.MustNewDecFromStr("0.5")
+	DefaultBlockExpireOffset       = sdk.NewInt(100000)
+	DefaultBreakFactor             = sdk.MustNewDecFromStr("0.5")
+	DefaultThrottledRollingAverage = sdk.NewInt(2000)
 
-	ParamStoreKeyBlockExpireOffset = []byte("BlockExpireOffset")
-	ParamStoreKeyBreakFactor       = []byte("BreakFactor")
+	ParamStoreKeyBlockExpireOffset          = []byte("BlockExpireOffset")
+	ParamStoreKeyBreakFactor                = []byte("BreakFactor")
+	ParamStoreKeyThrottledRollingAverageKey = []byte("ThrottledRollingAverage")
 )
 
 func ParamKeyTable() paramtypes.KeyTable {
 	return paramtypes.NewKeyTable().RegisterParamSet(&Params{})
 }
 
-func NewParams(breakFactor sdk.Dec, blockExpireOffset math.Int) Params {
+func NewParams(breakFactor sdk.Dec, blockExpireOffset math.Int, throttledRollingAverage math.Int) Params {
 	return Params{
-		BlockExpireOffset: blockExpireOffset,
-		BreakFactor:       breakFactor,
+		BlockExpireOffset: 		 blockExpireOffset,
+		BreakFactor:       		 breakFactor,
+		ThrottledRollingAverage: throttledRollingAverage,
 	}
 }
 
 func DefaultParams() Params {
-	return NewParams(DefaultBreakFactor, DefaultBlockExpireOffset)
+	return NewParams(DefaultBreakFactor, DefaultBlockExpireOffset, DefaultThrottledRollingAverage)
 }
 
 func (p *Params) ParamSetPairs() paramtypes.ParamSetPairs {
 	return paramtypes.ParamSetPairs{
+		paramtypes.NewParamSetPair(ParamStoreKeyThrottledRollingAverageKey, &p.ThrottledRollingAverage, validateBlockExpireOffset),
 		paramtypes.NewParamSetPair(ParamStoreKeyBlockExpireOffset, &p.BlockExpireOffset, validateBlockExpireOffset),
 		paramtypes.NewParamSetPair(ParamStoreKeyBreakFactor, &p.BreakFactor, validateBreakFactor),
 	}
@@ -68,6 +72,10 @@ func validateBreakFactor(i interface{}) error {
 }
 
 func (p Params) Validate() error {
+	if err := validateBlockExpireOffset(p.ThrottledRollingAverage); err != nil {
+		return err
+	}
+
 	if err := validateBlockExpireOffset(p.BlockExpireOffset); err != nil {
 		return err
 	}
