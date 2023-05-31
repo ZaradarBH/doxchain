@@ -8,11 +8,7 @@ import (
 )
 
 func (k msgServer) CreateDid(goCtx context.Context, msg *types.MsgCreateDidRequest) (result *types.MsgCreateDidResponse, err error) {
-	if msg.Creator != msg.Did.Creator {
-		return nil, types.ErrImpersonation
-	}
-
-	if msg.Did.IsModuleIdentifier() {
+	if msg.Creator != msg.Did.Creator || msg.Did.IsModuleIdentifier() {
 		return nil, types.ErrImpersonation
 	}
 
@@ -31,11 +27,7 @@ func (k msgServer) CreateDid(goCtx context.Context, msg *types.MsgCreateDidReque
 }
 
 func (k msgServer) UpdateDid(goCtx context.Context, msg *types.MsgUpdateDidRequest) (result *types.MsgUpdateDidResponse, err error) {
-	if msg.Creator != msg.Did.Creator {
-		return nil, types.ErrImpersonation
-	}
-
-	if msg.Did.IsModuleIdentifier() {
+	if msg.Creator != msg.Did.Creator || msg.Did.IsModuleIdentifier() {
 		return nil, types.ErrImpersonation
 	}
 
