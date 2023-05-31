@@ -2,6 +2,7 @@ package types
 
 import (
 	"fmt"
+	utils "github.com/be-heroes/doxchain/utils"
 )
 
 const DefaultIndex uint64 = 1
@@ -17,26 +18,26 @@ func DefaultGenesis() *GenesisState {
 func (gs GenesisState) Validate() error {
 	DeviceCodeRegistryIndexMap := make(map[string]struct{})
 
-	for _, elem := range gs.DeviceCodeRegistries {
-		creator := string(DeviceCodeRegistryKey(elem.Owner.Creator))
+	for _, registry := range gs.DeviceCodeRegistries {
+		indexer := string(utils.GetKeyBytes(registry.Owner.Creator))
 
-		if _, ok := DeviceCodeRegistryIndexMap[creator]; ok {
-			return fmt.Errorf("duplicated creator for DeviceCodeRegistry")
+		if _, ok := DeviceCodeRegistryIndexMap[indexer]; ok {
+			return fmt.Errorf("duplicated indexer for DeviceCodeRegistry")
 		}
 
-		DeviceCodeRegistryIndexMap[creator] = struct{}{}
+		DeviceCodeRegistryIndexMap[indexer] = struct{}{}
 	}
 
 	ClientRegistrationRegistryIndexMap := make(map[string]struct{})
 
-	for _, elem := range gs.ClientRegistrationRegistries {
-		creator := string(ClientRegistrationRegistryKey(elem.Owner.Creator))
+	for _, registry := range gs.ClientRegistrationRegistries {
+		indexer := string(utils.GetKeyBytes(registry.Owner.Creator))
 
-		if _, ok := ClientRegistrationRegistryIndexMap[creator]; ok {
-			return fmt.Errorf("duplicated creator for ClientRegistrationRegistry")
+		if _, ok := ClientRegistrationRegistryIndexMap[indexer]; ok {
+			return fmt.Errorf("duplicated indexer for ClientRegistrationRegistry")
 		}
 
-		ClientRegistrationRegistryIndexMap[creator] = struct{}{}
+		ClientRegistrationRegistryIndexMap[indexer] = struct{}{}
 	}
 
 	return gs.Params.Validate()

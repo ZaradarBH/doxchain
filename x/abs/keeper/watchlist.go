@@ -9,20 +9,20 @@ import (
 )
 
 func (k Keeper) SetAddressWatchlist(ctx sdk.Context, addr sdk.AccAddress, watchlistEntry types.WatchlistEntry) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.WatchlistKey)
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.WatchlistKeyPrefix))
 	b := k.cdc.MustMarshal(&watchlistEntry)
 
 	store.Set(addr.Bytes(), b)
 }
 
 func (k Keeper) DeleteAddressWatchlist(ctx sdk.Context, addr sdk.AccAddress) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.WatchlistKey)
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.WatchlistKeyPrefix))
 
 	store.Delete(addr.Bytes())
 }
 
 func (k Keeper) GetAddressWatchlist(ctx sdk.Context, addr sdk.AccAddress) types.WatchlistEntry {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.WatchlistKey)
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.WatchlistKeyPrefix))
 	b := store.Get(addr.Bytes())
 
 	if b == nil {
@@ -41,7 +41,7 @@ func (k Keeper) GetAddressWatchlist(ctx sdk.Context, addr sdk.AccAddress) types.
 }
 
 func (k Keeper) IterateWatchList(ctx sdk.Context, cb func(entry types.WatchlistEntry) bool) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.WatchlistKey)
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.WatchlistKeyPrefix))
 	iter := store.Iterator(nil, nil)
 
 	defer iter.Close()

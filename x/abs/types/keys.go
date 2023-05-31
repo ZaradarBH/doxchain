@@ -12,17 +12,14 @@ const (
 
 	// MemStoreKey defines the in-memory store key
 	MemStoreKey = "mem_abs"
+
 )
 
 func KeyPrefix(p string) []byte {
 	return []byte(p)
 }
 
-// Keys for abs store
-// Items are stored with the following key: values
-//
-// - 0x02: []WatchlistEntry
 var (
-	// Keys for store prefixed
-	WatchlistKey = []byte{0x01}
+	WatchlistKeyPrefix = "watchlist/value/"
+	PartitionedPoolRegistryKeyPrefix = "partitionedpoolregistry/value/"
 )

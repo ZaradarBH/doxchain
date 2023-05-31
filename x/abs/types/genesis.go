@@ -2,6 +2,7 @@ package types
 
 import (
 	"fmt"
+	utils "github.com/be-heroes/doxchain/utils"
 )
 
 const DefaultIndex uint64 = 1
@@ -16,14 +17,14 @@ func DefaultGenesis() *GenesisState {
 func (gs GenesisState) Validate() error {
 	partitionedPoolsIndexMap := make(map[string]struct{})
 
-	for _, elem := range gs.PartitionedPoolRegistries {
-		creator := string(PartitionedPoolRegistryKey(elem.Owner.Creator))
+	for _, registry := range gs.PartitionedPoolRegistries {
+		indexer := string(utils.GetKeyBytes(registry.Owner.Creator))
 
-		if _, ok := partitionedPoolsIndexMap[creator]; ok {
-			return fmt.Errorf("duplicated creator for PartitionedPoolRegistries")
+		if _, ok := partitionedPoolsIndexMap[indexer]; ok {
+			return fmt.Errorf("duplicated indexer for PartitionedPoolRegistries")
 		}
 
-		partitionedPoolsIndexMap[creator] = struct{}{}
+		partitionedPoolsIndexMap[indexer] = struct{}{}
 	}
 
 	return gs.Params.Validate()

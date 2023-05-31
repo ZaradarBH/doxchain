@@ -21,7 +21,7 @@ func (k Keeper) DidAll(goCtx context.Context, req *types.QueryAllDidRequest) (*t
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	store := ctx.KVStore(k.storeKey)
-	didStore := prefix.NewStore(store, types.KeyPrefix(types.DidKey))
+	didStore := prefix.NewStore(store, types.KeyPrefix(types.DidKeyPrefix))
 
 	pageRes, err := query.Paginate(didStore, req.Pagination, func(key []byte, value []byte) error {
 		var did types.Did

@@ -6,11 +6,12 @@ import (
 	"github.com/be-heroes/doxchain/x/did/types"
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	utils "github.com/be-heroes/doxchain/utils"
 )
 
 func (k Keeper) GetDidCount(ctx sdk.Context) uint64 {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), []byte{})
-	bz := store.Get(types.KeyPrefix(types.DidCountKey))
+	bz := store.Get(types.KeyPrefix(types.DidCountKeyPrefix))
 
 	if bz == nil {
 		return 0
@@ -25,22 +26,22 @@ func (k Keeper) SetDidCount(ctx sdk.Context, count uint64) {
 
 	binary.BigEndian.PutUint64(bz, count)
 
-	store.Set(types.KeyPrefix(types.DidCountKey), bz)
+	store.Set(types.KeyPrefix(types.DidCountKeyPrefix), bz)
 }
 
 func (k Keeper) SetDid(ctx sdk.Context, did types.Did, override bool) {
 	if k.CanOverrideDid(ctx, did, override) {
-		store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DidKey))
+		store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DidKeyPrefix))
 		
-		store.Set(GetDidIDBytes(did.GetW3CIdentifier()), k.cdc.MustMarshal(&did))
+		store.Set(utils.GetKeyBytes(did.GetW3CIdentifier()), k.cdc.MustMarshal(&did))
 
 		k.SetDidCount(ctx, k.GetDidCount(ctx)+1)
 	}
 }
 
 func (k Keeper) GetDid(ctx sdk.Context, didW3CIdentifier string) (result types.Did, found bool) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DidKey))
-	b := store.Get(GetDidIDBytes(didW3CIdentifier))
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DidKeyPrefix))
+	b := store.Get(utils.GetKeyBytes(didW3CIdentifier))
 
 	if b == nil {
 		return result, false
@@ -52,13 +53,13 @@ func (k Keeper) GetDid(ctx sdk.Context, didW3CIdentifier string) (result types.D
 }
 
 func (k Keeper) RemoveDid(ctx sdk.Context, didW3CIdentifier string) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DidKey))
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DidKeyPrefix))
 	
-	store.Delete(GetDidIDBytes(didW3CIdentifier))
+	store.Delete(utils.GetKeyBytes(didW3CIdentifier))
 }
 
 func (k Keeper) GetAllDid(ctx sdk.Context) (result []types.Did) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DidKey))
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DidKeyPrefix))
 	iterator := sdk.KVStorePrefixIterator(store, []byte{})
 
 	defer iterator.Close()
@@ -86,12 +87,4 @@ func (k Keeper) CanOverrideDid(ctx sdk.Context, did types.Did, override bool) bo
 	}
 
 	return true
-}
-
-func GetDidIDBytes(did string) []byte {
-	return []byte(did)
-}
-
-func GetDidIDFromBytes(bz []byte) string {
-	return string(bz)
 }

@@ -4,22 +4,19 @@ import (
 	"github.com/be-heroes/doxchain/x/idp/types"
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	utils "github.com/be-heroes/doxchain/utils"
 )
 
 func (k Keeper) SetDeviceCodeRegistry(ctx sdk.Context, deviceCodeRegistry types.DeviceCodeRegistry) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DeviceCodeRegistryKeyPrefix))
 	b := k.cdc.MustMarshal(&deviceCodeRegistry)
 
-	store.Set(types.DeviceCodeRegistryKey(
-		deviceCodeRegistry.Owner.GetW3CIdentifier(),
-	), b)
+	store.Set(utils.GetKeyBytes(deviceCodeRegistry.Owner.GetW3CIdentifier()), b)
 }
 
 func (k Keeper) GetDeviceCodeRegistry(ctx sdk.Context, deviceCodeRegistryW3CIdentifier string) (val types.DeviceCodeRegistry, found bool) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DeviceCodeRegistryKeyPrefix))
-	b := store.Get(types.DeviceCodeRegistryKey(
-		deviceCodeRegistryW3CIdentifier,
-	))
+	b := store.Get(utils.GetKeyBytes(deviceCodeRegistryW3CIdentifier))
 
 	if b == nil {
 		return val, false
@@ -33,9 +30,7 @@ func (k Keeper) GetDeviceCodeRegistry(ctx sdk.Context, deviceCodeRegistryW3CIden
 func (k Keeper) RemoveDeviceCodeRegistry(ctx sdk.Context, deviceCodeRegistryW3CIdentifier string) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DeviceCodeRegistryKeyPrefix))
 
-	store.Delete(types.DeviceCodeRegistryKey(
-		deviceCodeRegistryW3CIdentifier,
-	))
+	store.Delete(utils.GetKeyBytes(deviceCodeRegistryW3CIdentifier))
 }
 
 func (k Keeper) GetAllDeviceCodeRegistry(ctx sdk.Context) (list []types.DeviceCodeRegistry) {

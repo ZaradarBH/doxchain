@@ -5,17 +5,18 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
 	"github.com/be-heroes/doxchain/x/idp/types"
+	utils "github.com/be-heroes/doxchain/utils"
 )
 
 func (k Keeper) SetTenantRegistry(ctx sdk.Context, tenantRegistry types.TenantRegistry) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.TenantRegistryKeyPrefix))
 
-	store.Set(types.TenantRegistryKey(tenantRegistry.Owner.Creator), k.cdc.MustMarshal(&tenantRegistry))
+	store.Set(utils.GetKeyBytes(tenantRegistry.Owner.Creator), k.cdc.MustMarshal(&tenantRegistry))
 }
 
 func (k Keeper) GetTenantRegistry(ctx sdk.Context, tenantRegistryW3CIdentifier string) (result types.TenantRegistry, found bool) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.TenantRegistryKeyPrefix))
-	b := store.Get(types.TenantRegistryKey(tenantRegistryW3CIdentifier))
+	b := store.Get(utils.GetKeyBytes(tenantRegistryW3CIdentifier))
 
 	if b == nil {
 		return result, false
@@ -29,7 +30,7 @@ func (k Keeper) GetTenantRegistry(ctx sdk.Context, tenantRegistryW3CIdentifier s
 func (k Keeper) RemoveTenantRegistry(ctx sdk.Context, tenantRegistryW3CIdentifier string) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.TenantRegistryKeyPrefix))
 
-	store.Delete(types.TenantRegistryKey(tenantRegistryW3CIdentifier))
+	store.Delete(utils.GetKeyBytes(tenantRegistryW3CIdentifier))
 }
 
 func (k Keeper) GetAllTenantRegistry(ctx sdk.Context) (list []types.TenantRegistry) {

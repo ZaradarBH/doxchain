@@ -15,20 +15,11 @@ const (
 )
 
 const (
-	TenantRegistryKeyPrefix = "TenantRegistry/value/"
+	TenantRegistryKeyPrefix = "tenantregistry/value/"
+	ClientRegistrationRegistryKeyPrefix = "clientregistrationregistry/value/"
+	ClientRegistrationRelationshipRegistryKeyPrefix = "clientregistrationrelationshipregistry/value/"
+	DeviceCodeRegistryKeyPrefix = "devicecoderegistry/value/"
 )
-
-func TenantRegistryKey(
-	identifier string,
-) []byte {
-	var key []byte
-
-	identifierBytes := []byte(identifier)
-	key = append(key, identifierBytes...)
-	key = append(key, []byte("/")...)
-
-	return key
-}
 
 func KeyPrefix(p string) []byte {
 	return []byte(p)

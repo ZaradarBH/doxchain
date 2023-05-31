@@ -4,22 +4,19 @@ import (
 	"github.com/be-heroes/doxchain/x/abs/types"
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	utils "github.com/be-heroes/doxchain/utils"
 )
 
 func (k Keeper) SetPartitionedPoolRegistry(ctx sdk.Context, partitionedPoolRegistry types.PartitionedPoolRegistry) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.PartitionedPoolRegistryKeyPrefix))
 	b := k.cdc.MustMarshal(&partitionedPoolRegistry)
 
-	store.Set(types.PartitionedPoolRegistryKey(
-		partitionedPoolRegistry.Owner.GetW3CIdentifier(),
-	), b)
+	store.Set(utils.GetKeyBytes(partitionedPoolRegistry.Owner.GetW3CIdentifier()), b)
 }
 
 func (k Keeper) GetPartitionedPoolRegistry(ctx sdk.Context, partitionedPoolRegistryW3CIdentifier string) (result types.PartitionedPoolRegistry, found bool) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.PartitionedPoolRegistryKeyPrefix))
-	b := store.Get(types.PartitionedPoolRegistryKey(
-		partitionedPoolRegistryW3CIdentifier,
-	))
+	b := store.Get(utils.GetKeyBytes(partitionedPoolRegistryW3CIdentifier))
 
 	if b == nil {
 		return result, false
@@ -33,7 +30,7 @@ func (k Keeper) GetPartitionedPoolRegistry(ctx sdk.Context, partitionedPoolRegis
 func (k Keeper) RemovePartitionedPoolRegistry(ctx sdk.Context, partitionedPoolRegistryW3CIdentifier string) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.PartitionedPoolRegistryKeyPrefix))
 
-	store.Delete(types.PartitionedPoolRegistryKey(partitionedPoolRegistryW3CIdentifier))
+	store.Delete(utils.GetKeyBytes(partitionedPoolRegistryW3CIdentifier))
 }
 
 func (k Keeper) GetAllPartitionedPoolRegistries(ctx sdk.Context) (list []types.PartitionedPoolRegistry) {

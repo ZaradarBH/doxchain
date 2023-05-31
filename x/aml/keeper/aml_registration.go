@@ -5,11 +5,12 @@ import (
 	"github.com/be-heroes/doxchain/x/aml/types"
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	utils "github.com/be-heroes/doxchain/utils"
 )
 
 func (k Keeper) GetAMLRegistrationCount(ctx sdk.Context) uint64 {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), []byte{})
-	byteKey := types.KeyPrefix(types.AMLRegistrationCountKey)
+	byteKey := types.KeyPrefix(types.AMLRegistrationCountKeyPrefix)
 	bz := store.Get(byteKey)
 
 	if bz == nil {
@@ -21,7 +22,7 @@ func (k Keeper) GetAMLRegistrationCount(ctx sdk.Context) uint64 {
 
 func (k Keeper) SetAMLRegistrationCount(ctx sdk.Context, count uint64) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), []byte{})
-	byteKey := types.KeyPrefix(types.AMLRegistrationCountKey)
+	byteKey := types.KeyPrefix(types.AMLRegistrationCountKeyPrefix)
 	bz := make([]byte, 8)
 
 	binary.BigEndian.PutUint64(bz, count)
@@ -30,11 +31,11 @@ func (k Keeper) SetAMLRegistrationCount(ctx sdk.Context, count uint64) {
 
 func (k Keeper) AppendAMLRegistration(ctx sdk.Context, request types.AMLRegistration) string {
 	count := k.GetAMLRegistrationCount(ctx)
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AMLRegistrationKey))
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AMLRegistrationKeyPrefix))
 	appendedValue := k.cdc.MustMarshal(&request)
 	w3cIdentifier := request.Owner.GetW3CIdentifier()
 
-	store.Set(GetAMLRegistrationIDBytes(w3cIdentifier), appendedValue)
+	store.Set(utils.GetKeyBytes(w3cIdentifier), appendedValue)
 
 	k.SetAMLRegistrationCount(ctx, count+1)
 
@@ -42,15 +43,15 @@ func (k Keeper) AppendAMLRegistration(ctx sdk.Context, request types.AMLRegistra
 }
 
 func (k Keeper) SetAMLRegistration(ctx sdk.Context, request types.AMLRegistration) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AMLRegistrationKey))
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AMLRegistrationKeyPrefix))
 	b := k.cdc.MustMarshal(&request)
 
-	store.Set(GetAMLRegistrationIDBytes(request.Owner.GetW3CIdentifier()), b)
+	store.Set(utils.GetKeyBytes(request.Owner.GetW3CIdentifier()), b)
 }
 
 func (k Keeper) GetAMLRegistration(ctx sdk.Context, registrationW3CIdentifier string) (result types.AMLRegistration, found bool) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AMLRegistrationKey))
-	b := store.Get(GetAMLRegistrationIDBytes(registrationW3CIdentifier))
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AMLRegistrationKeyPrefix))
+	b := store.Get(utils.GetKeyBytes(registrationW3CIdentifier))
 
 	if b == nil {
 		return result, false
@@ -62,13 +63,13 @@ func (k Keeper) GetAMLRegistration(ctx sdk.Context, registrationW3CIdentifier st
 }
 
 func (k Keeper) RemoveAMLRegistration(ctx sdk.Context, registrationW3CIdentifier string) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AMLRegistrationKey))
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AMLRegistrationKeyPrefix))
 
-	store.Delete(GetAMLRegistrationIDBytes(registrationW3CIdentifier))
+	store.Delete(utils.GetKeyBytes(registrationW3CIdentifier))
 }
 
 func (k Keeper) GetAllAMLRegistration(ctx sdk.Context) (list []types.AMLRegistration) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AMLRegistrationKey))
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AMLRegistrationKeyPrefix))
 	iterator := sdk.KVStorePrefixIterator(store, []byte{})
 
 	defer iterator.Close()
@@ -90,12 +91,4 @@ func (k Keeper) ApproveAMLRegistration(ctx sdk.Context, registrationW3CIdentifie
 
 		k.SetAMLRegistration(ctx, request)
 	}
-}
-
-func GetAMLRegistrationIDBytes(did string) []byte {
-	return []byte(did)
-}
-
-func GetAMLRegistrationIDFromBytes(bz []byte) string {
-	return string(bz)
 }
