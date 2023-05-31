@@ -28,10 +28,14 @@ func (k Keeper) SetDidDocumentCount(ctx sdk.Context, count uint64) {
 	store.Set(types.KeyPrefix(types.DidDocumentCountKey), bz)
 }
 
-func (k Keeper) SetDidDocument(ctx sdk.Context, didDocument types.DidDocument) {
-	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DidDocumentKey))
-	store.Set(GetDidDocumentIDBytes(didDocument.Id.GetW3CIdentifier()), k.cdc.MustMarshal(&didDocument))
-	k.SetDidDocumentCount(ctx, k.GetDidDocumentCount(ctx)+1)
+func (k Keeper) SetDidDocument(ctx sdk.Context, didDocument types.DidDocument, override bool) {
+	if k.CanOverrideDidDocument(ctx, didDocument, override) {
+		store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DidDocumentKey))
+
+		store.Set(GetDidDocumentIDBytes(didDocument.Id.GetW3CIdentifier()), k.cdc.MustMarshal(&didDocument))
+
+		k.SetDidDocumentCount(ctx, k.GetDidDocumentCount(ctx)+1)
+	}
 }
 
 func (k Keeper) GetDidDocument(ctx sdk.Context, didDocumentW3CIdentifier string) (result types.DidDocument, found bool) {
@@ -49,6 +53,7 @@ func (k Keeper) GetDidDocument(ctx sdk.Context, didDocumentW3CIdentifier string)
 
 func (k Keeper) RemoveDidDocument(ctx sdk.Context, didDocumentW3CIdentifier string) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DidDocumentKey))
+
 	store.Delete(GetDidDocumentIDBytes(didDocumentW3CIdentifier))
 }
 
@@ -69,8 +74,22 @@ func (k Keeper) GetAllDidDocument(ctx sdk.Context) (result []types.DidDocument) 
 	return
 }
 
-func GetDidDocumentIDBytes(DidDocument string) []byte {
-	return []byte(DidDocument)
+func (k Keeper) CanOverrideDidDocument(ctx sdk.Context, didDocument types.DidDocument, override bool) bool {
+	if override {
+		return true
+	}
+
+	match, found := k.GetDidDocument(ctx, didDocument.Id.GetW3CIdentifier())
+	
+	if found && (!override || didDocument.Id.Creator != match.Id.Creator) {
+		return false
+	}
+
+	return true
+}
+
+func GetDidDocumentIDBytes(didDocumentW3CIdentifier string) []byte {
+	return []byte(didDocumentW3CIdentifier)
 }
 
 func GetDidDocumentIDFromBytes(bz []byte) string {
