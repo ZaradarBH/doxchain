@@ -13,7 +13,8 @@ func (k msgServer) CreateDid(goCtx context.Context, msg *types.MsgCreateDidReque
 	}
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
-	_, found := k.Keeper.GetDid(ctx, msg.Did.GetW3CIdentifier())
+	w3cIdentifier := msg.Did.GetW3CIdentifier()
+	_, found := k.Keeper.GetDid(ctx, w3cIdentifier)
 
 	if found {
 		return nil, types.ErrDidExists
@@ -21,7 +22,7 @@ func (k msgServer) CreateDid(goCtx context.Context, msg *types.MsgCreateDidReque
 
 	k.Keeper.SetDid(sdk.UnwrapSDKContext(goCtx), msg.Did, false)
 
-	result.DidW3CIdentifier = msg.Did.GetW3CIdentifier()
+	result.DidW3CIdentifier = w3cIdentifier
 	
 	return result, nil
 }
@@ -32,7 +33,8 @@ func (k msgServer) UpdateDid(goCtx context.Context, msg *types.MsgUpdateDidReque
 	}
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
-	match, found := k.Keeper.GetDid(ctx, msg.Did.GetW3CIdentifier())
+	w3cIdentifier := msg.Did.GetW3CIdentifier()
+	match, found := k.Keeper.GetDid(ctx, w3cIdentifier)
 
 	if found && msg.Creator != match.Creator {		
 		return nil, types.ErrImpersonation
@@ -40,7 +42,7 @@ func (k msgServer) UpdateDid(goCtx context.Context, msg *types.MsgUpdateDidReque
 
 	k.Keeper.SetDid(sdk.UnwrapSDKContext(goCtx), msg.Did, true)
 
-	result.DidW3CIdentifier = msg.Did.GetW3CIdentifier()
+	result.DidW3CIdentifier = w3cIdentifier
 	
 	return result, nil
 }
