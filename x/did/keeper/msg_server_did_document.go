@@ -50,7 +50,9 @@ func (k msgServer) UpdateDidDocument(goCtx context.Context, msg *types.MsgUpdate
 
 	k.Keeper.SetDidDocument(ctx, msg.DidDocument, true)
 
-	result.DidDocumentW3CIdentifier = msg.DidDocument.Id.GetW3CIdentifier()
+	result = &types.MsgUpdateDidDocumentResponse{
+		DidDocumentW3CIdentifier: msg.DidDocument.Id.GetW3CIdentifier(),
+	}
 
 	return result, nil
 }

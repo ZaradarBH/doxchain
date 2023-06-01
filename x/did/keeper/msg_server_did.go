@@ -44,7 +44,9 @@ func (k msgServer) UpdateDid(goCtx context.Context, msg *types.MsgUpdateDidReque
 
 	k.Keeper.SetDid(sdk.UnwrapSDKContext(goCtx), msg.Did, true)
 
-	result.DidW3CIdentifier = w3cIdentifier
+	result = &types.MsgUpdateDidResponse{
+		DidW3CIdentifier: w3cIdentifier,
+	}
 
 	return result, nil
 }
