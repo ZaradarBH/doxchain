@@ -88,3 +88,9 @@ func (k Keeper) CanOverrideDidDocument(ctx sdk.Context, didDocument types.DidDoc
 
 	return true
 }
+
+func (k Keeper) HasDidDocument(ctx sdk.Context, didDocumentW3CIdentifier string) bool {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DidDocumentKeyPrefix))
+
+	return store.Has(utils.GetKeyBytes(didDocumentW3CIdentifier))
+}

@@ -14,7 +14,7 @@ func (k msgServer) CreateDid(goCtx context.Context, msg *types.MsgCreateDidReque
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
 	w3cIdentifier := msg.Did.GetW3CIdentifier()
-	_, found := k.Keeper.GetDid(ctx, w3cIdentifier)
+	found := k.Keeper.HasDid(ctx, w3cIdentifier)
 
 	if found {
 		return nil, types.ErrDidExists

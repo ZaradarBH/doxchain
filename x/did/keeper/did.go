@@ -88,3 +88,9 @@ func (k Keeper) CanOverrideDid(ctx sdk.Context, did types.Did, override bool) bo
 
 	return true
 }
+
+func (k Keeper) HasDid(ctx sdk.Context, didW3CIdentifier string) bool {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.DidKeyPrefix))
+	
+	return store.Has(utils.GetKeyBytes(didW3CIdentifier))
+}

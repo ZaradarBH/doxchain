@@ -17,7 +17,7 @@ func (k msgServer) CreateDidDocument(goCtx context.Context, msg *types.MsgCreate
 	}
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
-	_, found := k.Keeper.GetDidDocument(ctx, msg.DidDocument.Id.GetW3CIdentifier())
+	found := k.Keeper.HasDidDocument(ctx, msg.DidDocument.Id.GetW3CIdentifier())
 
 	if found {
 		return nil, types.ErrDidDocumentExists
