@@ -22,8 +22,10 @@ func (k msgServer) CreateDid(goCtx context.Context, msg *types.MsgCreateDidReque
 
 	k.Keeper.SetDid(sdk.UnwrapSDKContext(goCtx), msg.Did, false)
 
-	result.DidW3CIdentifier = w3cIdentifier
-	
+	result = &types.MsgCreateDidResponse{
+		DidW3CIdentifier: w3cIdentifier,
+	}
+
 	return result, nil
 }
 
@@ -36,14 +38,16 @@ func (k msgServer) UpdateDid(goCtx context.Context, msg *types.MsgUpdateDidReque
 	w3cIdentifier := msg.Did.GetW3CIdentifier()
 	match, found := k.Keeper.GetDid(ctx, w3cIdentifier)
 
-	if found && msg.Creator != match.Creator {		
+	if found && msg.Creator != match.Creator {
 		return nil, types.ErrImpersonation
 	}
 
 	k.Keeper.SetDid(sdk.UnwrapSDKContext(goCtx), msg.Did, true)
 
-	result.DidW3CIdentifier = w3cIdentifier
-	
+	result = &types.MsgUpdateDidResponse{
+		DidW3CIdentifier: w3cIdentifier,
+	}
+
 	return result, nil
 }
 

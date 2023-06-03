@@ -25,8 +25,10 @@ func (k msgServer) CreateDidDocument(goCtx context.Context, msg *types.MsgCreate
 
 	k.Keeper.SetDidDocument(ctx, msg.DidDocument, false)
 
-	result.DidDocumentW3CIdentifier = msg.DidDocument.Id.GetW3CIdentifier()
-	
+	result = &types.MsgCreateDidDocumentResponse{
+		DidDocumentW3CIdentifier: msg.DidDocument.Id.GetW3CIdentifier(),
+	}
+
 	return result, nil
 }
 
@@ -48,8 +50,10 @@ func (k msgServer) UpdateDidDocument(goCtx context.Context, msg *types.MsgUpdate
 
 	k.Keeper.SetDidDocument(ctx, msg.DidDocument, true)
 
-	result.DidDocumentW3CIdentifier = msg.DidDocument.Id.GetW3CIdentifier()
-	
+	result = &types.MsgUpdateDidDocumentResponse{
+		DidDocumentW3CIdentifier: msg.DidDocument.Id.GetW3CIdentifier(),
+	}
+
 	return result, nil
 }
 
