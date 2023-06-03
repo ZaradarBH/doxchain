@@ -19,5 +19,7 @@ func (k msgServer) DeleteClientRegistration(goCtx context.Context, msg *types.Ms
 		k.Keeper.RemoveClientRegistration(sdk.UnwrapSDKContext(goCtx), msg.ClientRegistrationRegistryW3CIdentifier, msg.ClientRegistrationW3CIdentifier)
 	}
 
+	result = &types.MsgDeleteClientRegistrationResponse{}
+
 	return result, nil
 }

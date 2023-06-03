@@ -9,13 +9,15 @@ import (
 
 func (k msgServer) CreateClientRegistrationRegistry(goCtx context.Context, msg *types.MsgCreateClientRegistrationRegistryRequest) (result *types.MsgCreateClientRegistrationRegistryResponse, err error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
-	_, found := k.GetClientRegistrationRegistry(ctx, msg.ClientRegistrationRegistry.Owner.GetW3CIdentifier())
+	found := k.HasClientRegistrationRegistry(ctx, msg.ClientRegistrationRegistry.Owner.GetW3CIdentifier())
 
 	if found {
 		return nil, types.ErrClientRegistrationRegistryExists
 	}
 
 	k.SetClientRegistrationRegistry(ctx, msg.ClientRegistrationRegistry)
+
+	result = &types.MsgCreateClientRegistrationRegistryResponse{}
 
 	return result, nil
 }
@@ -34,6 +36,8 @@ func (k msgServer) UpdateClientRegistrationRegistry(goCtx context.Context, msg *
 
 	k.SetClientRegistrationRegistry(ctx, msg.ClientRegistrationRegistry)
 
+	result = &types.MsgUpdateClientRegistrationRegistryResponse{}
+
 	return result, nil
 }
 
@@ -50,6 +54,8 @@ func (k msgServer) DeleteClientRegistrationRegistry(goCtx context.Context, msg *
 	}
 
 	k.RemoveClientRegistrationRegistry(ctx, msg.ClientRegistrationRegistryW3CIdentifier)
+
+	result = &types.MsgDeleteClientRegistrationRegistryResponse{}
 
 	return result, nil
 }

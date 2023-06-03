@@ -10,5 +10,7 @@ import (
 func (k msgServer) UpdateClientRegistration(goCtx context.Context, msg *types.MsgUpdateClientRegistrationRequest) (result *types.MsgUpdateClientRegistrationResponse, err error) {
 	k.Keeper.SetClientRegistration(sdk.UnwrapSDKContext(goCtx), msg.ClientRegistrationRegistryW3CIdentifier, msg.ClientRegistration)
 
+	result = &types.MsgUpdateClientRegistrationResponse{}
+
 	return result, nil
 }

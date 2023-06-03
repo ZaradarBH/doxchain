@@ -10,5 +10,7 @@ import (
 func (k msgServer) CreateClientRegistrationRelationship(goCtx context.Context, msg *types.MsgCreateClientRegistrationRelationshipRequest) (result *types.MsgCreateClientRegistrationRelationshipResponse, err error) {
 	k.Keeper.SetClientRegistrationRelationship(sdk.UnwrapSDKContext(goCtx), msg.ClientRegistrationRegistryW3CIdentifier, msg.ClientRegistrationRelationshipRegistryEntry)
 
+	result = &types.MsgCreateClientRegistrationRelationshipResponse{}
+
 	return result, nil
 }

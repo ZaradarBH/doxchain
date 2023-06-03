@@ -92,3 +92,9 @@ func (k Keeper) ApproveAMLRegistration(ctx sdk.Context, registrationW3CIdentifie
 		k.SetAMLRegistration(ctx, request)
 	}
 }
+
+func (k Keeper) HasAMLRegistration(ctx sdk.Context, registrationW3CIdentifier string) bool {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.AMLRegistrationKeyPrefix))
+	
+	return store.Has(utils.GetKeyBytes(registrationW3CIdentifier))
+}

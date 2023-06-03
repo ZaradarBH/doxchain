@@ -10,7 +10,7 @@ import (
 
 func (k msgServer) CreateKYCRegistration(goCtx context.Context, msg *types.MsgCreateKYCRegistrationRequest) (result *types.MsgCreateKYCRegistrationResponse, err error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
-	_, found := k.GetKYCRegistration(ctx, msg.Owner.GetW3CIdentifier())
+	found := k.HasKYCRegistration(ctx, msg.Owner.GetW3CIdentifier())
 
 	if found {
 		return nil, types.ErrKYCRegistrationExists
@@ -27,6 +27,8 @@ func (k msgServer) CreateKYCRegistration(goCtx context.Context, msg *types.MsgCr
 			Approved: false,
 		},
 	)
+
+	result = &types.MsgCreateKYCRegistrationResponse{}
 
 	return result, nil
 }
@@ -45,6 +47,8 @@ func (k msgServer) DeleteKYCRegistration(goCtx context.Context, msg *types.MsgDe
 	}
 
 	k.RemoveKYCRegistration(ctx, userDid.GetW3CIdentifier())
+
+	result = &types.MsgDeleteKYCRegistrationResponse{}
 
 	return result, nil
 }

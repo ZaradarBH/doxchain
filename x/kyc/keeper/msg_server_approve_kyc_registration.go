@@ -8,7 +8,7 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
 
-func (k msgServer) ApproveKYCRegistration(goCtx context.Context, msg *types.MsgApproveKYCRegistrationRequest) (*types.MsgApproveKYCRegistrationResponse, error) {
+func (k msgServer) ApproveKYCRegistration(goCtx context.Context, msg *types.MsgApproveKYCRegistrationRequest) (result *types.MsgApproveKYCRegistrationResponse, err error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
 	var approvers []didTypes.Did
@@ -23,5 +23,7 @@ func (k msgServer) ApproveKYCRegistration(goCtx context.Context, msg *types.MsgA
 		}
 	}
 
-	return &types.MsgApproveKYCRegistrationResponse{}, nil
+	result = &types.MsgApproveKYCRegistrationResponse{}
+
+	return result, nil
 }

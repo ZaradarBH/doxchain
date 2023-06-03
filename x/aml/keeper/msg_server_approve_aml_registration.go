@@ -23,5 +23,7 @@ func (k msgServer) ApproveAMLRegistration(goCtx context.Context, msg *types.MsgA
 		}
 	}
 
+	result = &types.MsgApproveAMLRegistrationResponse{}
+
 	return result, nil
 }

@@ -71,5 +71,7 @@ func (k msgServer) DeleteDidDocument(goCtx context.Context, msg *types.MsgDelete
 
 	k.Keeper.RemoveDidDocument(ctx, msg.DidDocumentW3CIdentifier)
 
+	result = &types.MsgDeleteDidDocumentResponse{}
+
 	return result, nil
 }

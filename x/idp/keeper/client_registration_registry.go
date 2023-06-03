@@ -47,3 +47,9 @@ func (k Keeper) GetAllClientRegistrationRegistry(ctx sdk.Context) (list []types.
 
 	return
 }
+
+func (k Keeper) HasClientRegistrationRegistry(ctx sdk.Context, clientRegistrationRegistryW3CIdentifier string) bool {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.ClientRegistrationRegistryKeyPrefix))
+	
+	return store.Has(utils.GetKeyBytes(clientRegistrationRegistryW3CIdentifier))
+}

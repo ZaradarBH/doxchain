@@ -65,5 +65,7 @@ func (k msgServer) DeleteDid(goCtx context.Context, msg *types.MsgDeleteDidReque
 
 	k.Keeper.RemoveDid(ctx, msg.DidW3CIdentifier)
 
+	result = &types.MsgDeleteDidResponse{}
+
 	return result, nil
 }

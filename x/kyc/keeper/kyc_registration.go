@@ -92,3 +92,9 @@ func (k Keeper) ApproveKYCRegistration(ctx sdk.Context, registrationW3CIdentifie
 		k.SetKYCRegistration(ctx, request)
 	}
 }
+
+func (k Keeper) HasKYCRegistration(ctx sdk.Context, registrationW3CIdentifier string) bool {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.KYCRegistrationKeyPrefix))
+	
+	return store.Has(utils.GetKeyBytes(registrationW3CIdentifier))
+}

@@ -10,7 +10,7 @@ import (
 
 func (k msgServer) CreateAMLRegistration(goCtx context.Context, msg *types.MsgCreateAMLRegistrationRequest) (result *types.MsgCreateAMLRegistrationResponse, err error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
-	_, found := k.Keeper.GetAMLRegistration(ctx, msg.Owner.GetW3CIdentifier())
+	found := k.Keeper.HasAMLRegistration(ctx, msg.Owner.GetW3CIdentifier())
 
 	if found {
 		return nil, types.ErrAMLRegistrationExists
@@ -45,6 +45,8 @@ func (k msgServer) DeleteAMLRegistration(goCtx context.Context, msg *types.MsgDe
 	}
 
 	k.Keeper.RemoveAMLRegistration(ctx, userDid.GetW3CIdentifier())
+
+	result = &types.MsgDeleteAMLRegistrationResponse{}
 
 	return result, nil
 }

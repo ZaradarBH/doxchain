@@ -19,5 +19,7 @@ func (k msgServer) DeleteClientRegistrationRelationship(goCtx context.Context, m
 		k.Keeper.RemoveClientRegistrationRelationship(ctx, msg.ClientRegistrationRegistryW3CIdentifier, msg.OwnerClientRegistrationW3CIdentifier, msg.DestinationClientRegistrationW3CIdentifier)
 	}
 
+	result = &types.MsgDeleteClientRegistrationRelationshipResponse{}
+
 	return result, nil
 }
