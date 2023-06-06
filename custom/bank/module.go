@@ -35,4 +35,5 @@ func NewAppModule(cdc codec.Codec, keeper customkeeper.BaseKeeper, accountKeeper
 // RegisterServices registers module services.
 func (am AppModule) RegisterServices(cfg module.Configurator) {
 	types.RegisterMsgServer(cfg.MsgServer(), customkeeper.NewMsgServerImpl(am.keeper))
+	types.RegisterQueryServer(cfg.QueryServer(), am.keeper)
 }

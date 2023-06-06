@@ -19,6 +19,10 @@ import (
 	dbm "github.com/tendermint/tm-db"
 )
 
+const (
+	ChainID = "doxchain-1"
+)
+
 // DefaultConsensusParams defines the default Tendermint consensus params used
 // in junoApp testing.
 var DefaultConsensusParams = abci.ConsensusParams{
@@ -71,7 +75,7 @@ func SetupWithGenesisValSet(valSet *tmtypes.ValidatorSet, genAccs []authtypes.Ge
 			Validators:      []abci.ValidatorUpdate{},
 			ConsensusParams: &DefaultConsensusParams,
 			AppStateBytes:   stateBytes,
-			ChainId:         "testing",
+			ChainId:         ChainID,
 			Time:            time.Now().UTC(),
 			InitialHeight:   1,
 		},
@@ -80,7 +84,7 @@ func SetupWithGenesisValSet(valSet *tmtypes.ValidatorSet, genAccs []authtypes.Ge
 	// commit genesis changes
 	app.Commit()
 	app.BeginBlock(abci.RequestBeginBlock{Header: tmproto.Header{
-		ChainID:            "testing",
+		ChainID:            ChainID,
 		Height:             app.LastBlockHeight() + 1,
 		AppHash:            app.LastCommitID().Hash,
 		ValidatorsHash:     valSet.Hash(),

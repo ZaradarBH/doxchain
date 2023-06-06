@@ -1,9 +1,9 @@
 package keeper
 
 import (
+	sdkerrors "cosmossdk.io/errors"
 	"github.com/cosmos/cosmos-sdk/store/prefix"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 
 	"github.com/be-heroes/doxchain/x/abs/types"
 )
@@ -19,6 +19,12 @@ func (k Keeper) DeleteAddressWatchlist(ctx sdk.Context, addr sdk.AccAddress) {
 	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.WatchlistKeyPrefix))
 
 	store.Delete(addr.Bytes())
+}
+
+func (k Keeper) HasAddressWatchlist(ctx sdk.Context, addr sdk.AccAddress) bool {
+	store := prefix.NewStore(ctx.KVStore(k.storeKey), types.KeyPrefix(types.WatchlistKeyPrefix))
+
+	return store.Has(addr.Bytes())
 }
 
 func (k Keeper) GetAddressWatchlist(ctx sdk.Context, addr sdk.AccAddress) types.WatchlistEntry {
@@ -57,7 +63,7 @@ func (k Keeper) IterateWatchList(ctx sdk.Context, cb func(entry types.WatchlistE
 }
 
 func (k Keeper) AddToWatchlist(ctx sdk.Context, addr sdk.AccAddress, coins sdk.Coins) error {
-	if coins.Empty() || k.accountKeeper.GetAccount(ctx, addr) == nil {
+	if coins.Empty() || !k.accountKeeper.HasAccount(ctx, addr) {
 		return nil
 	}
 
@@ -65,9 +71,7 @@ func (k Keeper) AddToWatchlist(ctx sdk.Context, addr sdk.AccAddress, coins sdk.C
 	watchlistEntry := k.GetAddressWatchlist(ctx, addr)
 	watchlistEntry.Coins = watchlistEntry.Coins.Add(coins...)
 
-	var throttledRollingAverage sdk.Int
-
-	k.paramstore.Get(ctx, types.ParamStoreKeyThrottledRollingAverageKey, &throttledRollingAverage)
+	throttledRollingAverage := k.GetThrottledRollingAverage(ctx)
 
 	for _, watchlistEntryCoinPtr := range watchlistEntry.Coins {
 		if throttledRollingAverage.LT(watchlistEntryCoinPtr.Amount) {
@@ -87,10 +91,7 @@ func (k Keeper) AddToWatchlist(ctx sdk.Context, addr sdk.AccAddress, coins sdk.C
 		}
 	}
 
-	var blockExpireOffset sdk.Int
-
-	k.paramstore.Get(ctx, types.ParamStoreKeyBlockExpireOffset, &blockExpireOffset)
-
+	blockExpireOffset := k.GetBlockExpireOffset(ctx)
 	if watchlistEntry.GetBlockHeight()+blockExpireOffset.Uint64() <= blockHeight {
 		k.DeleteAddressWatchlist(ctx, addr)
 	} else {

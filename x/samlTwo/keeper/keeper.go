@@ -23,7 +23,7 @@ type (
 	}
 )
 
-//TODO: Implement SAML2 keeper
+// TODO: Implement SAML2 keeper
 func NewKeeper(
 	cdc codec.BinaryCodec,
 	storeKey,

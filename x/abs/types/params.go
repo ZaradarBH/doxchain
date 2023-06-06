@@ -28,8 +28,8 @@ func ParamKeyTable() paramtypes.KeyTable {
 
 func NewParams(breakFactor sdk.Dec, blockExpireOffset math.Int, throttledRollingAverage math.Int) Params {
 	return Params{
-		BlockExpireOffset: 		 blockExpireOffset,
-		BreakFactor:       		 breakFactor,
+		BlockExpireOffset:       blockExpireOffset,
+		BreakFactor:             breakFactor,
 		ThrottledRollingAverage: throttledRollingAverage,
 	}
 }

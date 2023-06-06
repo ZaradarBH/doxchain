@@ -25,7 +25,12 @@ func (k msgServer) Send(goCtx context.Context, msg *banktypes.MsgSend) (*banktyp
 		return nil, err
 	}
 
-	if err := k.abs.AddToWatchlist(ctx, sdk.AccAddress(msg.FromAddress), msg.Amount); err != nil {
+	fromAddr, err := sdk.AccAddressFromBech32(msg.FromAddress)
+	if err != nil {
+		return nil, err
+	}
+
+	if err := k.abs.AddToWatchlist(ctx, fromAddr, msg.Amount); err != nil {
 		return nil, err
 	}
 
@@ -40,7 +45,12 @@ func (k msgServer) MultiSend(goCtx context.Context, msg *banktypes.MsgMultiSend)
 			return nil, err
 		}
 
-		if err := k.abs.AddToWatchlist(ctx, sdk.AccAddress(input.Address), input.Coins); err != nil {
+		inputAddr, err := sdk.AccAddressFromBech32(input.Address)
+		if err != nil {
+			return nil, err
+		}
+
+		if err := k.abs.AddToWatchlist(ctx, inputAddr, input.Coins); err != nil {
 			return nil, err
 		}
 	}
