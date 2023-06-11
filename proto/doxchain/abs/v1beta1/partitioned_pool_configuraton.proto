@@ -1,5 +1,5 @@
 syntax = "proto3";
-package beheroes.doxchain.abs.v1beta1;
+package doxchain.abs.v1beta1;
 
 import "gogoproto/gogo.proto";
 import "doxchain/abs/v1beta1/partitioned_pool_corridor.proto";

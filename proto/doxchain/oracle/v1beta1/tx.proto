@@ -1,5 +1,5 @@
 syntax = "proto3";
-package beheroes.doxchain.oracle;
+package doxchain.oracle;
 
 option go_package = "github.com/be-heroes/doxchain/x/oracle/types";
 

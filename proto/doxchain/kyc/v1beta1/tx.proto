@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package beheroes.doxchain.kyc.v1beta1;
+package doxchain.kyc.v1beta1;
 
 import "gogoproto/gogo.proto";
 import "doxchain/did/v1beta1/did.proto";
@@ -16,7 +16,7 @@ service Msg {
 
 message MsgCreateKYCRegistrationRequest {
   string creator = 1;
-  beheroes.doxchain.did.v1beta1.Did owner = 2 [(gogoproto.nullable) = false];  
+  doxchain.did.v1beta1.Did owner = 2 [(gogoproto.nullable) = false];  
 }
 
 message MsgCreateKYCRegistrationResponse {}
@@ -29,7 +29,7 @@ message MsgDeleteKYCRegistrationResponse {}
 
 message MsgApproveKYCRegistrationRequest {  
   string creator = 1;
-  beheroes.doxchain.did.v1beta1.Did target = 2 [(gogoproto.nullable) = false];
+  doxchain.did.v1beta1.Did target = 2 [(gogoproto.nullable) = false];
 }
 
 message MsgApproveKYCRegistrationResponse {}

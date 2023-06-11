@@ -1,5 +1,5 @@
 syntax = "proto3";
-package beheroes.doxchain.abs.v1beta1;
+package doxchain.abs.v1beta1;
 
 import "gogoproto/gogo.proto";
 import "doxchain/abs/v1beta1/partitioned_pool.proto";
@@ -8,6 +8,6 @@ import "doxchain/did/v1beta1/did.proto";
 option go_package = "github.com/be-heroes/doxchain/x/abs/types";
 
 message PartitionedPoolRegistry {
-  beheroes.doxchain.did.v1beta1.Did owner = 1 [(gogoproto.nullable) = false];
+  doxchain.did.v1beta1.Did owner = 1 [(gogoproto.nullable) = false];
   repeated PartitionedPool pools = 2 [(gogoproto.nullable) = false]; 
 }

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package beheroes.doxchain.oauthtwo.v1beta1;
+package doxchain.oauthtwo.v1beta1;
 
 import "gogoproto/gogo.proto";
 import "doxchain/oauthtwo/v1beta1/params.proto";

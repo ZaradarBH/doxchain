@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package beheroes.doxchain.did.v1beta1;
+package doxchain.did.v1beta1;
 
 import "gogoproto/gogo.proto";
 import "doxchain/did/v1beta1/did.proto";

@@ -1,5 +1,5 @@
 syntax = "proto3";
-package beheroes.doxchain.idp.v1beta1;
+package doxchain.idp.v1beta1;
 
 import "gogoproto/gogo.proto";
 import "doxchain/idp/v1beta1/client_registration_relationship_registry_entry.proto";
@@ -8,6 +8,6 @@ import "doxchain/did/v1beta1/did.proto";
 option go_package = "github.com/be-heroes/doxchain/x/idp/types";
 
 message ClientRegistrationRelationshipRegistry {   
-  beheroes.doxchain.did.v1beta1.Did owner = 1 [(gogoproto.nullable) = false];
+  doxchain.did.v1beta1.Did owner = 1 [(gogoproto.nullable) = false];
   repeated ClientRegistrationRelationshipRegistryEntry relationships = 2 [(gogoproto.nullable) = false];
 }

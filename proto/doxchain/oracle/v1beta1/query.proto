@@ -1,5 +1,5 @@
 syntax = "proto3";
-package beheroes.doxchain.oracle;
+package doxchain.oracle;
 
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";

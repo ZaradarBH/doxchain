@@ -382,13 +382,13 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 }
 
 var (
-	pattern_Query_Params_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"doxchain", "abs", "params"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_Params_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"doxchain", "abs", "params"}, "", runtime.AssumeColonVerbOpt(false)))
 
-	pattern_Query_QueryWatchlist_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"doxchain", "abs", "query_watchlist"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_QueryWatchlist_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"doxchain", "abs", "query_watchlist"}, "", runtime.AssumeColonVerbOpt(false)))
 
-	pattern_Query_PartitionedPoolRegistry_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"be-heroes", "doxchain", "abs", "partitioned_pool_registries", "partitionedPoolRegistryW3CIdentifier"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_PartitionedPoolRegistry_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"be-heroes", "doxchain", "abs", "partitioned_pool_registries", "partitionedPoolRegistryW3CIdentifier"}, "", runtime.AssumeColonVerbOpt(false)))
 
-	pattern_Query_PartitionedPoolRegistryAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"be-heroes", "doxchain", "abs", "partitioned_pool_registries"}, "", runtime.AssumeColonVerbOpt(true)))
+	pattern_Query_PartitionedPoolRegistryAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"be-heroes", "doxchain", "abs", "partitioned_pool_registries"}, "", runtime.AssumeColonVerbOpt(false)))
 )
 
 var (

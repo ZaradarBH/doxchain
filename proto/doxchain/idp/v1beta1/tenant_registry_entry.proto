@@ -1,5 +1,5 @@
 syntax = "proto3";
-package beheroes.doxchain.idp.v1beta1;
+package doxchain.idp.v1beta1;
 
 import "gogoproto/gogo.proto";
 import "doxchain/did/v1beta1/did.proto";
@@ -9,7 +9,7 @@ import "doxchain/idp/v1beta1/tenant_configuration.proto";
 option go_package = "github.com/be-heroes/doxchain/x/idp/types";
 
 message TenantRegistryEntry {
-  beheroes.doxchain.did.v1beta1.Did id = 1 [(gogoproto.nullable) = false];
+  doxchain.did.v1beta1.Did id = 1 [(gogoproto.nullable) = false];
   TenantConfiguration tenantConfiguration = 2 [(gogoproto.nullable) = false];
   AccessClientList accessClientList = 3 [(gogoproto.nullable) = false];
 }

@@ -1,5 +1,5 @@
 syntax = "proto3";
-package beheroes.doxchain.samltwo.v1beta1;
+package doxchain.samltwo.v1beta1;
 
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";

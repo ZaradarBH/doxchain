@@ -1,5 +1,5 @@
 syntax = "proto3";
-package beheroes.doxchain.idp.v1beta1;
+package doxchain.idp.v1beta1;
 
 option go_package = "github.com/be-heroes/doxchain/x/idp/types";
 

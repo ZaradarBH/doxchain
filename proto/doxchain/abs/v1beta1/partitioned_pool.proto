@@ -1,5 +1,5 @@
 syntax = "proto3";
-package beheroes.doxchain.abs.v1beta1;
+package doxchain.abs.v1beta1;
 
 import "gogoproto/gogo.proto";
 import "doxchain/idp/v1beta1/access_client_list.proto";
@@ -11,5 +11,5 @@ option go_package = "github.com/be-heroes/doxchain/x/abs/types";
 message PartitionedPool {
   string denom = 1;
   ParitionedPoolConfiguration desiredState = 2 [(gogoproto.nullable) = true];
-  beheroes.doxchain.idp.v1beta1.AccessClientList accessClientList = 3 [(gogoproto.nullable) = true];
+  doxchain.idp.v1beta1.AccessClientList accessClientList = 3 [(gogoproto.nullable) = true];
 }
