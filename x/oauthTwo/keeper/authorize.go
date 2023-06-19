@@ -60,7 +60,7 @@ func (k Keeper) Authorize(ctx sdk.Context, creator string, tenantW3CIdentifier s
 		}
 	}
 
-	authorizationCode = strconv.FormatUint(utils.HashStringToUint64(creator + ctx.BlockTime().String()))
+	authorizationCode = strconv.FormatUint(utils.HashStringToUint64(creator + ctx.BlockTime().String()), 10)
 	tenantAuthorizationCodeRegistry, found := k.GetAuthorizationCodeRegistry(ctx, tenantW3CIdentifier)
 
 	if !found {
