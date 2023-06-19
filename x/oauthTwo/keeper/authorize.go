@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"time"
+	"strconv"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"	
@@ -59,7 +60,7 @@ func (k Keeper) Authorize(ctx sdk.Context, creator string, tenantW3CIdentifier s
 		}
 	}
 
-	authorizationCode = utils.HashStringToUint64(creator + ctx.BlockTime().String()).String()
+	authorizationCode = strconv.FormatUint(utils.HashStringToUint64(creator + ctx.BlockTime().String()))
 	tenantAuthorizationCodeRegistry, found := k.GetAuthorizationCodeRegistry(ctx, tenantW3CIdentifier)
 
 	if !found {
