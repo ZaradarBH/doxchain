@@ -1,10 +1,10 @@
 package keeper
 
 import (
-	sdk "github.com/cosmos/cosmos-sdk/types"
-	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"time"
 
+	sdk "github.com/cosmos/cosmos-sdk/types"
+	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"	
 	"github.com/be-heroes/doxchain/utils"
 	didUtils "github.com/be-heroes/doxchain/utils/did"
 	"github.com/be-heroes/doxchain/x/oauthtwo/types"
@@ -59,7 +59,7 @@ func (k Keeper) Authorize(ctx sdk.Context, creator string, tenantW3CIdentifier s
 		}
 	}
 
-	authorizationCode, _ = utils.GenerateRandomString(32)
+	authorizationCode, _ = utils.HashStringToUint64(creator + ctx.BlockTime().String())
 	tenantAuthorizationCodeRegistry, found := k.GetAuthorizationCodeRegistry(ctx, tenantW3CIdentifier)
 
 	if !found {
