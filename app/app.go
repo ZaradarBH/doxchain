@@ -544,7 +544,8 @@ func New(
 	)
 
 	doxchainModule := doxchainmodule.NewAppModule(appCodec, app.DoxchainKeeper)
-
+	absModule := absmodule.NewAppModule(appCodec, app.AbsKeeper, app.AccountKeeper)
+	
 	app.DidKeeper = *didmodulekeeper.NewKeeper(
 		appCodec,
 		keys[didmoduletypes.StoreKey],
@@ -555,8 +556,6 @@ func New(
 	)
 
 	didModule := didmodule.NewAppModule(appCodec, app.DidKeeper, app.AccountKeeper)
-
-	absModule := absmodule.NewAppModule(appCodec, app.AbsKeeper, app.AccountKeeper)
 
 	app.OAuthTwoKeeper = *oauthtwomodulekeeper.NewKeeper(
 		appCodec,
@@ -574,9 +573,11 @@ func New(
 		keys[idpmoduletypes.StoreKey],
 		keys[idpmoduletypes.MemStoreKey],
 		app.GetSubspace(idpmoduletypes.ModuleName),
+		
+		app.AccountKeeper,
 	)
 
-	idpModule := idpmodule.NewAppModule(appCodec, app.IdpKeeper)
+	idpModule := idpmodule.NewAppModule(appCodec, app.IdpKeeper, app.AccountKeeper)
 
 	app.OracleKeeper = *oraclemodulekeeper.NewKeeper(
 		appCodec,

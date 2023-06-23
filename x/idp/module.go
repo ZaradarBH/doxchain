@@ -91,15 +91,18 @@ type AppModule struct {
 	AppModuleBasic
 
 	keeper keeper.Keeper
+	accountKeeper types.AccountKeeper
 }
 
 func NewAppModule(
 	cdc codec.Codec,
 	keeper keeper.Keeper,
+	accountKeeper types.AccountKeeper,
 ) AppModule {
 	return AppModule{
 		AppModuleBasic: NewAppModuleBasic(cdc),
 		keeper:         keeper,
+		accountKeeper:  accountKeeper,
 	}
 }
 

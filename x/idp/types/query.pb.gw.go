@@ -418,13 +418,13 @@ func RegisterQueryHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 }
 
 var (
-	pattern_Query_Params_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"be-heroes", "doxchain", "idp", "params"}, "", runtime.AssumeColonVerbOpt(false)))
+	pattern_Query_Params_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"be-heroes", "doxchain", "idp", "params"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_GetDotWellKnown_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4}, []string{"be-heroes", "doxchain", "idp", "tenantW3CIdentifier", ".well-known"}, "", runtime.AssumeColonVerbOpt(false)))
+	pattern_Query_GetDotWellKnown_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4}, []string{"be-heroes", "doxchain", "idp", "tenantW3CIdentifier", ".well-known"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_ClientRegistrationRegistry_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"be-heroes", "doxchain", "idp", "client_registry", "clientRegistrationRegistryW3CIdentifier"}, "", runtime.AssumeColonVerbOpt(false)))
+	pattern_Query_ClientRegistrationRegistry_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"be-heroes", "doxchain", "idp", "client_registry", "clientRegistrationRegistryW3CIdentifier"}, "", runtime.AssumeColonVerbOpt(true)))
 
-	pattern_Query_ClientRegistrationRegistryAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"be-heroes", "doxchain", "idp", "client_registry"}, "", runtime.AssumeColonVerbOpt(false)))
+	pattern_Query_ClientRegistrationRegistryAll_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"be-heroes", "doxchain", "idp", "client_registry"}, "", runtime.AssumeColonVerbOpt(true)))
 )
 
 var (

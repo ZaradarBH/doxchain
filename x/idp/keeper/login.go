@@ -2,6 +2,8 @@ package keeper
 
 import (
 	"time"
+	"github.com/decred/dcrd/dcrec/secp256k1"
+    b64 "encoding/base64"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	jwtUtils "github.com/be-heroes/doxchain/utils/jwt"
@@ -14,14 +16,32 @@ func (k Keeper) Login(ctx sdk.Context, user sdk.AccAddress, tenantW3CIdentifier 
 		return ""
 	}
 
-	jwtToken := jwtUtils.NewJwtTokenFactory(jwtUtils.WithContext(&ctx)).Create(tenantW3CIdentifier, user.String(), user.String(), time.Minute*60)
-	tokenString, err := jwtToken.SignedString([]byte(user.String()))
+	account := k.accountKeeper.GetAccount(ctx, user)
+
+	if account == nil {
+		return ""
+	}
+
+	pubKey, err := secp256k1.ParsePubKey(account.GetPubKey().Bytes())
 
 	if err != nil {
 		return ""
 	}
 
-	return tokenString
+	jwtToken := jwtUtils.NewJwtTokenFactory(jwtUtils.WithContext(&ctx)).Create(tenantW3CIdentifier, user.String(), user.String(), time.Minute*60)
+	tokenString, err := jwtToken.SignedString(pubKey)
+
+	if err != nil {
+		return ""
+	}
+	
+	ciphertext, err := secp256k1.Encrypt(pubKey, []byte(tokenString))
+
+	if err != nil {
+		return ""
+	}
+
+	return b64.StdEncoding.EncodeToString(ciphertext)
 }
 
 func (k Keeper) AuthorizeUser(ctx sdk.Context, user sdk.AccAddress, tenantW3CIdentifier string) bool {
