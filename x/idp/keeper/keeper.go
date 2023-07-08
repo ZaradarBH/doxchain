@@ -23,6 +23,7 @@ type (
 	}
 )
 
+//TODO: Implement logic to retrieve a ClientRegistrationRelationshipGraph
 func NewKeeper(
 	cdc codec.BinaryCodec,
 	storeKey,
