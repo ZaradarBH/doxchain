@@ -14,5 +14,6 @@ message Did {
   string path = 5;
   string fragment = 6;
   string query = 7;
-  repeated DidParameter parameters = 8 [(gogoproto.nullable) = true];
+  string w3c_identifier = 8;
+  repeated DidParameter parameters = 9 [(gogoproto.nullable) = true];
 }

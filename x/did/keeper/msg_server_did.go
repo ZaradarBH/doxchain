@@ -13,7 +13,7 @@ func (k msgServer) CreateDid(goCtx context.Context, msg *types.MsgCreateDidReque
 	}
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
-	w3cIdentifier := msg.Did.GetW3CIdentifier()
+	w3cIdentifier := msg.Did.SetW3CIdentifier()
 	found := k.Keeper.HasDid(ctx, w3cIdentifier)
 
 	if found {
@@ -26,6 +26,18 @@ func (k msgServer) CreateDid(goCtx context.Context, msg *types.MsgCreateDidReque
 		DidW3CIdentifier: w3cIdentifier,
 	}
 
+	ctx.EventManager().EmitEvents(sdk.Events{
+		sdk.NewEvent(
+			types.EventCreateDid,
+			sdk.NewAttribute(types.AttributeKeyW3CIdentifier, w3cIdentifier),
+			sdk.NewAttribute(types.AttributeKeyCreator, msg.Creator),
+		),
+		sdk.NewEvent(
+			sdk.EventTypeMessage,
+			sdk.NewAttribute(sdk.AttributeKeyModule, types.ModuleName),
+		),
+	})
+
 	return result, nil
 }
 
@@ -35,7 +47,7 @@ func (k msgServer) UpdateDid(goCtx context.Context, msg *types.MsgUpdateDidReque
 	}
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
-	w3cIdentifier := msg.Did.GetW3CIdentifier()
+	w3cIdentifier := msg.Did.SetW3CIdentifier()
 	match, found := k.Keeper.GetDid(ctx, w3cIdentifier)
 
 	if found && msg.Creator != match.Creator {

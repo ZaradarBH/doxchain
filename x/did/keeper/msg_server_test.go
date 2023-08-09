@@ -45,3 +45,30 @@ func (s *KeeperTestSuite) TestCreateDID() {
 	s.Require().True(found)
 	s.Require().NotNil(did)
 }
+
+func (s *KeeperTestSuite) TestDeleteDID() {
+	s.SetupTest()
+
+	creator := s.TestAccs[0]
+
+	msgServer := keeper.NewMsgServerImpl(s.App.DidKeeper)
+	msg := types.NewMsgCreateDidRequest(creator.String(), *s.GetDid(creator))
+	err := msg.ValidateBasic()
+	s.Require().NoError(err)
+	res, err := msgServer.CreateDid(sdk.WrapSDKContext(s.Ctx), msg)
+	s.Require().NoError(err)
+	s.Require().NotNil(res)
+
+	// check if has stored
+	did, found := s.App.DidKeeper.GetDid(s.Ctx, msg.Did.GetW3CIdentifier())
+	s.Require().True(found)
+	s.Require().NotNil(did)
+
+	// delete
+	msgDelete := types.NewMsgDeleteDidRequest(creator.String(), did.GetW3CIdentifier())
+	err = msgDelete.ValidateBasic()
+	s.Require().NoError(err)
+	resDelete, err := msgServer.DeleteDid(sdk.WrapSDKContext(s.Ctx), msgDelete)
+	s.Require().NoError(err)
+	s.Require().NotNil(resDelete)
+}
