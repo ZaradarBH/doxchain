@@ -39,6 +39,7 @@ sim_log_file
 x/genutil/config
 x/genutil/data
 *.fail
+mytestnet
 
 # Vagrant
 .vagrant/

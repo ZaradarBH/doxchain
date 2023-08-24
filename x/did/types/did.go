@@ -6,8 +6,9 @@ import (
 	regexpUtils "github.com/be-heroes/doxchain/utils/regexp"
 )
 
-func (did *Did) GetW3CIdentifier() string {
-	return fmt.Sprintf("%s%s%s%s%s", regexpUtils.REGEX_DID_PREFIX, regexpUtils.REGEX_DID_SEPERATOR_CHAR, did.MethodName, regexpUtils.REGEX_DID_SEPERATOR_CHAR, did.MethodId)
+func (did *Did) SetW3CIdentifier() string {
+	did.W3CIdentifier = fmt.Sprintf("%s%s%s%s%s", regexpUtils.REGEX_DID_PREFIX, regexpUtils.REGEX_DID_SEPERATOR_CHAR, did.MethodName, regexpUtils.REGEX_DID_SEPERATOR_CHAR, did.MethodId)
+	return did.W3CIdentifier
 }
 
 func (did *Did) IsUserIdentifier() bool {
