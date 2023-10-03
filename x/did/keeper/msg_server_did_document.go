@@ -17,7 +17,8 @@ func (k msgServer) CreateDidDocument(goCtx context.Context, msg *types.MsgCreate
 	}
 
 	ctx := sdk.UnwrapSDKContext(goCtx)
-	found := k.Keeper.HasDidDocument(ctx, msg.DidDocument.Id.GetW3CIdentifier())
+	w3cIdentifier := msg.DidDocument.Id.SetW3CIdentifier()
+	found := k.Keeper.HasDidDocument(ctx, w3cIdentifier)
 
 	if found {
 		return nil, types.ErrDidDocumentExists
@@ -28,6 +29,18 @@ func (k msgServer) CreateDidDocument(goCtx context.Context, msg *types.MsgCreate
 	result = &types.MsgCreateDidDocumentResponse{
 		DidDocumentW3CIdentifier: msg.DidDocument.Id.GetW3CIdentifier(),
 	}
+
+	ctx.EventManager().EmitEvents(sdk.Events{
+		sdk.NewEvent(
+			types.EventCreateDidDocument,
+			sdk.NewAttribute(types.AttributeKeyW3CIdentifier, w3cIdentifier),
+			sdk.NewAttribute(types.AttributeKeyCreator, msg.Creator),
+		),
+		sdk.NewEvent(
+			sdk.EventTypeMessage,
+			sdk.NewAttribute(sdk.AttributeKeyModule, types.ModuleName),
+		),
+	})
 
 	return result, nil
 }

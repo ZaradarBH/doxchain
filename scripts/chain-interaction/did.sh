@@ -2,7 +2,7 @@
 
 BINARY=${1:-build/doxchaind}
 DENOM=${2:-udox}
-CHAIN_ID="localterra"
+CHAIN_ID="localdoxchain"
 KEYRING="test"
 KEY="test0"
 KEY1="test1"

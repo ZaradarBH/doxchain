@@ -10,7 +10,7 @@ if [ "$CONTINUE" == "true" ]; then
 fi
 
 rm -rf mytestnet
-pkill terrad
+pkill doxchaind
 
 # check DENOM is set. If not, set to udox
 DENOM=${2:-udox}
@@ -34,10 +34,10 @@ fi
 # check BINARY is set. If not, build terrad and set BINARY
 if [ -z "$BINARY" ]; then
     make build
-    BINARY=build/terrad
+    BINARY=build/doxchaind
 fi
 
-CHAIN_ID="localterra"
+CHAIN_ID="localdoxchain"
 KEYRING="test"
 KEY="test0"
 KEY1="test1"

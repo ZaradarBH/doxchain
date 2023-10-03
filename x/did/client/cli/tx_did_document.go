@@ -1,6 +1,8 @@
 package cli
 
 import (
+	"fmt"
+	"os"
 	"strconv"
 
 	"github.com/be-heroes/doxchain/x/did/types"
@@ -14,7 +16,7 @@ var _ = strconv.Itoa(0)
 
 func CmdCreateDidDocument() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "did-document [did-document-json]",
+		Use:   "create-did-document [did-document-json]",
 		Short: "Create a DidDocument",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
@@ -25,7 +27,13 @@ func CmdCreateDidDocument() *cobra.Command {
 				return err
 			}
 
-			err = clientCtx.Codec.UnmarshalJSON([]byte(args[0]), &didDocument)
+			jsonData, err := os.ReadFile(args[0])
+			if err != nil {
+				fmt.Println("Error reading JSON file:", err)
+				return
+			}
+
+			err = clientCtx.Codec.UnmarshalJSON(jsonData, &didDocument)
 
 			if err != nil {
 				return err
@@ -58,8 +66,14 @@ func CmdUpdateDidDocument() *cobra.Command {
 				return err
 			}
 
+			jsonData, err := os.ReadFile(args[0])
+			if err != nil {
+				fmt.Println("Error reading JSON file:", err)
+				return
+			}
+
 			var didDocument types.DidDocument
-			err = clientCtx.Codec.UnmarshalJSON([]byte(args[0]), &didDocument)
+			err = clientCtx.Codec.UnmarshalJSON(jsonData, &didDocument)
 
 			if err != nil {
 				return err
