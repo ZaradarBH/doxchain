@@ -18,6 +18,13 @@ DENOM=${2:-udox}
 COMMISSION_RATE=0.01
 COMMISSION_MAX_RATE=0.02
 
+# check if jq is installed
+if ! command -v jq &> /dev/null
+then
+    echo "jq could not be found. Please install it"
+    exit
+fis
+
 SED_BINARY=sed
 # check if this is OS X
 if [[ "$OSTYPE" == "darwin"* ]]; then
