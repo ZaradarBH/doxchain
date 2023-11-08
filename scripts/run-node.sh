@@ -23,7 +23,7 @@ if ! command -v jq &> /dev/null
 then
     echo "jq could not be found. Please install it"
     exit
-fis
+fi
 
 SED_BINARY=sed
 # check if this is OS X
