@@ -42,7 +42,7 @@ func CmdListDid() *cobra.Command {
 
 func CmdShowDid() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "show-did [did-url]",
+		Use:   "show-did [did-w3c-identifier]",
 		Short: "Shows a did",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
